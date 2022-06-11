@@ -1,32 +1,92 @@
-import React from "react";
-import { Button } from "../index";
+import React, { useEffect, useState } from "react";
+import Image from "next/image";
+import { FiLogIn } from "react-icons/fi";
+import { BsChevronDown } from "react-icons/bs";
+
+import styles from "../../styles/utility/Navbar.module.css";
+import { navItems } from "../../data/data";
+import { useStateContext } from "../../context/contextProvider";
 
 const Navbar = () => {
+  const {language, setLanguage} = useStateContext();
+  const [scroll, setScroll] = useState(false);
+
+  // useEffect(() => {
+  //   setLanguage(localStorage.getItem("lan"));
+  // }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", (e) => {
+      if (window.pageYOffset > 0) {
+        setScroll(true);
+      } else {
+        setScroll(false);
+      }
+    });
+  }, [scroll]);
+
+  const handleLanguage = (lan) => {
+    localStorage.setItem("lan", lan);
+    setLanguage(lan);
+  };
   return (
-    <div className="fixed bg-white w-full text-center">
+    <div
+      className={`fixed bg-white w-full text-center z-50 ${
+        scroll ? "shadow-lg" : ""
+      }`}
+    >
       <div className="max-w-6xl mx-auto flex justify-between items-center h-20">
-        <h2 className="text-3xl">Logo</h2>
+        <Image src="/logo/logo.jpg" width="80px" height="80px" alt="logo" />
+
         <ul className="flex justify-between">
-          <li className="mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold">
-            Home
-          </li>
-          <li className="mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold">
-            About
-          </li>
-          <li className="mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold">
-            Service
-          </li>
-          <li className="mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold">
-            Blog
-          </li>
+          {navItems.map((item) => (
+            <li
+              key={item.id}
+              className="font-bangla mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold"
+            >
+              {language === "English" ? item.title : item.titleBang}
+            </li>
+          ))}
         </ul>
-        <Button
-          color="#eee"
-          bgColor="rgb(2, 7, 62)"
-          text="Contact Us"
-          size=""
-          borderRadius="5px"
-        />
+        <div className="flex items-center">
+          <div className={`relative pr-5 ${styles.dropdown__container}`}>
+            <span className="text-md flex font-bangla items-center leading-20 hover:text-red-600">
+              {language} &nbsp; <BsChevronDown />
+            </span>
+            <ul
+              className={`absolute top-full -left-4 bg-white py-3 pl-5 pr-20 pt-2 -z-10 ${styles.dropdown__content}`}
+            >
+              <li
+                className="text-left font-bangla hover:text-red-700 cursor-pointer text-sm"
+                onClick={() => handleLanguage("বাংলা")}
+              >
+                বাংলা
+              </li>
+              <li
+                className="text-left hover:text-red-700 cursor-pointer text-sm mt-2"
+                onClick={() => handleLanguage("English")}
+              >
+                English
+              </li>
+            </ul>
+          </div>
+
+          <button
+            type="button"
+            style={{
+              backgroundColor: "#555",
+              borderRadius: "5px",
+              color: "#eee",
+            }}
+            className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center`}
+            onClick={() => {}}
+          >
+            <FiLogIn className="text-sm" />{" "}
+            <span className="pl-2 font-bangla">
+              {language === "English" ? "Log in" : "লগ ইন"}
+            </span>
+          </button>
+        </div>
       </div>
     </div>
   );

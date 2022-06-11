@@ -1,11 +1,12 @@
 import React from "react";
-import { Navbar, Banner } from "../index";
+import { Navbar, Banner, CrashCourse } from "../index";
 
 const Home = () => {
   return (
     <div>
       <Navbar />
       <Banner />
+      <CrashCourse />
     </div>
   );
 };

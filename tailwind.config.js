@@ -8,6 +8,7 @@ module.exports = {
     fontFamily: {
       display: ["Open Sans", "sans-serif"],
       body: ["Open Sans", "sans-serif"],
+      bangla: ["Noto Sans Bengali", "sans-serif"],
     },
     extend: {
       fontSize: {
@@ -43,6 +44,9 @@ module.exports = {
       },
       backgroundImage: {
         "hero-pattern": "url('/Background/banner-bg.jpg')",
+      },
+      lineHeight: {
+        20: "80px",
       },
     },
   },

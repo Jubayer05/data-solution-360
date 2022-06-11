@@ -1,0 +1,12 @@
+.dropdown__container {
+  line-height: 80px;
+}
+.dropdown__content {
+  visibility: hidden;
+  opacity: 0;
+}
+
+.dropdown__container:hover .dropdown__content {
+  visibility: visible;
+  opacity: 1;
+}
