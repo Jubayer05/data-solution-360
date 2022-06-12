@@ -5,15 +5,11 @@ import { BsChevronDown } from "react-icons/bs";
 
 import styles from "../../styles/utility/Navbar.module.css";
 import { navItems } from "../../data/data";
-import { useStateContext } from "../../context/contextProvider";
+import { useStateContext } from "../../context/ContextProvider";
 
 const Navbar = () => {
-  const {language, setLanguage} = useStateContext();
+  const { language, setLanguage } = useStateContext();
   const [scroll, setScroll] = useState(false);
-
-  // useEffect(() => {
-  //   setLanguage(localStorage.getItem("lan"));
-  // }, []);
 
   useEffect(() => {
     window.addEventListener("scroll", (e) => {

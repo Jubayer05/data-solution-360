@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { useStateContext } from "../../context/contextProvider";
+import { useStateContext } from "../../context/ContextProvider";
 import { services } from "../../data/data";
 
 const Service = () => {

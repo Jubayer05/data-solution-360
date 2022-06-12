@@ -10,5 +10,5 @@ export { default as Blog } from "./Blog/Blog";
 export { default as Contact } from "./Contact/Contact";
 export { default as Services } from "./Services/Services";
 
-export { default as Navbar } from "./Utilities/Navbar";
-export { default as Button } from "./Utilities/Button";
+export { default as Navbar } from "./utilities/Navbar";
+export { default as Button } from "./utilities/Button";

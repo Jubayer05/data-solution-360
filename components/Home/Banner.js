@@ -2,7 +2,7 @@ import React from "react";
 import * as animationData from "../../data/json/data-analysis.json";
 import { RiDoubleQuotesR, RiDoubleQuotesL } from "react-icons/ri";
 import Lottie from "react-lottie";
-import { useStateContext } from "../../context/contextProvider";
+import { useStateContext } from "../../context/ContextProvider";
 
 const Banner = () => {
   const { language } = useStateContext();
@@ -14,6 +14,7 @@ const Banner = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
   return (
     <div className="" style={{ backgroundColor: "#1a161f" }}>
       <h1

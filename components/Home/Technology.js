@@ -1,20 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { technologyStack } from "../../data/data";
 import { Icon } from "@iconify/react";
-import angularIcon from "@iconify/icons-logos/angular-icon";
 
 const Technology = () => {
   const [technologyItems, setTechnologyItems] = useState([]);
   const handleTechnology = (item) => {
     setTechnologyItems(item);
-    // console.log(technologyItems.technology?.technology);
   };
 
   useEffect(() => {
     setTechnologyItems(technologyStack[0]);
   }, [technologyStack]);
 
-  console.log(technologyItems.technology);
   return (
     <div className="mt-16 mb-28">
       <h2 className="text-center text-4xl font-bold mb-3">Technology Stack</h2>
@@ -41,8 +38,6 @@ const Technology = () => {
         ))}
       </div>
 
-      {/* <Icon icon="logos:angular-icon" />
-      <Icon icon={angularIcon} /> */}
       <div className="flex justify-center flex-wrap gap-6 mt-8 max-w-4xl mx-auto">
         {technologyItems.technology?.map((item) => (
           <Icon key={item.id} icon={item.img} className="text-6xl mx-6 my-3" />

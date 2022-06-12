@@ -3,7 +3,7 @@ import React, { useEffect, useState } from "react";
 import { crashCourseData } from "../../data/data";
 import { GiAerialSignal } from "react-icons/gi";
 import { BsPlayCircle } from "react-icons/bs";
-import { useStateContext } from "../../context/contextProvider";
+import { useStateContext } from "../../context/ContextProvider";
 
 const CrashCourse = () => {
   const { language } = useStateContext();
