@@ -17,7 +17,7 @@ const Banner = () => {
   return (
     <div className="" style={{ backgroundColor: "#1a161f" }}>
       <h1
-        className="text-5xl text-center leading-normal pt-20"
+        className="text-5xl text-center leading-normal pt-36 pb-6 "
         style={{ color: "#ddd" }}
       >
         {language === "English"
