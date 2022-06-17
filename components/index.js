@@ -12,3 +12,6 @@ export { default as Services } from "./Services/Services";
 
 export { default as Navbar } from "./utilities/Navbar";
 export { default as Button } from "./utilities/Button";
+export { default as Footer } from "./utilities/Footer";
+
+export { default as LoginComp } from "./Login/Login";

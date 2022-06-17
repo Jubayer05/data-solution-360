@@ -1,20 +1,10 @@
-// Framework
-// import angularIcon from "@iconify/icons-logos/angular-icon";
-import angularIcon from "@iconify/icons-logos/angular-icon";
-import flutterIcon from "@iconify/icons-logos/flutter";
-import nodejsIcon from "@iconify/icons-logos/nodejs";
-import springIcon from "@iconify/icons-logos/spring";
-import unityIcon from "@iconify/icons-logos/unity";
-
 // qaAutomations
 import appiumIcon from "@iconify/icons-logos/appium";
-// import apachejmeterIcon from "@iconify-icons/simple-icons/apachejmeter";
 
 // Language
 import javaIcon from "@iconify/icons-logos/java";
 import javascriptIcon from "@iconify/icons-logos/javascript";
 import pythonIcon from "@iconify/icons-logos/python";
-// import golangIcon from "@iconify-icons/grommet-icons/golang";
 
 // Devops
 import terraformIcon from "@iconify/icons-logos/terraform";
@@ -27,18 +17,14 @@ import kubernetesIcon from "@iconify/icons-logos/kubernetes";
 import jenkinsIcon from "@iconify/icons-logos/jenkins";
 import nomadIcon from "@iconify/icons-logos/nomad";
 import prometheusIcon from "@iconify/icons-logos/prometheus";
-// import fluentdIcon from "@iconify-icons/simple-icons/fluentd";
 import grafanaIcon from "@iconify/icons-logos/grafana";
 
 // Data Analysis
 import airflowIcon from "@iconify/icons-logos/airflow";
-// import apacheSpark from "@iconify-icons/cib/apache-spark";
-// import apachenetbeansideIcon from "@iconify-icons/simple-icons/apachenetbeanside";
 
 // Database
 import mongodbIcon from "@iconify/icons-logos/mongodb";
 import cassandraIcon from "@iconify/icons-logos/cassandra";
-// import sqlIcon from "@iconify-icons/carbon/sql";
 import redisIcon from "@iconify/icons-logos/redis";
 import postgresqlIcon from "@iconify/icons-logos/postgresql";
 import elasticsearchIcon from "@iconify/icons-logos/elasticsearch";
@@ -285,5 +271,78 @@ export const faqData = [
     question: "5. Question no 5?",
     answer:
       "Data science is the domain of study that deals with vast volumes of data using modern tools and techniques to find unseen patterns, derive meaningful information, and make business decisions. Data science uses complex machine learning algorithms to build predictive models.",
+  },
+];
+
+import { MdLocationOn, MdEmail } from "react-icons/md";
+import { ImPhone } from "react-icons/im";
+import { FaSkype } from "react-icons/fa";
+import { IoLogoWhatsapp, IoLogoYoutube } from "react-icons/io";
+import {
+  AiFillFacebook,
+  AiFillLinkedin,
+  AiFillTwitterCircle,
+} from "react-icons/ai";
+
+export const footerContactData = [
+  {
+    id: "1",
+    title: "Palbari, Jashore Sadar, Jashore",
+    icon: <MdLocationOn className="text-xl mr-1 " />,
+  },
+
+  {
+    id: "2",
+    title: "Phone: +8801700000000",
+    icon: <ImPhone className="text-lg mr-2  " />,
+  },
+
+  {
+    id: "3",
+    title: "Email: email@gmail.com",
+    icon: <MdEmail className="text-lg mr-2  " />,
+  },
+
+  {
+    id: "4",
+    title: "Skype: hello_name",
+    icon: <FaSkype className="text-lg mr-2  " />,
+  },
+];
+
+export const footerFollowUs = [
+  {
+    id: "1",
+    link: "https://www.facebook.com/groups/371272054987030/",
+    title: "Facebook",
+    icon: <AiFillFacebook />,
+  },
+
+  {
+    id: "2",
+    link: "/",
+    title: "LinkedIn",
+    icon: <AiFillLinkedin />,
+  },
+
+  {
+    id: "3",
+    link: "/",
+    title: "Whatsapp",
+    icon: <IoLogoWhatsapp />,
+  },
+
+  {
+    id: "4",
+    link: "/",
+    title: "Twitter",
+    icon: <AiFillTwitterCircle />,
+  },
+
+  {
+    id: "5",
+    link: "/",
+    title: "Youtube",
+    icon: <IoLogoYoutube />,
   },
 ];

@@ -6,6 +6,7 @@ import { BsChevronDown } from "react-icons/bs";
 import styles from "../../styles/utility/Navbar.module.css";
 import { navItems } from "../../data/data";
 import { useStateContext } from "../../context/ContextProvider";
+import Link from "next/link";
 
 const Navbar = () => {
   const { language, setLanguage } = useStateContext();
@@ -67,21 +68,25 @@ const Navbar = () => {
             </ul>
           </div>
 
-          <button
-            type="button"
-            style={{
-              backgroundColor: "#555",
-              borderRadius: "5px",
-              color: "#eee",
-            }}
-            className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center`}
-            onClick={() => {}}
-          >
-            <FiLogIn className="text-sm" />{" "}
-            <span className="pl-2 font-bangla">
-              {language === "English" ? "Log in" : "লগ ইন"}
-            </span>
-          </button>
+          <Link href="/login">
+            <a>
+              <button
+                type="button"
+                style={{
+                  backgroundColor: "#555",
+                  borderRadius: "5px",
+                  color: "#eee",
+                }}
+                className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center`}
+                onClick={() => {}}
+              >
+                <FiLogIn className="text-sm" />{" "}
+                <span className="pl-2 font-bangla">
+                  {language === "English" ? "Log in" : "লগ ইন"}
+                </span>
+              </button>
+            </a>
+          </Link>
         </div>
       </div>
     </div>

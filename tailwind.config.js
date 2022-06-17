@@ -27,6 +27,9 @@ module.exports = {
       borderColor: {
         color: "rgba(0, 0, 0, 0.1)",
       },
+      textColor: {
+        input: "#929292",
+      },
       width: {
         400: "400px",
         760: "760px",

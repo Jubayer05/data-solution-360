@@ -6,6 +6,7 @@ import {
   Service,
   Technology,
   Faq,
+  Footer
 } from "../index";
 
 const Home = () => {
@@ -17,6 +18,7 @@ const Home = () => {
       <CrashCourse />
       <Technology />
       <Faq />
+      <Footer />
     </div>
   );
 };
