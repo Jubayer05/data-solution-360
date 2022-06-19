@@ -33,7 +33,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto flex justify-between items-center h-20">
-        <Image src="/logo/logo.jpg" width="80px" height="80px" alt="logo" />
+        <Image src="/logo/logo.png" width="80px" height="80px" alt="logo" />
 
         <ul className="flex justify-between">
           {navItems.map((item) => (
