@@ -1,11 +1,15 @@
-import { MainContextProvider } from "../context/ContextProvider";
 import "../styles/globals.css";
+import "antd/dist/antd.css";
+import { ContextProvider } from "../src/context/UtilitiesContext";
+import { QuizContextProvider } from "../src/context/QuizContextStu";
 
 function MyApp({ Component, pageProps }) {
   return (
-    <MainContextProvider>
-      <Component {...pageProps} />
-    </MainContextProvider>
+    <QuizContextProvider>
+      <ContextProvider>
+        <Component {...pageProps} />
+      </ContextProvider>
+    </QuizContextProvider>
   );
 }
 

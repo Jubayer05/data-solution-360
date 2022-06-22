@@ -20,7 +20,8 @@ const Footer = () => {
           />
           <p className="mt-3">
             We are young company focused on Data Science. Taking a course will
-            help you deep learning on this topic. Hope you enjoy our course.
+            help you deep learning on this topic. Hope you enjoy our course. See
+            you soon.
           </p>
           <p className="text-gray-400 mt-4 text-xs">Sakib Tarafder - (CEO)</p>
         </div>
