@@ -268,7 +268,7 @@ export const faqData = [
   },
   {
     id: "5",
-    question: "5. Question no 5?",
+    question: "5. This Question no 5?",
     answer:
       "Data science is the domain of study that deals with vast volumes of data using modern tools and techniques to find unseen patterns, derive meaningful information, and make business decisions. Data science uses complex machine learning algorithms to build predictive models.",
   },
