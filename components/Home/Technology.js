@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { technologyStack } from "../../data/data";
+import { technologyStack } from "../../src/data/data";
 import { Icon } from "@iconify/react";
 
 const Technology = () => {

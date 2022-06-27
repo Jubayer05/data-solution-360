@@ -1,9 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
-import { crashCourseData } from "../../data/data";
+import { crashCourseData } from "../../src/data/data";
 import { GiAerialSignal } from "react-icons/gi";
 import { BsPlayCircle } from "react-icons/bs";
-import { useStateContext } from "../../context/ContextProvider";
+import { useStateContext } from "../../src/context/ContextProvider";
 
 const CrashCourse = () => {
   const { language } = useStateContext();

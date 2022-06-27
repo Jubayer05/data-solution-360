@@ -1,8 +1,8 @@
 import React from "react";
-import * as animationData from "../../data/json/data-analysis.json";
+import * as animationData from "../../src/data/json/data-analysis.json";
 import { RiDoubleQuotesR, RiDoubleQuotesL } from "react-icons/ri";
 import Lottie from "react-lottie";
-import { useStateContext } from "../../context/ContextProvider";
+import { useStateContext } from "../../src/context/ContextProvider";
 
 const Banner = () => {
   const { language } = useStateContext();

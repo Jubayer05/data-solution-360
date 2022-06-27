@@ -1,7 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from "react";
-import { useStateContext } from "../../context/ContextProvider";
-import { services } from "../../data/data";
+import { useStateContext } from "../../src/context/ContextProvider";
+import { services } from "../../src/data/data";
 
 const Service = () => {
   const { language } = useStateContext();

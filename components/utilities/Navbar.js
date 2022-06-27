@@ -4,8 +4,8 @@ import { FiLogIn } from "react-icons/fi";
 import { BsChevronDown } from "react-icons/bs";
 
 import styles from "../../styles/utility/Navbar.module.css";
-import { navItems } from "../../data/data";
-import { useStateContext } from "../../context/ContextProvider";
+import { navItems } from "../../src/data/data";
+import { useStateContext } from "../../src/context/ContextProvider";
 import Link from "next/link";
 
 const Navbar = () => {
@@ -35,13 +35,17 @@ const Navbar = () => {
       <div className="max-w-6xl mx-auto flex justify-between items-center h-20">
         <Image src="/logo/logo.png" width="80px" height="80px" alt="logo" />
 
-        <ul className="flex justify-between">
+        <ul className="flex justify-between mb-0">
           {navItems.map((item) => (
             <li
               key={item.id}
               className="font-bangla mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold"
             >
-              {language === "English" ? item.title : item.titleBang}
+              <Link href={item.link}>
+                <a className="text-gray-500">
+                  {language === "English" ? item.title : item.titleBang}
+                </a>
+              </Link>
             </li>
           ))}
         </ul>

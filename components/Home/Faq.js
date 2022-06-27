@@ -1,9 +1,11 @@
 import React, { useState } from "react";
-import Collapsible from "react-collapsible";
+import { Collapse, Space } from "antd";
 import { BsChevronDown } from "react-icons/bs";
-import { faqData } from "../../data/data";
+import { faqData } from "../../src/data/data";
 
 import { Button } from "../index";
+
+const { Panel } = Collapse;
 
 const Faq = () => {
   const [triggerOpen, setTriggerOpen] = useState(false);
@@ -37,16 +39,17 @@ const Faq = () => {
         </div>
         <div className="flex-1">
           {faqData.map((item) => (
-            <Collapsible
-              key={item.id}
-              trigger={<Triggers item={item} triggerOpen={triggerOpen} />}
-              onTriggerOpening={() => setTriggerOpen(item)}
-              onTriggerClosing={() => setTriggerOpen(item)}
-              tabIndex={item.id}
-              className="border-1 p-3"
-            >
-              <p>{item.answer}</p>
-            </Collapsible>
+            <div key={item.id} className="m-5">
+              <Collapse
+                collapsible="header"
+                expandIconPosition="end"
+                defaultActiveKey={["1"]}
+              >
+                <Panel header={item.question} key={item.id}>
+                  <p>{item.answer}</p>
+                </Panel>
+              </Collapse>
+            </div>
           ))}
         </div>
       </div>
