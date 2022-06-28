@@ -13,12 +13,8 @@ const Footer = () => {
       <div className="max-w-5xl mx-auto grid grid-cols-3 justify-between pb-6 ">
         {/* NOTE: BASIC INFO */}
         <div className="">
-          <img
-            src="/logo/logo.png"
-            alt="logo"
-            className="w-24 rounded-full bg-white"
-          />
-          <p className="mt-3">
+          <img src="/logo/logo-white.png" alt="logo" className="h-20 " />
+          <p className="mt-2">
             We are young company focused on Data Science. Taking a course will
             help you deep learning on this topic. Hope you enjoy our course. See
             you soon.

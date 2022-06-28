@@ -21,7 +21,7 @@ const Technology = () => {
         can ignore it while setting up their data science tech stack.
       </p>
 
-      <div className="max-w-5xl mx-auto grid grid-cols-5 justify-center mt-10">
+      <div className="max-w-5xl mx-auto grid grid-cols-4 justify-center mt-10">
         {technologyStack.map((item) => (
           <div
             key={item.id}
@@ -38,9 +38,19 @@ const Technology = () => {
         ))}
       </div>
 
-      <div className="flex justify-center flex-wrap gap-6 mt-8 max-w-4xl mx-auto">
+      <div className="flex justify-center items-center flex-wrap gap-6 mt-8 max-w-4xl mx-auto">
         {technologyItems.technology?.map((item) => (
-          <Icon key={item.id} icon={item.img} className="text-6xl mx-6 my-3" />
+          <>
+            {item.img ? (
+              <Icon
+                key={item.id}
+                icon={item.img}
+                className="text-6xl mx-6 my-3"
+              />
+            ) : (
+              <img src={item.logoImg} className="h-12 mx-3" />
+            )}
+          </>
         ))}
       </div>
     </div>

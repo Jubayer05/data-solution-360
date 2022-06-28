@@ -1,33 +1,10 @@
-// qaAutomations
-import appiumIcon from "@iconify/icons-logos/appium";
-
-// Language
+import rLang from "@iconify/icons-logos/r-lang";
 import javaIcon from "@iconify/icons-logos/java";
 import javascriptIcon from "@iconify/icons-logos/javascript";
 import pythonIcon from "@iconify/icons-logos/python";
-
-// Devops
-import terraformIcon from "@iconify/icons-logos/terraform";
-import ansibleIcon from "@iconify/icons-logos/ansible";
-import awsIcon from "@iconify/icons-logos/aws";
-import consulIcon from "@iconify/icons-logos/consul";
-import dockerIcon from "@iconify/icons-logos/docker";
-import gitIcon from "@iconify/icons-logos/git";
-import kubernetesIcon from "@iconify/icons-logos/kubernetes";
-import jenkinsIcon from "@iconify/icons-logos/jenkins";
-import nomadIcon from "@iconify/icons-logos/nomad";
-import prometheusIcon from "@iconify/icons-logos/prometheus";
-import grafanaIcon from "@iconify/icons-logos/grafana";
-
-// Data Analysis
-import airflowIcon from "@iconify/icons-logos/airflow";
-
-// Database
+import microsoftPowerBi from "@iconify/icons-logos/microsoft-power-bi";
+import tableauIcon from "@iconify/icons-logos/tableau";
 import mongodbIcon from "@iconify/icons-logos/mongodb";
-import cassandraIcon from "@iconify/icons-logos/cassandra";
-import redisIcon from "@iconify/icons-logos/redis";
-import postgresqlIcon from "@iconify/icons-logos/postgresql";
-import elasticsearchIcon from "@iconify/icons-logos/elasticsearch";
 
 export const navItems = [
   {
@@ -59,21 +36,21 @@ export const navItems = [
 export const crashCourseData = [
   {
     id: "1",
-    title: "This is the course heading",
+    title: "Python for data analysis",
     point1: "This is point no 1",
     point2: "This is point no 2",
     img: "/course/data-science.jpg",
   },
   {
     id: "2",
-    title: "This is the course heading",
+    title: "Microsoft Power BI",
     point1: "This is point no 1",
     point2: "This is point no 2",
     img: "/course/data-science-2.jpg",
   },
   {
     id: "3",
-    title: "This is the course heading",
+    title: "Coming Soon",
     point1: "This is point no 1",
     point2: "This is point no 2",
     img: "/course/data-science-3.jpg",
@@ -141,101 +118,56 @@ export const technologyStack = [
   },
   {
     id: "2",
-    title: "Database",
+    title: "Data Analysis",
     technology: [
       {
         id: "1",
-        img: mongodbIcon,
+        img: pythonIcon,
       },
       {
         id: "2",
-        img: cassandraIcon,
+        img: rLang,
       },
       {
         id: "3",
-        img: redisIcon,
+        logoImg: "/technology/excel.png",
       },
       {
         id: "4",
-        img: postgresqlIcon,
+        logoImg: "/technology/spss.png",
       },
       {
-        id: "5",
-        img: elasticsearchIcon,
+        id: "4",
+        logoImg: "/technology/stata.png",
       },
     ],
   },
   {
     id: "3",
-    title: "Data Analysis",
+    title: "Data Visualization",
     technology: [
       {
-        id: "4",
-        img: airflowIcon,
+        id: "1",
+        img: microsoftPowerBi,
       },
       {
-        id: "5",
-        img: elasticsearchIcon,
+        id: "2",
+        img: tableauIcon,
+      },
+
+      {
+        id: "3",
+        logoImg: "/technology/excel.png",
       },
     ],
   },
   {
     id: "4",
-    title: "Devops",
+    title: "Database",
     technology: [
       {
         id: "1",
-        img: terraformIcon,
-      },
-      {
-        id: "2",
-        img: ansibleIcon,
-      },
-      {
-        id: "3",
-        img: awsIcon,
-      },
-      {
-        id: "4",
-        img: consulIcon,
-      },
-      {
-        id: "5",
-        img: dockerIcon,
-      },
-      {
-        id: "6",
-        img: gitIcon,
-      },
-      {
-        id: "7",
-        img: kubernetesIcon,
-      },
-      {
-        id: "8",
-        img: jenkinsIcon,
-      },
-      {
-        id: "9",
-        img: nomadIcon,
-      },
-      {
-        id: "10",
-        img: prometheusIcon,
-      },
-      {
-        id: "11",
-        img: grafanaIcon,
-      },
-    ],
-  },
-  {
-    id: "5",
-    title: "QA automation",
-    technology: [
-      {
-        id: "1",
-        img: appiumIcon,
+        img: mongodbIcon,
       },
     ],
   },

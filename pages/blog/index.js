@@ -1,9 +1,12 @@
 import React from "react";
+import { Blog, Footer, Navbar } from "../../components";
 
 const index = () => {
   return (
     <div>
-      <h2>This is blog</h2>
+      <Navbar />
+      <Blog />
+      <Footer />
     </div>
   );
 };

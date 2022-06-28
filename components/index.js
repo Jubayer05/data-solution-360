@@ -7,6 +7,7 @@ export { default as Faq } from "./Home/Faq";
 
 export { default as About } from "./About/About";
 export { default as Blog } from "./Blog/Blog";
+export { default as BlogContent } from "./Blog/BlogContentItem";
 export { default as Contact } from "./Contact/Contact";
 export { default as Services } from "./Services/Services";
 

@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import { FiLogIn } from "react-icons/fi";
@@ -9,7 +10,7 @@ import { useStateContext } from "../../src/context/ContextProvider";
 import Link from "next/link";
 
 const Navbar = () => {
-  const { language, setLanguage } = useStateContext();
+  const { language, setLanguage, userName } = useStateContext();
   const [scroll, setScroll] = useState(false);
 
   useEffect(() => {
@@ -33,7 +34,7 @@ const Navbar = () => {
       }`}
     >
       <div className="max-w-6xl mx-auto flex justify-between items-center h-20">
-        <Image src="/logo/logo.png" width="80px" height="80px" alt="logo" />
+        <img src="/logo/logo.png" className="h-12" alt="logo" />
 
         <ul className="flex justify-between mb-0">
           {navItems.map((item) => (
@@ -49,7 +50,12 @@ const Navbar = () => {
             </li>
           ))}
         </ul>
+
         <div className="flex items-center">
+          <div className="font-semibold text-left mr-4">
+            Hello,
+            <p className="text-orange-500">{userName}</p>
+          </div>
           <div className={`relative pr-5 ${styles.dropdown__container}`}>
             <span className="text-md flex font-bangla items-center leading-20 hover:text-red-600">
               {language} &nbsp; <BsChevronDown />

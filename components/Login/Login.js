@@ -45,24 +45,31 @@ const Login = () => {
       .signInWithPopup(googleProvider)
       .then((result) => {
         const user = result.user;
-        const validUser = userData.find((item) => item.email === user.email);
 
-        if (validUser) {
-          if (validUser.status === "student") {
-            Router.push("/join-us/intern");
-          } else if (validUser.status === "teacher") {
-            Router.push("/dashboard/teacher");
-          } else if (validUser.status === "admin") {
-            Router.push("/");
-          }
+        if (user) {
+          Router.push("/");
           localStorage.setItem("emailUser", user.email);
-        } else {
-          db.collection("userLogin").add({
-            name: user.displayName,
-            email: user.email,
-            status: "student",
-          });
+          localStorage.setItem("userName", user.displayName);
         }
+
+        // const validUser = userData.find((item) => item.email === user.email);
+
+        // if (validUser) {
+        //   if (validUser.status === "student") {
+        //     Router.push("/join-us/intern");
+        //   } else if (validUser.status === "teacher") {
+        //     Router.push("/dashboard/teacher");
+        //   } else if (validUser.status === "admin") {
+        //     Router.push("/");
+        //   }
+        //   localStorage.setItem("emailUser", user.email);
+        // } else {
+        //   db.collection("userLogin").add({
+        //     name: user.displayName,
+        //     email: user.email,
+        //     status: "student",
+        //   });
+        // }
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -106,49 +113,50 @@ const Login = () => {
   };
 
   const handleCreateAccount = () => {
-    if (validateEmail(formData.email)) {
-      if (formData.password === formData.confirmPassword) {
-        firebase
-          .auth()
-          .createUserWithEmailAndPassword(formData.email, formData.password)
-          .then((userCredential) => {
-            const user = userCredential.user;
+    // if (validateEmail(formData.email)) {
+    //   if (formData.password === formData.confirmPassword) {
+    //     firebase
+    //       .auth()
+    //       .createUserWithEmailAndPassword(formData.email, formData.password)
+    //       .then((userCredential) => {
+    //         const user = userCredential.user;
 
-            const validUser = userData.find(
-              (item) => item.email === user.email
-            );
+    //         const validUser = userData.find(
+    //           (item) => item.email === user.email
+    //         );
 
-            // NOTE: HANDLE VERIFICATION EMAIL MESSAGE
-            if (user !== null) {
-              user.sendEmailVerification({
-                url: "https://robo-stem.vercel.app/",
-              });
-              alert(
-                "A verification email has been sent to your email. Please verify your email."
-              );
-            }
+    //         // NOTE: HANDLE VERIFICATION EMAIL MESSAGE
+    //         if (user !== null) {
+    //           user.sendEmailVerification({
+    //             url: "https://robo-stem.vercel.app/",
+    //           });
+    //           alert(
+    //             "A verification email has been sent to your email. Please verify your email."
+    //           );
+    //         }
 
-            // NOTE: ADD FIRESTORE DB
-            if (!validUser) {
-              db.collection("userLogin").add({
-                name: formData.email,
-                email: formData.email,
-                status: "student",
-              });
-            }
-            localStorage.setItem("emailUser", user.email);
-            Router.push("/join-us/intern");
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            alert(errorMessage);
-          });
-      } else {
-        alert("Password Doesn't Match");
-      }
-    } else {
-      alert("Please Provide a valid email");
-    }
+    //         // NOTE: ADD FIRESTORE DB
+    //         if (!validUser) {
+    //           db.collection("userLogin").add({
+    //             name: formData.email,
+    //             email: formData.email,
+    //             status: "student",
+    //           });
+    //         }
+    //         localStorage.setItem("emailUser", user.email);
+    //         Router.push("/join-us/intern");
+    //       })
+    //       .catch((error) => {
+    //         const errorMessage = error.message;
+    //         alert(errorMessage);
+    //       });
+    //   } else {
+    //     alert("Password Doesn't Match");
+    //   }
+    // } else {
+    //   alert("Please Provide a valid email");
+    // }
+    alert("Comming soon. Use google login now.");
   };
 
   return (
