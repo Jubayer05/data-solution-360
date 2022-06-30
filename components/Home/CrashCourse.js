@@ -19,7 +19,7 @@ const CrashCourse = () => {
           <span className="font-bangla">আপনার জন্য সেরা কোর্স</span>
         )}
       </h2>
-      <div className="flex justify-center ">
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 p-5">
         {crashCourseData.map((item) => (
           <CrashCourseItem key={item.id} item={item} />
         ))}
@@ -32,8 +32,8 @@ export default CrashCourse;
 
 const CrashCourseItem = ({ item }) => {
   return (
-    <div className="rounded-lg overflow-hidden mx-2 border-1 hover:-translate-y-5 transition-translate duration-300 cursor-pointer">
-      <img src={item.img} alt="" className="w-96 h-60" />
+    <div className="w-5/6 sm:w-full mx-auto rounded-lg overflow-hidden sm:mx-2 border-1 hover:-translate-y-5 transition-translate duration-300 cursor-pointer mt-4">
+      <img src={item.img} alt="" className="w-full h-60" />
       <h2 className="text-xl font-semibold text-center my-5">{item.title}</h2>
 
       <div className="flex items-center px-3">

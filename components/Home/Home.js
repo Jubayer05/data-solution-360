@@ -6,7 +6,7 @@ import {
   Service,
   Technology,
   Faq,
-  Footer
+  Footer,
 } from "../index";
 
 const Home = () => {

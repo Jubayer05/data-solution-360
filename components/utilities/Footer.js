@@ -7,13 +7,13 @@ import { Tooltip } from "antd";
 const Footer = () => {
   return (
     <div
-      className="pt-20 pb-1"
+      className="pt-20 pb-1 w-full"
       style={{ backgroundColor: "#333", color: "#b3b3b3" }}
     >
-      <div className="max-w-5xl mx-auto grid grid-cols-3 justify-between pb-6 ">
+      <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-between pb-6 ">
         {/* NOTE: BASIC INFO */}
-        <div className="">
-          <img src="/logo/logo-white.png" alt="logo" className="h-20 " />
+        <div className="px-4 text-center">
+          <img src="/logo/logo-white.png" alt="logo" className="h-20 mx-auto" />
           <p className="mt-2">
             We are young company focused on Data Science. Taking a course will
             help you deep learning on this topic. Hope you enjoy our course. See

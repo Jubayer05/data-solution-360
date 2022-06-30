@@ -18,7 +18,7 @@ const Banner = () => {
   return (
     <div className="" style={{ backgroundColor: "#1a161f" }}>
       <h1
-        className="text-5xl text-center leading-normal pt-36 pb-6 "
+        className="text-4xl sm:text-5xl text-center leading-normal pt-36 pb-6 "
         style={{ color: "#ddd" }}
       >
         {language === "English"
@@ -41,8 +41,8 @@ const Banner = () => {
           </>
         )}
       </p>
-      <div className="mt-10">
-        <Lottie options={defaultOptions} height="100%" width="500px" />
+      <div className="mt-10 max-w-lg mx-auto">
+        <Lottie options={defaultOptions} height="100%" width="85%" />
       </div>
     </div>
   );
