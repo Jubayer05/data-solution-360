@@ -102,3 +102,9 @@ a:visited {
 .Collapsible__contentInner {
   padding: 15px;
 }
+
+.react-select__control,
+.react-select__value-container,
+.react-select__menu {
+  padding: 5px 10px;
+}

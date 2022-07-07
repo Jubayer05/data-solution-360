@@ -14,10 +14,9 @@ const Footer = () => {
         {/* NOTE: BASIC INFO */}
         <div className="px-4 text-center">
           <img src="/logo/logo-white.png" alt="logo" className="h-20 mx-auto" />
-          <p className="mt-2">
-            We are young company focused on Data Science. Taking a course will
-            help you deep learning on this topic. Hope you enjoy our course. See
-            you soon.
+          <p className="mt-2 text-left">
+            If you are skilled enough, you don&apos;t need to seek a job. Jobs
+            will search for you.Just make a good portfolio.
           </p>
           <p className="text-gray-400 mt-4 text-xs">Sakib Tarafder - (CEO)</p>
         </div>
@@ -42,15 +41,19 @@ const Footer = () => {
             <div className="flex">
               {footerFollowUs.map((item) => (
                 <Link href={item.link} key={item.id}>
-                  <Tooltip placement="topLeft" title={item.title} key={item.id}>
-                    <a
-                      target="_blank"
-                      style={{ color: "#c5c5c5" }}
-                      className="text-3xl mx-2"
+                  <a
+                    target="_blank"
+                    style={{ color: "#c5c5c5" }}
+                    className="text-3xl mx-2"
+                  >
+                    <Tooltip
+                      placement="topLeft"
+                      title={item.title}
+                      key={item.id}
                     >
                       {item.icon}
-                    </a>
-                  </Tooltip>
+                    </Tooltip>
+                  </a>
                 </Link>
               ))}
             </div>

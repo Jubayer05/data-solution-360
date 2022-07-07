@@ -46,30 +46,34 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
 
-        if (user) {
-          Router.push("/");
+        const validUser = userData.find((item) => item.email === user.email);
+
+        if (validUser) {
+          if (
+            validUser.status === "student" &&
+            validUser.registered === false
+          ) {
+           
+            Router.push("/students/register");
+          } else if (
+            validUser.status === "student" &&
+            validUser.registered === true
+          ) {
+            Router.push("/students/dashboard");
+          } else if (validUser.status === "admin") {
+            Router.push("/admin/dashboard");
+          }
           localStorage.setItem("emailUser", user.email);
-          localStorage.setItem("userName", user.displayName);
+        } else {
+          db.collection("userLogin").add({
+            name: user.displayName,
+            email: user.email,
+            status: "student",
+            registered: false,
+          });
+
+          Router.push("/");
         }
-
-        // const validUser = userData.find((item) => item.email === user.email);
-
-        // if (validUser) {
-        //   if (validUser.status === "student") {
-        //     Router.push("/join-us/intern");
-        //   } else if (validUser.status === "teacher") {
-        //     Router.push("/dashboard/teacher");
-        //   } else if (validUser.status === "admin") {
-        //     Router.push("/");
-        //   }
-        //   localStorage.setItem("emailUser", user.email);
-        // } else {
-        //   db.collection("userLogin").add({
-        //     name: user.displayName,
-        //     email: user.email,
-        //     status: "student",
-        //   });
-        // }
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -165,9 +169,9 @@ const Login = () => {
       style={{ backgroundImage: "linear-gradient(30deg,#62d7e1, #b933dc)" }}
     >
       <div className="flex justify-center items-center min-h-screen	">
-        <div>
+        <div className="">
           <div
-            className="bg-white w-96 p-9 rounded-md"
+            className="bg-white  w-72 sm:w-96 p-9 rounded-md"
             style={{ marginTop: "30px" }}
           >
             <h3 className="text-center text-xl font-bold">Login</h3>

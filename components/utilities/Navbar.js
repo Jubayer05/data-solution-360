@@ -44,7 +44,11 @@ const Navbar = () => {
             onClick={() => setOpenNav(!openNav)}
             className="text-2xl md:hidden"
           />
-          <img src="/logo/logo.png" className="h-12" alt="logo" />
+          <Link href="/">
+            <a>
+              <img src="/logo/logo.png" className="h-12" alt="logo" />
+            </a>
+          </Link>
         </div>
 
         <div
@@ -59,7 +63,7 @@ const Navbar = () => {
                   key={item.id}
                   className="font-bangla mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold"
                 >
-                  <Link href={item.link}>
+                  <Link href={item?.link}>
                     <a className="text-gray-500">
                       {language === "English" ? item.title : item.titleBang}
                     </a>

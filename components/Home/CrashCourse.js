@@ -4,6 +4,7 @@ import { crashCourseData } from "../../src/data/data";
 import { GiAerialSignal } from "react-icons/gi";
 import { BsPlayCircle } from "react-icons/bs";
 import { useStateContext } from "../../src/context/ContextProvider";
+import Link from "next/link";
 
 const CrashCourse = () => {
   const { language } = useStateContext();
@@ -34,7 +35,11 @@ const CrashCourseItem = ({ item }) => {
   return (
     <div className="w-5/6 sm:w-full mx-auto rounded-lg overflow-hidden sm:mx-2 border-1 hover:-translate-y-5 transition-translate duration-300 cursor-pointer mt-4">
       <img src={item.img} alt="" className="w-full h-60" />
-      <h2 className="text-xl font-semibold text-center my-5">{item.title}</h2>
+      <h2 className="text-xl font-semibold text-center my-5">
+        <Link href={item?.link}>
+          <a className="text-gray-600">{item.title}</a>
+        </Link>
+      </h2>
 
       <div className="flex items-center px-3">
         <GiAerialSignal />
@@ -42,7 +47,7 @@ const CrashCourseItem = ({ item }) => {
       </div>
       <div className="flex items-center px-3 mt-2">
         <BsPlayCircle />
-        <span className="ml-3">{item.point1}</span>
+        <span className="ml-3">{item.point2}</span>
       </div>
 
       <div className="mt-5 py-4 border-t-1 text-center">
