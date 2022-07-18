@@ -30,7 +30,7 @@ const Banner = () => {
         {language === "English" ? (
           <>
             <RiDoubleQuotesL />
-            Only a perfect guide can make a good data scientist
+            Only a perfect guide can make a good data scientist.
             <RiDoubleQuotesR />
           </>
         ) : (
