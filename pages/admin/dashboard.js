@@ -1,9 +1,11 @@
 import React from "react";
+import { DashboardFormat } from "../../components";
+import AdminHome from "../../components/Admin/Home";
 
 const dashboard = () => {
   return (
     <div>
-      <h2>Hello Iam from admin dashboard</h2>
+      <DashboardFormat component={<AdminHome />} />
     </div>
   );
 };
