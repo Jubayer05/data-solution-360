@@ -7,11 +7,12 @@ const CourseDetails = () => {
   const [courseDetails, setCourseDetails] = useState("");
 
   useEffect(() => {
-    const slug = window.location.href.split("/").slice(-1)[0];
-    const item = crashCourseData.find((item) => item.slug === slug);
-    setCourseDetails(item);
+    if (typeof window !== "undefined") {
+      const slug = window.location.href.split("/").slice(-1)[0];
+      const item = crashCourseData.find((item) => item.slug === slug);
+      setCourseDetails(item);
+    }
   }, []);
-  console.log(courseDetails);
 
   return (
     <div className="pt-24 max-w-2xl mx-auto p-5">

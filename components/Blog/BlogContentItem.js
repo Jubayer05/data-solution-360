@@ -6,9 +6,11 @@ const BlogContentItem = () => {
   const [blogItem, setBlogItem] = useState({});
 
   useEffect(() => {
-    const slug = window.location.href.split("/").slice(-1)[0];
-    const item = blogData.find((item) => item.slug === slug);
-    setBlogItem(item);
+    if (typeof window !== "undefined") {
+      const slug = window.location.href.split("/").slice(-1)[0];
+      const item = blogData.find((item) => item.slug === slug);
+      setBlogItem(item);
+    }
   }, []);
 
   return (

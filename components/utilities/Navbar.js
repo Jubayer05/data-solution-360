@@ -17,15 +17,17 @@ const Navbar = () => {
   const [openNav, setOpenNav] = useState(null);
 
   useEffect(() => {
-    window.addEventListener("scroll", (e) => {
-      if (window.pageYOffset > 0) {
-        setScroll(true);
-      } else {
-        setScroll(false);
-      }
-    });
+    if (typeof window !== "undefined") {
+      window.addEventListener("scroll", (e) => {
+        if (window.pageYOffset > 0) {
+          setScroll(true);
+        } else {
+          setScroll(false);
+        }
+      });
 
-    setWidth(window.innerWidth);
+      setWidth(window.innerWidth);
+    }
   }, [scroll]);
 
   const handleLanguage = (lan) => {

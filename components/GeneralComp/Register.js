@@ -12,9 +12,6 @@ const Register = () => {
   const [progressData, setProgressData] = useState(0);
   const [photoUrl, setPhotoUrl] = useState(null);
 
-  // useEffect(() => {
-  //   window.location.reload();
-  // }, []);
 
   const validate = (values) => {
     const errors = {};

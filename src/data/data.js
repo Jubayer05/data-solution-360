@@ -32,6 +32,12 @@ export const navItems = [
     titleBang: "ব্লগ",
     link: "/blog",
   },
+  {
+    id: "nav-5",
+    title: "Dashboard",
+    titleBang: "ড্যাশবোর্ড",
+    link: "/admin/dashboard",
+  },
 ];
 
 export const crashCourseData = [
