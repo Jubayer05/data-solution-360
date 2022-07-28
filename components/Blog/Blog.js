@@ -1,9 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
-import { blogData } from "../../src/data/blog";
+import React, { useEffect, useState } from "react";
+import { convert } from "html-to-text";
 import Link from "next/link";
+import { useStateContext } from "../../src/context/ContextProvider";
 
 const Blog = () => {
+  const { blogData } = useStateContext();
+
+  // const text = ;
+
+  // console.log(text);
+
   return (
     <div className="pb-4 pt-20 max-w-6xl mx-auto">
       <h2 className="text-center mt-6 pb-4 text-5xl text-gray-600">
@@ -28,7 +35,13 @@ const Blog = () => {
                   </Link>
                 </h2>
                 <p className="text-lg">
-                  {item.details.split(" ").slice(0, 15).join(" ")}...
+                  {convert(item?.details, {
+                    wordwrap: 130,
+                  })
+                    .split(" ")
+                    .slice(0, 15)
+                    .join(" ")}
+                  ...
                 </p>
               </div>
             </div>

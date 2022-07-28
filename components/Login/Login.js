@@ -53,15 +53,14 @@ const Login = () => {
             validUser.status === "student" &&
             validUser.registered === false
           ) {
-           
-            Router.push("/students/register");
+            window.location.href = "/students/register";
           } else if (
             validUser.status === "student" &&
             validUser.registered === true
           ) {
-            Router.push("/students/dashboard");
+            window.location.href = "/students/dashboard";
           } else if (validUser.status === "admin") {
-            Router.push("/admin/dashboard");
+            window.location.href = "/admin/dashboard";
           }
           localStorage.setItem("emailUser", user.email);
         } else {
@@ -73,6 +72,7 @@ const Login = () => {
           });
 
           Router.push("/");
+          window.location.href = "/";
         }
       })
       .catch((error) => {

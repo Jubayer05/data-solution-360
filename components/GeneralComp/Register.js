@@ -12,7 +12,6 @@ const Register = () => {
   const [progressData, setProgressData] = useState(0);
   const [photoUrl, setPhotoUrl] = useState(null);
 
-
   const validate = (values) => {
     const errors = {};
     if (!values.firstName) {
@@ -121,6 +120,8 @@ const Register = () => {
     }
     console.log(fileSize);
   };
+
+  console.log(userEmail);
 
   return (
     <div className="pt-20 px-5">

@@ -14,6 +14,7 @@
     "draft-js": "^0.11.7",
     "firebase": "^9.8.3",
     "formik": "^2.2.9",
+    "html-to-text": "^8.2.0",
     "next": "12.1.6",
     "react": "18.1.0",
     "react-collapsible": "^2.9.0",
@@ -23,7 +24,8 @@
     "react-icons": "^4.4.0",
     "react-lottie": "^1.2.3",
     "react-select": "^5.4.0",
-    "swiper": "^8.2.3"
+    "swiper": "^8.3.2",
+    "uuid": "^8.3.2"
   },
   "devDependencies": {
     "@iconify/icons-logos": "^1.2.6",

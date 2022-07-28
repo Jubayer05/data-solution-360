@@ -3,6 +3,15 @@ import * as animationData from "../../src/data/json/data-analysis.json";
 import { RiDoubleQuotesR, RiDoubleQuotesL } from "react-icons/ri";
 import Lottie from "react-lottie";
 import { useStateContext } from "../../src/context/ContextProvider";
+import { Swiper, SwiperSlide } from "swiper/react";
+
+import { Autoplay, Pagination, Navigation } from "swiper";
+import "swiper/css";
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+// import "swiper/swiper.min.css";
+// import "swiper/components/pagination/pagination.min.css";
+// import "swiper/components/navigation/navigation.min.css";
 
 const Banner = () => {
   const { language } = useStateContext();
@@ -14,6 +23,17 @@ const Banner = () => {
       preserveAspectRatio: "xMidYMid slice",
     },
   };
+
+  const slides = [
+    { id: "Slide 1" },
+    { id: "Slide 2" },
+    { id: "Slide 3" },
+    { id: "Slide 4" },
+    { id: "Slide 5" },
+    { id: "Slide 6" },
+    { id: "Slide 7" },
+    { id: "Slide 8" },
+  ];
 
   return (
     <div className="" style={{ backgroundColor: "#1a161f" }}>
@@ -41,8 +61,28 @@ const Banner = () => {
           </>
         )}
       </p>
-      <div className="mt-10 max-w-lg mx-auto">
-        <Lottie options={defaultOptions} height="100%" width="85%" />
+      <div className="mt-28 max-w-4xl mx-auto pb-10">
+        <Swiper
+          spaceBetween={30}
+          slidesPerView={5}
+          autoplay={{
+            delay: 2500,
+            disableOnInteraction: false,
+          }}
+          loop={true}
+          modules={[Autoplay, Pagination, Navigation]}
+        >
+          {slides.map((item) => (
+            <SwiperSlide
+              key={item.id}
+              className="flex items-center justify-center"
+            >
+              <div className="flex items-center justify-center w-full h-56 px-4 py-5 rounded-lg  bg-white">
+                {item.id}
+              </div>
+            </SwiperSlide>
+          ))}
+        </Swiper>
       </div>
     </div>
   );

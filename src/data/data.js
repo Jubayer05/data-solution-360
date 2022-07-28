@@ -28,12 +28,18 @@ export const navItems = [
   },
   {
     id: "nav-4",
+    title: "Career",
+    titleBang: "ক্যারিয়ার",
+    link: "/career",
+  },
+  {
+    id: "nav-5",
     title: "Blog",
     titleBang: "ব্লগ",
     link: "/blog",
   },
   {
-    id: "nav-5",
+    id: "nav-6",
     title: "Dashboard",
     titleBang: "ড্যাশবোর্ড",
     link: "/admin/dashboard",
@@ -140,6 +146,10 @@ export const technologyStack = [
         img: javaIcon,
       },
       {
+        id: "4",
+        img: rLang,
+      },
+      {
         id: "2",
         img: javascriptIcon,
       },
@@ -157,10 +167,7 @@ export const technologyStack = [
         id: "1",
         img: pythonIcon,
       },
-      {
-        id: "2",
-        img: rLang,
-      },
+
       {
         id: "3",
         logoImg: "/technology/excel.png",

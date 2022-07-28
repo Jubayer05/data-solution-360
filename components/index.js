@@ -6,6 +6,7 @@ export { default as Technology } from "./Home/Technology";
 export { default as Faq } from "./Home/Faq";
 
 export { default as About } from "./About/About";
+export { default as Career } from "./Career/Career";
 export { default as Blog } from "./Blog/Blog";
 export { default as AddNewBlog } from "./Blog/AddNewBlog";
 export { default as BlogContent } from "./Blog/BlogContentItem";
