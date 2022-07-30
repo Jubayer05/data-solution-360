@@ -9,7 +9,7 @@ const Team = () => {
       img: "/team/sakib.jpg",
     },
     {
-      name: "Shaikh Farhad Hossain",
+      name: "Shaikh Farhad Hossain, PhD",
       profession: "Trainer and Advisor Data Scientist and AI Researcher",
       img: "/team/Shamim.jpg",
     },
