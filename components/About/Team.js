@@ -23,6 +23,11 @@ const Team = () => {
       profession: "Graphics Designer and Video Editor",
       img: "/team/Farhad.png",
     },
+    {
+      name: "Jubayer Ahmed",
+      profession: "Web Developer",
+      img: "/team/jubayer.jpeg",
+    },
   ];
 
   return (
@@ -37,10 +42,10 @@ const Team = () => {
               src={item.img}
               alt=""
             />
-            <p className="text-base text-gray-600 font-semibold mt-2">
+            <p className="text-base text-gray-900 font-semibold mt-2">
               {item.name}
             </p>
-            <p className="text-xs text-gray-400 -mt-3">{item.profession}</p>
+            <p className="text-xs text-gray-600 -mt-3">{item.profession}</p>
           </div>
         ))}
       </div>
