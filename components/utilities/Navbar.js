@@ -36,11 +36,11 @@ const Navbar = () => {
   };
   return (
     <div
-      className={`fixed bg-white w-full md:text-center z-50 p-5 md:px-3 md:py-0 ${
-        scroll ? "shadow-lg" : ""
+      className={`fixed w-full md:text-center z-50 p-5 md:px-3 md:py-0 ${
+        scroll ? "shadow-lg bg-white" : ""
       }`}
     >
-      <div className="max-w-6xl mx-auto md:flex md:justify-between md:items-center md:h-20 ">
+      <div className="max-w-6xl mx-auto md:flex md:justify-between md:items-center md:h-16 ">
         <div className="flex justify-between">
           <HiOutlineMenuAlt1
             onClick={() => setOpenNav(!openNav)}
@@ -54,7 +54,7 @@ const Navbar = () => {
         </div>
 
         <div
-          className={`md:flex-1 md:justify-between md:flex md:items-center bg-white md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+          className={`md:flex-1 md:justify-between md:flex md:items-center bg-transparent md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             openNav ? "top-20" : "top-[-490px]"
           }`}
         >
@@ -77,13 +77,13 @@ const Navbar = () => {
 
           <div className="md:flex md:items-center">
             <div className="font-semibold text-left mr-4">
-              Hello,
+              {userName ? "Hello," : ""}
               <p className="text-orange-500">{userName}</p>
             </div>
 
             {width > 768 ? (
               <div className={`relative pr-5 ${styles.dropdown__container}`}>
-                <span className="text-md flex font-bangla items-center leading-20 hover:text-red-600">
+                <span className="text-md flex font-bangla items-center leading-16 hover:text-red-600">
                   {language} &nbsp; <BsChevronDown />
                 </span>
                 <ul
@@ -112,11 +112,9 @@ const Navbar = () => {
                 <button
                   type="button"
                   style={{
-                    backgroundColor: "#555",
                     borderRadius: "5px",
-                    color: "#eee",
                   }}
-                  className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center`}
+                  className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center border-1 border-slate-700 text-gray-300 bg-slate-700 transition-all duration-300 ease-linear hover:bg-white hover:text-gray-800`}
                   onClick={() => {}}
                 >
                   <FiLogIn className="text-sm" />{" "}

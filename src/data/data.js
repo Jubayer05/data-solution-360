@@ -6,6 +6,10 @@ import microsoftPowerBi from "@iconify/icons-logos/microsoft-power-bi";
 import tableauIcon from "@iconify/icons-logos/tableau";
 import mongodbIcon from "@iconify/icons-logos/mongodb";
 import mysqlIcon from "@iconify/icons-logos/mysql";
+import { MdLocationOn, MdEmail } from "react-icons/md";
+import { ImPhone } from "react-icons/im";
+import { IoLogoWhatsapp, IoLogoYoutube } from "react-icons/io";
+import { AiFillFacebook, AiFillLinkedin } from "react-icons/ai";
 
 export const navItems = [
   {
@@ -43,6 +47,29 @@ export const navItems = [
     title: "Dashboard",
     titleBang: "ড্যাশবোর্ড",
     link: "/admin/dashboard",
+  },
+];
+
+export const slidesData = [
+  {
+    id: "1",
+    img: "/course/data-science.jpg",
+  },
+  {
+    id: "2",
+    img: "/course/data-science-2.jpg",
+  },
+  {
+    id: "3",
+    img: "/course/data-science-2-c.jpg",
+  },
+  {
+    id: "4",
+    img: "/course/data-science111.jpg",
+  },
+  {
+    id: "5",
+    img: "/course/data-science-3.jpg",
   },
 ];
 
@@ -274,16 +301,6 @@ export const faqData = [
     ),
   },
 ];
-
-import { MdLocationOn, MdEmail } from "react-icons/md";
-import { ImPhone } from "react-icons/im";
-import { FaSkype } from "react-icons/fa";
-import { IoLogoWhatsapp, IoLogoYoutube } from "react-icons/io";
-import {
-  AiFillFacebook,
-  AiFillLinkedin,
-  AiFillTwitterCircle,
-} from "react-icons/ai";
 
 export const footerContactData = [
   {
