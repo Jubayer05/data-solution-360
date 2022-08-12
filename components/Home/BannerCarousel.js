@@ -90,7 +90,7 @@ const BannerCarousel = () => {
         effect={"fade"}
         speed={1000}
         autoplay={{
-          delay: 650000,
+          delay: 7000,
           disableOnInteraction: false,
         }}
         navigation={true}
