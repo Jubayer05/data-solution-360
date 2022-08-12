@@ -7,7 +7,7 @@ import { Tooltip } from "antd";
 const Footer = () => {
   return (
     <div
-      className="pt-20 pb-1 w-full"
+      className="pt-8 pb-1 w-full"
       style={{ backgroundColor: "#333", color: "#b3b3b3" }}
     >
       <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 justify-between pb-6 ">
@@ -15,10 +15,10 @@ const Footer = () => {
         <div className="px-4 text-center">
           <img src="/logo/logo-white.png" alt="logo" className="h-20 mx-auto" />
           <p className="mt-2 text-left">
-            If you are skilled enough, you don&apos;t need to seek a job. Jobs
-            will search for you.Just make a good portfolio.
+            If you are skilled enough, you don&apos;t need to seek for a job.
+            Jobs will search for you.Just make a good portfolio.
           </p>
-          <p className="text-gray-400 mt-4 text-xs">Sakib Tarafder - (CEO)</p>
+          <p className="text-white mt-4 text-xs">Sakib Tarafder - (CEO)</p>
         </div>
 
         {/* NOTE: CONTACT */}
@@ -62,7 +62,7 @@ const Footer = () => {
       </div>
 
       {/* NOTE: COPYRIGHT */}
-      <p className="text-center text-sm mt-6">
+      <p className="text-center text-sm ">
         Copyright &copy; {new Date().getFullYear()}{" "}
         <Link href="/">
           <a

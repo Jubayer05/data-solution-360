@@ -108,3 +108,18 @@ a:visited {
 .react-select__menu {
   padding: 5px 10px;
 }
+
+.swiper-button-prev,
+.swiper-button-next {
+  border-radius: 50%;
+  color: rgba(50, 50, 50, 0.301) !important;
+  font-weight: 400;
+  outline: 0;
+  transition: background-color 0.2s ease, color 0.2s ease;
+}
+
+.swiper-button-prev:hover,
+.swiper-button-next:hover {
+  font-weight: 700;
+  color: rgb(49, 49, 49) !important;
+}
