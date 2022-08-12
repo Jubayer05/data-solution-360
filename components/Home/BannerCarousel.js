@@ -101,7 +101,6 @@ const BannerCarousel = () => {
         <SwiperSlide>
           {({ isActive }) => (
             <div
-              // className="min-h-screen bg-center bg-cover"
               className="bg-center bg-cover"
               style={{
                 backgroundImage: "url(/banner/img8.jpg)",
@@ -109,7 +108,7 @@ const BannerCarousel = () => {
               }}
             >
               <div
-                className="pt-32"
+                className="flex items-center justify-start"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.4)",
                   minHeight: "calc(100vh - 60px)",
@@ -193,7 +192,7 @@ const BannerCarousel = () => {
               }}
             >
               <div
-                className="pt-32 "
+                className="pt-32"
                 style={{
                   backgroundColor: "rgba(255,255,255,0.4)",
                   minHeight: "calc(100vh - 60px)",
@@ -201,7 +200,7 @@ const BannerCarousel = () => {
               >
                 <div className="max-w-6xl mx-auto flex items-center justify-end sm:mr-0 md:mr-8 lg:mr-32">
                   {isActive && (
-                    <div className="mt-10 overflow-hidden sm:w-full md:w-3/5 lg:w-2/5 px-8">
+                    <div className="overflow-hidden sm:w-full md:w-3/5 lg:w-2/5 px-8">
                       {/* NOTE: HEADER */}
                       <motion.h2
                         key="head"
@@ -304,9 +303,9 @@ const BannerCarousel = () => {
                   minHeight: "calc(100vh - 60px)",
                 }}
               >
-                <div className="max-w-6xl mx-auto flex items-center sm:ml-0 md:ml-8 lg:ml-20 ">
+                <div className="max-w-6xl mx-auto flex items-center sm:ml-0 md:ml-8 lg:ml-56 ">
                   {isActive && (
-                    <div className="mt-10 overflow-hidden sm:w-full md:w-3/5 lg:w-2/5 px-8">
+                    <div className="overflow-hidden sm:w-full md:w-3/5 lg:w-2/5 px-8">
                       {/* NOTE: HEADER */}
                       <motion.h2
                         key="head"
