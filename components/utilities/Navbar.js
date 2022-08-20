@@ -36,12 +36,12 @@ const Navbar = () => {
   };
   return (
     <div
-      className={`fixed w-full md:text-center z-50 p-5 md:px-3 md:py-0 ${
+      className={`fixed w-full md:text-center bg-white z-50 px-5 pt-4 pb-3 md:px-3 md:py-0 ${
         scroll ? "shadow-lg bg-white" : ""
       }`}
     >
       <div className="max-w-6xl mx-auto md:flex md:justify-between md:items-center md:h-16 ">
-        <div className="flex justify-between">
+        <div className="flex justify-between items-center z-50">
           <HiOutlineMenuAlt1
             onClick={() => setOpenNav(!openNav)}
             className="text-2xl md:hidden"
@@ -54,16 +54,16 @@ const Navbar = () => {
         </div>
 
         <div
-          className={`md:flex-1 md:justify-between md:flex md:items-center bg-transparent md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-            openNav ? "top-20" : "top-[-490px]"
+          className={`bg-white pt-4 md:flex-1 md:justify-between md:flex md:items-center md:bg-transparent md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+            openNav ? "top-16" : "top-[-490px]"
           }`}
         >
-          <div className="flex-1">
+          <div className="flex-1 ">
             <ul className="md:inline-flex  md:justify-between mb-0">
               {navItems.map((item) => (
                 <li
                   key={item.id}
-                  className="font-bangla mx-2 cursor-pointer border-b-2 border-transparent hover:border-slate-500 font-bold"
+                  className="font-bangla mx-2 cursor-pointer border-b-2 border-transparent  md:hover:border-slate-500 font-bold"
                 >
                   <Link href={item?.link}>
                     <a className="text-gray-500">
@@ -104,7 +104,26 @@ const Navbar = () => {
                 </ul>
               </div>
             ) : (
-              ""
+              <div>
+                <ul className="flex -mt-3">
+                  <li
+                    className={`px-3 ${
+                      language === "বাংলা" ? "text-red-600" : ""
+                    }`}
+                    onClick={() => handleLanguage("বাংলা")}
+                  >
+                    বাংলা
+                  </li>
+                  <li
+                    className={`px-3 ${
+                      language === "English" ? "text-red-600" : ""
+                    }`}
+                    onClick={() => handleLanguage("English")}
+                  >
+                    English
+                  </li>
+                </ul>
+              </div>
             )}
 
             <Link href="/login">

@@ -123,3 +123,10 @@ a:visited {
   font-weight: 700;
   color: rgb(49, 49, 49) !important;
 }
+
+@media (max-width: 550px) {
+  .swiper-button-prev,
+  .swiper-button-next {
+    display: none !important;
+  }
+}

@@ -42,12 +42,12 @@ export const navItems = [
     titleBang: "ব্লগ",
     link: "/blog",
   },
-  {
-    id: "nav-6",
-    title: "Dashboard",
-    titleBang: "ড্যাশবোর্ড",
-    link: "/admin/dashboard",
-  },
+  // {
+  //   id: "nav-6",
+  //   title: "Dashboard",
+  //   titleBang: "ড্যাশবোর্ড",
+  //   link: "/admin/dashboard",
+  // },
 ];
 
 export const slidesData = [
