@@ -37,7 +37,7 @@ const Login = () => {
     });
   }, []);
 
-  // console.log(userData);
+  const handleFacebookLogin = () => {};
 
   const handleGoogleSignIn = () => {
     firebase
@@ -265,15 +265,10 @@ const Login = () => {
 
             <div className="flex justify-center items-center mt-4">
               <Icon
+                onClick={handleFacebookLogin}
                 icon="akar-icons:facebook-fill"
                 className="m-1 cursor-pointer text-4xl"
                 style={{ color: "#3e548d" }}
-              />
-
-              <Icon
-                icon="entypo-social:twitter-with-circle"
-                className="m-1 cursor-pointer"
-                style={{ color: "#4e9eec", fontSize: "38px" }}
               />
 
               <Icon
