@@ -22,31 +22,31 @@ const BannerCarousel = () => {
   const motionData = [
     {
       id: "1",
-      title: "This is first point 1",
+      title: "Best data science platform",
       icon: <AiFillHome />,
       transitionDelay: 1.2,
     },
     {
       id: "2",
-      title: "This is first point 2",
+      title: "Freelancing guidelines",
       icon: <AiFillEnvironment />,
       transitionDelay: 2,
     },
     {
       id: "3",
-      title: "This is first point 3",
+      title: "Provide recorded video after classes",
       icon: <AiFillGift />,
       transitionDelay: 2.8,
     },
     {
       id: "4",
-      title: "This is first point 4",
+      title: "life time support",
       icon: <AiFillNotification />,
       transitionDelay: 3.6,
     },
     {
       id: "5",
-      title: "This is first point 5",
+      title: "Unlimited Q&A options",
       icon: <BiAlarmAdd />,
       transitionDelay: 4.4,
     },
@@ -147,7 +147,7 @@ const BannerCarousel = () => {
                       {motionData.map((item) => (
                         <motion.h2
                           key={item.id}
-                          className="text-sm text-gray-800 mt-3 flex"
+                          className="text-sm text-gray-800 mt-3 flex items-center"
                           initial={{ x: -100, opacity: 0 }}
                           animate={{ x: 0, opacity: 1 }}
                           transition={{
