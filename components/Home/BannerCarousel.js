@@ -10,6 +10,8 @@ import {
 import { BiAlarmAdd, BiArch, BiBookHeart } from "react-icons/bi";
 import { DiPython } from "react-icons/di";
 import { SiPowerbi } from "react-icons/si";
+import { FaAws } from "react-icons/fa";
+import { AiFillFileExcel } from "react-icons/ai";
 
 import "swiper/css";
 import "swiper/css/pagination";
@@ -77,7 +79,21 @@ const BannerCarousel = () => {
       title: "Power BI",
       icon: <SiPowerbi />,
       bg: "goldenrod",
-      transitionDelay: 3.2,
+      transitionDelay: 3,
+    },
+    {
+      id: "3",
+      title: "AWS",
+      icon: <FaAws />,
+      bg: "#FF9900 ",
+      transitionDelay: 4,
+    },
+    {
+      id: "4",
+      title: "Excel",
+      icon: <AiFillFileExcel />,
+      bg: "#1d6f42",
+      transitionDelay: 5,
     },
   ];
 
@@ -116,7 +132,7 @@ const BannerCarousel = () => {
               >
                 <div className="flex items-center max-w-6xl mx-auto">
                   {isActive && (
-                    <div className="overflow-hidden sm:w-full md:w-3/5 lg:w-2/5 sm:ml-0 md:ml-8 lg:ml-20 px-8">
+                    <div className="overflow-hidden sm:w-full md:w-3/5 sm:ml-0 px-8">
                       {/* NOTE: HEADER */}
                       <motion.h2
                         key="head"
@@ -128,8 +144,8 @@ const BannerCarousel = () => {
                           delay: 0.2,
                         }}
                       >
-                        Welcome to Bangladeshi Data Science Learning Platform at
-                        Data Solution-360
+                        Welcome to best data science learning platform in
+                        Bangladesah
                       </motion.h2>
                       <div className="w-14 flex justify-center mt-2 mb-8">
                         <motion.h2
@@ -243,7 +259,7 @@ const BannerCarousel = () => {
                         {slideTwoMotionData.map((item) => (
                           <motion.h2
                             key={item.id}
-                            className="text-white mt-3 flex mr-8 relative"
+                            className="text-white mt-3 flex flex-col items-center direction-column mr-8 text-center"
                             initial={{ y: 40, rotateY: 180, opacity: 0 }}
                             animate={{ y: 0, rotateY: 360, opacity: 1 }}
                             transition={{
@@ -251,15 +267,15 @@ const BannerCarousel = () => {
                               delay: item.transitionDelay,
                             }}
                           >
-                            <span
+                            <p
                               className="text-4xl p-5 rounded-full"
                               style={{ backgroundColor: item.bg }}
                             >
                               {item.icon}
-                            </span>
-                            <span className="w-24 absolute top-16 uppercase  text-black">
+                            </p>
+                            <p className="-mt-12 uppercase text-black">
                               {item.title}
-                            </span>
+                            </p>
                           </motion.h2>
                         ))}
                       </div>
@@ -272,7 +288,7 @@ const BannerCarousel = () => {
                           animate={{ y: 0, rotateY: 360, opacity: 1 }}
                           transition={{
                             duration: 1,
-                            delay: 4.5,
+                            delay: 5.8,
                           }}
                         >
                           Learn More
@@ -355,11 +371,12 @@ const BannerCarousel = () => {
                             delay: 2.5,
                           }}
                         >
-                          Lorem ipsum dolor sit amet consectetur adipisicing
-                          elit. Voluptas illum maxime soluta labore architecto
-                          facilis, ad laborum molestiae magnam sit impedit et!
-                          Delectus voluptatibus reprehenderit blanditiis ea
-                          exercitationem facere tempore?
+                          Data Solution-360 works with data science, artificial
+                          intelligence, machine learning, data analytics
+                          learning, and consulting.
+                          <br /> We make capable of earning by providing quality
+                          training and guideline. We want to unveil something
+                          new and innovative
                         </motion.h2>
                       </div>
 

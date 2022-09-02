@@ -54,7 +54,7 @@ const Navbar = () => {
         </div>
 
         <div
-          className={`bg-white pt-4 md:flex-1 md:justify-between md:flex md:items-center md:bg-transparent md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+          className={`bg-white pt-4 md:pt-0 md:flex-1 md:justify-between md:flex md:items-center md:bg-transparent md:pb-0 pb-12 absolute md:static md:z-auto z-[-1] left-0 w-full md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
             openNav ? "top-16" : "top-[-490px]"
           }`}
         >

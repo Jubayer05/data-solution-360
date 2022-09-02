@@ -15,8 +15,10 @@ const CourseDetails = () => {
   }, []);
 
   return (
-    <div className="pt-24 max-w-2xl mx-auto p-5">
-      <h2 className="text-center text-4xl underline">{courseDetails.title}</h2>
+    <div className="pt-32 max-w-2xl mx-auto p-5 pb-28">
+      <h2 className="text-center text-4xl underline mb-12">
+        {courseDetails.title}
+      </h2>
 
       <img src={courseDetails.img} alt="" />
       <p className="text-xl font-bold mt-8">Details:</p>

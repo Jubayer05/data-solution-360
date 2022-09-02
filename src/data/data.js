@@ -87,6 +87,31 @@ export const crashCourseData = [
     additional: "",
   },
   {
+    id: "4",
+    link: "/course-details/expert-in-python",
+    slug: "expert-in-python",
+    title: "Expert in Python",
+    point1: "Live class",
+    point2: "Access recorded video",
+    img: "/course/data-science-4.jpg",
+    details:
+      "If you're looking for a comprehensive, hands-on guide to learning Python in a advance way, you've come to the right place.",
+    additional: (
+      <ul>
+        <li> 1) Great opportunity to enter the freelancing sector.</li>
+        <li>
+          2)RemoteJob opportunities in big multinational companies in the
+          country and abroad
+        </li>
+        <li> 3) Part time job as well as study.</li>
+        <li>4) The demand in the corporate sector is increasing day by day.</li>
+        <li>
+          5) Opportunity to build a career as a Data Analyst / Data Scientist.
+        </li>
+      </ul>
+    ),
+  },
+  {
     id: "2",
     link: "/course-details/microsoft-power-bi",
     slug: "microsoft-power-bi",
@@ -113,13 +138,28 @@ export const crashCourseData = [
   },
   {
     id: "3",
-    link: "/",
-    slug: "",
-    title: "Coming Soon",
+    link: "/course-details/amazon-web-services",
+    slug: "amazon-web-services",
+    title: "Amazon Web Services",
     point1: "Live class",
     point2: "Access recorded video",
     img: "/course/data-science-3.jpg",
-    additional: "",
+    details:
+      "If you're looking for a comprehensive, hands-on guide to learning Amazon Web Services, you've come to the right place.",
+    additional: (
+      <ul>
+        <li> 1) Great opportunity to enter the freelancing sector.</li>
+        <li>
+          2)RemoteJob opportunities in big multinational companies in the
+          country and abroad
+        </li>
+        <li> 3) Part time job as well as study.</li>
+        <li>4) The demand in the corporate sector is increasing day by day.</li>
+        <li>
+          5) Opportunity to build a career as a Data Analyst / Data Scientist.
+        </li>
+      </ul>
+    ),
   },
 ];
 
