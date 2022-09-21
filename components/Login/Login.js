@@ -62,6 +62,7 @@ const Login = () => {
           } else if (validUser.status === "admin") {
             window.location.href = "/admin/dashboard";
           }
+          localStorage.setItem("userName", user.displayName);
           localStorage.setItem("emailUser", user.email);
         } else {
           db.collection("userLogin").add({

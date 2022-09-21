@@ -6,7 +6,7 @@ import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { BsChevronDown } from "react-icons/bs";
 
 import styles from "../../styles/utility/Navbar.module.css";
-import { navItems } from "../../src/data/data";
+import { navItems } from "../../src/data/data"; 
 import { useStateContext } from "../../src/context/ContextProvider";
 import Link from "next/link";
 
@@ -72,6 +72,13 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
+              <li className="font-bangla mx-2 cursor-pointer border-b-2 border-transparent  md:hover:border-slate-500 font-bold">
+                <Link href="/">
+                  <a className="text-gray-500">
+                    {language === "English" ? "Dashboard" : "ড্যাশবোর্ড"}
+                  </a>
+                </Link>
+              </li>
             </ul>
           </div>
 
