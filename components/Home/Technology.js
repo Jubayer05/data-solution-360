@@ -14,7 +14,9 @@ const Technology = () => {
 
   return (
     <div className="mt-16 mb-28">
-      <h2 className="text-center text-4xl font-bold mb-3">Technology Stack</h2>
+      <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
+        Technology Stack
+      </h2>
       <div className="w-36 h-1.5 bg-gradient-to-r from-orange-600 to-blue-700 rounded-full mx-auto"></div>
       <p className="text-center mt-6 text-xl sm:w-2/3 mx-auto px-4">
         The field of data science has evolved to a stage where no organization

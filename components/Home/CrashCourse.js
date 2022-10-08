@@ -7,22 +7,27 @@ import { useStateContext } from "../../src/context/ContextProvider";
 import Link from "next/link";
 
 const CrashCourse = () => {
+  const [courseData, setCourseData] = useState(crashCourseData);
   const { language } = useStateContext();
 
   console.log(language);
 
   return (
-    <div className="bg-slate-100	mt-16">
+    <div className="bg-[#edf2f5]	pt-8">
       <div className="max-w-6xl py-10 mx-auto">
-        <h2 className="text-center text-4xl font-bold  mb-6">
+        <h2 className="text-center text-3xl font-bold font-heading mt-16 mb-6 text-headerMain">
           {language === "English" ? (
             "Best Courses for you"
           ) : (
             <span className="font-bangla">আপনার জন্য সেরা কোর্স</span>
           )}
         </h2>
+        <p className="text-center font-bold font-heading  mb-16 text-headerMain	">
+          At this moment Data Solution - 360 provides this following courses for
+          you.
+        </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5 p-5">
-          {crashCourseData.map((item) => (
+          {courseData.map((item) => (
             <CrashCourseItem key={item.id} item={item} />
           ))}
         </div>

@@ -9,14 +9,16 @@ module.exports = {
       display: ["Open Sans", "sans-serif"],
       body: ["Open Sans", "sans-serif"],
       bangla: ["Noto Sans Bengali", "sans-serif"],
+      heading: ["Roboto Slab", "serif"],
     },
     extend: {
       fontSize: {
         14: "14px",
       },
       backgroundColor: {
+        "primary-bg": "#d6295f",
         "main-bg": "#FAFBFB",
-        "main-dark-bg": "#20232A",
+        "main-dark-bg": "#020268",
         "secondary-dark-bg": "#33373E",
         "light-gray": "#f0f0f0",
         "half-transparent": "rgba(0, 0, 0, 0.5)",
@@ -25,10 +27,13 @@ module.exports = {
         1: "1px",
       },
       borderColor: {
+        primary: "#d6295f",
         color: "rgba(0, 0, 0, 0.1)",
       },
       textColor: {
         input: "#929292",
+        primary: "#d6295f",
+        headerMain: "#26346E",
       },
       width: {
         400: "400px",

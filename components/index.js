@@ -1,9 +1,11 @@
 export { default as HomeComp } from "./Home/Home";
 export { default as Banner } from "./Home/Banner";
+export { default as MainBanner } from "./Home/MainBanner";
 export { default as CrashCourse } from "./Home/CrashCourse";
 export { default as Service } from "./Home/Service";
 export { default as Technology } from "./Home/Technology";
 export { default as Faq } from "./Home/Faq";
+export { default as AboutHome } from "./Home/AboutUs";
 
 export { default as About } from "./About/About";
 export { default as Career } from "./Career/Career";

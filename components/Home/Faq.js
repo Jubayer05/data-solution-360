@@ -11,7 +11,7 @@ const Faq = () => {
   const [triggerOpen, setTriggerOpen] = useState(false);
   return (
     <div className="mt-16 mb-28 max-w-6xl mx-auto">
-      <h2 className="text-center text-3xl font-bold">
+      <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
         Frequently Asked Questions
       </h2>
       <p className="text-center text-xl mt-3 text-gray-500">

@@ -7,6 +7,7 @@ import {
   Technology,
   Faq,
   Footer,
+  AboutHome,
 } from "../index";
 
 const Home = () => {
@@ -14,6 +15,7 @@ const Home = () => {
     <div>
       <Navbar />
       <Banner />
+      <AboutHome />
       <Service />
       <CrashCourse />
       <Technology />
