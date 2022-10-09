@@ -42,6 +42,11 @@ export const linksAdmin = [
     title: "Pages",
     links: [
       {
+        name: "Add a course",
+        link: "/admin/add-course",
+        icon: <AiOutlineVideoCameraAdd />,
+      },
+      {
         name: "Add blog content",
         link: "/admin/addBlogContent",
         icon: <ImBlog />,
@@ -56,11 +61,11 @@ export const linksAdmin = [
         link: "/admin/myBlogs",
         icon: <AiOutlineFundView />,
       },
-      {
-        name: "Add video lesson",
-        link: "/admin/addVideoLesson",
-        icon: <AiOutlineVideoCameraAdd />,
-      },
+      // {
+      //   name: "Add video lesson",
+      //   link: "/admin/addVideoLesson",
+      //   icon: <AiOutlineVideoCameraAdd />,
+      // },
     ],
   },
   {

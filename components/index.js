@@ -26,3 +26,5 @@ export { default as DashboardFormat } from "./utilities/DashboardFormatStudent";
 export { default as LoginComp } from "./Login/Login";
 
 export { default as RegisterComp } from "./GeneralComp/Register";
+
+export { default as AddCourseComp } from "./Admin/Course/AddCourse";
