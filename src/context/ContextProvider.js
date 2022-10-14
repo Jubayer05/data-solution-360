@@ -11,6 +11,7 @@ export const MainContextProvider = ({ children }) => {
   const [userData, setUserData] = useState([]);
   const [blogData, setBlogData] = useState([]);
   const [dashAdmin, setDashAdmin] = useState([]);
+  const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
     setLanguage(localStorage.getItem("lan"));
@@ -20,12 +21,13 @@ export const MainContextProvider = ({ children }) => {
     loadData("userLogin", setUserData);
     loadData("blogData", setBlogData);
     loadData("dashboard_admin", setDashAdmin);
+    loadData("course_data", setCourseData);
   }, []);
 
   const loadData = (database, setState) => {
     db.collection(database).onSnapshot((snap) => {
       const data = snap.docs.map((doc) => ({
-        id: doc.id,
+        key: doc.id,
         ...doc.data(),
       }));
       setState(data);
@@ -47,6 +49,7 @@ export const MainContextProvider = ({ children }) => {
         findCurrentUser,
         findAdmin,
         blogData,
+        courseData,
       }}
     >
       {children}

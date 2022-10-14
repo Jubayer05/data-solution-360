@@ -8,6 +8,7 @@ import {
   Faq,
   Footer,
   AboutHome,
+  TeamMember,
 } from "../index";
 
 const Home = () => {
@@ -18,6 +19,7 @@ const Home = () => {
       <AboutHome />
       <Service />
       <CrashCourse />
+      <TeamMember />
       <Technology />
       <Faq />
       <Footer />

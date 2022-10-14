@@ -5,6 +5,7 @@ import { useRouter } from "next/router";
 import firebase from "../../firebase";
 
 const db = firebase.firestore();
+const auth = firebase.auth();
 
 const initialState = {
   name: "",
@@ -14,6 +15,7 @@ const initialState = {
 };
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
+const facebookProvider = new firebase.auth.FacebookAuthProvider();
 
 const Login = () => {
   const [haveAccount, setHaveAccount] = useState(false);
@@ -37,49 +39,59 @@ const Login = () => {
     });
   }, []);
 
-  const handleFacebookLogin = () => {};
+  const handleFacebookLogin = () => {
+    auth
+      .signInWithPopup(facebookProvider)
+      .then((result) => {
+        const user = result.user;
+        const validUser = userData.find((item) => item.email === user.email);
+        fbGoogleLoginFunction(validUser);
+      })
+      .catch((error) => {
+        var errorMessage = error.message;
+        alert(errorMessage);
+      });
+  };
 
   const handleGoogleSignIn = () => {
-    firebase
-      .auth()
+    auth
       .signInWithPopup(googleProvider)
       .then((result) => {
         const user = result.user;
-
         const validUser = userData.find((item) => item.email === user.email);
-
-        if (validUser) {
-          if (
-            validUser.status === "student" &&
-            validUser.registered === false
-          ) {
-            window.location.href = "/students/register";
-          } else if (
-            validUser.status === "student" &&
-            validUser.registered === true
-          ) {
-            window.location.href = "/students/dashboard";
-          } else if (validUser.status === "admin") {
-            window.location.href = "/admin/dashboard";
-          }
-          localStorage.setItem("userName", user.displayName);
-          localStorage.setItem("emailUser", user.email);
-        } else {
-          db.collection("userLogin").add({
-            name: user.displayName,
-            email: user.email,
-            status: "student",
-            registered: false,
-          });
-
-          Router.push("/");
-          window.location.href = "/";
-        }
+        fbGoogleLoginFunction(validUser);
       })
       .catch((error) => {
         const errorMessage = error.message;
         alert(errorMessage);
       });
+  };
+
+  const fbGoogleLoginFunction = (validUser) => {
+    if (validUser) {
+      if (validUser.status === "student" && validUser.registered === false) {
+        window.location.href = "/students/register";
+      } else if (
+        validUser.status === "student" &&
+        validUser.registered === true
+      ) {
+        window.location.href = "/students/dashboard";
+      } else if (validUser.status === "admin") {
+        window.location.href = "/admin/dashboard";
+      }
+      localStorage.setItem("userName", user.displayName);
+      localStorage.setItem("emailUser", user.email);
+    } else {
+      db.collection("userLogin").add({
+        name: user.displayName,
+        email: user.email,
+        status: "student",
+        registered: false,
+      });
+
+      Router.push("/");
+      window.location.href = "/";
+    }
   };
 
   const handleLogin = () => {
@@ -89,8 +101,7 @@ const Login = () => {
       if (
         userData.find((item) => item.email === formData.email) !== undefined
       ) {
-        firebase
-          .auth()
+        auth
           .signInWithEmailAndPassword(formData.email, formData.password)
           .then((userCredential) => {
             const user = userCredential.user;
