@@ -50,6 +50,39 @@ export const navItems = [
   // },
 ];
 
+export const navDropItems = [
+  {
+    id: "nav-1",
+    title: "Dashboard",
+    titleBang: "হোম",
+    link: "/",
+  },
+  {
+    id: "nav-2",
+    title: "Profile",
+    titleBang: "সম্পর্ক",
+    link: "/about",
+  },
+  {
+    id: "nav-3",
+    title: "Terms and Condition",
+    titleBang: "সার্ভিস",
+    link: "/services",
+  },
+  {
+    id: "nav-4",
+    title: "Return Policy",
+    titleBang: "ক্যারিয়ার",
+    link: "/career",
+  },
+  {
+    id: "nav-5",
+    title: "Help Center",
+    titleBang: "ব্লগ",
+    link: "/blog",
+  },
+];
+
 export const slidesData = [
   {
     id: "1",

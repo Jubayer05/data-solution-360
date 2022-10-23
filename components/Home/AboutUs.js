@@ -4,7 +4,7 @@ import YoutubeEmbed from "../utilities/YoutubeEmbed";
 const AboutUs = () => {
   return (
     <div className="max-w-6xl mx-auto my-10">
-      <div className="max-w-6xl mx-auto flex justify-between items-center">
+      <div className="max-w-6xl mx-auto flex justify-between items-center flex-col lg:flex-row">
         <div className="flex-1">
           <YoutubeEmbed embedId="URQ2U6Seq_Y" />
         </div>

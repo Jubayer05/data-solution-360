@@ -45,7 +45,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         const validUser = userData.find((item) => item.email === user.email);
-        fbGoogleLoginFunction(validUser);
+        fbGoogleLoginFunction(validUser, user);
       })
       .catch((error) => {
         var errorMessage = error.message;
@@ -59,7 +59,7 @@ const Login = () => {
       .then((result) => {
         const user = result.user;
         const validUser = userData.find((item) => item.email === user.email);
-        fbGoogleLoginFunction(validUser);
+        fbGoogleLoginFunction(validUser, user);
       })
       .catch((error) => {
         const errorMessage = error.message;
@@ -67,7 +67,7 @@ const Login = () => {
       });
   };
 
-  const fbGoogleLoginFunction = (validUser) => {
+  const fbGoogleLoginFunction = (validUser, user) => {
     if (validUser) {
       if (validUser.status === "student" && validUser.registered === false) {
         window.location.href = "/students/register";

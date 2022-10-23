@@ -13,14 +13,14 @@ const MainBanner = () => {
   };
   return (
     <div
-      className="pt-16 text-white"
+      className=" text-white"
       style={{
         backgroundImage:
           "linear-gradient(90deg, rgb(38, 52, 110), rgb(40, 52, 113))",
       }}
     >
       <div
-        className="max-w-6xl mx-auto flex justify-between items-center"
+        className="max-w-6xl mx-auto p-4 flex justify-between items-center flex-col lg:flex-row"
         style={{
           minHeight: "calc(100vh - 60px)",
         }}
@@ -32,12 +32,16 @@ const MainBanner = () => {
           <p className="text-lg">
             Bangladeshi number one data science learning platform.
           </p>
-          <button className="text-base px-4 py-3 border-2 rounded-lg border-transparent bg-primary-bg transition-all duration-300 ease-linear hover:bg-white hover:text-primary hover:border-primary">
+          <button
+            className="text-base px-4 py-3 border-2 rounded-lg border-transparent bg-primary-bg 
+                      transition-all duration-300 ease-linear hover:bg-white hover:text-primary 
+                    hover:border-primary"
+          >
             Explore Courses
           </button>
         </div>
-        <div className="flex-1 overflow-visible">
-          <Lottie options={defaultOptions} width={580} />
+        <div className="flex-1 overflow-visible w-[350px] md:w-[500px]">
+          <Lottie options={defaultOptions} />
         </div>
       </div>
     </div>
