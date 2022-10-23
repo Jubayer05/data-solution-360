@@ -3,6 +3,8 @@ import React, { useEffect, useState } from "react";
 import { UserOutlined } from "@ant-design/icons";
 import { Avatar, Switch } from "antd";
 import { FiLogIn, FiLogOut } from "react-icons/fi";
+import { VscTriangleUp } from "react-icons/vsc";
+
 import { HiOutlineMenuAlt1 } from "react-icons/hi";
 import { BsChevronDown } from "react-icons/bs";
 import { getAuth, signOut } from "firebase/auth";
@@ -110,38 +112,45 @@ const Navbar = () => {
             </div>
 
             {userName ? (
-              <div className="relative font-semibold text-left mr-4">
+              <div
+                className={`${styles.dropdown__container} relative font-semibold text-left mr-4 py-4`}
+              >
                 <Avatar
-                  size={45}
+                  size={48}
                   src="https://randomuser.me/api/portraits/med/men/78.jpg"
                   className="cursor-pointer"
                 />
 
-                <div className="absolute z-10 bg-white top-[60px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg">
-                  <ul>
-                    {navDropItems.map((item) => (
-                      <li
-                        key={item.id}
-                        className="py-3 rounded-md cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]"
-                      >
-                        {item.title}
+                <div
+                  className={`${styles.dropdown__content} absolute z-10 bg-white top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
+                >
+                  <div className="relative">
+                    <VscTriangleUp className="absolute top-[-39px] -right-2 text-white text-3xl" />
+                    <ul>
+                      {navDropItems.map((item) => (
+                        <li
+                          key={item.id}
+                          className="py-3 rounded-md cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]"
+                        >
+                          {item.title}
+                        </li>
+                      ))}
+                      <li className="py-3 mt-2 bg-primary-bg hover:bg-[rgb(32,52,110)] flex items-center justify-center text-white rounded-md cursor-pointer hover:text-white px-4">
+                        <button
+                          type="button"
+                          className={`text-md px-3 hover:drop-shadow-xl flex items-center justify-center text-gray-300 
+                        transition-all duration-300 ease-linear
+                        `}
+                          onClick={handleLogout}
+                        >
+                          <FiLogOut className="text-sm" />{" "}
+                          <span className="pl-2 font-bangla">
+                            {language === "English" ? "Logout" : "লগ ইন"}
+                          </span>
+                        </button>
                       </li>
-                    ))}
-                    <li className="py-3 mt-2 bg-primary-bg hover:bg-[rgb(32,52,110)] flex items-center justify-center text-white rounded-md cursor-pointer hover:text-white px-4">
-                      <button
-                        type="button"
-                        className={`text-md px-3 hover:drop-shadow-xl flex items-center justify-center text-gray-300 
-                           transition-all duration-300 ease-linear
-                           `}
-                        onClick={handleLogout}
-                      >
-                        <FiLogOut className="text-sm" />{" "}
-                        <span className="pl-2 font-bangla">
-                          {language === "English" ? "Logout" : "লগ ইন"}
-                        </span>
-                      </button>
-                    </li>
-                  </ul>
+                    </ul>
+                  </div>
                 </div>
               </div>
             ) : (
