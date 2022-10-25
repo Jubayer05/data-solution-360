@@ -61,7 +61,7 @@ export const navDropItems = [
     title: "Dashboard",
     slug: "dashboard",
     titleBang: "হোম",
-    link: "/student/dashboard",
+    link: "/students/dashboard",
   },
   {
     id: "nav-2",
