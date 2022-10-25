@@ -1,9 +1,10 @@
 import React from "react";
+import Navbar from "../../components/utilities/Navbar";
 
 const dashboard = () => {
   return (
     <div>
-      <h2>Hello Dashboard</h2>
+      <Navbar />
     </div>
   );
 };
