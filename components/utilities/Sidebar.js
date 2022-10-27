@@ -5,11 +5,11 @@ import { MdOutlineCancel } from "react-icons/md";
 import Link from "next/link";
 
 import { Tooltip } from "antd";
-import { useStateContext } from "../../src/context/UtilitiesContext";
+import { useStateContextDashboard } from "../../src/context/UtilitiesContext";
 import { linksAdmin } from "../../src/data/dummy";
 
 const Sidebar = ({ links }) => {
-  const { activeMenu, setActiveMenu, screenSize } = useStateContext();
+  const { activeMenu, setActiveMenu, screenSize } = useStateContextDashboard();
 
   const handleCloseMenu = () => {
     if (activeMenu && screenSize <= 900) {

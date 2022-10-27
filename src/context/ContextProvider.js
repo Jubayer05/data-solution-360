@@ -7,7 +7,9 @@ const StateContext = createContext();
 export const MainContextProvider = ({ children }) => {
   const [language, setLanguage] = useState("English");
   const [userName, setUserName] = useState("");
+  // const [email, setEmail] = useState("");
   const [userEmail, setUserEmail] = useState("");
+  const [photoUrl, setPhotoUrl] = useState("");
   const [userData, setUserData] = useState([]);
   const [blogData, setBlogData] = useState([]);
   const [dashAdmin, setDashAdmin] = useState([]);
@@ -17,6 +19,7 @@ export const MainContextProvider = ({ children }) => {
     setLanguage(localStorage.getItem("lan"));
     setUserName(localStorage.getItem("userName"));
     setUserEmail(localStorage.getItem("emailUser"));
+    setPhotoUrl(localStorage.getItem("photoUrl"));
 
     loadData("userLogin", setUserData);
     loadData("blogData", setBlogData);
@@ -36,8 +39,9 @@ export const MainContextProvider = ({ children }) => {
 
   const findCurrentUser = userData.find((item) => item.email === userEmail);
   const findAdmin = dashAdmin.find((item) => item.email === userEmail);
+  const uniqueUserName = userEmail.split("@")[0];
 
-  // console.log(findAdmin);
+  // console.log(uniqueUserName);
 
   return (
     <StateContext.Provider
@@ -50,6 +54,8 @@ export const MainContextProvider = ({ children }) => {
         findAdmin,
         blogData,
         courseData,
+        photoUrl,
+        uniqueUserName
       }}
     >
       {children}

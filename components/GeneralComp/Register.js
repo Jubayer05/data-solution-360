@@ -10,7 +10,9 @@ const Register = () => {
   const { userEmail, findCurrentUser } = useStateContext();
   const [selectedOption, setSelectedOption] = useState(null);
   const [progressData, setProgressData] = useState(0);
-  const [photoUrl, setPhotoUrl] = useState(null);
+  // const [photoUrl, setPhotoUrl] = useState(null);
+
+  console.log(findCurrentUser);
 
   const validate = (values) => {
     const errors = {};
@@ -48,22 +50,24 @@ const Register = () => {
       email: "",
       phone: "",
       address: "",
-      photoUrl: "",
+      // photoUrl: "",
     },
     validate,
     onSubmit: (values) => {
       firebase
         .firestore()
         .collection("userLogin")
-        .doc(findCurrentUser.id)
+        .doc(findCurrentUser.key)
         .update({
           ...values,
           email: userEmail,
           district: selectedOption?.value,
-          photoUrl: photoUrl,
+          // photoUrl: photoUrl,
+        })
+        .then(() => {
+          alert("Profile updated successfully!");
+          window.location.href = "/students/dashboard";
         });
-
-      alert("Profile updated successfully!");
     },
   });
 
@@ -81,45 +85,45 @@ const Register = () => {
     }),
   };
 
-  const handleFileSubmit = (e) => {
-    const fileSize = document.getElementById("photoUrl").files[0].size;
-    const profileImg = e.target.files[0];
+  // const handleFileSubmit = (e) => {
+  //   const fileSize = document.getElementById("photoUrl").files[0].size;
+  //   const profileImg = e.target.files[0];
 
-    if (fileSize < 512000) {
-      const uploadTask = firebase
-        .storage()
-        .ref(`profileImage/${userEmail}/${profileImg?.name}`)
-        .put(profileImg);
-      uploadTask.on(
-        "state_changed",
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-          );
+  //   if (fileSize < 512000) {
+  //     const uploadTask = firebase
+  //       .storage()
+  //       .ref(`profileImage/${userEmail}/${profileImg?.name}`)
+  //       .put(profileImg);
+  //     uploadTask.on(
+  //       "state_changed",
+  //       (snapshot) => {
+  //         const progress = Math.round(
+  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+  //         );
 
-          setProgressData(progress);
-        },
-        (error) => {
-          alert(error.message + "" + "Something went wrong");
-        },
-        () => {
-          firebase
-            .storage()
-            .ref("profileImage")
-            .child(userEmail)
-            .child(profileImg?.name)
-            .getDownloadURL()
-            .then((url) => {
-              // NOTE: use this url
-              setPhotoUrl(url);
-            });
-        }
-      );
-    } else {
-      alert("File Size must be under 500kb");
-    }
-    console.log(fileSize);
-  };
+  //         setProgressData(progress);
+  //       },
+  //       (error) => {
+  //         alert(error.message + "" + "Something went wrong");
+  //       },
+  //       () => {
+  //         firebase
+  //           .storage()
+  //           .ref("profileImage")
+  //           .child(userEmail)
+  //           .child(profileImg?.name)
+  //           .getDownloadURL()
+  //           .then((url) => {
+  //             // NOTE: use this url
+  //             setPhotoUrl(url);
+  //           });
+  //       }
+  //     );
+  //   } else {
+  //     alert("File Size must be under 500kb");
+  //   }
+  //   console.log(fileSize);
+  // };
 
   console.log(userEmail);
 

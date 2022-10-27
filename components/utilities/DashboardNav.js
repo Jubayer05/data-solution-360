@@ -1,13 +1,18 @@
+/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { FiShoppingCart } from "react-icons/fi";
+import { MdOutlineMenuOpen } from "react-icons/md";
+import { AiOutlineSearch } from "react-icons/ai";
+import { Input } from "antd";
 import { BsChatLeft } from "react-icons/bs";
 import { RiNotification3Line } from "react-icons/ri";
 import { MdKeyboardArrowDown } from "react-icons/md";
 
 import { Tooltip } from "antd";
-import { useStateContext } from "../../src/context/UtilitiesContext";
+import { useStateContextDashboard } from "../../src/context/UtilitiesContext";
+import { useStateContext } from "../../src/context/ContextProvider";
+// import { useStateContext } from "../../src/context/UtilitiesContext";
 
 const NavButton = ({ title, link, customFunc, icon, color, dotColor }) => {
   return (
@@ -37,7 +42,8 @@ const DashboardNavbar = () => {
     handleClick,
     screenSize,
     setScreenSize,
-  } = useStateContext();
+  } = useStateContextDashboard();
+  const { userName, photoUrl, uniqueUserName } = useStateContext();
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -58,22 +64,23 @@ const DashboardNavbar = () => {
   }, [screenSize]);
 
   return (
-    <div className="flex justify-between p-2 md:mx-6 relative">
+    <div className="flex justify-between items-center p-2 md:mx-6 relative">
       <NavButton
-        icon={<AiOutlineMenu />}
+        icon={activeMenu ? <MdOutlineMenuOpen /> : <AiOutlineMenu />}
         customFunc={() => setActiveMenu((prev) => !prev)}
         title="Menu"
         color="blue"
       />
 
-      <div className="flex">
-        <NavButton
-          icon={<FiShoppingCart />}
-          customFunc={() => handleClick("cart")}
-          title="Cart"
-          color="blue"
+      <div className="px-2 py-1 flex items-center bg-[#e2ecff] w-1/3 rounded-lg">
+        <AiOutlineSearch className="text-xl mr-2" />
+        <input
+          placeholder="Quic searching"
+          className="rounded-md bg-[#e2ecff] h-8 outline-none w-full"
         />
+      </div>
 
+      <div className="flex items-center">
         <NavButton
           icon={<BsChatLeft />}
           customFunc={() => handleClick("chat")}
@@ -91,16 +98,27 @@ const DashboardNavbar = () => {
         />
         <Tooltip title="Profile" color="#707070">
           <div
-            className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
+            className="ml-2 flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
             onClick={() => handleClick("userProfile")}
           >
             {/* <img src={avatar} alt="" className="h-8 w-8 rounded-full" /> */}
-            <p className="mb-0">
-              <span className="text-gray-400 text-14">Hi, </span>{" "}
-              <span className="text-gray-400 font-bold ml-1 text-14">
-                Jubayer
-              </span>
-            </p>
+            <div className="flex items-center">
+              <div className="border-[3px] border-[#0389d7] rounded-full flex items-center justify-center">
+                <img
+                  className="w-[40px] h-[40px] rounded-full"
+                  src={photoUrl}
+                  alt={userName}
+                />
+              </div>
+              <div>
+                <p className="text-gray-800 font-bold ml-1 text-14 mb-0">
+                  {userName}
+                </p>
+                <p className="text-gray-500 font-bold ml-1 text-[10px] mb-0">
+                  @{uniqueUserName}
+                </p>
+              </div>
+            </div>
             <MdKeyboardArrowDown className="text-gray-400 text-14" />
           </div>
         </Tooltip>

@@ -15,12 +15,16 @@ import { useStateContext } from "../../src/context/ContextProvider";
 import Link from "next/link";
 
 const Navbar = () => {
-  const { language, setLanguage, userName, findAdmin } = useStateContext();
+  const { language, setLanguage, userName, findAdmin, photoUrl } =
+    useStateContext();
   const auth = getAuth();
+  const user = auth.currentUser;
   // const [scroll, setScroll] = useState(false);
   const [url, setUrl] = useState(null);
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
+
+  console.log(user);
 
   useEffect(() => {
     if (eng) {
@@ -134,11 +138,7 @@ const Navbar = () => {
               <div
                 className={`${styles.dropdown__container} relative font-semibold text-left mr-4 py-4`}
               >
-                <Avatar
-                  size={48}
-                  src="https://randomuser.me/api/portraits/med/men/78.jpg"
-                  className="cursor-pointer"
-                />
+                <Avatar size={48} src={photoUrl} className="cursor-pointer" />
 
                 <div
                   className={`${styles.dropdown__content} absolute z-10 bg-white top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
@@ -210,11 +210,7 @@ const Sidebar = ({ url, setOpenNav, eng, setEng }) => {
       pt-5 pb-2 h-[105vh]"
       >
         <div className="flex items-center justify-between pl-10 pr-3 pt-4">
-          <Avatar
-            size={56}
-            src="https://randomuser.me/api/portraits/med/men/78.jpg"
-            className="cursor-pointer"
-          />
+          <Avatar size={56} src={photoUrl} className="cursor-pointer" />
           <MdClose
             onClick={() => setOpenNav(false)}
             className="text-2xl text-[#fb4050]"
@@ -231,7 +227,7 @@ const Sidebar = ({ url, setOpenNav, eng, setEng }) => {
             ${
               url == item.slug
                 ? "text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] "
-                : "text-[#140342] "
+                : "text-[#140342] visited:text-[#140342] "
             } 
               my-1 `}
                 >
@@ -268,7 +264,7 @@ const Sidebar = ({ url, setOpenNav, eng, setEng }) => {
                   ${
                     url == item.slug
                       ? "text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] "
-                      : "text-[#140342] "
+                      : "text-[#140342] visited:text-[#140342] "
                   } 
                   my-1 `}
                   >

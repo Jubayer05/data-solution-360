@@ -68,6 +68,10 @@ const Login = () => {
   };
 
   const fbGoogleLoginFunction = (validUser, user) => {
+    localStorage.setItem("userName", user.displayName);
+    localStorage.setItem("emailUser", user.email);
+    localStorage.setItem("photoUrl", user.photoURL);
+
     if (validUser) {
       if (validUser.status === "student" && validUser.registered === false) {
         window.location.href = "/students/register";
@@ -79,18 +83,18 @@ const Login = () => {
       } else if (validUser.status === "admin") {
         window.location.href = "/admin/dashboard";
       }
-      localStorage.setItem("userName", user.displayName);
-      localStorage.setItem("emailUser", user.email);
     } else {
-      db.collection("userLogin").add({
-        name: user.displayName,
-        email: user.email,
-        status: "student",
-        registered: false,
-      });
-
-      Router.push("/");
-      window.location.href = "/";
+      db.collection("userLogin")
+        .add({
+          name: user.displayName,
+          photoUrl: user.photoURL,
+          email: user.email,
+          status: "student",
+          registered: false,
+        })
+        .then(() => {
+          window.location.href = "/";
+        });
     }
   };
 

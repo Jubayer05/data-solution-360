@@ -38,4 +38,4 @@ export const UtilityContextProvider = ({ children }) => {
   );
 };
 
-export const useStateContext = () => useContext(StateContext);
+export const useStateContextDashboard = () => useContext(StateContext);

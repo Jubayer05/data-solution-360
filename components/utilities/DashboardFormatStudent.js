@@ -1,10 +1,10 @@
 import React from "react";
 import { Sidebar, DashboardNavbar } from "..";
-import { useStateContext } from "../../src/context/UtilitiesContext";
+import { useStateContextDashboard } from "../../src/context/UtilitiesContext";
 import { linksStudent } from "../../src/data/dummy";
 
 const DashboardFormatStudent = ({ component }) => {
-  const { activeMenu } = useStateContext();
+  const { activeMenu } = useStateContextDashboard();
 
   return (
     <div className="flex relative dark:bg-main-dark-bg">
