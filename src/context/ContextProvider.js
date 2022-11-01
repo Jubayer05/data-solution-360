@@ -39,7 +39,7 @@ export const MainContextProvider = ({ children }) => {
 
   const findCurrentUser = userData.find((item) => item.email === userEmail);
   const findAdmin = dashAdmin.find((item) => item.email === userEmail);
-  const uniqueUserName = userEmail.split("@")[0];
+  const uniqueUserName = userEmail?.split("@")[0];
 
   // console.log(uniqueUserName);
 
@@ -55,7 +55,7 @@ export const MainContextProvider = ({ children }) => {
         blogData,
         courseData,
         photoUrl,
-        uniqueUserName
+        uniqueUserName,
       }}
     >
       {children}
