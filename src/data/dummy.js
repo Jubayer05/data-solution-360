@@ -97,7 +97,7 @@ export const linksStudents = [
       },
       {
         name: "My Courses",
-        link: "/students/overview",
+        link: "/students/myCourse",
         icon: <MdOutlineContentPaste />,
       },
       {

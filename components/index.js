@@ -32,3 +32,6 @@ export { default as AddCourseComp } from "./Admin/Course/AddCourse";
 
 export { default as DashboardStudent } from "./Students/DashboardStu";
 export { default as ProfileStudent } from "./Students/Profile";
+export { default as StudentActivity } from "./Students/MyActivity";
+export { default as StudentCourse } from "./Students/MyCourse";
+export { default as ProfileEdit } from "./Students/EditProfile";
