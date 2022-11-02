@@ -6,13 +6,11 @@ import Select from "react-select";
 import { districts } from "../../src/data/district";
 import firebase from "../../firebase";
 
-const Register = () => {
+const Register = ({ title }) => {
   const { userEmail, findCurrentUser } = useStateContext();
   const [selectedOption, setSelectedOption] = useState(null);
   const [progressData, setProgressData] = useState(0);
   // const [photoUrl, setPhotoUrl] = useState(null);
-
-  console.log(findCurrentUser);
 
   const validate = (values) => {
     const errors = {};
@@ -62,6 +60,7 @@ const Register = () => {
           ...values,
           email: userEmail,
           district: selectedOption?.value,
+          registered: true,
           // photoUrl: photoUrl,
         })
         .then(() => {
@@ -125,13 +124,9 @@ const Register = () => {
   //   console.log(fileSize);
   // };
 
-  console.log(userEmail);
-
   return (
     <div className="pt-20 px-5">
-      <h2 className="text-center text-xl text-gray-500 mt-10 mb-6">
-        Please Register Before Purchasing a course.
-      </h2>
+      <h2 className="text-center text-xl text-gray-500 mt-10 mb-6">{title}</h2>
 
       <div className="max-w-xl mx-auto border-solid border-2 border-gray-300 p-5 my-4">
         <form onSubmit={formik.handleSubmit}>

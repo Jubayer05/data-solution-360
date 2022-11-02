@@ -155,8 +155,7 @@ const Navbar = () => {
                     url == item.slug
                       ? "text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] "
                       : "text-[#140342] visited:text-[#140342] "
-                  } 
-                  my-1 `}
+                  }`}
                             >
                               <span>{item.title}</span>
                             </a>

@@ -5,7 +5,7 @@ const register = () => {
   return (
     <div>
       <Navbar />
-      <RegisterComp />
+      <RegisterComp title="Please Register Before Next Step" />
       <Footer />
     </div>
   );
