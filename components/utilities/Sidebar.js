@@ -1,15 +1,20 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React, { useEffect, useState } from "react";
 import { SiShopware } from "react-icons/si";
 import { MdOutlineCancel } from "react-icons/md";
 import Link from "next/link";
 
 import { Tooltip } from "antd";
 import { useStateContextDashboard } from "../../src/context/UtilitiesContext";
-import { linksAdmin } from "../../src/data/dummy";
+import { linksAdmin, linksStudents } from "../../src/data/dummy";
 
-const Sidebar = ({ links }) => {
+const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContextDashboard();
+  const [url, setUrl] = useState("");
+  useEffect(() => {
+    const url = window.location.href.split("/");
+    setUrl(url[3]);
+  }, []);
 
   const handleCloseMenu = () => {
     if (activeMenu && screenSize <= 900) {
@@ -54,26 +59,51 @@ const Sidebar = ({ links }) => {
           </div>
 
           <div className="mt-10">
-            {linksAdmin.map((item) => (
-              <div
-                className="text-gray-400 m-3 mt-4 uppercase"
-                key={item.title}
-              >
-                <p className="text-gray-400 m-3 mt-4 uppercase">{item.title}</p>
-                {item.links.map((link) => (
-                  <Link
-                    href={`${link.link}`}
-                    key={link.name}
-                    onClick={handleCloseMenu}
+            {url == "students"
+              ? linksStudents.map((item) => (
+                  <div
+                    className="text-gray-400 m-3 mt-4 uppercase"
+                    key={item.title}
                   >
-                    <a className={activeLink ? activeLink : normalLink}>
-                      <span className="text-xl"> {link.icon}</span>
-                      <span className="capitalize">{link.name}</span>
-                    </a>
-                  </Link>
+                    <p className="text-gray-400 m-3 mt-4 uppercase">
+                      {item.title}
+                    </p>
+                    {item.links.map((link) => (
+                      <Link
+                        href={`${link.link}`}
+                        key={link.name}
+                        onClick={handleCloseMenu}
+                      >
+                        <a className={activeLink ? activeLink : normalLink}>
+                          <span className="text-xl"> {link.icon}</span>
+                          <span className="capitalize">{link.name}</span>
+                        </a>
+                      </Link>
+                    ))}
+                  </div>
+                ))
+              : linksAdmin.map((item) => (
+                  <div
+                    className="text-gray-400 m-3 mt-4 uppercase"
+                    key={item.title}
+                  >
+                    <p className="text-gray-400 m-3 mt-4 uppercase">
+                      {item.title}
+                    </p>
+                    {item.links.map((link) => (
+                      <Link
+                        href={`${link.link}`}
+                        key={link.name}
+                        onClick={handleCloseMenu}
+                      >
+                        <a className={activeLink ? activeLink : normalLink}>
+                          <span className="text-xl"> {link.icon}</span>
+                          <span className="capitalize">{link.name}</span>
+                        </a>
+                      </Link>
+                    ))}
+                  </div>
                 ))}
-              </div>
-            ))}
           </div>
         </>
       )}

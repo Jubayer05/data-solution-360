@@ -1,20 +1,24 @@
 import React from "react";
+import { useEffect, useState } from "react";
 import { Sidebar, DashboardNavbar } from "..";
 import { useStateContextDashboard } from "../../src/context/UtilitiesContext";
-import { linksStudent } from "../../src/data/dummy";
 
 const DashboardFormatStudent = ({ component }) => {
   const { activeMenu } = useStateContextDashboard();
+
+  // const findStudent = url.find(item=> item)
+
+  // console.log(url[3]);
 
   return (
     <div className="flex relative dark:bg-main-dark-bg">
       {activeMenu ? (
         <div className="w-72 fixed sidebar dark:bg-secondary-dark-bg bg-white">
-          <Sidebar links={linksStudent} />
+          <Sidebar />
         </div>
       ) : (
         <div className="w-0 dark:bg-secondary-dark-bg bg-white">
-          <Sidebar links={linksStudent} />
+          <Sidebar />
         </div>
       )}
 

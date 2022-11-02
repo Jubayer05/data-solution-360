@@ -10,6 +10,10 @@ import { MdLocationOn, MdEmail } from "react-icons/md";
 import { ImPhone } from "react-icons/im";
 import { IoLogoWhatsapp, IoLogoYoutube } from "react-icons/io";
 import { AiFillFacebook, AiFillLinkedin } from "react-icons/ai";
+import { CgProfile } from "react-icons/cg";
+import { MdContentCopy, MdReviews } from "react-icons/md";
+import { FiVideo } from "react-icons/fi";
+import { RiAdminFill } from "react-icons/ri";
 
 export const navItems = [
   {
@@ -62,6 +66,13 @@ export const navDropItems = [
     slug: "dashboard",
     titleBang: "হোম",
     link: "/students/dashboard",
+  },
+  {
+    id: "nav-5",
+    title: "Profile",
+    slug: "profile",
+    titleBang: "সার্ভিস",
+    link: "/students/profile",
   },
   {
     id: "nav-2",
@@ -438,5 +449,54 @@ export const footerFollowUs = [
     link: "/",
     title: "Youtube",
     icon: <IoLogoYoutube />,
+  },
+];
+
+export const dashboardAdmin = [
+  {
+    id: "1",
+    title: "Total Students",
+    gridClass: false,
+    classes: "",
+    bgFrom: " #1a9f53",
+    bgTo: "#4eda89",
+    icon: <CgProfile />,
+  },
+
+  {
+    id: "2",
+    title: "Total Courses",
+    gridClass: false,
+    classes: "",
+    bgFrom: "#be0ee1",
+    bgTo: "#ed68ff",
+    icon: <MdContentCopy />,
+  },
+  {
+    id: "3",
+    title: "Total Reviews",
+    gridClass: true,
+    bgTo: "#ff5648",
+    bgFrom: "#da5568",
+    icon: <RiAdminFill />,
+  },
+  {
+    id: "4",
+    title: " Total Video Lessons",
+    gridClass: false,
+
+    classes: "",
+    bgFrom: "#2b77e5",
+    bgTo: "#64b3f6",
+    icon: <MdReviews />,
+  },
+  {
+    id: "5",
+    title: "Total Blog",
+    gridClass: false,
+    classes: "",
+    bgFrom: "#e1940e",
+    bgTo: "#f4d02b",
+    icon: <FiVideo />,
   },
 ];

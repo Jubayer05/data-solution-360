@@ -3,28 +3,20 @@ import { CgProfile } from "react-icons/cg";
 import { BsThreeDotsVertical } from "react-icons/bs";
 
 import { useStateContext } from "../../src/context/ContextProvider";
+import { dashboardAdmin } from "../../src/data/data";
 
 const AdminHome = () => {
-  const { userName, photoUrl } = useStateContext();
+  const { userName } = useStateContext();
   return (
     <div className="flex justify-center items-center flex-col p-2 md:mx-6">
-      <h2 className="text-2xl mt-6">Welcome, {userName} in admin dashboard</h2>
-      <img src={photoUrl} alt="" />
-      <div>
-        <li>1. Total Students</li>
-        <li>2. Total Courses</li>
-        <li>3. Total blog</li>
-        <li>4. New registered students table</li>
-        <li>5. Total review</li>
-        <li>6. total video lessons</li>
-      </div>
+      <h2 className="text-2xl mt-6 capitalize mb-10">
+        Welcome, {userName} in admin dashboard
+      </h2>
 
       <div className="grid grid-cols-3 w-full gap-5 pb-20">
-        <HomeGroup />
-        <HomeGroup />
-        <HomeGroup classes="row-span-2" />
-        <HomeGroup />
-        <HomeGroup />
+        {dashboardAdmin?.map((item) => (
+          <HomeGroup key={item.id} item={item} />
+        ))}
       </div>
     </div>
   );
@@ -32,17 +24,24 @@ const AdminHome = () => {
 
 export default AdminHome;
 
-const HomeGroup = ({ classes }) => {
+const HomeGroup = ({ item }) => {
   return (
     <div
-      className={`${classes} bg-gradient-to-r rounded-lg from-[#1a9f53] to-[#4eda89] text-white px-6 py-5`}
+      style={{
+        backgroundImage: `linear-gradient(to right, ${item.bgFrom}, ${item.bgTo})`,
+      }}
+      className={` rounded-lg text-white px-6 py-5 ${
+        item.gridClass ? "row-span-2" : ""
+      }`}
     >
       <div className="flex items-center justify-between mb-6">
         <div>
-          <h3 className="text-lg text-white">Total Students</h3>
+          <h3 className="text-lg text-white">{item.title}</h3>
           <h2 className="text-3xl text-white -mt-2">350</h2>
         </div>
-        <CgProfile />
+        <div className="p-2 bg-gradient-to-t rounded text-2xl from-[#01190c62] to-[#0b191121] ">
+          {item.icon}
+        </div>
       </div>
       <div className="flex items-center justify-between">
         <div>

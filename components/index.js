@@ -29,3 +29,6 @@ export { default as LoginComp } from "./Login/Login";
 export { default as RegisterComp } from "./GeneralComp/Register";
 
 export { default as AddCourseComp } from "./Admin/Course/AddCourse";
+
+export { default as DashboardStudent } from "./Students/DashboardStu";
+export { default as ProfileStudent } from "./Students/Profile";

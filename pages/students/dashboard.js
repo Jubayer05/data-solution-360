@@ -1,10 +1,11 @@
 import React from "react";
-import Navbar from "../../components/utilities/Navbar";
+import { DashboardFormat, DashboardStudent } from "../../components";
 
 const dashboard = () => {
+  
   return (
     <div>
-      <Navbar />
+      <DashboardFormat component={<DashboardStudent />} />
     </div>
   );
 };

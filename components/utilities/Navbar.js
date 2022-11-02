@@ -147,11 +147,20 @@ const Navbar = () => {
                     <VscTriangleUp className="absolute top-[-39px] -right-2 text-white text-3xl" />
                     <ul>
                       {navDropItems.map((item) => (
-                        <li
-                          key={item.id}
-                          className="py-3 rounded-md cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]"
-                        >
-                          {item.title}
+                        <li key={item.id}>
+                          <Link href={item.link}>
+                            <a
+                              className={`block font-semibold rounded-md py-3 cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]
+                  ${
+                    url == item.slug
+                      ? "text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] "
+                      : "text-[#140342] visited:text-[#140342] "
+                  } 
+                  my-1 `}
+                            >
+                              <span>{item.title}</span>
+                            </a>
+                          </Link>
                         </li>
                       ))}
                       <li className="py-3 mt-2 bg-primary-bg hover:bg-[rgb(32,52,110)] flex items-center justify-center text-white rounded-md cursor-pointer hover:text-white px-4">
@@ -259,7 +268,6 @@ const Sidebar = ({ url, setOpenNav, eng, setEng }) => {
               <li key={item.id}>
                 <Link href={item.link}>
                   <a
-                    key={item.id}
                     className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
                   ${
                     url == item.slug

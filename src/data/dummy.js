@@ -6,10 +6,11 @@ import {
 } from "react-icons/ai";
 import { FiLogOut, FiActivity, FiHelpCircle } from "react-icons/fi";
 import { BsGraphUp } from "react-icons/bs";
-import { BiAddToQueue } from "react-icons/bi";
 import { ImBlog } from "react-icons/im";
 import { FaUserEdit } from "react-icons/fa";
 import { GiProgression } from "react-icons/gi";
+import { CgProfile } from "react-icons/cg";
+import { MdOutlineContentPaste } from "react-icons/md";
 
 export const linksAdmin = [
   {
@@ -51,21 +52,11 @@ export const linksAdmin = [
         link: "/admin/addBlogContent",
         icon: <ImBlog />,
       },
-      // {
-      //   name: "Add Quiz",
-      //   link: "/admin/addQuiz",
-      //   icon: <BiAddToQueue />,
-      // },
       {
         name: "Manage my blogs",
         link: "/admin/myBlogs",
         icon: <AiOutlineFundView />,
       },
-      // {
-      //   name: "Add video lesson",
-      //   link: "/admin/addVideoLesson",
-      //   icon: <AiOutlineVideoCameraAdd />,
-      // },
     ],
   },
   {
@@ -90,24 +81,24 @@ export const linksAdmin = [
   },
 ];
 
-export const linksStudent = [
+export const linksStudents = [
   {
     title: "Dashboard",
     links: [
       {
         name: "Home",
-        link: "/students",
+        link: "/students/dashboard",
         icon: <AiOutlineHome />,
       },
       {
-        name: "Progress",
-        link: "/students/progress",
-        icon: <GiProgression />,
+        name: "Profile",
+        link: "/students/profile",
+        icon: <CgProfile />,
       },
       {
-        name: "Overview",
+        name: "My Courses",
         link: "/students/overview",
-        icon: <BsGraphUp />,
+        icon: <MdOutlineContentPaste />,
       },
       {
         name: "My Activity",
@@ -117,27 +108,6 @@ export const linksStudent = [
     ],
   },
 
-  {
-    title: "Pages",
-    links: [
-      {
-        name: "Take a quiz",
-        link: "/students/quiz",
-        icon: <BiAddToQueue />,
-      },
-
-      {
-        name: "Watch video lesson",
-        link: "/students/addVideoLesson",
-        icon: <AiOutlineVideoCameraAdd />,
-      },
-      {
-        name: "Read blog content",
-        link: "/students/addBlogContent",
-        icon: <ImBlog />,
-      },
-    ],
-  },
   {
     title: "More",
     links: [
@@ -153,7 +123,7 @@ export const linksStudent = [
       },
       {
         name: "Log out",
-        link: "/teacher/logout",
+        link: "/students/logout",
         icon: <FiLogOut />,
       },
     ],

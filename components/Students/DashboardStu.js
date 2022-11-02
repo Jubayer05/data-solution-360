@@ -1,7 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
+import React from "react";
 import { AiOutlineFileText, AiOutlineClockCircle } from "react-icons/ai";
-import { BiBarChart, BiDollar } from "react-icons/bi";
+import { BiBarChart } from "react-icons/bi";
 import { TbCurrencyTaka } from "react-icons/tb";
 
 import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
@@ -9,27 +8,20 @@ import { useStateContext } from "../../src/context/ContextProvider";
 import Link from "next/link";
 import { Avatar } from "antd";
 
-const CrashCourse = () => {
-  const { language, courseData } = useStateContext();
-
+const AdminHome = () => {
+  const { userName, language, courseData } = useStateContext();
   return (
-    <div className="bg-[#ffffff]	pt-8">
-      <div className="max-w-[1290px] py-10 mx-auto">
-        <h2 className="text-center text-3xl font-bold font-heading mt-16 mb-6 text-headerMain">
-          {language === "English" ? (
-            "Best Courses for you"
-          ) : (
-            <span className="font-bangla">আপনার জন্য সেরা কোর্স</span>
-          )}
+    <div className="flex justify-center items-center flex-col p-2 md:mx-6">
+      <div>
+        <h2 className="text-2xl text-center mt-6 capitalize mb-10 text-cyan-700">
+          Welcome, {userName} in your student dashboard
         </h2>
-        <p className="text-center font-bold font-heading  mb-16 text-headerMain	">
-          At this moment Data Solution - 360 provides this following courses for
-          you.
-        </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5">
-          {courseData.map((item) => (
-            <CrashCourseItem key={item.id} item={item} />
-          ))}
+
+        <h2 className="text-xl">Your Courses</h2>
+        <p>You do not select any course</p>
+
+        <h2 className="text-xl mt-12">Suggested Course</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-5 pt-0">
           {courseData.map((item) => (
             <CrashCourseItem key={item.id} item={item} />
           ))}
@@ -39,7 +31,7 @@ const CrashCourse = () => {
   );
 };
 
-export default CrashCourse;
+export default AdminHome;
 
 const CrashCourseItem = ({ item }) => {
   return (
