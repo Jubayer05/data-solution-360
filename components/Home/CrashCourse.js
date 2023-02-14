@@ -30,9 +30,6 @@ const CrashCourse = () => {
           {courseData.map((item) => (
             <CrashCourseItem key={item.id} item={item} />
           ))}
-          {courseData.map((item) => (
-            <CrashCourseItem key={item.id} item={item} />
-          ))}
         </div>
       </div>
     </div>
