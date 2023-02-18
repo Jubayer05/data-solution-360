@@ -30,7 +30,7 @@ const MainBanner = () => {
             Learn Data science earn money and lead the world of technology
           </h2>
           <p className="text-lg">
-            Bangladeshi number one data science learning platform.
+            Best Data Science learning Platform in Bangladesh
           </p>
           <button
             className="text-base px-4 py-3 border-2 rounded-lg border-transparent bg-primary-bg 

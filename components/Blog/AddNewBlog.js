@@ -88,7 +88,6 @@ const AddNewBlog = () => {
   const handleSubmit = () => {
     if (
       blogData.title !== "" &&
-      blogData.slug !== "" &&
       convertContent !== null &&
       blogData.img !== "" &&
       blogData.author !== ""
@@ -100,6 +99,7 @@ const AddNewBlog = () => {
           ...blogData,
           id: uuidv4().split("-")[0],
           details: convertContent,
+          slug: blogData.title.split(" ").join("-"),
           date: new Date().toLocaleDateString(undefined, options),
         })
         .then(() => {
@@ -126,16 +126,6 @@ const AddNewBlog = () => {
         <input
           id="title"
           onChange={(e) => setBlogData({ ...blogData, title: e.target.value })}
-          type="text"
-          className="w-full px-4 py-2 outline-none border-1 text-lg mt-3 "
-        />
-
-        <label htmlFor="title" className="font-semibold mt-3 block">
-          Slug / URL paths
-        </label>
-        <input
-          id="title"
-          onChange={(e) => setBlogData({ ...blogData, slug: e.target.value })}
           type="text"
           className="w-full px-4 py-2 outline-none border-1 text-lg mt-3 "
         />
