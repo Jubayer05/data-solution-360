@@ -24,7 +24,7 @@ const Navbar = () => {
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
 
-  console.log(user);
+  // console.log(user);
 
   useEffect(() => {
     if (eng) {
@@ -53,7 +53,7 @@ const Navbar = () => {
       });
   };
 
-  console.log(url);
+  console.log(photoUrl);
 
   return (
     <div
@@ -79,6 +79,7 @@ const Navbar = () => {
             eng={eng}
             setEng={setEng}
             url={url}
+            photoUrl={photoUrl}
           />
         )}
         <div
@@ -210,7 +211,7 @@ const Navbar = () => {
 
 export default Navbar;
 
-const Sidebar = ({ url, setOpenNav, eng, setEng }) => {
+const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
   return (
     <div className="w-screen z-40 bg-[rgba(0,0,0,0.6)] h-screen fixed top-0 left-0">
       <div
