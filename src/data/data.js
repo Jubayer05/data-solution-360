@@ -217,31 +217,31 @@ export const services = [
     details: "Daily live classes help you maintain your routine",
     img: "/services/liveclass.png",
   },
-  {
-    id: "2",
-    title: "Daily Assignment",
-    details: "Access our lecture sheets and interactive books",
-    img: "/services/notes.png",
-  },
-  {
-    id: "3",
-    title: "Daily Quiz ",
-    details: "Practicing your daily home tasks helps you improve your skills.",
-    img: "/services/practice.png",
-  },
+  // {
+  //   id: "2",
+  //   title: "Daily Assignment",
+  //   details: "Access our lecture sheets and interactive books",
+  //   img: "/services/notes.png",
+  // },
+  // {
+  //   id: "3",
+  //   title: "Daily Quiz ",
+  //   details: "Practicing your daily home tasks helps you improve your skills.",
+  //   img: "/services/practice.png",
+  // },
   {
     id: "4",
     title: "Q & A Facilities",
     details: "A team member is always with you for your questions.",
     img: "/services/qa.png",
   },
-  {
-    id: "5",
-    title: "Class Materials ",
-    details:
-      "You will get unlimited resources during whole course. That'll helps you your data science carrier.",
-    img: "/services/resource.png",
-  },
+  // {
+  //   id: "5",
+  //   title: "Class Materials ",
+  //   details:
+  //     "You will get unlimited resources during whole course. That'll helps you your data science carrier.",
+  //   img: "/services/resource.png",
+  // },
   {
     id: "6",
     title: "Live support",

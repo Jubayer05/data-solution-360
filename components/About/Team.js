@@ -38,7 +38,7 @@ const Team = () => {
         {teamMembers.map((item) => (
           <div key={item.name} className="w-full">
             <img
-              className="h-60 w-full transition-all 0.2s hover:scale-105"
+              className="h-60 w-full transition-all 0.2s hover:scale-105 rounded-md"
               src={item.img}
               alt=""
             />
@@ -54,4 +54,3 @@ const Team = () => {
 };
 
 export default Team;
-<h2>Our Team Members</h2>;
