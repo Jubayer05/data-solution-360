@@ -52,18 +52,6 @@ const BannerCarousel = () => {
       icon: <BiAlarmAdd />,
       transitionDelay: 4.4,
     },
-    // {
-    //   id: "6",
-    //   title: "This is first point 6",
-    //   icon: <BiArch />,
-    //   transitionDelay: 5.2,
-    // },
-    // {
-    //   id: "7",
-    //   title: "This is first point 7",
-    //   icon: <BiBookHeart />,
-    //   transitionDelay: 6,
-    // },
   ];
 
   const slideTwoMotionData = [
