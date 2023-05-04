@@ -24,7 +24,7 @@ const Navbar = () => {
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
 
-  // console.log(user);
+  console.log(user?.photoURL);
 
   useEffect(() => {
     if (eng) {
@@ -139,7 +139,11 @@ const Navbar = () => {
               <div
                 className={`${styles.dropdown__container} relative font-semibold text-left mr-4 py-4`}
               >
-                <Avatar size={48} src={photoUrl} className="cursor-pointer" />
+                <Avatar
+                  size={48}
+                  src={user?.photoURL}
+                  className="cursor-pointer"
+                />
 
                 <div
                   className={`${styles.dropdown__content} absolute z-10 bg-white top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
