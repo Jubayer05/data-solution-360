@@ -112,7 +112,7 @@ const Review = () => {
                           style={customStyles}
                           contentLabel="Example Modal"
                         >
-                          <div className="max-w-xl">
+                          <div className="max-w-xl mx-5">
                             <div className="flex items-center justify-center mb-[15px]">
                               <img
                                 className="h-[55px] object-cover rounded-[3px] mr-[15px]"
