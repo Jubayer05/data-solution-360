@@ -53,7 +53,8 @@ const Review = () => {
     },
   ];
   const settings = {
-    // dots: true,
+    dots: true,
+    arrows: false,
     infinite: true,
     autoplay: true,
     speed: 350,
@@ -61,10 +62,24 @@ const Review = () => {
     cssEase: "linear",
     slidesToShow: 3,
     slidesToScroll: 1,
+    responsive: [
+      {
+        breakpoint: 768,
+        settings: {
+          slidesToShow: 2,
+        },
+      },
+      {
+        breakpoint: 560,
+        settings: {
+          slidesToShow: 1,
+        },
+      },
+    ],
   };
   return (
-    <div className="bg-[url('/review/review-bg.jpg')] flex items-center bg-center bg-cover bg-no-repeat">
-      <div className="my- mb-14 max-w-6xl mx-auto">
+    <div className="bg-[url('/review/review-bg.jpg')] flex items-center justify-center bg-center bg-cover bg-no-repeat">
+      <div className="my-4 mb-14 max-w-[350px] sm:max-w-2xl md:max-w-4xl lg:max-w-6xl pr-[30px]">
         <h1 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
           Our Lovely Students Feedback
         </h1>
