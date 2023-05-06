@@ -500,3 +500,69 @@ export const dashboardAdmin = [
     icon: <FiVideo />,
   },
 ];
+
+export const reviewData = [
+  {
+    id: "1",
+    name: "Md. Towhidul Islam",
+    job: "Daffodil International University as a Student",
+    photoUrl: "/review/image1.jpeg",
+    reviewDetails:
+      "This data analyst course can be a valuable investment in developing skills and knowledge in the field of data analysis. It's important to carefully consider my options and choose a course that aligns with my goals and needs.",
+    star: 5,
+  },
+  {
+    id: "2",
+    name: "Raiful Islam",
+    job: "Student",
+    photoUrl: "/review/avatar.png",
+    reviewDetails:
+      "The instructor is amazing. First of all, I didn't think I will communicate with the instructor. But the instructor has given me space to talk about certain things with him. He is friendly when we just ask questions during the class. I am quite an introverted person but I was thinking it will create a problem. The instructor has given me a platform to overcome it. The best important thing is, sometimes he gives some real examples which are quite fascinating for me and I like the most. He showed me a career path.  Eventually, by his guidelines, I think I can create a career in the future. And after this course, I think I can fulfil my dream.",
+    star: 5,
+  },
+  {
+    id: "3",
+    name: "Tasmin Akter Tripty",
+    job: "Mathematics, BUET",
+    photoUrl: "/review/image2.jpeg",
+    reviewDetails:
+      "It's a great experience for me to be a student at Data Solution 360's data analysis course. The course addressed a wide range of topics in data analysis, including statistical analysis, data visualization, and Python. It is well-structured, and covered many of these themes. The instructor is always eager to offer further assistance and support In order to make sure we fully understood the content.",
+    star: 5,
+  },
+  {
+    id: "4",
+    name: "Ashraf shakil",
+    job: "Student",
+    photoUrl: "/review/image3.jpeg",
+    reviewDetails:
+      "This online platform is very nice. I am very happy to join this platform. The Course Teacher is very helpful ,he all  time try to teach something very care.",
+    star: 5,
+  },
+  {
+    id: "5",
+    name: "Md.Tusher Alam",
+    job: "Not now work any organization",
+    photoUrl: "/review/image4.jpg",
+    reviewDetails:
+      "The instructor was knowledgeable and engaging, and the material was presented in a clear and concise manner. One of the best things about this course was its practical focus. Throughout the lessons, we were given plenty of opportunities to apply what we had learned by working on real-world marketing projects.  The course platform was easy to use, and the videos were high quality. The course materials, including templates and resources, were well-organized and easy to follow. Additionally, the course community was supportive and active, with a dedicated forum where students could ask questions and share their work.",
+    star: 5,
+  },
+  {
+    id: "6",
+    name: "Md. Fahad Hossain Faysal",
+    job: "Personal Projects",
+    photoUrl: "/review/image5.jpeg",
+    reviewDetails:
+      "This course covered a wide range of topics, including data visualization, statistics, database management, and programming languages such as Python. Our instructor Shakib vai is knowledgeable and experienced in data analysis fields, and were able to explain complex concepts in a clear and concise manner. But I have a recommendation to our instructor Shakib vai that please maintain the learning sequence. When you start a topics like programming or SQL or Statistics or whatever it, firstly please complete the topic fully(beginning to advanced). Don't jump from a topic to another topic. Sometimes students are confused if we jumping a topic to another topic. Please follow the sequence.",
+    star: 5,
+  },
+  {
+    id: "7",
+    name: "Sumaya Akter",
+    job: "Null",
+    photoUrl: "/review/woman.png",
+    reviewDetails:
+      "The competent and interesting lecturer in this data solution program makes difficult ideas understandable. Our academic and practical abilities are improved through hands-on exercises and assignments. It's a great course for anyone wishing to improve their data analysis skills, regardless of experience level.",
+    star: 5,
+  },
+];
