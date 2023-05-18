@@ -85,7 +85,7 @@ const Review = () => {
                 <div className="bg-[white] px-[15px] py-[30px] rounded-[5px] mb-[40px] relative">
                   <div className="flex items-center mb-[15px] h-[100px]">
                     <img
-                      className="h-[55px] object-cover rounded-[3px] mr-[15px]"
+                      className="h-[65px] w-[60px] object-cover rounded-[3px] mr-[15px]"
                       src={item.photoUrl}
                       alt={item.name}
                     />
