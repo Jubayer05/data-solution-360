@@ -60,8 +60,8 @@ const Review = () => {
   };
 
   function cutFirst50Words(str) {
-    if (str.length > 50) {
-      return str.substr(0, 250) + "...";
+    if (str.length > 30) {
+      return str.substring(0, 132) + "...";
     } else {
       return str;
     }
@@ -83,7 +83,7 @@ const Review = () => {
             {reviewData.map((item) => (
               <div key={item.id} className="p-5 m-5 w-[150px] overflow-hidden ">
                 <div className="bg-[white] px-[15px] py-[30px] rounded-[5px] mb-[40px] relative">
-                  <div className="flex items-center mb-[15px]">
+                  <div className="flex items-center mb-[15px] h-[100px]">
                     <img
                       className="h-[55px] object-cover rounded-[3px] mr-[15px]"
                       src={item.photoUrl}
@@ -98,9 +98,9 @@ const Review = () => {
                       </p>
                     </div>
                   </div>
-                  <p className="text-base leading-7 text-[#6f6b80] mb-[24px]">
-                    &ldquo;{cutFirst50Words(item.reviewDetails)}{" "}
-                    {countWords(item.reviewDetails) >= 30 ? (
+                  <p className="text-base leading-7 text-[#6f6b80] mb-[24px] h-[140px]">
+                    &ldquo;{cutFirst50Words(item.reviewDetails)}
+                    {countWords(item.reviewDetails) >= 20 ? (
                       <>
                         <a type="button" onClick={() => openModal(item)}>
                           see more
