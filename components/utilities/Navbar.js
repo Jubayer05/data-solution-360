@@ -57,8 +57,7 @@ const Navbar = () => {
 
   return (
     <div
-      className={`w-full border-b-1 border-[rgb(79,91,140)] md:text-center z-50 px-5 pt-4 pb-3 
-                 md:px-4 md:py-0 bg-[rgb(38,52,110)]`}
+      className={`w-full border-b-1 border-[rgb(79,91,140)] md:text-center z-50 px-5 pt-4 pb-3 md:px-4 md:py-0 bg-[rgb(38,52,110)] sticky top-0`}
     >
       <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20 ">
         <div className="flex justify-between items-center z-50">

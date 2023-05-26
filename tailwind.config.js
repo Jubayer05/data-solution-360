@@ -8,7 +8,7 @@ module.exports = {
     fontFamily: {
       display: ["Open Sans", "sans-serif"],
       body: ["Open Sans", "sans-serif"],
-      bangla: ["Noto Sans Bengali", "sans-serif"],
+      bangla: ["Hind Siliguri", "sans-serif"],
       heading: ["Roboto Slab", "serif"],
     },
     extend: {

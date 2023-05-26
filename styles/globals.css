@@ -2,6 +2,7 @@
 @tailwind components;
 @tailwind utilities;
 
+@import "@fontsource/hind-siliguri";
 @import "~antd/dist/antd.css";
 
 *,
