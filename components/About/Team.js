@@ -13,28 +13,13 @@ const Team = () => {
       profession: "Trainer and Advisor Data Scientist and AI Researcher",
       img: "/team/Shamim.jpg",
     },
-    {
-      name: "Ashraful Alam",
-      profession: "Junior Executive",
-      img: "/team/ashraful.jpg",
-    },
-    {
-      name: "Shamim Ahmed ",
-      profession: "Graphics Designer and Video Editor",
-      img: "/team/Farhad.png",
-    },
-    {
-      name: "Jubayer Ahmed",
-      profession: "Web Developer",
-      img: "/team/jubayer.jpeg",
-    },
   ];
 
   return (
     <div>
       <h2 className="text-3xl text-center mt-12 mb-8">Meet our team</h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 lg:gap-7 pb-20 px-3 ">
+      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5 lg:gap-7 pb-20 px-3 ">
         {teamMembers.map((item) => (
           <div key={item.name} className="w-full">
             <img

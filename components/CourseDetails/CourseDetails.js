@@ -20,7 +20,6 @@ const CourseDetails = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       const slug = window.location.href.split("/").slice(-1)[0];
-      console.log(slug);
       const item = courseData.find((item) => item.key === slug);
       setCourseDetails(item);
     }
@@ -36,9 +35,7 @@ const CourseDetails = () => {
           {courseDetails?.title}
         </h2>
         <p className="font-medium text-base">
-          একটা এক্সসাইটিং জার্নিতে আপনাকে স্বাগতম। দেশের অন্যতম সেরা ট্রেইনারের
-          কাছ থেকে শিখুন {courseDetails?.title}. আশা করি পুরো জার্নিটা এনজয়
-          করবেন। শুভকামনা।
+          {courseDetails?.short_description}
         </p>
 
         {/* NOTE: ORIENTATION SECTION */}
@@ -48,7 +45,8 @@ const CourseDetails = () => {
             <span className="cursor-pointer">ফ্রি ওরিয়েন্টেশন ক্লাস</span>
             <div className="flex items-center text-base mt-1">
               <GoCalendar />
-              <span className="ml-1.5">২ জুন, শুক্র - রাত ৯:০০</span>
+              {/* TODO: Make it simple date with day name */}
+              <span className="ml-1.5">{courseDetails?.orientation_class}</span>
             </div>
           </div>
           <div className="ml-auto">
@@ -62,7 +60,7 @@ const CourseDetails = () => {
         <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-6">
           <div className="pl-3 pr-2">
             <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
-              <span>ব্যাচ ২</span>
+              <span>{courseDetails?.batch_no}</span>
             </div>
           </div>
           <div className="bg-[#d5caca] w-[2px] h-[40px]" />
@@ -71,7 +69,7 @@ const CourseDetails = () => {
               <GoCalendar className="text-[#ff8c4b] text-base" />
               <span className="ml-1.5 cursor-pointer">শুরু হবে</span>
             </div>
-            <span>শুক্রবার ১৬, জুন</span>
+            <span>{courseDetails?.main_class_starting_date}</span>
           </div>
           <div className="bg-[#d5caca] w-[1px] h-[40px]" />
           <div className="px-3">
@@ -79,7 +77,15 @@ const CourseDetails = () => {
               <BsCalendarDay className="text-[#ff8c4b] text-base" />
               <span className="ml-1.5 cursor-pointer">ক্লাসের দিন</span>
             </div>
-            <span> শনি, সোম, বুধ </span>
+            <span>
+              {" "}
+              {courseDetails?.class_days?.map((item, index) => (
+                <span key={item}>
+                  {item}
+                  {index !== courseDetails?.class_days.length - 1 && `, `}
+                </span>
+              ))}{" "}
+            </span>
           </div>
           <div className="bg-[#d5caca] w-[1px] h-[40px]" />
           <div className="px-3">
@@ -87,7 +93,8 @@ const CourseDetails = () => {
               <BsClock className="text-[#ff8c4b] text-base" />
               <span className="ml-1.5 cursor-pointer">ক্লাসের সময়</span>
             </div>
-            <span>রাত ৯:০০ - রাত ১০:৩০</span>
+            {/* <span>রাত ৯:০০ - রাত ১০:৩০</span> */}
+            <span>{courseDetails?.class_time}</span>
           </div>
         </div>
 
@@ -163,27 +170,17 @@ const CourseDetails = () => {
           /> */}
           {/* TODO: Remove it letter */}
           <div className="mt-4">
-            <p className="text-lg font-normal">
-              আপনি যদি একজন ডিজিটাল মার্কেটার হিসেবে আপনার ক্যারিয়ার গড়তে চান
-              তাহলে আপনার জন্যই ওস্তাদের “Full Stack DIgital Marketing 2023”. আর
-              আপনাদের ইন্সট্রাকশনে থাকবেন Skiluper এর ফাউন্ডার Shamim Hussain
-              স্যার যার কাছে শিখে ফ্রিল্যান্সিং মার্কেটপ্লেসে এখন অনেকেই হাজার
-              ডলারের বেশি ইনকাম করছেন।{" "}
-            </p>
+            <p
+              className="text-lg font-normal"
+              dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
+            />
             <p className="text-lg">কোর্সটি কাদের জন্যঃ</p>
             <p className="text-lg font-normal">
-              -পুরো কোর্স শেষ করার পর ডিজিটাল মার্কেটিং এর মাধ্যমে যাদের মাসিক
-              অন্তত ১ লক্ষ টাকা ইনকাম করার প্ল্যানিং আছে এবং সেই পরিমাণ ইফোর্ট
-              আপনি দিতে ইচ্ছুক তাদের জন্যই এই কোর্স।
+              - {courseDetails?.who_is_the_course_for}
             </p>
-            <p className="text-lg">কোর্স শেষ করলেই কি আমি ইনকাম করতে পারবো?</p>
+            <p className="text-lg">কোর্স শেষ করার পর Extra সুযোগ সুবিধা </p>
             <p className="text-lg font-normal">
-              - পুরো কোর্সটিকে বেশ কয়েকটি মডিউলে সাজানো হয়েছে। প্রতিটি মডিউল শেষ
-              হবার পর থাকবে কুইজ, টাস্ক এবং এসাইনমেন্ট- যার উপর আপনাদের মার্কিং
-              হবে। আর একটি বেঞ্চমার্ক সেট করে দেয়া হবে। যারা এই বেঞ্চমার্ক হিট
-              করতে পারবেন, তাদের সাথে আমাদের “ক্যারিয়ার গ্রোথ টিম” ডিরেক্টলি কাজ
-              করবেন জব প্লেসমেন্ট এবং ফ্রিল্যান্সিং মার্কেটপ্লেস থেকে ইনকাম করা
-              পর্যন্ত।
+              - {courseDetails?.after_course_benefit}
             </p>
           </div>
         </div>
@@ -245,13 +242,18 @@ const CourseDetails = () => {
             <div className="flex bg-[#fff1e9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
               <ImClock className="text-[rgb(223,97,52)] mr-[6px]" />
               <span className="text-sm font-[700] tracking-wider">
-                {23} দিন বাকি
+                {Math.ceil(
+                  (new Date(courseDetails?.main_class_starting_date).getTime() -
+                    new Date().getTime()) /
+                    (1000 * 60 * 60 * 24)
+                )}{" "}
+                দিন বাকি
               </span>
             </div>
             <div className="flex bg-[rgba(161,68,255,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
               <ImClock className="text-[rgb(120,12,208)] mr-[6px]" />
               <span className="text-sm font-[700] tracking-wider	 ">
-                {23} টি সিট বাকি
+                মোট {courseDetails?.total_seat_number} টি সিট
               </span>
             </div>
           </div>
@@ -261,12 +263,12 @@ const CourseDetails = () => {
             <div className="flex items-center">
               <div>
                 <span className="text-[orangered] font-bold text-lg">
-                  <strike>৫০০০/-</strike>
+                  <strike>{courseDetails?.price}/-</strike>
                 </span>
               </div>
               <div className="ml-4">
                 <span className="text-[#1d2939] font-bold text-3xl">
-                  ২০০০/-
+                  {courseDetails?.discounted_price}/-
                 </span>
               </div>
               <div className="flex items-center ml-auto border-b-1 cursor-pointer">
@@ -284,43 +286,15 @@ const CourseDetails = () => {
           <div className="py-4 px-5 border-b-1">
             <p className="font-bold text-lg">এই কোর্সে আপনি পাচ্ছেন</p>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[#3a4e67]">
-              <div className="flex items-start">
-                <BsCheck2Circle />
-                <span className="ml-2 -mt-1">৮ মাসের স্টাডিপ্ল্যান</span>
-              </div>
-              <div className="flex items-start ">
-                <BsCheck2Circle className="text-base" />
-                <span className="ml-2 -mt-1">
-                  ওয়েব এনালিটিক্স & সার্ভার সাইড ট্র্যাকিং
-                </span>
-              </div>
-              <div className="flex items-start ">
-                <BsCheck2Circle className="text-base" />
-                <span className="ml-2 -mt-1">
-                  ওয়েব এনালিটিক্স & সার্ভার সাইড
-                </span>
-              </div>
-              <div className="flex items-start ">
-                <BsCheck2Circle className="text-base" />
-                <span className="ml-2 -mt-1">৮ মাসের স্টাডিপ্ল্যান</span>
-              </div>
-
-              <div className="flex items-start ">
-                <BsCheck2Circle className="text-base" />
-                <span className="ml-2 -mt-1">
-                  ওয়েব এনালিটিক্স & সার্ভার সাইড
-                </span>
-              </div>
-              <div className="flex items-start ">
-                <BsCheck2Circle className="text-base" />
-                <span className="ml-2 -mt-1">
-                  ওয়েব এনালিটিক্স & সার্ভার সাইড ট্র্যাকিং
-                </span>
-              </div>
-              <div className="flex items-start ">
-                <BsCheck2Circle className="text-base" />
-                <span className="ml-2 -mt-1">৮ মাসের স্টাডিপ্ল্যান</span>
-              </div>
+              {courseDetails?.courseShortData.map(
+                (item) =>
+                  item.value !== "" && (
+                    <div key={item.name} className="flex items-start">
+                      <BsCheck2Circle />
+                      <span className="ml-2 -mt-1">{item.value}</span>
+                    </div>
+                  )
+              )}
             </div>
           </div>
           {/* NOTE: RIGHT BOTTOM */}

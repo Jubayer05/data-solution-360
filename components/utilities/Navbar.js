@@ -140,12 +140,15 @@ const Navbar = () => {
               >
                 <Avatar
                   size={48}
-                  src={user?.photoURL}
+                  src={
+                    user?.photoURL ||
+                    "https://lh3.googleusercontent.com/a/AEdFTp6la6cinLFex3jaJIjVsSizEDeTo8nl5dBrSFwCiw=s96-c"
+                  }
                   className="cursor-pointer"
                 />
 
                 <div
-                  className={`${styles.dropdown__content} absolute z-10 bg-white top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
+                  className={`${styles.dropdown__content} absolute z-10 bg-white shadow-2xl top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
                 >
                   <div className="relative">
                     <VscTriangleUp className="absolute top-[-39px] -right-2 text-white text-3xl" />

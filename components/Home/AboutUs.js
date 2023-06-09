@@ -6,7 +6,7 @@ const AboutUs = () => {
     <div className="max-w-6xl mx-auto my-10">
       <div className="max-w-6xl mx-auto flex justify-between items-center flex-col lg:flex-row">
         <div className="flex-1">
-          <YoutubeEmbed embedId="URQ2U6Seq_Y" />
+          <YoutubeEmbed embedId="zwnFqmGo7oc" />
         </div>
         <div className="flex-1 pl-14">
           <h2 className="text-3xl font-heading text-headerMain">
