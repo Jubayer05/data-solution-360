@@ -10,7 +10,7 @@ import { CgProfile } from 'react-icons/cg';
 import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 import { FiVideo } from 'react-icons/fi';
 import { IoLogoYoutube } from 'react-icons/io';
-import { MdContentCopy, MdLocationOn, MdReviews } from 'react-icons/md';
+import { MdContentCopy, MdReviews } from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
 
 export const navItems = [
@@ -385,20 +385,6 @@ export const faqData = [
       </p>
     ),
   },
-];
-
-export const footerContactData = [
-  {
-    id: '1',
-    title: 'Dhaka Mawa High Way',
-    icon: <MdLocationOn className="text-xl mr-1 " />,
-  },
-
-  // {
-  //   id: "4",
-  //   title: "Skype: hello_name",
-  //   icon: <FaSkype className="text-lg mr-2  " />,
-  // },
 ];
 
 export const footerExploreData = [

@@ -1,10 +1,10 @@
-import React from "react";
-import Team from "./Team";
+import React from 'react';
+import Team from './Team';
 
 const About = () => {
   return (
     <div className="bg-[#edf2f5]">
-      <div className="pt-24 max-w-5xl mx-auto ">
+      <div className="pt-24 max-w-6xl mx-auto ">
         <div className="max-w-2xl mx-auto">
           <h2 className="text-center text-3xl font-bold font-heading mt-8 text-headerMain	">
             About Us

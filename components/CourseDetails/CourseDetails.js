@@ -1,25 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
-import { useState, useEffect } from "react";
-import { crashCourseData } from "../../src/data/data";
-import { useStateContext } from "../../src/context/ContextProvider";
-import { ImClock } from "react-icons/im";
-import { BiShareAlt } from "react-icons/bi";
-import { GoCalendar } from "react-icons/go";
+import React, { useEffect, useState } from 'react';
+import { BiShareAlt } from 'react-icons/bi';
 import {
   BsCalendarDay,
   BsCheck2Circle,
   BsClock,
   BsTelephone,
-} from "react-icons/bs";
+} from 'react-icons/bs';
+import { GoCalendar } from 'react-icons/go';
+import { ImClock } from 'react-icons/im';
+import { useStateContext } from '../../src/context/ContextProvider';
 
 const CourseDetails = () => {
   const { courseData } = useStateContext();
-  const [courseDetails, setCourseDetails] = useState("");
+  const [courseDetails, setCourseDetails] = useState('');
 
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      const slug = window.location.href.split("/").slice(-1)[0];
+    if (typeof window !== 'undefined') {
+      const slug = window.location.href.split('/').slice(-1)[0];
       const item = courseData.find((item) => item.key === slug);
       setCourseDetails(item);
     }
@@ -78,13 +76,13 @@ const CourseDetails = () => {
               <span className="ml-1.5 cursor-pointer">ক্লাসের দিন</span>
             </div>
             <span>
-              {" "}
+              {' '}
               {courseDetails?.class_days?.map((item, index) => (
                 <span key={item}>
                   {item}
                   {index !== courseDetails?.class_days.length - 1 && `, `}
                 </span>
-              ))}{" "}
+              ))}{' '}
             </span>
           </div>
           <div className="bg-[#d5caca] w-[1px] h-[40px]" />
@@ -220,7 +218,7 @@ const CourseDetails = () => {
           <h2 className="text-2xl font-bold mb-3">হেল্প</h2>
           <div className="mt-3 mb-8 h-[.5px] w-[100%] bg-slate-300" />
           <p className="text-lg font-normal cursor-pointer">
-            ব্যাচ সংক্রান্ত যেকোনো তথ্যের জন্যে কল করুন{" "}
+            ব্যাচ সংক্রান্ত যেকোনো তথ্যের জন্যে কল করুন{' '}
             <span className="font-bold underline">01870106460</span> (সকাল ১০টা
             থেকে রাত ১০টা)
           </p>
@@ -245,8 +243,8 @@ const CourseDetails = () => {
                 {Math.ceil(
                   (new Date(courseDetails?.main_class_starting_date).getTime() -
                     new Date().getTime()) /
-                    (1000 * 60 * 60 * 24)
-                )}{" "}
+                    (1000 * 60 * 60 * 24),
+                )}{' '}
                 দিন বাকি
               </span>
             </div>
@@ -286,14 +284,14 @@ const CourseDetails = () => {
           <div className="py-4 px-5 border-b-1">
             <p className="font-bold text-lg">এই কোর্সে আপনি পাচ্ছেন</p>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[#3a4e67]">
-              {courseDetails?.courseShortData.map(
+              {courseDetails?.courseShortData?.map(
                 (item) =>
-                  item.value !== "" && (
+                  item.value !== '' && (
                     <div key={item.name} className="flex items-start">
                       <BsCheck2Circle />
                       <span className="ml-2 -mt-1">{item.value}</span>
                     </div>
-                  )
+                  ),
               )}
             </div>
           </div>
