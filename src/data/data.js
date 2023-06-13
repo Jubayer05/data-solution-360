@@ -1,55 +1,53 @@
-import rLang from "@iconify/icons-logos/r-lang";
-import javaIcon from "@iconify/icons-logos/java";
-import javascriptIcon from "@iconify/icons-logos/javascript";
-import pythonIcon from "@iconify/icons-logos/python";
-import microsoftPowerBi from "@iconify/icons-logos/microsoft-power-bi";
-import tableauIcon from "@iconify/icons-logos/tableau";
-import mongodbIcon from "@iconify/icons-logos/mongodb";
-import mysqlIcon from "@iconify/icons-logos/mysql";
-import { MdLocationOn, MdEmail } from "react-icons/md";
-import { ImPhone } from "react-icons/im";
-import { IoLogoWhatsapp, IoLogoYoutube } from "react-icons/io";
-import { AiFillFacebook, AiFillLinkedin } from "react-icons/ai";
-import { CgProfile } from "react-icons/cg";
-import { MdContentCopy, MdReviews } from "react-icons/md";
-import { FiVideo } from "react-icons/fi";
-import { RiAdminFill } from "react-icons/ri";
+import javaIcon from '@iconify/icons-logos/java';
+import javascriptIcon from '@iconify/icons-logos/javascript';
+import microsoftPowerBi from '@iconify/icons-logos/microsoft-power-bi';
+import mongodbIcon from '@iconify/icons-logos/mongodb';
+import mysqlIcon from '@iconify/icons-logos/mysql';
+import pythonIcon from '@iconify/icons-logos/python';
+import rLang from '@iconify/icons-logos/r-lang';
+import tableauIcon from '@iconify/icons-logos/tableau';
+import { CgProfile } from 'react-icons/cg';
+import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
+import { FiVideo } from 'react-icons/fi';
+import { IoLogoYoutube } from 'react-icons/io';
+import { MdContentCopy, MdLocationOn, MdReviews } from 'react-icons/md';
+import { RiAdminFill } from 'react-icons/ri';
 
 export const navItems = [
   {
-    id: "nav-1",
-    title: "Home",
-    slug: "",
-    titleBang: "হোম",
-    link: "/",
+    id: 'nav-1',
+    title: 'Home',
+    slug: '',
+    titleBang: 'হোম',
+    link: '/',
   },
   {
-    id: "nav-2",
-    title: "About",
-    slug: "about",
-    titleBang: "সম্পর্ক",
-    link: "/about",
+    id: 'nav-2',
+    title: 'About',
+    slug: 'about',
+    titleBang: 'সম্পর্ক',
+    link: '/about',
   },
   {
-    id: "nav-3",
-    title: "Services",
-    slug: "services",
-    titleBang: "সার্ভিস",
-    link: "/services",
+    id: 'nav-3',
+    title: 'Services',
+    slug: 'services',
+    titleBang: 'সার্ভিস',
+    link: '/services',
   },
   {
-    id: "nav-4",
-    title: "Career",
-    slug: "career",
-    titleBang: "ক্যারিয়ার",
-    link: "/career",
+    id: 'nav-4',
+    title: 'Career',
+    slug: 'career',
+    titleBang: 'ক্যারিয়ার',
+    link: '/career',
   },
   {
-    id: "nav-5",
-    title: "Blog",
-    slug: "blog",
-    titleBang: "ব্লগ",
-    link: "/blog",
+    id: 'nav-5',
+    title: 'Blog',
+    slug: 'blog',
+    titleBang: 'ব্লগ',
+    link: '/blog',
   },
   // {
   //   id: "nav-6",
@@ -61,86 +59,86 @@ export const navItems = [
 
 export const navDropItems = [
   {
-    id: "nav-1",
-    title: "Dashboard",
-    slug: "dashboard",
-    titleBang: "হোম",
-    link: "/students/dashboard",
+    id: 'nav-1',
+    title: 'Dashboard',
+    slug: 'dashboard',
+    titleBang: 'হোম',
+    link: '/students/dashboard',
   },
   {
-    id: "nav-5",
-    title: "Profile",
-    slug: "profile",
-    titleBang: "সার্ভিস",
-    link: "/students/profile",
+    id: 'nav-5',
+    title: 'Profile',
+    slug: 'profile',
+    titleBang: 'সার্ভিস',
+    link: '/students/profile',
   },
   {
-    id: "nav-2",
-    title: "Terms and Condition",
-    slug: "terms-and-conditions",
-    titleBang: "সার্ভিস",
-    link: "/terms-and-conditions",
+    id: 'nav-2',
+    title: 'Terms and Condition',
+    slug: 'terms-and-conditions',
+    titleBang: 'সার্ভিস',
+    link: '/terms-and-conditions',
   },
   {
-    id: "nav-3",
-    title: "Return Policy",
-    slug: "return-policy",
-    titleBang: "ক্যারিয়ার",
-    link: "/return-policy",
+    id: 'nav-3',
+    title: 'Return Policy',
+    slug: 'return-policy',
+    titleBang: 'ক্যারিয়ার',
+    link: '/return-policy',
   },
   {
-    id: "nav-4",
-    title: "Help Center",
-    slug: "help",
-    titleBang: "ব্লগ",
-    link: "/help",
+    id: 'nav-4',
+    title: 'Help Center',
+    slug: 'help',
+    titleBang: 'ব্লগ',
+    link: '/help',
   },
 ];
 
 export const slidesData = [
   {
-    id: "1",
-    img: "/course/data-science.jpg",
+    id: '1',
+    img: '/course/data-science.jpg',
   },
   {
-    id: "2",
-    img: "/course/data-science-2.jpg",
+    id: '2',
+    img: '/course/data-science-2.jpg',
   },
   {
-    id: "3",
-    img: "/course/data-science-2-c.jpg",
+    id: '3',
+    img: '/course/data-science-2-c.jpg',
   },
   {
-    id: "4",
-    img: "/course/data-science111.jpg",
+    id: '4',
+    img: '/course/data-science111.jpg',
   },
   {
-    id: "5",
-    img: "/course/data-science-3.jpg",
+    id: '5',
+    img: '/course/data-science-3.jpg',
   },
 ];
 
 export const crashCourseData = [
   {
-    id: "1",
-    link: "/course-details/python-for-data-analysis",
-    slug: "python-for-data-analysis",
-    title: "Python for data analysis",
-    point1: "Live class",
-    point2: "Access recorded video",
-    img: "/course/data-science.jpg",
+    id: '1',
+    link: '/course-details/python-for-data-analysis',
+    slug: 'python-for-data-analysis',
+    title: 'Python for data analysis',
+    point1: 'Live class',
+    point2: 'Access recorded video',
+    img: '/course/data-science.jpg',
     details:
       "In this course ,you will learn the fundamentals of  Python for data analysis techniques.You'll discover how to organize data for analysis, carry out basic statistical calculations, make insightful data visualizations, detect patterns using data, and more! ",
-    additional: "",
+    additional: '',
   },
   {
-    id: "4",
-    link: "/course-details/expert-in-python",
-    slug: "expert-in-python",
-    title: "Expert in Python",
-    point1: "Live class",
-    point2: "Access recorded video",
-    img: "/course/data-science-4.jpg",
+    id: '4',
+    link: '/course-details/expert-in-python',
+    slug: 'expert-in-python',
+    title: 'Expert in Python',
+    point1: 'Live class',
+    point2: 'Access recorded video',
+    img: '/course/data-science-4.jpg',
     details:
       "If you're looking for a comprehensive, hands-on guide to learning Python in a advance way, you've come to the right place.",
     additional: (
@@ -159,13 +157,13 @@ export const crashCourseData = [
     ),
   },
   {
-    id: "2",
-    link: "/course-details/microsoft-power-bi",
-    slug: "microsoft-power-bi",
-    title: "Microsoft Power BI",
-    point1: "Live class",
-    point2: "Access recorded video",
-    img: "/course/data-science-2.jpg",
+    id: '2',
+    link: '/course-details/microsoft-power-bi',
+    slug: 'microsoft-power-bi',
+    title: 'Microsoft Power BI',
+    point1: 'Live class',
+    point2: 'Access recorded video',
+    img: '/course/data-science-2.jpg',
     details:
       "If you're looking for a comprehensive, hands-on guide to learning Microsoft Power BI Desktop, you've come to the right place.",
     additional: (
@@ -184,13 +182,13 @@ export const crashCourseData = [
     ),
   },
   {
-    id: "3",
-    link: "/course-details/amazon-web-services",
-    slug: "amazon-web-services",
-    title: "Amazon Web Services",
-    point1: "Live class",
-    point2: "Access recorded video",
-    img: "/course/data-science-3.jpg",
+    id: '3',
+    link: '/course-details/amazon-web-services',
+    slug: 'amazon-web-services',
+    title: 'Amazon Web Services',
+    point1: 'Live class',
+    point2: 'Access recorded video',
+    img: '/course/data-science-3.jpg',
     details:
       "If you're looking for a comprehensive, hands-on guide to learning Amazon Web Services, you've come to the right place.",
     additional: (
@@ -212,10 +210,10 @@ export const crashCourseData = [
 
 export const services = [
   {
-    id: "1",
-    title: "Live Workshop",
-    details: "Daily live classes help you maintain your routine",
-    img: "/services/liveclass.png",
+    id: '1',
+    title: 'Live Workshop',
+    details: 'Daily live classes help you maintain your routine',
+    img: '/services/liveclass.png',
   },
   // {
   //   id: "2",
@@ -230,10 +228,10 @@ export const services = [
   //   img: "/services/practice.png",
   // },
   {
-    id: "4",
-    title: "Q & A Facilities",
-    details: "A team member is always with you for your questions.",
-    img: "/services/qa.png",
+    id: '4',
+    title: 'Q & A Facilities',
+    details: 'A team member is always with you for your questions.',
+    img: '/services/qa.png',
   },
   // {
   //   id: "5",
@@ -243,93 +241,93 @@ export const services = [
   //   img: "/services/resource.png",
   // },
   {
-    id: "6",
-    title: "Live support",
-    details: "You will get live support during whole course.",
-    img: "/services/support.png",
+    id: '6',
+    title: 'Live support',
+    details: 'You will get live support during whole course.',
+    img: '/services/support.png',
   },
 ];
 
 export const technologyStack = [
   {
-    id: "1",
-    title: "Language",
+    id: '1',
+    title: 'Language',
     technology: [
       {
-        id: "1",
+        id: '1',
         img: javaIcon,
       },
       {
-        id: "4",
+        id: '4',
         img: rLang,
       },
       {
-        id: "2",
+        id: '2',
         img: javascriptIcon,
       },
       {
-        id: "3",
+        id: '3',
         img: pythonIcon,
       },
     ],
   },
   {
-    id: "2",
-    title: "Data Analysis",
+    id: '2',
+    title: 'Data Analysis',
     technology: [
       {
-        id: "1",
+        id: '1',
         img: pythonIcon,
       },
 
       {
-        id: "3",
-        logoImg: "/technology/excel.png",
+        id: '3',
+        logoImg: '/technology/excel.png',
       },
       {
-        id: "4",
-        logoImg: "/technology/spss.png",
+        id: '4',
+        logoImg: '/technology/spss.png',
       },
       {
-        id: "4",
-        logoImg: "/technology/stata.png",
+        id: '4',
+        logoImg: '/technology/stata.png',
       },
     ],
   },
   {
-    id: "3",
-    title: "Data Visualization",
+    id: '3',
+    title: 'Data Visualization',
     technology: [
       {
-        id: "1",
+        id: '1',
         img: microsoftPowerBi,
       },
       {
-        id: "2",
+        id: '2',
         img: tableauIcon,
       },
 
       {
-        id: "3",
-        logoImg: "/technology/excel.png",
+        id: '3',
+        logoImg: '/technology/excel.png',
       },
     ],
   },
   {
-    id: "4",
-    title: "Database",
+    id: '4',
+    title: 'Database',
     technology: [
       {
-        id: "1",
+        id: '1',
         img: mongodbIcon,
       },
       {
-        id: "2",
+        id: '2',
         img: mysqlIcon,
       },
       {
-        id: "3",
-        logoImg: "/technology/postgresql.jpg",
+        id: '3',
+        logoImg: '/technology/postgresql.jpg',
       },
     ],
   },
@@ -337,20 +335,20 @@ export const technologyStack = [
 
 export const faqData = [
   {
-    id: "1",
-    question: "1. What is data science?",
+    id: '1',
+    question: '1. What is data science?',
     answer:
-      "Data science is the field of study that combines domain expertise, programming skills, and knowledge of mathematics and statistics to extract meaningful insights from data.",
+      'Data science is the field of study that combines domain expertise, programming skills, and knowledge of mathematics and statistics to extract meaningful insights from data.',
   },
   {
-    id: "2",
-    question: "2. Is Data Science a Good Career?",
+    id: '2',
+    question: '2. Is Data Science a Good Career?',
     answer:
-      "Yes, data science is a very good career with tremendous opportunities for advancement in the future. Already, demand is high, salaries are competitive, and the perks are numerous – which is why Data Scientist has been called “the most promising career” by LinkedIn and the “best job in America” by Glassdoor.",
+      'Yes, data science is a very good career with tremendous opportunities for advancement in the future. Already, demand is high, salaries are competitive, and the perks are numerous – which is why Data Scientist has been called “the most promising career” by LinkedIn and the “best job in America” by Glassdoor.',
   },
   {
-    id: "3",
-    question: "3. What is different between data science and data analytics?",
+    id: '3',
+    question: '3. What is different between data science and data analytics?',
     answer: (
       <p>
         Data Science is an umbrella that encompasses Data Analytics. {<br />}
@@ -365,14 +363,14 @@ export const faqData = [
     ),
   },
   {
-    id: "4",
-    question: "4. What is Power BI?",
+    id: '4',
+    question: '4. What is Power BI?',
     answer:
-      "Power BI is a technology-driven business intelligence tool provided by Microsoft for analyzing and visualizing raw data to present actionable information. It combines business analytics, data visualization, and best practices that help an organization to make data-driven decisions.",
+      'Power BI is a technology-driven business intelligence tool provided by Microsoft for analyzing and visualizing raw data to present actionable information. It combines business analytics, data visualization, and best practices that help an organization to make data-driven decisions.',
   },
   {
-    id: "5",
-    question: "5. Why should you learn Power BI?",
+    id: '5',
+    question: '5. Why should you learn Power BI?',
     answer: (
       <p>
         1) Great opportunity to enter the freelancing sector. {<br />}
@@ -380,7 +378,7 @@ export const faqData = [
         the country and abroad {<br />}
         {<br />} 3) Part time job as well as study. {<br />}
         {<br />}
-        {<br />}4) The demand in the corporate sector is increasing day by day.{" "}
+        {<br />}4) The demand in the corporate sector is increasing day by day.{' '}
         {<br />}
         {<br />}5) Opportunity to build a career as a Data Analyst / Data
         Scientist.
@@ -391,21 +389,9 @@ export const faqData = [
 
 export const footerContactData = [
   {
-    id: "1",
-    title: "Address: Dhaka Mawa High Way",
+    id: '1',
+    title: 'Dhaka Mawa High Way',
     icon: <MdLocationOn className="text-xl mr-1 " />,
-  },
-
-  {
-    id: "2",
-    title: "Phone: +8801996104096",
-    icon: <ImPhone className="text-lg mr-2  " />,
-  },
-
-  {
-    id: "3",
-    title: "Email: datasolution360.business@gmail.com",
-    icon: <MdEmail className="text-lg mr-2  " />,
   },
 
   // {
@@ -415,26 +401,89 @@ export const footerContactData = [
   // },
 ];
 
+export const footerExploreData = [
+  {
+    id: '1',
+    title: 'About Us',
+    Link: '/about',
+  },
+  {
+    id: '2',
+    title: 'Upcoming Events',
+    Link: '/about',
+  },
+  {
+    id: '3',
+    title: 'Blog & News',
+    Link: '/blog',
+  },
+  {
+    id: '4',
+    title: 'FAQ Questions',
+    Link: '/faq',
+  },
+
+  {
+    id: '5',
+    title: 'Testimonials',
+    Link: '/testimonials',
+  },
+  {
+    id: '6',
+    title: 'Privacy Policy',
+    Link: '/privacy-policy',
+  },
+];
+
+export const footerUsefulLinksData = [
+  {
+    id: '1',
+    title: 'Contact Us',
+    Link: '/contact',
+  },
+  {
+    id: '2',
+    title: 'View Courses',
+    Link: '/about',
+  },
+  {
+    id: '3',
+    title: 'Gallery',
+    Link: '/blog',
+  },
+  {
+    id: '4',
+    title: 'Instructors',
+    Link: '/instructors',
+  },
+
+  {
+    id: '5',
+    title: 'Purchase Guide',
+    Link: '/purchase-guide',
+  },
+];
+
 export const footerFollowUs = [
   {
-    id: "1",
-    link: "https://www.facebook.com/Datasolution360",
-    title: "Facebook",
-    icon: <AiFillFacebook />,
+    id: '1',
+    link: 'https://www.facebook.com/Datasolution360',
+    title: 'Facebook',
+    icon: <FaFacebookF />,
   },
 
   {
-    id: "2",
-    link: "https://www.linkedin.com/company/data-solution-360",
-    title: "LinkedIn",
-    icon: <AiFillLinkedin />,
+    id: '2',
+    link: 'https://www.linkedin.com/company/data-solution-360',
+    title: 'LinkedIn',
+    icon: <FaLinkedinIn />,
   },
 
   {
-    id: "3",
-    link: "https://wa.me/+8801996104096",
-    title: "Whatsapp",
-    icon: <IoLogoWhatsapp />,
+    id: '3',
+    link: 'https://wa.me/+8801996104096',
+    title: 'Whatsapp',
+    icon: <FaWhatsapp />,
   },
 
   // {
@@ -445,122 +494,122 @@ export const footerFollowUs = [
   // },
 
   {
-    id: "5",
-    link: "/",
-    title: "Youtube",
+    id: '5',
+    link: '/',
+    title: 'Youtube',
     icon: <IoLogoYoutube />,
   },
 ];
 
 export const dashboardAdmin = [
   {
-    id: "1",
-    title: "Total Students",
+    id: '1',
+    title: 'Total Students',
     gridClass: false,
-    classes: "",
-    bgFrom: " #1a9f53",
-    bgTo: "#4eda89",
+    classes: '',
+    bgFrom: ' #1a9f53',
+    bgTo: '#4eda89',
     icon: <CgProfile />,
   },
 
   {
-    id: "2",
-    title: "Total Courses",
+    id: '2',
+    title: 'Total Courses',
     gridClass: false,
-    classes: "",
-    bgFrom: "#be0ee1",
-    bgTo: "#ed68ff",
+    classes: '',
+    bgFrom: '#be0ee1',
+    bgTo: '#ed68ff',
     icon: <MdContentCopy />,
   },
   {
-    id: "3",
-    title: "Total Reviews",
+    id: '3',
+    title: 'Total Reviews',
     gridClass: true,
-    bgTo: "#ff5648",
-    bgFrom: "#da5568",
+    bgTo: '#ff5648',
+    bgFrom: '#da5568',
     icon: <RiAdminFill />,
   },
   {
-    id: "4",
-    title: " Total Video Lessons",
+    id: '4',
+    title: ' Total Video Lessons',
     gridClass: false,
 
-    classes: "",
-    bgFrom: "#2b77e5",
-    bgTo: "#64b3f6",
+    classes: '',
+    bgFrom: '#2b77e5',
+    bgTo: '#64b3f6',
     icon: <MdReviews />,
   },
   {
-    id: "5",
-    title: "Total Blog",
+    id: '5',
+    title: 'Total Blog',
     gridClass: false,
-    classes: "",
-    bgFrom: "#e1940e",
-    bgTo: "#f4d02b",
+    classes: '',
+    bgFrom: '#e1940e',
+    bgTo: '#f4d02b',
     icon: <FiVideo />,
   },
 ];
 
 export const reviewData = [
   {
-    id: "1",
-    name: "Md. Towhidul Islam",
-    job: "Daffodil International University as a Student",
-    photoUrl: "/review/image1.jpeg",
+    id: '1',
+    name: 'Md. Towhidul Islam',
+    job: 'Daffodil International University as a Student',
+    photoUrl: '/review/image1.jpeg',
     reviewDetails:
       "This data analyst course can be a valuable investment in developing skills and knowledge in the field of data analysis. It's important to carefully consider my options and choose a course that aligns with my goals and needs.",
     star: 5,
   },
   {
-    id: "2",
-    name: "Raiful Islam",
-    job: "Student",
-    photoUrl: "/review/avatar.png",
+    id: '2',
+    name: 'Raiful Islam',
+    job: 'Student',
+    photoUrl: '/review/avatar.png',
     reviewDetails:
       "The instructor is amazing. First of all, I didn't think I will communicate with the instructor. But the instructor has given me space to talk about certain things with him. He is friendly when we just ask questions during the class. I am quite an introverted person but I was thinking it will create a problem. The instructor has given me a platform to overcome it. The best important thing is, sometimes he gives some real examples which are quite fascinating for me and I like the most. He showed me a career path.  Eventually, by his guidelines, I think I can create a career in the future. And after this course, I think I can fulfil my dream.",
     star: 5,
   },
   {
-    id: "3",
-    name: "Tasmin Akter Tripty",
-    job: "Mathematics, BUET",
-    photoUrl: "/review/image2.jpeg",
+    id: '3',
+    name: 'Tasmin Akter Tripty',
+    job: 'Mathematics, BUET',
+    photoUrl: '/review/image2.jpeg',
     reviewDetails:
       "It's a great experience for me to be a student at Data Solution 360's data analysis course. The course addressed a wide range of topics in data analysis, including statistical analysis, data visualization, and Python. It is well-structured, and covered many of these themes. The instructor is always eager to offer further assistance and support In order to make sure we fully understood the content.",
     star: 5,
   },
   {
-    id: "4",
-    name: "Ashraf shakil",
-    job: "Student",
-    photoUrl: "/review/image3.jpeg",
+    id: '4',
+    name: 'Ashraf shakil',
+    job: 'Student',
+    photoUrl: '/review/image3.jpeg',
     reviewDetails:
-      "This online platform is very nice. I am very happy to join this platform. The Course Teacher is very helpful ,he all  time try to teach something very care.",
+      'This online platform is very nice. I am very happy to join this platform. The Course Teacher is very helpful ,he all  time try to teach something very care.',
     star: 5,
   },
   {
-    id: "5",
-    name: "Md.Tusher Alam",
-    job: "Not now work any organization",
-    photoUrl: "/review/image4.jpg",
+    id: '5',
+    name: 'Md.Tusher Alam',
+    job: 'Not now work any organization',
+    photoUrl: '/review/image4.jpg',
     reviewDetails:
-      "The instructor was knowledgeable and engaging, and the material was presented in a clear and concise manner. One of the best things about this course was its practical focus. Throughout the lessons, we were given plenty of opportunities to apply what we had learned by working on real-world marketing projects.  The course platform was easy to use, and the videos were high quality. The course materials, including templates and resources, were well-organized and easy to follow. Additionally, the course community was supportive and active, with a dedicated forum where students could ask questions and share their work.",
+      'The instructor was knowledgeable and engaging, and the material was presented in a clear and concise manner. One of the best things about this course was its practical focus. Throughout the lessons, we were given plenty of opportunities to apply what we had learned by working on real-world marketing projects.  The course platform was easy to use, and the videos were high quality. The course materials, including templates and resources, were well-organized and easy to follow. Additionally, the course community was supportive and active, with a dedicated forum where students could ask questions and share their work.',
     star: 5,
   },
   {
-    id: "6",
-    name: "Md. Fahad Hossain Faysal",
-    job: "Personal Projects",
-    photoUrl: "/review/image5.jpeg",
+    id: '6',
+    name: 'Md. Fahad Hossain Faysal',
+    job: 'Personal Projects',
+    photoUrl: '/review/image5.jpeg',
     reviewDetails:
       "This course covered a wide range of topics, including data visualization, statistics, database management, and programming languages such as Python. Our instructor Shakib vai is knowledgeable and experienced in data analysis fields, and were able to explain complex concepts in a clear and concise manner. But I have a recommendation to our instructor Shakib vai that please maintain the learning sequence. When you start a topics like programming or SQL or Statistics or whatever it, firstly please complete the topic fully(beginning to advanced). Don't jump from a topic to another topic. Sometimes students are confused if we jumping a topic to another topic. Please follow the sequence.",
     star: 5,
   },
   {
-    id: "7",
-    name: "Sumaya Akter",
-    job: "Null",
-    photoUrl: "/review/woman.png",
+    id: '7',
+    name: 'Sumaya Akter',
+    job: 'Null',
+    photoUrl: '/review/woman.png',
     reviewDetails:
       "The competent and interesting lecturer in this data solution program makes difficult ideas understandable. Our academic and practical abilities are improved through hands-on exercises and assignments. It's a great course for anyone wishing to improve their data analysis skills, regardless of experience level.",
     star: 5,

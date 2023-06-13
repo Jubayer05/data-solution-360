@@ -6,5 +6,8 @@
     "formik",
     "orangered",
     "semibold"
-  ]
+  ],
+  "editor.formatOnSave": true,
+  "notebook.formatOnSave.enabled": false,
+  "editor.defaultFormatter": "esbenp.prettier-vscode"
 }
