@@ -1,11 +1,10 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState } from "react";
-import { Button } from "antd";
-import Slider from "react-slick";
-import StarRatings from "react-star-ratings";
-import { AiFillCaretRight } from "react-icons/ai";
-import { reviewData } from "../../src/data/data";
-import Modal from "react-modal";
+import React, { useState } from 'react';
+import { AiFillCaretRight } from 'react-icons/ai';
+import Modal from 'react-modal';
+import Slider from 'react-slick';
+import StarRatings from 'react-star-ratings';
+import { reviewData } from '../../src/data/data';
 
 const Review = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -23,13 +22,13 @@ const Review = () => {
 
   const customStyles = {
     content: {
-      background: "#fff",
-      top: "50%",
-      left: "50%",
-      right: "auto",
-      bottom: "auto",
-      marginRight: "-50%",
-      transform: "translate(-50%, -50%)",
+      background: '#fff',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
     },
   };
 
@@ -40,7 +39,7 @@ const Review = () => {
     autoplay: true,
     speed: 350,
     autoplaySpeed: 3000,
-    cssEase: "linear",
+    cssEase: 'linear',
     slidesToShow: 3,
     slidesToScroll: 1,
     responsive: [
@@ -61,7 +60,7 @@ const Review = () => {
 
   function cutFirst50Words(str) {
     if (str.length > 30) {
-      return str.substring(0, 132) + "...";
+      return str.substring(0, 132) + '...';
     } else {
       return str;
     }
@@ -144,13 +143,13 @@ const Review = () => {
                         </Modal>
                       </>
                     ) : (
-                      ""
+                      ''
                     )}
                     &rdquo;
                   </p>
                   <div>
                     <StarRatings
-                      rating={4.5}
+                      rating={5}
                       numberOfStars={5}
                       name="rating"
                       starDimension="22px"
