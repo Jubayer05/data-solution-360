@@ -11,6 +11,7 @@ import {
 } from '../index';
 import WhatsApp from '../utilities/WhatsApp';
 import Review from './Review';
+import Subscribe from './Subscribe';
 // import BannerCarousel from "./BannerCarousel";
 
 const Home = () => {
@@ -26,6 +27,7 @@ const Home = () => {
         {/* <TeamMember /> */}
         <Technology />
         <Review />
+        <Subscribe />
         <Faq />
         <Footer />
       </>

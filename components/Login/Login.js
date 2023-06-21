@@ -1,17 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useState, useEffect } from "react";
-import { Icon } from "@iconify/react";
-import { useRouter } from "next/router";
-import firebase from "../../firebase";
+import { Icon } from '@iconify/react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
+import React, { useEffect, useState } from 'react';
+import firebase from '../../firebase';
 
 const db = firebase.firestore();
 const auth = firebase.auth();
 
 const initialState = {
-  name: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
+  name: '',
+  email: '',
+  password: '',
+  confirmPassword: '',
 };
 
 const googleProvider = new firebase.auth.GoogleAuthProvider();
@@ -30,7 +31,7 @@ const Login = () => {
   };
 
   useEffect(() => {
-    db.collection("userLogin").onSnapshot((snap) => {
+    db.collection('userLogin').onSnapshot((snap) => {
       const userData = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -68,32 +69,32 @@ const Login = () => {
   };
 
   const fbGoogleLoginFunction = (validUser, user) => {
-    localStorage.setItem("userName", user.displayName);
-    localStorage.setItem("emailUser", user.email);
-    localStorage.setItem("photoUrl", user.photoURL);
+    localStorage.setItem('userName', user.displayName);
+    localStorage.setItem('emailUser', user.email);
+    localStorage.setItem('photoUrl', user.photoURL);
 
     if (validUser) {
-      if (validUser.status === "student" && validUser.registered === false) {
-        window.location.href = "/students/register";
+      if (validUser.status === 'student' && validUser.registered === false) {
+        window.location.href = '/students/register';
       } else if (
-        validUser.status === "student" &&
+        validUser.status === 'student' &&
         validUser.registered === true
       ) {
-        window.location.href = "/students/dashboard";
-      } else if (validUser.status === "admin") {
-        window.location.href = "/admin/dashboard";
+        window.location.href = '/students/dashboard';
+      } else if (validUser.status === 'admin') {
+        window.location.href = '/admin/dashboard';
       }
     } else {
-      db.collection("userLogin")
+      db.collection('userLogin')
         .add({
           name: user.displayName,
           photoUrl: user.photoURL,
           email: user.email,
-          status: "student",
+          status: 'student',
           registered: false,
         })
         .then(() => {
-          window.location.href = "/";
+          window.location.href = '/';
         });
     }
   };
@@ -109,14 +110,14 @@ const Login = () => {
           .signInWithEmailAndPassword(formData.email, formData.password)
           .then((userCredential) => {
             const user = userCredential.user;
-            localStorage.setItem("emailUser", user.email);
+            localStorage.setItem('emailUser', user.email);
             if (validUser) {
-              if (validUser.status === "student") {
-                Router.push("/join-us/intern");
-              } else if (validUser.status === "teacher") {
-                Router.push("/dashboard/teacher");
-              } else if (validUser.status === "admin") {
-                Router.push("/dashboard/admin");
+              if (validUser.status === 'student') {
+                Router.push('/join-us/intern');
+              } else if (validUser.status === 'teacher') {
+                Router.push('/dashboard/teacher');
+              } else if (validUser.status === 'admin') {
+                Router.push('/dashboard/admin');
               }
             }
           })
@@ -125,10 +126,10 @@ const Login = () => {
             alert(errorMessage);
           });
       } else {
-        alert("You are not a seller. Create an account first.");
+        alert('You are not a seller. Create an account first.');
       }
     } else {
-      alert("Please Provide a valid email");
+      alert('Please Provide a valid email');
     }
   };
 
@@ -176,19 +177,19 @@ const Login = () => {
     // } else {
     //   alert("Please Provide a valid email");
     // }
-    alert("Comming soon. Use google login now.");
+    alert('Comming soon. Use google login now.');
   };
 
   return (
     <div
       className="py-14"
-      style={{ backgroundImage: "linear-gradient(30deg,#62d7e1, #b933dc)" }}
+      style={{ backgroundImage: 'linear-gradient(30deg,#62d7e1, #b933dc)' }}
     >
       <div className="flex justify-center items-center min-h-screen	">
         <div className="">
           <div
             className="bg-white  w-72 sm:w-96 p-9 rounded-md"
-            style={{ marginTop: "30px" }}
+            style={{ marginTop: '30px' }}
           >
             <h3 className="text-center text-xl font-bold">Login</h3>
 
@@ -197,7 +198,7 @@ const Login = () => {
             </p>
             <div
               className="flex items-end pb-2 border-b-2	mt-1"
-              style={{ borderBottomColor: "#c6c6c6" }}
+              style={{ borderBottomColor: '#c6c6c6' }}
             >
               <Icon
                 icon="clarity:email-line"
@@ -233,7 +234,7 @@ const Login = () => {
             {haveAccount && (
               <>
                 <p className="pt-4 text-xs font-bold text-gray-500 after:content-['*'] after:ml-0.5 after:text-red-500 ">
-                  {" "}
+                  {' '}
                   Confirm Password
                 </p>
                 <div className="flex items-end pb-2 border-b-2	mt-1">
@@ -267,32 +268,12 @@ const Login = () => {
                 className="w-full border-0 text-white p-2 rounded-full block mt-5"
                 style={{
                   backgroundImage:
-                    "linear-gradient(to right, #64d2db, #e63df6)",
+                    'linear-gradient(to right, #64d2db, #e63df6)',
                 }}
                 onClick={haveAccount ? handleCreateAccount : handleLogin}
               >
-                {haveAccount ? "Create Account" : "Login"}
+                {haveAccount ? 'Create Account' : 'Login'}
               </button>
-            </div>
-
-            <p className="text-xs font-semibold text-input text-center mt-9">
-              or sign up using
-            </p>
-
-            <div className="flex justify-center items-center mt-4">
-              <Icon
-                onClick={handleFacebookLogin}
-                icon="akar-icons:facebook-fill"
-                className="m-1 cursor-pointer text-4xl"
-                style={{ color: "#3e548d" }}
-              />
-
-              <Icon
-                onClick={handleGoogleSignIn}
-                icon="akar-icons:google-contained-fill"
-                className="m-1 cursor-pointer text-4xl"
-                style={{ color: "#d95447" }}
-              />
             </div>
 
             <p className="text-center mt-9">
@@ -318,6 +299,41 @@ const Login = () => {
                   sign up
                 </span>
               )}
+            </p>
+
+            <p className="text-xs font-semibold text-input text-center mt-9">
+              or sign up using
+            </p>
+
+            <div className="flex justify-center items-center mt-4">
+              <Icon
+                onClick={handleFacebookLogin}
+                icon="akar-icons:facebook-fill"
+                className="m-2 cursor-pointer text-5xl"
+                style={{ color: '#3e548d' }}
+              />
+
+              <Icon
+                onClick={handleGoogleSignIn}
+                icon="akar-icons:google-contained-fill"
+                className="m-2 cursor-pointer text-5xl"
+                style={{ color: '#d95447' }}
+              />
+            </div>
+
+            <p className="text-center">
+              By continuing, you are indicating that you accept our{' '}
+              <Link href="/privacy-policy">
+                <a className="text-blue-500 visited:text-blue-500 font-medium">
+                  Terms of Service
+                </a>
+              </Link>{' '}
+              and{' '}
+              <Link href="/privacy-policy">
+                <a className="text-blue-500 visited:text-blue-500 font-medium">
+                  Privacy Policy
+                </a>
+              </Link>
             </p>
           </div>
         </div>

@@ -1,6 +1,7 @@
-import React from "react";
-import Services from "../../components/Services/Services";
-import { Footer, Navbar } from "../../components";
+import React from 'react';
+import { Footer, Navbar } from '../../components';
+import Services from '../../components/Services/Services';
+import WhatsApp from '../../components/utilities/WhatsApp';
 
 const index = () => {
   return (
@@ -8,6 +9,7 @@ const index = () => {
       <Navbar />
       <Services />
       <Footer />
+      <WhatsApp />
     </div>
   );
 };

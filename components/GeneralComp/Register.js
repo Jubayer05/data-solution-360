@@ -1,41 +1,82 @@
-import React, { useState, useEffect } from "react";
-import { useFormik } from "formik";
-import { Progress, Spin } from "antd";
-import { useStateContext } from "../../src/context/ContextProvider";
-import Select from "react-select";
-import { districts } from "../../src/data/district";
-import firebase from "../../firebase";
+import { useFormik } from 'formik';
+import React, { useState } from 'react';
+import Select from 'react-select';
+import Swal from 'sweetalert2';
+import 'sweetalert2/dist/sweetalert2.css';
+import firebase from '../../firebase';
+import { useStateContext } from '../../src/context/ContextProvider';
+import { districts } from '../../src/data/district';
 
 const Register = ({ title }) => {
   const { userEmail, findCurrentUser } = useStateContext();
   const [selectedOption, setSelectedOption] = useState(null);
+  const [selectedGender, setSelectedGender] = useState(null);
+  const [selectedOccupation, setSelectedOccupation] = useState(null);
   const [progressData, setProgressData] = useState(0);
-  // const [photoUrl, setPhotoUrl] = useState(null);
+
+  const gender = [
+    {
+      id: '1',
+      value: 'Male',
+      label: 'Male',
+    },
+    {
+      id: '2',
+      value: 'Female',
+      label: 'Female',
+    },
+    {
+      id: '3',
+      value: 'Custom',
+      label: 'Custom',
+    },
+  ];
+
+  const occupation = [
+    {
+      id: '1',
+      value: 'University Student',
+      label: 'University Student',
+    },
+    {
+      id: '2',
+      value: 'School / College Student',
+      label: 'School / College Student',
+    },
+    {
+      id: '3',
+      value: 'Job Holder',
+      label: 'Job Holder',
+    },
+    {
+      id: '4',
+      value: 'Job Seeker',
+      label: 'Job Seeker',
+    },
+    {
+      id: '5',
+      value: 'Freelancer',
+      label: 'Freelancer',
+    },
+    {
+      id: '6',
+      value: 'Others',
+      label: 'Others',
+    },
+  ];
 
   const validate = (values) => {
     const errors = {};
-    if (!values.firstName) {
-      errors.firstName = "Required";
-    } else if (values.firstName.length > 15) {
-      errors.firstName = "Must be 15 characters or less";
+    if (!values.fullName) {
+      errors.fullName = 'Required';
+    } else if (values.fullName.length > 30) {
+      errors.fullName = 'Must be 30 characters or less';
     }
 
-    if (!values.lastName) {
-      errors.lastName = "Required";
-    } else if (values.lastName.length > 20) {
-      errors.lastName = "Must be 20 characters or less";
-    }
-
-    if (!values.address) {
-      errors.address = "Required";
-    } else if (values.address.length < 10) {
-      errors.address = "Must be 10 characters or more";
-    }
-
-    if (!values.phone) {
-      errors.phone = "Required";
-    } else if (values.phone.length > 14) {
-      errors.phone = "Must be 14 characters or less";
+    if (!values.institution) {
+      errors.institution = 'Required';
+    } else if (values.institution.length > 40) {
+      errors.institution = 'Must be 40 characters or less';
     }
 
     return errors;
@@ -43,29 +84,41 @@ const Register = ({ title }) => {
 
   const formik = useFormik({
     initialValues: {
-      firstName: "",
-      lastName: "",
-      email: "",
-      phone: "",
-      address: "",
+      fullName: '',
+      email: '',
+      institution: '',
+      address: '',
       // photoUrl: "",
     },
     validate,
     onSubmit: (values) => {
       firebase
         .firestore()
-        .collection("userLogin")
+        .collection('userLogin')
         .doc(findCurrentUser.key)
         .update({
           ...values,
           email: userEmail,
           district: selectedOption?.value,
+          gender: selectedGender?.value,
           registered: true,
           // photoUrl: photoUrl,
         })
         .then(() => {
-          alert("Profile updated successfully!");
-          window.location.href = "/students/dashboard";
+          Swal.fire({
+            title: 'Hello',
+            text: 'Your profile is updated successfully!',
+            icon: 'success',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Okay',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.href = '/students/dashboard';
+            }
+          });
+        })
+        .catch((err) => {
+          Swal.fire('Hello!', 'Profile cannot updated!', 'error');
         });
     },
   });
@@ -73,14 +126,14 @@ const Register = ({ title }) => {
   const customStyles = {
     menu: (provided, state) => ({
       ...provided,
-      borderBottom: "1px dotted pink",
+      borderBottom: '1px dotted pink',
       padding: 20,
     }),
     control: (_, {}) => ({
-      display: "flex",
-      border: "1px solid #e5e5e5",
-      padding: "5px 10px",
-      borderRadius: "3px",
+      display: 'flex',
+      border: '1px solid #e5e5e5',
+      padding: '5px 10px',
+      borderRadius: '3px',
     }),
   };
 
@@ -131,43 +184,23 @@ const Register = ({ title }) => {
       <div className="max-w-xl mx-auto border-solid border-2 border-gray-300 p-5 my-4">
         <form onSubmit={formik.handleSubmit}>
           {/* NOTE: FIRST NAME */}
-          <label htmlFor="firstName">
-            First Name{" "}
-            {formik.errors.firstName ? (
+          <label htmlFor="fullName">
+            Full Name
+            {formik.errors.fullName ? (
               <span className="text-xs text-red-600">
-                ({formik.errors.firstName})
+                ({formik.errors.fullName})
               </span>
             ) : null}
           </label>
           <input
-            id="firstName"
-            name="firstName"
+            id="fullName"
+            name="fullName"
             type="text"
             onChange={formik.handleChange}
-            value={formik.values.firstName}
+            value={formik.values.fullName}
             className="w-full border px-2 py-3 mb-3 mt-1 rounded-md"
-            style={formik.errors.firstName && { border: "2px solid orangered" }}
+            style={formik.errors.fullName && { border: '2px solid orangered' }}
           />
-
-          {/* NOTE: LAST NAME */}
-          <label htmlFor="lastName">
-            Last Name{" "}
-            {formik.errors.lastName ? (
-              <span className="text-xs text-red-600">
-                ({formik.errors.lastName})
-              </span>
-            ) : null}
-          </label>
-          <input
-            id="lastName"
-            name="lastName"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.lastName}
-            className="w-full border px-2 py-3 mb-3 mt-1 rounded-md outline-none"
-            style={formik.errors.lastName && { border: "2px solid orangered" }}
-          />
-
           {/* NOTE: EMAIL */}
           <label htmlFor="email">Email</label>
           <input
@@ -179,23 +212,45 @@ const Register = ({ title }) => {
             className="w-full border px-2 py-3 mb-3 mt-1 rounded-md outline-none"
           />
 
-          {/* NOTE: PHONE */}
+          {/* NOTE: Gender */}
+          <p>Gender</p>
+          <Select
+            className="-mt-2 mb-2"
+            styles={customStyles}
+            options={gender}
+            defaultValue={selectedGender}
+            onChange={setSelectedGender}
+          />
+
+          {/* NOTE: Occupation */}
+          <p>Occupation</p>
+          <Select
+            className="-mt-2 mb-2"
+            styles={customStyles}
+            options={occupation}
+            defaultValue={selectedOccupation}
+            onChange={setSelectedOccupation}
+          />
+
+          {/* NOTE: institution */}
           <label htmlFor="email">
-            Phone{" "}
-            {formik.errors.phone ? (
+            Institution / Organization / Company{' '}
+            {formik.errors.institution ? (
               <span className="text-xs text-red-600">
-                ({formik.errors.phone})
+                ({formik.errors.institution})
               </span>
             ) : null}
           </label>
           <input
-            id="phone"
-            name="phone"
-            type="phone"
+            id="institution"
+            name="institution"
+            type="institution"
             onChange={formik.handleChange}
-            value={formik.values.phone}
+            value={formik.values.institution}
             className="w-full border px-2 py-3 mb-3 mt-1 rounded-md outline-none"
-            style={formik.errors.phone && { border: "2px solid orangered" }}
+            style={
+              formik.errors.institution && { border: '2px solid orangered' }
+            }
           />
 
           {/* NOTE: DISTRICTS */}
@@ -208,56 +263,10 @@ const Register = ({ title }) => {
             onChange={setSelectedOption}
           />
 
-          {/* NOTE: ADDRESS */}
-          <label className="pt-2" htmlFor="lastName">
-            Address{" "}
-            {formik.errors.address ? (
-              <span className="text-xs text-red-600">
-                ({formik.errors.address})
-              </span>
-            ) : null}
-          </label>
-          <input
-            id="address"
-            name="address"
-            type="text"
-            onChange={formik.handleChange}
-            value={formik.values.address}
-            className="w-full border px-2 py-3 mb-3 mt-1 rounded-md outline-none"
-            style={formik.errors.address && { border: "2px solid orangered" }}
-          />
-
-          {/* NOTE: UPLOAD IMAGES */}
-          {/* <div style={{ textAlign: "center", margin: "15px" }}>
-            <Progress
-              width={60}
-              strokeColor={{
-                "0%": "#108ee9",
-                "100%": "#87d068",
-              }}
-              type="circle"
-              percent={progressData}
-            />
-          </div>
-
-          <label htmlFor="photoUrl">
-            Upload Image{" "}
-            <span className="text-xs text-red-500">
-              (image must be under 500kb)
-            </span>
-          </label>
-          <input
-            type="file"
-            id="photoUrl"
-            name="photoUrl"
-            onChange={handleFileSubmit}
-            className="w-full border px-2 py-3 mb-3 mt-1 rounded-md outline-none"
-          /> */}
-
           <div className="text-center mt-6">
             <button
               type="submit"
-              className="bg-orange-300 text-white px-3 py-2 rounded-lg "
+              className="w-full bg-primary-bg text-white px-3 py-2 rounded-lg "
             >
               Submit
             </button>

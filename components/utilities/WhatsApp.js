@@ -3,7 +3,7 @@ import React from 'react';
 
 const WhatsApp = () => {
   const handleClick = () => {
-    const phoneNumber = '01735546339'; // Replace with your desired phone number
+    const phoneNumber = '8801996104096'; // Replace with your desired phone number
     const url = `https://api.whatsapp.com/send?phone=${phoneNumber}`;
     window.open(url, '_blank');
   };
@@ -19,11 +19,3 @@ const WhatsApp = () => {
 };
 
 export default WhatsApp;
-
-{
-  /* <Link href="https://api.whatsapp.com/send?phone=01735546339">
-<a>
-  <img src="/whatsapp.png" alt="whatsapp" />
-</a>
-</Link> */
-}

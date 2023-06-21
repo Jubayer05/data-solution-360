@@ -1,5 +1,6 @@
-import React from "react";
-import { About, Footer, Navbar } from "../../components";
+import React from 'react';
+import { About, Footer, Navbar } from '../../components';
+import WhatsApp from '../../components/utilities/WhatsApp';
 
 const index = () => {
   return (
@@ -7,6 +8,7 @@ const index = () => {
       <Navbar />
       <About />
       <Footer />
+      <WhatsApp />
     </div>
   );
 };

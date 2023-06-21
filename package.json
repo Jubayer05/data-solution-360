@@ -31,6 +31,7 @@
     "react-slick": "^0.29.0",
     "react-star-ratings": "^2.3.0",
     "slick-carousel": "^1.8.1",
+    "sweetalert2": "^11.7.12",
     "swiper": "^8.3.2",
     "uuid": "^8.3.2"
   },

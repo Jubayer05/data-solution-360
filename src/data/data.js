@@ -49,12 +49,18 @@ export const navItems = [
     titleBang: 'ব্লগ',
     link: '/blog',
   },
-  // {
-  //   id: "nav-6",
-  //   title: "Dashboard",
-  //   titleBang: "ড্যাশবোর্ড",
-  //   link: "/admin/dashboard",
-  // },
+  {
+    id: 'nav-6',
+    title: 'Subscribe',
+    titleBang: 'সাবস্ক্রাইব',
+    link: '/#subscribe',
+  },
+  {
+    id: 'nav-6',
+    title: 'Free Course',
+    titleBang: 'ফ্রী কোর্স',
+    link: '/free-course',
+  },
 ];
 
 export const navDropItems = [

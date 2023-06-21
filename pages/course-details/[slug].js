@@ -1,5 +1,6 @@
-import React from "react";
-import { Footer, Navbar, CourseDetails } from "../../components";
+import React from 'react';
+import { CourseDetails, Footer, Navbar } from '../../components';
+import WhatsApp from '../../components/utilities/WhatsApp';
 
 const slug = () => {
   return (
@@ -7,6 +8,7 @@ const slug = () => {
       <Navbar />
       <CourseDetails />
       <Footer />
+      <WhatsApp />
     </div>
   );
 };
