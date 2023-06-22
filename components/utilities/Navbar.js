@@ -1,18 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
-import { Avatar, Switch } from "antd";
-import { FiLogIn, FiLogOut } from "react-icons/fi";
-import { VscTriangleUp } from "react-icons/vsc";
-import { MdClose } from "react-icons/md";
-import { HiOutlineMenuAlt1 } from "react-icons/hi";
-import { BiChevronRight } from "react-icons/bi";
+import { Avatar, Switch } from 'antd';
+import React, { useEffect, useState } from 'react';
+import { BiChevronRight } from 'react-icons/bi';
+import { FiLogIn, FiLogOut } from 'react-icons/fi';
+import { HiOutlineMenuAlt1 } from 'react-icons/hi';
+import { MdClose } from 'react-icons/md';
+import { VscTriangleUp } from 'react-icons/vsc';
 
-import { getAuth, signOut } from "firebase/auth";
+import { getAuth, signOut } from 'firebase/auth';
 
-import styles from "../../styles/utility/Navbar.module.css";
-import { navDropItems, navItems } from "../../src/data/data";
-import { useStateContext } from "../../src/context/ContextProvider";
-import Link from "next/link";
+import Link from 'next/link';
+import { useStateContext } from '../../src/context/ContextProvider';
+import { navDropItems, navItems, navItems2 } from '../../src/data/data';
+import styles from '../../styles/utility/Navbar.module.css';
 
 const Navbar = () => {
   const { language, setLanguage, userName, findAdmin, photoUrl } =
@@ -28,28 +28,28 @@ const Navbar = () => {
 
   useEffect(() => {
     if (eng) {
-      localStorage.setItem("lan", "English");
-      setLanguage("English");
+      localStorage.setItem('lan', 'English');
+      setLanguage('English');
     } else {
-      localStorage.setItem("lan", "বাংলা");
-      setLanguage("বাংলা");
+      localStorage.setItem('lan', 'বাংলা');
+      setLanguage('বাংলা');
     }
   }, [eng]);
 
   useEffect(() => {
-    const url = window.location.href.split("/").slice(-1)[0];
+    const url = window.location.href.split('/').slice(-1)[0];
     setUrl(url);
   }, []);
 
   const handleLogout = () => {
-    console.log("Hello");
+    console.log('Hello');
     signOut(auth)
       .then(() => {
         localStorage.clear();
         window.location.reload();
       })
       .catch((error) => {
-        alert("Can not logout");
+        alert('Can not logout');
       });
   };
 
@@ -85,24 +85,24 @@ const Navbar = () => {
           className={`hidden bg-white pt-4 md:pt-0 md:flex-1 md:justify-between md:flex md:items-center 
                     md:bg-transparent md:pb-0 pb-12 md:static md:z-auto z-[-1] left-0 w-full 
                     md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
-                      openNav ? "top-16 " : "top-[-490px]"
+                      openNav ? 'top-16 ' : 'top-[-490px]'
                     }`}
         >
           <div>
-            <ul className="pl-8 md:inline-flex md:justify-between mb-0">
-              {navItems.map((item) => (
+            <ul className="pl-4 md:inline-flex md:justify-between mb-0">
+              {navItems2.map((item) => (
                 <li key={item.id} className="">
                   <Link href={item?.link}>
                     <a
                       className={`font-bangla cursor-pointer font-medium  
                        ${
                          url == item.slug
-                           ? "text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] "
-                           : "text-white visited:text-white"
+                           ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
+                           : 'text-white visited:text-white'
                        } px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] transition-all 
                       duration-500 rounded-md hover:text-[#61CE70] `}
                     >
-                      {language === "English" ? item.title : item.titleBang}
+                      {language === 'English' ? item.title : item.titleBang}
                     </a>
                   </Link>
                 </li>
@@ -114,7 +114,7 @@ const Navbar = () => {
                       className="font-bangla cursor-pointer font-medium visited:text-white text-white 
                                   px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-[#61CE70]"
                     >
-                      {language === "English" ? "Dashboard" : "ড্যাশবোর্ড"}
+                      {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
                     </a>
                   </Link>
                 </li>
@@ -124,6 +124,39 @@ const Navbar = () => {
 
           {/* Right side */}
           <div className="md:flex md:items-center">
+            <div>
+              <ul className="pl-8 md:inline-flex md:justify-between mb-0">
+                {navItems.map((item) => (
+                  <li key={item.id} className="">
+                    <Link href={item?.link}>
+                      <a
+                        className={`font-bangla cursor-pointer font-medium  
+                       ${
+                         url == item.slug
+                           ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
+                           : 'text-white visited:text-white'
+                       } px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] transition-all 
+                      duration-500 rounded-md hover:text-[#61CE70] `}
+                      >
+                        {language === 'English' ? item.title : item.titleBang}
+                      </a>
+                    </Link>
+                  </li>
+                ))}
+                {findAdmin && (
+                  <li className="">
+                    <Link href="/admin/dashboard">
+                      <a
+                        className="font-bangla cursor-pointer font-medium visited:text-white text-white 
+                                  px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-[#61CE70]"
+                      >
+                        {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
+                      </a>
+                    </Link>
+                  </li>
+                )}
+              </ul>
+            </div>
             <div className="mr-3">
               <Switch
                 size={50}
@@ -142,7 +175,7 @@ const Navbar = () => {
                   size={48}
                   src={
                     user?.photoURL ||
-                    "https://lh3.googleusercontent.com/a/AEdFTp6la6cinLFex3jaJIjVsSizEDeTo8nl5dBrSFwCiw=s96-c"
+                    'https://lh3.googleusercontent.com/a/AEdFTp6la6cinLFex3jaJIjVsSizEDeTo8nl5dBrSFwCiw=s96-c'
                   }
                   className="cursor-pointer"
                 />
@@ -160,8 +193,8 @@ const Navbar = () => {
                               className={`block font-semibold rounded-md py-3 cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]
                   ${
                     url == item.slug
-                      ? "text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] "
-                      : "text-[#140342] visited:text-[#140342] "
+                      ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
+                      : 'text-[#140342] visited:text-[#140342] '
                   }`}
                             >
                               <span>{item.title}</span>
@@ -177,9 +210,9 @@ const Navbar = () => {
                         `}
                           onClick={handleLogout}
                         >
-                          <FiLogOut className="text-sm" />{" "}
+                          <FiLogOut className="text-sm" />{' '}
                           <span className="pl-2 font-bangla">
-                            {language === "English" ? "Logout" : "লগ ইন"}
+                            {language === 'English' ? 'Logout' : 'লগ ইন'}
                           </span>
                         </button>
                       </li>
@@ -193,16 +226,16 @@ const Navbar = () => {
                   <button
                     type="button"
                     style={{
-                      borderRadius: "5px",
+                      borderRadius: '5px',
                     }}
                     className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 
                           bg-primary-bg transition-all duration-300 ease-linear hover:bg-white
                            hover:text-primary hover:border-primary`}
                     onClick={() => {}}
                   >
-                    <FiLogIn className="text-sm" />{" "}
+                    <FiLogIn className="text-sm" />{' '}
                     <span className="pl-2 font-bangla">
-                      {language === "English" ? "Log in" : "লগ ইন"}
+                      {language === 'English' ? 'Log in' : 'লগ ইন'}
                     </span>
                   </button>
                 </a>
@@ -241,8 +274,8 @@ const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
                   className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
             ${
               url == item.slug
-                ? "text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] "
-                : "text-[#140342] visited:text-[#140342] "
+                ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
+                : 'text-[#140342] visited:text-[#140342] '
             } 
               my-1 `}
                 >
@@ -277,8 +310,8 @@ const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
                     className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
                   ${
                     url == item.slug
-                      ? "text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] "
-                      : "text-[#140342] visited:text-[#140342] "
+                      ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
+                      : 'text-[#140342] visited:text-[#140342] '
                   } 
                   my-1 `}
                   >

@@ -3,7 +3,9 @@ import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import firebase from '../../firebase';
+import PhoneLogin from './PhoneLogin';
 
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -113,11 +115,29 @@ const Login = () => {
             localStorage.setItem('emailUser', user.email);
             if (validUser) {
               if (validUser.status === 'student') {
-                Router.push('/join-us/intern');
+                Swal.fire(
+                  'Hey!',
+                  'You are successfully logged in.',
+                  'success',
+                ).then(() => {
+                  window.location.href = '/students/dashboard';
+                });
               } else if (validUser.status === 'teacher') {
-                Router.push('/dashboard/teacher');
+                Swal.fire(
+                  'Hey!',
+                  'You are successfully logged in.',
+                  'success',
+                ).then(() => {
+                  window.location.href = '/teacher/dashboard';
+                });
               } else if (validUser.status === 'admin') {
-                Router.push('/dashboard/admin');
+                Swal.fire(
+                  'Hey!',
+                  'You are successfully logged in.',
+                  'success',
+                ).then(() => {
+                  window.location.href = '/admin/dashboard';
+                });
               }
             }
           })
@@ -126,58 +146,72 @@ const Login = () => {
             alert(errorMessage);
           });
       } else {
-        alert('You are not a seller. Create an account first.');
+        Swal.fire(
+          'Hey!',
+          'Please check your email and password again!',
+          'error',
+        );
       }
     } else {
-      alert('Please Provide a valid email');
+      console.log(formData.email);
+      Swal.fire('Hey!', 'Please Provide a valid email', 'error');
     }
   };
 
   const handleCreateAccount = () => {
-    // if (validateEmail(formData.email)) {
-    //   if (formData.password === formData.confirmPassword) {
-    //     firebase
-    //       .auth()
-    //       .createUserWithEmailAndPassword(formData.email, formData.password)
-    //       .then((userCredential) => {
-    //         const user = userCredential.user;
+    if (validateEmail(formData.email)) {
+      if (formData.password === formData.confirmPassword) {
+        firebase
+          .auth()
+          .createUserWithEmailAndPassword(formData.email, formData.password)
+          .then((userCredential) => {
+            const user = userCredential.user;
 
-    //         const validUser = userData.find(
-    //           (item) => item.email === user.email
-    //         );
+            const validUser = userData.find(
+              (item) => item.email === user.email,
+            );
 
-    //         // NOTE: HANDLE VERIFICATION EMAIL MESSAGE
-    //         if (user !== null) {
-    //           user.sendEmailVerification({
-    //             url: "https://robo-stem.vercel.app/",
-    //           });
-    //           alert(
-    //             "A verification email has been sent to your email. Please verify your email."
-    //           );
-    //         }
-
-    //         // NOTE: ADD FIRESTORE DB
-    //         if (!validUser) {
-    //           db.collection("userLogin").add({
-    //             name: formData.email,
-    //             email: formData.email,
-    //             status: "student",
-    //           });
-    //         }
-    //         localStorage.setItem("emailUser", user.email);
-    //         Router.push("/join-us/intern");
-    //       })
-    //       .catch((error) => {
-    //         const errorMessage = error.message;
-    //         alert(errorMessage);
-    //       });
-    //   } else {
-    //     alert("Password Doesn't Match");
-    //   }
-    // } else {
-    //   alert("Please Provide a valid email");
-    // }
-    alert('Comming soon. Use google login now.');
+            // NOTE: ADD FIRESTORE DB
+            if (!validUser) {
+              db.collection('userLogin')
+                .add({
+                  name: formData.email,
+                  email: formData.email,
+                  status: 'student',
+                })
+                .then(() => {
+                  localStorage.setItem('emailUser', user.email);
+                  // NOTE: HANDLE VERIFICATION EMAIL MESSAGE
+                  if (user !== null) {
+                    user.sendEmailVerification({
+                      url: 'https://datasolution360.com/',
+                    });
+                    Swal.fire(
+                      'Hey!',
+                      'A verification email has been sent to your email. Please verify your email.',
+                      'success',
+                    ).then(() => {
+                      window.location.href = '/students/register';
+                    });
+                  }
+                })
+                .catch(() => {
+                  Swal.fire('Can not create account', 'error');
+                });
+            }
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            Swal.fire(errorMessage, 'error');
+            // alert(errorMessage);
+          });
+      } else {
+        Swal.fire('Hey!', 'Your password does not match!', 'error');
+      }
+    } else {
+      Swal.fire('Hey!', 'Please Provide a valid email', 'error');
+    }
+    // alert('Comming soon. Use google login now.');
   };
 
   return (
@@ -306,6 +340,8 @@ const Login = () => {
             </p>
 
             <div className="flex justify-center items-center mt-4">
+              <PhoneLogin />
+
               <Icon
                 onClick={handleFacebookLogin}
                 icon="akar-icons:facebook-fill"

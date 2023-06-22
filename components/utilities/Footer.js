@@ -2,11 +2,10 @@
 import { Tooltip } from 'antd';
 import Link from 'next/link';
 import React from 'react';
-import { AiOutlineMail } from 'react-icons/ai';
-import { BiPhoneOutgoing } from 'react-icons/bi';
 import { FaAngleDoubleRight } from 'react-icons/fa';
 import { GoLocation } from 'react-icons/go';
 import {
+  footerAboutData,
   footerExploreData,
   footerFollowUs,
   footerUsefulLinksData,
@@ -16,19 +15,41 @@ const Footer = () => {
   return (
     <div
       className="pt-8 pb-1 w-full"
-      style={{ backgroundColor: '#231f40', color: '#ffffff' }}
+      style={{ backgroundColor: '#ffffff', color: '#5f5246' }}
     >
-      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between py-24 items-start">
+      <div className="max-w-6xl border-t-1 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between py-8 items-start">
         {/* NOTE: BASIC INFO */}
         <div className="px-4 text-center">
-          <img src="/logo/logo-white.png" alt="logo" className="h-20" />
-          <p className="mt-2 text-left text-base">
-            If you are skilled enough, you don&apos;t need to seek for a job.
-            Jobs will search for you.Just make a good portfolio.
-          </p>
-          <p className="text-white mt-4 text-xs text-right">
-            Sakib Tarafder - (CEO)
-          </p>
+          <img src="/logo/logo.png" alt="logo" className="h-20" />
+
+          <ul className="">
+            <li className="text-base flex items-center -mt-2 py-1 text-[#212529]">
+              <GoLocation /> <span className="ml-2">Dhaka Mawa High Way</span>
+            </li>
+            <li className="text-base flex items-center cursor-pointer mt-4">
+              {/* <BiPhoneOutgoing className="text-xl" />{' '} */}
+              <Link href="tel:+8801996104096">
+                <a
+                  target="_blank"
+                  className="ml-2 text-blue-500 hover:text-blue-800 ease-in-out duration-300"
+                >
+                  <span>+8801996104096</span>
+                </a>
+              </Link>
+            </li>
+
+            <li className="text-base flex items-center cursor-pointer ">
+              {/* <AiOutlineMail className="text-xl" /> */}
+              <Link href="mailto:datasolution360.business@gmail.com">
+                <a
+                  target="_blank"
+                  className="ml-2 text-blue-500 hover:text-blue-800 ease-in-out duration-300"
+                >
+                  <span>datasolution360.business@gmail.com</span>
+                </a>
+              </Link>
+            </li>
+          </ul>
 
           {/* NOTE: FOLLOW US */}
           <div className="mt-8 flex justify-center">
@@ -39,10 +60,14 @@ const Footer = () => {
                     <a
                       target="_blank"
                       style={{
-                        color: '#ffffff',
+                        color: '#000000',
+                        ':hover': {
+                          backgroundColor: 'red',
+                          color: 'white',
+                        },
                         transition: 'background-color 0.3s',
                       }}
-                      className="text-2xl mx-2 bg-[#ffffff1A] p-3 rounded hover:bg-[#525FE1]"
+                      className="text-2xl mx-2 bg-[#0000001A] p-2 rounded hover:bg-[#8f98ff]"
                     >
                       <Tooltip
                         placement="topLeft"
@@ -62,12 +87,12 @@ const Footer = () => {
         {/* NOTE: Explore */}
         <div className="text-base flex justify-center">
           <div>
-            <h2 className="text-2xl text-white mb-10">Explore</h2>
+            <h2 className="text-2xl text-[#212529] mb-3">Explore</h2>
             <ul>
               {footerExploreData.map((item) => (
                 <li
                   key={item.id}
-                  className="flex items-center cursor-pointer my-2 py-1 text-white hover:text-blue-700 ease-in-out duration-300"
+                  className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300"
                 >
                   <FaAngleDoubleRight />
                   <span className="ml-3">{item.title}</span>
@@ -77,15 +102,15 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* NOTE: Explore */}
+        {/* NOTE: Useful Links */}
         <div className="text-base flex justify-center">
           <div>
-            <h2 className="text-2xl text-white mb-10">Useful Links</h2>
+            <h2 className="text-2xl text-[#212529] mb-3">Useful Links</h2>
             <ul>
               {footerUsefulLinksData.map((item) => (
                 <li
                   key={item.id}
-                  className="flex items-center cursor-pointer my-2 py-1 text-white hover:text-blue-700 ease-in-out duration-300"
+                  className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300"
                 >
                   <FaAngleDoubleRight />
                   <span className="ml-3">{item.title}</span>
@@ -95,37 +120,20 @@ const Footer = () => {
           </div>
         </div>
 
-        {/* NOTE: CONTACT */}
-        <div className="flex justify-center ">
+        {/* NOTE: About */}
+        <div className="text-base flex justify-center">
           <div>
-            <h2 className="text-2xl text-white mb-10">Contact Us</h2>
-            <ul className="">
-              <li className="text-base flex items-center my-2 py-1 text-white">
-                <GoLocation /> <span className="ml-2">Dhaka Mawa High Way</span>
-              </li>
-              <li className="text-base flex items-center cursor-pointer my-2 py-1 ">
-                <BiPhoneOutgoing className="text-xl" />{' '}
-                <Link href="tel:+8801996104096">
-                  <a
-                    target="_blank"
-                    className="ml-2 text-white hover:text-blue-700 ease-in-out duration-300"
-                  >
-                    <span>+8801996104096</span>
-                  </a>
-                </Link>
-              </li>
-
-              <li className="text-base flex items-center cursor-pointer my-2 py-1 ">
-                <AiOutlineMail className="text-xl" />{' '}
-                <Link href="mailto:datasolution360.business@gmail.com">
-                  <a
-                    target="_blank"
-                    className="ml-2 text-white hover:text-blue-700 ease-in-out duration-300"
-                  >
-                    <span>datasolution360.business@gmail.com</span>
-                  </a>
-                </Link>
-              </li>
+            <h2 className="text-2xl text-[#212529] mb-3">About</h2>
+            <ul>
+              {footerAboutData.map((item) => (
+                <li
+                  key={item.id}
+                  className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300"
+                >
+                  <FaAngleDoubleRight />
+                  <span className="ml-3">{item.title}</span>
+                </li>
+              ))}
             </ul>
           </div>
         </div>
@@ -137,7 +145,7 @@ const Footer = () => {
         <Link href="/">
           <a
             className="font-semibold decoration-2 hover:underline"
-            style={{ color: '#fff' }}
+            style={{ color: '#000' }}
           >
             {' '}
             Data Solution - 360

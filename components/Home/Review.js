@@ -10,8 +10,6 @@ const Review = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-  console.log(modalData);
-
   const openModal = (item) => {
     setModalData(item);
     setIsOpen(true);

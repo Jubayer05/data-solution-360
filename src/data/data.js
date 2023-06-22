@@ -49,6 +49,9 @@ export const navItems = [
     titleBang: 'ব্লগ',
     link: '/blog',
   },
+];
+
+export const navItems2 = [
   {
     id: 'nav-6',
     title: 'Subscribe',
@@ -456,6 +459,34 @@ export const footerUsefulLinksData = [
   },
 ];
 
+export const footerAboutData = [
+  {
+    id: '1',
+    title: 'Location',
+    Link: '/location',
+  },
+  {
+    id: '2',
+    title: 'Team',
+    Link: '/team',
+  },
+  {
+    id: '3',
+    title: 'Privacy Policy',
+    Link: '/privacy-policy',
+  },
+  {
+    id: '4',
+    title: 'Terms and Conditions',
+    Link: '/terms-and-conditions',
+  },
+  {
+    id: '5',
+    title: 'Return and Refund Policy',
+    Link: '/return-and-refund-policy',
+  },
+];
+
 export const footerFollowUs = [
   {
     id: '1',
@@ -487,7 +518,7 @@ export const footerFollowUs = [
 
   {
     id: '5',
-    link: '/',
+    link: 'https://www.youtube.com/@datasolution-3607',
     title: 'Youtube',
     icon: <IoLogoYoutube />,
   },
@@ -564,28 +595,29 @@ export const reviewData = [
   {
     id: '3',
     name: 'Tasmin Akter Tripty',
-    job: 'Mathematics, BUET',
+    job: 'Teaching Assistant, BUET',
     photoUrl: '/review/image2.jpeg',
     reviewDetails:
       "It's a great experience for me to be a student at Data Solution 360's data analysis course. The course addressed a wide range of topics in data analysis, including statistical analysis, data visualization, and Python. It is well-structured, and covered many of these themes. The instructor is always eager to offer further assistance and support In order to make sure we fully understood the content.",
     star: 5,
   },
+
   {
     id: '4',
-    name: 'Ashraf shakil',
-    job: 'Student',
-    photoUrl: '/review/image3.jpeg',
-    reviewDetails:
-      'This online platform is very nice. I am very happy to join this platform. The Course Teacher is very helpful ,he all  time try to teach something very care.',
-    star: 5,
-  },
-  {
-    id: '5',
     name: 'Md.Tusher Alam',
     job: 'Not now work any organization',
     photoUrl: '/review/image4.jpg',
     reviewDetails:
       'The instructor was knowledgeable and engaging, and the material was presented in a clear and concise manner. One of the best things about this course was its practical focus. Throughout the lessons, we were given plenty of opportunities to apply what we had learned by working on real-world marketing projects.  The course platform was easy to use, and the videos were high quality. The course materials, including templates and resources, were well-organized and easy to follow. Additionally, the course community was supportive and active, with a dedicated forum where students could ask questions and share their work.',
+    star: 5,
+  },
+  {
+    id: '5',
+    name: 'Sumaya Akter',
+    job: 'Null',
+    photoUrl: '/review/woman.png',
+    reviewDetails:
+      "The competent and interesting lecturer in this data solution program makes difficult ideas understandable. Our academic and practical abilities are improved through hands-on exercises and assignments. It's a great course for anyone wishing to improve their data analysis skills, regardless of experience level.",
     star: 5,
   },
   {
@@ -597,13 +629,32 @@ export const reviewData = [
       "This course covered a wide range of topics, including data visualization, statistics, database management, and programming languages such as Python. Our instructor Shakib vai is knowledgeable and experienced in data analysis fields, and were able to explain complex concepts in a clear and concise manner. But I have a recommendation to our instructor Shakib vai that please maintain the learning sequence. When you start a topics like programming or SQL or Statistics or whatever it, firstly please complete the topic fully(beginning to advanced). Don't jump from a topic to another topic. Sometimes students are confused if we jumping a topic to another topic. Please follow the sequence.",
     star: 5,
   },
+
   {
     id: '7',
-    name: 'Sumaya Akter',
-    job: 'Null',
+    name: 'Mallika Talukdar Chitra',
+    job: 'Student',
     photoUrl: '/review/woman.png',
     reviewDetails:
-      "The competent and interesting lecturer in this data solution program makes difficult ideas understandable. Our academic and practical abilities are improved through hands-on exercises and assignments. It's a great course for anyone wishing to improve their data analysis skills, regardless of experience level.",
+      'Previously I had no basic knowledge in Data analytics and tools. With the help of this course, I can say, I gained not only basic but also advance knowledge. I want to pay my gratitude to our mentors.',
+    star: 5,
+  },
+  {
+    id: '8',
+    name: 'Ashraf shakil',
+    job: 'Student',
+    photoUrl: '/review/image3.jpeg',
+    reviewDetails:
+      'This online platform is very nice. I am very happy to join this platform. The Course Teacher is very helpful ,he all  time try to teach something very care.',
+    star: 5,
+  },
+  {
+    id: '9',
+    name: 'Shaharin Mehjabin Mim',
+    job: 'Student, DIU',
+    photoUrl: '/review/woman.png',
+    reviewDetails:
+      "First of all The data analyst course's module which I liked the most. the course mentor's teaching skill is mesmerizing. He is affable and admirable. thanks to you of data solution360 team for having such course. hope for the best.",
     star: 5,
   },
 ];

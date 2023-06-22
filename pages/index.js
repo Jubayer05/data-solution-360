@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-page-custom-font */
-import Head from "next/head";
-import { HomeComp } from "../components";
+import Head from 'next/head';
+import { HomeComp } from '../components';
 
 export default function Home() {
   return (
@@ -20,6 +20,11 @@ export default function Home() {
           type="text/css"
           href="https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.6.0/slick-theme.min.css"
         />
+        <script
+          src="https://www.google.com/recaptcha/api.js"
+          async
+          defer
+        ></script>
       </Head>
 
       <main>
