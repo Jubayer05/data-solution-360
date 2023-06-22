@@ -24,7 +24,10 @@ const Footer = () => {
 
           <ul className="">
             <li className="text-base flex items-center -mt-2 py-1 text-[#212529]">
-              <GoLocation /> <span className="ml-2">Dhaka Mawa High Way</span>
+              <GoLocation />{' '}
+              <span className="ml-2">
+                173/2, Al Amin Vila, Middle Badda, Gulshan-1,Dhaka
+              </span>
             </li>
             <li className="text-base flex items-center cursor-pointer mt-4">
               {/* <BiPhoneOutgoing className="text-xl" />{' '} */}
