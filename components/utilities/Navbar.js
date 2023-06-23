@@ -107,18 +107,6 @@ const Navbar = () => {
                   </Link>
                 </li>
               ))}
-              {findAdmin && (
-                <li className="">
-                  <Link href="/admin/dashboard">
-                    <a
-                      className="font-bangla cursor-pointer font-medium visited:text-white text-white 
-                                  px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-[#61CE70]"
-                    >
-                      {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
-                    </a>
-                  </Link>
-                </li>
-              )}
             </ul>
           </div>
 

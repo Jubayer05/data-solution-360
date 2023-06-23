@@ -27,8 +27,8 @@ const Home = () => {
         {/* <TeamMember /> */}
         <Technology />
         <Review />
-        <Subscribe />
         <Faq />
+        <Subscribe />
         <Footer />
       </>
       <WhatsApp />

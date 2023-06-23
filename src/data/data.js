@@ -577,7 +577,7 @@ export const reviewData = [
   {
     id: '1',
     name: 'Md. Towhidul Islam',
-    job: 'Daffodil International University as a Student',
+    job: 'Student, DIU',
     photoUrl: '/review/image1.jpeg',
     reviewDetails:
       "This data analyst course can be a valuable investment in developing skills and knowledge in the field of data analysis. It's important to carefully consider my options and choose a course that aligns with my goals and needs.",
@@ -605,7 +605,7 @@ export const reviewData = [
   {
     id: '4',
     name: 'Md.Tusher Alam',
-    job: 'Not now work any organization',
+    job: '',
     photoUrl: '/review/image4.jpg',
     reviewDetails:
       'The instructor was knowledgeable and engaging, and the material was presented in a clear and concise manner. One of the best things about this course was its practical focus. Throughout the lessons, we were given plenty of opportunities to apply what we had learned by working on real-world marketing projects.  The course platform was easy to use, and the videos were high quality. The course materials, including templates and resources, were well-organized and easy to follow. Additionally, the course community was supportive and active, with a dedicated forum where students could ask questions and share their work.',
@@ -614,7 +614,7 @@ export const reviewData = [
   {
     id: '5',
     name: 'Sumaya Akter',
-    job: 'Null',
+    job: 'Student',
     photoUrl: '/review/woman.png',
     reviewDetails:
       "The competent and interesting lecturer in this data solution program makes difficult ideas understandable. Our academic and practical abilities are improved through hands-on exercises and assignments. It's a great course for anyone wishing to improve their data analysis skills, regardless of experience level.",
@@ -623,7 +623,7 @@ export const reviewData = [
   {
     id: '6',
     name: 'Md. Fahad Hossain Faysal',
-    job: 'Personal Projects',
+    job: 'Self Employed',
     photoUrl: '/review/image5.jpeg',
     reviewDetails:
       "This course covered a wide range of topics, including data visualization, statistics, database management, and programming languages such as Python. Our instructor Shakib vai is knowledgeable and experienced in data analysis fields, and were able to explain complex concepts in a clear and concise manner. But I have a recommendation to our instructor Shakib vai that please maintain the learning sequence. When you start a topics like programming or SQL or Statistics or whatever it, firstly please complete the topic fully(beginning to advanced). Don't jump from a topic to another topic. Sometimes students are confused if we jumping a topic to another topic. Please follow the sequence.",
