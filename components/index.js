@@ -1,6 +1,7 @@
 export { default as AboutHome } from './Home/AboutUs';
-export { default as Banner } from './Home/Banner';
+export { default as BannerCompanies } from './Home/BannerCompanies';
 export { default as CrashCourse } from './Home/CrashCourse';
+export { default as Discount } from './Home/Discount/Discount';
 export { default as Faq } from './Home/Faq';
 export { default as HomeComp } from './Home/Home';
 export { default as MainBanner } from './Home/MainBanner';
@@ -29,6 +30,7 @@ export { default as LoginComp } from './Login/Login';
 export { default as RegisterComp } from './GeneralComp/Register';
 
 export { default as AddCourseComp } from './Admin/Course/AddCourse';
+export { default as SubscribedUser } from './Admin/SubscribedUser/SubscribedUser';
 
 export { default as DashboardStudent } from './Students/DashboardStu';
 export { default as ProfileEdit } from './Students/EditProfile';
@@ -37,3 +39,7 @@ export { default as StudentCourse } from './Students/MyCourse';
 export { default as ProfileStudent } from './Students/Profile';
 
 export { default as FreeCourse } from './FreeCourse/FreeCourse';
+
+export { default as PrivacyPolicy } from './Policy/PrivacyPolicy';
+export { default as RefundPolicy } from './Policy/RefundPolicy';
+export { default as TermsCondition } from './Policy/TermsCondition';

@@ -1,22 +1,23 @@
-import React from "react";
-import { CgProfile } from "react-icons/cg";
-import { BsThreeDotsVertical } from "react-icons/bs";
+import React from 'react';
+import { BsThreeDotsVertical } from 'react-icons/bs';
 
-import { useStateContext } from "../../src/context/ContextProvider";
-import { dashboardAdmin } from "../../src/data/data";
+import { useStateContext } from '../../src/context/ContextProvider';
+import { dashboardAdmin } from '../../src/data/data';
+import HeadingDashboard from '../utilities/HeadingDashboard';
 
 const AdminHome = () => {
   const { userName } = useStateContext();
   return (
-    <div className="flex justify-center items-center flex-col p-2 md:mx-6">
-      <h2 className="text-2xl mt-6 capitalize mb-10">
-        Welcome, {userName} in admin dashboard
-      </h2>
+    <div>
+      <HeadingDashboard title={`Welcome to admin dashboard`} />
+      <div className="flex justify-center items-center flex-col p-2 md:mx-6">
+        <h2 className="text-2xl mt-6 capitalize mb-10"></h2>
 
-      <div className="grid grid-cols-3 w-full gap-5 pb-20">
-        {dashboardAdmin?.map((item) => (
-          <HomeGroup key={item.id} item={item} />
-        ))}
+        <div className="grid grid-cols-3 w-full gap-5 pb-20">
+          {dashboardAdmin?.map((item) => (
+            <HomeGroup key={item.id} item={item} />
+          ))}
+        </div>
       </div>
     </div>
   );
@@ -31,7 +32,7 @@ const HomeGroup = ({ item }) => {
         backgroundImage: `linear-gradient(to right, ${item.bgFrom}, ${item.bgTo})`,
       }}
       className={` rounded-lg text-white px-6 py-5 ${
-        item.gridClass ? "row-span-2" : ""
+        item.gridClass ? 'row-span-2' : ''
       }`}
     >
       <div className="flex items-center justify-between mb-6">

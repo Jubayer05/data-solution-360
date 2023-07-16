@@ -17,7 +17,7 @@ const Footer = () => {
       className="pt-8 pb-1 w-full"
       style={{ backgroundColor: '#ffffff', color: '#5f5246' }}
     >
-      <div className="max-w-6xl border-t-1 mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between py-8 items-start">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between py-8 items-start">
         {/* NOTE: BASIC INFO */}
         <div className="px-4 text-center">
           <img src="/logo/logo.png" alt="logo" className="h-20" />
@@ -93,13 +93,14 @@ const Footer = () => {
             <h2 className="text-2xl text-[#212529] mb-3">Explore</h2>
             <ul>
               {footerExploreData.map((item) => (
-                <li
-                  key={item.id}
-                  className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300"
-                >
-                  <FaAngleDoubleRight />
-                  <span className="ml-3">{item.title}</span>
-                </li>
+                <Link href={item.Link} key={item.id}>
+                  <a>
+                    <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
+                      <FaAngleDoubleRight />
+                      <span className="ml-3">{item.title}</span>
+                    </li>
+                  </a>
+                </Link>
               ))}
             </ul>
           </div>
@@ -111,13 +112,14 @@ const Footer = () => {
             <h2 className="text-2xl text-[#212529] mb-3">Useful Links</h2>
             <ul>
               {footerUsefulLinksData.map((item) => (
-                <li
-                  key={item.id}
-                  className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300"
-                >
-                  <FaAngleDoubleRight />
-                  <span className="ml-3">{item.title}</span>
-                </li>
+                <Link href={item.Link} key={item.id}>
+                  <a>
+                    <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
+                      <FaAngleDoubleRight />
+                      <span className="ml-3">{item.title}</span>
+                    </li>
+                  </a>
+                </Link>
               ))}
             </ul>
           </div>
@@ -126,16 +128,17 @@ const Footer = () => {
         {/* NOTE: About */}
         <div className="text-base flex justify-center">
           <div>
-            <h2 className="text-2xl text-[#212529] mb-3">About</h2>
+            <h2 className="text-2xl text-[#212529] mb-3">Prospectus</h2>
             <ul>
               {footerAboutData.map((item) => (
-                <li
-                  key={item.id}
-                  className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300"
-                >
-                  <FaAngleDoubleRight />
-                  <span className="ml-3">{item.title}</span>
-                </li>
+                <Link href={item.Link} key={item.id}>
+                  <a>
+                    <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
+                      <FaAngleDoubleRight />
+                      <span className="ml-3">{item.title}</span>
+                    </li>
+                  </a>
+                </Link>
               ))}
             </ul>
           </div>

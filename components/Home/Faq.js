@@ -1,16 +1,16 @@
-import React, { useState } from "react";
-import { Collapse, Space } from "antd";
-import { BsChevronDown } from "react-icons/bs";
-import { faqData } from "../../src/data/data";
+import { Collapse } from 'antd';
+import React, { useState } from 'react';
+import { BsChevronDown } from 'react-icons/bs';
+import { faqData } from '../../src/data/data';
 
-import { Button } from "../index";
+import { Button } from '../index';
 
 const { Panel } = Collapse;
 
 const Faq = () => {
   const [triggerOpen, setTriggerOpen] = useState(false);
   return (
-    <div className="mt-16 mb-28 max-w-6xl mx-auto">
+    <div className="mt-16 mb-28 max-w-6xl mx-auto" id="faq">
       <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
         Frequently Asked Questions
       </h2>
@@ -43,7 +43,7 @@ const Faq = () => {
               <Collapse
                 collapsible="header"
                 expandIconPosition="end"
-                defaultActiveKey={["1"]}
+                defaultActiveKey={['1']}
               >
                 <Panel header={item.question} key={item.id}>
                   <p>{item.answer}</p>
@@ -63,7 +63,7 @@ const Triggers = ({ item, triggerOpen }) => {
   console.log(triggerOpen);
   return (
     <p className="flex justify-between items-center">
-      <span>{item.question}</span>{" "}
+      <span>{item.question}</span>{' '}
       <span>
         {/* {item.id === triggerOpen.id ? <AiOutlineDown /> : <AiOutlineRight />} */}
         <BsChevronDown className="font-bold" />

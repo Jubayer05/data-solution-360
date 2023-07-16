@@ -1,0 +1,7 @@
+.youtube_player .ytp-title {
+  display: none; /* Hide video title */
+}
+
+.youtube_player .ytp-share-button {
+  display: none; /* Hide share button */
+}

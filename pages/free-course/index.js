@@ -1,12 +1,13 @@
 import React from 'react';
-import { Footer, FreeCourse, Navbar } from '../../components';
+import { Footer, Navbar } from '../../components';
+import FreeCourseHome from '../../components/FreeCourse/FreeCourseHome';
 import WhatsApp from '../../components/utilities/WhatsApp';
 
 const index = () => {
   return (
     <div>
       <Navbar />
-      <FreeCourse />
+      <FreeCourseHome />
       <Footer />
       <WhatsApp />
     </div>

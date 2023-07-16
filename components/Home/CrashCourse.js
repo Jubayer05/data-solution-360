@@ -1,23 +1,23 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
-import { AiOutlineFileText, AiOutlineClockCircle } from "react-icons/ai";
-import { BiBarChart, BiDollar } from "react-icons/bi";
-import { TbCurrencyTaka } from "react-icons/tb";
+import React from 'react';
+import { AiOutlineClockCircle, AiOutlineFileText } from 'react-icons/ai';
+import { BiBarChart } from 'react-icons/bi';
+import { TbCurrencyTaka } from 'react-icons/tb';
 
-import { BsStarFill, BsStar, BsStarHalf } from "react-icons/bs";
-import { useStateContext } from "../../src/context/ContextProvider";
-import Link from "next/link";
-import { Avatar } from "antd";
+import { Avatar } from 'antd';
+import Link from 'next/link';
+import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
+import { useStateContext } from '../../src/context/ContextProvider';
 
 const CrashCourse = () => {
   const { language, courseData } = useStateContext();
 
   return (
-    <div className="bg-[#ffffff]	pt-8">
+    <div className="bg-[#ffffff]	pt-8" id="courses">
       <div className="max-w-[1290px] py-10 mx-auto">
         <h2 className="text-center text-3xl font-bold font-heading mt-16 mb-6 text-headerMain">
-          {language === "English" ? (
-            "Best Courses for you"
+          {language === 'English' ? (
+            'Best Courses for you'
           ) : (
             <span className="font-bangla">আপনার জন্য সেরা কোর্স</span>
           )}

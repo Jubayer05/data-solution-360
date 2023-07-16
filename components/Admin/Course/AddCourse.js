@@ -1,47 +1,48 @@
-import React, { useEffect, useState } from "react";
-import { EditorState } from "draft-js";
-import { convertToHTML } from "draft-convert";
-import { Checkbox } from "antd";
-import dynamic from "next/dynamic";
-import { v4 as uuidv4 } from "uuid";
-import firebase from "../../../firebase";
+import { Checkbox } from 'antd';
+import { convertToHTML } from 'draft-convert';
+import { EditorState } from 'draft-js';
+import dynamic from 'next/dynamic';
+import React, { useState } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+import firebase from '../../../firebase';
 
 // Dynamic import of the Editor component from react-draft-wysiwyg
 const Editor = dynamic(
   () => {
-    return import("react-draft-wysiwyg").then((mod) => mod.Editor);
+    return import('react-draft-wysiwyg').then((mod) => mod.Editor);
   },
-  { ssr: false }
+  { ssr: false },
 );
 
 // CSS styles for the Editor component
-import "react-draft-wysiwyg/dist/react-draft-wysiwyg.css";
-import { useStateContext } from "../../../src/context/ContextProvider";
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { useStateContext } from '../../../src/context/ContextProvider';
+import HeadingDashboard from '../../utilities/HeadingDashboard';
 
 // Initial state for the course data
 const initialCourseState = {
-  title: "",
-  img: "",
-  short_description: "",
-  price: "",
-  discounted_price: "",
-  total_seat_number: "",
-  batch_no: "",
-  class_time: "",
-  orientation_class: "",
-  main_class_starting_date: "",
-  who_is_the_course_for: "",
-  after_course_benefit: "",
-  name_of_the_instructor: "",
+  title: '',
+  img: '',
+  short_description: '',
+  price: '',
+  discounted_price: '',
+  total_seat_number: '',
+  batch_no: '',
+  class_time: '',
+  orientation_class: '',
+  main_class_starting_date: '',
+  who_is_the_course_for: '',
+  after_course_benefit: '',
+  name_of_the_instructor: '',
 };
 
 // Date options for formatting
-const options = { year: "numeric", month: "long", day: "numeric" };
+const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 const AddCourse = () => {
   const { userEmail } = useStateContext();
   const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty()
+    EditorState.createEmpty(),
   );
   const [convertContent, setConvertedContent] = useState(null);
   const [courseData, setCourseData] = useState(initialCourseState);
@@ -56,11 +57,11 @@ const AddCourse = () => {
   };
 
   // Plain options for checkboxes
-  const plainOptions = ["Sat", "Sun", "Mon", "Tue", "Wed", "Thu", "Fri"];
+  const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
   // Handler for input changes
   const handleInputChange = (key, value) => {
-    console.log(key + ": " + value);
+    console.log(key + ': ' + value);
     const updatedObject = {
       ...courseData,
       [key]: value,
@@ -70,20 +71,20 @@ const AddCourse = () => {
 
   // Course short point description data
   const courseShortData = [
-    { name: "Point No - 1", value: "" },
-    { name: "Point No - 2", value: "" },
-    { name: "Point No - 3", value: "" },
-    { name: "Point No - 4", value: "" },
-    { name: "Point No - 5", value: "" },
-    { name: "Point No - 6", value: "" },
-    { name: "Point No - 7", value: "" },
-    { name: "Point No - 8", value: "" },
-    { name: "Point No - 9", value: "" },
+    { name: 'Point No - 1', value: '' },
+    { name: 'Point No - 2', value: '' },
+    { name: 'Point No - 3', value: '' },
+    { name: 'Point No - 4', value: '' },
+    { name: 'Point No - 5', value: '' },
+    { name: 'Point No - 6', value: '' },
+    { name: 'Point No - 7', value: '' },
+    { name: 'Point No - 8', value: '' },
+    { name: 'Point No - 9', value: '' },
   ];
 
   // Handler for file submission
   const handleFileSubmit = (e) => {
-    const fileSize = document.getElementById("photoUrl").files[0].size;
+    const fileSize = document.getElementById('photoUrl').files[0].size;
     const courseImg = e.target.files[0];
 
     if (fileSize < 1024000) {
@@ -92,20 +93,20 @@ const AddCourse = () => {
         .ref(`courseImage/${userEmail}/${courseImg?.name}`)
         .put(courseImg);
       uploadTask.on(
-        "state_changed",
+        'state_changed',
         (snapshot) => {
           const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100
+            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
           );
           setProgressData(progress);
         },
         (error) => {
-          alert(error.message + "" + "Something went wrong");
+          alert(error.message + '' + 'Something went wrong');
         },
         () => {
           firebase
             .storage()
-            .ref("courseImage")
+            .ref('courseImage')
             .child(userEmail)
             .child(courseImg?.name)
             .getDownloadURL()
@@ -113,10 +114,10 @@ const AddCourse = () => {
               // NOTE: use this url
               setCourseData({ ...courseData, img: url });
             });
-        }
+        },
       );
     } else {
-      alert("File Size must be under 1mb");
+      alert('File Size must be under 1mb');
     }
     // console.log(fileSize);
   };
@@ -125,38 +126,38 @@ const AddCourse = () => {
   const handleSubmit = () => {
     if (
       convertContent !== null &&
-      courseShortData?.filter((item) => item.value !== "").length >= 7 &&
-      courseData.title != "" &&
-      courseData.img != "" &&
-      courseData.short_description != "" &&
-      courseData.price != "" &&
-      courseData.discounted_price != "" &&
-      courseData.total_seat_number != "" &&
-      courseData.batch_no != "" &&
-      courseData.class_time != "" &&
-      courseData.orientation_class != "" &&
-      courseData.main_class_starting_date != "" &&
-      courseData.who_is_the_course_for != "" &&
-      courseData.after_course_benefit != "" &&
-      courseData.name_of_the_instructor != ""
+      courseShortData?.filter((item) => item.value !== '').length >= 7 &&
+      courseData.title != '' &&
+      courseData.img != '' &&
+      courseData.short_description != '' &&
+      courseData.price != '' &&
+      courseData.discounted_price != '' &&
+      courseData.total_seat_number != '' &&
+      courseData.batch_no != '' &&
+      courseData.class_time != '' &&
+      courseData.orientation_class != '' &&
+      courseData.main_class_starting_date != '' &&
+      courseData.who_is_the_course_for != '' &&
+      courseData.after_course_benefit != '' &&
+      courseData.name_of_the_instructor != ''
     ) {
       firebase
         .firestore()
-        .collection("course_data")
+        .collection('course_data')
         .add({
           ...courseData,
-          id: uuidv4().split("-")[0],
+          id: uuidv4().split('-')[0],
           details: convertContent,
           courseShortData,
           createdAt: new Date().toLocaleDateString(undefined, options),
         })
         .then(() => {
-          alert("Course Data was successfully uploaded.");
+          alert('Course Data was successfully uploaded.');
           setCourseData(initialCourseState);
           window.location.reload();
         })
         .catch((error) => {
-          alert(error.message + "" + "Something went wrong");
+          alert(error.message + '' + 'Something went wrong');
         });
       // console.log(courseData);
     } else {
@@ -169,11 +170,7 @@ const AddCourse = () => {
 
   return (
     <div className="flex justify-center items-center flex-col">
-      <div className="h-[200px] bg-[url(/Background/admin-bg.jpg)] w-full flex items-center justify-center">
-        <h2 className="text-4xl mt-6 pb-4 text-[#231f40] text-center  ">
-          Add a new course
-        </h2>
-      </div>
+      <HeadingDashboard title="Add a new course" />
       <div className="w-3/4">
         {/* InputBox component for the course title */}
         <InputBox
@@ -278,7 +275,7 @@ const AddCourse = () => {
             <div>
               <Checkbox.Group
                 options={plainOptions}
-                onChange={(e) => handleInputChange("class_days", e)}
+                onChange={(e) => handleInputChange('class_days', e)}
               />
             </div>
           </div>
@@ -316,7 +313,7 @@ const AddCourse = () => {
         <div className="w-full border-1 p-3 bg-white">
           <Editor
             editorState={editorState}
-            editorStyle={{ minHeight: "140px" }}
+            editorStyle={{ minHeight: '140px' }}
             toolbarClassName="toolbarClassName"
             wrapperClassName="demoWrapper"
             editorClassName="editorClassName"
@@ -327,7 +324,7 @@ const AddCourse = () => {
         {/* Minimum 7 short point for course details */}
         <div className="border-1 mt-5 py-6 px-3 rounded-lg bg-[#f0f0f0]">
           <p className="text-lg font-semibold text-[#17012e]">
-            Add minimum 7 course details in point{" "}
+            Add minimum 7 course details in point{' '}
             <span className="italic text-[orangered]">(required)</span>
           </p>
           <div className="grid gap-4 grid-cols-3">
@@ -378,7 +375,7 @@ const InputBox = ({ title, type, id, func, placeholder }) => {
       <input
         id={id}
         onChange={(e) =>
-          func(title.toLowerCase().split(" ").join("_"), e.target.value)
+          func(title.toLowerCase().split(' ').join('_'), e.target.value)
         }
         type={type}
         placeholder={placeholder}

@@ -1,10 +1,12 @@
 import React from 'react';
 import {
   AboutHome,
-  Banner,
+  BannerCompanies,
   CrashCourse,
+  Discount,
   Faq,
   Footer,
+  MainBanner,
   Navbar,
   Service,
   Technology,
@@ -18,8 +20,10 @@ const Home = () => {
   return (
     <div>
       <>
-        <Navbar />
-        <Banner />
+        <Discount />
+        <Navbar home="home" />
+        <MainBanner />
+        <BannerCompanies />
         {/* <BannerCarousel /> */}
         <AboutHome />
         <Service />

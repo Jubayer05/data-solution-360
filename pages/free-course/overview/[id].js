@@ -1,12 +1,12 @@
 import React from 'react';
-import { Footer, Navbar, TermsCondition } from '../../components';
-import WhatsApp from '../../components/utilities/WhatsApp';
+import { Footer, FreeCourse, Navbar } from '../../../components';
+import WhatsApp from '../../../components/utilities/WhatsApp';
 
 const index = () => {
   return (
     <div>
       <Navbar />
-      <TermsCondition />
+      <FreeCourse />
       <Footer />
       <WhatsApp />
     </div>

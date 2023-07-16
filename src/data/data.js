@@ -415,18 +415,13 @@ export const footerExploreData = [
   {
     id: '4',
     title: 'FAQ Questions',
-    Link: '/faq',
+    Link: '/#faq',
   },
 
   {
     id: '5',
     title: 'Testimonials',
     Link: '/testimonials',
-  },
-  {
-    id: '6',
-    title: 'Privacy Policy',
-    Link: '/privacy-policy',
   },
 ];
 
@@ -439,12 +434,12 @@ export const footerUsefulLinksData = [
   {
     id: '2',
     title: 'View Courses',
-    Link: '/about',
+    Link: '/#courses',
   },
   {
     id: '3',
     title: 'Gallery',
-    Link: '/blog',
+    Link: '/gallery',
   },
   {
     id: '4',
@@ -656,5 +651,14 @@ export const reviewData = [
     reviewDetails:
       "First of all The data analyst course's module which I liked the most. the course mentor's teaching skill is mesmerizing. He is affable and admirable. thanks to you of data solution360 team for having such course. hope for the best.",
     star: 5,
+  },
+];
+
+export const freeCourseData = [
+  {
+    id: '1',
+    title: 'Complete Data analyst boot-camp',
+    photoUrl: '/course/free-course-1.jpg',
+    link: '/free-course/overview/data-analyst-boot-camp',
   },
 ];
