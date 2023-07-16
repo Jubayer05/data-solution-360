@@ -128,7 +128,7 @@ const Footer = () => {
         {/* NOTE: About */}
         <div className="text-base flex justify-center">
           <div>
-            <h2 className="text-2xl text-[#212529] mb-3">Prospectus</h2>
+            <h2 className="text-2xl text-[#212529] mb-3">In Details</h2>
             <ul>
               {footerAboutData.map((item) => (
                 <Link href={item.Link} key={item.id}>

@@ -461,6 +461,11 @@ export const footerAboutData = [
     Link: '/location',
   },
   {
+    id: '6',
+    title: 'Prospectus',
+    Link: '/Prospectus',
+  },
+  {
     id: '2',
     title: 'Team',
     Link: '/team',
