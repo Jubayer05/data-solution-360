@@ -37,9 +37,9 @@ const Countdown = ({ targetDate }) => {
 
   return (
     <div className="text-white">
-      <h2 className="font-heading text-base text-white ">
-        <span className="font-normal text-sm">Expires in:</span>{' '}
-        <span>{countdown}</span>
+      <h2 className="font-heading text-base text-white flex items-center">
+        <span className="font-normal text-sm">Expires in: &nbsp;</span>{' '}
+        <span className="text-xl"> {countdown}</span>
       </h2>
     </div>
   );

@@ -59,16 +59,16 @@ const BannerCompanies = () => {
 
   return (
     <div
-      className="text-white"
-      style={{
-        backgroundImage:
-          'linear-gradient(90deg, rgb(38, 52, 110), rgb(40, 52, 113))',
-      }}
+      className="text-white h-[350px] flex justify-center items-center"
+      // style={{
+      //   backgroundImage:
+      //     'linear-gradient(90deg, rgb(38, 52, 110), rgb(40, 52, 113))',
+      // }}
     >
       <div className="max-w-6xl mx-auto p-4 pb-16">
-        <h2 className="text-white text-lg pb-5">
+        {/* <h2 className="text-black text-lg pb-5">
           These 50 companies are looking for you
-        </h2>
+        </h2> */}
         <Slider {...settings}>
           {companyLogos.map((item) => (
             <div key={item.id}>

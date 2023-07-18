@@ -457,11 +457,6 @@ export const footerUsefulLinksData = [
 export const footerAboutData = [
   {
     id: '1',
-    title: 'Location',
-    Link: '/location',
-  },
-  {
-    id: '6',
     title: 'Prospectus',
     Link: '/Prospectus',
   },
