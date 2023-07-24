@@ -5,7 +5,7 @@ import { BiBarChart } from 'react-icons/bi';
 
 import { Avatar } from 'antd';
 import Link from 'next/link';
-import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
+import { BsStarFill } from 'react-icons/bs';
 import { useStateContext } from '../../src/context/ContextProvider';
 
 const CrashCourse = () => {
@@ -46,19 +46,20 @@ const CrashCourseItem = ({ item }) => {
           <div className="px-4 py-3 border-1 rounded-lg rounded-t-none">
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <span className="text-[orange] font-heading mr-2">4.7</span>
+                <span className="text-[orange] font-heading mr-2">5</span>
                 <div className="flex text-[orange] ">
                   <BsStarFill className="mx-[1px]" />
                   <BsStarFill className="mx-[1px]" />
                   <BsStarFill className="mx-[1px]" />
-                  <BsStarHalf className="mx-[1px]" />
-                  <BsStar className="mx-[1px]" />
+                  <BsStarFill className="mx-[1px]" />
+                  <BsStarFill className="mx-[1px]" />
+                  {/* <BsStarHalf className="mx-[1px]" /> */}
                 </div>
-                <div className="font-bold ml-1 text-gray-500">(3)</div>
+                <div className="font-bold ml-1 text-gray-500">(50)</div>
               </div>
               <div className="flex items-center text-[#4F547B]">
                 <BiBarChart className="mr-0.5" />
-                <span>{item.difficulty}</span>
+                <span>all level</span>
               </div>
             </div>
             <p className="inline-block text-lg font-semibold mb-1.5 mt-2 text-[#140342] hover:text-[#6440FB]">
