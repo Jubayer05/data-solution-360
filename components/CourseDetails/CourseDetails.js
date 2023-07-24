@@ -26,10 +26,10 @@ const CourseDetails = () => {
   console.log(courseData);
 
   return (
-    <div className="flex items-start max-w-6xl mx-auto font-bangla font-bold">
+    <div className="flex items-start flex-col-reverse md:flex-row max-w-6xl mx-auto font-bangla font-bold">
       {/* NOTE: LEFT SIDE */}
-      <div className="pt-32 p-5 flex-[.58 1] w-[60%]">
-        <h2 className="text-5xl mb-6 -mt-20 font-[700] text-[#101828]">
+      <div className="pt-32 p-5 flex-[.58 1] w-[100%] md:w-[60%]">
+        <h2 className="text-4xl md:text-5xl mb-6 -mt-20 font-[700] text-[#101828]">
           {courseDetails?.title}
         </h2>
         <p className="font-medium text-base">
@@ -55,14 +55,14 @@ const CourseDetails = () => {
         </div>
 
         {/* NOTE: COURSE DETAILS (BATCH, STARTING, DAY, TIME) */}
-        <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-6">
+        <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-1 md:gap-6">
           <div className="pl-3 pr-2">
             <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
               <span>{courseDetails?.batch_no}</span>
             </div>
           </div>
           <div className="bg-[#d5caca] w-[2px] h-[40px]" />
-          <div className="px-3">
+          <div className="px-1 md:px-3">
             <div className="flex items-center text-xs pb-1.5">
               <GoCalendar className="text-[#ff8c4b] text-base" />
               <span className="ml-1.5 cursor-pointer">শুরু হবে</span>
@@ -70,7 +70,7 @@ const CourseDetails = () => {
             <span>{courseDetails?.main_class_starting_date}</span>
           </div>
           <div className="bg-[#d5caca] w-[1px] h-[40px]" />
-          <div className="px-3">
+          <div className="px-1 md:px-3">
             <div className="flex items-center text-xs pb-1.5">
               <BsCalendarDay className="text-[#ff8c4b] text-base" />
               <span className="ml-1.5 cursor-pointer">ক্লাসের দিন</span>
@@ -86,7 +86,7 @@ const CourseDetails = () => {
             </span>
           </div>
           <div className="bg-[#d5caca] w-[1px] h-[40px]" />
-          <div className="px-3">
+          <div className="px-1 md:px-3">
             <div className="flex items-center text-xs pb-1.5">
               <BsClock className="text-[#ff8c4b] text-base" />
               <span className="ml-1.5 cursor-pointer">ক্লাসের সময়</span>
@@ -97,13 +97,13 @@ const CourseDetails = () => {
         </div>
 
         {/* NOTE: COURSE INCLUDED ITEMS */}
-        <div className="bg-[#101828] p-8 pl-12 font-normal text-[#eaecf0] rounded-lg mt-8">
+        <div className="bg-[#101828] p-3 md:p-8 pl-5 md:pl-12 font-normal text-[#eaecf0] rounded-lg mt-8">
           <div className="flex items-center gap-4">
             <div className="text-base">কোর্স চলাকালীন থাকবে</div>
             <div className="grow h-[.5px] bg-[#eaecf0]" />
           </div>
 
-          <div className="grid grid-cols-2 gap-y-6 gap-x-12 mt-6">
+          <div className="grid grid-cols-2 gap-y-6 gap-x-4 md:gap-x-12 mt-6">
             {/* NOTE: 1 */}
             <div className="relative bg-[#1d2939] py-3 pr-4 pl-8 border-b-2 border-l-2 rounded-[4px] border-[#475467]">
               <img
@@ -225,7 +225,7 @@ const CourseDetails = () => {
         </div>
       </div>
       {/* NOTE: RIGHT SIDE */}
-      <div className="my-2 flex-grow-[.42] pb-3 shrink w-[40%] sticky top-[-185px]">
+      <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-185px]">
         <div className="mb-3">
           <img
             src={courseDetails?.img}

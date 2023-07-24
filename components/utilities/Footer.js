@@ -154,7 +154,7 @@ const Footer = () => {
       </div>
 
       {/* NOTE: COPYRIGHT */}
-      <p className="text-center text-base pb-2">
+      <p className="text-center text-base pb-2 px-2">
         Copyright &copy; {new Date().getFullYear()}{' '}
         <Link href="/">
           <a
