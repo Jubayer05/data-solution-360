@@ -2,8 +2,8 @@
 @tailwind components;
 @tailwind utilities;
 
-@import "@fontsource/hind-siliguri";
-@import "~antd/dist/antd.css";
+@import '@fontsource/hind-siliguri';
+@import '~antd/dist/antd.css';
 
 *,
 body,
@@ -46,7 +46,7 @@ html {
 
 #preview {
   background: transparent
-    url("https://ej2.syncfusion.com/react/demos/src/color-picker/images/pen.png")
+    url('https://ej2.syncfusion.com/react/demos/src/color-picker/images/pen.png')
     no-repeat;
   display: inline-block;
   height: 80px;
@@ -98,6 +98,13 @@ a:visited {
 .Collapsible__trigger {
   display: block;
   width: 100%;
+}
+
+.ant-collapse
+  > .ant-collapse-item
+  .ant-collapse-header-collapsible-only
+  .ant-collapse-header-text {
+  flex: content !important;
 }
 
 .Collapsible__contentInner {

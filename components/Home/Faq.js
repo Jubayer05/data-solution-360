@@ -46,7 +46,7 @@ const Faq = () => {
                 defaultActiveKey={['1']}
               >
                 <Panel header={item.question} key={item.id}>
-                  <p>{item.answer}</p>
+                  <p className="">{item.answer}</p>
                 </Panel>
               </Collapse>
             </div>

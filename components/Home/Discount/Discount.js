@@ -11,10 +11,10 @@ const Discount = () => {
         <a>
           <div className="flex justify-around text-center pt-3 pb-3 cursor-pointer">
             <Countdown targetDate={targetDate} />
-            <h2 className="font-heading text-base text-white hover:underline">
+            <h2 className="font-heading text-xs md:text-base text-white hover:underline">
               Signup Today and get 10% extra discount!
             </h2>
-            <h2 className="font-heading text-base text-white hover:underline">
+            <h2 className="font-heading text-xs md:text-base text-white hover:underline">
               Click Here
             </h2>
           </div>
