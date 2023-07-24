@@ -2,7 +2,6 @@
 import React from 'react';
 import { AiOutlineClockCircle, AiOutlineFileText } from 'react-icons/ai';
 import { BiBarChart } from 'react-icons/bi';
-import { TbCurrencyTaka } from 'react-icons/tb';
 
 import { Avatar } from 'antd';
 import Link from 'next/link';
@@ -72,20 +71,22 @@ const CrashCourseItem = ({ item }) => {
               </div>
               <div className="flex items-center mx-2">
                 <AiOutlineClockCircle className="mr-1" />
-                <span>{item.duration} Days</span>
+                <span>{item?.total_seat_number} Seat</span>
               </div>
             </div>
 
             <div className="h-[1px] w-full bg-slate-200 mt-4 mb-3" />
             <div className="flex items-center justify-between">
               <div className="flex items-center">
-                <Avatar />
-                <span className="ml-2">{item.author}</span>
+                <Avatar src="/team/sakib.jpg" />
+                <span className="ml-2">{item?.name_of_the_instructor}</span>
               </div>
               <div>
-                <span className="flex items-center font-bold text-lg text-[#42476f]">
-                  <TbCurrencyTaka />
-                  {item.price}
+                <span className="flex items-center font-bold text-base text-[orangered]">
+                  <strike>{item?.price}/-</strike>
+                </span>
+                <span className="text-[#1d2939] font-bold text-2xl">
+                  {item?.discounted_price}/-
                 </span>
               </div>
             </div>

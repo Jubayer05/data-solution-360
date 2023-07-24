@@ -402,11 +402,11 @@ export const footerExploreData = [
     title: 'About Us',
     Link: '/about',
   },
-  {
-    id: '2',
-    title: 'Upcoming Events',
-    Link: '/about',
-  },
+  // {
+  //   id: '2',
+  //   title: 'Upcoming Events',
+  //   Link: '/about',
+  // },
   {
     id: '3',
     title: 'Blog & News',
@@ -421,7 +421,7 @@ export const footerExploreData = [
   {
     id: '5',
     title: 'Testimonials',
-    Link: '/testimonials',
+    Link: '/#testimonials',
   },
 ];
 
@@ -442,12 +442,6 @@ export const footerUsefulLinksData = [
     Link: '/gallery',
   },
   {
-    id: '4',
-    title: 'Instructors',
-    Link: '/instructors',
-  },
-
-  {
     id: '5',
     title: 'Purchase Guide',
     Link: '/purchase-guide',
@@ -458,7 +452,7 @@ export const footerAboutData = [
   {
     id: '1',
     title: 'Prospectus',
-    Link: '/Prospectus',
+    Link: '/prospectus',
   },
   {
     id: '2',

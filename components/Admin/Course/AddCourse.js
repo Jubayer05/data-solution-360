@@ -164,6 +164,7 @@ const AddCourse = () => {
       // const isFieldsFulfilled =
       //   ;
       console.log(courseData);
+      console.log(courseShortData);
       // alert("Please fill up all the required fields!");
     }
   };

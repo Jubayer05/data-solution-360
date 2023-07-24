@@ -69,7 +69,10 @@ const Review = () => {
   }
 
   return (
-    <div className="bg-[url('/review/review-bg.jpg')] flex items-center justify-center bg-center bg-cover bg-no-repeat">
+    <div
+      id="testimonials"
+      className="bg-[url('/review/review-bg.jpg')] flex items-center justify-center bg-center bg-cover bg-no-repeat"
+    >
       <div className="my-4 mb-14 max-w-[350px] sm:max-w-2xl md:max-w-4xl lg:max-w-6xl pr-[30px]">
         <h1 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
           Our Lovely Students Feedback

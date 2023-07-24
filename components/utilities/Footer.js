@@ -88,7 +88,7 @@ const Footer = () => {
         </div>
 
         {/* NOTE: Explore */}
-        <div className="text-base flex justify-center">
+        <div className="text-base flex  w-[250px] mx-auto mt-5 md:mt-0">
           <div>
             <h2 className="text-2xl text-[#212529] mb-3">Explore</h2>
             <ul>
@@ -107,7 +107,7 @@ const Footer = () => {
         </div>
 
         {/* NOTE: Useful Links */}
-        <div className="text-base flex justify-center">
+        <div className="text-base flex  w-[250px] mx-auto mt-5 md:mt-0">
           <div>
             <h2 className="text-2xl text-[#212529] mb-3">Useful Links</h2>
             <ul>
@@ -121,12 +121,20 @@ const Footer = () => {
                   </a>
                 </Link>
               ))}
+              <Link href="https://docs.google.com/forms/d/e/1FAIpQLScwvqWOoQ51ZJKDJAOxvgE5uFc1LXARSm2dWHPxIT-Rd7Hy1A/viewform?usp=sf_link">
+                <a target="_blank">
+                  <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
+                    <FaAngleDoubleRight />
+                    <span className="ml-3">Join as instructor</span>
+                  </li>
+                </a>
+              </Link>
             </ul>
           </div>
         </div>
 
         {/* NOTE: About */}
-        <div className="text-base flex justify-center">
+        <div className="text-base flex  w-[250px] mx-auto mt-5 md:mt-0">
           <div>
             <h2 className="text-2xl text-[#212529] mb-3">In Details</h2>
             <ul>
