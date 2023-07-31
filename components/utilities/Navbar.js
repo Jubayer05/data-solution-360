@@ -64,9 +64,7 @@ const Navbar = ({ home }) => {
       <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20 ">
         <div className="flex justify-between items-center z-50">
           <Link href="/">
-            <a>
-              <img src="/logo/logo-white.png" className="h-16" alt="logo" />
-            </a>
+            <img src="/logo/logo-white.png" className="h-16" alt="logo" />
           </Link>
           <HiOutlineMenuAlt1
             onClick={() => setOpenNav(true)}
@@ -94,18 +92,17 @@ const Navbar = ({ home }) => {
             <ul className="pl-4 md:inline-flex md:justify-between mb-0">
               {navItems2.map((item) => (
                 <li key={item.id} className="">
-                  <Link href={item?.link}>
-                    <a
-                      className={`font-bangla cursor-pointer font-medium  
+                  <Link
+                    href={item?.link}
+                    className={`font-bangla cursor-pointer font-medium  
                        ${
                          url == item.slug
                            ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
                            : 'text-white visited:text-white'
                        } px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] transition-all 
                       duration-500 rounded-md hover:text-[#61CE70] `}
-                    >
-                      {language === 'English' ? item.title : item.titleBang}
-                    </a>
+                  >
+                    {language === 'English' ? item.title : item.titleBang}
                   </Link>
                 </li>
               ))}
@@ -118,30 +115,28 @@ const Navbar = ({ home }) => {
               <ul className="pl-8 md:inline-flex md:justify-between mb-0">
                 {navItems.map((item) => (
                   <li key={item.id} className="">
-                    <Link href={item?.link}>
-                      <a
-                        className={`font-bangla cursor-pointer font-medium  
+                    <Link
+                      href={item?.link}
+                      className={`font-bangla cursor-pointer font-medium  
                        ${
                          url == item.slug
                            ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
                            : 'text-white visited:text-white'
                        } px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] transition-all 
                       duration-500 rounded-md hover:text-[#61CE70] `}
-                      >
-                        {language === 'English' ? item.title : item.titleBang}
-                      </a>
+                    >
+                      {language === 'English' ? item.title : item.titleBang}
                     </Link>
                   </li>
                 ))}
                 {findAdmin && (
                   <li className="">
-                    <Link href="/admin/dashboard">
-                      <a
-                        className="font-bangla cursor-pointer font-medium visited:text-white text-white 
+                    <Link
+                      href="/admin/dashboard"
+                      className="font-bangla cursor-pointer font-medium visited:text-white text-white 
                                   px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-[#61CE70]"
-                      >
-                        {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
-                      </a>
+                    >
+                      {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
                     </Link>
                   </li>
                 )}
@@ -178,17 +173,16 @@ const Navbar = ({ home }) => {
                     <ul>
                       {navDropItems.map((item) => (
                         <li key={item.id}>
-                          <Link href={item.link}>
-                            <a
-                              className={`block font-semibold rounded-md py-3 cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]
+                          <Link
+                            href={item.link}
+                            className={`block font-semibold rounded-md py-3 cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]
                   ${
                     url == item.slug
                       ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
                       : 'text-[#140342] visited:text-[#140342] '
                   }`}
-                            >
-                              <span>{item.title}</span>
-                            </a>
+                          >
+                            <span>{item.title}</span>
                           </Link>
                         </li>
                       ))}
@@ -212,23 +206,21 @@ const Navbar = ({ home }) => {
               </div>
             ) : (
               <Link href="/login">
-                <a>
-                  <button
-                    type="button"
-                    style={{
-                      borderRadius: '5px',
-                    }}
-                    className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 
+                <button
+                  type="button"
+                  style={{
+                    borderRadius: '5px',
+                  }}
+                  className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 
                           bg-primary-bg transition-all duration-300 ease-linear hover:bg-white
                            hover:text-primary hover:border-primary`}
-                    onClick={() => {}}
-                  >
-                    <FiLogIn className="text-sm" />{' '}
-                    <span className="pl-2 font-bangla">
-                      {language === 'English' ? 'Log in' : 'লগ ইন'}
-                    </span>
-                  </button>
-                </a>
+                  onClick={() => {}}
+                >
+                  <FiLogIn className="text-sm" />{' '}
+                  <span className="pl-2 font-bangla">
+                    {language === 'English' ? 'Log in' : 'লগ ইন'}
+                  </span>
+                </button>
               </Link>
             )}
           </div>
@@ -258,20 +250,19 @@ const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
         <ul className="pl-12 pr-6 pt-6 pb-4">
           {navItems.map((item) => (
             <li key={item.id}>
-              <Link href={item.link}>
-                <a
-                  key={item.id}
-                  className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
+              <Link
+                href={item.link}
+                key={item.id}
+                className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
             ${
               url == item.slug
                 ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
                 : 'text-[#140342] visited:text-[#140342] '
             } 
               my-1 `}
-                >
-                  <span>{item.title}</span>
-                  <BiChevronRight className="text-xl" />
-                </a>
+              >
+                <span>{item.title}</span>
+                <BiChevronRight className="text-xl" />
               </Link>
             </li>
           ))}
@@ -295,19 +286,18 @@ const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
           <ul className="pt-2 pb-4">
             {navDropItems.map((item) => (
               <li key={item.id}>
-                <Link href={item.link}>
-                  <a
-                    className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
+                <Link
+                  href={item.link}
+                  className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
                   ${
                     url == item.slug
                       ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
                       : 'text-[#140342] visited:text-[#140342] '
                   } 
                   my-1 `}
-                  >
-                    <span>{item.title}</span>
-                    <BiChevronRight className="text-xl" />
-                  </a>
+                >
+                  <span>{item.title}</span>
+                  <BiChevronRight className="text-xl" />
                 </Link>
               </li>
             ))}

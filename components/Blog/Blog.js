@@ -1,8 +1,8 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
-import { convert } from "html-to-text";
-import Link from "next/link";
-import { useStateContext } from "../../src/context/ContextProvider";
+import { convert } from 'html-to-text';
+import Link from 'next/link';
+import React from 'react';
+import { useStateContext } from '../../src/context/ContextProvider';
 
 const Blog = () => {
   const { blogData } = useStateContext();
@@ -28,19 +28,20 @@ const Blog = () => {
             <div className="p-4 flex-1">
               <div>
                 <h2 className="text-2xl font-bold cursor-pointer transition-colors duration-300">
-                  <Link href={`/blog/${item.slug}`}>
-                    <a className="text-black hover:text-red-400 ">
-                      {item.title}
-                    </a>
+                  <Link
+                    href={`/blog/${item.slug}`}
+                    className="text-black hover:text-red-400 "
+                  >
+                    {item.title}
                   </Link>
                 </h2>
                 <p className="text-lg">
                   {convert(item?.details, {
                     wordwrap: 130,
                   })
-                    .split(" ")
+                    .split(' ')
                     .slice(0, 15)
-                    .join(" ")}
+                    .join(' ')}
                   ...
                 </p>
               </div>

@@ -16,28 +16,32 @@ const Team = () => {
   ];
 
   return (
-    <div>
-      <h2 className="text-3xl text-center mt-12 mb-8">Meet our team</h2>
+    <div className="bg-[#f9f9fa] pt-10 pb-6 mt-16">
+      <div className="max-w-6xl mx-auto">
+        <h2 className="text-4xl text-center font-heading my-8">
+          Meet our team
+        </h2>
 
-      <div className="grid grid-cols-2 sm:grid-cols-3 gap-3 sm:gap-5 lg:gap-16 pb-20 px-3 ">
-        {teamMembers.map((item) => (
-          <div
-            key={item.name}
-            className="w-full overflow-hidden rounded-md shadow-lg"
-          >
-            <img
-              className="h-[320px] w-full transition-all 0.2s hover:scale-105"
-              src={item.img}
-              alt=""
-            />
-            <div className="px-5 py-8">
-              <p className="text-base text-gray-900 font-semibold mt-2">
-                {item.name}
-              </p>
-              <p className="text-xs text-gray-600 -mt-3">{item.profession}</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-3 sm:gap-5 pb-20 px-3 ">
+          {teamMembers.map((item) => (
+            <div
+              key={item.name}
+              className="w-full overflow-hidden rounded-md shadow-lg cursor-pointer group"
+            >
+              <img
+                className="h-[240px] w-full transition-all 0.2s group-hover:scale-105"
+                src={item.img}
+                alt=""
+              />
+              <div className="p-5">
+                <p className="text-gray-900 font-heading font-semibold mt-2 text-xl">
+                  {item.name}
+                </p>
+                <p className="text-sm text-gray-600 -mt-3">{item.profession}</p>
+              </div>
             </div>
-          </div>
-        ))}
+          ))}
+        </div>
       </div>
     </div>
   );

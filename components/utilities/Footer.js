@@ -31,25 +31,23 @@ const Footer = () => {
             </li>
             <li className="text-base flex items-center cursor-pointer mt-4">
               {/* <BiPhoneOutgoing className="text-xl" />{' '} */}
-              <Link href="tel:+8801996104096">
-                <a
-                  target="_blank"
-                  className="ml-2 text-blue-500 hover:text-blue-800 ease-in-out duration-300"
-                >
-                  <span>+8801996104096</span>
-                </a>
+              <Link
+                href="tel:+8801996104096"
+                target="_blank"
+                className="ml-2 text-blue-500 hover:text-blue-800 ease-in-out duration-300"
+              >
+                <span>+8801996104096</span>
               </Link>
             </li>
 
             <li className="text-base flex items-center cursor-pointer ">
               {/* <AiOutlineMail className="text-xl" /> */}
-              <Link href="mailto:datasolution360.business@gmail.com">
-                <a
-                  target="_blank"
-                  className="ml-2 text-blue-500 hover:text-blue-800 ease-in-out duration-300"
-                >
-                  <span>datasolution360.business@gmail.com</span>
-                </a>
+              <Link
+                href="mailto:datasolution360.business@gmail.com"
+                target="_blank"
+                className="ml-2 text-blue-500 hover:text-blue-800 ease-in-out duration-300"
+              >
+                <span>datasolution360.business@gmail.com</span>
               </Link>
             </li>
           </ul>
@@ -59,27 +57,22 @@ const Footer = () => {
             <div>
               <div className="flex">
                 {footerFollowUs.map((item) => (
-                  <Link href={item.link} key={item.id}>
-                    <a
-                      target="_blank"
-                      style={{
-                        color: '#000000',
-                        ':hover': {
-                          backgroundColor: 'red',
-                          color: 'white',
-                        },
-                        transition: 'background-color 0.3s',
-                      }}
-                      className="text-2xl mx-2 bg-[#0000001A] p-2 rounded hover:bg-[#8f98ff]"
+                  <Link
+                    href={item.link}
+                    key={item.id}
+                    target="_blank"
+                    style={{
+                      backgroundColor: item.brandColor,
+                    }}
+                    className={`text-2xl text-white visited:text-white mx-2 p-2 rounded-full hover:text-white`}
+                  >
+                    <Tooltip
+                      placement="topLeft"
+                      title={item.title}
+                      key={item.id}
                     >
-                      <Tooltip
-                        placement="topLeft"
-                        title={item.title}
-                        key={item.id}
-                      >
-                        {item.icon}
-                      </Tooltip>
-                    </a>
+                      {item.icon}
+                    </Tooltip>
                   </Link>
                 ))}
               </div>
@@ -94,12 +87,10 @@ const Footer = () => {
             <ul>
               {footerExploreData.map((item) => (
                 <Link href={item.Link} key={item.id}>
-                  <a>
-                    <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
-                      <FaAngleDoubleRight />
-                      <span className="ml-3">{item.title}</span>
-                    </li>
-                  </a>
+                  <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
+                    <FaAngleDoubleRight />
+                    <span className="ml-3">{item.title}</span>
+                  </li>
                 </Link>
               ))}
             </ul>
@@ -113,21 +104,20 @@ const Footer = () => {
             <ul>
               {footerUsefulLinksData.map((item) => (
                 <Link href={item.Link} key={item.id}>
-                  <a>
-                    <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
-                      <FaAngleDoubleRight />
-                      <span className="ml-3">{item.title}</span>
-                    </li>
-                  </a>
-                </Link>
-              ))}
-              <Link href="https://docs.google.com/forms/d/e/1FAIpQLScwvqWOoQ51ZJKDJAOxvgE5uFc1LXARSm2dWHPxIT-Rd7Hy1A/viewform?usp=sf_link">
-                <a target="_blank">
                   <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
                     <FaAngleDoubleRight />
-                    <span className="ml-3">Join as instructor</span>
+                    <span className="ml-3">{item.title}</span>
                   </li>
-                </a>
+                </Link>
+              ))}
+              <Link
+                target="_blank"
+                href="https://docs.google.com/forms/d/e/1FAIpQLScwvqWOoQ51ZJKDJAOxvgE5uFc1LXARSm2dWHPxIT-Rd7Hy1A/viewform?usp=sf_link"
+              >
+                <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
+                  <FaAngleDoubleRight />
+                  <span className="ml-3">Join as instructor</span>
+                </li>
               </Link>
             </ul>
           </div>
@@ -140,12 +130,10 @@ const Footer = () => {
             <ul>
               {footerAboutData.map((item) => (
                 <Link href={item.Link} key={item.id}>
-                  <a>
-                    <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
-                      <FaAngleDoubleRight />
-                      <span className="ml-3">{item.title}</span>
-                    </li>
-                  </a>
+                  <li className="flex items-center cursor-pointer text-[#6c757d] hover:text-blue-700 ease-in-out duration-300">
+                    <FaAngleDoubleRight />
+                    <span className="ml-3">{item.title}</span>
+                  </li>
                 </Link>
               ))}
             </ul>
@@ -156,14 +144,12 @@ const Footer = () => {
       {/* NOTE: COPYRIGHT */}
       <p className="text-center text-base pb-2 px-2">
         Copyright &copy; {new Date().getFullYear()}{' '}
-        <Link href="/">
-          <a
-            className="font-semibold decoration-2 hover:underline"
-            style={{ color: '#000' }}
-          >
-            {' '}
-            Data Solution - 360
-          </a>
+        <Link
+          href="/"
+          className="font-semibold decoration-2 hover:underline"
+          style={{ color: '#000' }}
+        >
+          Data Solution - 360
         </Link>
         . All rights reserved.
       </p>

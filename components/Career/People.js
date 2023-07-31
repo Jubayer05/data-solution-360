@@ -1,25 +1,25 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
+import React from 'react';
 
 const People = () => {
   const peoples = [
     {
-      name: "Ashzad Ferdous Rup",
-      profession: "Intern",
-      email: "ashzad2013@gmail.com",
-      img: "/team/ashzad.jpg",
+      name: 'Ashzad Ferdous Rup',
+      profession: 'Intern',
+      email: 'ashzad2013@gmail.com',
+      img: '/team/ashzad.jpg',
     },
     {
-      name: "Ishtiak Ahammed Tanvir",
-      profession: "Intern",
-      email: "ishtiakahammed1@gmail.com",
-      img: "/team/ishtiak.jpg",
+      name: 'Ishtiak Ahammed Tanvir',
+      profession: 'Intern',
+      email: 'ishtiakahammed1@gmail.com',
+      img: '/team/ishtiak.jpg',
     },
     {
-      name: "Md. Sairul Islam",
-      profession: "Intern",
-      email: "sahirulislam.70@gmail.com",
-      img: "/team/sairul.jpg",
+      name: 'Md. Sairul Islam',
+      profession: 'Intern',
+      email: 'sahirulislam.70@gmail.com',
+      img: '/team/sairul.jpg',
     },
   ];
 
@@ -32,21 +32,21 @@ const People = () => {
             className="w-full border-1 rounded-lg overflow-hidden"
           >
             <img
-              className="h-72 w-full transition-all 0.2s"
+              className="h-[300px] w-full transition-all 0.2s"
               src={item.img}
               alt=""
             />
-            <div className="px-4 pb-4">
+            <div className="px-4 pb-4 font-heading">
               <p className="text-[20px] text-gray-900 font-semibold mt-2">
                 {item.name}
               </p>
               <p className="text-md -mt-4 text-[tomato]">{item.profession}</p>
               <p className="text-base font-semibold">
-                Contact Information: <br />{" "}
+                Contact Information: <br />{' '}
                 <span className="text-[#9b9b9b] font-normal">{item.email}</span>
               </p>
               <p className="text-base font-semibold">
-                Project Completed:{" "}
+                Project Completed:{' '}
                 <span className="text-[#9b9b9b] font-normal">upcoming</span>
               </p>
             </div>

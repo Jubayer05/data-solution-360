@@ -4,8 +4,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../firebase';
 
 const Subscribe = () => {
-  const [value, setValue] = useState('');
-  const [emails, setEmails] = useState([]);
+  const [allData, setAllData] = useState({ name: '', phone: '', email: '' });
   const [data, setData] = useState([]);
 
   useEffect(() => {
@@ -21,24 +20,20 @@ const Subscribe = () => {
     fetchData();
   }, []);
 
-  const handleChange = (event) => {
-    setValue(event.target.value);
-  };
-
   const validateEmail = (email) => {
     const regexPattern = /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i;
     return regexPattern.test(email);
   };
 
   const handleSubscribe = () => {
-    const alreadySubscribed = data.find((data) => data.email === value);
-    const isValidEmail = validateEmail(value);
+    const alreadySubscribed = data.find((data) => data.email === allData.email);
+    const isValidEmail = validateEmail(allData.email);
 
     if (!alreadySubscribed && isValidEmail) {
       firebase
         .firestore()
         .collection('subscripted_user')
-        .add({ email: value })
+        .add({ ...allData })
         .then(() => {
           Swal.fire({
             title: 'Remember',
@@ -47,7 +42,7 @@ const Subscribe = () => {
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Okay',
           });
-          setValue('');
+          setAllData({ name: '', email: '', phone: '' });
         })
         .catch((err) => {
           Swal.fire('Hello!', 'Something went wrong!', 'error');
@@ -68,14 +63,36 @@ const Subscribe = () => {
         <p className="font-heading text-base">
           By subscribing with your mail, you will accept our privacy policy
         </p>
-        <div className="flex justify-center items-center gap-3 flex-col md:flex-row mt-16">
-          <div className="w-[300px] md:w-[500px]">
+        <div className="gap-3 flex-col md:flex-row mt-16">
+          <div className="w-[300px] md:w-[500px] mx-auto">
             <input
               type="text"
-              value={value}
-              onChange={handleChange}
+              value={allData.name}
+              onChange={(e) => setAllData({ ...allData, name: e.target.value })}
               className="border-white bg-[#161b2a] w-full text-base py-3 px-4 rounded-md text-[#c0c0c0] placeholder-gray-400 focus:outline-none"
-              placeholder="Enter your email here..."
+              placeholder="Enter your name"
+            />
+          </div>
+          <div className="w-[300px] md:w-[500px] mx-auto my-5">
+            <input
+              type="text"
+              value={allData.email}
+              onChange={(e) =>
+                setAllData({ ...allData, email: e.target.value })
+              }
+              className="border-white bg-[#161b2a] w-full text-base py-3 px-4 rounded-md text-[#c0c0c0] placeholder-gray-400 focus:outline-none"
+              placeholder="Enter your email"
+            />
+          </div>
+          <div className="w-[300px] md:w-[500px] mx-auto mb-10">
+            <input
+              type="text"
+              value={allData.phone}
+              onChange={(e) =>
+                setAllData({ ...allData, phone: e.target.value })
+              }
+              className="border-white bg-[#161b2a] w-full text-base py-3 px-4 rounded-md text-[#c0c0c0] placeholder-gray-400 focus:outline-none"
+              placeholder="Enter your phone number"
             />
           </div>
           <button

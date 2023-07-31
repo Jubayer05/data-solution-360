@@ -26,21 +26,21 @@ export const navItems = [
     title: 'About',
     slug: 'about',
     titleBang: 'সম্পর্ক',
-    link: '/about',
+    link: '/about-us',
   },
   {
     id: 'nav-3',
+    title: 'Courses',
+    slug: 'courses',
+    titleBang: 'কোর্স',
+    link: '/courses',
+  },
+  {
+    id: 'nav-4',
     title: 'Services',
     slug: 'services',
     titleBang: 'সার্ভিস',
     link: '/services',
-  },
-  {
-    id: 'nav-4',
-    title: 'Career',
-    slug: 'career',
-    titleBang: 'ক্যারিয়ার',
-    link: '/career',
   },
   {
     id: 'nav-5',
@@ -400,13 +400,13 @@ export const footerExploreData = [
   {
     id: '1',
     title: 'About Us',
-    Link: '/about',
+    Link: '/about-us',
   },
-  // {
-  //   id: '2',
-  //   title: 'Upcoming Events',
-  //   Link: '/about',
-  // },
+  {
+    id: '2',
+    title: 'Career',
+    Link: '/career',
+  },
   {
     id: '3',
     title: 'Blog & News',
@@ -457,7 +457,7 @@ export const footerAboutData = [
   {
     id: '2',
     title: 'Team',
-    Link: '/team',
+    Link: '/about-us',
   },
   {
     id: '3',
@@ -482,6 +482,7 @@ export const footerFollowUs = [
     link: 'https://www.facebook.com/Datasolution360',
     title: 'Facebook',
     icon: <FaFacebookF />,
+    brandColor: '#1877F2',
   },
 
   {
@@ -489,6 +490,7 @@ export const footerFollowUs = [
     link: 'https://www.linkedin.com/company/data-solution-360',
     title: 'LinkedIn',
     icon: <FaLinkedinIn />,
+    brandColor: '#0A66C2',
   },
 
   {
@@ -496,20 +498,14 @@ export const footerFollowUs = [
     link: 'https://wa.me/+8801996104096',
     title: 'Whatsapp',
     icon: <FaWhatsapp />,
+    brandColor: '#25D366',
   },
-
-  // {
-  //   id: "4",
-  //   link: "/",
-  //   title: "Twitter",
-  //   icon: <AiFillTwitterCircle />,
-  // },
-
   {
-    id: '5',
+    id: '4',
     link: 'https://www.youtube.com/@datasolution-3607',
     title: 'Youtube',
     icon: <IoLogoYoutube />,
+    brandColor: '#FF0000',
   },
 ];
 

@@ -359,16 +359,18 @@ const Login = () => {
 
             <p className="text-center">
               By continuing, you are indicating that you accept our{' '}
-              <Link href="/privacy-policy">
-                <a className="text-blue-500 visited:text-blue-500 font-medium">
-                  Terms of Service
-                </a>
+              <Link
+                href="/privacy-policy"
+                className="text-blue-500 visited:text-blue-500 font-medium"
+              >
+                Terms of Service
               </Link>{' '}
               and{' '}
-              <Link href="/privacy-policy">
-                <a className="text-blue-500 visited:text-blue-500 font-medium">
-                  Privacy Policy
-                </a>
+              <Link
+                href="/privacy-policy"
+                className="text-blue-500 visited:text-blue-500 font-medium"
+              >
+                Privacy Policy
               </Link>
             </p>
           </div>

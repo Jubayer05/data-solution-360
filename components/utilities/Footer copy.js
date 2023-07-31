@@ -35,23 +35,23 @@ const Footer = () => {
             <div>
               <div className="flex">
                 {footerFollowUs.map((item) => (
-                  <Link href={item.link} key={item.id}>
-                    <a
-                      target="_blank"
-                      style={{
-                        color: '#ffffff',
-                        transition: 'background-color 0.3s',
-                      }}
-                      className="text-2xl mx-2 bg-[#ffffff1A] p-3 rounded hover:bg-[#525FE1]"
+                  <Link
+                    href={item.link}
+                    key={item.id}
+                    target="_blank"
+                    style={{
+                      color: '#ffffff',
+                      transition: 'background-color 0.3s',
+                    }}
+                    className="text-2xl mx-2 bg-[#ffffff1A] p-3 rounded hover:bg-[#525FE1]"
+                  >
+                    <Tooltip
+                      placement="topLeft"
+                      title={item.title}
+                      key={item.id}
                     >
-                      <Tooltip
-                        placement="topLeft"
-                        title={item.title}
-                        key={item.id}
-                      >
-                        {item.icon}
-                      </Tooltip>
-                    </a>
+                      {item.icon}
+                    </Tooltip>
                   </Link>
                 ))}
               </div>
@@ -105,25 +105,23 @@ const Footer = () => {
               </li>
               <li className="text-base flex items-center cursor-pointer my-2 py-1 ">
                 <BiPhoneOutgoing className="text-xl" />{' '}
-                <Link href="tel:+8801996104096">
-                  <a
-                    target="_blank"
-                    className="ml-2 text-white hover:text-blue-700 ease-in-out duration-300"
-                  >
-                    <span>+8801996104096</span>
-                  </a>
+                <Link
+                  href="tel:+8801996104096"
+                  target="_blank"
+                  className="ml-2 text-white hover:text-blue-700 ease-in-out duration-300"
+                >
+                  <span>+8801996104096</span>
                 </Link>
               </li>
 
               <li className="text-base flex items-center cursor-pointer my-2 py-1 ">
                 <AiOutlineMail className="text-xl" />{' '}
-                <Link href="mailto:datasolution360.business@gmail.com">
-                  <a
-                    target="_blank"
-                    className="ml-2 text-white hover:text-blue-700 ease-in-out duration-300"
-                  >
-                    <span>datasolution360.business@gmail.com</span>
-                  </a>
+                <Link
+                  href="mailto:datasolution360.business@gmail.com"
+                  target="_blank"
+                  className="ml-2 text-white hover:text-blue-700 ease-in-out duration-300"
+                >
+                  <span>datasolution360.business@gmail.com</span>
                 </Link>
               </li>
             </ul>
@@ -134,14 +132,12 @@ const Footer = () => {
       {/* NOTE: COPYRIGHT */}
       <p className="text-center text-base pb-2">
         Copyright &copy; {new Date().getFullYear()}{' '}
-        <Link href="/">
-          <a
-            className="font-semibold decoration-2 hover:underline"
-            style={{ color: '#fff' }}
-          >
-            {' '}
-            Data Solution - 360
-          </a>
+        <Link
+          href="/"
+          className="font-semibold decoration-2 hover:underline"
+          style={{ color: '#fff' }}
+        >
+          Data Solution - 360
         </Link>
         . All rights reserved.
       </p>

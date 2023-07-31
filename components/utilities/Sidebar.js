@@ -1,18 +1,17 @@
 /* eslint-disable @next/next/no-img-element */
-import React, { useEffect, useState } from "react";
-import { SiShopware } from "react-icons/si";
-import { MdOutlineCancel } from "react-icons/md";
-import Link from "next/link";
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { MdOutlineCancel } from 'react-icons/md';
 
-import { Tooltip } from "antd";
-import { useStateContextDashboard } from "../../src/context/UtilitiesContext";
-import { linksAdmin, linksStudents } from "../../src/data/dummy";
+import { Tooltip } from 'antd';
+import { useStateContextDashboard } from '../../src/context/UtilitiesContext';
+import { linksAdmin, linksStudents } from '../../src/data/dummy';
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContextDashboard();
-  const [url, setUrl] = useState("");
+  const [url, setUrl] = useState('');
   useEffect(() => {
-    const url = window.location.href.split("/");
+    const url = window.location.href.split('/');
     setUrl(url[3]);
   }, []);
 
@@ -25,10 +24,10 @@ const Sidebar = () => {
   console.log(activeMenu);
 
   const activeLink =
-    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-gray-600 text-md m-2  hover:bg-gray-100 hover:text-gray-400";
+    'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-gray-600 text-md m-2  hover:bg-gray-100 hover:text-gray-400';
 
   const normalLink =
-    "flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
+    'flex items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2';
 
   return (
     <div className="ml-3 md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 h-screen">
@@ -40,9 +39,7 @@ const Sidebar = () => {
               onClick={handleCloseMenu}
               className="items-center gap-3 ml-3 mt-4 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
             >
-              <a>
-                <img src="/logo/logo.png" className="w-40 mt-4" alt="" />
-              </a>
+              <img src="/logo/logo.png" className="w-40 mt-4" alt="" />
             </Link>
 
             {/* NOTE: TOOLTIP COMPONENT FROM ANTD */}
@@ -59,7 +56,7 @@ const Sidebar = () => {
           </div>
 
           <div className="mt-10">
-            {url == "students"
+            {url == 'students'
               ? linksStudents.map((item) => (
                   <div
                     className="text-gray-400 m-3 mt-4 uppercase"
@@ -73,11 +70,10 @@ const Sidebar = () => {
                         href={`${link.link}`}
                         key={link.name}
                         onClick={handleCloseMenu}
+                        className={activeLink ? activeLink : normalLink}
                       >
-                        <a className={activeLink ? activeLink : normalLink}>
-                          <span className="text-xl"> {link.icon}</span>
-                          <span className="capitalize">{link.name}</span>
-                        </a>
+                        <span className="text-xl"> {link.icon}</span>
+                        <span className="capitalize">{link.name}</span>
                       </Link>
                     ))}
                   </div>
@@ -95,11 +91,10 @@ const Sidebar = () => {
                         href={`${link.link}`}
                         key={link.name}
                         onClick={handleCloseMenu}
+                        className={activeLink ? activeLink : normalLink}
                       >
-                        <a className={activeLink ? activeLink : normalLink}>
-                          <span className="text-xl"> {link.icon}</span>
-                          <span className="capitalize">{link.name}</span>
-                        </a>
+                        <span className="text-xl"> {link.icon}</span>
+                        <span className="capitalize">{link.name}</span>
                       </Link>
                     ))}
                   </div>

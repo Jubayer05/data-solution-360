@@ -26,7 +26,7 @@ const CourseDetails = () => {
   console.log(courseData);
 
   return (
-    <div className="flex items-start flex-col-reverse md:flex-row max-w-6xl mx-auto font-bangla font-bold">
+    <div className="flex items-start flex-col-reverse md:flex-row max-w-6xl mx-auto font-bold font-heading">
       {/* NOTE: LEFT SIDE */}
       <div className="pt-32 p-5 flex-[.58 1] w-[100%] md:w-[60%]">
         <h2 className="text-4xl md:text-5xl mb-6 -mt-20 font-[700] text-[#101828]">
@@ -40,7 +40,9 @@ const CourseDetails = () => {
         <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
           <img className="w-[60px] mr-4" src="/course/webinar.png" alt="" />
           <div>
-            <span className="cursor-pointer">ফ্রি ওরিয়েন্টেশন ক্লাস</span>
+            <span className="cursor-pointer font-heading">
+              Free Orientation Class
+            </span>
             <div className="flex items-center text-base mt-1">
               <GoCalendar />
               {/* TODO: Make it simple date with day name */}
@@ -49,7 +51,7 @@ const CourseDetails = () => {
           </div>
           <div className="ml-auto">
             <button className="bg-[#1f0835] text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
-              ফ্রি বুক করুন
+              Book Your Seat Now
             </button>
           </div>
         </div>
@@ -65,7 +67,7 @@ const CourseDetails = () => {
           <div className="px-1 md:px-3">
             <div className="flex items-center text-xs pb-1.5">
               <GoCalendar className="text-[#ff8c4b] text-base" />
-              <span className="ml-1.5 cursor-pointer">শুরু হবে</span>
+              <span className="ml-1.5 cursor-pointer">Start Date</span>
             </div>
             <span>{courseDetails?.main_class_starting_date}</span>
           </div>
@@ -73,7 +75,7 @@ const CourseDetails = () => {
           <div className="px-1 md:px-3">
             <div className="flex items-center text-xs pb-1.5">
               <BsCalendarDay className="text-[#ff8c4b] text-base" />
-              <span className="ml-1.5 cursor-pointer">ক্লাসের দিন</span>
+              <span className="ml-1.5 cursor-pointer">Class Days</span>
             </div>
             <span>
               {' '}
@@ -89,7 +91,7 @@ const CourseDetails = () => {
           <div className="px-1 md:px-3">
             <div className="flex items-center text-xs pb-1.5">
               <BsClock className="text-[#ff8c4b] text-base" />
-              <span className="ml-1.5 cursor-pointer">ক্লাসের সময়</span>
+              <span className="ml-1.5 cursor-pointer">Class Time</span>
             </div>
             {/* <span>রাত ৯:০০ - রাত ১০:৩০</span> */}
             <span>{courseDetails?.class_time}</span>
@@ -99,7 +101,7 @@ const CourseDetails = () => {
         {/* NOTE: COURSE INCLUDED ITEMS */}
         <div className="bg-[#101828] p-3 md:p-8 pl-5 md:pl-12 font-normal text-[#eaecf0] rounded-lg mt-8">
           <div className="flex items-center gap-4">
-            <div className="text-base">কোর্স চলাকালীন থাকবে</div>
+            <div className="text-base">During the whole course</div>
             <div className="grow h-[.5px] bg-[#eaecf0]" />
           </div>
 
@@ -112,8 +114,8 @@ const CourseDetails = () => {
                 alt=""
               />
               <div>
-                <p className="m-0 text-base text-[#12b76a]">ইভালুয়েশান টেস্ট</p>
-                <p className="m-0">রেগুলার টেস্টে ঝালিয়ে নিন নিজেকে</p>
+                <p className="m-0 text-base text-[#12b76a]">Evaluation Test</p>
+                <p className="m-0">Test yourself for regular exam</p>
               </div>
             </div>
             {/* NOTE: 2 */}
@@ -124,8 +126,8 @@ const CourseDetails = () => {
                 alt=""
               />
               <div>
-                <p className="m-0 text-base text-[#6993ff]">সাপোর্ট ক্লাস</p>
-                <p className="m-0">সমস্যা গুলোর সমাধান হবে নিয়মিত</p>
+                <p className="m-0 text-base text-[#6993ff]">Support Class</p>
+                <p className="m-0">Solve your problems regularly</p>
               </div>
             </div>
             {/* NOTE: 3 */}
@@ -137,9 +139,9 @@ const CourseDetails = () => {
               />
               <div>
                 <p className="m-0 text-base text-[#ff8c4b]">
-                  প্রোগ্রেস ট্র্যাকিং
+                  Progress Tracking
                 </p>
-                <p className="m-0">থাকুন অলওয়েজ অন ট্র্যাক</p>
+                <p className="m-0">Keep yourself always on track</p>
               </div>
             </div>
             {/* NOTE: 4 */}
@@ -150,8 +152,10 @@ const CourseDetails = () => {
                 alt=""
               />
               <div>
-                <p className="m-0 text-base text-[#ffab00]">ইন্টার্নশীপ অফার</p>
-                <p className="m-0">বেস্ট স্টুডেন্টদের জন্য</p>
+                <p className="m-0 text-base text-[#ffab00]">
+                  Scope for Internship
+                </p>
+                <p className="m-0">For best performers only</p>
               </div>
             </div>
           </div>
@@ -159,7 +163,7 @@ const CourseDetails = () => {
 
         {/* NOTE: ABOUT COURSE  */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-3">কোর্স সম্পর্কে</h2>
+          <h2 className="text-3xl font-bold mb-3 font-heading">About Course</h2>
           <div className="h-[.5px] w-[100%] bg-slate-300" />
 
           {/* <div
@@ -172,11 +176,11 @@ const CourseDetails = () => {
               className="text-lg font-normal"
               dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
             />
-            <p className="text-lg">কোর্সটি কাদের জন্যঃ</p>
+            <p className="text-2xl mt-12">Who is this course for?</p>
             <p className="text-lg font-normal">
               - {courseDetails?.who_is_the_course_for}
             </p>
-            <p className="text-lg">কোর্স শেষ করার পর Extra সুযোগ সুবিধা </p>
+            <p className="text-2xl mt-12">After course benefit</p>
             <p className="text-lg font-normal">
               - {courseDetails?.after_course_benefit}
             </p>
@@ -185,7 +189,7 @@ const CourseDetails = () => {
 
         {/* NOTE: ABOUT INSTRUCTOR */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-3">ইন্সট্রাক্টর</h2>
+          <h2 className="text-2xl font-bold mb-3">Instructor</h2>
           <div className="h-[.5px] w-[100%] bg-slate-300" />
 
           <div className="mt-8 border-l-[3px] border-[#4478ff] rounded-[4px] shadow-lg py-3 px-4 cursor-pointer flex items-center gap-4 hover:bg-[#eaecf0]">
@@ -206,21 +210,21 @@ const CourseDetails = () => {
         </div>
         {/* NOTE: REQUIREMENTS */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-3">রিকোয়ারমেন্টস</h2>
+          <h2 className="text-2xl font-bold mb-3">Requirements</h2>
           <div className="mt-3 mb-8 h-[.5px] w-[100%] bg-slate-300" />
           <p className="text-lg font-normal pb-10">
-            ইন্টারনেট সংযোগসহ ল্যাপটপ/ডেস্কটপ
+            Laptop/desktop with internet connection
           </p>
         </div>
 
         {/* NOTE: HELP */}
         <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-3">হেল্প</h2>
+          <h2 className="text-2xl font-bold mb-3">Help</h2>
           <div className="mt-3 mb-8 h-[.5px] w-[100%] bg-slate-300" />
           <p className="text-lg font-normal cursor-pointer">
-            ব্যাচ সংক্রান্ত যেকোনো তথ্যের জন্যে কল করুন{' '}
-            <span className="font-bold underline">01870106460</span> (সকাল ১০টা
-            থেকে রাত ১০টা)
+            For any batch related information call{' '}
+            <span className="font-bold underline">01870106460</span> (10 am to
+            10 pm)
           </p>
         </div>
       </div>
@@ -239,19 +243,19 @@ const CourseDetails = () => {
           <div className="flex items-center justify-center gap-4 border-b-1 py-4">
             <div className="flex bg-[#fff1e9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
               <ImClock className="text-[rgb(223,97,52)] mr-[6px]" />
-              <span className="text-sm font-[700] tracking-wider">
+              <span className="text-sm font-[700]">
                 {Math.ceil(
                   (new Date(courseDetails?.main_class_starting_date).getTime() -
                     new Date().getTime()) /
                     (1000 * 60 * 60 * 24),
                 )}{' '}
-                দিন বাকি
+                Days Left
               </span>
             </div>
             <div className="flex bg-[rgba(161,68,255,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
               <ImClock className="text-[rgb(120,12,208)] mr-[6px]" />
-              <span className="text-sm font-[700] tracking-wider	 ">
-                মোট {courseDetails?.total_seat_number} টি সিট
+              <span className="text-sm font-[700]">
+                Total {courseDetails?.total_seat_number} Seat
               </span>
             </div>
           </div>
@@ -271,18 +275,18 @@ const CourseDetails = () => {
               </div>
               <div className="flex items-center ml-auto border-b-1 cursor-pointer">
                 <BiShareAlt />
-                <span>শেয়ার</span>
+                <span>Share</span>
               </div>
             </div>
             <div>
               <button className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] mt-6 hover:opacity-[0.8] transition-all">
-                জয়েন লাইভ ব্যাচ
+                Join Live Batch
               </button>
             </div>
           </div>
           {/* NOTE: COURSE DETAILS IN POINTS */}
           <div className="py-4 px-5 border-b-1">
-            <p className="font-bold text-lg">এই কোর্সে আপনি পাচ্ছেন</p>
+            <p className="font-bold text-lg">You will get from this course</p>
             <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[#3a4e67]">
               {courseDetails?.courseShortData?.map(
                 (item) =>
@@ -300,9 +304,9 @@ const CourseDetails = () => {
             <div className="flex justify-center items-center">
               <span className="flex items-center text-[orange] mr-2 cursor-pointer">
                 <BsTelephone className="mr-2" />
-                কল করুন ০১৮৭০১০৬৪৬০
+                Call Us 01870106460
               </span>
-              <span>(সকাল ১০টা থেকে রাত ১০টা) </span>
+              <span>(10 am to 10 pm)</span>
             </div>
           </div>
         </div>
