@@ -11,7 +11,17 @@ const Team = () => {
     {
       name: 'Shaikh Farhad Hossain, PhD',
       profession: 'Trainer and Advisor Data Scientist and AI Researcher',
-      img: '/team/Shamim.jpg',
+      img: '/team/Farhad.jpg',
+    },
+    {
+      name: 'Mr. Noor Ahmed Sarker',
+      profession: 'CTO at Data Solution 360',
+      img: '/team/noor.jpeg',
+    },
+    {
+      name: 'Md. Monjur',
+      profession: 'Business development manager at Data Solution 360',
+      img: '/team/monjur.jpeg',
     },
   ];
 

@@ -1,14 +1,10 @@
-import { Collapse } from 'antd';
-import React, { useState } from 'react';
+import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
-import { faqData } from '../../src/data/data';
+import { faqData, faqDataHome } from '../../src/data/data';
 
-import { Button } from '../index';
-
-const { Panel } = Collapse;
+import { Button, FaqComp } from '../index';
 
 const Faq = () => {
-  const [triggerOpen, setTriggerOpen] = useState(false);
   return (
     <div className="mt-16 mb-28 max-w-6xl mx-auto" id="faq">
       <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
@@ -37,21 +33,8 @@ const Faq = () => {
             Ask your question
           </Button>
         </div>
-        <div className="flex-1">
-          {faqData.map((item) => (
-            <div key={item.id} className="m-5">
-              <Collapse
-                collapsible="header"
-                expandIconPosition="end"
-                defaultActiveKey={['1']}
-              >
-                <Panel header={item.question} key={item.id}>
-                  <p className="">{item.answer}</p>
-                </Panel>
-              </Collapse>
-            </div>
-          ))}
-        </div>
+
+        <FaqComp data={faqDataHome} />
       </div>
     </div>
   );

@@ -18,17 +18,17 @@ html {
 }
 .nav-item,
 .navbar {
-  z-index: 10000;
+  z-index: 20;
 }
 @media screen and (max-width: 800px) {
   .sidebar {
-    z-index: 10000000;
+    z-index: 30;
   }
 }
 
 .e-dlg-center-center,
 .e-quick-popup-wrapper.e-device {
-  z-index: 1000000 !important;
+  z-index: 35 !important;
 }
 
 ::-webkit-scrollbar {

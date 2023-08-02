@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   AboutHome,
   CrashCourse,
@@ -7,6 +7,7 @@ import {
   Footer,
   MainBanner,
   Navbar,
+  Popup,
   Service,
   Technology,
 } from '../index';
@@ -16,9 +17,21 @@ import Subscribe from './Subscribe';
 // import BannerCarousel from "./BannerCarousel";
 
 const Home = () => {
+  const [showPopup, setShowPopup] = useState(false);
+
+  useEffect(() => {
+    const hasVisitedBefore = sessionStorage.getItem('popup');
+    if (!hasVisitedBefore) {
+      setShowPopup(true);
+
+      sessionStorage.setItem('popup', true);
+    }
+  }, []);
+
   return (
     <div>
       <>
+        {showPopup && <Popup handler={setShowPopup} />}
         <Discount />
         <Navbar home="home" />
         <MainBanner />

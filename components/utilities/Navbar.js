@@ -57,12 +57,12 @@ const Navbar = ({ home }) => {
 
   return (
     <div
-      className={`w-full border-b-1 border-[rgb(79,91,140)] md:text-center z-50 px-5 pt-4 pb-3 md:px-4 md:py-0 bg-[rgb(38,52,110)] sticky ${
+      className={`w-full border-b-1 border-[rgb(79,91,140)] md:text-center z-10 px-5 pt-4 pb-3 md:px-4 md:py-0 bg-[rgb(38,52,110)] sticky ${
         home ? 'top-14' : 'top-0'
       }`}
     >
       <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20 ">
-        <div className="flex justify-between items-center z-50">
+        <div className="flex justify-between items-center z-10">
           <Link href="/">
             <img src="/logo/logo-white.png" className="h-16" alt="logo" />
           </Link>
@@ -234,9 +234,9 @@ export default Navbar;
 
 const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
   return (
-    <div className="w-screen z-40 bg-[rgba(0,0,0,0.6)] h-screen fixed top-0 left-0">
+    <div className="w-screen z-10 bg-[rgba(0,0,0,0.6)] h-screen fixed top-0 left-0">
       <div
-        className="block md:hidden z-50 fixed overflow-y-scroll bg-white w-9/12 -left-6 -top-5 
+        className="block md:hidden z-20 fixed overflow-y-scroll bg-white w-9/12 -left-6 -top-5 
       pt-5 pb-2 h-[105vh]"
       >
         <div className="flex items-center justify-between pl-10 pr-3 pt-4">

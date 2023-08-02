@@ -1,13 +1,13 @@
 import React from 'react';
-import { Footer, Navbar } from '../../components';
-import Prospectus from '../../components/Prospectus/Prospectus';
+import { FaqComp, Footer, Navbar } from '../../components';
 import WhatsApp from '../../components/utilities/WhatsApp';
+import { faqDataPage } from '../../src/data/data';
 
 const index = () => {
   return (
     <div>
       <Navbar />
-      <Prospectus />
+      <FaqComp title="Frequently Asked Questions" data={faqDataPage} />
       <Footer />
       <WhatsApp />
     </div>
