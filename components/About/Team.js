@@ -14,7 +14,7 @@ const Team = () => {
       img: '/team/Farhad.jpg',
     },
     {
-      name: 'Mr. Noor Ahmed Sarker',
+      name: 'Noor Ahmed Sarker',
       profession: 'CTO at Data Solution 360',
       img: '/team/noor.jpeg',
     },
