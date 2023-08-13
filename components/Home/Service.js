@@ -1,24 +1,24 @@
 /* eslint-disable @next/next/no-img-element */
-import React from "react";
-import { useStateContext } from "../../src/context/ContextProvider";
-import { services } from "../../src/data/data";
+import React from 'react';
+import { useStateContext } from '../../src/context/ContextProvider';
+import { services } from '../../src/data/data';
 
 const Service = () => {
   const { language } = useStateContext();
 
   return (
     <div className="bg-[#edf2f5]">
-      <div className="max-w-6xl py-10 mx-auto">
+      <div className="max-w-6xl py-10 mx-auto font-body">
         <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain	">
-          {language === "English" ? (
-            "See the feature of Data Solution - 360"
+          {language === 'English' ? (
+            'See the feature of Data Solution - 360'
           ) : (
             <span className="font-bangla">
               ডেটা সলিউশন - 360 এর ফিচারগুলো দেখুন
             </span>
           )}
         </h2>
-        <p className="text-center font-bold font-heading  mb-16 text-headerMain	">
+        <p className="text-center font-bold font-subHeading mb-16 text-headerMain	">
           During the course Data Solution - 360 provides all of this features
         </p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-x-6 gap-y-6 px-4">

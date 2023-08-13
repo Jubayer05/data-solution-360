@@ -94,7 +94,9 @@ const Navbar = ({ home }) => {
                 <li key={item.id} className="">
                   <Link
                     href={item?.link}
-                    className={`font-bangla cursor-pointer font-medium  
+                    className={`${
+                      language === 'English' ? 'font-body' : 'font-bangla'
+                    } cursor-pointer font-medium  
                        ${
                          url == item.slug
                            ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
@@ -117,7 +119,9 @@ const Navbar = ({ home }) => {
                   <li key={item.id} className="">
                     <Link
                       href={item?.link}
-                      className={`font-bangla cursor-pointer font-medium  
+                      className={`${
+                        language === 'English' ? 'font-body' : 'font-bangla'
+                      } cursor-pointer font-medium  
                        ${
                          url == item.slug
                            ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
@@ -133,8 +137,10 @@ const Navbar = ({ home }) => {
                   <li className="">
                     <Link
                       href="/admin/dashboard"
-                      className="font-bangla cursor-pointer font-medium visited:text-white text-white 
-                                  px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-[#61CE70]"
+                      className={`${
+                        language === 'English' ? 'font-body' : 'font-bangla'
+                      } cursor-pointer font-medium visited:text-white text-white 
+                        px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-[#61CE70]`}
                     >
                       {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
                     </Link>
@@ -195,7 +201,13 @@ const Navbar = ({ home }) => {
                           onClick={handleLogout}
                         >
                           <FiLogOut className="text-sm" />{' '}
-                          <span className="pl-2 font-bangla">
+                          <span
+                            className={`pl-2 ${
+                              language === 'English'
+                                ? 'font-body'
+                                : 'font-bangla'
+                            }`}
+                          >
                             {language === 'English' ? 'Logout' : 'লগ ইন'}
                           </span>
                         </button>
@@ -217,7 +229,11 @@ const Navbar = ({ home }) => {
                   onClick={() => {}}
                 >
                   <FiLogIn className="text-sm" />{' '}
-                  <span className="pl-2 font-bangla">
+                  <span
+                    className={`pl-2 ${
+                      language === 'English' ? 'font-body' : 'font-bangla'
+                    }`}
+                  >
                     {language === 'English' ? 'Log in' : 'লগ ইন'}
                   </span>
                 </button>

@@ -6,10 +6,10 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      display: ['Open Sans', 'sans-serif'],
-      body: ['Open Sans', 'sans-serif'],
-      bangla: ['Hind Siliguri', 'sans-serif'],
       heading: ['Roboto Slab', 'serif'],
+      subHeading: ['Roboto', 'sans-serif'],
+      body: ['Helvetica', 'sans-serif'],
+      bangla: ['Hind Siliguri', 'sans-serif'],
     },
     extend: {
       fontSize: {
@@ -31,7 +31,7 @@ module.exports = {
         color: 'rgba(0, 0, 0, 0.1)',
       },
       textColor: {
-        input: '#929292',
+        input: '#000',
         primary: '#d6295f',
         headerMain: '#26346E',
       },

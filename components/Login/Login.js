@@ -216,163 +216,178 @@ const Login = () => {
 
   return (
     <div
-      className="py-14"
-      style={{ backgroundImage: 'linear-gradient(30deg,#62d7e1, #b933dc)' }}
+      className=" bg-slate-200 font-body bg-cover bg-center bg-no-repeat"
+      style={{ backgroundImage: "url('/Background/login.jpg')" }}
     >
-      <div className="flex justify-center items-center min-h-screen	">
-        <div className="">
-          <div
-            className="bg-white  w-72 sm:w-96 p-9 rounded-md"
-            style={{ marginTop: '30px' }}
-          >
-            <h3 className="text-center text-xl font-bold">Login</h3>
-
-            <p className="pt-4 text-xs font-bold text-gray-500 after:content-['*'] after:ml-0.5 after:text-red-500 ">
-              Email
-            </p>
+      <div className="bg-[#000000dd] py-14">
+        <div className="max-w-6xl mx-auto">
+          <Link href="/">
+            <img className="w-[150px] mb-5" src="/logo/logo-white.png" alt="" />
+          </Link>
+        </div>
+        <div className="flex justify-center items-center min-h-screen	">
+          <div className="">
             <div
-              className="flex items-end pb-2 border-b-2	mt-1"
-              style={{ borderBottomColor: '#c6c6c6' }}
+              className="bg-white  w-72 sm:w-[450px] p-9 rounded-md"
+              style={{ marginTop: '30px' }}
             >
-              <Icon
-                icon="clarity:email-line"
-                className="text-xl text-gray-400"
+              <img
+                className="w-[100px] mx-auto mb-5"
+                src="/logo/logo.png"
+                alt=""
               />
-              <input
-                onChange={(e) =>
-                  setFormData({ ...formData, email: e.target.value })
-                }
-                className="border-0 outline-0 block w-full ml-2 text-sm text-input"
-                size="large"
-                placeholder="Your Email"
-                type="email"
-              />
-            </div>
+              <h3 className="text-center text-2xl font-bold">Login</h3>
 
-            <p className="pt-4 text-xs font-bold text-gray-500 after:content-['*'] after:ml-0.5 after:text-red-500 ">
-              Password
-            </p>
-            <div className="flex items-end pb-2 border-b-2	mt-1">
-              <Icon icon="bx:lock-alt" className="text-xl text-gray-400" />
-              <input
-                onChange={(e) =>
-                  setFormData({ ...formData, password: e.target.value })
-                }
-                className="border-0 outline-0 block w-full ml-2 text-sm text-input"
-                size="large"
-                placeholder="Enter password"
-                type="password"
-              />
-            </div>
-
-            {haveAccount && (
-              <>
-                <p className="pt-4 text-xs font-bold text-gray-500 after:content-['*'] after:ml-0.5 after:text-red-500 ">
-                  {' '}
-                  Confirm Password
-                </p>
-                <div className="flex items-end pb-2 border-b-2	mt-1">
-                  <Icon icon="bx:lock-alt" className="text-xl text-gray-400" />
-                  <input
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        confirmPassword: e.target.value,
-                      })
-                    }
-                    className="border-0 outline-0 block w-full ml-2 text-sm text-input"
-                    size="large"
-                    placeholder="Retype password"
-                    type="password"
-                  />
-                </div>
-              </>
-            )}
-
-            {!haveAccount && (
-              <p className="text-right text-xs mt-1 font-semibold text-input">
-                <span className="cursor-pointer hover:underline">
-                  forgot password
-                </span>
+              <p className="pt-4 text-sm font-bold text-gray-500 after:content-['*'] after:ml-0.5 after:text-red-500 ">
+                Email
               </p>
-            )}
-
-            <div>
-              <button
-                className="w-full border-0 text-white p-2 rounded-full block mt-5"
-                style={{
-                  backgroundImage:
-                    'linear-gradient(to right, #64d2db, #e63df6)',
-                }}
-                onClick={haveAccount ? handleCreateAccount : handleLogin}
+              <div
+                className="flex items-end pb-2"
+                style={{ borderBottomColor: '#c6c6c6' }}
               >
-                {haveAccount ? 'Create Account' : 'Login'}
-              </button>
-            </div>
+                {/* <Icon
+                  icon="clarity:email-line"
+                  className="text-xl text-gray-400"
+                /> */}
+                <input
+                  onChange={(e) =>
+                    setFormData({ ...formData, email: e.target.value })
+                  }
+                  className="border-2 rounded-md outline-0 block w-full px-2 py-3 text-base text-input"
+                  size="large"
+                  placeholder="Your Email"
+                  type="email"
+                />
+              </div>
 
-            <p className="text-center mt-9">
-              {haveAccount ? (
-                <span>Already have an account?</span>
-              ) : (
-                <span>Don&apos;t have an account?</span>
+              <p className="pt-4 text-sm font-bold text-gray-500 after:content-['*'] after:ml-0.5 after:text-red-500 ">
+                Password
+              </p>
+              <div className="flex items-end pb-2">
+                {/* <Icon icon="bx:lock-alt" className="text-xl text-gray-400" /> */}
+                <input
+                  onChange={(e) =>
+                    setFormData({ ...formData, password: e.target.value })
+                  }
+                  className="border-2 rounded-md outline-0 block w-full px-2 py-3 text-base text-input"
+                  size="large"
+                  placeholder="Enter password"
+                  type="password"
+                />
+              </div>
+
+              {haveAccount && (
+                <>
+                  <p className="pt-4 text-sm font-bold text-gray-500 after:content-['*'] after:ml-0.5 after:text-red-500 ">
+                    {' '}
+                    Confirm Password
+                  </p>
+                  <div className="flex items-end pb-2 ">
+                    {/* <Icon
+                      icon="bx:lock-alt"
+                      className="text-xl text-gray-400"
+                    /> */}
+                    <input
+                      onChange={(e) =>
+                        setFormData({
+                          ...formData,
+                          confirmPassword: e.target.value,
+                        })
+                      }
+                      className="border-2 rounded-md outline-0 block w-full px-2 py-3 text-base text-input"
+                      size="large"
+                      placeholder="Retype password"
+                      type="password"
+                    />
+                  </div>
+                </>
               )}
-            </p>
-            <p className="text-center uppercase font-semibold text-xs mt-1 text-input">
-              {haveAccount ? (
-                <span
-                  className="cursor-pointer hover:underline"
-                  onClick={() => setHaveAccount(!haveAccount)}
-                >
-                  sign in
-                </span>
-              ) : (
-                <span
-                  className="cursor-pointer hover:underline"
-                  onClick={() => setHaveAccount(!haveAccount)}
-                >
-                  sign up
-                </span>
+
+              {!haveAccount && (
+                <p className="text-right text-xs mt-1 font-semibold text-input">
+                  <span className="cursor-pointer hover:underline">
+                    forgot password
+                  </span>
+                </p>
               )}
-            </p>
 
-            <p className="text-xs font-semibold text-input text-center mt-9">
-              or sign up using
-            </p>
+              <div>
+                <button
+                  className="w-full border-0 text-white p-2 rounded-full block mt-5 bg-primary-bg"
+                  // style={{
+                  //   backgroundImage:
+                  //     'linear-gradient(to right, #64d2db, #e63df6)',
+                  // }}
+                  onClick={haveAccount ? handleCreateAccount : handleLogin}
+                >
+                  {haveAccount ? 'Create Account' : 'Login'}
+                </button>
+              </div>
 
-            <div className="flex justify-center items-center mt-4">
-              <PhoneLogin />
+              <p className="text-center mt-5 text-sm">
+                {haveAccount ? (
+                  <span>Already have an account?</span>
+                ) : (
+                  <span>Don&apos;t have an account?</span>
+                )}
+              </p>
+              <p className="text-center uppercase font-semibold text-sm mt-1 text-input">
+                {haveAccount ? (
+                  <span
+                    className="cursor-pointer hover:underline"
+                    onClick={() => setHaveAccount(!haveAccount)}
+                  >
+                    sign in
+                  </span>
+                ) : (
+                  <span
+                    className="cursor-pointer hover:underline"
+                    onClick={() => setHaveAccount(!haveAccount)}
+                  >
+                    sign up
+                  </span>
+                )}
+              </p>
 
-              <Icon
-                onClick={handleFacebookLogin}
-                icon="akar-icons:facebook-fill"
-                className="m-2 cursor-pointer text-5xl"
-                style={{ color: '#3e548d' }}
-              />
+              <p className="text-sm font-semibold text-input text-center mt-9">
+                or sign up using
+              </p>
 
-              <Icon
-                onClick={handleGoogleSignIn}
-                icon="akar-icons:google-contained-fill"
-                className="m-2 cursor-pointer text-5xl"
-                style={{ color: '#d95447' }}
-              />
+              <div className="flex justify-center items-center mt-4">
+                <PhoneLogin />
+
+                <Icon
+                  onClick={handleFacebookLogin}
+                  icon="akar-icons:facebook-fill"
+                  className="m-2 cursor-pointer text-5xl"
+                  style={{ color: '#3e548d' }}
+                />
+
+                <Icon
+                  onClick={handleGoogleSignIn}
+                  icon="akar-icons:google-contained-fill"
+                  className="m-2 cursor-pointer text-5xl"
+                  style={{ color: '#d95447' }}
+                />
+              </div>
+
+              <p className="text-center mt-4">
+                By continuing, you are indicating that you accept our{' '}
+                <Link
+                  href="/terms-and-conditions"
+                  className="text-blue-500 visited:text-blue-500 font-medium"
+                >
+                  Terms of Service
+                </Link>{' '}
+                and{' '}
+                <Link
+                  href="/privacy-policy"
+                  className="text-blue-500 visited:text-blue-500 font-medium"
+                >
+                  Privacy Policy
+                </Link>
+              </p>
             </div>
-
-            <p className="text-center">
-              By continuing, you are indicating that you accept our{' '}
-              <Link
-                href="/privacy-policy"
-                className="text-blue-500 visited:text-blue-500 font-medium"
-              >
-                Terms of Service
-              </Link>{' '}
-              and{' '}
-              <Link
-                href="/privacy-policy"
-                className="text-blue-500 visited:text-blue-500 font-medium"
-              >
-                Privacy Policy
-              </Link>
-            </p>
           </div>
         </div>
       </div>

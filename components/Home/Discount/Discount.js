@@ -3,7 +3,7 @@ import React from 'react';
 import Countdown from './CountDown';
 
 const Discount = () => {
-  const targetDate = new Date('2023-08-01T23:59:59');
+  const targetDate = new Date('2023-10-01T23:59:59');
 
   return (
     <div className="bg-green-600 sticky top-0 z-20">
