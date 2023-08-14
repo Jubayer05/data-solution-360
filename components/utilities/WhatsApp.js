@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import MessengerCustomerChat from 'react-messenger-customer-chat';
+import { CustomChat, FacebookProvider } from 'react-facebook';
 
 const WhatsApp = () => {
   const handleClick = () => {
@@ -19,11 +19,15 @@ const WhatsApp = () => {
       </div>
 
       <div className="w-[50px] md:w-[60px] fixed bottom-14 md:bottom-20 right-5 md:right-7 cursor-pointer">
-        <MessengerCustomerChat
+        {/* <MessengerCustomerChat
           pageId="61550107890707"
-          appId="719749473297599"
+          appId=""
           htmlRef="<REF_STRING>"
-        />
+        /> */}
+
+        <FacebookProvider appId="719749473297599" chatSupport>
+          <CustomChat pageId="61550107890707" minimized={false} />
+        </FacebookProvider>
       </div>
     </div>
   );
