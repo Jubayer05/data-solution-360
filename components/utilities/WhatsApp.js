@@ -12,23 +12,15 @@ const WhatsApp = () => {
   return (
     <div>
       <div
-        className="w-[50px] md:w-[55px] fixed bottom-20 md:bottom-28 right-5 md:right-7 cursor-pointer"
+        className="w-[50px] md:w-[55px] fixed bottom-[6rem] md:bottom-24 right-[1.55rem] md:right-7 cursor-pointer"
         onClick={handleClick}
       >
         <img src="/whatsapp.png" alt="whatsapp" />
       </div>
 
-      <div className="w-[50px] md:w-[60px] fixed bottom-20 right-5 md:right-7 cursor-pointer">
-        {/* <MessengerCustomerChat
-          pageId="61550107890707"
-          appId=""
-          htmlRef="<REF_STRING>"
-        /> */}
-
-        <FacebookProvider appId="719749473297599" chatSupport>
-          <CustomChat pageId="131657960804162" minimized={false} />
-        </FacebookProvider>
-      </div>
+      <FacebookProvider appId="719749473297599" chatSupport>
+        <CustomChat pageId="131657960804162" minimized={false} />
+      </FacebookProvider>
     </div>
   );
 };
