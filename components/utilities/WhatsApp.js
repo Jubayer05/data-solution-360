@@ -12,7 +12,7 @@ const WhatsApp = () => {
   return (
     <div>
       <div
-        className="w-[50px] md:w-[55px] fixed bottom-[6rem] md:bottom-24 right-[1.55rem] md:right-7 cursor-pointer"
+        className="w-[60px] fixed bottom-[6rem] md:bottom-24 right-[1.55rem] md:right-7 cursor-pointer"
         onClick={handleClick}
       >
         <img src="/whatsapp.png" alt="whatsapp" />
