@@ -18,7 +18,7 @@ const WhatsApp = () => {
         <img src="/whatsapp.png" alt="whatsapp" />
       </div>
 
-      <div className="w-[50px] md:w-[60px] fixed bottom-14 md:bottom-20 right-5 md:right-7 cursor-pointer">
+      <div className="w-[50px] md:w-[60px] fixed bottom-20 right-5 md:right-7 cursor-pointer">
         {/* <MessengerCustomerChat
           pageId="61550107890707"
           appId=""
@@ -26,7 +26,7 @@ const WhatsApp = () => {
         /> */}
 
         <FacebookProvider appId="719749473297599" chatSupport>
-          <CustomChat pageId="122093005160018799" minimized={false} />
+          <CustomChat pageId="131657960804162" minimized={false} />
         </FacebookProvider>
       </div>
     </div>
