@@ -26,7 +26,7 @@ const WhatsApp = () => {
         /> */}
 
         <FacebookProvider appId="719749473297599" chatSupport>
-          <CustomChat pageId="61550107890707" minimized={false} />
+          <CustomChat pageId="122093005160018799" minimized={false} />
         </FacebookProvider>
       </div>
     </div>
