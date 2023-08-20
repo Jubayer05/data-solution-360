@@ -42,7 +42,7 @@ const Team = () => {
       details: '',
     },
     {
-      name: 'Noor Ahmed Sarker',
+      name: 'Noor Ahmad Sarker',
       profession: 'CTO at Data Solution 360',
       img: '/team/noor.jpeg',
       details: `<p>At the moment, Mr. Noor Ahmad Sarker serves as Data Solution 360's CTO. In 2021, he graduated with a Bachelor of Science (B.Sc.) from Rajshahi University of Engineering & Technology (RUET). Later, in October 2022, he started working for Data Solution 360 as an analytics engineer before being promoted to CTO in March 2023. <br/> <br/> Mr. Noor enjoys learning about and researching data science. He is currently working on some projects related to Data Analytics & Machine Learning after successfully completing several projects on data analysis. His ambition is to work as a researcher in the field of data science. <br/><br/> Mr. Noor is very knowledgeable about various data analytics and visualization tools. He utilized well-known Python libraries like Numpy, Pandas, and others to work on a variety of data analysis and machine learning projects.</p>`,

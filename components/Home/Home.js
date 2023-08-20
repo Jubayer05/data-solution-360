@@ -2,7 +2,6 @@ import React, { useEffect, useState } from 'react';
 import {
   AboutHome,
   CrashCourse,
-  Discount,
   Faq,
   Footer,
   MainBanner,
@@ -32,8 +31,9 @@ const Home = () => {
     <div>
       <>
         {showPopup && <Popup handler={setShowPopup} />}
-        <Discount />
-        <Navbar home="home" />
+        {/* <Discount /> */}
+        {/* <Navbar home="home" /> */}
+        <Navbar />
         <MainBanner />
         {/* <BannerCompanies /> */}
         {/* <BannerCarousel /> */}
