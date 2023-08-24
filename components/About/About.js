@@ -4,7 +4,7 @@ import Team from './Team';
 const About = () => {
   return (
     <div className="bg-[#ffffff]">
-      <div className="pt-24 max-w-6xl mx-auto ">
+      <div className="px-4 pt-24 max-w-6xl mx-auto ">
         <div className="max-w-4xl mx-auto">
           <h2 className="text-center text-4xl font-bold font-heading mb-12 text-headerMain	">
             About Us

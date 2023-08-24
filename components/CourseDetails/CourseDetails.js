@@ -28,6 +28,7 @@ const CourseDetails = () => {
   return (
     <div className="flex items-start flex-col-reverse md:flex-row max-w-6xl mx-auto font-bold font-heading">
       {/* NOTE: LEFT SIDE */}
+      {/* TODO: Make different files inside courseDetails folder and distribute the components for better code management */}
       <div className="pt-32 p-5 flex-[.58 1] w-[100%] md:w-[60%]">
         <h2 className="text-4xl md:text-5xl mb-6 -mt-20 font-[700] text-[#101828]">
           {courseDetails?.title}
@@ -244,11 +245,16 @@ const CourseDetails = () => {
             <div className="flex bg-[#fff1e9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
               <ImClock className="text-[rgb(223,97,52)] mr-[6px]" />
               <span className="text-sm font-[700]">
-                {Math.ceil(
-                  (new Date(courseDetails?.main_class_starting_date).getTime() -
-                    new Date().getTime()) /
-                    (1000 * 60 * 60 * 24),
-                )}{' '}
+                {new Date(courseDetails?.main_class_starting_date).getTime() >=
+                new Date().getTime()
+                  ? Math.ceil(
+                      (new Date(
+                        courseDetails?.main_class_starting_date,
+                      ).getTime() -
+                        new Date().getTime()) /
+                        (1000 * 60 * 60 * 24),
+                    )
+                  : 0}{' '}
                 Days Left
               </span>
             </div>
