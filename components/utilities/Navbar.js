@@ -24,7 +24,7 @@ const Navbar = ({ home }) => {
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
 
-  console.log(user?.photoURL);
+  // console.log(user?.photoURL);
 
   useEffect(() => {
     if (eng) {
@@ -42,7 +42,7 @@ const Navbar = ({ home }) => {
   }, []);
 
   const handleLogout = () => {
-    console.log('Hello');
+    // console.log('Hello');
     signOut(auth)
       .then(() => {
         localStorage.clear();
@@ -53,7 +53,7 @@ const Navbar = ({ home }) => {
       });
   };
 
-  console.log(photoUrl);
+  // console.log(photoUrl);
 
   return (
     <div

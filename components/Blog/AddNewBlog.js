@@ -90,7 +90,6 @@ const AddNewBlog = () => {
     if (
       blogData.title !== '' &&
       convertContent !== null &&
-      blogData.img !== '' &&
       blogData.author !== ''
     ) {
       firebase
@@ -105,6 +104,7 @@ const AddNewBlog = () => {
         })
         .then(() => {
           alert('Blog Data was successfully uploaded.');
+          window.location.reload();
         })
         .catch((error) => {
           alert(error.message + '' + 'Something went wrong');

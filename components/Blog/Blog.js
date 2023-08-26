@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import { Empty } from 'antd';
 import { convert } from 'html-to-text';
 import Link from 'next/link';
 import React from 'react';
@@ -21,15 +22,21 @@ const Blog = () => {
         {blogData.map((item) => (
           <div
             key={item.id}
-            className="shadow-xl rounded-xl overflow-hidden flex flex-col mt-6"
+            className="shadow-xl rounded-xl border overflow-hidden flex flex-col mt-6"
           >
-            <img src={item.img} alt="" />
+            {item.img ? (
+              <img className="h-[250px]" src={item.img} alt="" />
+            ) : (
+              <Empty className="h-[250px] pt-16" description={false} />
+            )}
 
             <div className="p-4 flex-1">
               <div>
                 <h2 className="text-2xl font-bold cursor-pointer transition-colors duration-300">
                   <Link
-                    href={`/blog/${item.slug}`}
+                    href={`/blog/${encodeURIComponent(item.slug)}?id=${
+                      item.id
+                    }`}
                     className="text-black hover:text-red-400 "
                   >
                     {item.title}
