@@ -21,7 +21,7 @@ const BlogContentItem = () => {
   }, []);
 
   return (
-    <div className="max-w-4xl mx-auto pt-24">
+    <div className="max-w-4xl mx-auto pt-24 px-2">
       <h2 className="text-5xl mt-4 pb-4">{blogItem?.title}</h2>
       <h3 className="text-lg font-bold">{blogItem?.author}</h3>
       <p className="-mt-1 text-sm">Posted on {blogItem?.date}</p>
