@@ -5,10 +5,10 @@ import { RxCross1 } from 'react-icons/rx';
 const Popup = ({ handler }) => {
   return (
     <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-30 flex justify-center items-center">
-      <div className="bg-[#bef4d4] h-3/5 w-3/5 rounded-md relative flex justify-center items-center">
+      <div className="bg-[#fff6ef] h-3/5 w-4/5 lg:w-3/5 px-2 rounded-md relative flex justify-center items-center">
         <div>
           <h2 className="font-heading text-2xl md:text-4xl text-center mt-4">
-            Welcome to Data Solution - 360
+            Welcome to <br /> Data Solution - 360
           </h2>
           <p className="text-center text-lg mt-6 font-heading">
             Sign up today and get 10% extra discount.

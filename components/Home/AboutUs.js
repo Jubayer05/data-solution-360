@@ -5,12 +5,12 @@ import YoutubeEmbed from '../utilities/YoutubeEmbed';
 const AboutUs = () => {
   return (
     <div className="max-w-6xl mx-auto my-10">
-      <div className="max-w-6xl mx-auto flex justify-between items-center flex-col lg:flex-row">
+      <div className="max-w-6xl mx-auto flex justify-between items-center flex-col lg:flex-row gap-4 px-2">
         <div className="flex-1">
           <YoutubeEmbed embedId="OywwMI8a2mE" />
         </div>
-        <div className="flex-1 pl-14">
-          <h2 className="text-3xl font-heading text-headerMain">
+        <div className="flex-1 p-2 md:pl-14">
+          <h2 className="text-[26px] md:text-3xl font-heading text-headerMain">
             For your successful career Data Solution - 360 is always with you.
           </h2>
           <p className="text-lg">
