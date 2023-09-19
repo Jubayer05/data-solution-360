@@ -67,20 +67,20 @@ export const navItems2 = [
 ];
 
 export const navDropItems = [
-  {
-    id: 'nav-1',
-    title: 'Dashboard',
-    slug: 'dashboard',
-    titleBang: 'ড্যাশবোর্ড',
-    link: '/students/dashboard',
-  },
-  {
-    id: 'nav-5',
-    title: 'Profile',
-    slug: 'profile',
-    titleBang: 'প্রোফাইল',
-    link: '/students/profile',
-  },
+  // {
+  //   id: 'nav-1',
+  //   title: 'Dashboard',
+  //   slug: 'dashboard',
+  //   titleBang: 'ড্যাশবোর্ড',
+  //   link: '/students/dashboard',
+  // },
+  // {
+  //   id: 'nav-5',
+  //   title: 'Profile',
+  //   slug: 'profile',
+  //   titleBang: 'প্রোফাইল',
+  //   link: '/students/profile',
+  // },
   {
     id: 'nav-2',
     title: 'Terms and Condition',
@@ -92,7 +92,7 @@ export const navDropItems = [
     id: 'nav-3',
     title: 'Return Policy',
     slug: 'return-policy',
-    titleBang: 'রিটার্ন এন্ড রিফান্ড পলিসি',
+    titleBang: 'রিটার্ন পলিসি',
     link: '/return-and-refund-policy',
   },
   {
@@ -100,7 +100,7 @@ export const navDropItems = [
     title: 'Help Center',
     slug: 'help',
     titleBang: 'হেল্প',
-    link: '/help',
+    link: '/contact',
   },
 ];
 

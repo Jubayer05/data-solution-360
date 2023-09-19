@@ -4,7 +4,6 @@ const FreeCourse = () => {
   return (
     <div className="mt-16 font-heading max-w-3xl mx-auto pb-12 px-3">
       <h1 className="text-4xl font-bold text-center">Privacy Policy</h1>
-      <p className="text-base">Effective Date: [Date]</p>
       <p className="text-base mt-6">
         This Privacy Policy (&quot;Policy&quot;) describes how{' '}
         <strong>Data Solution 360</strong>

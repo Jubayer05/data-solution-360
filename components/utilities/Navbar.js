@@ -79,6 +79,7 @@ const Navbar = ({ home }) => {
             setEng={setEng}
             url={url}
             photoUrl={photoUrl}
+            language={language}
           />
         )}
         <div
@@ -248,7 +249,7 @@ const Navbar = ({ home }) => {
 
 export default Navbar;
 
-const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
+const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl, language }) => {
   return (
     <div className="w-screen z-10 bg-[rgba(0,0,0,0.6)] h-screen fixed top-0 left-0">
       <div
@@ -277,7 +278,9 @@ const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
             } 
               my-1 `}
               >
-                <span>{item.title}</span>
+                <span>
+                  {language === 'English' ? item.title : item.titleBang}
+                </span>
                 <BiChevronRight className="text-xl" />
               </Link>
             </li>
@@ -296,7 +299,8 @@ const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
         <div className="h-[1px] mb-4 bg-slate-300" />
 
         <div className="pl-12 pr-6 pt-2 pb-4">
-          <h2 className="text-center text-xl">Profile</h2>
+          {/* <h2 className="text-center text-xl">Profile</h2> */}
+          <h2 className="text-center text-xl">More</h2>
 
           {/* NOTE: DROPDOWN */}
           <ul className="pt-2 pb-4">
@@ -312,7 +316,9 @@ const Sidebar = ({ url, setOpenNav, eng, setEng, photoUrl }) => {
                   } 
                   my-1 `}
                 >
-                  <span>{item.title}</span>
+                  <span>
+                    {language === 'English' ? item.title : item.titleBang}
+                  </span>
                   <BiChevronRight className="text-xl" />
                 </Link>
               </li>

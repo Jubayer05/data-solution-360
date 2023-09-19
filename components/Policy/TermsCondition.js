@@ -4,7 +4,6 @@ const FreeCourse = () => {
   return (
     <div className="mt-16 font-heading max-w-3xl mx-auto pb-12 px-3">
       <h1 className="text-4xl font-bold text-center">Terms and Conditions</h1>
-      <p className="text-base">Effective Date: [Date]</p>
       <p className="text-base mt-6">
         These Terms and Conditions (&quot;Terms&quot;) govern your use of the
         Data Solution 360 website and online course selling platform
