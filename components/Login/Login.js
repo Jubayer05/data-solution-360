@@ -228,7 +228,7 @@ const Login = () => {
         <div className="flex justify-center items-center min-h-screen	">
           <div className="">
             <div
-              className="bg-white  w-72 sm:w-[450px] p-9 rounded-md"
+              className="bg-white w-80 sm:w-[450px] p-9 rounded-md"
               style={{ marginTop: '30px' }}
             >
               <img
