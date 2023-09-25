@@ -5,8 +5,11 @@ import { RxCross1 } from 'react-icons/rx';
 const Popup = ({ handler }) => {
   return (
     <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-30 flex justify-center items-center">
-      <div className="bg-[#fff6ef] h-3/5 w-4/5 lg:w-3/5 px-2 rounded-md relative flex justify-center items-center">
-        <div>
+      <div
+        style={{ backgroundImage: 'url("/course/photo_popup-01.jpeg")' }}
+        className=" h-[400px] md:h-[450px] lg:h-[580px] w-[350px] md:w-[480px] lg:w-[600px] p-2 rounded-md relative flex justify-center items-end bg-cover"
+      >
+        {/* <div>
           <h2 className="font-heading text-2xl md:text-4xl text-center mt-4">
             Welcome to <br /> Data Solution - 360
           </h2>
@@ -20,7 +23,16 @@ const Popup = ({ handler }) => {
               </button>
             </Link>
           </div>
-        </div>
+        </div> */}
+        {/* <div>&nbsp;</div> */}
+        <Link href="/course-details/me2qACJYYnfpUVMS1LL0">
+          <button
+            className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 
+          bg-primary-bg transition-all duration-300 ease-linear `}
+          >
+            Click Here for Details
+          </button>
+        </Link>
         <div className="absolute -top-3 -right-3">
           <RxCross1
             onClick={() => handler(false)}

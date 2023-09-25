@@ -45,5 +45,9 @@
     "eslint-config-next": "12.1.6",
     "postcss": "^8.4.14",
     "tailwindcss": "^3.1.2"
-  }
+  },
+  "main": "index.js",
+  "repository": "https://github.com/Jubayer05/data-solution-360.git",
+  "author": "Jubayer05 <jubayer0504@gmail.com>",
+  "license": "MIT"
 }
