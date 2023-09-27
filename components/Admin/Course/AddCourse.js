@@ -322,6 +322,15 @@ const AddCourse = () => {
           />
         </div>
 
+        {/* InputBox component for the Course Details */}
+        <InputBox
+          title="Drive Link"
+          id="driveLink"
+          placeholder="https://drive.google.com/file/xyz"
+          func={handleInputChange}
+          type="text"
+        />
+
         {/* Minimum 7 short point for course details */}
         <div className="border-1 mt-5 py-6 px-3 rounded-lg bg-[#f0f0f0]">
           <p className="text-lg font-semibold text-[#17012e]">
