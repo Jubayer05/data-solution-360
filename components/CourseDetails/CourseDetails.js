@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { BiShareAlt } from 'react-icons/bi';
 import {
@@ -177,6 +178,21 @@ const CourseDetails = () => {
               className="text-lg font-normal"
               dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
             />
+            {courseDetails?.drive_link && (
+              <>
+                <p className="text-2xl mt-12">Full Course Details Link</p>
+
+                <button className="bg-[#1f0835] text-[#f9fbff] py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
+                  <Link
+                    href={courseDetails?.drive_link}
+                    className="text-[#f9fbff] visited:text-[#f9fbff]"
+                    target="_blank"
+                  >
+                    See More Details Module
+                  </Link>
+                </button>
+              </>
+            )}
             <p className="text-2xl mt-12">Who is this course for?</p>
             <p className="text-lg font-normal">
               - {courseDetails?.who_is_the_course_for}
