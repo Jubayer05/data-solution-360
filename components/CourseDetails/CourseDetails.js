@@ -205,7 +205,7 @@ const CourseDetails = () => {
         </div>
 
         {/* NOTE: ABOUT INSTRUCTOR */}
-        <div className="mt-16">
+        {/* <div className="mt-16">
           <h2 className="text-2xl font-bold mb-3">Instructor</h2>
           <div className="h-[.5px] w-[100%] bg-slate-300" />
 
@@ -224,7 +224,7 @@ const CourseDetails = () => {
               </p>
             </div>
           </div>
-        </div>
+        </div> */}
         {/* NOTE: REQUIREMENTS */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-3">Requirements</h2>

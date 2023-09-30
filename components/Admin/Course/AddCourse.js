@@ -119,7 +119,6 @@ const AddCourse = () => {
     } else {
       alert('File Size must be under 1mb');
     }
-    // console.log(fileSize);
   };
 
   // Handler for form submission
@@ -159,13 +158,9 @@ const AddCourse = () => {
         .catch((error) => {
           alert(error.message + '' + 'Something went wrong');
         });
-      // console.log(courseData);
     } else {
-      // const isFieldsFulfilled =
-      //   ;
       console.log(courseData);
       console.log(courseShortData);
-      // alert("Please fill up all the required fields!");
     }
   };
 
@@ -300,7 +295,13 @@ const AddCourse = () => {
           type="text"
         />
 
-        {/* InputBox component for the instructor name */}
+        {/* 
+          TODO: InputBox component for the instructor name 
+          * 1. Build a form for the instructor 
+          * 2. This will contain following information 
+          * 3. Name, photoUrl, job title
+        */}
+
         <InputBox
           title="Name of the instructor"
           id="classTime"
@@ -308,6 +309,27 @@ const AddCourse = () => {
           func={handleInputChange}
           type="text"
         />
+
+        {/* <div className="border-1 mt-5 py-6 px-3 rounded-lg bg-[#f0f0f0]">
+          <p className="text-lg font-semibold text-[#17012e]">
+            Instructor Information
+          </p>
+          <div className="grid gap-4 grid-cols-3">
+            <div>
+              <label
+                htmlFor="instructor_info"
+                className="font-semibold block text-[#17012e]"
+              >
+                Name
+              </label>
+              <input
+                id="instructor_info"
+                type="text"
+                className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
+              />
+            </div>
+          </div>
+        </div> */}
 
         {/* Course Description */}
         <p className="font-semibold mt-6">Course Description</p>
@@ -357,7 +379,6 @@ const AddCourse = () => {
               </div>
             ))}
           </div>
-          {/* InputBox component for the batch number */}
         </div>
 
         <div className="w-full text-center pt-5 pb-16">
