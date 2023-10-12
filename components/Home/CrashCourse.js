@@ -54,7 +54,9 @@ const CrashCourseItem = ({ item }) => {
                 <BsStarFill className="mx-[1px]" />
                 {/* <BsStarHalf className="mx-[1px]" /> */}
               </div>
-              <div className="font-bold ml-1 text-gray-500">(50)</div>
+              <div className="font-bold ml-1 text-gray-500">
+                ({item.review})
+              </div>
             </div>
             <div className="flex items-center text-[#4F547B]">
               <BiBarChart className="mr-0.5" />
@@ -71,7 +73,8 @@ const CrashCourseItem = ({ item }) => {
             </div>
             <div className="flex items-center mx-2">
               <AiOutlineClockCircle className="mr-1" />
-              <span>{item?.total_seat_number} Seats Remaining</span>
+              {/* <span>{item?.total_seat_number} Seats Remaining</span> */}
+              <span>40 Seats</span>
             </div>
           </div>
 
