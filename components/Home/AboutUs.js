@@ -17,7 +17,7 @@ const AboutUs = () => {
             Bangladeshi number one data science learning platform.
           </p>
           <Link href="/about-us">
-            <button className="text-base px-8 py-4 border-2 rounded-xl  hover:bg-primary-bg transition-all duration-300 ease-linear bg-white text-primary hover:text-white border-primary">
+            <button className="text-xl font-semibold px-8 py-4 border-2 rounded-xl  hover:bg-primary-bg transition-all duration-300 ease-linear bg-white text-primary hover:text-white border-primary">
               Know About Us
             </button>
           </Link>

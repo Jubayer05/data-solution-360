@@ -71,7 +71,7 @@ const CrashCourseItem = ({ item }) => {
             </div>
             <div className="flex items-center mx-2">
               <AiOutlineClockCircle className="mr-1" />
-              <span>{item?.total_seat_number} Seat</span>
+              <span>{item?.total_seat_number} Seats Remaining</span>
             </div>
           </div>
 

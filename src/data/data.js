@@ -24,7 +24,7 @@ export const navItems = [
   {
     id: 'nav-2',
     title: 'About',
-    slug: 'about',
+    slug: 'about-us',
     titleBang: 'সম্পর্ক',
     link: '/about-us',
   },

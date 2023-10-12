@@ -60,7 +60,7 @@ const Navbar = ({ home }) => {
         home ? 'top-14' : 'top-0'
       }`}
     >
-      <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-16 ">
+      <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20">
         <div className="flex justify-between items-center z-10">
           <Link href="/">
             <img src="/logo/logo-white.png" className="h-16" alt="logo" />
@@ -91,20 +91,20 @@ const Navbar = ({ home }) => {
                     }`}
         >
           <div>
-            <ul className="pl-4 md:inline-flex md:justify-between mb-0">
+            <ul className="pl-4 md:inline-flex md:justify-between mb-0 ">
               {navItems2.map((item) => (
-                <li key={item.id} className="">
+                <li key={item.id} className="mx-1 ">
                   <Link
                     href={item?.link}
                     className={`${
                       language === 'English' ? 'font-body' : 'font-bangla'
-                    } cursor-pointer font-medium  
+                    } cursor-pointer font-semibold tracking-wider 
                        ${
                          url == item.slug
-                           ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
+                           ? 'text-primary visited:text-primary bg-[rgba(0,0,0,0.3)] '
                            : 'text-white visited:text-white'
                        } px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] transition-all 
-                      duration-500 rounded-md hover:text-[#61CE70] `}
+                      duration-500 rounded-md hover:text-primary `}
                   >
                     {language === 'English' ? item.title : item.titleBang}
                   </Link>
@@ -118,18 +118,18 @@ const Navbar = ({ home }) => {
             <div>
               <ul className="pl-8 md:inline-flex md:justify-between mb-0">
                 {navItems.map((item) => (
-                  <li key={item.id} className="">
+                  <li key={item.id} className="mx-1">
                     <Link
                       href={item?.link}
                       className={`${
                         language === 'English' ? 'font-body' : 'font-bangla'
-                      } cursor-pointer font-medium  
+                      } cursor-pointer font-semibold tracking-wider
                        ${
                          url == item.slug
-                           ? 'text-[#61CE70] visited:text-[#61CE70] bg-[rgba(0,0,0,0.3)] '
+                           ? 'text-primary visited:text-primary bg-[rgba(0,0,0,0.3)] '
                            : 'text-white visited:text-white'
-                       } px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] transition-all 
-                      duration-500 rounded-md hover:text-[#61CE70] `}
+                       } px-4 py-3  hover:bg-[rgba(0,0,0,0.3)] transition-all 
+                      duration-500 rounded-md hover:text-primary `}
                     >
                       {language === 'English' ? item.title : item.titleBang}
                     </Link>
@@ -142,7 +142,7 @@ const Navbar = ({ home }) => {
                       className={`${
                         language === 'English' ? 'font-body' : 'font-bangla'
                       } cursor-pointer font-medium visited:text-white text-white 
-                        px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-[#61CE70]`}
+                        px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-primary`}
                     >
                       {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
                     </Link>

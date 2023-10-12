@@ -116,7 +116,7 @@ const CourseDetails = () => {
                 alt=""
               />
               <div>
-                <p className="m-0 text-base text-[#12b76a]">Evaluation Test</p>
+                <p className="m-0 text-base text-primary">Evaluation Test</p>
                 <p className="m-0">Test yourself for regular exam</p>
               </div>
             </div>
@@ -180,7 +180,9 @@ const CourseDetails = () => {
             />
             {courseDetails?.drive_link && (
               <>
-                <p className="text-2xl mt-12">Full Course Details Link</p>
+                <p className="text-2xl mt-12 capitalize">
+                  Full Course Details Link
+                </p>
 
                 <button className="bg-[#1f0835] text-[#f9fbff] py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
                   <Link
@@ -193,13 +195,17 @@ const CourseDetails = () => {
                 </button>
               </>
             )}
-            <p className="text-2xl mt-12">Who is this course for?</p>
+            <p className="text-2xl mt-12 capitalize">
+              For whom this course for
+            </p>
             <p className="text-lg font-normal">
               - {courseDetails?.who_is_the_course_for}
             </p>
-            <p className="text-2xl mt-12">After course benefit</p>
-            <p className="text-lg font-normal">
-              - {courseDetails?.after_course_benefit}
+            <p className="text-2xl mt-12 capitalize">course benefit</p>
+            <p className="text-lg font-normal capitalize">
+              - Certificate <br />
+              - Job Placement Support <br />- Communication with alumni <br />-
+              Internship <br />- After course support
             </p>
           </div>
         </div>
@@ -324,7 +330,7 @@ const CourseDetails = () => {
           {/* NOTE: RIGHT BOTTOM */}
           <div className="py-4 px-5">
             <div className="flex justify-center items-center">
-              <span className="flex items-center text-[orange] mr-2 cursor-pointer">
+              <span className="flex items-center text-[blue] mr-2 cursor-pointer">
                 <BsTelephone className="mr-2" />
                 Call Us 01870106460
               </span>

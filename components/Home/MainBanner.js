@@ -22,14 +22,14 @@ const MainBanner = () => {
       >
         <div className="flex-1">
           <h2 className="text-[#211b46] text-[36px] md:text-[52px] leading-[1.4] md:leading-[1.05] font-heading tracking-wide mt-10 md:mt-2">
-            Learn Data Analysis to Pave a New Dimension of Your Career
+            Learn Data Analysis and Explore Your Career
           </h2>
           <p className="text-lg text-[#7a7a7b] my-8">
             Best Data Science learning Platform in Bangladesh
           </p>
           <Link href="/courses">
             <button
-              className="text-base text-white px-4 py-3 border-2 rounded-lg border-transparent bg-primary-bg 
+              className="text-xl font-semibold text-white px-4 py-3 border-2 rounded-lg border-transparent bg-primary-bg 
             transition-all duration-300 ease-linear hover:bg-white hover:text-primary 
             hover:border-primary"
             >
