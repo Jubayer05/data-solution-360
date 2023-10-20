@@ -43,9 +43,9 @@ const Team = () => {
     },
     {
       name: 'Noor Ahmad Sarker',
-      profession: 'CTO at Data Solution 360',
+      profession: 'Analytics Engineer & CTO at Data Solution 360',
       img: '/team/noor.jpeg',
-      details: `<p>At the moment, Mr. Noor Ahmad Sarker serves as Data Solution 360's CTO. In 2021, he graduated with a Bachelor of Science (B.Sc.) from Rajshahi University of Engineering & Technology (RUET). Later, in October 2022, he started working for Data Solution 360 as an analytics engineer before being promoted to CTO in March 2023. <br/> <br/> Mr. Noor enjoys learning about and researching data science. He is currently working on some projects related to Data Analytics & Machine Learning after successfully completing several projects on data analysis. His ambition is to work as a researcher in the field of data science. <br/><br/> Mr. Noor is very knowledgeable about various data analytics and visualization tools. He utilized well-known Python libraries like Numpy, Pandas, and others to work on a variety of data analysis and machine learning projects.</p>`,
+      details: `<p>At the moment, Mr. Noor Ahmad Sarker is serving as an Analytics Engineer (Full-time) & CTO in Data Solution 360. In 2021, he graduated with a Bachelor of Science (B.Sc.) from Rajshahi University of Engineering & Technology (RUET). After that, he started working for Data Solution 360 as a “Trainee Analytics Engineer” in October 2022. Later, he was promoted & still working as a full-time “Analytics Engineer” in March 2023. Besides, he is currently serving as Data Solution 360's CTO. <br/> <br/> Mr. Noor enjoys learning about and researching data science. He is currently working on some projects related to Data Analytics & Machine Learning after successfully completing several projects on data analysis. His ambition is to work as a researcher in the field of data science. <br/><br/> Mr. Noor is very knowledgeable about various data analytics and visualization tools. He utilized well-known Python libraries like Numpy, Pandas, and others to work on a variety of data analysis and machine learning projects.</p>`,
     },
     {
       name: 'Md. Monjur',
