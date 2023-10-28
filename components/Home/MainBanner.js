@@ -21,7 +21,7 @@ const MainBanner = () => {
         }}
       >
         <div className="flex-1">
-          <h2 className="text-headerMainBlack text-[36px] md:text-[52px] leading-[1.4] md:leading-[1.05] font-heading tracking-wide mt-10 md:mt-2">
+          <h2 className="text-headerMainBlack text-[28px] md:text-[40px] leading-[1.4] md:leading-[1.05] font-heading tracking-wide mt-10 md:mt-2">
             Learn Data Analysis and Explore Your Career
           </h2>
           <p className="text-lg text-headerSub my-8">

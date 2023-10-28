@@ -78,8 +78,8 @@ const Navbar = ({ home }) => {
     <div
       className={`w-full md:text-center z-10 px-5 pt-4 pb-3 md:px-4 md:py-0 ${
         scrolled80px
-          ? 'bg-[#ffffff] border-b-1 border-[rgb(79,91,140)]'
-          : ' bg-[rgba(38, 52, 110, 0)]'
+          ? 'bg-[#d6295f] border-b-1 border-[#4f5b8c]'
+          : ' bg-[#d6295f]'
       } fixed ${home ? 'top-14' : 'top-0'}`}
     >
       <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20">
@@ -126,7 +126,7 @@ const Navbar = ({ home }) => {
                            ? 'text-nav visited:text-nav  '
                            : 'text-nav visited:text-nav'
                        }  px-4 py-1 transition-all 
-                      duration-500 rounded-md hover:text-primary bg-[#d6295f]`}
+                      duration-500 rounded-md hover:text-primary`}
                   >
                     {language === 'English' ? item.title : item.titleBang}
                   </Link>
@@ -152,7 +152,7 @@ const Navbar = ({ home }) => {
                            ? 'text-nav visited:text-nav  '
                            : 'text-nav visited:text-nav'
                        } uppercase px-4 py-1 transition-all 
-                      duration-500 rounded-md hover:text-primary flex items-center  bg-[#d6295f]`}
+                      duration-500 rounded-md hover:text-primary flex items-center  `}
                       >
                         <span>
                           {language === 'English' ? item.title : item.titleBang}
@@ -196,6 +196,7 @@ const Navbar = ({ home }) => {
             </div>
             <div className="mr-3">
               <Switch
+                handleBg="#d6295f"
                 size={50}
                 checkedChildren="en"
                 unCheckedChildren="bn"
