@@ -13,18 +13,18 @@ const MainBanner = () => {
     },
   };
   return (
-    <div>
+    <div className="bg-main-bg">
       <div
         className="max-w-6xl mx-auto p-4 flex justify-between items-center flex-col lg:flex-row gap-4"
         style={{
-          minHeight: 'calc(100vh - 60px)',
+          minHeight: '100vh',
         }}
       >
         <div className="flex-1">
-          <h2 className="text-[#211b46] text-[36px] md:text-[52px] leading-[1.4] md:leading-[1.05] font-heading tracking-wide mt-10 md:mt-2">
+          <h2 className="text-headerMainBlack text-[36px] md:text-[52px] leading-[1.4] md:leading-[1.05] font-heading tracking-wide mt-10 md:mt-2">
             Learn Data Analysis and Explore Your Career
           </h2>
-          <p className="text-lg text-[#7a7a7b] my-8">
+          <p className="text-lg text-headerSub my-8">
             Best Data Science learning Platform in Bangladesh
           </p>
           <Link href="/courses">

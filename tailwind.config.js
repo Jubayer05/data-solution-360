@@ -17,11 +17,7 @@ module.exports = {
       },
       backgroundColor: {
         'primary-bg': '#d6295f',
-        'main-bg': '#FAFBFB',
-        'main-dark-bg': '#020268',
-        'secondary-dark-bg': '#33373E',
-        'light-gray': '#f0f0f0',
-        'half-transparent': 'rgba(0, 0, 0, 0.5)',
+        'main-bg': '#fcf5f5',
       },
       borderWidth: {
         1: '1px',
@@ -31,9 +27,11 @@ module.exports = {
         color: 'rgba(0, 0, 0, 0.1)',
       },
       textColor: {
-        input: '#000',
-        primary: '#d6295f',
+        nav: '#fff',
+        primary: 'orange',
         headerMain: '#26346E',
+        headerMainBlack: '#26346E',
+        headerSub: '#26346E',
       },
       width: {
         400: '400px',

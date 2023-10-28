@@ -41,6 +41,23 @@ export const navItems = [
     slug: 'services',
     titleBang: 'সার্ভিস',
     link: '/services',
+    dropdown: [
+      {
+        id: 'dropdown-1',
+        title: 'Ed-Tech',
+        link: 'services/ed-tech',
+      },
+      {
+        id: 'dropdown-2',
+        title: 'B2B',
+        link: 'services/b2b',
+      },
+      {
+        id: 'dropdown-3',
+        title: 'Consultancy',
+        link: 'services/consultancy',
+      },
+    ],
   },
   {
     id: 'nav-5',

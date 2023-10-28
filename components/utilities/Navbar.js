@@ -8,6 +8,7 @@ import { VscTriangleUp } from 'react-icons/vsc';
 import { getAuth, signOut } from 'firebase/auth';
 
 import Link from 'next/link';
+import { BiSolidChevronRight } from 'react-icons/bi';
 import { useStateContext } from '../../src/context/ContextProvider';
 import { navDropItems, navItems, navItems2 } from '../../src/data/data';
 import styles from '../../styles/utility/Navbar.module.css';
@@ -22,8 +23,27 @@ const Navbar = ({ home }) => {
   const [url, setUrl] = useState(null);
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
+  const [scrolled80px, setScrolled80px] = useState(false);
 
-  // console.log(user?.photoURL);
+  useEffect(() => {
+    function handleScroll() {
+      if (window.scrollY >= 80 && !scrolled80px) {
+        console.log('Scroll 80px successful');
+        setScrolled80px(true);
+      } else if (window.scrollY < 80 && scrolled80px) {
+        console.log('Scrolled back to the top');
+        setScrolled80px(false);
+      }
+    }
+
+    window.addEventListener('scroll', handleScroll);
+
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+    };
+  }, [scrolled80px]);
+
+  console.log(scrolled80px);
 
   useEffect(() => {
     if (eng) {
@@ -56,9 +76,11 @@ const Navbar = ({ home }) => {
 
   return (
     <div
-      className={`w-full border-b-1 border-[rgb(79,91,140)] md:text-center z-10 px-5 pt-4 pb-3 md:px-4 md:py-0 bg-[rgb(38,52,110)] sticky ${
-        home ? 'top-14' : 'top-0'
-      }`}
+      className={`w-full md:text-center z-10 px-5 pt-4 pb-3 md:px-4 md:py-0 ${
+        scrolled80px
+          ? 'bg-[#ffffff] border-b-1 border-[rgb(79,91,140)]'
+          : ' bg-[rgba(38, 52, 110, 0)]'
+      } fixed ${home ? 'top-14' : 'top-0'}`}
     >
       <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20">
         <div className="flex justify-between items-center z-10">
@@ -86,7 +108,7 @@ const Navbar = ({ home }) => {
         <div
           className={`hidden bg-white pt-4 md:pt-0 md:flex-1 md:justify-between md:flex md:items-center 
                     md:bg-transparent md:pb-0 pb-12 md:static md:z-auto z-[-1] left-0 w-full 
-                    md:w-auto md:pl-0 pl-9 transition-all duration-500 ease-in ${
+                    md:w-auto md:pl-0 pl-9 transition-all duration-500  ease-in ${
                       openNav ? 'top-16 ' : 'top-[-490px]'
                     }`}
         >
@@ -98,13 +120,13 @@ const Navbar = ({ home }) => {
                     href={item?.link}
                     className={`${
                       language === 'English' ? 'font-body' : 'font-bangla'
-                    } cursor-pointer font-semibold tracking-wider 
+                    } cursor-pointer font-semibold tracking-[0.02em] uppercase
                        ${
                          url == item.slug
-                           ? 'text-primary visited:text-primary bg-[rgba(0,0,0,0.3)] '
-                           : 'text-white visited:text-white'
-                       } px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] transition-all 
-                      duration-500 rounded-md hover:text-primary `}
+                           ? 'text-nav visited:text-nav  '
+                           : 'text-nav visited:text-nav'
+                       }  px-4 py-1 transition-all 
+                      duration-500 rounded-md hover:text-primary bg-[#d6295f]`}
                   >
                     {language === 'English' ? item.title : item.titleBang}
                   </Link>
@@ -118,22 +140,44 @@ const Navbar = ({ home }) => {
             <div>
               <ul className="pl-8 md:inline-flex md:justify-between mb-0">
                 {navItems.map((item) => (
-                  <li key={item.id} className="mx-1">
-                    <Link
-                      href={item?.link}
-                      className={`${
-                        language === 'English' ? 'font-body' : 'font-bangla'
-                      } cursor-pointer font-semibold tracking-wider
+                  <div className="relative group" key={item.id}>
+                    <li className="mx-1">
+                      <Link
+                        href={item?.link}
+                        className={`${
+                          language === 'English' ? 'font-body' : 'font-bangla'
+                        } cursor-pointer font-semibold tracking-[0.02em]
                        ${
                          url == item.slug
-                           ? 'text-primary visited:text-primary bg-[rgba(0,0,0,0.3)] '
-                           : 'text-white visited:text-white'
-                       } px-4 py-3  hover:bg-[rgba(0,0,0,0.3)] transition-all 
-                      duration-500 rounded-md hover:text-primary `}
-                    >
-                      {language === 'English' ? item.title : item.titleBang}
-                    </Link>
-                  </li>
+                           ? 'text-nav visited:text-nav  '
+                           : 'text-nav visited:text-nav'
+                       } uppercase px-4 py-1 transition-all 
+                      duration-500 rounded-md hover:text-primary flex items-center  bg-[#d6295f]`}
+                      >
+                        <span>
+                          {language === 'English' ? item.title : item.titleBang}
+                        </span>
+                        {item.dropdown?.length > 0 && (
+                          <span className="fort-bold text-xl -mt-0.5">
+                            <BiSolidChevronRight />
+                          </span>
+                        )}
+                      </Link>
+                    </li>
+                    {item.dropdown?.length > 0 && (
+                      <div className="absolute hidden group-hover:block bg-white mt-0 border-t-4 border-[#0a5] py-2 w-52 rounded shadow-lg text-left font-semibold tracking-[0.02em] uppercase">
+                        {item.dropdown.map((dropItem) => (
+                          <Link
+                            key={dropItem.id}
+                            href={dropItem.link}
+                            className="block px-4 py-3 text-gray-800 hover:text-blue-600"
+                          >
+                            {dropItem.title}
+                          </Link>
+                        ))}
+                      </div>
+                    )}
+                  </div>
                 ))}
                 {findAdmin && (
                   <li className="">
