@@ -16,7 +16,7 @@ module.exports = {
         14: '14px',
       },
       backgroundColor: {
-        'primary-bg': '#d6295f',
+        'primary-bg': '#14752b',
         'main-bg': '#fcf5f5',
       },
       borderWidth: {

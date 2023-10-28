@@ -268,7 +268,7 @@ const Navbar = ({ home }) => {
                     borderRadius: '5px',
                   }}
                   className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 
-                          bg-primary-bg transition-all duration-300 ease-linear hover:bg-white
+                          bg-primary-bg transition-all duration-300 ease-linear hover:bg-white uppercase font-semibold
                            hover:text-primary hover:border-primary`}
                   onClick={() => {}}
                 >
