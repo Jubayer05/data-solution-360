@@ -80,7 +80,7 @@ const Navbar = ({ home }) => {
         scrolled80px
           ? 'bg-[#d6295f] border-b-1 border-[#4f5b8c]'
           : ' bg-[#d6295f]'
-      } fixed ${home ? 'top-14' : 'top-0'}`}
+      } sticky ${home ? 'top-14' : 'top-0'}`}
     >
       <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20">
         <div className="flex justify-between items-center z-10">

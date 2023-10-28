@@ -23,12 +23,12 @@ module.exports = {
         1: '1px',
       },
       borderColor: {
-        primary: '#d6295f',
+        primary: '#14752b',
         color: 'rgba(0, 0, 0, 0.1)',
       },
       textColor: {
         nav: '#fff',
-        primary: 'orange',
+        primary: '#14752b',
         headerMain: '#26346E',
         headerMainBlack: '#26346E',
         headerSub: '#26346E',

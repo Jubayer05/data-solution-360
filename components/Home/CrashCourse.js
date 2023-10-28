@@ -63,7 +63,7 @@ const CrashCourseItem = ({ item }) => {
               <span>all level</span>
             </div>
           </div>
-          <p className="inline-block h-[80px] text-lg font-semibold mb-1.5 mt-2 text-[#140342] hover:text-[#6440FB]">
+          <p className="inline-block h-[80px] text-lg font-semibold mb-1.5 mt-2 text-[#140342] hover:text-primary">
             {item.title}
           </p>
           <div className="flex items-center font-medium text-[14px] flex-wrap text-[#4F547B]">

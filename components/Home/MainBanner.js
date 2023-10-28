@@ -29,7 +29,7 @@ const MainBanner = () => {
           </p>
           <Link href="/courses">
             <button
-              className="text-xl font-semibold text-white px-4 py-3 border-2 rounded-lg border-transparent bg-primary-bg 
+              className="text-base font-semibold text-white px-4 py-3 border-2 rounded-lg border-transparent bg-primary-bg 
             transition-all duration-300 ease-linear hover:bg-white hover:text-primary 
             hover:border-primary"
             >
