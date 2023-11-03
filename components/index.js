@@ -14,6 +14,8 @@ export { default as About } from './About/About';
 export { default as AddNewBlog } from './Blog/AddNewBlog';
 export { default as Blog } from './Blog/Blog';
 export { default as BlogContent } from './Blog/BlogContentItem';
+export { default as MyBlogs } from './Blog/MyBlogs';
+
 export { default as Career } from './Career/Career';
 export { default as Contact } from './Contact/Contact';
 export { default as CourseDetails } from './CourseDetails/CourseDetails';

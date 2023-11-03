@@ -1,45 +1,47 @@
-import React, { createContext, useContext, useEffect, useState } from "react";
-import firebase from "../../firebase";
+import React, { createContext, useContext, useEffect, useState } from 'react';
+import firebase from '../../firebase';
 const db = firebase.firestore();
 
 const StateContext = createContext();
 
 export const MainContextProvider = ({ children }) => {
-  const [language, setLanguage] = useState("English");
-  const [userName, setUserName] = useState("");
+  const [language, setLanguage] = useState('English');
+  const [userName, setUserName] = useState('');
   // const [email, setEmail] = useState("");
-  const [userEmail, setUserEmail] = useState("");
-  const [photoUrl, setPhotoUrl] = useState("");
+  const [userEmail, setUserEmail] = useState('');
+  const [photoUrl, setPhotoUrl] = useState('');
   const [userData, setUserData] = useState([]);
   const [blogData, setBlogData] = useState([]);
   const [dashAdmin, setDashAdmin] = useState([]);
   const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
-    setLanguage(localStorage.getItem("lan"));
-    setUserName(localStorage.getItem("userName"));
-    setUserEmail(localStorage.getItem("emailUser"));
-    setPhotoUrl(localStorage.getItem("photoUrl"));
+    setLanguage(localStorage.getItem('lan'));
+    setUserName(localStorage.getItem('userName'));
+    setUserEmail(localStorage.getItem('emailUser'));
+    setPhotoUrl(localStorage.getItem('photoUrl'));
 
-    loadData("userLogin", setUserData);
-    loadData("blogData", setBlogData);
-    loadData("dashboard_admin", setDashAdmin);
-    loadData("course_data", setCourseData);
+    loadData('userLogin', setUserData);
+    loadData('blogData', setBlogData);
+    loadData('dashboard_admin', setDashAdmin);
+    loadData('course_data', setCourseData);
   }, []);
 
   const loadData = (database, setState) => {
-    db.collection(database).onSnapshot((snap) => {
-      const data = snap.docs.map((doc) => ({
-        key: doc.id,
-        ...doc.data(),
-      }));
-      setState(data);
-    });
+    db.collection(database)
+      .orderBy('createdAt', 'desc')
+      .onSnapshot((snap) => {
+        const data = snap.docs.map((doc) => ({
+          key: doc.id,
+          ...doc.data(),
+        }));
+        setState(data);
+      });
   };
 
   const findCurrentUser = userData.find((item) => item.email === userEmail);
   const findAdmin = dashAdmin.find((item) => item.email === userEmail);
-  const uniqueUserName = userEmail?.split("@")[0];
+  const uniqueUserName = userEmail?.split('@')[0];
 
   // console.log(uniqueUserName);
 

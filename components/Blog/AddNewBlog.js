@@ -101,6 +101,7 @@ const AddNewBlog = () => {
           details: convertContent,
           slug: blogData.title.split(' ').join('-'),
           date: new Date().toLocaleDateString(undefined, options),
+          createdAt: new Date().getTime(),
         })
         .then(() => {
           alert('Blog Data was successfully uploaded.');
