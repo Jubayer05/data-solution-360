@@ -1,6 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import React from 'react';
-import Lottie from 'react-lottie';
 import * as animationData from '../../src/data/json/data-analysis.json';
 
 const MainBanner = () => {
@@ -38,7 +38,12 @@ const MainBanner = () => {
           </Link>
         </div>
         <div className="flex-1 overflow-visible w-[350px] md:w-[500px]">
-          <Lottie options={defaultOptions} />
+          {/* <Lottie options={defaultOptions} /> */}
+          <img
+            className="w-[450px] mx-auto"
+            src="/Background/banner-1.jpeg"
+            alt=""
+          />
         </div>
       </div>
     </div>

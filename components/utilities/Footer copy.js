@@ -21,7 +21,7 @@ const Footer = () => {
       <div className="max-w-6xl mx-auto grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 justify-between py-24 items-start">
         {/* NOTE: BASIC INFO */}
         <div className="px-4 text-center">
-          <img src="/logo/logo-white.png" alt="logo" className="h-20" />
+          <img src="/logo/logo.png" alt="logo" className="h-20" />
           <p className="mt-2 text-left text-base">
             If you are skilled enough, you don&apos;t need to seek for a job.
             Jobs will search for you.Just make a good portfolio.

@@ -1,13 +1,12 @@
 import React from 'react';
-import { Footer, Navbar } from '../../components';
-import ComingSoon from '../../components/utilities/ComingSoon';
+import { Footer, Gallery, Navbar } from '../../components';
 import WhatsApp from '../../components/utilities/WhatsApp';
 
 const index = () => {
   return (
     <div>
       <Navbar />
-      <ComingSoon />
+      <Gallery />
       <Footer />
       <WhatsApp />
     </div>

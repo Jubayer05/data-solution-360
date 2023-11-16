@@ -1,54 +1,54 @@
-import React, { useEffect, useState } from "react";
-import { Swiper, SwiperSlide, useSwiper } from "swiper/react";
-import { motion } from "framer-motion";
+import { motion } from 'framer-motion';
+import React from 'react';
 import {
   AiFillEnvironment,
+  AiFillFileExcel,
   AiFillGift,
   AiFillHome,
   AiFillNotification,
-} from "react-icons/ai";
-import { BiAlarmAdd, BiArch, BiBookHeart } from "react-icons/bi";
-import { DiPython } from "react-icons/di";
-import { SiPowerbi } from "react-icons/si";
-import { FaAws } from "react-icons/fa";
-import { AiFillFileExcel } from "react-icons/ai";
+} from 'react-icons/ai';
+import { BiAlarmAdd } from 'react-icons/bi';
+import { DiPython } from 'react-icons/di';
+import { FaAws } from 'react-icons/fa';
+import { SiPowerbi } from 'react-icons/si';
+import { Swiper, SwiperSlide } from 'swiper/react';
 
-import "swiper/css";
-import "swiper/css/pagination";
-import "swiper/css/navigation";
-import "swiper/css/effect-fade";
+import 'swiper/css';
+import 'swiper/css/effect-fade';
+import 'swiper/css/navigation';
+import 'swiper/css/pagination';
 
-import { EffectFade, Autoplay, Pagination, Navigation } from "swiper";
+import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
 
 const BannerCarousel = () => {
   const motionData = [
     {
-      id: "1",
-      title: "Best data science platform",
+      id: '1',
+      title: 'Best data science platform',
       icon: <AiFillHome />,
       transitionDelay: 1.2,
     },
     {
-      id: "2",
-      title: "Freelancing guidelines",
+      id: '2',
+      title: 'Freelancing guidelines',
       icon: <AiFillEnvironment />,
       transitionDelay: 2,
     },
     {
-      id: "3",
-      title: "Provide recorded video after classes",
+      id: '3',
+      title: 'Provide recorded video after classes',
       icon: <AiFillGift />,
       transitionDelay: 2.8,
     },
     {
-      id: "4",
-      title: "life time support",
+      id: '4',
+      title: 'life time support',
       icon: <AiFillNotification />,
       transitionDelay: 3.6,
     },
     {
-      id: "5",
-      title: "Unlimited Q&A options",
+      id: '5',
+      title: 'Unlimited Q&A options',
       icon: <BiAlarmAdd />,
       transitionDelay: 4.4,
     },
@@ -56,31 +56,31 @@ const BannerCarousel = () => {
 
   const slideTwoMotionData = [
     {
-      id: "1",
-      title: "Python",
+      id: '1',
+      title: 'Python',
       icon: <DiPython />,
-      bg: "#4b8bbe",
+      bg: '#4b8bbe',
       transitionDelay: 2,
     },
     {
-      id: "2",
-      title: "Power BI",
+      id: '2',
+      title: 'Power BI',
       icon: <SiPowerbi />,
-      bg: "goldenrod",
+      bg: 'goldenrod',
       transitionDelay: 3,
     },
     {
-      id: "3",
-      title: "AWS",
+      id: '3',
+      title: 'AWS',
       icon: <FaAws />,
-      bg: "#FF9900 ",
+      bg: '#FF9900 ',
       transitionDelay: 4,
     },
     {
-      id: "4",
-      title: "Excel",
+      id: '4',
+      title: 'Excel',
       icon: <AiFillFileExcel />,
-      bg: "#1d6f42",
+      bg: '#1d6f42',
       transitionDelay: 5,
     },
   ];
@@ -91,7 +91,7 @@ const BannerCarousel = () => {
         slidesPerView={1}
         spaceBetween={0}
         loop={true}
-        effect={"fade"}
+        effect={'fade'}
         speed={1000}
         autoplay={{
           delay: 7000,
@@ -107,15 +107,15 @@ const BannerCarousel = () => {
             <div
               className="bg-center bg-cover"
               style={{
-                backgroundImage: "url(/banner/img8.jpg)",
-                minHeight: "calc(100vh - 60px)",
+                backgroundImage: 'url(/banner/img8.jpg)',
+                minHeight: 'calc(100vh - 60px)',
               }}
             >
               <div
                 className="flex items-center justify-start"
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.4)",
-                  minHeight: "calc(100vh - 60px)",
+                  backgroundColor: 'rgba(255,255,255,0.4)',
+                  minHeight: 'calc(100vh - 60px)',
                 }}
               >
                 <div className="flex items-center max-w-6xl mx-auto">
@@ -191,15 +191,15 @@ const BannerCarousel = () => {
             <div
               className=" bg-center bg-cover"
               style={{
-                backgroundImage: "url(/banner/img4.jpg)",
-                minHeight: "calc(100vh - 60px)",
+                backgroundImage: 'url(/banner/img4.jpg)',
+                minHeight: 'calc(100vh - 60px)',
               }}
             >
               <div
                 className="pt-32"
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.4)",
-                  minHeight: "calc(100vh - 60px)",
+                  backgroundColor: 'rgba(255,255,255,0.4)',
+                  minHeight: 'calc(100vh - 60px)',
                 }}
               >
                 <div className="max-w-6xl mx-auto flex items-center justify-end sm:mr-0 md:mr-8 lg:mr-32">
@@ -296,15 +296,15 @@ const BannerCarousel = () => {
             <div
               className=" bg-center bg-cover"
               style={{
-                backgroundImage: "url(/banner/img9.jpg)",
-                minHeight: "calc(100vh - 60px)",
+                backgroundImage: 'url(/banner/img9.jpg)',
+                minHeight: 'calc(100vh - 60px)',
               }}
             >
               <div
                 className="pt-32 "
                 style={{
-                  backgroundColor: "rgba(255,255,255,0.4)",
-                  minHeight: "calc(100vh - 60px)",
+                  backgroundColor: 'rgba(255,255,255,0.4)',
+                  minHeight: 'calc(100vh - 60px)',
                 }}
               >
                 <div className="max-w-6xl mx-auto flex items-center sm:ml-0 md:ml-8 lg:ml-56 ">

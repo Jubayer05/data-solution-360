@@ -55,7 +55,8 @@ const Blog = () => {
             </div>
             <div className="pb-2 px-4 flex justify-between">
               <h3 className="text-gray-600 underline text-base">
-                {item.author}
+                {/* {item.author} */}
+                Data Solution 360
               </h3>
               <h4 className="text-gray-400">{item.date}</h4>
             </div>

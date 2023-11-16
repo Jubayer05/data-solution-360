@@ -45,17 +45,17 @@ export const navItems = [
       {
         id: 'dropdown-1',
         title: 'Ed-Tech',
-        link: 'services/ed-tech',
+        link: '/services/edTech',
       },
       {
         id: 'dropdown-2',
         title: 'B2B',
-        link: 'services/b2b',
+        link: '/services/b2b',
       },
       {
         id: 'dropdown-3',
         title: 'Consultancy',
-        link: 'services/consultancy',
+        link: '/services/consultancy',
       },
     ],
   },

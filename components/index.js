@@ -16,6 +16,8 @@ export { default as Blog } from './Blog/Blog';
 export { default as BlogContent } from './Blog/BlogContentItem';
 export { default as MyBlogs } from './Blog/MyBlogs';
 
+export { default as Gallery } from './Gallery/Gallery';
+
 export { default as Career } from './Career/Career';
 export { default as Contact } from './Contact/Contact';
 export { default as CourseDetails } from './CourseDetails/CourseDetails';

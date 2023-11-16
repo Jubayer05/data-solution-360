@@ -222,7 +222,7 @@ const Login = () => {
       <div className="bg-[#000000dd] py-14">
         <div className="max-w-6xl mx-auto">
           <Link href="/">
-            <img className="w-[150px] mb-5" src="/logo/logo-white.png" alt="" />
+            <img className="w-[150px] mb-5" src="/logo/logo.png" alt="" />
           </Link>
         </div>
         <div className="flex justify-center items-center min-h-screen	">
