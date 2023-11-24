@@ -1,7 +1,11 @@
 import { Avatar, Switch } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
-import { BiChevronRight } from 'react-icons/bi';
+import {
+  BiChevronRight,
+  BiSolidChevronDown,
+  BiSolidChevronRight,
+} from 'react-icons/bi';
 import { FiLogIn, FiLogOut } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
 
@@ -18,6 +22,12 @@ const Sidebar = ({
   handleLogout,
   userName,
 }) => {
+  const [openDropdown, setOpenDropdown] = useState(null);
+
+  const handleDropdownToggle = (itemId) => {
+    setOpenDropdown(openDropdown === itemId ? null : itemId);
+  };
+
   return (
     <div className="w-screen z-10 bg-[rgba(0,0,0,0.6)] h-screen fixed top-0 left-0">
       <div
@@ -45,22 +55,69 @@ const Sidebar = ({
         <ul className="pl-12 pr-6 pt-6 pb-4">
           {navItems.map((item) => (
             <li key={item.id}>
-              <Link
-                href={item.link}
-                key={item.id}
-                className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
-            ${
-              url == item.slug
-                ? 'text-[#ffffff] visited:text-[#ffffff] bg-[rgba(100,64,251,0.2)] '
-                : 'text-[#ffffff] visited:text-[#ffffff] '
-            } 
-              my-1 `}
-              >
-                <span>
-                  {language === 'English' ? item.title : item.titleBang}
-                </span>
-                <BiChevronRight className="text-xl" />
-              </Link>
+              {item.dropdown?.length > 0 ? (
+                <>
+                  <button
+                    onClick={() => handleDropdownToggle(item.id)}
+                    className={`${
+                      openDropdown === item.id ? 'bg-[rgba(11,6,32,0.08)]' : ''
+                    } text-[#ffffff] w-full font-semibold flex rounded-md justify-between items-center py-3 px-3 transition-all duration-300 ease-in-out`}
+                  >
+                    <span>
+                      {language === 'English' ? item.title : item.titleBang}
+                    </span>
+                    {openDropdown === item.id ? (
+                      <BiSolidChevronDown />
+                    ) : (
+                      <BiSolidChevronRight />
+                    )}
+                  </button>
+
+                  {/* Display dropdown items when openDropdown matches the current item id */}
+                  {openDropdown === item.id && (
+                    <ul>
+                      {item.dropdown.map((dropdownItem) => (
+                        <li key={dropdownItem.id}>
+                          <Link
+                            href={dropdownItem.link}
+                            className={`w-full font-semibold flex rounded-md justify-between items-center py-3 pr-3 pl-10
+                           ${
+                             url === dropdownItem.slug
+                               ? 'text-[#ffffff] visited:text-[#ffffff] bg-[rgba(11,6,32,0.2)] '
+                               : 'text-[#ffffff] visited:text-[#ffffff] '
+                           }
+                           my-1 `}
+                          >
+                            <span>
+                              {language === 'English'
+                                ? dropdownItem.title
+                                : dropdownItem.titleBang}
+                            </span>
+                            <BiChevronRight className="text-xl" />
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                </>
+              ) : (
+                <Link
+                  href={item.link}
+                  key={item.id}
+                  className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
+              ${
+                url == item.slug
+                  ? 'text-[#ffffff] visited:text-[#ffffff] bg-[rgba(11,6,32,0.2)] '
+                  : 'text-[#ffffff] visited:text-[#ffffff] '
+              } 
+                my-1 `}
+                >
+                  <span>
+                    {language === 'English' ? item.title : item.titleBang}
+                  </span>
+                  <BiChevronRight className="text-xl" />
+                </Link>
+              )}
             </li>
           ))}
           <div className="ml-[13px] mt-3 text-[#fff]">
@@ -97,6 +154,7 @@ const Sidebar = ({
                   <span>
                     {language === 'English' ? item.title : item.titleBang}
                   </span>
+
                   <BiChevronRight className="text-xl" />
                 </Link>
               </li>
