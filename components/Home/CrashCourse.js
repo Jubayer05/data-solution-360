@@ -41,7 +41,7 @@ const CrashCourseItem = ({ item }) => {
   return (
     <div className=" sm:w-full mx-auto rounded-lg overflow-hidden sm:mx-2 hover:-translate-y-3 hover:shadow-xl transition-translate duration-300 cursor-pointer mt-4">
       <Link href={`/course-details/${item.key}`}>
-        <img src={item.img} alt="" className="w-full h-48" />
+        <img src={item.img} alt="" className="w-full h-60" />
         <div className="px-4 py-3 border-1 rounded-lg rounded-t-none">
           <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -74,7 +74,7 @@ const CrashCourseItem = ({ item }) => {
             <div className="flex items-center mx-2">
               <AiOutlineClockCircle className="mr-1" />
               {/* <span>{item?.total_seat_number} Seats Remaining</span> */}
-              <span>40 Seats</span>
+              <span>70 Seats</span>
             </div>
           </div>
 
