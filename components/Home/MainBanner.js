@@ -40,8 +40,8 @@ const MainBanner = () => {
         <div className="flex-1 overflow-visible w-[350px] md:w-[500px]">
           {/* <Lottie options={defaultOptions} /> */}
           <img
-            className="w-[450px] mx-auto"
-            src="/Background/banner-1.jpeg"
+            className="w-[600px] mx-auto"
+            src="/Background/Banner.png"
             alt=""
           />
         </div>
