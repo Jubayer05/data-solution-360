@@ -41,7 +41,7 @@ const MainBanner = () => {
           {/* <Lottie options={defaultOptions} /> */}
           <img
             className="w-[600px] mx-auto"
-            src="/Background/Banner.png"
+            src="/Background/banner.png"
             alt=""
           />
         </div>
