@@ -6,7 +6,7 @@ import { RxCross1 } from 'react-icons/rx';
 const Popup = ({ handler }) => {
   return (
     <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-30 flex justify-center items-center">
-      <div className=" h-[230px] md:h-[380px] lg:h-[480px] w-[350px] md:w-[600px] lg:w-[800px] rounded-md relative flex items-center flex-col items-end bg-cover">
+      <div className="-top-36 h-[230px] md:h-[350px] lg:h-[380px] w-[350px] md:w-[500px] lg:w-[600px] rounded-md relative flex items-center flex-col bg-cover">
         <img
           src="https://firebasestorage.googleapis.com/v0/b/data-solution-360.appspot.com/o/courseImage%2Fjubayer0504%40gmail.com%2Fpopup.jpeg?alt=media&token=dde3945f-204d-4d0e-b3ba-7eb20f4d4f97"
           alt="Popup img"
