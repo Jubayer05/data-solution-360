@@ -8,7 +8,7 @@ const Popup = ({ handler }) => {
     <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-30 flex justify-center items-center">
       <div className=" h-[230px] md:h-[380px] lg:h-[480px] w-[350px] md:w-[600px] lg:w-[800px] rounded-md relative flex items-center flex-col items-end bg-cover">
         <img
-          src="https://firebasestorage.googleapis.com/v0/b/data-solution-360.appspot.com/o/courseImage%2Fjubayer0504%40gmail.com%2Ffinal-fianl%20(1).jpg?alt=media&token=d3cec0eb-e10d-4319-9d51-0f99d0289b28"
+          src="https://firebasestorage.googleapis.com/v0/b/data-solution-360.appspot.com/o/courseImage%2Fjubayer0504%40gmail.com%2Fpopup.jpeg?alt=media&token=dde3945f-204d-4d0e-b3ba-7eb20f4d4f97"
           alt="Popup img"
           className="rounded-lg"
         />
