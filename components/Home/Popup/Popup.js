@@ -12,7 +12,7 @@ const Popup = ({ handler }) => {
           alt="Popup img"
           className="rounded-lg"
         />
-        <Link href="course-details/g0fAq19lGtOen9OmXp69">
+        <Link href="course-details/me2qACJYYnfpUVMS1LL0">
           <button
             className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 rounded-md mt-2
           bg-primary-bg transition-all duration-300 ease-linear `}
