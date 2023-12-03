@@ -267,7 +267,7 @@ const CourseDetails = () => {
             <div className="flex bg-[#fff1e9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
               <ImClock className="text-[rgb(223,97,52)] mr-[6px]" />
               <span className="text-sm font-[700]">
-                {new Date(courseDetails?.main_class_starting_date).getTime() >=
+                {/* {new Date(courseDetails?.main_class_starting_date).getTime() >=
                 new Date().getTime()
                   ? Math.ceil(
                       (new Date(
@@ -276,8 +276,8 @@ const CourseDetails = () => {
                         new Date().getTime()) /
                         (1000 * 60 * 60 * 24),
                     )
-                  : 0}{' '}
-                Days Left
+                  : 0}{' '} */}
+                7 Days Left
               </span>
             </div>
             <div className="flex bg-[rgba(161,68,255,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
