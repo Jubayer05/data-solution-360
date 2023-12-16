@@ -84,20 +84,27 @@ export const navItems2 = [
 ];
 
 export const navDropItems = [
-  // {
-  //   id: 'nav-1',
-  //   title: 'Dashboard',
-  //   slug: 'dashboard',
-  //   titleBang: 'ড্যাশবোর্ড',
-  //   link: '/students/dashboard',
-  // },
-  // {
-  //   id: 'nav-5',
-  //   title: 'Profile',
-  //   slug: 'profile',
-  //   titleBang: 'প্রোফাইল',
-  //   link: '/students/profile',
-  // },
+  {
+    id: 'nav-1',
+    title: 'My Profile',
+    slug: 'dashboard',
+    titleBang: 'ড্যাশবোর্ড',
+    link: '/students/dashboard',
+  },
+  {
+    id: 'nav-5',
+    title: 'Settings',
+    slug: 'profile',
+    titleBang: 'প্রোফাইল',
+    link: '/students/profile',
+  },
+  {
+    id: 'nav-5',
+    title: 'My wishlist',
+    slug: 'profile',
+    titleBang: 'প্রোফাইল',
+    link: '/students/profile',
+  },
   {
     id: 'nav-2',
     title: 'Terms and Condition',
