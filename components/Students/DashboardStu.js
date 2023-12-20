@@ -7,19 +7,14 @@ import { Avatar } from 'antd';
 import Link from 'next/link';
 import { BsStar, BsStarFill, BsStarHalf } from 'react-icons/bs';
 import { useStateContext } from '../../src/context/ContextProvider';
+import Profile from './Profile';
 
 const AdminHome = () => {
   const { userName, language, courseData } = useStateContext();
   return (
-    <div className="flex justify-center items-center flex-col p-2 md:mx-6">
-      <div>
-        <h2 className="text-2xl text-center mt-6 capitalize mb-10 text-cyan-700">
-          Welcome, {userName} in your student dashboard
-        </h2>
-
-        <h2 className="text-xl">Your Courses</h2>
-        <p>You do not select any course</p>
-
+    <div>
+      <Profile title="Dashboard" />
+      <div className="flex justify-center items-center flex-col p-2 md:mx-6">
         <h2 className="text-xl mt-12">Suggested Course</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 p-5 pt-0">
           {courseData.map((item) => (

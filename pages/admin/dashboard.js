@@ -1,6 +1,6 @@
 import React from "react";
 import { DashboardFormat } from "../../components";
-import AdminHome from "../../components/Admin/Home";
+import AdminHome from "../../components/Admin/AdminHome";
 
 const dashboard = () => {
   return (

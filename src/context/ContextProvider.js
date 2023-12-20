@@ -22,12 +22,21 @@ export const MainContextProvider = ({ children }) => {
     setPhotoUrl(localStorage.getItem('photoUrl'));
 
     loadData('userLogin', setUserData);
-    loadData('blogData', setBlogData);
+    loadDataByOrder('blogData', setBlogData);
     loadData('dashboard_admin', setDashAdmin);
-    loadData('course_data', setCourseData);
+    loadDataByOrder('course_data', setCourseData);
   }, []);
 
   const loadData = (database, setState) => {
+    db.collection(database).onSnapshot((snap) => {
+      const data = snap.docs.map((doc) => ({
+        key: doc.id,
+        ...doc.data(),
+      }));
+      setState(data);
+    });
+  };
+  const loadDataByOrder = (database, setState) => {
     db.collection(database)
       .orderBy('createdAt', 'desc')
       .onSnapshot((snap) => {
@@ -43,7 +52,7 @@ export const MainContextProvider = ({ children }) => {
   const findAdmin = dashAdmin.find((item) => item.email === userEmail);
   const uniqueUserName = userEmail?.split('@')[0];
 
-  // console.log(uniqueUserName);
+  console.log(userData);
 
   return (
     <StateContext.Provider
