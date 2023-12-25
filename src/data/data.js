@@ -94,9 +94,9 @@ export const navDropItems = [
   {
     id: 'nav-5',
     title: 'Settings',
-    slug: 'profile',
+    slug: 'settings',
     titleBang: 'প্রোফাইল',
-    link: '/students/profile',
+    link: '/students/settings',
   },
   {
     id: 'nav-5',

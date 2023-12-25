@@ -10,6 +10,7 @@ import { FaUserEdit } from 'react-icons/fa';
 import { FiActivity, FiHelpCircle, FiLogOut } from 'react-icons/fi';
 import { GiProgression } from 'react-icons/gi';
 import { ImBlog } from 'react-icons/im';
+import { IoMdSettings } from 'react-icons/io';
 import { MdOutlineContentPaste, MdOutlineUnsubscribe } from 'react-icons/md';
 
 export const linksAdmin = [
@@ -117,13 +118,13 @@ export const linksStudents = [
     title: 'More',
     links: [
       {
-        name: 'Edit profile',
-        link: '/students/editProfile',
-        icon: <FaUserEdit />,
+        name: 'Settings',
+        link: '/students/settings/editProfile',
+        icon: <IoMdSettings />,
       },
       {
         name: 'Help',
-        link: '/students/help',
+        link: '/contact',
         icon: <FiHelpCircle />,
       },
       {

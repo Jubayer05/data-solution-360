@@ -33,7 +33,7 @@ export { default as Sidebar } from './utilities/Sidebar';
 
 export { default as LoginComp } from './Login/Login';
 
-export { default as RegisterComp } from './GeneralComp/Register';
+export { default as RegisterComp } from './Students/Register/Register';
 
 export { default as AddCourseComp } from './Admin/Course/AddCourse';
 export { default as SubscribedUser } from './Admin/SubscribedUser/SubscribedUser';

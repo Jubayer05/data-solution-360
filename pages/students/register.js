@@ -1,5 +1,5 @@
-import React from "react";
-import { Footer, Navbar, RegisterComp } from "../../components";
+import React from 'react';
+import { Footer, Navbar, RegisterComp } from '../../components';
 
 const register = () => {
   return (

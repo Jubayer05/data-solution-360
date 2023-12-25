@@ -1,17 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect } from "react";
-import { AiOutlineMenu } from "react-icons/ai";
-import { MdOutlineMenuOpen } from "react-icons/md";
-import { AiOutlineSearch } from "react-icons/ai";
-import { Input } from "antd";
-import { BsChatLeft } from "react-icons/bs";
-import { RiNotification3Line } from "react-icons/ri";
-import { MdKeyboardArrowDown } from "react-icons/md";
+import React, { useEffect } from 'react';
+import { AiOutlineMenu } from 'react-icons/ai';
+import { BsChatLeft } from 'react-icons/bs';
+import { MdKeyboardArrowDown, MdOutlineMenuOpen } from 'react-icons/md';
+import { RiNotification3Line } from 'react-icons/ri';
 
-import { Tooltip } from "antd";
-import { useStateContextDashboard } from "../../src/context/UtilitiesContext";
-import { useStateContext } from "../../src/context/ContextProvider";
+import { Tooltip } from 'antd';
+import { useStateContext } from '../../src/context/ContextProvider';
+import { useStateContextDashboard } from '../../src/context/UtilitiesContext';
 // import { useStateContext } from "../../src/context/UtilitiesContext";
 
 const NavButton = ({ title, link, customFunc, icon, color, dotColor }) => {
@@ -48,11 +45,11 @@ const DashboardNavbar = () => {
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
 
-    window.addEventListener("resize", handleResize);
+    window.addEventListener('resize', handleResize);
 
     handleResize();
 
-    return () => window.removeEventListener("resize", handleResize);
+    return () => window.removeEventListener('resize', handleResize);
   }, []);
 
   useEffect(() => {
@@ -72,18 +69,18 @@ const DashboardNavbar = () => {
         color="blue"
       />
 
-      <div className="px-2 py-1 flex items-center bg-[#e2ecff] w-1/3 rounded-lg">
+      {/* <div className="px-2 py-1 flex items-center bg-[#e2ecff] w-1/3 rounded-lg">
         <AiOutlineSearch className="text-xl mr-2" />
         <input
           placeholder="Quic searching"
           className="rounded-md bg-[#e2ecff] h-8 outline-none w-full"
         />
-      </div>
+      </div> */}
 
       <div className="flex items-center">
         <NavButton
           icon={<BsChatLeft />}
-          customFunc={() => handleClick("chat")}
+          customFunc={() => handleClick('chat')}
           title="Chat"
           color="blue"
           dotColor="#03c9d7"
@@ -91,7 +88,7 @@ const DashboardNavbar = () => {
 
         <NavButton
           icon={<RiNotification3Line />}
-          customFunc={() => handleClick("notification")}
+          customFunc={() => handleClick('notification')}
           title="Notification"
           color="blue"
           dotColor="#03c9d7"
@@ -99,7 +96,7 @@ const DashboardNavbar = () => {
         <Tooltip title="Profile" color="#707070">
           <div
             className="ml-2 flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-            onClick={() => handleClick("userProfile")}
+            onClick={() => handleClick('userProfile')}
           >
             {/* <img src={avatar} alt="" className="h-8 w-8 rounded-full" /> */}
             <div className="flex items-center">

@@ -120,12 +120,12 @@ const Navbar = ({ home }) => {
                     href={item?.link}
                     className={`${
                       language === 'English' ? 'font-body' : 'font-bangla'
-                    } cursor-pointer font-semibold tracking-[0.02em] uppercase
+                    } cursor-pointer font-semibold tracking-[0.02em] capitalize
                        ${
                          url == item.slug
                            ? 'text-nav visited:text-nav  '
                            : 'text-nav visited:text-nav'
-                       }  px-4 py-1 transition-all 
+                       }  px-2 py-1 transition-all 
                       duration-500 rounded-md hover:text-primary`}
                   >
                     {language === 'English' ? item.title : item.titleBang}
@@ -144,17 +144,19 @@ const Navbar = ({ home }) => {
                     <li className="mx-1">
                       <Link
                         href={item?.link}
-                        className={`${
-                          language === 'English' ? 'font-body' : 'font-bangla'
-                        } cursor-pointer font-semibold tracking-[0.02em]
+                        className={`cursor-pointer font-semibold tracking-[0.02em]
                        ${
                          url == item.slug
                            ? 'text-nav visited:text-nav  '
                            : 'text-nav visited:text-nav'
-                       } uppercase px-4 py-1 transition-all 
+                       } capitalize px-2 py-1 transition-all 
                       duration-500 rounded-md hover:text-primary flex items-center  `}
                       >
-                        <span>
+                        <span
+                          className={`${
+                            language === 'English' ? 'font-body' : 'font-bangla'
+                          }`}
+                        >
                           {language === 'English' ? item.title : item.titleBang}
                         </span>
                         {item.dropdown?.length > 0 && (
@@ -165,12 +167,17 @@ const Navbar = ({ home }) => {
                       </Link>
                     </li>
                     {item.dropdown?.length > 0 && (
-                      <div className="absolute hidden group-hover:block bg-white mt-0 border-t-4 border-[#0a5] py-2 w-52 rounded shadow-lg text-left font-semibold tracking-[0.02em] uppercase">
+                      <div className="absolute hidden group-hover:block bg-white mt-0 border-t-4 border-[#0a5] py-2 w-52 rounded shadow-lg text-left font-semibold tracking-[0.02em] capitalize">
                         {item.dropdown.map((dropItem) => (
                           <Link
                             key={dropItem.id}
                             href={dropItem.link}
-                            className="block px-4 py-3 text-gray-800 hover:text-blue-600"
+                            className={`block px-2 py-3 text-gray-800 hover:text-blue-600 ${
+                              language === 'English'
+                                ? 'font-body'
+                                : 'font-bangla'
+                            }
+                            `}
                           >
                             {dropItem.title}
                           </Link>
@@ -185,8 +192,9 @@ const Navbar = ({ home }) => {
                       href="/admin/dashboard"
                       className={`${
                         language === 'English' ? 'font-body' : 'font-bangla'
-                      } cursor-pointer font-medium visited:text-white text-white 
-                        px-4 py-3 hover:bg-[rgba(0,0,0,0.3)] rounded-md hover:text-primary`}
+                      } cursor-pointer font-semibold tracking-[0.02em]
+                      capitalize px-2 py-1 transition-all 
+                      duration-500 rounded-md text-white hover:text-primary visited:text-nav flex items-center`}
                     >
                       {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
                     </Link>
@@ -268,7 +276,7 @@ const Navbar = ({ home }) => {
                     borderRadius: '5px',
                   }}
                   className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 
-                          bg-primary-bg transition-all duration-300 ease-linear hover:bg-white uppercase font-semibold
+                          bg-primary-bg transition-all duration-300 ease-linear hover:bg-white capitalize font-semibold
                            hover:text-primary hover:border-primary`}
                   onClick={() => {}}
                 >

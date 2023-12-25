@@ -16,66 +16,49 @@ const Profile = ({ title }) => {
     <div>
       <HeadingDashboard username={title ? userName : ''} title="Your Profile" />
       <div className="w-full max-w-6xl mx-auto mt-10">
-        <div className="bg-white grid grid-cols-4 p-10 rounded-md shadow-md mb-4">
+        <div className="bg-white grid grid-cols-2 lg:grid-cols-4 py-8 px-4 rounded-md shadow-md mb-4">
           <div>
-            <img src="/icon/profile.png" className="w-40 mx-auto" alt="" />
-            <div>
-              {/* <div className="flex">
-              {footerFollowUs.map((item) => (
-                <Link
-                  href={item.link}
-                  key={item.id}
-                  target="_blank"
-                  style={{
-                    backgroundColor: item.brandColor,
-                  }}
-                  className={`text-xl text-white visited:text-white mx-2 p-2 rounded-full hover:text-white`}
-                  >
-                  <Tooltip placement="topLeft" title={item.title} key={item.id}>
-                    {item.icon}
-                    </Tooltip>
-                </Link>
-              ))}
-            </div> */}
-            </div>
+            <img
+              src="/icon/profile.png"
+              className="w-24 sm:w-40 mx-auto"
+              alt=""
+            />
+            {/* <div></div> */}
           </div>
           <div>
-            <h2 className="uppercase font-bold text-2xl text-[#1aa5d3]">
-              {findCurrentUser?.name}
+            <h2 className="uppercase font-bold text-lg sm:text-2xl text-[#1aa5d3]">
+              {findCurrentUser?.fullName}
             </h2>
-            <p className="text-lg">{}Frontend Developer</p>
+            <p className="text-base sm:text-lg">{findCurrentUser?.jobTitle}</p>
             <div className="flex items-center my-2">
-              <FaAward className="text-lg text-[#1aa5d3]" />
-              <span className="ml-4 text-base">0 Badges</span>
+              <FaAward className="text-base sm:text-lg text-[#1aa5d3]" />
+              <span className="ml-4 text-sm md:text-base">0 Badges</span>
             </div>
             <div className="flex items-center my-2">
-              <HiUserGroup className="text-lg text-[#1aa5d3]" />
-              <span className="ml-4 text-base">0 Enrollment</span>
+              <HiUserGroup className="text-base sm:text-lg text-[#1aa5d3]" />
+              <span className="ml-4 text-sm md:text-base">0 Enrollment</span>
             </div>
             <div className="flex items-center my-2">
-              <GiStarFormation className="text-lg text-[#1aa5d3]" />
-              <span className="ml-4 text-base">0 Reviews</span>
+              <GiStarFormation className="text-base sm:text-lg text-[#1aa5d3]" />
+              <span className="ml-4 text-sm md:text-base">0 Reviews</span>
             </div>
             <div className="flex items-center my-2">
-              <MdLocationOn className="text-lg text-[#1aa5d3]" />
-              <span className="ml-4 text-base">
+              <MdLocationOn className="text-base sm:text-lg text-[#1aa5d3]" />
+              <span className="ml-4 text-sm md:text-base">
                 {findCurrentUser?.district}, Bangladesh
               </span>
             </div>
           </div>
           <div className="col-span-2">
-            <h2 className="uppercase font-bold text-2xl ">Your Bio</h2>
-            <p className="text-[16px] font-light leading-6 text-[#8b8b8b]">
-              Lorem, ipsum dolor sit amet consectetur adipisicing elit. Suscipit
-              reiciendis itaque, quas mollitia commodi provident, quo libero ad
-              vero reprehenderit repudiandae pariatur animi! Nihil, iusto
-              facilis vero ratione quo ipsum reprehenderit doloribus similique
-              sunt excepturi aut sed accusantium veniam, voluptatem eveniet sit
-              officiis optio aliquid molestias rerum. Omnis, rem eligendi.
+            <h2 className="uppercase font-bold text-lg sm:text-2xl ">
+              Your Bio
+            </h2>
+            <p className="text-sm sm:text-base font-light leading-6 text-[#8b8b8b]">
+              {findCurrentUser?.biography}
             </p>
           </div>
         </div>
-        <div className=" grid grid-cols-2 gap-10  mt-20 pb-10">
+        <div className=" grid grid-cols-1 sm:grid-cols-2 px-6 gap-10  mt-20 pb-10">
           <div className="w-full bg-white pb-10 shadow-lg rounded-md">
             <h2 className="text-center bg-[#1aa5d3] text-xl font-bold py-2 uppercase text-white rounded-t-md">
               Education and Skills
@@ -119,12 +102,6 @@ const Profile = ({ title }) => {
                 <p className="text-[#999]">{findCurrentUser?.phone}</p>
               </div>
 
-              <div className="px-4 pt-3">
-                <h2 className="font-bold text-xl uppercase">Location</h2>
-                <p className="text-[#999]">
-                  {findCurrentUser?.district}, Bangladesh
-                </p>
-              </div>
               <div className="px-4 pt-3">
                 <h2 className="font-bold text-xl uppercase">Location</h2>
                 <p className="text-[#999]">
