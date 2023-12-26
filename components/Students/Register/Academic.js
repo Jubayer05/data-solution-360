@@ -6,32 +6,16 @@ import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
 
 const Academic = () => {
-  const { userEmail, findCurrentUser } = useStateContext();
-
-  console.log(findCurrentUser);
-
-  const validate = (values) => {
-    const errors = {};
-    if (!values.email) {
-      errors.email = 'Required';
-    } else if (values.email.length > 30) {
-      errors.email = 'Must be 30 characters or less';
-    }
-
-    if (!values.institution) {
-      errors.institution = 'Required';
-    } else if (values.institution.length > 40) {
-      errors.institution = 'Must be 40 characters or less';
-    }
-
-    return errors;
-  };
+  const { findCurrentUser } = useStateContext();
 
   const formik = useFormik({
     initialValues: {
-      academic: [],
+      universityName: '',
+      educationLevel: '',
+      skillSet: '',
+      language: '',
     },
-    validate,
+    // validate,
     onSubmit: (values) => {
       firebase
         .firestore()
@@ -39,9 +23,6 @@ const Academic = () => {
         .doc(findCurrentUser.key)
         .update({
           ...values,
-          email: userEmail,
-          registered: true,
-          // photoUrl: photoUrl,
         })
         .then(() => {
           Swal.fire({
@@ -50,6 +31,10 @@ const Academic = () => {
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Okay',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
           });
         })
         .catch((err) => {
@@ -107,91 +92,102 @@ const Academic = () => {
           </h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
           <form onSubmit={formik.handleSubmit}>
-            {/* NOTE: EMAIL */}
+            {/* NOTE: universityName */}
             <div className="flex items-center mb-3">
-              <label htmlFor="email" className="w-[300px]">
-                Email
-                {formik.errors.email ? (
+              <label htmlFor="universityName" className="w-[300px]">
+                School / University Name
+                {formik.errors.universityName ? (
                   <span className="text-xs text-red-600">
-                    ({formik.errors.email})
+                    ({formik.errors.universityName})
                   </span>
                 ) : null}
               </label>
               <input
-                id="email"
-                name="email"
-                type="text"
-                disabled
-                // onChange={formik.handleChange}
-                value={formik.values.email || userEmail}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
-                style={formik.errors.email && { border: '2px solid orangered' }}
-              />
-            </div>
-
-            {/* NOTE: PHONE NUM */}
-            <div className="flex items-center mb-3">
-              <label htmlFor="phone" className="w-[300px]">
-                Phone Number
-                {formik.errors.phone ? (
-                  <span className="text-xs text-red-600">
-                    ({formik.errors.phone})
-                  </span>
-                ) : null}
-              </label>
-              <input
-                id="phone"
-                name="phone"
+                id="universityName"
+                name="universityName"
                 type="text"
                 onChange={formik.handleChange}
-                value={formik.values.phone}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
-                style={formik.errors.phone && { border: '2px solid orangered' }}
-              />
-            </div>
-
-            {/* NOTE: institution */}
-            <div className="flex items-center mb-3">
-              <label className="w-[300px]" htmlFor="email">
-                Institution / Organization / Company{' '}
-                {formik.errors.institution ? (
-                  <span className="text-xs text-red-600">
-                    ({formik.errors.institution})
-                  </span>
-                ) : null}
-              </label>
-              <input
-                id="institution"
-                name="institution"
-                type="institution"
-                onChange={formik.handleChange}
-                value={formik.values.institution}
+                value={formik.values.universityName}
+                placeholder="Dhaka University"
                 className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
                 style={
-                  formik.errors.institution && { border: '2px solid orangered' }
+                  formik.errors.universityName && {
+                    border: '2px solid orangered',
+                  }
                 }
               />
             </div>
 
-            {/* NOTE: Website */}
-            <div className="flex items-center">
-              <label className="w-[300px]" htmlFor="email">
-                Website Link (if any)
-                {formik.errors.websiteLink ? (
+            {/* NOTE: educationLevel */}
+            <div className="flex items-center mb-3">
+              <label htmlFor="educationLevel" className="w-[300px]">
+                Level of Education
+                {formik.errors.educationLevel ? (
                   <span className="text-xs text-red-600">
-                    ({formik.errors.websiteLink})
+                    ({formik.errors.educationLevel})
                   </span>
                 ) : null}
               </label>
               <input
-                id="websiteLink"
-                name="websiteLink"
-                type="websiteLink"
+                id="educationLevel"
+                name="educationLevel"
+                type="text"
                 onChange={formik.handleChange}
-                value={formik.values.websiteLink}
+                value={formik.values.educationLevel}
+                placeholder="BSc in CSE"
                 className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
                 style={
-                  formik.errors.websiteLink && { border: '2px solid orangered' }
+                  formik.errors.educationLevel && {
+                    border: '2px solid orangered',
+                  }
+                }
+              />
+            </div>
+
+            {/* NOTE: Skills */}
+            <div className="flex items-center mb-3">
+              <label className="w-[300px]" htmlFor="email">
+                Skill Set
+                {formik.errors.skillSet ? (
+                  <span className="text-xs text-red-600">
+                    ({formik.errors.skillSet})
+                  </span>
+                ) : null}
+              </label>
+              <input
+                id="skillSet"
+                name="skillSet"
+                type="skillSet"
+                onChange={formik.handleChange}
+                value={formik.values.skillSet}
+                placeholder="Web development, Graphic Designing"
+                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                style={
+                  formik.errors.skillSet && { border: '2px solid orangered' }
+                }
+              />
+            </div>
+
+            {/* NOTE: Language */}
+            <div className="flex items-center">
+              <label className="w-[300px]" htmlFor="email">
+                Language
+                {formik.errors.language ? (
+                  <span className="text-xs text-red-600">
+                    ({formik.errors.language})
+                  </span>
+                ) : null}
+              </label>
+              <input
+                id="language"
+                name="language"
+                type="language"
+                onChange={formik.handleChange}
+                value={formik.values.language}
+                placeholder="Bangla, English, Hindi"
+                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                style={
+                  formik.errors.language && { border: '2px solid orangered' }
                 }
               />
             </div>

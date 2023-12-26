@@ -19,7 +19,7 @@ const Profile = ({ title }) => {
         <div className="bg-white grid grid-cols-2 lg:grid-cols-4 py-8 px-4 rounded-md shadow-md mb-4">
           <div>
             <img
-              src="/icon/profile.png"
+              src={findCurrentUser?.photoUrl || '/icon/profile.png'}
               className="w-24 sm:w-40 mx-auto"
               alt=""
             />
@@ -63,28 +63,31 @@ const Profile = ({ title }) => {
             <h2 className="text-center bg-[#1aa5d3] text-xl font-bold py-2 uppercase text-white rounded-t-md">
               Education and Skills
             </h2>
-            <div className="px-4 pt-5">
+            <div className="px-4 pt-4">
               <h2 className="font-bold text-xl uppercase">Education</h2>
-              <p className="text-[#999]">
-                Jashore Universiyt of Science and Technology, Bangladesh
+              <p className="text-[#999] text-sm">
+                {findCurrentUser?.educationLevel}
+              </p>
+              <p className="text-[#999] -mt-2">
+                {findCurrentUser?.universityName
+                  ? findCurrentUser?.universityName
+                  : 'You did not update your educational information'}
               </p>
             </div>
-            <div className="px-4 pt-5">
+            <div className="px-4 pt-4">
               <h2 className="font-bold text-xl uppercase">Skill</h2>
               <p className="text-[#999]">
-                Jashore Universiyt of Science and Technology, Bangladesh
+                {findCurrentUser?.skillSet
+                  ? findCurrentUser?.skillSet
+                  : 'You did not update your skills information'}
               </p>
             </div>
-            <div className="px-4 pt-5">
+            <div className="px-4 pt-4">
               <h2 className="font-bold text-xl uppercase">Language</h2>
               <p className="text-[#999]">
-                Jashore Universiyt of Science and Technology, Bangladesh
-              </p>
-            </div>
-            <div className="px-4 pt-5">
-              <h2 className="font-bold text-xl uppercase">Certification</h2>
-              <p className="text-[#999]">
-                Jashore Universiyt of Science and Technology, Bangladesh
+                {findCurrentUser?.language
+                  ? findCurrentUser?.language
+                  : 'You did not update your language information'}
               </p>
             </div>
           </div>
@@ -93,16 +96,16 @@ const Profile = ({ title }) => {
               <h2 className="text-center bg-[#1aa5d3] text-xl font-bold py-2 uppercase text-white rounded-t-md">
                 Contact Information
               </h2>
-              <div className="px-4 pt-3">
+              <div className="px-4 pt-4">
                 <h2 className="font-bold text-xl uppercase">Email</h2>
                 <p className="text-[#999]">{findCurrentUser?.email}</p>
               </div>
-              <div className="px-4 pt-3">
+              <div className="px-4 pt-4">
                 <h2 className="font-bold text-xl uppercase">Phone Number</h2>
                 <p className="text-[#999]">{findCurrentUser?.phone}</p>
               </div>
 
-              <div className="px-4 pt-3">
+              <div className="px-4 pt-4">
                 <h2 className="font-bold text-xl uppercase">Location</h2>
                 <p className="text-[#999]">
                   {findCurrentUser?.district}, Bangladesh

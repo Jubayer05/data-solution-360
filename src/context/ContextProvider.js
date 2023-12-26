@@ -52,7 +52,7 @@ export const MainContextProvider = ({ children }) => {
   const findAdmin = dashAdmin.find((item) => item.email === userEmail);
   const uniqueUserName = userEmail?.split('@')[0];
 
-  console.log(userData);
+  // console.log(userData);
 
   return (
     <StateContext.Provider

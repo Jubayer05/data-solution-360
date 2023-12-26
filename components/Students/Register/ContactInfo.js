@@ -10,25 +10,12 @@ const ContactInfo = () => {
 
   console.log(findCurrentUser);
 
-  const validate = (values) => {
-    const errors = {};
-
-    if (!values.institution) {
-      errors.institution = 'Required';
-    } else if (values.institution.length > 40) {
-      errors.institution = 'Must be 40 characters or less';
-    }
-
-    return errors;
-  };
-
   const formik = useFormik({
     initialValues: {
       institution: '',
       phone: '',
       websiteLink: '',
     },
-    validate,
     onSubmit: (values) => {
       firebase
         .firestore()
@@ -47,6 +34,10 @@ const ContactInfo = () => {
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Okay',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              window.location.reload();
+            }
           });
         })
         .catch((err) => {
