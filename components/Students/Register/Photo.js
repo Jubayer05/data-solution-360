@@ -95,7 +95,7 @@ const ContactInfo = () => {
     <div>
       <div className="pt-4 pb-5 px-5 ">
         <div className="max-w-xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
-          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Contact Info</h2>
+          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Profile Photo</h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
           <form onSubmit={formik.handleSubmit}>
             {/* NOTE: photoUrl */}
