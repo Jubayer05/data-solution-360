@@ -29,7 +29,9 @@ const Profile = ({ title }) => {
             <h2 className="uppercase font-bold text-lg sm:text-2xl text-[#1aa5d3]">
               {findCurrentUser?.fullName}
             </h2>
-            <p className="text-base sm:text-lg">{findCurrentUser?.jobTitle}</p>
+            <p className="text-base sm:text-lg">
+              {findCurrentUser?.jobTitle || 'You did not update your job title'}
+            </p>
             <div className="flex items-center my-2">
               <FaAward className="text-base sm:text-lg text-[#1aa5d3]" />
               <span className="ml-4 text-sm md:text-base">0 Badges</span>
@@ -45,7 +47,9 @@ const Profile = ({ title }) => {
             <div className="flex items-center my-2">
               <MdLocationOn className="text-base sm:text-lg text-[#1aa5d3]" />
               <span className="ml-4 text-sm md:text-base">
-                {findCurrentUser?.district}, Bangladesh
+                {findCurrentUser?.district
+                  ? `${findCurrentUser?.district}, Bangladesh`
+                  : 'You did not update your district.'}
               </span>
             </div>
           </div>
@@ -54,7 +58,7 @@ const Profile = ({ title }) => {
               Your Bio
             </h2>
             <p className="text-sm sm:text-base font-light leading-6 text-[#8b8b8b]">
-              {findCurrentUser?.biography}
+              {findCurrentUser?.biography || 'You did not update your bio.'}
             </p>
           </div>
         </div>
@@ -102,13 +106,18 @@ const Profile = ({ title }) => {
               </div>
               <div className="px-4 pt-4">
                 <h2 className="font-bold text-xl uppercase">Phone Number</h2>
-                <p className="text-[#999]">{findCurrentUser?.phone}</p>
+                <p className="text-[#999]">
+                  {findCurrentUser?.phone ||
+                    'You did not update your phone number.'}
+                </p>
               </div>
 
               <div className="px-4 pt-4">
                 <h2 className="font-bold text-xl uppercase">Location</h2>
                 <p className="text-[#999]">
-                  {findCurrentUser?.district}, Bangladesh
+                  {findCurrentUser?.district
+                    ? `${findCurrentUser?.district}, Bangladesh`
+                    : 'You did not update your district.'}
                 </p>
               </div>
             </div>

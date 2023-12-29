@@ -42,10 +42,6 @@ const MyBlogs = () => {
     setConvertedContent(currentContentAsHTML);
   };
 
-  const openModal = (item) => {
-    setModalData(item);
-    setIsOpen(true);
-  };
   const closeModal = () => {
     setIsOpen(false);
   };

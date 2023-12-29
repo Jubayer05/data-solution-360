@@ -137,49 +137,9 @@ const BasicInfo = () => {
       border: '1px solid #e5e5e5',
       padding: '5px 10px',
       borderRadius: '3px',
-      backgroundColor: '#fafafa',
+      backgroundColor: '#f1f1f1',
     }),
   };
-
-  // const handleFileSubmit = (e) => {
-  //   const fileSize = document.getElementById("photoUrl").files[0].size;
-  //   const profileImg = e.target.files[0];
-
-  //   if (fileSize < 512000) {
-  //     const uploadTask = firebase
-  //       .storage()
-  //       .ref(`profileImage/${userEmail}/${profileImg?.name}`)
-  //       .put(profileImg);
-  //     uploadTask.on(
-  //       "state_changed",
-  //       (snapshot) => {
-  //         const progress = Math.round(
-  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //         );
-
-  //         setProgressData(progress);
-  //       },
-  //       (error) => {
-  //         alert(error.message + "" + "Something went wrong");
-  //       },
-  //       () => {
-  //         firebase
-  //           .storage()
-  //           .ref("profileImage")
-  //           .child(userEmail)
-  //           .child(profileImg?.name)
-  //           .getDownloadURL()
-  //           .then((url) => {
-  //             // NOTE: use this url
-  //             setPhotoUrl(url);
-  //           });
-  //       }
-  //     );
-  //   } else {
-  //     alert("File Size must be under 500kb");
-  //   }
-  //   console.log(fileSize);
-  // };
 
   return (
     <div>
@@ -190,7 +150,7 @@ const BasicInfo = () => {
           <form onSubmit={formik.handleSubmit}>
             {/* NOTE: NAME */}
             <div className="flex items-center mb-3">
-              <label htmlFor="fullName" className="w-[300px]">
+              <label htmlFor="fullName" className="w-[240px] sm:w-[300px]">
                 Name
                 {formik.errors.fullName ? (
                   <span className="text-xs text-red-600">
@@ -204,7 +164,7 @@ const BasicInfo = () => {
                 type="text"
                 onChange={formik.handleChange}
                 value={formik.values.fullName}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.fullName && { border: '2px solid orangered' }
                 }
@@ -212,7 +172,7 @@ const BasicInfo = () => {
             </div>
             {/* NOTE: jobTitle */}
             <div className="flex items-center mb-3">
-              <label htmlFor="jobTitle" className="w-[300px]">
+              <label htmlFor="jobTitle" className="w-[240px] sm:w-[300px]">
                 Job Title
                 {formik.errors.jobTitle ? (
                   <span className="text-xs text-red-600">
@@ -226,7 +186,7 @@ const BasicInfo = () => {
                 type="jobTitle"
                 onChange={formik.handleChange}
                 value={formik.values.jobTitle}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.jobTitle && { border: '2px solid orangered' }
                 }
@@ -235,7 +195,7 @@ const BasicInfo = () => {
 
             {/* NOTE: Gender */}
             <div className="flex items-center mb-3">
-              <p className="w-[300px]">Gender</p>
+              <p className="w-[240px] sm:w-[300px]">Gender</p>
               <Select
                 className="w-[100%]"
                 styles={customStyles}
@@ -247,7 +207,7 @@ const BasicInfo = () => {
 
             {/* NOTE: Occupation */}
             <div className="flex items-center mb-3">
-              <p className="w-[300px]">Occupation</p>
+              <p className="w-[240px] sm:w-[300px]">Occupation</p>
               <Select
                 className="w-[100%]"
                 styles={customStyles}
@@ -259,7 +219,7 @@ const BasicInfo = () => {
 
             {/* NOTE: DISTRICTS */}
             <div className="flex items-center mb-3">
-              <p className="w-[300px]">District</p>
+              <p className="w-[240px] sm:w-[300px]">District</p>
               <Select
                 className="w-full"
                 styles={customStyles}
@@ -271,7 +231,10 @@ const BasicInfo = () => {
 
             {/* NOTE: biography */}
             <div className="flex items-start">
-              <label className="w-[300px] pt-3" htmlFor="biography">
+              <label
+                className="w-[240px] sm:w-[300px] pt-3"
+                htmlFor="biography"
+              >
                 Biography
                 {formik.errors.biography ? (
                   <span className="text-xs text-red-600">

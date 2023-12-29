@@ -1,6 +1,6 @@
-import React, { useEffect, useState } from "react";
-import { technologyStack } from "../../src/data/data";
-import { Icon } from "@iconify/react";
+import { Icon } from '@iconify/react';
+import React, { useEffect, useState } from 'react';
+import { technologyStack } from '../../src/data/data';
 
 const Technology = () => {
   const [technologyItems, setTechnologyItems] = useState([]);
@@ -23,7 +23,7 @@ const Technology = () => {
         can ignore it while setting up their data science tech stack.
       </p>
 
-      <div className="max-w-5xl mx-auto grid grid-cols-3 sm:grid-cols-4 justify-center mt-10 px-4">
+      <div className="max-w-5xl mx-auto grid grid-cols-3 sm:grid-cols-5 justify-center mt-10 px-4">
         {technologyStack.map((item) => (
           <div
             key={item.id}
@@ -31,7 +31,7 @@ const Technology = () => {
             onClick={() => handleTechnology(item)}
             style={
               technologyItems.title === item.title
-                ? { backgroundColor: "#027ad6", color: "#fff" }
+                ? { backgroundColor: '#027ad6', color: '#fff' }
                 : {}
             }
           >

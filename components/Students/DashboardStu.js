@@ -1,7 +1,7 @@
 import React from 'react';
 
 import { useStateContext } from '../../src/context/ContextProvider';
-import CrashCourseItem from '../utilities/CrashCourseItem';
+import CrashCourseItem from '../Courses/CrashCourseItem';
 import Profile from './Profile';
 
 const AdminHome = () => {

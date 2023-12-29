@@ -4,14 +4,13 @@ import {
   AiOutlineHome,
   AiOutlineVideoCameraAdd,
 } from 'react-icons/ai';
-import { BsGraphUp } from 'react-icons/bs';
 import { CgProfile } from 'react-icons/cg';
 import { FaUserEdit } from 'react-icons/fa';
 import { FiActivity, FiHelpCircle, FiLogOut } from 'react-icons/fi';
-import { GiProgression } from 'react-icons/gi';
 import { ImBlog } from 'react-icons/im';
 import { IoMdSettings } from 'react-icons/io';
 import { MdOutlineContentPaste, MdOutlineUnsubscribe } from 'react-icons/md';
+import { RiHomeGearFill } from 'react-icons/ri';
 
 export const linksAdmin = [
   {
@@ -23,20 +22,20 @@ export const linksAdmin = [
         icon: <AiOutlineHome />,
       },
       {
-        name: 'Progress',
-        link: '/admin/progress',
-        icon: <GiProgression />,
+        name: 'Customize Home Page',
+        link: '/admin/home-page',
+        icon: <RiHomeGearFill />,
       },
-      {
-        name: 'Overview',
-        link: '/admin/overview',
-        icon: <BsGraphUp />,
-      },
-      {
-        name: 'My Activity',
-        link: '/admin/myActivity',
-        icon: <FiActivity />,
-      },
+      // {
+      //   name: 'Overview',
+      //   link: '/admin/overview',
+      //   icon: <BsGraphUp />,
+      // },
+      // {
+      //   name: 'My Activity',
+      //   link: '/admin/myActivity',
+      //   icon: <FiActivity />,
+      // },
     ],
   },
 

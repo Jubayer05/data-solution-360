@@ -2,7 +2,7 @@
 import React from 'react';
 
 import { useStateContext } from '../../src/context/ContextProvider';
-import CrashCourseItem from '../utilities/CrashCourseItem';
+import CrashCourseItem from './CrashCourseItem';
 
 const CrashCourse = () => {
   const { language, courseData } = useStateContext();

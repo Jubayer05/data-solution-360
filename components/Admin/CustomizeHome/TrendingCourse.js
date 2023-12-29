@@ -1,3 +1,4 @@
+/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
@@ -5,22 +6,23 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+const db = firebase.firestore();
 
-const ContactInfo = () => {
-  const { userEmail, findCurrentUser } = useStateContext();
+const TrendingCourse = () => {
+  const { userEmail, trendingCourse } = useStateContext();
   const [photoUrl, setPhotoUrl] = useState('');
   const [progressData, setProgressData] = useState('');
 
   const formik = useFormik({
     initialValues: {
+      trendingCourseLink: '',
       photoUrl: photoUrl,
     },
-    // validate,
     onSubmit: (values) => {
       firebase
         .firestore()
-        .collection('userLogin')
-        .doc(findCurrentUser.key)
+        .collection('trendingCourse')
+        .doc('vMVpfcjol5dGUyiVZDDO')
         .update({
           ...values,
           photoUrl: photoUrl,
@@ -44,15 +46,17 @@ const ContactInfo = () => {
     },
   });
 
+  // console.log(trendingCourse[0]);
+
   const handleFileSubmit = (e) => {
     const fileSize = document.getElementById('photoUrl').files[0].size;
-    const profileImg = e.target.files[0];
+    const courseImg = e.target.files[0];
 
-    if (fileSize < 512000) {
+    if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`profileImage/${userEmail}/${profileImg?.name}`)
-        .put(profileImg);
+        .ref(`courseImage/${userEmail}/${courseImg?.name}`)
+        .put(courseImg);
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -68,9 +72,9 @@ const ContactInfo = () => {
         () => {
           firebase
             .storage()
-            .ref('profileImage')
+            .ref('courseImage')
             .child(userEmail)
-            .child(profileImg?.name)
+            .child(courseImg?.name)
             .getDownloadURL()
             .then((url) => {
               // NOTE: use this url
@@ -79,9 +83,8 @@ const ContactInfo = () => {
         },
       );
     } else {
-      alert('File Size must be under 500kb');
+      alert('File Size must be under 1mb.');
     }
-    console.log(fileSize);
   };
 
   console.log(photoUrl);
@@ -93,15 +96,23 @@ const ContactInfo = () => {
 
   return (
     <div>
-      <div className="pt-4 pb-5 px-5 ">
-        <div className="max-w-xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
-          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Contact Info</h2>
+      <div className="pt-10 pb-4 px-5 ">
+        <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
+          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Trending Course</h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
+          <h2>Current Trending Image</h2>
+          <div className="w-[400px] mx-auto">
+            <img
+              src={trendingCourse[0]?.photoUrl}
+              alt="Trending Images"
+              className="rounded-lg"
+            />
+          </div>
           <form onSubmit={formik.handleSubmit}>
             {/* NOTE: photoUrl */}
-            <div className="flex items-center mb-3">
+            <div className="flex items-center mb-3 mt-20">
               <label htmlFor="photoUrl" className="w-[240px] sm:w-[300px]">
-                Upload Photo
+                Change trending image
               </label>
               <input
                 id="photoUrl"
@@ -120,6 +131,23 @@ const ContactInfo = () => {
               />
             </div>
 
+            <div className="flex items-center mt-3">
+              <label
+                htmlFor="trendingCourseLink"
+                className="w-[240px] sm:w-[300px]"
+              >
+                Link of the trending course
+              </label>
+              <input
+                id="trendingCourseLink"
+                name="trendingCourseLink"
+                type="text"
+                onChange={formik.handleChange}
+                value={formik.values.trendingCourseLink}
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
+              />
+            </div>
+
             <div className="text-center mt-6">
               <button
                 type="submit"
@@ -135,5 +163,5 @@ const ContactInfo = () => {
     </div>
   );
 };
-
-export default ContactInfo;
+``;
+export default TrendingCourse;

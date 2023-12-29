@@ -1,6 +1,8 @@
+export { default as CrashCourse } from './Courses/CrashCourse';
+export { default as Trending } from './Courses/Trending';
+
 export { default as AboutHome } from './Home/AboutUs';
 export { default as BannerCompanies } from './Home/BannerCompanies';
-export { default as CrashCourse } from './Home/CrashCourse';
 export { default as Discount } from './Home/Discount/Discount';
 export { default as Faq } from './Home/Faq';
 export { default as HomeComp } from './Home/Home';
@@ -30,6 +32,7 @@ export { default as FaqComp } from './utilities/Faq';
 export { default as Footer } from './utilities/Footer';
 export { default as Navbar } from './utilities/Navbar';
 export { default as Sidebar } from './utilities/Sidebar';
+export { default as WhatsApp } from './utilities/WhatsApp';
 
 export { default as LoginComp } from './Login/Login';
 

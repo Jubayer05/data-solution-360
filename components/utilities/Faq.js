@@ -19,10 +19,13 @@ const Faq = ({ data, title }) => {
           >
             <Panel
               className="text-lg font-semibold"
-              header={item.question}
+              header={item.faqTitle}
               key={item.id}
             >
-              <div className="text-base font-normal">{item.answer}</div>
+              <div
+                className="text-base font-normal"
+                dangerouslySetInnerHTML={{ __html: item.faqAnswer }}
+              />
             </Panel>
           </Collapse>
         </div>

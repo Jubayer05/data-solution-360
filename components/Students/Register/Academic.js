@@ -94,7 +94,10 @@ const Academic = () => {
           <form onSubmit={formik.handleSubmit}>
             {/* NOTE: universityName */}
             <div className="flex items-center mb-3">
-              <label htmlFor="universityName" className="w-[300px]">
+              <label
+                htmlFor="universityName"
+                className="w-[240px] sm:w-[300px]"
+              >
                 School / University Name
                 {formik.errors.universityName ? (
                   <span className="text-xs text-red-600">
@@ -109,7 +112,7 @@ const Academic = () => {
                 onChange={formik.handleChange}
                 value={formik.values.universityName}
                 placeholder="Dhaka University"
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.universityName && {
                     border: '2px solid orangered',
@@ -120,7 +123,10 @@ const Academic = () => {
 
             {/* NOTE: educationLevel */}
             <div className="flex items-center mb-3">
-              <label htmlFor="educationLevel" className="w-[300px]">
+              <label
+                htmlFor="educationLevel"
+                className="w-[240px] sm:w-[300px]"
+              >
                 Level of Education
                 {formik.errors.educationLevel ? (
                   <span className="text-xs text-red-600">
@@ -135,7 +141,7 @@ const Academic = () => {
                 onChange={formik.handleChange}
                 value={formik.values.educationLevel}
                 placeholder="BSc in CSE"
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.educationLevel && {
                     border: '2px solid orangered',
@@ -146,7 +152,7 @@ const Academic = () => {
 
             {/* NOTE: Skills */}
             <div className="flex items-center mb-3">
-              <label className="w-[300px]" htmlFor="email">
+              <label className="w-[240px] sm:w-[300px]" htmlFor="email">
                 Skill Set
                 {formik.errors.skillSet ? (
                   <span className="text-xs text-red-600">
@@ -161,7 +167,7 @@ const Academic = () => {
                 onChange={formik.handleChange}
                 value={formik.values.skillSet}
                 placeholder="Web development, Graphic Designing"
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.skillSet && { border: '2px solid orangered' }
                 }
@@ -170,7 +176,7 @@ const Academic = () => {
 
             {/* NOTE: Language */}
             <div className="flex items-center">
-              <label className="w-[300px]" htmlFor="email">
+              <label className="w-[240px] sm:w-[300px]" htmlFor="email">
                 Language
                 {formik.errors.language ? (
                   <span className="text-xs text-red-600">
@@ -185,7 +191,7 @@ const Academic = () => {
                 onChange={formik.handleChange}
                 value={formik.values.language}
                 placeholder="Bangla, English, Hindi"
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.language && { border: '2px solid orangered' }
                 }

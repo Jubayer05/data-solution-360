@@ -14,6 +14,8 @@ export const MainContextProvider = ({ children }) => {
   const [blogData, setBlogData] = useState([]);
   const [dashAdmin, setDashAdmin] = useState([]);
   const [courseData, setCourseData] = useState([]);
+  const [faqData, setFaqData] = useState([]);
+  const [trendingCourse, setTrendingCourse] = useState([]);
 
   useEffect(() => {
     setLanguage(localStorage.getItem('lan'));
@@ -22,9 +24,11 @@ export const MainContextProvider = ({ children }) => {
     setPhotoUrl(localStorage.getItem('photoUrl'));
 
     loadData('userLogin', setUserData);
-    loadDataByOrder('blogData', setBlogData);
+    loadData('trendingCourse', setTrendingCourse);
     loadData('dashboard_admin', setDashAdmin);
-    loadDataByOrder('course_data', setCourseData);
+    loadDataByOrder('faqData', setFaqData, 'orderFaq', 'asc');
+    loadDataByOrder('blogData', setBlogData, 'createdAt', 'desc');
+    loadDataByOrder('course_data', setCourseData, 'createdAt', 'desc');
   }, []);
 
   const loadData = (database, setState) => {
@@ -36,9 +40,9 @@ export const MainContextProvider = ({ children }) => {
       setState(data);
     });
   };
-  const loadDataByOrder = (database, setState) => {
+  const loadDataByOrder = (database, setState, orderProperty, orderBy) => {
     db.collection(database)
-      .orderBy('createdAt', 'desc')
+      .orderBy(orderProperty, orderBy)
       .onSnapshot((snap) => {
         const data = snap.docs.map((doc) => ({
           key: doc.id,
@@ -67,6 +71,8 @@ export const MainContextProvider = ({ children }) => {
         courseData,
         photoUrl,
         uniqueUserName,
+        faqData,
+        trendingCourse,
       }}
     >
       {children}

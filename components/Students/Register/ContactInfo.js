@@ -95,7 +95,7 @@ const ContactInfo = () => {
           <form onSubmit={formik.handleSubmit}>
             {/* NOTE: EMAIL */}
             <div className="flex items-center mb-3">
-              <label htmlFor="email" className="w-[300px]">
+              <label htmlFor="email" className="w-[240px] sm:w-[300px]">
                 Email
               </label>
               <input
@@ -105,13 +105,13 @@ const ContactInfo = () => {
                 disabled
                 // onChange={formik.handleChange}
                 value={formik.values.email || userEmail}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
               />
             </div>
 
             {/* NOTE: PHONE NUM */}
             <div className="flex items-center mb-3">
-              <label htmlFor="phone" className="w-[300px]">
+              <label htmlFor="phone" className="w-[240px] sm:w-[300px]">
                 Phone Number
                 {formik.errors.phone ? (
                   <span className="text-xs text-red-600">
@@ -125,14 +125,14 @@ const ContactInfo = () => {
                 type="text"
                 onChange={formik.handleChange}
                 value={formik.values.phone}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={formik.errors.phone && { border: '2px solid orangered' }}
               />
             </div>
 
             {/* NOTE: institution */}
             <div className="flex items-center mb-3">
-              <label className="w-[300px]" htmlFor="email">
+              <label className="w-[240px] sm:w-[300px]" htmlFor="email">
                 Institution / Organization / Company{' '}
                 {formik.errors.institution ? (
                   <span className="text-xs text-red-600">
@@ -146,7 +146,7 @@ const ContactInfo = () => {
                 type="institution"
                 onChange={formik.handleChange}
                 value={formik.values.institution}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.institution && { border: '2px solid orangered' }
                 }
@@ -155,7 +155,7 @@ const ContactInfo = () => {
 
             {/* NOTE: Website */}
             <div className="flex items-center">
-              <label className="w-[300px]" htmlFor="email">
+              <label className="w-[240px] sm:w-[300px]" htmlFor="email">
                 Website Link (if any)
                 {formik.errors.websiteLink ? (
                   <span className="text-xs text-red-600">
@@ -169,7 +169,7 @@ const ContactInfo = () => {
                 type="websiteLink"
                 onChange={formik.handleChange}
                 value={formik.values.websiteLink}
-                className="w-full px-2 py-3 rounded-md bg-[#fafafa] outline-none"
+                className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
                 style={
                   formik.errors.websiteLink && { border: '2px solid orangered' }
                 }

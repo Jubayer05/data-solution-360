@@ -28,15 +28,9 @@ export const navItems = [
     titleBang: 'সম্পর্ক',
     link: '/about-us',
   },
+
   {
     id: 'nav-3',
-    title: 'Courses',
-    slug: 'courses',
-    titleBang: 'কোর্স',
-    link: '/courses',
-  },
-  {
-    id: 'nav-4',
     title: 'Services',
     slug: 'services',
     titleBang: 'সার্ভিস',
@@ -58,6 +52,13 @@ export const navItems = [
         link: '/services/consultancy',
       },
     ],
+  },
+  {
+    id: 'nav-4',
+    title: 'Courses',
+    slug: 'courses',
+    titleBang: 'কোর্স',
+    link: '/courses',
   },
   {
     id: 'nav-5',
@@ -362,6 +363,16 @@ export const technologyStack = [
       {
         id: '3',
         logoImg: '/technology/postgresql.jpg',
+      },
+    ],
+  },
+  {
+    id: '4',
+    title: 'AI',
+    technology: [
+      {
+        id: '1',
+        logoImg: '/technology/chatgpt.png',
       },
     ],
   },
