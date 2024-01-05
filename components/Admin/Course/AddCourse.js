@@ -18,6 +18,7 @@ const Editor = dynamic(
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import HeadingDashboard from '../../utilities/HeadingDashboard';
+import AddModule from './AddModule';
 
 // Initial state for the course data
 const initialCourseState = {
@@ -46,6 +47,7 @@ const AddCourse = () => {
   );
   const [convertContent, setConvertedContent] = useState(null);
   const [courseData, setCourseData] = useState(initialCourseState);
+  const [courseModule, setCourseModule] = useState([]);
   const [progressData, setProgressData] = useState(null);
 
   // Handler for changes in the editor content
@@ -56,12 +58,13 @@ const AddCourse = () => {
     setConvertedContent(currentContentAsHTML);
   };
 
+  console.log(courseModule);
+
   // Plain options for checkboxes
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
   // Handler for input changes
   const handleInputChange = (key, value) => {
-    console.log(key + ': ' + value);
     const updatedObject = {
       ...courseData,
       [key]: value,
@@ -147,6 +150,7 @@ const AddCourse = () => {
           ...courseData,
           id: uuidv4().split('-')[0],
           details: convertContent,
+          courseModule,
           courseShortData,
           createdAt: new Date().toLocaleDateString(undefined, options),
         })
@@ -351,6 +355,11 @@ const AddCourse = () => {
           placeholder="https://drive.google.com/file/xyz"
           func={handleInputChange}
           type="text"
+        />
+
+        <AddModule
+          courseModule={courseModule}
+          setCourseModule={setCourseModule}
         />
 
         {/* Minimum 7 short point for course details */}

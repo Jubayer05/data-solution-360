@@ -1,16 +1,16 @@
 /* eslint-disable @next/next/no-img-element */
+import { Collapse } from 'antd';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { BiShareAlt } from 'react-icons/bi';
-import {
-  BsCalendarDay,
-  BsCheck2Circle,
-  BsClock,
-  BsTelephone,
-} from 'react-icons/bs';
+import { AiOutlineFundProjectionScreen } from 'react-icons/ai';
+import { BsCalendarDay, BsClock } from 'react-icons/bs';
 import { GoCalendar } from 'react-icons/go';
-import { ImClock } from 'react-icons/im';
+import { RiLiveLine } from 'react-icons/ri';
 import { useStateContext } from '../../src/context/ContextProvider';
+
+import { colors } from '../../src/data/data';
+import RightSide from './RightSide';
+const { Panel } = Collapse;
 
 const CourseDetails = () => {
   const { courseData } = useStateContext();
@@ -24,7 +24,7 @@ const CourseDetails = () => {
     }
   }, [courseData]);
 
-  console.log(courseData);
+  console.log(colors);
 
   return (
     <div className="flex items-start flex-col-reverse md:flex-row max-w-6xl mx-auto font-bold font-heading">
@@ -167,17 +167,86 @@ const CourseDetails = () => {
         <div className="mt-16">
           <h2 className="text-3xl font-bold mb-3 font-heading">About Course</h2>
           <div className="h-[.5px] w-[100%] bg-slate-300" />
-
-          {/* <div
-            className="text-lg"
-            dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
-          /> */}
-          {/* TODO: Remove it letter */}
           <div className="mt-4">
             <p
               className="text-lg font-normal"
               dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
             />
+          </div>
+        </div>
+
+        {/* NOTE: COURSE MODULE  */}
+        <div className="mt-16">
+          <h2 className="text-3xl font-bold mb-3 font-heading">
+            Course Module
+          </h2>
+          <div className="h-[.5px] w-[100%] bg-slate-300" />
+          <div className="mt-4">
+            {courseDetails?.courseModule?.map((item, index) => (
+              <div key={item.id} className="border rounded my-3">
+                <Collapse
+                  collapsible="header"
+                  expandIconPosition="end"
+                  ghost
+                  defaultActiveKey={['1']}
+                >
+                  <Panel
+                    className="text-lg font-semibold"
+                    header={
+                      <div className="flex items-center gap-4 ">
+                        <div
+                          style={{ backgroundColor: colors[index] }}
+                          className={`p-2 rounded-lg text-white text-center text-base font-normal`}
+                        >
+                          <p className="m-0">Module</p>
+                          <p className="m-0 font-bold">{item.moduleNumber}</p>
+                        </div>
+                        <div>
+                          <h2 className="text-xl font-bold">
+                            {item.moduleName}
+                          </h2>
+                          <div className="flex items-center gap-4">
+                            <div className="flex items-center text-[13px] font-normal">
+                              <RiLiveLine /> &nbsp;{' '}
+                              <p className="m-0">
+                                {' '}
+                                <span className="font-semibold">
+                                  {item.liveClassNumber}
+                                </span>{' '}
+                                Live Classes
+                              </p>
+                            </div>
+                            <div className="flex items-center text-[13px] font-normal">
+                              <AiOutlineFundProjectionScreen /> &nbsp;
+                              <p className="m-0">
+                                {' '}
+                                <span className="font-semibold">
+                                  {item.projectNumber}
+                                </span>{' '}
+                                Projects
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    }
+                    key={item.id}
+                  >
+                    <div className="text-base font-normal border-t-1 px-4 pt-4">
+                      {item.lessons.map((panelLesson) => (
+                        <p key={panelLesson.id}>{panelLesson.title}</p>
+                      ))}
+                    </div>
+                  </Panel>
+                </Collapse>
+              </div>
+            ))}
+          </div>
+        </div>
+
+        {/* NOTE: DRIVE LINK, COURSE BENEFIT  */}
+        <div className="mt-16">
+          <div className="mt-4">
             {courseDetails?.drive_link && (
               <>
                 <p className="text-2xl mt-12 capitalize">
@@ -252,93 +321,7 @@ const CourseDetails = () => {
         </div>
       </div>
       {/* NOTE: RIGHT SIDE */}
-      <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-185px]">
-        <div className="mb-3">
-          <img
-            src={courseDetails?.img}
-            alt=""
-            className="rounded-md w-[100%] h-[360px]"
-          />
-        </div>
-
-        <div className="border-1 rounded-md">
-          {/* NOTE: RIGHT HEADER */}
-          <div className="flex items-center justify-center gap-4 border-b-1 py-4">
-            <div className="flex bg-[#fff1e9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
-              <ImClock className="text-[rgb(223,97,52)] mr-[6px]" />
-              <span className="text-sm font-[700]">
-                {/* {new Date(courseDetails?.main_class_starting_date).getTime() >=
-                new Date().getTime()
-                  ? Math.ceil(
-                      (new Date(
-                        courseDetails?.main_class_starting_date,
-                      ).getTime() -
-                        new Date().getTime()) /
-                        (1000 * 60 * 60 * 24),
-                    )
-                  : 0}{' '} */}
-                7 Days Left
-              </span>
-            </div>
-            <div className="flex bg-[rgba(161,68,255,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
-              <ImClock className="text-[rgb(120,12,208)] mr-[6px]" />
-              <span className="text-sm font-[700]">
-                Total {courseDetails?.total_seat_number} Seat
-              </span>
-            </div>
-          </div>
-
-          {/* NOTE: PRICE & BUTTON */}
-          <div className="py-4 px-5 border-b-1">
-            <div className="flex items-center">
-              <div>
-                <span className="text-[orangered] font-bold text-lg">
-                  <strike>{courseDetails?.price}/-</strike>
-                </span>
-              </div>
-              <div className="ml-4">
-                <span className="text-[#1d2939] font-bold text-3xl">
-                  {courseDetails?.discounted_price}/-
-                </span>
-              </div>
-              <div className="flex items-center ml-auto border-b-1 cursor-pointer">
-                <BiShareAlt />
-                <span>Share</span>
-              </div>
-            </div>
-            <div>
-              <button className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] mt-6 hover:opacity-[0.8] transition-all">
-                Join Live Batch
-              </button>
-            </div>
-          </div>
-          {/* NOTE: COURSE DETAILS IN POINTS */}
-          <div className="py-4 px-5 border-b-1">
-            <p className="font-bold text-lg">You will get from this course</p>
-            <div className="grid grid-cols-2 gap-x-4 gap-y-2 text-[#3a4e67]">
-              {courseDetails?.courseShortData?.map(
-                (item) =>
-                  item.value !== '' && (
-                    <div key={item.name} className="flex items-start">
-                      <BsCheck2Circle />
-                      <span className="ml-2 -mt-1">{item.value}</span>
-                    </div>
-                  ),
-              )}
-            </div>
-          </div>
-          {/* NOTE: RIGHT BOTTOM */}
-          <div className="py-4 px-5">
-            <div className="flex justify-center items-center">
-              <span className="flex items-center text-[blue] mr-2 cursor-pointer">
-                <BsTelephone className="mr-2" />
-                Call Us 01870106460
-              </span>
-              <span>(10 am to 10 pm)</span>
-            </div>
-          </div>
-        </div>
-      </div>
+      <RightSide courseDetails={courseDetails} />
     </div>
   );
 };

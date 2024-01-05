@@ -71,12 +71,14 @@ const Team = () => {
                 <p className="text-gray-900 font-heading font-semibold mt-2 text-xl">
                   {item.name}
                 </p>
-                <p className="text-sm text-gray-600 -mt-3">{item.profession}</p>
+                <p className="text-sm text-gray-600 -mt-3 font-body">
+                  {item.profession}
+                </p>
 
                 <>
                   <a
                     type="button"
-                    className="text-[#d6295f] hover:text-[#d6295f]"
+                    className="text-[#d6295f] hover:text-[#d6295f] font-body"
                     onClick={() => openModal(item)}
                   >
                     view details

@@ -23,9 +23,9 @@ const Footer = () => {
           <img src="/logo/logo.png" alt="logo" className="h-20" />
 
           <ul className="">
-            <li className="text-base flex items-center -mt-2 py-1 text-[#212529]">
-              <GoLocation />{' '}
-              <span className="ml-2">
+            <li className="text-base flex items-center mt-2 py-1 text-[#212529]">
+              <GoLocation className="text-3xl" />{' '}
+              <span className="text-left ml-3">
                 173/2, Al Amin Vila, Middle Badda, Gulshan-1,Dhaka
               </span>
             </li>

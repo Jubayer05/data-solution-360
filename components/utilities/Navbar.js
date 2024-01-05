@@ -77,19 +77,17 @@ const Navbar = ({ home }) => {
   return (
     <div
       className={`w-full md:text-center z-10 px-5 pt-4 pb-3 md:px-4 md:py-0 ${
-        scrolled80px
-          ? 'bg-[#d6295f] border-b-1 border-[#4f5b8c]'
-          : ' bg-[#d6295f]'
+        scrolled80px ? 'bg-white shadow-lg' : ' bg-transparent '
       } sticky ${home ? 'top-14' : 'top-0'}`}
     >
       <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20">
         <div className="flex justify-between items-center z-10">
           <Link href="/">
-            <img src="/logo/logo-white.png" className="h-16" alt="logo" />
+            <img src="/logo/logo.png" className="h-16 " alt="logo" />
           </Link>
           <HiOutlineMenuAlt1
             onClick={() => setOpenNav(true)}
-            className="text-2xl md:hidden text-white"
+            className="text-2xl md:hidden text-nav"
           />
         </div>
         {openNav && (
@@ -194,7 +192,7 @@ const Navbar = ({ home }) => {
                         language === 'English' ? 'font-body' : 'font-bangla'
                       } cursor-pointer font-semibold tracking-[0.02em]
                       capitalize px-2 py-1 transition-all 
-                      duration-500 rounded-md text-white hover:text-primary visited:text-nav flex items-center`}
+                      duration-500 rounded-md text-nav hover:text-primary visited:text-nav flex items-center`}
                     >
                       {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
                     </Link>
@@ -227,13 +225,13 @@ const Navbar = ({ home }) => {
                   className={`${styles.dropdown__content} absolute z-10 bg-white shadow-2xl top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
                 >
                   <div className="relative">
-                    <VscTriangleUp className="absolute top-[-39px] -right-2 text-white text-3xl" />
+                    <VscTriangleUp className="absolute top-[-39px] -right-2 text-nav text-3xl" />
                     <ul>
                       {navDropItems.map((item) => (
                         <li key={item.id}>
                           <Link
                             href={item.link}
-                            className={`block font-semibold rounded-md py-3 cursor-pointer hover:text-white px-4 hover:bg-[rgb(32,52,110)]
+                            className={`block font-semibold rounded-md py-3 cursor-pointer hover:text-navWhite px-4 hover:bg-[rgb(32,52,110)]
                   ${
                     url == item.slug
                       ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
@@ -244,7 +242,7 @@ const Navbar = ({ home }) => {
                           </Link>
                         </li>
                       ))}
-                      <li className="py-3 mt-2 bg-primary-bg hover:bg-[rgb(32,52,110)] flex items-center justify-center text-white rounded-md cursor-pointer hover:text-white px-4">
+                      <li className="py-3 mt-2 bg-primary-bg hover:bg-[rgb(32,52,110)] flex items-center justify-center text-nav rounded-md cursor-pointer hover:text-navWhite px-4">
                         <button
                           type="button"
                           className={`text-md px-3 hover:drop-shadow-xl flex items-center justify-center text-gray-300 

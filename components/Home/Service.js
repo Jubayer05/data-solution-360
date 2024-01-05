@@ -7,8 +7,8 @@ const Service = () => {
   const { language } = useStateContext();
 
   return (
-    <div className="bg-[#edf2f5]">
-      <div className="max-w-6xl py-10 px-2 mx-auto font-body">
+    <div className="bg-[#fafafa]">
+      <div className="max-w-6xl py-10 md:pb-32 px-2 mx-auto">
         <h2 className="text-center text-[26px] md:text-3xl font-bold font-heading mt-16 text-headerMain	">
           {language === 'English' ? (
             'See the feature of Data Solution - 360'
@@ -37,7 +37,9 @@ const ServiceItem = ({ item }) => {
   return (
     <div className="overflow-hidden text-center px-1.5 md:px-5 pt-2 md:pt-10 pb-2 md:pb-16 shadow-lg rounded-lg bg-white sm:w-full mx-auto hover:-translate-y-3 hover:shadow-xl transition-translate duration-300">
       <img src={item.img} alt="" className="w-20 h-20 mx-auto " />
-      <h2 className="text-xl font-bold text-center mt-6 mb-3">{item.title}</h2>
+      <h2 className="text-xl font-bold text-center mt-6 mb-3  capitalize">
+        {item.title}
+      </h2>
       <p className="text-sm text-gray-500">{item.details}</p>
     </div>
   );

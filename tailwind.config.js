@@ -8,7 +8,9 @@ module.exports = {
     fontFamily: {
       heading: ['Roboto Slab', 'serif'],
       subHeading: ['Roboto', 'sans-serif'],
-      body: ['Helvetica', 'sans-serif'],
+      body: ['Roboto', 'sans-serif'],
+      // body: ['Poppins', 'sans-serif'],
+      // body: ['Montserrat', 'sans-serif'],
       bangla: ['Hind Siliguri', 'sans-serif'],
     },
     extend: {
@@ -17,7 +19,7 @@ module.exports = {
       },
       backgroundColor: {
         'primary-bg': '#14752b',
-        'main-bg': '#fcf5f5',
+        'main-bg': '#ffffff',
       },
       borderWidth: {
         1: '1px',
@@ -27,11 +29,11 @@ module.exports = {
         color: 'rgba(0, 0, 0, 0.1)',
       },
       textColor: {
-        nav: '#fff',
+        nav: '#000000',
+        navWhite: '#ffffff',
         primary: '#14752b',
-        headerMain: '#26346E',
-        headerMainBlack: '#26346E',
-        headerSub: '#26346E',
+        headerMain: '#173F56',
+        headerSub: '#264751',
       },
       width: {
         400: '400px',
