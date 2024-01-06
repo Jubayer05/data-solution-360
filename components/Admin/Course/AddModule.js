@@ -58,7 +58,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
   };
 
   return (
-    <div className="bg-white border-dashed px-6 py-3 mt-5">
+    <div className="bg-[#f0f0f0] shadow-lg rounded-lg border-dashed px-6 py-3 mt-5">
       <h2 className="text-xl text text-center my-4 font-bold">
         Study Plan In Details
       </h2>

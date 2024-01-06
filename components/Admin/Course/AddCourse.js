@@ -18,6 +18,7 @@ const Editor = dynamic(
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import HeadingDashboard from '../../utilities/HeadingDashboard';
+import AddInstructor from './AddInstructor';
 import AddModule from './AddModule';
 
 // Initial state for the course data
@@ -34,7 +35,6 @@ const initialCourseState = {
   main_class_starting_date: '',
   who_is_the_course_for: '',
   after_course_benefit: '',
-  name_of_the_instructor: '',
 };
 
 // Date options for formatting
@@ -48,6 +48,7 @@ const AddCourse = () => {
   const [convertContent, setConvertedContent] = useState(null);
   const [courseData, setCourseData] = useState(initialCourseState);
   const [courseModule, setCourseModule] = useState([]);
+  const [instructor, setInstructor] = useState([]);
   const [progressData, setProgressData] = useState(null);
 
   // Handler for changes in the editor content
@@ -140,8 +141,7 @@ const AddCourse = () => {
       courseData.orientation_class != '' &&
       courseData.main_class_starting_date != '' &&
       courseData.who_is_the_course_for != '' &&
-      courseData.after_course_benefit != '' &&
-      courseData.name_of_the_instructor != ''
+      courseData.after_course_benefit != ''
     ) {
       firebase
         .firestore()
@@ -151,6 +151,7 @@ const AddCourse = () => {
           id: uuidv4().split('-')[0],
           details: convertContent,
           courseModule,
+          instructor,
           courseShortData,
           createdAt: new Date().toLocaleDateString(undefined, options),
         })
@@ -171,7 +172,7 @@ const AddCourse = () => {
   return (
     <div className="flex justify-center items-center flex-col">
       <HeadingDashboard title="Add a new course" />
-      <div className="w-3/4">
+      <div className="w-3/4 shadow-lg p-10">
         {/* InputBox component for the course title */}
         <InputBox
           title="Title"
@@ -299,41 +300,7 @@ const AddCourse = () => {
           type="text"
         />
 
-        {/* 
-          TODO: InputBox component for the instructor name 
-          * 1. Build a form for the instructor 
-          * 2. This will contain following information 
-          * 3. Name, photoUrl, job title
-        */}
-
-        <InputBox
-          title="Name of the instructor"
-          id="classTime"
-          placeholder="Example - Sakib Tarafder"
-          func={handleInputChange}
-          type="text"
-        />
-
-        {/* <div className="border-1 mt-5 py-6 px-3 rounded-lg bg-[#f0f0f0]">
-          <p className="text-lg font-semibold text-[#17012e]">
-            Instructor Information
-          </p>
-          <div className="grid gap-4 grid-cols-3">
-            <div>
-              <label
-                htmlFor="instructor_info"
-                className="font-semibold block text-[#17012e]"
-              >
-                Name
-              </label>
-              <input
-                id="instructor_info"
-                type="text"
-                className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
-              />
-            </div>
-          </div>
-        </div> */}
+        <AddInstructor instructor={instructor} setInstructor={setInstructor} />
 
         {/* Course Description */}
         <p className="font-semibold mt-6">Course Description</p>

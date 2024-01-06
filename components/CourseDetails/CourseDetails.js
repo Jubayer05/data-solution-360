@@ -24,7 +24,7 @@ const CourseDetails = () => {
     }
   }, [courseData]);
 
-  console.log(colors);
+  console.log(courseDetails);
 
   return (
     <div className="flex items-start flex-col-reverse md:flex-row max-w-6xl mx-auto font-bold font-heading">
@@ -280,26 +280,38 @@ const CourseDetails = () => {
         </div>
 
         {/* NOTE: ABOUT INSTRUCTOR */}
-        {/* <div className="mt-16">
+        <div className="mt-16">
           <h2 className="text-2xl font-bold mb-3">Instructor</h2>
           <div className="h-[.5px] w-[100%] bg-slate-300" />
 
-          <div className="mt-8 border-l-[3px] border-[#4478ff] rounded-[4px] shadow-lg py-3 px-4 cursor-pointer flex items-center gap-4 hover:bg-[#eaecf0]">
-            <img
-              src="/team/sakib.jpg"
-              className="w-[60px] h-[60px] rounded-full"
-              alt=""
-            />
-            <div>
-              <p className="m-0 text-xl text-[#1d2939] font-bold">
-                Sakib Tarafder
-              </p>
-              <p className="m-0 text-base text-[#475467]">
-                CEO at Data Solution - 360
-              </p>
+          <div className="mt-8 bg-[#fff1e9] px-8 py-5 border-l-[3px] border-[#fd6506] rounded-[8px] shadow-lg overflow-hidden">
+            <div className="flex items-center gap-2">
+              <img src="/icon/medal.png" className="w-12" alt="" />
+              <h2 className="text-lg font-bold">Lead Instructor</h2>
             </div>
+
+            {courseDetails?.instructor?.map((item) => (
+              <div
+                key={item.id}
+                className="bg-white mt-4 border-l-[3px] border-[#4478ff] rounded-[6px] shadow-lg py-3 px-4 cursor-pointer flex items-center gap-4 hover:bg-[#eaecf0]"
+              >
+                <img
+                  src={item.photoUrl}
+                  className="w-[60px] h-[60px] rounded-full"
+                  alt=""
+                />
+                <div>
+                  <p className="m-0 text-xl text-[#1d2939] font-bold">
+                    {item.instructorName}
+                  </p>
+                  <p className="m-0 text-base text-[#475467]">
+                    {item.jobTitle}
+                  </p>
+                </div>
+              </div>
+            ))}
           </div>
-        </div> */}
+        </div>
         {/* NOTE: REQUIREMENTS */}
         <div className="mt-16">
           <h2 className="text-2xl font-bold mb-3">Requirements</h2>
