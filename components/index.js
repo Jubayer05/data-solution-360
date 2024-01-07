@@ -39,6 +39,7 @@ export { default as LoginComp } from './Login/Login';
 export { default as RegisterComp } from './Students/Register/Register';
 
 export { default as AddCourseComp } from './Admin/Course/AddCourse';
+export { default as ManageCourse } from './Admin/ManageCourse/ManageCourse';
 export { default as SubscribedUser } from './Admin/SubscribedUser/SubscribedUser';
 
 export { default as DashboardStudent } from './Students/DashboardStu';

@@ -9,7 +9,11 @@ import { FaUserEdit } from 'react-icons/fa';
 import { FiActivity, FiHelpCircle, FiLogOut } from 'react-icons/fi';
 import { ImBlog } from 'react-icons/im';
 import { IoMdSettings } from 'react-icons/io';
-import { MdOutlineContentPaste, MdOutlineUnsubscribe } from 'react-icons/md';
+import {
+  MdCastForEducation,
+  MdOutlineContentPaste,
+  MdOutlineUnsubscribe,
+} from 'react-icons/md';
 import { RiHomeGearFill } from 'react-icons/ri';
 
 export const linksAdmin = [
@@ -46,6 +50,11 @@ export const linksAdmin = [
         name: 'Add a course',
         link: '/admin/add-course',
         icon: <AiOutlineVideoCameraAdd />,
+      },
+      {
+        name: 'Manage Courses',
+        link: '/admin/manage-course',
+        icon: <MdCastForEducation />,
       },
       {
         name: 'Add blog content',

@@ -195,7 +195,7 @@ const MyBlogs = () => {
   return (
     <div>
       <HeadingDashboard title="Subscribed user for newsletter" />
-      <div className="max-w-3xl mx-auto">
+      <div className="max-w-3xl mx-auto my-20">
         <Table
           columns={columns}
           dataSource={[...blogData]}
