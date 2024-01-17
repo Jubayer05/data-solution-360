@@ -6,7 +6,7 @@ import { useStateContext } from '../../src/context/ContextProvider';
 const Trending = () => {
   const { trendingCourse } = useStateContext();
   return (
-    <div className="max-w-2xl mx-auto mt-10">
+    <div className="max-w-7xl mx-auto mt-10">
       <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
         Trending Course
       </h2>

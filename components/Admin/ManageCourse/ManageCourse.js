@@ -64,7 +64,6 @@ const ManageCourse = () => {
       }
     });
   };
-
   return (
     <div>
       <HeadingDashboard title="Subscribed user for newsletter" />
