@@ -16,6 +16,7 @@ export const MainContextProvider = ({ children }) => {
   const [courseData, setCourseData] = useState([]);
   const [faqData, setFaqData] = useState([]);
   const [trendingCourse, setTrendingCourse] = useState([]);
+  const [instructor, setInstructor] = useState([]);
 
   useEffect(() => {
     setLanguage(localStorage.getItem('lan'));
@@ -24,6 +25,7 @@ export const MainContextProvider = ({ children }) => {
     setPhotoUrl(localStorage.getItem('photoUrl'));
 
     loadData('userLogin', setUserData);
+    loadData('instructors', setInstructor);
     loadData('trendingCourse', setTrendingCourse);
     loadData('dashboard_admin', setDashAdmin);
     loadDataByOrder('faqData', setFaqData, 'orderFaq', 'asc');
@@ -73,6 +75,7 @@ export const MainContextProvider = ({ children }) => {
         uniqueUserName,
         faqData,
         trendingCourse,
+        instructor,
       }}
     >
       {children}

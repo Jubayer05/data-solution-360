@@ -18,8 +18,9 @@ const Editor = dynamic(
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import HeadingDashboard from '../../utilities/HeadingDashboard';
-import AddInstructor from './AddInstructor';
+import AddInstructorCourse from './AddInstructorCourse';
 import AddModule from './AddModule';
+import InputBox from './InputBox';
 
 // Initial state for the course data
 const initialCourseState = {
@@ -48,8 +49,7 @@ const AddCourse = () => {
   const [convertContent, setConvertedContent] = useState(null);
   const [courseData, setCourseData] = useState(initialCourseState);
   const [courseModule, setCourseModule] = useState([]);
-  const [instructor, setInstructor] = useState([]);
-  const [progressData, setProgressData] = useState(null);
+  const [instructors, setInstructors] = useState([]);
 
   // Handler for changes in the editor content
   const handleEditorChange = (state) => {
@@ -98,12 +98,7 @@ const AddCourse = () => {
         .put(courseImg);
       uploadTask.on(
         'state_changed',
-        (snapshot) => {
-          const progress = Math.round(
-            (snapshot.bytesTransferred / snapshot.totalBytes) * 100,
-          );
-          setProgressData(progress);
-        },
+        (snapshot) => {},
         (error) => {
           alert(error.message + '' + 'Something went wrong');
         },
@@ -151,7 +146,7 @@ const AddCourse = () => {
           id: uuidv4().split('-')[0],
           details: convertContent,
           courseModule,
-          instructor,
+          instructors,
           courseShortData,
           createdAt: new Date().toLocaleDateString(undefined, options),
         })
@@ -173,7 +168,7 @@ const AddCourse = () => {
     <div className="flex justify-center items-center flex-col">
       <HeadingDashboard title="Add a new course" />
       <div className="w-3/4 shadow-lg p-10">
-        {/* InputBox component for the course title */}
+        {/* NOTE: InputBox component for the course title */}
         <InputBox
           title="Title"
           id="courseTitle"
@@ -182,7 +177,7 @@ const AddCourse = () => {
           type="text"
         />
 
-        {/* InputBox component for the course image */}
+        {/* NOTE: InputBox component for the course image */}
         <div className="mt-4">
           <label htmlFor className="font-semibold block text-[#17012e]">
             Course Image
@@ -195,7 +190,7 @@ const AddCourse = () => {
           />
         </div>
 
-        {/* InputBox component for the short description */}
+        {/* NOTE: InputBox component for the short description */}
         <InputBox
           title="Short Description"
           id="shortDescription"
@@ -204,8 +199,9 @@ const AddCourse = () => {
           type="text"
         />
 
+        {/* NOTE: PRICE BOX */}
         <div className="grid gap-4 grid-cols-2">
-          {/* InputBox component for the course price */}
+          {/* NOTE: InputBox component for the course price */}
           <InputBox
             title="Price"
             id="price"
@@ -214,7 +210,7 @@ const AddCourse = () => {
             type="number"
           />
 
-          {/* InputBox component for the discounted price */}
+          {/* NOTE: InputBox component for the discounted price */}
           <InputBox
             title="Discounted price"
             id="discountedPrice"
@@ -225,7 +221,7 @@ const AddCourse = () => {
         </div>
 
         <div className="grid gap-4 grid-cols-3">
-          {/* InputBox component for the total seat number */}
+          {/* NOTE: InputBox component for the total seat number */}
           <InputBox
             title="Total Seat Number"
             id="totalSeatNumber"
@@ -234,7 +230,7 @@ const AddCourse = () => {
             type="number"
           />
 
-          {/* InputBox component for the batch number */}
+          {/* NOTE: InputBox component for the batch number */}
           <InputBox
             title="Batch No"
             id="batchNumber"
@@ -243,7 +239,7 @@ const AddCourse = () => {
             type="number"
           />
 
-          {/* InputBox component for the class time */}
+          {/* NOTE: InputBox component for the class time */}
           <InputBox
             title="Class Time"
             id="classTime"
@@ -254,7 +250,7 @@ const AddCourse = () => {
         </div>
 
         <div className="grid gap-4 grid-cols-3">
-          {/* InputBox component for the orientation class */}
+          {/* NOTE: InputBox component for the orientation class */}
           <InputBox
             title="Orientation Class"
             id="orientationClass"
@@ -262,15 +258,15 @@ const AddCourse = () => {
             type="date"
           />
 
-          {/* InputBox component for the main class starting date */}
+          {/* NOTE: InputBox component for the main class starting date */}
           <InputBox
             title="Main class starting date"
-            id="batchNumber"
+            id="mainClassStartingDate"
             func={handleInputChange}
             type="date"
           />
 
-          {/* Checkbox component for selecting class days */}
+          {/* NOTE: Checkbox component for selecting class days */}
           <div>
             <label className="font-semibold mt-8 block">Class Day</label>
             <div>
@@ -282,7 +278,7 @@ const AddCourse = () => {
           </div>
         </div>
 
-        {/* InputBox component for the course target audience */}
+        {/* NOTE: InputBox component for the course target audience */}
         <InputBox
           title="Who is the course for"
           id="classTime"
@@ -291,7 +287,7 @@ const AddCourse = () => {
           type="text"
         />
 
-        {/* InputBox component for the after-course benefit */}
+        {/* NOTE: InputBox component for the after-course benefit */}
         <InputBox
           title="After Course Benefit"
           id="classTime"
@@ -300,9 +296,13 @@ const AddCourse = () => {
           type="text"
         />
 
-        <AddInstructor instructor={instructor} setInstructor={setInstructor} />
+        {/* NOTE: INSTRUCTORS */}
+        <AddInstructorCourse
+          instructors={instructors}
+          setInstructors={setInstructors}
+        />
 
-        {/* Course Description */}
+        {/* NOTE: Course Description */}
         <p className="font-semibold mt-6">Course Description</p>
         <div className="w-full border-1 p-3 bg-white">
           <Editor
@@ -315,7 +315,7 @@ const AddCourse = () => {
           />
         </div>
 
-        {/* InputBox component for the Course Details */}
+        {/* NOTE: InputBox component for the Course Details */}
         <InputBox
           title="Drive Link"
           id="driveLink"
@@ -329,14 +329,14 @@ const AddCourse = () => {
           setCourseModule={setCourseModule}
         />
 
-        {/* Minimum 7 short point for course details */}
+        {/* NOTE: Minimum 7 short point for course details */}
         <div className="border-1 mt-5 py-6 px-3 rounded-lg bg-[#f0f0f0]">
           <p className="text-lg font-semibold text-[#17012e]">
             Add minimum 7 course details in point{' '}
             <span className="italic text-[orangered]">(required)</span>
           </p>
           <div className="grid gap-4 grid-cols-3">
-            {/* InputBox component for the point wise course details */}
+            {/* NOTE: InputBox component for the point wise course details */}
             {courseShortData?.map((item) => (
               <div key={item.name}>
                 <label
@@ -358,7 +358,7 @@ const AddCourse = () => {
         </div>
 
         <div className="w-full text-center pt-5 pb-16">
-          {/* Submit button */}
+          {/* NOTE: Submit button */}
           <button
             onClick={handleSubmit}
             className="px-4 py-3 bg-blue-500 text-white rounded-md"
@@ -372,22 +372,3 @@ const AddCourse = () => {
 };
 
 export default AddCourse;
-
-const InputBox = ({ title, type, id, func, placeholder }) => {
-  return (
-    <div className="w-full mt-5">
-      <label htmlFor={id} className="font-semibold mt-3 block text-[#17012e]">
-        {title}
-      </label>
-      <input
-        id={id}
-        onChange={(e) =>
-          func(title.toLowerCase().split(' ').join('_'), e.target.value)
-        }
-        type={type}
-        placeholder={placeholder}
-        className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
-      />
-    </div>
-  );
-};

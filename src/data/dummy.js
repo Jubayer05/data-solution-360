@@ -7,6 +7,7 @@ import {
 import { CgProfile } from 'react-icons/cg';
 import { FaUserEdit } from 'react-icons/fa';
 import { FiActivity, FiHelpCircle, FiLogOut } from 'react-icons/fi';
+import { GiTeacher } from 'react-icons/gi';
 import { ImBlog } from 'react-icons/im';
 import { IoMdSettings } from 'react-icons/io';
 import {
@@ -70,6 +71,11 @@ export const linksAdmin = [
         name: 'Subscribed Users',
         link: '/admin/subscribed-user',
         icon: <MdOutlineUnsubscribe />,
+      },
+      {
+        name: 'Instructors',
+        link: '/admin/instructors',
+        icon: <GiTeacher />,
       },
     ],
   },

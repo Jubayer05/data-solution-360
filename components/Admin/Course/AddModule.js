@@ -62,11 +62,11 @@ const AddModule = ({ courseModule, setCourseModule }) => {
       <h2 className="text-xl text text-center my-4 font-bold">
         Study Plan In Details
       </h2>
-      {courseModule.length === 0 ? (
+      {courseModule?.length === 0 ? (
         <p className="text-base">No modules were added!</p>
       ) : (
         courseModule
-          .sort((a, b) => a.moduleNumber - b.moduleNumber)
+          ?.sort((a, b) => a.moduleNumber - b.moduleNumber)
           .map((item) => (
             <div key={item.id} className="my-2 flex items-center">
               <div className="flex-1">

@@ -71,7 +71,9 @@ const CourseDetails = () => {
               <GoCalendar className="text-[#ff8c4b] text-base" />
               <span className="ml-1.5 cursor-pointer">Start Date</span>
             </div>
-            <span>{courseDetails?.main_class_starting_date}</span>
+            <span className=" capitalize">
+              {courseDetails?.main_class_starting_date}
+            </span>
           </div>
           <div className="bg-[#d5caca] w-[1px] h-[40px]" />
           <div className="px-1 md:px-3">

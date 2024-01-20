@@ -194,7 +194,7 @@ const MyBlogs = () => {
 
   return (
     <div>
-      <HeadingDashboard title="Subscribed user for newsletter" />
+      <HeadingDashboard title="Manage Blogs" />
       <div className="max-w-3xl mx-auto my-20">
         <Table
           columns={columns}
@@ -252,6 +252,7 @@ const MyBlogs = () => {
           <div className="w-full border-1 p-3">
             <Editor
               editorState={editorState}
+              editorStyle={{ minHeight: '140px' }}
               toolbarClassName="toolbarClassName"
               wrapperClassName="wrapperClassName"
               editorClassName="editorClassName"
