@@ -41,9 +41,9 @@ const ManageCourse = () => {
 
   useEffect(() => {
     setCourseDataObj(modalData);
-    setCourseModule(modalData?.courseModule);
+    setCourseModule(modalData?.courseModule || []);
     setCourseShortData(modalData?.courseShortData);
-    setInstructors(modalData?.instructors);
+    setInstructors(modalData?.instructors || []);
   }, [modalData]);
 
   const handleEditorChange = (state) => {
