@@ -292,7 +292,7 @@ const CourseDetails = () => {
               <h2 className="text-lg font-bold">Lead Instructor</h2>
             </div>
 
-            {courseDetails?.instructor?.map((item) => (
+            {courseDetails?.instructors?.map((item) => (
               <div
                 key={item.id}
                 className="bg-white mt-4 border-l-[3px] border-[#4478ff] rounded-[6px] shadow-lg py-3 px-4 cursor-pointer flex items-center gap-4 hover:bg-[#eaecf0]"
