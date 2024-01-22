@@ -6,7 +6,7 @@ import { ImClock } from 'react-icons/im';
 
 const RightSide = ({ courseDetails }) => {
   return (
-    <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-185px]">
+    <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-360px]">
       <div className="mb-3">
         <img
           src={courseDetails?.img}
