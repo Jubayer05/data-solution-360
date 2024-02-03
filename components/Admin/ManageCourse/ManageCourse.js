@@ -44,6 +44,7 @@ const ManageCourse = () => {
     setCourseModule(modalData?.courseModule || []);
     setCourseShortData(modalData?.courseShortData);
     setInstructors(modalData?.instructors || []);
+    setConvertedContent(modalData?.details);
   }, [modalData]);
 
   const handleEditorChange = (state) => {

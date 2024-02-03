@@ -16,8 +16,8 @@ const Faq = () => {
         Ask your question and meet.
       </p>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 px-4 max-w-4xl mx-auto items-center mt-12">
-        <div className="pr-6">
+      <div className="grid grid-cols-1 md:grid-cols-12 px-4 max-w-4xl mx-auto items-center mt-12">
+        <div className="pr-6 col-span-5">
           <h2 className="font-bold text-2xl">
             Do you have any question? Please ask here we ready to support.
           </h2>
@@ -35,8 +35,9 @@ const Faq = () => {
             Ask your question
           </Button>
         </div>
-
-        <FaqComp data={faqData} />
+        <div className="col-span-7">
+          <FaqComp data={faqData} />
+        </div>
       </div>
     </div>
   );
