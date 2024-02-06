@@ -1,5 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
-import { Switch, Table } from 'antd';
+import { Checkbox, Switch, Table } from 'antd';
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import dynamic from 'next/dynamic';
@@ -46,6 +46,8 @@ const ManageCourse = () => {
     setInstructors(modalData?.instructors || []);
     setConvertedContent(modalData?.details);
   }, [modalData]);
+
+  const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -221,6 +223,8 @@ const ManageCourse = () => {
     }
   };
 
+  console.log(modalData);
+
   return (
     <div>
       <HeadingDashboard title="Manage Courses" />
@@ -381,6 +385,29 @@ const ManageCourse = () => {
                     : false
                 }
               />
+            </div>
+          </div>
+          <div className="grid grid-cols-1">
+            {/* NOTE: Checkbox component for selecting class days */}
+            <div>
+              <label className="font-semibold mt-8 block">
+                Class Day{' '}
+                <span className="ml-2 italic font-thin">
+                  (previous:
+                  <span className=" text-[orangered] ml-2">
+                    {modalData?.class_days.map((item) => (
+                      <span key={item}>{item} &nbsp;</span>
+                    ))}
+                  </span>
+                  )
+                </span>
+              </label>
+              <div>
+                <Checkbox.Group
+                  options={plainOptions}
+                  onChange={(e) => handleInputChange('class_days', e)}
+                />
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-2 gap-4">
