@@ -36,6 +36,7 @@ const initialCourseState = {
   main_class_starting_date: '',
   who_is_the_course_for: '',
   after_course_benefit: '',
+  join_link: '',
 };
 
 // Date options for formatting
@@ -320,6 +321,14 @@ const AddCourse = () => {
           title="Drive Link"
           id="driveLink"
           placeholder="https://drive.google.com/file/xyz"
+          func={handleInputChange}
+          type="text"
+        />
+
+        <InputBox
+          title="Join Link"
+          id="joinLink"
+          placeholder="https://facebook.com/file/xyz"
           func={handleInputChange}
           type="text"
         />

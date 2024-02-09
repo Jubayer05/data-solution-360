@@ -52,9 +52,11 @@ const CourseDetails = () => {
             </div>
           </div>
           <div className="ml-auto">
-            <button className="bg-[#1f0835] text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
-              Book Your Seat Now
-            </button>
+            <Link href={`${courseDetails?.join_link}`} target="_blank">
+              <button className="bg-[#1f0835] text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
+                Book Your Seat Now
+              </button>
+            </Link>
           </div>
         </div>
 
@@ -266,18 +268,21 @@ const CourseDetails = () => {
                 </button>
               </>
             )}
-            <p className="text-2xl mt-12 capitalize">
-              For whom this course for
-            </p>
-            <p className="text-lg font-normal">
-              - {courseDetails?.who_is_the_course_for}
-            </p>
+            <p className="text-2xl mt-12 capitalize">Who this course is for</p>
+            <div
+              className="text-lg font-normal"
+              dangerouslySetInnerHTML={{
+                __html: courseDetails?.who_is_the_course_for,
+              }}
+            />
+
             <p className="text-2xl mt-12 capitalize">course benefit</p>
-            <p className="text-lg font-normal capitalize">
-              - Certificate <br />
-              - Job Placement Support <br />- Communication with alumni <br />-
-              Internship <br />- After course support
-            </p>
+            <div
+              className="font-normal text-lg capitalize"
+              dangerouslySetInnerHTML={{
+                __html: courseDetails?.after_course_benefit,
+              }}
+            />
           </div>
         </div>
 

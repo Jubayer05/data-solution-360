@@ -1,4 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
 import React from 'react';
 import { BiShareAlt } from 'react-icons/bi';
 import { BsCheck2Circle, BsTelephone } from 'react-icons/bs';
@@ -61,9 +62,11 @@ const RightSide = ({ courseDetails }) => {
             </div>
           </div>
           <div>
-            <button className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] mt-6 hover:opacity-[0.8] transition-all">
-              Join Live Batch
-            </button>
+            <Link href={`${courseDetails?.join_link}`} target="_blank">
+              <button className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] mt-6 hover:opacity-[0.8] transition-all">
+                Join Live Batch
+              </button>
+            </Link>
           </div>
         </div>
         {/* NOTE: COURSE DETAILS IN POINTS */}

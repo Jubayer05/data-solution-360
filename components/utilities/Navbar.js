@@ -111,7 +111,7 @@ const Navbar = ({ home }) => {
                     }`}
         >
           <div>
-            <ul className="pl-4 md:inline-flex md:justify-between mb-0 ">
+            <ul className="pl-4 md:inline-flex md:justify-between mb-0 list-none">
               {navItems2.map((item) => (
                 <li key={item.id} className="mx-1 ">
                   <Link
@@ -136,7 +136,7 @@ const Navbar = ({ home }) => {
           {/* Right side */}
           <div className="md:flex md:items-center">
             <div>
-              <ul className="pl-8 md:inline-flex md:justify-between mb-0">
+              <ul className="pl-8 md:inline-flex md:justify-between mb-0 list-none">
                 {navItems.map((item) => (
                   <div className="relative group" key={item.id}>
                     <li className="mx-1">
@@ -226,7 +226,7 @@ const Navbar = ({ home }) => {
                 >
                   <div className="relative">
                     <VscTriangleUp className="absolute top-[-39px] -right-2 text-nav text-3xl" />
-                    <ul>
+                    <ul className="list-none">
                       {navDropItems.map((item) => (
                         <li key={item.id}>
                           <Link

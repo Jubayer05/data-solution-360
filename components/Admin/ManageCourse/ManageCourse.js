@@ -1,8 +1,5 @@
 /* eslint-disable @next/next/no-img-element */
 import { Checkbox, Switch, Table } from 'antd';
-import { convertToHTML } from 'draft-convert';
-import { EditorState } from 'draft-js';
-import dynamic from 'next/dynamic';
 import { useEffect, useState } from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 import Modal from 'react-modal';
@@ -11,53 +8,35 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import HeadingDashboard from '../../utilities/HeadingDashboard';
+import RichTextEditor from '../../utilities/RichTextEditor';
 import AddInstructorCourse from '../Course/AddInstructorCourse';
 import AddModule from '../Course/AddModule';
 import InputBoxManage from './InputBoxManage';
 
 const db = firebase.firestore();
 
-const Editor = dynamic(
-  () => {
-    return import('react-draft-wysiwyg').then((mod) => mod.Editor);
-  },
-  { ssr: false },
-);
-
 const ManageCourse = () => {
   const { courseData, userEmail } = useStateContext();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [courseDataObj, setCourseDataObj] = useState({});
-  const [convertContent, setConvertedContent] = useState(null);
   const [modalData, setModalData] = useState(null);
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
-  );
   const [orientation, setOrientation] = useState(true);
   const [mainClassStart, setMainClassStart] = useState(true);
   const [courseModule, setCourseModule] = useState([]);
   const [courseShortData, setCourseShortData] = useState([]);
   const [instructors, setInstructors] = useState([]);
+  const [courseBenefit, setCourseBenefit] = useState('');
+  const [courseDetails, setCourseDetails] = useState([]);
+  const [courseFor, setCourseFor] = useState([]);
 
   useEffect(() => {
     setCourseDataObj(modalData);
     setCourseModule(modalData?.courseModule || []);
     setCourseShortData(modalData?.courseShortData);
     setInstructors(modalData?.instructors || []);
-    setConvertedContent(modalData?.details);
   }, [modalData]);
 
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
-
-  const handleEditorChange = (state) => {
-    setEditorState(state);
-    convertContentToHTML();
-  };
-
-  const convertContentToHTML = () => {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    setConvertedContent(currentContentAsHTML);
-  };
 
   const closeModal = () => {
     setIsOpen(false);
@@ -162,7 +141,15 @@ const ManageCourse = () => {
       courseModule,
       instructors,
       courseShortData,
-      details: convertContent,
+      after_course_benefit: !isContentEmpty(courseBenefit)
+        ? courseBenefit
+        : courseDataObj?.after_course_benefit,
+      details: !isContentEmpty(courseDetails)
+        ? courseDetails
+        : courseDataObj?.details,
+      who_is_the_course_for: !isContentEmpty(courseFor)
+        ? courseFor
+        : courseDataObj?.who_is_the_course_for,
     };
 
     db.collection('course_data')
@@ -223,7 +210,7 @@ const ManageCourse = () => {
     }
   };
 
-  console.log(modalData);
+  // console.log(modalData);
 
   return (
     <div>
@@ -410,45 +397,22 @@ const ManageCourse = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-2 gap-4">
-            <InputBoxManage
+          <div className="grid grid-cols-1 gap-4 pb-8">
+            <RichTextEditor
+              onDataChange={setCourseFor}
               title="Who is the course for"
-              id="classTime"
-              placeholder="Example - for all students who want to learn power bi"
-              func={handleInputChange}
-              type="text"
               value={modalData?.who_is_the_course_for}
             />
-            <InputBoxManage
+
+            <RichTextEditor
+              onDataChange={setCourseBenefit}
               title="After Course Benefit"
-              id="classTime"
-              placeholder="Example - scope of internships"
-              func={handleInputChange}
-              type="text"
               value={modalData?.after_course_benefit}
             />
-          </div>
-
-          <p className="font-semibold mt-8">Course Description</p>
-          <p>
-            <span className="italic font-thin">
-              previous:
-              <span
-                className=" text-[orangered] ml-2 text-xs"
-                dangerouslySetInnerHTML={{
-                  __html: modalData?.details,
-                }}
-              />
-            </span>
-          </p>
-          <div className="w-full border-1 p-3">
-            <Editor
-              editorState={editorState}
-              editorStyle={{ minHeight: '140px' }}
-              toolbarClassName="toolbarClassName"
-              wrapperClassName="wrapperClassName"
-              editorClassName="editorClassName"
-              onEditorStateChange={handleEditorChange}
+            <RichTextEditor
+              onDataChange={setCourseDetails}
+              title="Course Description"
+              value={modalData?.details}
             />
           </div>
 
@@ -459,6 +423,15 @@ const ManageCourse = () => {
             func={handleInputChange}
             type="text"
             value={modalData?.drive_link}
+          />
+
+          <InputBoxManage
+            title="Join Link"
+            id="joinLink"
+            placeholder="https://facebook.com/file/xyz"
+            func={handleInputChange}
+            type="text"
+            value={modalData?.join_link}
           />
 
           <AddModule
@@ -523,3 +496,9 @@ const ManageCourse = () => {
 };
 
 export default ManageCourse;
+
+const isContentEmpty = (content) => {
+  // Use a regular expression to check if the content contains only whitespace or line breaks
+  const isEmpty = /^(<p><br><\/p>\s*)*$/.test(content);
+  return isEmpty;
+};

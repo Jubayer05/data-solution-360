@@ -63,7 +63,7 @@ const Footer = () => {
         <div className="text-base flex justify-center">
           <div>
             <h2 className="text-2xl text-white mb-10">Explore</h2>
-            <ul>
+            <ul className="list-none">
               {footerExploreData.map((item) => (
                 <li
                   key={item.id}
@@ -81,7 +81,7 @@ const Footer = () => {
         <div className="text-base flex justify-center">
           <div>
             <h2 className="text-2xl text-white mb-10">Useful Links</h2>
-            <ul>
+            <ul className="list-none">
               {footerUsefulLinksData.map((item) => (
                 <li
                   key={item.id}
@@ -99,7 +99,7 @@ const Footer = () => {
         <div className="flex justify-center ">
           <div>
             <h2 className="text-2xl text-white mb-10">Contact Us</h2>
-            <ul className="">
+            <ul className="list-none">
               <li className="text-base flex items-center my-2 py-1 text-white">
                 <GoLocation /> <span className="ml-2">Dhaka Mawa High Way</span>
               </li>
