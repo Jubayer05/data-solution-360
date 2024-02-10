@@ -238,7 +238,32 @@ const CourseDetails = () => {
                   >
                     <div className="text-base font-normal border-t-1 px-4 pt-4">
                       {item.lessons.map((panelLesson) => (
-                        <p key={panelLesson.id}>{panelLesson.title}</p>
+                        <Collapse
+                          collapsible="header"
+                          expandIconPosition="end"
+                          defaultActiveKey={['1']}
+                          key={panelLesson.id}
+                        >
+                          <Panel
+                            className="text-lg font-semibold mb-2"
+                            header={
+                              <p className="text-base mb-0 font-medium">
+                                {panelLesson.title}
+                              </p>
+                            }
+                          >
+                            <div className="flex flex-col justify-between">
+                              {panelLesson?.topics?.map((topic) => (
+                                <p
+                                  key={topic.id}
+                                  className="text-base font-normal"
+                                >
+                                  {topic.name}
+                                </p>
+                              ))}
+                            </div>
+                          </Panel>
+                        </Collapse>
                       ))}
                     </div>
                   </Panel>

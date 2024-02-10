@@ -45,7 +45,8 @@ const ManageCourse = () => {
   const customStyles = {
     content: {
       background: '#fff',
-      height: '600px',
+      height: '700px',
+      width: '1000px',
       top: '50%',
       left: '50%',
       right: 'auto',

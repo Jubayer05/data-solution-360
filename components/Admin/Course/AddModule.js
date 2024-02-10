@@ -12,13 +12,25 @@ const initialModuleState = {
 };
 
 const initialLessonState = {
-  title: '',
   id: '',
+  title: '',
+  topics: [],
+};
+
+const initialTopicState = {
+  id: '',
+  name: '',
 };
 
 const AddModule = ({ courseModule, setCourseModule }) => {
   const [module, setModule] = useState({ ...initialModuleState });
+  const [moduleEdit, setModuleEdit] = useState(null);
   const [lesson, setLesson] = useState({ ...initialLessonState });
+  const [topic, setTopic] = useState({ ...initialTopicState });
+  const [editValue, setEditValue] = useState(null);
+  const [editLesson, setEditLesson] = useState(null);
+
+  console.log(courseModule);
 
   const handleAddLesson = () => {
     setModule({
@@ -26,6 +38,14 @@ const AddModule = ({ courseModule, setCourseModule }) => {
       lessons: [...module.lessons, { ...lesson, id: uuidv4().split('-')[0] }],
     });
     setLesson({ ...initialLessonState });
+  };
+
+  const handleAddTopic = () => {
+    setLesson({
+      ...lesson,
+      topics: [...lesson.topics, { ...topic, id: uuidv4().split('-')[0] }],
+    });
+    setTopic({ ...initialTopicState });
   };
 
   const handleAddModule = () => {
@@ -48,13 +68,48 @@ const AddModule = ({ courseModule, setCourseModule }) => {
   const handleLessonChange = (e) => {
     setLesson({ ...lesson, title: e.target.value });
   };
+  const handleTopicChange = (e) => {
+    setTopic({ ...topic, name: e.target.value });
+  };
   const handleModuleChange = (e) => {
     setModule({ ...module, [e.target.name]: e.target.value });
+    setModuleEdit({ ...moduleEdit, [e.target.name]: e.target.value });
   };
 
   const handleDeleteModule = (item) => {
     setCourseModule(courseModule.filter((x) => x.id !== item.id));
-    // console.log(item);
+  };
+
+  const handleEditModule = () => {
+    const courseModuleCopy = [...courseModule];
+    const updatedModule = { ...editValue, ...moduleEdit };
+    const moduleIndex = courseModule.findIndex((x) => x.id === editValue.id);
+    courseModuleCopy[moduleIndex] = updatedModule;
+    setCourseModule(courseModuleCopy);
+
+    // NOTE: back to original state
+    setModuleEdit(null);
+    setEditValue(null);
+    setEditLesson(null);
+    setModule({ ...initialModuleState });
+  };
+
+  const handleEditLesson = () => {
+    const courseModuleCopy = [...courseModule];
+    const updatedLesson = editValue?.lessons.find(
+      (val) => val.id === editLesson.id,
+    );
+    updatedLesson[title] = lesson.title;
+    const updatedModule = { ...editValue, ...moduleEdit };
+    console.log(updatedLesson);
+    // const moduleIndex = courseModule.findIndex((x) => x.id === editValue.id);
+    // courseModuleCopy[moduleIndex] = updatedModule;
+    // setCourseModule(courseModuleCopy);
+  };
+
+  const handleEditBtn = (item) => {
+    setEditValue(item);
+    // setModule(item);
   };
 
   return (
@@ -88,24 +143,51 @@ const AddModule = ({ courseModule, setCourseModule }) => {
                         Project number:{item.projectNumber}
                       </p>
                       {item.lessons.map((panelLesson) => (
-                        <p key={panelLesson.id}>{panelLesson.title}</p>
+                        <Collapse
+                          collapsible="header"
+                          expandIconPosition="end"
+                          defaultActiveKey={['1']}
+                          key={panelLesson.id}
+                        >
+                          <Panel
+                            className="text-lg font-semibold mb-2"
+                            header={
+                              <p className="text-base mb-0 font-normal">
+                                {panelLesson.title}
+                              </p>
+                            }
+                          >
+                            <div className="flex flex-col justify-between">
+                              {panelLesson?.topics?.map((topic) => (
+                                <p key={topic.id}>{topic.name}</p>
+                              ))}
+                            </div>
+                          </Panel>
+                        </Collapse>
                       ))}
                     </div>
                   </Panel>
                 </Collapse>
               </div>
               <button
-                onClick={() => handleDeleteModule(item)}
-                className="px-4 py-3 mx-4 bg-red-500 text-white rounded-md"
+                onClick={() => setEditValue(item)}
+                className="px-4 py-2 ml-2 bg-blue-500 text-white rounded-md"
               >
-                Delete Module
+                Edit
+              </button>
+              <button
+                onClick={() => handleDeleteModule(item)}
+                className="px-4 py-2 mx-4 bg-red-500 text-white rounded-md"
+              >
+                Delete
               </button>
             </div>
           ))
       )}
-      <div className="grid gap-4 grid-cols-4 mt-10">
+      <div className="grid gap-4 grid-cols-5 mt-10">
         <div className="col-span-1">
           <InputBox
+            editVal={editValue?.moduleNumber}
             value={module.moduleNumber}
             title="Module Number"
             name="moduleNumber"
@@ -116,6 +198,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
         </div>
         <div className="col-span-2">
           <InputBox
+            editVal={editValue?.moduleName}
             value={module.moduleName}
             title="Module Name"
             name="moduleName"
@@ -126,6 +209,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
         </div>
         <div className="col-span-1">
           <InputBox
+            editVal={editValue?.liveClassNumber}
             value={module.liveClassNumber}
             title="Live Class Number"
             name="liveClassNumber"
@@ -136,6 +220,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
         </div>
         <div className="col-span-1">
           <InputBox
+            editVal={editValue?.projectNumber}
             value={module.projectNumber}
             title="Project Number"
             name="projectNumber"
@@ -144,9 +229,10 @@ const AddModule = ({ courseModule, setCourseModule }) => {
             func={handleModuleChange}
           />
         </div>
-        <div className="col-span-3 flex items-end">
+        <div className="col-span-5 flex items-end gap-4">
           <div className="flex-1">
             <InputBox
+              editVal={editLesson?.title}
               value={lesson.title}
               title="Lesson Name"
               name="title"
@@ -155,21 +241,39 @@ const AddModule = ({ courseModule, setCourseModule }) => {
               func={handleLessonChange}
             />
           </div>
+          <div className="flex-1">
+            <InputBox
+              value={topic.name}
+              disabled={editLesson ? true : false}
+              title="Topic Name"
+              name="topicName"
+              id="topicName"
+              type="text"
+              func={handleTopicChange}
+            />
+          </div>
 
           <button
-            onClick={handleAddLesson}
-            className="px-4 py-4 mx-2 bg-blue-500 text-white rounded-md"
+            disabled={editLesson ? true : false}
+            onClick={handleAddTopic}
+            className="px-4 py-[15px] bg-[#001f3f] text-white rounded-md"
           >
-            Add Lessons
+            Add Topic
+          </button>
+          <button
+            onClick={editLesson ? handleEditLesson : handleAddLesson}
+            className="px-4 py-[15px] bg-[#3d9970] text-white rounded-md"
+          >
+            {editLesson ? 'Update' : 'Add Lesson'}
           </button>
         </div>
       </div>
       <div className="w-full text-center pt-5 pb-4">
         <button
-          onClick={handleAddModule}
-          className="px-4 py-3 bg-blue-500 text-white rounded-md"
+          onClick={editValue ? handleEditModule : handleAddModule}
+          className="px-4 py-3 bg-[#85144b] text-white rounded-md"
         >
-          Submit Module
+          {editValue ? 'Update Module' : 'Submit New Module'}
         </button>
       </div>
     </div>
@@ -178,13 +282,32 @@ const AddModule = ({ courseModule, setCourseModule }) => {
 
 export default AddModule;
 
-const InputBox = ({ title, type, id, func, placeholder, name, value }) => {
+const InputBox = ({
+  title,
+  type,
+  id,
+  func,
+  placeholder,
+  name,
+  value,
+  editVal,
+  disabled,
+}) => {
   return (
     <div className="w-full">
       <label htmlFor={id} className="font-semibold block text-[#17012e]">
-        {title}
+        {title} <br />
+        {editVal ? (
+          <span className="ml-2 italic font-thin">
+            (previous:
+            <span className=" text-[orangered] ml-2">{editVal}</span>)
+          </span>
+        ) : (
+          ''
+        )}
       </label>
       <input
+        disabled={disabled}
         value={value}
         id={id}
         onChange={func}
