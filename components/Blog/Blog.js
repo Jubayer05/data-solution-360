@@ -32,7 +32,7 @@ const Blog = () => {
 
             <div className="p-4 flex-1">
               <div>
-                <h2 className="text-2xl font-bold cursor-pointer transition-colors duration-300">
+                <h2 className="text-2xl font-bold font-bangla cursor-pointer transition-colors duration-300">
                   <Link
                     href={`/blog/${encodeURIComponent(item.slug)}?id=${
                       item.id
@@ -42,7 +42,7 @@ const Blog = () => {
                     {item.title}
                   </Link>
                 </h2>
-                <p className="text-lg">
+                <p className="text-lg font-bangla">
                   {convert(item?.details, {
                     wordwrap: 130,
                   })

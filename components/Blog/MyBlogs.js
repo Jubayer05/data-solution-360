@@ -1,46 +1,30 @@
-import { Table } from 'antd';
-import { convertToHTML } from 'draft-convert';
-import { EditorState } from 'draft-js';
-import dynamic from 'next/dynamic';
+/* eslint-disable @next/next/no-img-element */
+import { Progress, Table } from 'antd';
 import { useEffect, useState } from 'react';
+import { ImCancelCircle } from 'react-icons/im';
 import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
 import HeadingDashboard from '../utilities/HeadingDashboard';
+import RichTextEditor from '../utilities/RichTextEditor';
 const db = firebase.firestore();
 
-const Editor = dynamic(
-  () => {
-    return import('react-draft-wysiwyg').then((mod) => mod.Editor);
-  },
-  { ssr: false },
-);
-
 const MyBlogs = () => {
-  const { blogData } = useStateContext();
+  const { userEmail, blogData } = useStateContext();
   const [modalIsOpen, setIsOpen] = useState(false);
   const [blogDataState, setBlogDataState] = useState();
   const [convertContent, setConvertedContent] = useState(null);
   const [modalData, setModalData] = useState(null);
-  const [editorState, setEditorState] = useState(() =>
-    EditorState.createEmpty(),
-  );
+  const [progressData, setProgressData] = useState('');
+  const [blogDetails, setBlogDetails] = useState('');
+
+  console.log(modalData);
 
   useEffect(() => {
     setBlogDataState(modalData);
   }, [modalData]);
-
-  const handleEditorChange = (state) => {
-    setEditorState(state);
-    convertContentToHTML();
-  };
-
-  const convertContentToHTML = () => {
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
-    setConvertedContent(currentContentAsHTML);
-  };
 
   const closeModal = () => {
     setIsOpen(false);
@@ -136,7 +120,7 @@ const MyBlogs = () => {
             .getDownloadURL()
             .then((url) => {
               // NOTE: use this url
-              setBlogData({ ...blogData, img: url });
+              setBlogDataState({ ...blogDataState, img: url });
             });
         },
       );
@@ -178,18 +162,28 @@ const MyBlogs = () => {
   const handleSubmitClick = () => {
     const updatedBlog = {
       ...blogDataState,
-      details: convertContent,
+      details: !isContentEmpty(blogDetails) ? blogDetails : modalData?.details,
     };
 
     db.collection('blogData')
       .doc(modalData.key)
       .update(updatedBlog)
       .then(() => {
-        Swal.fire('Updated!', 'Your file has been updated.', 'success');
+        Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
+          () => {
+            window.location.reload();
+          },
+        );
       })
       .catch((error) => {
         Swal.fire('Error!', 'Something went wrong.', 'error');
       });
+  };
+
+  const conicColors = {
+    '0%': '#87d068',
+    '50%': '#ffe58f',
+    '100%': '#ffccc7',
   };
 
   return (
@@ -213,10 +207,28 @@ const MyBlogs = () => {
         style={customStyles}
         contentLabel="Example Modal"
       >
-        <div className="w-3/4">
+        <div className="flex justify-between">
+          <div />
+          <h2 className="text-2xl font-bold text-center mb-8 ">
+            Edit The Blog
+          </h2>
+          <div>
+            <ImCancelCircle
+              onClick={() => closeModal()}
+              className="text-2xl cursor-pointer"
+            />
+          </div>
+        </div>
+        <div className="w-3/4 mx-auto">
           <label htmlFor="title" className="font-semibold mt-3 block">
             Blog heading / Blog title
+            <span className="ml-2 italic font-thin">
+              (previous:
+              <span className=" text-[orangered] ml-2">{modalData?.title}</span>
+              )
+            </span>
           </label>
+
           <input
             id="title"
             onChange={(e) =>
@@ -228,6 +240,13 @@ const MyBlogs = () => {
 
           <label htmlFor="title" className="font-semibold mt-3 block">
             Author
+            <span className="ml-2 italic font-thin">
+              (previous:
+              <span className=" text-[orangered] ml-2">
+                {modalData?.author}
+              </span>
+              )
+            </span>
           </label>
           <input
             id="title"
@@ -241,22 +260,27 @@ const MyBlogs = () => {
           <label htmlFor="photoUrl" className="font-semibold mt-3 block">
             Main blog image
           </label>
+          <span className="italic font-thin">previous:</span>
+          <img src={modalData?.img} className="w-80 my-4" alt="" />
           <input
             id="photoUrl"
             onChange={handleFileSubmit}
             type="file"
             className="w-full px-4 py-2 outline-none border-1 mt-3 "
           />
+          <div className="text-center mx-auto px-4">
+            <Progress
+              percent={progressData}
+              size="small"
+              strokeColor={conicColors}
+            />
+          </div>
 
-          <p className="font-semibold mt-2">Full blog description</p>
-          <div className="w-full border-1 p-3">
-            <Editor
-              editorState={editorState}
-              editorStyle={{ minHeight: '140px' }}
-              toolbarClassName="toolbarClassName"
-              wrapperClassName="wrapperClassName"
-              editorClassName="editorClassName"
-              onEditorStateChange={handleEditorChange}
+          <div className="w-full p-3">
+            <RichTextEditor
+              onDataChange={setBlogDetails}
+              title="Full blog description"
+              value={modalData?.details}
             />
           </div>
 
@@ -277,3 +301,9 @@ const MyBlogs = () => {
 };
 
 export default MyBlogs;
+
+const isContentEmpty = (content) => {
+  // Use a regular expression to check if the content contains only whitespace or line breaks
+  const isEmpty = /^(<p><br><\/p>\s*)*$/.test(content);
+  return isEmpty;
+};

@@ -1,8 +1,10 @@
+import { Progress } from 'antd';
 import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
@@ -34,7 +36,7 @@ const AddNewBlog = () => {
   );
   const [convertContent, setConvertedContent] = useState(null);
   const [blogData, setBlogData] = useState(initialBlogState);
-  const [progressData, setProgressData] = useState(null);
+  const [progressData, setProgressData] = useState('');
 
   const handleEditorChange = (state) => {
     setEditorState(state);
@@ -104,15 +106,27 @@ const AddNewBlog = () => {
           createdAt: new Date().getTime(),
         })
         .then(() => {
-          alert('Blog Data was successfully uploaded.');
+          Swal.fire(
+            'Success!',
+            'Your Blog was successfully added.',
+            'success',
+          ).then(() => {
+            window.location.reload();
+          });
           window.location.reload();
         })
         .catch((error) => {
-          alert(error.message + '' + 'Something went wrong');
+          Swal.fire('Error!', 'Something went wrong.', 'error');
         });
     } else {
-      alert('Blog data was not correct.');
+      Swal.fire('Warning!', 'Something went wrong.', 'warning');
     }
+  };
+
+  const conicColors = {
+    '0%': '#87d068',
+    '50%': '#ffe58f',
+    '100%': '#ffccc7',
   };
 
   return (
@@ -148,6 +162,14 @@ const AddNewBlog = () => {
           type="file"
           className="w-full px-4 py-2 outline-none border-1 mt-3 "
         />
+
+        <div className="text-center mx-auto px-4">
+          <Progress
+            percent={progressData}
+            size="small"
+            strokeColor={conicColors}
+          />
+        </div>
 
         <p className="font-semibold mt-2">Full blog description</p>
         <div className="w-full border-1 p-3">

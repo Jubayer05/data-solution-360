@@ -19,22 +19,24 @@ const RightSide = ({ courseDetails }) => {
       <div className="border-1 rounded-md">
         {/* NOTE: RIGHT HEADER */}
         <div className="flex items-center justify-center gap-4 border-b-1 py-4">
-          <div className="flex bg-[#fff1e9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
-            <ImClock className="text-[rgb(223,97,52)] mr-[6px]" />
-            <span className="text-sm font-[700]">
-              {new Date(courseDetails?.main_class_starting_date).getTime() >=
-              new Date().getTime()
-                ? Math.ceil(
-                    (new Date(
-                      courseDetails?.main_class_starting_date,
-                    ).getTime() -
-                      new Date().getTime()) /
-                      (1000 * 60 * 60 * 24),
-                  )
-                : 0}{' '}
-              Days Left
-            </span>
-          </div>
+          {courseDetails?.status === 'On Going' && (
+            <div className="flex bg-[#fff1e9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
+              <ImClock className="text-[rgb(223,97,52)] mr-[6px]" />
+              <span className="text-sm font-[700]">
+                {new Date(courseDetails?.main_class_starting_date).getTime() >=
+                new Date().getTime()
+                  ? Math.ceil(
+                      (new Date(
+                        courseDetails?.main_class_starting_date,
+                      ).getTime() -
+                        new Date().getTime()) /
+                        (1000 * 60 * 60 * 24),
+                    )
+                  : 0}{' '}
+                Days Left
+              </span>
+            </div>
+          )}
           <div className="flex bg-[rgba(161,68,255,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
             <ImClock className="text-[rgb(120,12,208)] mr-[6px]" />
             <span className="text-sm font-[700]">
@@ -44,31 +46,33 @@ const RightSide = ({ courseDetails }) => {
         </div>
 
         {/* NOTE: PRICE & BUTTON */}
-        <div className="py-4 px-5 border-b-1">
-          <div className="flex items-center">
+        {courseDetails?.status === 'On Going' && (
+          <div className="py-4 px-5 border-b-1">
+            <div className="flex items-center">
+              <div>
+                <span className="text-[orangered] font-bold text-lg">
+                  <strike>{courseDetails?.price}/-</strike>
+                </span>
+              </div>
+              <div className="ml-4">
+                <span className="text-[#1d2939] font-bold text-3xl">
+                  {courseDetails?.discounted_price}/-
+                </span>
+              </div>
+              <div className="flex items-center ml-auto border-b-1 cursor-pointer">
+                <BiShareAlt />
+                <span>Share</span>
+              </div>
+            </div>
             <div>
-              <span className="text-[orangered] font-bold text-lg">
-                <strike>{courseDetails?.price}/-</strike>
-              </span>
-            </div>
-            <div className="ml-4">
-              <span className="text-[#1d2939] font-bold text-3xl">
-                {courseDetails?.discounted_price}/-
-              </span>
-            </div>
-            <div className="flex items-center ml-auto border-b-1 cursor-pointer">
-              <BiShareAlt />
-              <span>Share</span>
+              <Link href={`${courseDetails?.join_link}`} target="_blank">
+                <button className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] mt-6 hover:opacity-[0.8] transition-all">
+                  Join Live Batch
+                </button>
+              </Link>
             </div>
           </div>
-          <div>
-            <Link href={`${courseDetails?.join_link}`} target="_blank">
-              <button className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] mt-6 hover:opacity-[0.8] transition-all">
-                Join Live Batch
-              </button>
-            </Link>
-          </div>
-        </div>
+        )}
         {/* NOTE: COURSE DETAILS IN POINTS */}
         <div className="py-4 px-5 border-b-1">
           <p className="font-bold text-lg">You will get from this course</p>

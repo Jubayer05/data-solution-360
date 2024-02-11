@@ -87,7 +87,6 @@ const TrendingCourse = () => {
     }
   };
 
-  console.log(photoUrl);
   const conicColors = {
     '0%': '#87d068',
     '50%': '#ffe58f',

@@ -27,20 +27,20 @@ module.exports = {
         '6xl': '4rem',
       },
       backgroundColor: {
-        'primary-bg': '#14752b',
+        'primary-bg': '#fd6406',
         'main-bg': '#ffffff',
       },
       borderWidth: {
         1: '1px',
       },
       borderColor: {
-        primary: '#14752b',
+        primary: '#fd6406',
         color: 'rgba(0, 0, 0, 0.1)',
       },
       textColor: {
         nav: '#000000',
         navWhite: '#ffffff',
-        primary: '#14752b',
+        primary: '#fd6406',
         headerMain: '#173F56',
         headerSub: '#264751',
       },

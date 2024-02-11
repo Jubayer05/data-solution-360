@@ -1,11 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
+import { FaArrowRightLong } from 'react-icons/fa6';
 
 import { useStateContext } from '../../src/context/ContextProvider';
 import CrashCourseItem from './CrashCourseItem';
 
 const CrashCourse = () => {
   const { language, courseData } = useStateContext();
+
+  const onGoingCourses = courseData?.filter((val) => val.status === 'On Going');
+  const upComingCourses = courseData?.filter(
+    (val) => val.status === 'Upcoming',
+  );
+  console.log(onGoingCourses);
 
   return (
     <div className="bg-[#ffffff]	pt-4 md:pt-8" id="courses">
@@ -21,8 +28,20 @@ const CrashCourse = () => {
           At this moment Data Solution - 360 provides this following courses for
           you.
         </p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5">
-          {courseData.map((item) => (
+        <h2 className="text-headerMain font-heading ml-6 text-xl font-semibold inline-flex items-center gap-2 hover:text-primary transition-all">
+          Registration Going on <FaArrowRightLong />
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
+          {onGoingCourses.map((item) => (
+            <CrashCourseItem key={item.id} item={item} />
+          ))}
+        </div>
+
+        <h2 className="mt-10 text-headerMain font-heading ml-6 text-xl font-semibold inline-flex items-center gap-2 hover:text-primary transition-all">
+          Upcoming Courses <FaArrowRightLong />
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
+          {upComingCourses.map((item) => (
             <CrashCourseItem key={item.id} item={item} />
           ))}
         </div>

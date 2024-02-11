@@ -22,7 +22,7 @@ const BlogContentItem = () => {
 
   return (
     <div className="max-w-3xl mx-auto pt-24 px-2">
-      <h2 className="text-5xl mt-4 pb-4">{blogItem?.title}</h2>
+      <h2 className="text-5xl mt-4 pb-4 font-bangla">{blogItem?.title}</h2>
       {/* <h3 className="text-lg font-bold">{blogItem?.author}</h3> */}
       <h3 className="text-lg font-bold">Data Solution 360</h3>
       <p className="-mt-1 text-sm">Posted on {blogItem?.date}</p>
@@ -33,7 +33,7 @@ const BlogContentItem = () => {
       )}
       <div className="mt-4"></div>
       <div
-        className="text-[22px] pb-8 leading-10"
+        className="text-xl pb-8 leading-10 font-bangla"
         dangerouslySetInnerHTML={{ __html: blogItem?.details }}
       />
     </div>

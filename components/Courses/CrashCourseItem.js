@@ -3,11 +3,14 @@ import React from 'react';
 import { AiOutlineClockCircle, AiOutlineFileText } from 'react-icons/ai';
 import { BiBarChart } from 'react-icons/bi';
 
-import { Avatar } from 'antd';
 import Link from 'next/link';
 import { BsStarFill } from 'react-icons/bs';
 
 const CrashCourseItem = ({ item }) => {
+  const discountPercentage = Math.round(
+    100 - (item?.discounted_price / item?.price) * 100,
+  );
+
   return (
     <div className="w-full mx-auto rounded-lg overflow-hidden sm:mx-2 hover:-translate-y-3 hover:shadow-xl transition-translate duration-300 cursor-pointer mt-4">
       <Link href={`/course-details/${item.key}`}>
@@ -48,21 +51,26 @@ const CrashCourseItem = ({ item }) => {
             </div>
           </div>
 
-          <div className="h-[1px] w-full bg-slate-200 mt-4 mb-3" />
-          <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <Avatar src="/team/sakib.jpg" />
-              <span className="ml-2">{item?.name_of_the_instructor}</span>
-            </div>
-            <div>
-              <span className="flex items-center font-bold text-base text-[orangered]">
-                <strike>{item?.price}/-</strike>
-              </span>
-              <span className="text-[#1d2939] font-bold text-2xl">
-                {item?.discounted_price}/-
-              </span>
-            </div>
-          </div>
+          {item.status === 'On Going' && (
+            <>
+              <div className="h-[1px] w-full bg-slate-200 mt-4 mb-3" />
+              <div className="flex items-center justify-between">
+                <div className="px-3 pt-1 pb-[1px] border-1 border-[#fd6406] rounded-full">
+                  <h4 className="text-[#fd6406] italic">
+                    <span className="text-xl">{discountPercentage}%</span> off
+                  </h4>
+                </div>
+                <div>
+                  <span className="flex items-center font-bold text-base text-[orangered]">
+                    <strike>{item?.price}/-</strike>
+                  </span>
+                  <span className="text-[#1d2939] font-bold text-2xl">
+                    {item?.discounted_price}/-
+                  </span>
+                </div>
+              </div>
+            </>
+          )}
         </div>
       </Link>
     </div>

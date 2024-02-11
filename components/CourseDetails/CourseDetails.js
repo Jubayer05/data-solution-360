@@ -39,70 +39,76 @@ const CourseDetails = () => {
         </p>
 
         {/* NOTE: ORIENTATION SECTION */}
-        <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
-          <img className="w-[60px] mr-4" src="/course/webinar.png" alt="" />
-          <div>
-            <span className="cursor-pointer font-heading">
-              Free Orientation Class
-            </span>
-            <div className="flex items-center text-base mt-1">
-              <GoCalendar />
-              {/* TODO: Make it simple date with day name */}
-              <span className="ml-1.5">{courseDetails?.orientation_class}</span>
+        {courseDetails?.status === 'On Going' && (
+          <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
+            <img className="w-[60px] mr-4" src="/course/webinar.png" alt="" />
+            <div>
+              <span className="cursor-pointer font-heading">
+                Free Orientation Class
+              </span>
+              <div className="flex items-center text-base mt-1">
+                <GoCalendar />
+                {/* TODO: Make it simple date with day name */}
+                <span className="ml-1.5">
+                  {courseDetails?.orientation_class}
+                </span>
+              </div>
+            </div>
+            <div className="ml-auto">
+              <Link href={`${courseDetails?.join_link}`} target="_blank">
+                <button className="bg-[#1f0835] text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
+                  Book Your Seat Now
+                </button>
+              </Link>
             </div>
           </div>
-          <div className="ml-auto">
-            <Link href={`${courseDetails?.join_link}`} target="_blank">
-              <button className="bg-[#1f0835] text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
-                Book Your Seat Now
-              </button>
-            </Link>
-          </div>
-        </div>
+        )}
 
         {/* NOTE: COURSE DETAILS (BATCH, STARTING, DAY, TIME) */}
-        <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-1 md:gap-6">
-          <div className="pl-3 pr-2">
-            <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
-              <span>{courseDetails?.batch_no}</span>
+        {courseDetails?.status === 'On Going' && (
+          <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-1 md:gap-6">
+            <div className="pl-3 pr-2">
+              <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
+                <span>{courseDetails?.batch_no}</span>
+              </div>
+            </div>
+            <div className="bg-[#d5caca] w-[2px] h-[40px]" />
+            <div className="px-1 md:px-3">
+              <div className="flex items-center text-xs pb-1.5">
+                <GoCalendar className="text-[#ff8c4b] text-base" />
+                <span className="ml-1.5 cursor-pointer">Start Date</span>
+              </div>
+              <span className=" capitalize">
+                {courseDetails?.main_class_starting_date}
+              </span>
+            </div>
+            <div className="bg-[#d5caca] w-[1px] h-[40px]" />
+            <div className="px-1 md:px-3">
+              <div className="flex items-center text-xs pb-1.5">
+                <BsCalendarDay className="text-[#ff8c4b] text-base" />
+                <span className="ml-1.5 cursor-pointer">Class Days</span>
+              </div>
+              <span>
+                {' '}
+                {courseDetails?.class_days?.map((item, index) => (
+                  <span key={item}>
+                    {item}
+                    {index !== courseDetails?.class_days.length - 1 && `, `}
+                  </span>
+                ))}{' '}
+              </span>
+            </div>
+            <div className="bg-[#d5caca] w-[1px] h-[40px]" />
+            <div className="px-1 md:px-3">
+              <div className="flex items-center text-xs pb-1.5">
+                <BsClock className="text-[#ff8c4b] text-base" />
+                <span className="ml-1.5 cursor-pointer">Class Time</span>
+              </div>
+              {/* <span>রাত ৯:০০ - রাত ১০:৩০</span> */}
+              <span>{courseDetails?.class_time}</span>
             </div>
           </div>
-          <div className="bg-[#d5caca] w-[2px] h-[40px]" />
-          <div className="px-1 md:px-3">
-            <div className="flex items-center text-xs pb-1.5">
-              <GoCalendar className="text-[#ff8c4b] text-base" />
-              <span className="ml-1.5 cursor-pointer">Start Date</span>
-            </div>
-            <span className=" capitalize">
-              {courseDetails?.main_class_starting_date}
-            </span>
-          </div>
-          <div className="bg-[#d5caca] w-[1px] h-[40px]" />
-          <div className="px-1 md:px-3">
-            <div className="flex items-center text-xs pb-1.5">
-              <BsCalendarDay className="text-[#ff8c4b] text-base" />
-              <span className="ml-1.5 cursor-pointer">Class Days</span>
-            </div>
-            <span>
-              {' '}
-              {courseDetails?.class_days?.map((item, index) => (
-                <span key={item}>
-                  {item}
-                  {index !== courseDetails?.class_days.length - 1 && `, `}
-                </span>
-              ))}{' '}
-            </span>
-          </div>
-          <div className="bg-[#d5caca] w-[1px] h-[40px]" />
-          <div className="px-1 md:px-3">
-            <div className="flex items-center text-xs pb-1.5">
-              <BsClock className="text-[#ff8c4b] text-base" />
-              <span className="ml-1.5 cursor-pointer">Class Time</span>
-            </div>
-            {/* <span>রাত ৯:০০ - রাত ১০:৩০</span> */}
-            <span>{courseDetails?.class_time}</span>
-          </div>
-        </div>
+        )}
 
         {/* NOTE: COURSE INCLUDED ITEMS */}
         <div className="bg-[#101828] p-3 md:p-8 pl-5 md:pl-12 font-normal text-[#eaecf0] rounded-lg mt-8">
@@ -237,7 +243,7 @@ const CourseDetails = () => {
                     key={item.id}
                   >
                     <div className="text-base font-normal border-t-1 px-4 pt-4">
-                      {item.lessons.map((panelLesson) => (
+                      {item.lessons.map((panelLesson, lessonIndex) => (
                         <Collapse
                           collapsible="header"
                           expandIconPosition="end"
@@ -248,16 +254,18 @@ const CourseDetails = () => {
                             className="text-lg font-semibold mb-2"
                             header={
                               <p className="text-base mb-0 font-medium">
+                                {<strong>{lessonIndex + 1}.</strong>}{' '}
                                 {panelLesson.title}
                               </p>
                             }
                           >
-                            <div className="flex flex-col justify-between">
-                              {panelLesson?.topics?.map((topic) => (
+                            <div className="flex flex-col justify-between px-4 py-2">
+                              {panelLesson?.topics?.map((topic, topicIndex) => (
                                 <p
                                   key={topic.id}
                                   className="text-base font-normal"
                                 >
+                                  <strong>{topicIndex + 1}.</strong>{' '}
                                   {topic.name}
                                 </p>
                               ))}

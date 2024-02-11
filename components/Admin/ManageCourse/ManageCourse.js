@@ -22,12 +22,15 @@ const ManageCourse = () => {
   const [modalData, setModalData] = useState(null);
   const [orientation, setOrientation] = useState(true);
   const [mainClassStart, setMainClassStart] = useState(true);
+  const [courseStatus, setCourseStatus] = useState(true);
   const [courseModule, setCourseModule] = useState([]);
   const [courseShortData, setCourseShortData] = useState([]);
   const [instructors, setInstructors] = useState([]);
   const [courseBenefit, setCourseBenefit] = useState('');
-  const [courseDetails, setCourseDetails] = useState([]);
-  const [courseFor, setCourseFor] = useState([]);
+  const [courseDetails, setCourseDetails] = useState('');
+  const [courseFor, setCourseFor] = useState('');
+
+  console.log(courseStatus);
 
   useEffect(() => {
     setCourseDataObj(modalData);
@@ -151,6 +154,7 @@ const ManageCourse = () => {
       who_is_the_course_for: !isContentEmpty(courseFor)
         ? courseFor
         : courseDataObj?.who_is_the_course_for,
+      status: courseStatus ? 'On Going' : 'Upcoming',
     };
 
     db.collection('course_data')
@@ -238,7 +242,8 @@ const ManageCourse = () => {
         <div className="w-full">
           <div className="flex justify-between">
             <div />
-            <h2 className="text-2xl font-bold text-center mb-8 ">
+
+            <h2 className="text-2xl font-heading font-bold text-center mb-8 ">
               Edit The Course
             </h2>
             <div>
@@ -248,6 +253,25 @@ const ManageCourse = () => {
               />
             </div>
           </div>
+          <div className="mb-4">
+            <p>
+              Status{' '}
+              <span className="ml-2 italic font-thin">
+                (previous:
+                <span className=" text-[orangered] ml-2">
+                  {modalData?.status}
+                </span>
+                )
+              </span>
+            </p>
+            <Switch
+              onChange={(value) => setCourseStatus(value)}
+              checkedChildren="On Going"
+              unCheckedChildren="Upcoming"
+              defaultChecked={modalData?.status === 'Upcoming' ? false : true}
+            />
+          </div>
+
           {/* NOTE: COURSE TITLE */}
           <InputBoxManage
             title="Title"
