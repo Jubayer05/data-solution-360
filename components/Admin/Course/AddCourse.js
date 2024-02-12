@@ -16,6 +16,7 @@ const Editor = dynamic(
 
 // CSS styles for the Editor component
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import HeadingDashboard from '../../utilities/HeadingDashboard';
 import AddInstructorCourse from './AddInstructorCourse';
@@ -124,20 +125,10 @@ const AddCourse = () => {
   // Handler for form submission
   const handleSubmit = () => {
     if (
-      convertContent !== null &&
-      courseShortData?.filter((item) => item.value !== '').length >= 7 &&
       courseData.title != '' &&
       courseData.img != '' &&
-      courseData.short_description != '' &&
       courseData.price != '' &&
-      courseData.discounted_price != '' &&
-      courseData.total_seat_number != '' &&
-      courseData.batch_no != '' &&
-      courseData.class_time != '' &&
-      courseData.orientation_class != '' &&
-      courseData.main_class_starting_date != '' &&
-      courseData.who_is_the_course_for != '' &&
-      courseData.after_course_benefit != ''
+      courseData.discounted_price != ''
     ) {
       firebase
         .firestore()
@@ -152,9 +143,14 @@ const AddCourse = () => {
           createdAt: new Date().toLocaleDateString(undefined, options),
         })
         .then(() => {
-          alert('Course Data was successfully uploaded.');
-          setCourseData(initialCourseState);
-          window.location.reload();
+          Swal.fire(
+            'Success!',
+            'Your course is added successfully.',
+            'success',
+          ).then(() => {
+            setCourseData(initialCourseState);
+            window.location.reload();
+          });
         })
         .catch((error) => {
           alert(error.message + '' + 'Something went wrong');

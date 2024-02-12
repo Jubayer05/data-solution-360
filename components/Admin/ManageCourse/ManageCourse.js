@@ -407,7 +407,7 @@ const ManageCourse = () => {
                 <span className="ml-2 italic font-thin">
                   (previous:
                   <span className=" text-[orangered] ml-2">
-                    {modalData?.class_days.map((item) => (
+                    {modalData?.class_days?.map((item) => (
                       <span key={item}>{item} &nbsp;</span>
                     ))}
                   </span>
