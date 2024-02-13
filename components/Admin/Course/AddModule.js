@@ -29,6 +29,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
   const [topic, setTopic] = useState({ ...initialTopicState });
   const [editValue, setEditValue] = useState(null);
   const [editLesson, setEditLesson] = useState(null);
+  const [editTopic, setEditTopic] = useState(null);
 
   console.log(courseModule);
 
@@ -91,25 +92,55 @@ const AddModule = ({ courseModule, setCourseModule }) => {
     setModuleEdit(null);
     setEditValue(null);
     setEditLesson(null);
+    setEditTopic(null);
+    setLesson({ ...initialLessonState });
     setModule({ ...initialModuleState });
+    setTopic({ ...initialTopicState });
   };
 
   const handleEditLesson = () => {
-    const courseModuleCopy = [...courseModule];
     const updatedLesson = editValue?.lessons.find(
       (val) => val.id === editLesson.id,
     );
-    updatedLesson[title] = lesson.title;
-    const updatedModule = { ...editValue, ...moduleEdit };
-    console.log(updatedLesson);
-    // const moduleIndex = courseModule.findIndex((x) => x.id === editValue.id);
-    // courseModuleCopy[moduleIndex] = updatedModule;
-    // setCourseModule(courseModuleCopy);
+    const findUpdatedLessonIndex = editValue?.lessons.findIndex(
+      (val) => val.id === editLesson.id,
+    );
+    updatedLesson.title = lesson.title;
+    editValue.lessons[findUpdatedLessonIndex] = updatedLesson;
+
+    // call the update module function
+    handleEditModule();
   };
 
-  const handleEditBtn = (item) => {
-    setEditValue(item);
-    // setModule(item);
+  const handleEditTopic = () => {
+    const updatedLesson = editValue?.lessons.find(
+      (val) => val.id === editLesson.id,
+    );
+    const findUpdatedLessonIndex = editValue?.lessons.findIndex(
+      (val) => val.id === editLesson.id,
+    );
+
+    // Find updated topic
+    const updatedTopic = updatedLesson.topics.find(
+      (val) => val.id === editTopic.id,
+    );
+
+    const updatedTopicIndex = updatedLesson.topics.findIndex(
+      (val) => val.id === editTopic.id,
+    );
+
+    updatedTopic.name = topic.name;
+
+    updatedLesson.topics[updatedTopicIndex] = updatedTopic;
+    editValue.lessons[findUpdatedLessonIndex] = updatedLesson;
+
+    // call the update module function
+    handleEditModule();
+  };
+
+  const handleEditLessonBtn = (item) => {
+    setEditLesson(item);
+    setEditTopic(null);
   };
 
   return (
@@ -143,27 +174,50 @@ const AddModule = ({ courseModule, setCourseModule }) => {
                         Project number:{item.projectNumber}
                       </p>
                       {item.lessons.map((panelLesson) => (
-                        <Collapse
-                          collapsible="header"
-                          expandIconPosition="end"
-                          defaultActiveKey={['1']}
-                          key={panelLesson.id}
-                        >
-                          <Panel
-                            className="text-lg font-semibold mb-2"
-                            header={
-                              <p className="text-base mb-0 font-normal">
-                                {panelLesson.title}
-                              </p>
-                            }
+                        <div key={panelLesson.id} className="flex items-center">
+                          <Collapse
+                            collapsible="header"
+                            expandIconPosition="end"
+                            defaultActiveKey={['1']}
+                            className="flex-1"
                           >
-                            <div className="flex flex-col justify-between">
-                              {panelLesson?.topics?.map((topic) => (
-                                <p key={topic.id}>{topic.name}</p>
-                              ))}
-                            </div>
-                          </Panel>
-                        </Collapse>
+                            <Panel
+                              className="text-lg font-semibold mb-2"
+                              header={
+                                <p className="text-base mb-0 font-normal">
+                                  {panelLesson.title}
+                                </p>
+                              }
+                            >
+                              <div className="flex flex-col justify-between">
+                                {panelLesson?.topics?.map((topic) => (
+                                  <div
+                                    key={topic.id}
+                                    className="flex items-center"
+                                  >
+                                    <p className="flex-1">{topic.name}</p>
+                                    {panelLesson.id === editLesson?.id && (
+                                      <button
+                                        onClick={() => setEditTopic(topic)}
+                                        className="px-2 py-1 ml-2 bg-[#03a9f4] text-white rounded-md text-sm font-normal"
+                                      >
+                                        Edit Topic
+                                      </button>
+                                    )}
+                                  </div>
+                                ))}
+                              </div>
+                            </Panel>
+                          </Collapse>
+                          {editValue?.id === item.id && (
+                            <button
+                              onClick={() => handleEditLessonBtn(panelLesson)}
+                              className="px-2 py-1 ml-2 bg-[#7b1fa2] text-white rounded-md"
+                            >
+                              Edit Lesson
+                            </button>
+                          )}
+                        </div>
                       ))}
                     </div>
                   </Panel>
@@ -171,13 +225,13 @@ const AddModule = ({ courseModule, setCourseModule }) => {
               </div>
               <button
                 onClick={() => setEditValue(item)}
-                className="px-4 py-2 ml-2 bg-blue-500 text-white rounded-md"
+                className="px-2 py-1 ml-2 bg-[#01579b] text-white rounded-md"
               >
                 Edit
               </button>
               <button
                 onClick={() => handleDeleteModule(item)}
-                className="px-4 py-2 mx-4 bg-red-500 text-white rounded-md"
+                className="px-2 py-1 ml-2 bg-red-500 text-white rounded-md"
               >
                 Delete
               </button>
@@ -233,6 +287,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
           <div className="flex-1">
             <InputBox
               editVal={editLesson?.title}
+              disabled={editTopic && editLesson ? true : false}
               value={lesson.title}
               title="Lesson Name"
               name="title"
@@ -244,7 +299,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
           <div className="flex-1">
             <InputBox
               value={topic.name}
-              disabled={editLesson ? true : false}
+              disabled={editLesson && !editTopic ? true : false}
               title="Topic Name"
               name="topicName"
               id="topicName"
@@ -254,13 +309,14 @@ const AddModule = ({ courseModule, setCourseModule }) => {
           </div>
 
           <button
-            disabled={editLesson ? true : false}
-            onClick={handleAddTopic}
+            disabled={editLesson && !editTopic ? true : false}
+            onClick={editTopic ? handleEditTopic : handleAddTopic}
             className="px-4 py-[15px] bg-[#001f3f] text-white rounded-md"
           >
-            Add Topic
+            {editTopic ? 'Update' : 'Add Topic'}
           </button>
           <button
+            disabled={editTopic ? true : false}
             onClick={editLesson ? handleEditLesson : handleAddLesson}
             className="px-4 py-[15px] bg-[#3d9970] text-white rounded-md"
           >
