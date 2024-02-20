@@ -21,8 +21,8 @@ const ManageCourse = () => {
   const [courseDataObj, setCourseDataObj] = useState({});
   const [modalData, setModalData] = useState(null);
   const [orientation, setOrientation] = useState(true);
-  const [mainClassStart, setMainClassStart] = useState(true);
-  const [courseStatus, setCourseStatus] = useState(true);
+  const [mainClassStart, setMainClassStart] = useState(false);
+  const [courseStatus, setCourseStatus] = useState(false);
   const [courseModule, setCourseModule] = useState([]);
   const [courseShortData, setCourseShortData] = useState([]);
   const [instructors, setInstructors] = useState([]);
@@ -30,13 +30,15 @@ const ManageCourse = () => {
   const [courseDetails, setCourseDetails] = useState('');
   const [courseFor, setCourseFor] = useState('');
 
-  console.log(courseStatus);
+  console.log(modalData);
 
   useEffect(() => {
     setCourseDataObj(modalData);
     setCourseModule(modalData?.courseModule || []);
     setCourseShortData(modalData?.courseShortData);
     setInstructors(modalData?.instructors || []);
+    setCourseStatus(modalData?.status);
+    setMainClassStart(modalData?.main_class_starting_date);
   }, [modalData]);
 
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
