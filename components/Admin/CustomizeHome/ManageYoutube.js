@@ -10,10 +10,6 @@ const db = firebase.firestore();
 
 const ManageYoutube = () => {
   const { youtubeVideo } = useStateContext();
-  const [photoUrl, setPhotoUrl] = useState('');
-  const [progressData, setProgressData] = useState('');
-
-  // console.log();
 
   const formik = useFormik({
     initialValues: {

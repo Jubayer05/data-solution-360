@@ -5,6 +5,11 @@ import { useStateContext } from '../../src/context/ContextProvider';
 
 const Trending = () => {
   const { trendingCourse } = useStateContext();
+
+  const findImageData = trendingCourse.find(
+    (item) => item.key === 'vMVpfcjol5dGUyiVZDDO',
+  );
+
   return (
     <div className="max-w-7xl mx-auto mt-10">
       <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
@@ -12,7 +17,7 @@ const Trending = () => {
       </h2>
       <img
         className="w-full rounded-lg shadow-lg"
-        src={trendingCourse[0]?.photoUrl}
+        src={findImageData?.photoUrl}
         alt="trending course"
       />
       <div className="flex justify-center mt-10">

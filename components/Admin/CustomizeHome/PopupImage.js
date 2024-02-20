@@ -8,7 +8,7 @@ import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
 const db = firebase.firestore();
 
-const TrendingCourse = () => {
+const PopupImage = () => {
   const { userEmail, trendingCourse } = useStateContext();
   const [photoUrl, setPhotoUrl] = useState('');
   const [progressData, setProgressData] = useState('');
@@ -19,10 +19,8 @@ const TrendingCourse = () => {
       photoUrl: photoUrl,
     },
     onSubmit: (values) => {
-      firebase
-        .firestore()
-        .collection('trendingCourse')
-        .doc('vMVpfcjol5dGUyiVZDDO')
+      db.collection('trendingCourse')
+        .doc('BoUM4T62rg5qyXHVM7ik')
         .update({
           ...values,
           photoUrl: photoUrl,
@@ -46,16 +44,15 @@ const TrendingCourse = () => {
     },
   });
 
-  // console.log(trendingCourse[0]);
-
   const handleFileSubmit = (e) => {
-    const fileSize = document.getElementById('photoUrl').files[0].size;
+    // const fileSize = document.getElementById('photoUrl').files[0].size;
+    const fileSize = e.target.files[0].size;
     const courseImg = e.target.files[0];
 
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`courseImage/${userEmail}/${courseImg?.name}`)
+        .ref(`trendingImage/${userEmail}/${courseImg?.name}`)
         .put(courseImg);
       uploadTask.on(
         'state_changed',
@@ -94,16 +91,16 @@ const TrendingCourse = () => {
   };
 
   const findImageData = trendingCourse.find(
-    (item) => item.key === 'vMVpfcjol5dGUyiVZDDO',
+    (item) => item.key === 'BoUM4T62rg5qyXHVM7ik',
   );
 
   return (
     <div>
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
-          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Trending Course</h2>
+          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Popup Image</h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
-          <h2>Current Trending Image</h2>
+          <h2>Current Popup Image</h2>
           <div className="w-[400px] mx-auto">
             <img
               src={findImageData?.photoUrl}
@@ -115,7 +112,7 @@ const TrendingCourse = () => {
             {/* NOTE: photoUrl */}
             <div className="flex items-center mb-3 mt-20">
               <label htmlFor="photoUrl" className="w-[240px] sm:w-[300px]">
-                Change trending image
+                Change popup image
               </label>
               <input
                 id="photoUrl"
@@ -167,4 +164,4 @@ const TrendingCourse = () => {
   );
 };
 ``;
-export default TrendingCourse;
+export default PopupImage;

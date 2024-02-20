@@ -12,7 +12,6 @@ const CrashCourse = () => {
   const upComingCourses = courseData?.filter(
     (val) => val.status === 'Upcoming',
   );
-  console.log(onGoingCourses);
 
   return (
     <div className="bg-[#ffffff]	pt-4 md:pt-8" id="courses">
