@@ -21,7 +21,7 @@ const ManageCourse = () => {
   const [courseDataObj, setCourseDataObj] = useState({});
   const [modalData, setModalData] = useState(null);
   const [orientation, setOrientation] = useState(true);
-  const [mainClassStart, setMainClassStart] = useState(false);
+  const [mainClassStart, setMainClassStart] = useState(null);
   const [courseStatus, setCourseStatus] = useState(false);
   const [courseModule, setCourseModule] = useState([]);
   const [courseShortData, setCourseShortData] = useState([]);
@@ -30,7 +30,7 @@ const ManageCourse = () => {
   const [courseDetails, setCourseDetails] = useState('');
   const [courseFor, setCourseFor] = useState('');
 
-  console.log(modalData);
+  console.log(courseStatus);
 
   useEffect(() => {
     setCourseDataObj(modalData);
@@ -38,7 +38,7 @@ const ManageCourse = () => {
     setCourseShortData(modalData?.courseShortData);
     setInstructors(modalData?.instructors || []);
     setCourseStatus(modalData?.status);
-    setMainClassStart(modalData?.main_class_starting_date);
+    setMainClassStart(modalData?.mainClassStartStatus || false);
   }, [modalData]);
 
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
@@ -140,10 +140,11 @@ const ManageCourse = () => {
   const handleSubmitClick = () => {
     const updatedCourse = {
       ...courseDataObj,
-      orientation_class: orientation ? courseDataObj.orientation_class : '-',
-      main_class_starting_date: !mainClassStart
-        ? courseDataObj.main_class_starting_date
-        : 'running',
+      orientation_class: orientation ? courseDataObj?.orientation_class : '-',
+      main_class_starting_date: mainClassStart
+        ? 'running'
+        : courseDataObj?.main_class_starting_date,
+      mainClassStartStatus: mainClassStart,
       courseModule,
       instructors,
       courseShortData,
@@ -156,7 +157,7 @@ const ManageCourse = () => {
       who_is_the_course_for: !isContentEmpty(courseFor)
         ? courseFor
         : courseDataObj?.who_is_the_course_for,
-      status: courseStatus ? 'On Going' : 'Upcoming',
+      status: courseStatus,
     };
 
     db.collection('course_data')
@@ -261,7 +262,7 @@ const ManageCourse = () => {
               <span className="ml-2 italic font-thin">
                 (previous:
                 <span className=" text-[orangered] ml-2">
-                  {modalData?.status}
+                  {modalData?.status ? 'On Going' : 'Upcoming'}
                 </span>
                 )
               </span>
@@ -270,7 +271,7 @@ const ManageCourse = () => {
               onChange={(value) => setCourseStatus(value)}
               checkedChildren="On Going"
               unCheckedChildren="Upcoming"
-              defaultChecked={modalData?.status === 'Upcoming' ? false : true}
+              defaultChecked={modalData?.status === false ? false : true}
             />
           </div>
 
@@ -340,6 +341,16 @@ const ManageCourse = () => {
               value={modalData?.total_seat_number}
             />
 
+            {/* NOTE: InputBox component for the total seat number */}
+            <InputBoxManage
+              title="Remaining Seat Number"
+              id="remainingSeatNumber"
+              func={handleInputChange}
+              placeholder="Example - 40"
+              type="number"
+              value={modalData?.remaining_seat_number}
+            />
+
             {/* NOTE: InputBox component for the batch number */}
             <InputBoxManage
               title="Batch No"
@@ -379,26 +390,24 @@ const ManageCourse = () => {
                 />
               </div>
             </div>
-          </div>
-          <div className="flex gap-4">
-            <InputBoxManage
-              title="Main class starting date"
-              id="mainClassStartingDate"
-              func={handleInputChange}
-              type="date"
-              value={modalData?.main_class_starting_date}
-            />
-            <div className="mt-8">
-              <Switch
-                onChange={(value) => setMainClassStart(value)}
-                checkedChildren="Running"
-                unCheckedChildren="Future"
-                defaultChecked={
-                  modalData?.main_class_starting_date === 'running'
-                    ? true
-                    : false
-                }
+            <div className="flex gap-4">
+              <InputBoxManage
+                title="Main class starting date"
+                id="mainClassStartingDate"
+                func={handleInputChange}
+                type="date"
+                value={modalData?.main_class_starting_date}
               />
+              <div className="mt-8">
+                <Switch
+                  onChange={(value) => setMainClassStart(value)}
+                  checkedChildren="Running"
+                  unCheckedChildren="Future"
+                  defaultChecked={
+                    modalData?.mainClassStartStatus ? true : false
+                  }
+                />
+              </div>
             </div>
           </div>
           <div className="grid grid-cols-1">

@@ -1,12 +1,9 @@
 import React from 'react';
 import { BsChevronDown } from 'react-icons/bs';
 
-import { useStateContext } from '../../src/context/ContextProvider';
 import { Button, FaqComp } from '../index';
 
 const Faq = () => {
-  const { faqData } = useStateContext();
-
   return (
     <div className="mt-16 mb-28 max-w-6xl mx-auto" id="faq">
       <h2 className="text-center text-3xl font-bold font-heading mt-16 text-headerMain">
@@ -36,7 +33,7 @@ const Faq = () => {
           </Button>
         </div>
         <div className="col-span-7">
-          <FaqComp data={faqData} />
+          <FaqComp />
         </div>
       </div>
     </div>

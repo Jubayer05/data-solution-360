@@ -8,10 +8,10 @@ import CrashCourseItem from './CrashCourseItem';
 const CrashCourse = () => {
   const { language, courseData } = useStateContext();
 
-  const onGoingCourses = courseData?.filter((val) => val.status === 'On Going');
-  const upComingCourses = courseData?.filter(
-    (val) => val.status === 'Upcoming',
-  );
+  const onGoingCourses = courseData?.filter((val) => val.status === true);
+  const upComingCourses = courseData?.filter((val) => val.status === false);
+
+  console.log(courseData);
 
   return (
     <div className="bg-[#ffffff]	pt-4 md:pt-8" id="courses">

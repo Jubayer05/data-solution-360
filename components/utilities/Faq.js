@@ -1,14 +1,14 @@
 import { Collapse } from 'antd';
 import React, { useState } from 'react';
 import { IoCaretDownSharp, IoCaretUpSharp } from 'react-icons/io5';
+import { useStateContext } from '../../src/context/ContextProvider';
 
 const { Panel } = Collapse;
 
-const Faq = ({ data, title }) => {
+const Faq = ({ title }) => {
+  const { faqData } = useStateContext();
   const [showMore, setShowMore] = useState(false);
-  const firstFiveData = data?.slice(0, 5);
-  console.log(firstFiveData);
-  console.log(data);
+
   return (
     <div className="flex-1 font-bangla text-lg max-w-4xl mx-auto">
       {title && (
@@ -17,7 +17,7 @@ const Faq = ({ data, title }) => {
         </h2>
       )}
       {showMore
-        ? data.map((item) => (
+        ? faqData.map((item) => (
             <div key={item.id} className="m-5">
               <Collapse
                 collapsible="header"
@@ -37,7 +37,7 @@ const Faq = ({ data, title }) => {
               </Collapse>
             </div>
           ))
-        : data?.slice(0, 5).map((item) => (
+        : faqData?.slice(0, 5).map((item) => (
             <div key={item.id} className="m-5">
               <Collapse
                 collapsible="header"
