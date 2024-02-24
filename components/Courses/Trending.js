@@ -6,9 +6,11 @@ import { useStateContext } from '../../src/context/ContextProvider';
 const Trending = () => {
   const { trendingCourse } = useStateContext();
 
-  const findImageData = trendingCourse.find(
+  const findTrendingCourse = trendingCourse.find(
     (item) => item.key === 'vMVpfcjol5dGUyiVZDDO',
   );
+
+  // console.log(findImageData);
 
   return (
     <div className="max-w-7xl mx-auto mt-10">
@@ -17,11 +19,11 @@ const Trending = () => {
       </h2>
       <img
         className="w-full rounded-lg shadow-lg"
-        src={findImageData?.photoUrl}
+        src={findTrendingCourse?.photoUrl}
         alt="trending course"
       />
       <div className="flex justify-center mt-10">
-        <Link href={trendingCourse[0]?.trendingCourseLink || '#'}>
+        <Link href={findTrendingCourse?.trendingCourseLink || '#'}>
           <button
             className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-white rounded-md mt-2
           bg-[#d6295f] transition-all duration-300 ease-linear `}
