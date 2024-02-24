@@ -61,8 +61,6 @@ const AddCourse = () => {
     setConvertedContent(currentContentAsHTML);
   };
 
-  console.log(courseModule);
-
   // Plain options for checkboxes
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
@@ -127,8 +125,7 @@ const AddCourse = () => {
     if (
       courseData.title != '' &&
       courseData.img != '' &&
-      courseData.price != '' &&
-      courseData.discounted_price != ''
+      courseData.price != ''
     ) {
       firebase
         .firestore()
@@ -141,6 +138,7 @@ const AddCourse = () => {
           instructors,
           courseShortData,
           createdAt: new Date().toLocaleDateString(undefined, options),
+          status: false,
         })
         .then(() => {
           Swal.fire(
