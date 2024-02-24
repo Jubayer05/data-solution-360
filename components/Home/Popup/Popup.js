@@ -7,20 +7,20 @@ import { useStateContext } from '../../../src/context/ContextProvider';
 const Popup = ({ handler }) => {
   const { trendingCourse } = useStateContext();
 
-  const findImageData = trendingCourse.find(
+  const findTrendingCourse = trendingCourse.find(
     (item) => item.key === 'BoUM4T62rg5qyXHVM7ik',
   );
 
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-30 flex justify-center items-center">
+    <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-[60] flex justify-center items-center">
       <div className="-top-36 h-[230px] md:h-[350px] lg:h-[380px] w-[350px] md:w-[500px] lg:w-[600px] rounded-md relative flex items-center flex-col bg-cover">
         <img
           // src={trendingCourse[0]?.photoUrl}
-          src={findImageData?.photoUrl}
+          src={findTrendingCourse?.photoUrl}
           alt="Popup img"
           className="rounded-lg"
         />
-        <Link href={findImageData?.trendingCourseLink || '#'}>
+        <Link href={findTrendingCourse?.trendingCourseLink || '#'}>
           <button
             className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 rounded-md mt-2
           bg-primary-bg transition-all duration-300 ease-linear `}
