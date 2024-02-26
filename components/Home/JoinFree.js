@@ -32,9 +32,8 @@ const JoinFree = () => {
             Build your career learning Data Science with Data Solution 360
           </h2>
           <p className="text-[#ffffff] text-[16px]">
-            Skill development is easy now, totally free. Join multiple live
-            webinars, live courses and recorded courses from 8 different
-            categories and 40 different skills.
+            You will get continuous support and guidance from our team even
+            after you finish the course.
           </p>
           <Link href="https://datasolution360.com/course-details/g0fAq19lGtOen9OmXp69">
             <button
