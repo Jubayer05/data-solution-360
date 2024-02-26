@@ -13,11 +13,11 @@ const JoinFree = () => {
         }}
       >
         <div className="relative">
-          <img
-            src="/Background/join_main.png"
+          {/* <img
+            // src="/Background/join_main.png"
             className="w-[600px] z-10"
             alt=""
-          />
+          /> */}
         </div>
         <div className="pr-20">
           <h2 className="text-[#ffffff] text-[26px] md:text-[36px] leading-[50px]">
