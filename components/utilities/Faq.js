@@ -25,7 +25,7 @@ const Faq = ({ title }) => {
                 defaultActiveKey={['1']}
               >
                 <Panel
-                  className="text-[10px] "
+                  className="text-[10px] md:text-lg font-semibold"
                   header={item.faqTitle}
                   key={item.id}
                 >
@@ -45,7 +45,7 @@ const Faq = ({ title }) => {
                 defaultActiveKey={['1']}
               >
                 <Panel
-                  className="text-lg font-semibold"
+                  className="text-[10px] md:text-lg font-semibold"
                   header={item.faqTitle}
                   key={item.id}
                 >
