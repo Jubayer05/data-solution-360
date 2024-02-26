@@ -6,9 +6,13 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      heading: ['Roboto Slab', 'serif'],
-      subHeading: ['Roboto', 'sans-serif'],
-      body: ['Roboto', 'sans-serif'],
+      // heading: ['Roboto Slab', 'serif'],
+      // subHeading: ['Roboto', 'sans-serif'],
+      // body: ['Roboto', 'sans-serif'],
+      heading: ['Hind Siliguri', 'sans-serif'],
+      subHeading: ['Hind Siliguri', 'sans-serif'],
+      body: ['Hind Siliguri', 'sans-serif'],
+
       // body: ['Poppins', 'sans-serif'],
       // body: ['Montserrat', 'sans-serif'],
       bangla: ['Hind Siliguri', 'sans-serif'],
@@ -41,8 +45,8 @@ module.exports = {
         nav: '#000000',
         navWhite: '#ffffff',
         primary: '#fd6406',
-        headerMain: '#173F56',
-        headerSub: '#264751',
+        headerMain: '#101828',
+        headerSub: '#101828',
       },
       width: {
         400: '400px',

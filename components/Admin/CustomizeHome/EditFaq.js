@@ -12,8 +12,6 @@ const EditFaq = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
-  console.log(modalData);
-
   const handleDelete = (record) => {
     Swal.fire({
       title: 'Are you sure?',
@@ -110,7 +108,7 @@ const EditFaq = () => {
   ];
 
   return (
-    <div>
+    <div id="customize_faq">
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
           <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Customize FAQ</h2>

@@ -18,6 +18,8 @@ export const MainContextProvider = ({ children }) => {
   const [trendingCourse, setTrendingCourse] = useState([]);
   const [instructor, setInstructor] = useState([]);
   const [youtubeVideo, setYouTubeVideo] = useState([]);
+  const [technologyStack, setTechnologyStack] = useState([]);
+  const [studentReview, setStudentReview] = useState([]);
 
   useEffect(() => {
     setLanguage(localStorage.getItem('lan'));
@@ -30,6 +32,9 @@ export const MainContextProvider = ({ children }) => {
     loadData('trendingCourse', setTrendingCourse);
     loadData('youtubeVideo', setYouTubeVideo);
     loadData('dashboard_admin', setDashAdmin);
+    loadData('student_review', setStudentReview);
+
+    loadData('technology_stack', setTechnologyStack);
     loadDataByOrder('faqData', setFaqData, 'orderFaq', 'asc');
     loadDataByOrder('blogData', setBlogData, 'createdAt', 'desc');
     loadDataByOrder('course_data', setCourseData, 'createdAt', 'desc');
@@ -79,6 +84,8 @@ export const MainContextProvider = ({ children }) => {
         trendingCourse,
         youtubeVideo,
         instructor,
+        technologyStack,
+        studentReview,
       }}
     >
       {children}

@@ -1,11 +1,3 @@
-import javaIcon from '@iconify/icons-logos/java';
-import javascriptIcon from '@iconify/icons-logos/javascript';
-import microsoftPowerBi from '@iconify/icons-logos/microsoft-power-bi';
-import mongodbIcon from '@iconify/icons-logos/mongodb';
-import mysqlIcon from '@iconify/icons-logos/mysql';
-import pythonIcon from '@iconify/icons-logos/python';
-import rLang from '@iconify/icons-logos/r-lang';
-import tableauIcon from '@iconify/icons-logos/tableau';
 import { CgProfile } from 'react-icons/cg';
 import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 import { FiVideo } from 'react-icons/fi';
@@ -41,16 +33,16 @@ export const navItems = [
         title: 'Ed-Tech',
         link: '/services/edTech',
       },
-      {
-        id: 'dropdown-2',
-        title: 'B2B',
-        link: '/services/b2b',
-      },
-      {
-        id: 'dropdown-3',
-        title: 'Consultancy',
-        link: '/services/consultancy',
-      },
+      // {
+      //   id: 'dropdown-2',
+      //   title: 'B2B',
+      //   link: '/services/b2b',
+      // },
+      // {
+      //   id: 'dropdown-3',
+      //   title: 'Consultancy',
+      //   link: '/services/consultancy',
+      // },
     ],
   },
   {
@@ -152,7 +144,7 @@ export const slidesData = [
   },
 ];
 
-export const crashCourseData = [
+export const homeCourseData = [
   {
     id: '1',
     link: '/course-details/python-for-data-analysis',
@@ -283,300 +275,7 @@ export const services = [
   },
 ];
 
-export const technologyStack = [
-  {
-    id: '1',
-    title: 'Language',
-    technology: [
-      {
-        id: '1',
-        img: javaIcon,
-      },
-      {
-        id: '4',
-        img: rLang,
-      },
-      {
-        id: '2',
-        img: javascriptIcon,
-      },
-      {
-        id: '3',
-        img: pythonIcon,
-      },
-    ],
-  },
-  {
-    id: '2',
-    title: 'Data Analysis',
-    technology: [
-      {
-        id: '1',
-        img: pythonIcon,
-      },
-
-      {
-        id: '3',
-        logoImg: '/technology/excel.png',
-      },
-      {
-        id: '4',
-        logoImg: '/technology/spss.png',
-      },
-      {
-        id: '4',
-        logoImg: '/technology/stata.png',
-      },
-    ],
-  },
-  {
-    id: '3',
-    title: 'Data Visualization',
-    technology: [
-      {
-        id: '1',
-        img: microsoftPowerBi,
-      },
-      {
-        id: '2',
-        img: tableauIcon,
-      },
-
-      {
-        id: '3',
-        logoImg: '/technology/excel.png',
-      },
-    ],
-  },
-  {
-    id: '4',
-    title: 'Database',
-    technology: [
-      {
-        id: '1',
-        img: mongodbIcon,
-      },
-      {
-        id: '2',
-        img: mysqlIcon,
-      },
-      {
-        id: '3',
-        logoImg: '/technology/postgresql.jpg',
-      },
-    ],
-  },
-  {
-    id: '4',
-    title: 'AI',
-    technology: [
-      {
-        id: '1',
-        logoImg: '/technology/chatgpt.png',
-      },
-    ],
-  },
-];
-
-export const faqDataPage = [
-  {
-    id: '1',
-    question:
-      '১. যেকানো কোর্সে প্রতি ক্লাস শেষে ক্লাস রেকর্ডিং পাওয়া যাবে কি না?',
-    answer: (
-      <p>
-        অবশ্যই। প্রতিটি ক্লাস শেষ হওয়ার ২৪ ঘন্টার মধ্যে ইমেইলে রেকর্ডিং পাঠিয়ে
-        দেয়া হবে।
-      </p>
-    ),
-  },
-  {
-    id: '2',
-    question: '২. কোর্সগুলো কাদের জন্য?',
-    answer: (
-      <p>
-        এই কোর্সগুলো সবার বোঝার উপযোগী করেই তৈরি করা হয়েছে। স্টুডেন্ট এবং
-        প্রফেশনাল উভয়ই এই কোর্সটি করতে পারবেন। {<br />} {<br />}
-        যেহেতু বর্তমানে ডেটা এনালাইসিস একটি গুরুত্বপূর্ণ বিষয়, তাই যেকোনো ধরণের
-        ক্যারিয়ার এর জন্য এই কোর্সগুলো খুবই প্রয়োজনীয়। কোর্সগুলো মূলত তাদের জন্য
-        যারা নিজেদের ক্যরিয়ারকে সময়ের চাহিদা অনুযায়ী ডাইনামিক করতে চায় এবং
-        বর্তমান বিশ্বের সবচেয়ে চাহিদাপূর্ণ জবগুলো এবং ইনকাম সোর্সগুলো সহজেই পেতে
-        চায়।
-      </p>
-    ),
-  },
-  {
-    id: '3',
-    question: '৩. কোর্সগুলো করার জন্য কি কি জানা থাকা লাগবে?',
-    answer: (
-      <p>
-        যেহেতু কোর্সগুলো একদম বেসিক লেভেল থেকে শুরু হবে তাই এই কোর্সটি করার জন্য
-        স্পেশাল কোন কিছু জানা থাকার প্রয়োজন নেই। শুধু বেসিক গণিত এবং কম্পিউটারের
-        ব্যবহার জানা থাকাটা প্রয়োজন। সেই সাথে দরকার হবে ইন্টারনেট সংযোগ।
-      </p>
-    ),
-  },
-  {
-    id: '4',
-    question: '৪. পেশাজীবি হিসেবে কোর্সগুলো কি আমার করা উচিত?',
-    answer: (
-      <p>
-        একজন প্রফেশনাল চাকুরীজীবী, যিনি যেই পেশাতেই থাকুন না কেন, তাকে
-        প্রতিনিয়তই ডেটা সম্পর্কিত সমস্যার সম্মুখিন হতে হচ্ছে। এর পাশাপাশি অনেক
-        পেশাজীবী যুগের চাহিদা অনুযায়ী তাদের ক্যরিয়ার ডেটা এনালাইসিস এ সুইচ করতে
-        চাচ্ছেন। এই সমস্ত বিষয় বিবেচনায় নিলে সহজেই বোঝা যায়, কোর্সগুলো
-        পেশাজীবীদের জন্য কতটা গুরুত্বপূর্ণ। {<br />} {<br />}
-        পাশাপাশি -
-        <ul>
-          <li>
-            ১. বর্তমানে ডাটা এনালাইসিস শিখলে চাকরিতে এবং ক্যারিয়ারে আপনার
-            প্রমোশন ত্বরান্বিত হবে।
-          </li>
-          <li>২. আপনার কর্মক্ষেত্রে আপনার অবস্থান শক্ত হবে।</li>
-          <li>৩. আপনি অফিসিয়াল ডিসিশন মেকিংয়ে আরও দক্ষ হয়ে উঠবেন।</li>
-        </ul>
-      </p>
-    ),
-  },
-  {
-    id: '5',
-    question:
-      '৫. স্কুল, কলেজ বা বিশ্ববিদ্যালয়ের শিক্ষার্থী হিসেবে কোর্সগুলো কি আমার করা উচিত?',
-    answer: (
-      <p>
-        অবশ্যই উচিত। কারণ ছাত্রজীবনের এই সময়টা হচ্ছে স্কিল ডেভলপমেন্ট এর সময়। আর
-        যেহেতু এটা বর্তমান বিশ্বের একটি টপ ডিমান্ডিং স্কিল তাই গ্রাজুয়েশন শেষ
-        করে দ্রুততম সময়ের মধ্যে নিজের ক্যরিয়ারকে সমৃদ্ধ করার জন্য এবং ইনকাম
-        সোর্স পাবার জন্যে এটা খুবই ভালো একটা অপশন।
-        {<br />}
-        {<br />}এছাড়াও ফ্রিল্যান্স মার্কেটপ্লেসে একজন দক্ষ ডেটা এনালিস্ট এর
-        প্রচুর চাহিদা রয়েছে। সেই দিকটা বিবেচনায় নিলে স্কুল-কলেজ পড়ুয়া
-        শিক্ষার্থীদের জন্য পার্টটাইম আয়ের একটা ভালো সুযোগ তৈরি করতে সহায়তা করবে
-        এই কোর্স।
-      </p>
-    ),
-  },
-  {
-    id: '6',
-    question: '৬. আমি অনলাইন কোর্সগুলোতে কিভাবে ভর্তি হবো? ',
-    answer: <p>কোর্সগুলোতে ভর্তি হওয়ার জন্য কোর্স কলামগুলো ফলো করুন।</p>,
-  },
-  {
-    id: '7',
-    question: '৭. আমি কি অনলাইন ক্লাস ম্যাটেরিয়াল গুলো পাবো?',
-    answer: (
-      <p>
-        অবশ্যই পাবেন। ক্লাস শেষে প্রয়োজনীয় ম্যাটেরিয়ালগুলো মেসেঞ্জার গ্রুপে এবং
-        গুগল ক্লাসরুমে শেয়ার করে দেয় হবে; যেখান থেকে আপনি খুব সহজেই সেগুলো
-        ডাউনলোড করে নিতে পারবেন।
-      </p>
-    ),
-  },
-  {
-    id: '7',
-    question: '৮. কোর্সগুলো কিভাবে আমার ক্যারিয়ার সমৃদ্ধ করবে?',
-    answer: (
-      <p>
-        আপনি শিক্ষার্থী, ব্যবসায়ী বা চাকরিজীবী - যেই হোন না কেন, কোর্সগুলো আপনার
-        জন্যে খুবই উপযোগী করে তৈরি করা হয়েছে। একজন প্রফেশনাল চাকুরীজীবীকে
-        প্রতিনিয়তই ডেটা সম্পর্কিত সমস্যার সম্মুখীন হতে হচ্ছে। এর পাশাপাশি অনেক
-        পেশাজীবী যুগের চাহিদা অনুযায়ী তাদের ক্যরিয়ার ডেটা এনালাইসিস এ সুইচ করতে
-        চাচ্ছেন। {<br />}
-        {<br />}
-        চাকুরীর বাজার হোক কিংবা ফ্রিল্যান্স মার্কেটপ্লেস, একজন দক্ষ ডেটা
-        এনালিস্ট এর সব ক্ষেত্রেই প্রচুর চাহিদা রয়েছে। কারণ ডেটা এনালাইসিস
-        বর্তমান বিশ্বের টপ ৫ টি প্রফেশন এর মধ্যে একটি। এসব কিছু বিবেচনায় নিলে
-        এটা নিশ্চিত ভাবেই বলা যায় যে, এই কোর্স অবশ্যই আপনার ক্যারিয়ারের জন্য অতি
-        গুরুত্বপূর্ণ ।
-      </p>
-    ),
-  },
-];
-
-export const faqDataHome = [
-  {
-    id: '1',
-    question: '1. What is data science?',
-    answer:
-      'Data science is the field of study that combines domain expertise, programming skills, and knowledge of mathematics and statistics to extract meaningful insights from data.',
-  },
-  {
-    id: '2',
-    question: '2. Is Data Science a Good Career?',
-    answer:
-      'Yes, data science is a very good career with tremendous opportunities for advancement in the future. Already, demand is high, salaries are competitive, and the perks are numerous – which is why Data Scientist has been called “the most promising career” by LinkedIn and the “best job in America” by Glassdoor.',
-  },
-  {
-    id: '3',
-    question: '3. What is different between data science and data analytics?',
-    answer: (
-      <p>
-        Data Science is an umbrella that encompasses Data Analytics. {<br />}
-        Data Science focuses on finding meaningful correlations between large
-        datasets, {<br />}
-        Data Analytics is designed to uncover the specifics of extracted
-        insights.Data Science seeks to discover new and unique questions that
-        can drive business innovation. In contrast, Data Analytics is a branch
-        of Data Science that focuses on more specific answers to the questions
-        that Data Science brings forth
-      </p>
-    ),
-  },
-  {
-    id: '4',
-    question: '4. What is Power BI?',
-    answer:
-      'Power BI is a technology-driven business intelligence tool provided by Microsoft for analyzing and visualizing raw data to present actionable information. It combines business analytics, data visualization, and best practices that help an organization to make data-driven decisions.',
-  },
-  {
-    id: '5',
-    question: '5. Why should you learn Power BI?',
-    answer: (
-      <p>
-        1) Great opportunity to enter the freelancing sector. {<br />}
-        {<br />} 2)Remote Job opportunities in big multinational companies in
-        the country and abroad {<br />}
-        {<br />} 3) Part time job as well as study. {<br />}
-        {<br />}
-        {<br />}4) The demand in the corporate sector is increasing day by day.{' '}
-        {<br />}
-        {<br />}5) Opportunity to build a career as a Data Analyst / Data
-        Scientist.
-      </p>
-    ),
-  },
-];
-
 export const footerExploreData = [
-  {
-    id: '1',
-    title: 'About Us',
-    Link: '/about-us',
-  },
-  {
-    id: '2',
-    title: 'Career',
-    Link: '/career',
-  },
-  {
-    id: '3',
-    title: 'Blog & News',
-    Link: '/blog',
-  },
-  {
-    id: '4',
-    title: 'FAQ Questions',
-    Link: '/faq',
-  },
-
-  {
-    id: '5',
-    title: 'Testimonials',
-    Link: '/#testimonials',
-  },
-];
-
-export const footerUsefulLinksData = [
   {
     id: '1',
     title: 'Contact Us',
@@ -584,7 +283,7 @@ export const footerUsefulLinksData = [
   },
   {
     id: '2',
-    title: 'View Courses',
+    title: 'Upcoming Live Batch',
     Link: '/#courses',
   },
   {
@@ -593,11 +292,18 @@ export const footerUsefulLinksData = [
     Link: '/gallery',
   },
   {
+    id: '4',
+    title: 'Blog & News',
+    Link: '/blog',
+  },
+  {
     id: '5',
-    title: 'Purchase Guide',
-    Link: '/purchase-guide',
+    title: 'FAQ Questions',
+    Link: '/faq',
   },
 ];
+
+export const footerUsefulLinksData = [];
 
 export const footerAboutData = [
   {
@@ -607,7 +313,7 @@ export const footerAboutData = [
   },
   {
     id: '2',
-    title: 'Team',
+    title: 'About Us',
     Link: '/about-us',
   },
   {

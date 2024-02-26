@@ -43,10 +43,10 @@ const ManageYoutube = () => {
   });
 
   return (
-    <div>
+    <div id="manage_youtube">
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
-          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Trending Course</h2>
+          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Manage Youtube</h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
           <h2>Current Youtube Video</h2>
           <div className="w-[400px] mx-auto">

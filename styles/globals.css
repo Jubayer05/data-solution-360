@@ -5,6 +5,32 @@
 @import '@fontsource/hind-siliguri';
 @import '~antd/dist/antd.css';
 
+@layer base {
+  h1 {
+    font-size: 34px; /* Example: Adjust as needed */
+  }
+
+  h2 {
+    font-size: 30px; /* Example: Adjust as needed */
+  }
+
+  h3 {
+    font-size: 24px; /* Example: Adjust as needed */
+  }
+
+  h4 {
+    font-size: 20px; /* Example: Adjust as needed */
+  }
+
+  h5 {
+    font-size: 18px; /* Example: Adjust as needed */
+  }
+
+  h6 {
+    font-size: 16px; /* Example: Adjust as needed */
+  }
+}
+
 *,
 body,
 html {

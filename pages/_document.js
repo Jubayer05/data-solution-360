@@ -25,6 +25,12 @@ class MyDocument extends Document {
             rel="stylesheet"
           ></link>
 
+          {/* NOTE: FONT 4 */}
+          <link
+            href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
+            rel="stylesheet"
+          ></link>
+
           {/* FAVICON ICON */}
           <link
             rel="icon"

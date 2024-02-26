@@ -25,7 +25,7 @@ const Faq = ({ title }) => {
                 defaultActiveKey={['1']}
               >
                 <Panel
-                  className="text-lg font-semibold"
+                  className="text-[10px] "
                   header={item.faqTitle}
                   key={item.id}
                 >
@@ -37,7 +37,7 @@ const Faq = ({ title }) => {
               </Collapse>
             </div>
           ))
-        : faqData?.slice(0, 5).map((item) => (
+        : faqData?.slice(0, 4).map((item) => (
             <div key={item.id} className="m-5">
               <Collapse
                 collapsible="header"

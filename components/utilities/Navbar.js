@@ -76,12 +76,12 @@ const Navbar = ({ home }) => {
 
   return (
     <div
-      className={`w-full md:text-center z-10 px-5 pt-4 pb-3 md:px-4 md:py-0 ${
+      className={`w-full md:text-center z-50 px-5 pt-4 pb-3 md:px-4 md:py-0 ${
         scrolled80px ? 'bg-white shadow-lg' : ' bg-transparent '
       } sticky ${home ? 'top-14' : 'top-0'}`}
     >
-      <div className="max-w-7xl mx-auto md:flex md:justify-between md:items-center md:h-20">
-        <div className="flex justify-between items-center z-10">
+      <div className="max-w-6xl mx-auto md:flex md:justify-between md:items-center md:h-20">
+        <div className="flex justify-between items-center z-50">
           <Link href="/">
             <img src="/logo/logo.png" className="h-16 " alt="logo" />
           </Link>
@@ -222,7 +222,7 @@ const Navbar = ({ home }) => {
                 />
 
                 <div
-                  className={`${styles.dropdown__content} absolute z-10 bg-white shadow-2xl top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
+                  className={`${styles.dropdown__content} absolute z-50 bg-white shadow-2xl top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
                 >
                   <div className="relative">
                     <VscTriangleUp className="absolute top-[-39px] -right-2 text-nav text-3xl" />

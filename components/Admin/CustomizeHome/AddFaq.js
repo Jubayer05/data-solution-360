@@ -77,7 +77,7 @@ const AddFaq = () => {
   });
 
   return (
-    <div>
+    <div id="add_faq">
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
           <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Add FAQ</h2>

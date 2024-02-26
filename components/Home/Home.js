@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
 import {
   AboutHome,
-  CrashCourse,
   Faq,
   Footer,
+  HomeCourse,
   MainBanner,
   Navbar,
   Popup,
@@ -11,6 +11,7 @@ import {
   Technology,
 } from '../index';
 import WhatsApp from '../utilities/WhatsApp';
+import JoinFree from './JoinFree';
 import Review from './Review';
 import Subscribe from './Subscribe';
 // import BannerCarousel from "./BannerCarousel";
@@ -28,22 +29,21 @@ const Home = () => {
   }, []);
 
   return (
-    <div>
+    <div className="bg-[#f9f9fa]">
       <>
         {showPopup && <Popup handler={setShowPopup} />}
         {/* <Discount /> */}
-        {/* <Navbar home="home" /> */}
         <Navbar />
         <MainBanner />
         {/* <BannerCompanies /> */}
         {/* <BannerCarousel /> */}
-        <AboutHome />
+        <HomeCourse />
+        <JoinFree />
         <Service />
-        <CrashCourse />
-        {/* <TeamMember /> */}
+        <AboutHome />
         <Technology />
-        <Review />
         <Faq />
+        <Review />
         <Subscribe />
         <Footer />
       </>

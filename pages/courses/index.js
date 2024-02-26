@@ -1,6 +1,6 @@
 import React from 'react';
 import {
-  CrashCourse,
+  HomeCourse,
   Footer,
   Navbar,
   Trending,
@@ -12,7 +12,7 @@ const index = () => {
     <div>
       <Navbar />
       <Trending />
-      <CrashCourse />
+      <HomeCourse />
       <Footer />
       <WhatsApp />
     </div>

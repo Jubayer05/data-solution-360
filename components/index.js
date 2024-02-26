@@ -1,4 +1,4 @@
-export { default as CrashCourse } from './Courses/CrashCourse';
+export { default as HomeCourse } from './Courses/HomeCourse';
 export { default as Trending } from './Courses/Trending';
 
 export { default as AboutHome } from './Home/AboutUs';
@@ -9,7 +9,6 @@ export { default as HomeComp } from './Home/Home';
 export { default as MainBanner } from './Home/MainBanner';
 export { default as Popup } from './Home/Popup/Popup';
 export { default as Service } from './Home/Service';
-export { default as TeamMember } from './Home/TeamMember';
 export { default as Technology } from './Home/Technology';
 
 export { default as About } from './About/About';

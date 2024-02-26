@@ -7,23 +7,29 @@ const AboutUs = () => {
   const { youtubeVideo } = useStateContext();
 
   return (
-    <div className="max-w-6xl mx-auto my-5 py-20">
-      <div className="max-w-6xl mx-auto flex justify-between items-center flex-col lg:flex-row gap-4 px-2">
-        <div className="flex-1">
-          <YoutubeEmbed embedId={youtubeVideo[0]?.embedId} />
-        </div>
-        <div className="flex-1 p-2 md:pl-14">
-          <h2 className="text-[26px] md:text-3xl font-heading text-headerMain">
-            For your successful career Data Solution - 360 is always with you.
-          </h2>
-          <p className="text-lg">
-            Bangladeshi number one data science learning platform.
-          </p>
-          <Link href="/about-us">
-            <button className="text-base font-semibold px-4 pb-3 pt-2 border-2 rounded-xl  bg-primary-bg transition-all duration-300 ease-linear hover:bg-white hover:text-primary text-white border-primary">
-              Know About Us
-            </button>
-          </Link>
+    <div className="bg-[#f9f9fa]	py-4 md:pt-20 px-3" id="courses">
+      <div className="max-w-6xl bg-[#ffffff] py-4 md:py-12 mx-auto rounded-lg shadow px-5">
+        <div className="max-w-6xl mx-auto flex justify-between items-center flex-col lg:flex-row gap-4 px-2">
+          <div className="flex-1">
+            <YoutubeEmbed embedId={youtubeVideo[0]?.embedId} />
+          </div>
+          <div className="flex-1 p-2 md:pl-14">
+            <h2 className="text-3xl font-bold font-heading mt-4 text-headerMain">
+              For your successful career Data Solution - 360 is always with you.
+            </h2>
+            <p className="text-lg">
+              Bangladeshi number one data science learning platform.
+            </p>
+            <Link href="/about-us" className="inline-block mt-4">
+              <button
+                className="text-base font-semibold px-4 pb-3 pt-2 border-2 rounded-md
+               bg-primary-bg transition-all duration-300 ease-linear hover:bg-white hover:text-primary
+                text-white border-primary"
+              >
+                Know About Us
+              </button>
+            </Link>
+          </div>
         </div>
       </div>
     </div>

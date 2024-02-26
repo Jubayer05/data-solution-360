@@ -2,35 +2,33 @@
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
+import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
 const db = firebase.firestore();
 
-const TrendingCourse = () => {
-  const { userEmail, trendingCourse } = useStateContext();
-  const [photoUrl, setPhotoUrl] = useState('');
+const TechnologyStack = () => {
+  const { userEmail, technologyStack } = useStateContext();
+  const [img, setImg] = useState('');
   const [progressData, setProgressData] = useState('');
 
   const formik = useFormik({
     initialValues: {
-      trendingCourseLink: '',
-      photoUrl: photoUrl,
+      titleIcon: '',
+      img: img,
     },
     onSubmit: (values) => {
-      firebase
-        .firestore()
-        .collection('trendingCourse')
-        .doc('vMVpfcjol5dGUyiVZDDO')
-        .update({
+      db.collection('technology_stack')
+        .add({
           ...values,
-          photoUrl: photoUrl,
+          img: img,
         })
         .then(() => {
           Swal.fire({
             title: 'Hello',
-            text: 'Your photo is uploaded successfully!',
+            text: 'Technology added successfully!',
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Okay',
@@ -46,17 +44,16 @@ const TrendingCourse = () => {
     },
   });
 
-  // console.log(trendingCourse[0]);
-
   const handleFileSubmit = (e) => {
-    const fileSize = document.getElementById('photoUrl').files[0].size;
-    const courseImg = e.target.files[0];
+    // const fileSize = document.getElementById('photoUrl').files[0].size;
+    const fileSize = e.target.files[0].size;
+    const technologyImg = e.target.files[0];
 
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`courseImage/${userEmail}/${courseImg?.name}`)
-        .put(courseImg);
+        .ref(`technologyIcon/${userEmail}/${technologyImg?.name}`)
+        .put(technologyImg);
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -72,13 +69,13 @@ const TrendingCourse = () => {
         () => {
           firebase
             .storage()
-            .ref('courseImage')
+            .ref('technologyIcon')
             .child(userEmail)
-            .child(courseImg?.name)
+            .child(technologyImg?.name)
             .getDownloadURL()
             .then((url) => {
               // NOTE: use this url
-              setPhotoUrl(url);
+              setImg(url);
             });
         },
       );
@@ -93,33 +90,70 @@ const TrendingCourse = () => {
     '100%': '#ffccc7',
   };
 
-  const findImageData = trendingCourse.find(
-    (item) => item.key === 'vMVpfcjol5dGUyiVZDDO',
-  );
+  const handleRemoveTechnology = (item) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: "You won't be able to revert this!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        db.collection('technology_stack')
+          .doc(item.key)
+          .delete()
+          .then(() => {
+            Swal.fire(
+              'Deleted!',
+              'Your technology item has been deleted.',
+              'success',
+            );
+          })
+          .catch((error) => {
+            Swal.fire('Error!', 'Something went wrong.', 'error');
+          });
+      }
+    });
+  };
 
   return (
-    <div id="trending_course">
+    <div id="technology_stack">
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
-          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Trending Course</h2>
+          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">
+            Technology Stack
+          </h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
-          <h2>Current Trending Image</h2>
-          <div className="w-[400px] mx-auto">
-            <img
-              src={findImageData?.photoUrl}
-              alt="Trending Images"
-              className="rounded-lg"
-            />
+          <h2>Current Technology Stack</h2>
+          <div className="w-[600px] mx-auto flex justify-center items-center flex-wrap gap-6">
+            {technologyStack?.map((item) => (
+              <div
+                key={item?.key}
+                className="bg-white shadow-md w-28 h-28 flex items-center justify-center flex-col
+              rounded-lg  relative group"
+              >
+                <div className="absolute -top-3 -right-3 hidden group-hover:block">
+                  <RxCross1
+                    onClick={() => handleRemoveTechnology(item)}
+                    className="text-2xl cursor-pointer bg-black border-2 p-1 rounded-full text-white"
+                  />
+                </div>
+                <img src={item?.img} alt="" className="w-20" />
+                <p className="m-0">{item?.titleIcon}</p>
+              </div>
+            ))}
           </div>
           <form onSubmit={formik.handleSubmit}>
             {/* NOTE: photoUrl */}
             <div className="flex items-center mb-3 mt-20">
-              <label htmlFor="photoUrl" className="w-[240px] sm:w-[300px]">
-                Change trending image
+              <label htmlFor="img" className="w-[240px] sm:w-[300px]">
+                Add Icon
               </label>
               <input
-                id="photoUrl"
-                name="photoUrl"
+                id="img"
+                name="img"
                 type="file"
                 onChange={handleFileSubmit}
                 className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
@@ -135,18 +169,15 @@ const TrendingCourse = () => {
             </div>
 
             <div className="flex items-center mt-3">
-              <label
-                htmlFor="trendingCourseLink"
-                className="w-[240px] sm:w-[300px]"
-              >
-                Link of the trending course
+              <label htmlFor="titleIcon" className="w-[240px] sm:w-[300px]">
+                Title of icon
               </label>
               <input
-                id="trendingCourseLink"
-                name="trendingCourseLink"
+                id="titleIcon"
+                name="titleIcon"
                 type="text"
                 onChange={formik.handleChange}
-                value={formik.values.trendingCourseLink}
+                value={formik.values.titleIcon}
                 className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"
               />
             </div>
@@ -167,4 +198,4 @@ const TrendingCourse = () => {
   );
 };
 ``;
-export default TrendingCourse;
+export default TechnologyStack;

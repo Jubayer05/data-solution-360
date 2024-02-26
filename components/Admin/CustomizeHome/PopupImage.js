@@ -69,7 +69,7 @@ const PopupImage = () => {
         () => {
           firebase
             .storage()
-            .ref('courseImage')
+            .ref('trendingImage')
             .child(userEmail)
             .child(courseImg?.name)
             .getDownloadURL()
@@ -95,7 +95,7 @@ const PopupImage = () => {
   );
 
   return (
-    <div>
+    <div id="popup_image">
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
           <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Popup Image</h2>

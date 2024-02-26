@@ -7,21 +7,21 @@ const Service = () => {
   const { language } = useStateContext();
 
   return (
-    <div className="bg-[#fafafa]">
+    <div className="bg-[#ffffff] font-bangla px-3">
       <div className="max-w-6xl py-10 md:pb-32 px-2 mx-auto">
-        <h2 className="text-center text-[26px] md:text-3xl font-bold font-heading mt-16 text-headerMain	">
+        <h2 className="text-center text-[26px] md:text-[36px] font-bold font-heading mt-16 text-headerMain mb-2">
           {language === 'English' ? (
-            'See the feature of Data Solution - 360'
+            'Live Course Content'
           ) : (
             <span className="font-bangla">
               ডেটা সলিউশন - 360 এর ফিচারগুলো দেখুন
             </span>
           )}
         </h2>
-        <p className="text-center font-bold font-subHeading mb-16 text-headerMain	">
-          During the course Data Solution - 360 provides all of this features
+        <p className="text-center font-bold text-xl font-subHeading mb-8 text-[#667087]	">
+          See what you are getting after joining our live courses
         </p>
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-x-2 md:gap-x-6 gap-y-4 md:gap-y-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2 md:gap-8">
           {services.map((item) => (
             <ServiceItem key={item.id} item={item} />
           ))}
@@ -35,12 +35,17 @@ export default Service;
 
 const ServiceItem = ({ item }) => {
   return (
-    <div className="overflow-hidden text-center px-1.5 md:px-5 pt-2 md:pt-10 pb-2 md:pb-16 shadow-lg rounded-lg bg-white sm:w-full mx-auto hover:-translate-y-3 hover:shadow-xl transition-translate duration-300">
+    <div
+      className="overflow-hidden text-center p-1.5 md:p-4 pt-2 md:pt-8  
+     rounded-lg border border-[#98a2b3] w-full mx-auto"
+    >
       <img src={item.img} alt="" className="w-20 h-20 mx-auto " />
-      <h2 className="text-xl font-bold text-center mt-6 mb-3  capitalize">
+      <h2 className="text-xl font-bold text-center mt-6 mb-3 capitalize">
         {item.title}
       </h2>
-      <p className="text-sm text-gray-500">{item.details}</p>
+      <p className="text-base tracking-[.32px] text-[rgb(29, 41, 57)]">
+        {item.details}
+      </p>
     </div>
   );
 };
