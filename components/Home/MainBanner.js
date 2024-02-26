@@ -101,7 +101,7 @@ const MainBanner = () => {
                     className="text-headerMain text-[28px] md:text-[45px] leading-[1.3] 
                   font-heading tracking-wide md:mt-10 font-bold mb-0"
                   >
-                    Bangladesh Data Science Learns{' '}
+                    Data Analytics & Data Science Job Ready Program{' '}
                     <span className="text-[#e83a30] relative">
                       Live
                       <span className="w-[50px] absolute -right-16 top-[15%]">
@@ -112,7 +112,7 @@ const MainBanner = () => {
                   <p className="text-lg text-headerSub my-4 font-semibold">
                     Best Data Science learning Platform in Bangladesh
                   </p>
-                  <Link href="/courses">
+                  <Link href="https://datasolution360.com/course-details/g0fAq19lGtOen9OmXp69">
                     <button
                       className="text-sm md:text-base font-semibold text-white px-4 py-2 border-2 rounded-lg border-transparent bg-primary-bg 
                     transition-all duration-300 ease-linear hover:bg-white hover:text-primary 

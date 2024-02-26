@@ -1,7 +1,19 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
 import React from 'react';
+import Lottie from 'react-lottie';
+import * as animationData from '../../src/data/json/data-analysis.json';
 
 const JoinFree = () => {
+  const defaultOptions = {
+    loop: true,
+    autoplay: true,
+    animationData: animationData,
+    rendererSettings: {
+      preserveAspectRatio: 'xMidYMid slice',
+    },
+  };
+
   return (
     <div className="bg-[#f9f9fa] pt-20 pb-10 px-3">
       <div
@@ -13,11 +25,7 @@ const JoinFree = () => {
         }}
       >
         <div className="relative">
-          {/* <img
-            // src="/Background/join_main.png"
-            className="w-[600px] z-10"
-            alt=""
-          /> */}
+          <Lottie options={defaultOptions} />
         </div>
         <div className="pr-20">
           <h2 className="text-[#ffffff] text-[26px] md:text-[36px] leading-[50px]">
@@ -28,13 +36,15 @@ const JoinFree = () => {
             webinars, live courses and recorded courses from 8 different
             categories and 40 different skills.
           </p>
-          <button
-            className="text-base font-semibold text-white px-4 py-2 border-2 rounded-md border-transparent
-             bg-[#fd5406] transition-all duration-300 ease-linear hover:bg-[#da523a] 
+          <Link href="https://datasolution360.com/course-details/g0fAq19lGtOen9OmXp69">
+            <button
+              className="text-base font-semibold text-white px-4 py-2 border-2 rounded-md border-transparent
+            bg-[#fd5406] transition-all duration-300 ease-linear hover:bg-[#da523a] 
             hover:border-primary"
-          >
-            Explore Courses
-          </button>
+            >
+              Visit Trending Courses
+            </button>
+          </Link>
         </div>
       </div>
     </div>
