@@ -36,7 +36,7 @@ class MyDocument extends Document {
             rel="icon"
             type="image/png"
             sizes="26x16"
-            href="/logo/logo-fav.png"
+            href="/logo/fav.jpeg"
           />
         </Head>
         <body>

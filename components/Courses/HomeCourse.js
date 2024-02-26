@@ -47,7 +47,7 @@ const HomeCourse = () => {
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
           {upComingCourses.map((item) => (
-            <HomeCourseItem key={item.id} item={item} />
+            <HomeCourseItem key={item.id} item={item} upcoming={true} />
           ))}
         </div>
         <div className="flex justify-center">

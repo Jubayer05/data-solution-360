@@ -39,7 +39,7 @@ const CourseDetails = () => {
         </p>
 
         {/* NOTE: ORIENTATION SECTION */}
-        {courseDetails?.status === 'On Going' && (
+        {courseDetails?.status === true && (
           <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
             <img className="w-[60px] mr-4" src="/course/webinar.png" alt="" />
             <div>
@@ -65,7 +65,7 @@ const CourseDetails = () => {
         )}
 
         {/* NOTE: COURSE DETAILS (BATCH, STARTING, DAY, TIME) */}
-        {courseDetails?.status === 'On Going' && (
+        {courseDetails?.status === true && (
           <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-1 md:gap-6">
             <div className="pl-3 pr-2">
               <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">

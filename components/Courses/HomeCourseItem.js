@@ -5,7 +5,7 @@ import { IoIosPeople } from 'react-icons/io';
 import Link from 'next/link';
 import { ImClock } from 'react-icons/im';
 
-const CourseItem = ({ item }) => {
+const CourseItem = ({ item, upcoming }) => {
   const discountPercentage = Math.round(
     100 - (item?.discounted_price / item?.price) * 100,
   );
@@ -56,17 +56,21 @@ const CourseItem = ({ item }) => {
             </div>
             <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
               <ImClock />
-              <span className="text-[12px] -mt-[1px]">
-                {new Date(item?.main_class_starting_date).getTime() >=
-                new Date().getTime()
-                  ? Math.ceil(
-                      (new Date(item?.main_class_starting_date).getTime() -
-                        new Date().getTime()) /
-                        (1000 * 60 * 60 * 24),
-                    )
-                  : 0}{' '}
-                Days Left
-              </span>
+              {upcoming ? (
+                <span className="text-[12px] -mt-[1px]">0 Days Left</span>
+              ) : (
+                <span className="text-[12px] -mt-[1px]">
+                  {new Date(item?.main_class_starting_date).getTime() >=
+                  new Date().getTime()
+                    ? Math.ceil(
+                        (new Date(item?.main_class_starting_date).getTime() -
+                          new Date().getTime()) /
+                          (1000 * 60 * 60 * 24),
+                      )
+                    : 0}{' '}
+                  Days Left
+                </span>
+              )}
             </div>
           </div>
           <p
