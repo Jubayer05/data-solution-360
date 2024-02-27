@@ -53,6 +53,13 @@ const MyBlogs = () => {
       render: (_, __, index) => index + 1,
     },
     {
+      title: 'Order Number',
+      dataIndex: 'orderNo',
+      width: 100,
+      align: 'center',
+      // render: (_, __, index) => index + 1,
+    },
+    {
       title: 'Blog Title',
       dataIndex: 'title',
       align: 'left',
@@ -171,7 +178,7 @@ const MyBlogs = () => {
       .then(() => {
         Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
           () => {
-            window.location.reload();
+            // window.location.reload();
           },
         );
       })
@@ -190,6 +197,9 @@ const MyBlogs = () => {
     <div>
       <HeadingDashboard title="Manage Blogs" />
       <div className="max-w-3xl mx-auto my-20">
+        <h2 className="text-lg italic text-[orangered]">
+          Note: First 3 blogs will show into home page.
+        </h2>
         <Table
           columns={columns}
           dataSource={[...blogData]}
@@ -220,6 +230,29 @@ const MyBlogs = () => {
           </div>
         </div>
         <div className="w-3/4 mx-auto">
+          <label htmlFor="orderNo" className="font-semibold mt-3 block">
+            Order of Blog
+            <span className="ml-2 italic font-thin">
+              (previous:
+              <span className=" text-[orangered] ml-2">
+                {modalData?.orderNo}
+              </span>
+              )
+            </span>
+          </label>
+
+          <input
+            id="orderNo"
+            onChange={(e) =>
+              setBlogDataState({
+                ...blogDataState,
+                orderNo: parseInt(e.target.value),
+              })
+            }
+            type="number"
+            className="w-full px-4 py-2 outline-none border-1 text-lg mt-3 "
+          />
+
           <label htmlFor="title" className="font-semibold mt-3 block">
             Blog heading / Blog title
             <span className="ml-2 italic font-thin">

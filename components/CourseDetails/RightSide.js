@@ -52,7 +52,7 @@ const RightSide = ({ courseDetails }) => {
         </div>
 
         {/* NOTE: PRICE & BUTTON */}
-        {courseDetails?.status === 'On Going' && (
+        {courseDetails?.status && (
           <div className="py-4 px-5 border-b-1">
             <div className="flex items-center">
               <div>

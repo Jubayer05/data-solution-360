@@ -21,7 +21,8 @@ const RefundPolicy = () => {
       <ul className="list-disc list-inside text-base mt-4">
         <li>
           If you are unsatisfied with the course content or quality, you may
-          request a refund within [number of days] days of the purchase date.
+          request a refund within <strong>7 days (1 week)</strong> of the
+          starting date.
         </li>
         <li>
           If you accidentally purchased the same course more than once, we will
@@ -66,8 +67,8 @@ const RefundPolicy = () => {
         </li>
         <li>
           If your refund request is approved, we will process the refund within
-          [number of days] days, using the same payment method used for the
-          original purchase.
+          <strong> 7 days (1week),</strong> using the same payment method used
+          for the original purchase.
         </li>
       </ol>
 

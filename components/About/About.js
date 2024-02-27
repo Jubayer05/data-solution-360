@@ -64,12 +64,20 @@ const About = () => {
             impact in Bangladesh with data-driven decisions. We offer four
             signature courses:
             <ul className="list-inside list-disc font-bold">
-              <li className="my-2">Job-ready programme on Data Science</li>
+              {/* <li className="my-2">Job-ready programme on Data Science</li>
               <li className="my-2">
                 Data Analytics & Data Science Job Ready Program
               </li>
               <li className="my-2">Data Analyst boot-camp</li>
-              <li className="my-2">Python for data analysis</li>
+              <li className="my-2">Python for data analysis</li> */}
+              <li>Become a Data Scientist</li>
+              <li>Become a Machine Learning Engineer</li>
+              <li>SQL (MySQL) for Data Analyst</li>
+              <li>Unlock Your Data Analysis Skills with Power BI and Excel</li>
+              <li>Become a Data Analyst with Power BI</li>
+              <li>Data Science and Machine Learning with Python and R</li>
+              <li>Basic to Advanced Excel for Data Analysis</li>
+              <li>Complete Data Analyst Boot-camp</li>
               {/* <li className="my-2">Power BI for data analysis</li>
               <li className="my-2">Excel for data analysis</li> */}
             </ul>

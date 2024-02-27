@@ -36,7 +36,7 @@ export const MainContextProvider = ({ children }) => {
 
     loadData('technology_stack', setTechnologyStack);
     loadDataByOrder('faqData', setFaqData, 'orderFaq', 'asc');
-    loadDataByOrder('blogData', setBlogData, 'createdAt', 'desc');
+    loadDataByOrder('blogData', setBlogData, 'orderNo', 'asc');
     loadDataByOrder('course_data', setCourseData, 'createdAt', 'desc');
   }, []);
 

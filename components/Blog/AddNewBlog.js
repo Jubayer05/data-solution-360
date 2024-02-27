@@ -133,6 +133,19 @@ const AddNewBlog = () => {
     <div className="flex justify-center items-center flex-col">
       <HeadingDashboard title="Add a new blog" />
       <div className="w-3/4">
+        <label htmlFor="orderNo" className="font-semibold mt-3 block">
+          Order of Blog
+        </label>
+
+        <input
+          id="orderNo"
+          onChange={(e) =>
+            setBlogData({ ...blogData, orderNo: parseInt(e.target.value) })
+          }
+          type="number"
+          className="w-full px-4 py-2 outline-none border-1 text-lg mt-3 "
+        />
+
         <label htmlFor="title" className="font-semibold mt-3 block">
           Blog heading / Blog title
         </label>
