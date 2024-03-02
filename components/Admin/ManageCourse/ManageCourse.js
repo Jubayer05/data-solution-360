@@ -30,8 +30,6 @@ const ManageCourse = () => {
   const [courseDetails, setCourseDetails] = useState('');
   const [courseFor, setCourseFor] = useState('');
 
-  console.log(courseStatus);
-
   useEffect(() => {
     setCourseDataObj(modalData);
     setCourseModule(modalData?.courseModule || []);
@@ -141,6 +139,9 @@ const ManageCourse = () => {
     const updatedCourse = {
       ...courseDataObj,
       orientation_class: orientation ? courseDataObj?.orientation_class : '-',
+      youtube_video: extractEmbedId(courseDataObj?.youtube_video)
+        ? extractEmbedId(courseDataObj?.youtube_video)
+        : courseDataObj?.youtube_video,
       main_class_starting_date: mainClassStart
         ? 'running'
         : courseDataObj?.main_class_starting_date,
@@ -295,6 +296,16 @@ const ManageCourse = () => {
             onChange={handleFileSubmit}
             type="file"
             className="w-full px-4 py-2 outline-none border-1 mt-3 "
+          />
+
+          {/* NOTE: SHORT DESCRIPTION */}
+          <InputBoxManage
+            title="Youtube Video"
+            id="youtubeVideo"
+            func={handleInputChange}
+            placeholder="Example - https://youtu.be/-kfyvQkQoXw?si=TVEztoxsZmtFfRnd"
+            type="text"
+            value={modalData?.youtube_video}
           />
 
           {/* NOTE: SHORT DESCRIPTION */}
@@ -538,3 +549,21 @@ const isContentEmpty = (content) => {
   const isEmpty = /^(<p><br><\/p>\s*)*$/.test(content);
   return isEmpty;
 };
+
+function extractEmbedId(url) {
+  let match;
+
+  // Check for the "https://www.youtube.com/watch?v=VIDEO_ID" format
+  match = url.match(/[?&]v=([^&]+)/);
+  if (match) {
+    return match[1];
+  }
+
+  // Check for the "https://youtu.be/VIDEO_ID" format
+  match = url.match(/youtu\.be\/([^?]+)/);
+  if (match) {
+    return match[1];
+  }
+
+  return null;
+}

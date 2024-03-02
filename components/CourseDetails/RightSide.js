@@ -4,16 +4,25 @@ import React from 'react';
 import { BiShareAlt } from 'react-icons/bi';
 import { BsCheck2Circle, BsTelephone } from 'react-icons/bs';
 import { ImClock } from 'react-icons/im';
+import YoutubeEmbed from '../utilities/YoutubeEmbed';
 
 const RightSide = ({ courseDetails }) => {
   return (
     <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-360px]">
       <div className="mb-3">
-        <img
-          src={courseDetails?.img}
-          alt=""
-          className="rounded-md w-[100%] h-[360px]"
-        />
+        {courseDetails?.youtube_video ? (
+          <YoutubeEmbed
+            embedId={courseDetails?.youtube_video}
+            width="100%"
+            height="360px"
+          />
+        ) : (
+          <img
+            src={courseDetails?.img}
+            alt=""
+            className="rounded-md w-[100%] h-[360px]"
+          />
+        )}
       </div>
 
       <div className="border-1 rounded-md">

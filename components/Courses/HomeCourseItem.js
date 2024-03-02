@@ -44,21 +44,33 @@ const CourseItem = ({ item, upcoming }) => {
           </div> */}
           <div className="p-2 border-b-1 border-[#d6dae1] flex items-center flex-wrap">
             <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded">
-              <span className="text-[#101828] text-[12px] block -mt-[1px]">
-                Batch {item?.batch_no}
-              </span>
+              {upcoming ? (
+                <span className="text-[#101828] text-[12px] block -mt-[1px]">
+                  Upcoming
+                </span>
+              ) : (
+                <span className="text-[#101828] text-[12px] block -mt-[1px]">
+                  Batch {item?.batch_no}
+                </span>
+              )}
             </div>
             <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
               <IoIosPeople />
-              <span className=" text-[12px] block -mt-[1px]">
-                {item?.remaining_seat_number} Seats Left
-              </span>
-            </div>
-            <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
-              <ImClock />
               {upcoming ? (
-                <span className="text-[12px] -mt-[1px]">0 Days Left</span>
+                <span className=" text-[12px] block -mt-[1px]">
+                  {item?.total_seat_number} Seats
+                </span>
               ) : (
+                <span className=" text-[12px] block -mt-[1px]">
+                  {item?.remaining_seat_number} Seats Left
+                </span>
+              )}
+            </div>
+            {upcoming ? (
+              ''
+            ) : (
+              <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
+                <ImClock />
                 <span className="text-[12px] -mt-[1px]">
                   {new Date(item?.main_class_starting_date).getTime() >=
                   new Date().getTime()
@@ -70,8 +82,8 @@ const CourseItem = ({ item, upcoming }) => {
                     : 0}{' '}
                   Days Left
                 </span>
-              )}
-            </div>
+              </div>
+            )}
           </div>
           <p
             className=" flex-1 text-lg font-bold mb-1.5 mt-2 text-[#140342]
