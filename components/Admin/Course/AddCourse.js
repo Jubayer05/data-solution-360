@@ -122,11 +122,7 @@ const AddCourse = () => {
 
   // Handler for form submission
   const handleSubmit = () => {
-    if (
-      courseData.title != '' &&
-      courseData.img != '' &&
-      courseData.price != ''
-    ) {
+    if (courseData.title != '') {
       firebase
         .firestore()
         .collection('course_data')
@@ -154,8 +150,7 @@ const AddCourse = () => {
           alert(error.message + '' + 'Something went wrong');
         });
     } else {
-      console.log(courseData);
-      console.log(courseShortData);
+      Swal.fire('Warning!', 'A Title and a image is required!', 'warning');
     }
   };
 
