@@ -219,7 +219,7 @@ const ManageCourse = () => {
     }
   };
 
-  // console.log(modalData);
+  console.log(modalData);
 
   return (
     <div>
@@ -298,15 +298,20 @@ const ManageCourse = () => {
             className="w-full px-4 py-2 outline-none border-1 mt-3 "
           />
 
-          {/* NOTE: SHORT DESCRIPTION */}
-          <InputBoxManage
-            title="Youtube Video"
-            id="youtubeVideo"
-            func={handleInputChange}
-            placeholder="Example - https://youtu.be/-kfyvQkQoXw?si=TVEztoxsZmtFfRnd"
-            type="text"
-            value={modalData?.youtube_video}
-          />
+          {/* NOTE: YOUTUBE VIDEO */}
+          <div className="flex items-center gap-2">
+            <InputBoxManage
+              title="Youtube Video"
+              id="youtubeVideo"
+              func={handleInputChange}
+              placeholder="Example - https://youtu.be/-kfyvQkQoXw?si=TVEztoxsZmtFfRnd"
+              type="text"
+              value={modalData?.youtube_video}
+            />
+            {/* <button className="px-4 py-3 bg-blue-500 text-white rounded-md">
+              Reset Youtube Link
+            </button> */}
+          </div>
 
           {/* NOTE: SHORT DESCRIPTION */}
           <InputBoxManage
@@ -554,13 +559,13 @@ function extractEmbedId(url) {
   let match;
 
   // Check for the "https://www.youtube.com/watch?v=VIDEO_ID" format
-  match = url.match(/[?&]v=([^&]+)/);
+  match = url?.match(/[?&]v=([^&]+)/);
   if (match) {
     return match[1];
   }
 
   // Check for the "https://youtu.be/VIDEO_ID" format
-  match = url.match(/youtu\.be\/([^?]+)/);
+  match = url?.match(/youtu\.be\/([^?]+)/);
   if (match) {
     return match[1];
   }
