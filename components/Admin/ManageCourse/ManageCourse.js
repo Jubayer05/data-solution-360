@@ -141,7 +141,7 @@ const ManageCourse = () => {
       orientation_class: orientation ? courseDataObj?.orientation_class : '-',
       youtube_video: extractEmbedId(courseDataObj?.youtube_video)
         ? extractEmbedId(courseDataObj?.youtube_video)
-        : courseDataObj?.youtube_video,
+        : courseDataObj?.youtube_video || '',
       main_class_starting_date: mainClassStart
         ? 'running'
         : courseDataObj?.main_class_starting_date,
@@ -570,5 +570,5 @@ function extractEmbedId(url) {
     return match[1];
   }
 
-  return null;
+  return '';
 }
