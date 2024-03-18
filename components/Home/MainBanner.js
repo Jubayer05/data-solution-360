@@ -4,8 +4,11 @@ import React from 'react';
 import Lottie from 'react-lottie';
 import Slider from 'react-slick';
 import * as animationData from '../../public/banner/loader.json';
+import { useStateContext } from '../../src/context/ContextProvider';
 
 const MainBanner = () => {
+  const { slidesMainBannerData } = useStateContext();
+
   const defaultOptions = {
     loop: true,
     autoplay: true,
@@ -86,7 +89,7 @@ const MainBanner = () => {
         />
         <div className="absolute w-full h-full bg-white opacity-60 left-0" />
         <Slider {...settings}>
-          {bannerSlideData?.map((item) => (
+          {slidesMainBannerData?.map((item) => (
             <div
               key={item.id}
               className="p-3 md:p-6 w-full 
@@ -101,7 +104,7 @@ const MainBanner = () => {
                     className="text-headerMain text-[28px] md:text-[45px] leading-[1.3] 
                   font-heading tracking-wide md:mt-10 font-bold mb-0"
                   >
-                    Data Analytics & Data Science Job Ready Program{' '}
+                    {item?.titleCourse}
                     <span className="text-[#e83a30] relative">
                       Live
                       <span className="w-[50px] absolute -right-16 top-[15%]">
@@ -112,7 +115,7 @@ const MainBanner = () => {
                   <p className="text-lg text-headerSub my-4 font-semibold">
                     Best Data Science learning Platform in Bangladesh
                   </p>
-                  <Link href="https://datasolution360.com/course-details/g0fAq19lGtOen9OmXp69">
+                  <Link href={item.courseLink}>
                     <button
                       className="text-sm md:text-base font-semibold text-white px-4 py-2 border-2 rounded-lg border-transparent bg-primary-bg 
                     transition-all duration-300 ease-linear hover:bg-white hover:text-primary 

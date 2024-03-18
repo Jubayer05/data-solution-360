@@ -60,10 +60,18 @@ const Prospectus = () => {
           Our Courses are
         </h2>
         <ul className="list-disc list-inside text-lg capitalize">
-          <li className="my-3">Data Analyst Bootcamp</li>
-          <li className="my-3">Power bi</li>
-          <li className="my-3">Python for data scientist and data analyst</li>
-          <li className="my-3">Excel basic to advance</li>
+          <li className="my-3">Become a Data Scientist</li>
+          <li className="my-3">Become a Machine Learning Engineer</li>
+          <li className="my-3">SQL (MySQL) for Data Analyst</li>
+          <li className="my-3">
+            Unlock Your Data Analysis Skills with Power BI and Excel
+          </li>
+          <li className="my-3">Become a Data Analyst with Power BI</li>
+          <li className="my-3">
+            Data Science and Machine Learning with Python and R
+          </li>
+          <li className="my-3">Basic to Advanced Excel for Data Analysis</li>
+          <li className="my-3">Complete Data Analyst Boot-camp</li>
         </ul>
 
         <h2 className="text-center capitalize text-2xl mt-16 font-bold">

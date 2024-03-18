@@ -29,6 +29,8 @@ const ManageCourse = () => {
   const [courseBenefit, setCourseBenefit] = useState('');
   const [courseDetails, setCourseDetails] = useState('');
   const [courseFor, setCourseFor] = useState('');
+  const [youtube_video, setYoutube_video] = useState('');
+  const [youtubeVideoReset, setYoutubeVideoReset] = useState(false);
 
   useEffect(() => {
     setCourseDataObj(modalData);
@@ -139,8 +141,10 @@ const ManageCourse = () => {
     const updatedCourse = {
       ...courseDataObj,
       orientation_class: orientation ? courseDataObj?.orientation_class : '-',
-      youtube_video: extractEmbedId(courseDataObj?.youtube_video)
-        ? extractEmbedId(courseDataObj?.youtube_video)
+      youtube_video: youtubeVideoReset
+        ? ''
+        : extractEmbedId(youtube_video)
+        ? extractEmbedId(youtube_video)
         : courseDataObj?.youtube_video || '',
       main_class_starting_date: mainClassStart
         ? 'running'
@@ -176,6 +180,8 @@ const ManageCourse = () => {
         console.log(error);
       });
   };
+
+  const handleYoutubeReset = () => {};
 
   const handleInputChange = (key, value) => {
     const updatedObject = {
@@ -299,18 +305,39 @@ const ManageCourse = () => {
           />
 
           {/* NOTE: YOUTUBE VIDEO */}
-          <div className="flex items-center gap-2">
-            <InputBoxManage
-              title="Youtube Video"
-              id="youtubeVideo"
-              func={handleInputChange}
-              placeholder="Example - https://youtu.be/-kfyvQkQoXw?si=TVEztoxsZmtFfRnd"
-              type="text"
-              value={modalData?.youtube_video}
-            />
-            {/* <button className="px-4 py-3 bg-blue-500 text-white rounded-md">
-              Reset Youtube Link
-            </button> */}
+          <div className="flex items-end gap-2">
+            <div className="w-full mt-5 ">
+              <label
+                htmlFor="youtubeVideo"
+                className="font-semibold mt-3 block text-[#17012e]"
+              >
+                Youtube Video
+                <span className="ml-2 italic font-thin">
+                  (previous:
+                  {!youtubeVideoReset && (
+                    <span className=" text-[orangered] ml-2">
+                      {modalData?.youtube_video}
+                    </span>
+                  )}
+                  )
+                </span>
+              </label>
+              <input
+                id="youtubeVideo"
+                onChange={(e) => setYoutube_video(e.target.value)}
+                type="text"
+                placeholder="Example - https://youtu.be/-kfyvQkQoXw?si=TVEztoxsZmtFfRnd"
+                className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
+              />
+            </div>
+            {modalData?.youtube_video && (
+              <button
+                onClick={() => setYoutubeVideoReset(true)}
+                className=" w-1/3 px-4 py-4 bg-[#ff3d50] text-white rounded-md"
+              >
+                Reset Youtube Link
+              </button>
+            )}
           </div>
 
           {/* NOTE: SHORT DESCRIPTION */}

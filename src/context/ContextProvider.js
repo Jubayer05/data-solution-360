@@ -20,6 +20,7 @@ export const MainContextProvider = ({ children }) => {
   const [youtubeVideo, setYouTubeVideo] = useState([]);
   const [technologyStack, setTechnologyStack] = useState([]);
   const [studentReview, setStudentReview] = useState([]);
+  const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);
 
   useEffect(() => {
     setLanguage(localStorage.getItem('lan'));
@@ -33,6 +34,7 @@ export const MainContextProvider = ({ children }) => {
     loadData('youtubeVideo', setYouTubeVideo);
     loadData('dashboard_admin', setDashAdmin);
     loadData('student_review', setStudentReview);
+    loadData('slides_main_banner', setSlidesMainBannerData);
 
     loadData('technology_stack', setTechnologyStack);
     loadDataByOrder('faqData', setFaqData, 'orderFaq', 'asc');
@@ -86,6 +88,7 @@ export const MainContextProvider = ({ children }) => {
         instructor,
         technologyStack,
         studentReview,
+        slidesMainBannerData,
       }}
     >
       {children}

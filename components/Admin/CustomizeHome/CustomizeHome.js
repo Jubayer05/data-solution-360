@@ -5,6 +5,7 @@ import EditFaq from './EditFaq';
 import ManageYoutube from './ManageYoutube';
 import PopupImage from './PopupImage';
 import ShortCut from './ShortCut';
+import SlideMainBanner from './SlideMainBanner';
 import StudentFeedback from './StudentFeedback';
 import TechnologyStack from './TechnologyStack';
 import TrendingCourse from './TrendingCourse';
@@ -14,6 +15,7 @@ const CustomizeHome = () => {
     <div className="relative">
       <HeadingDashboard title={`Customize the content of Home Page`} />
       <ShortCut />
+      <SlideMainBanner />
       <AddFaq />
       <EditFaq />
       <TrendingCourse />

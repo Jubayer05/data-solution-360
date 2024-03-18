@@ -5,6 +5,11 @@ import 'sweetalert2/dist/sweetalert2.css';
 
 const ShortCut = () => {
   const contentList = [
+    {
+      id: '8',
+      title: 'Slide Main Banner',
+      link: '/admin/home-page/#slide_main_banner',
+    },
     { id: '1', title: 'Add Faq', link: '/admin/home-page/#add_faq' },
     {
       id: '2',

@@ -27,23 +27,23 @@ export const navItems = [
     slug: 'services',
     titleBang: 'সার্ভিস',
     link: '/services',
-    dropdown: [
-      {
-        id: 'dropdown-1',
-        title: 'Ed-Tech',
-        link: '/services/edTech',
-      },
-      // {
-      //   id: 'dropdown-2',
-      //   title: 'B2B',
-      //   link: '/services/b2b',
-      // },
-      // {
-      //   id: 'dropdown-3',
-      //   title: 'Consultancy',
-      //   link: '/services/consultancy',
-      // },
-    ],
+    // dropdown: [
+    //   {
+    //     id: 'dropdown-1',
+    //     title: 'Ed-Tech',
+    //     link: '/services/edTech',
+    //   },
+    //   // {
+    //   //   id: 'dropdown-2',
+    //   //   title: 'B2B',
+    //   //   link: '/services/b2b',
+    //   // },
+    //   // {
+    //   //   id: 'dropdown-3',
+    //   //   title: 'Consultancy',
+    //   //   link: '/services/consultancy',
+    //   // },
+    // ],
   },
   {
     id: 'nav-4',
@@ -68,12 +68,12 @@ export const navItems2 = [
     titleBang: 'সাবস্ক্রাইব',
     link: '/#subscribe',
   },
-  {
-    id: 'nav-7',
-    title: 'Free Course',
-    titleBang: 'ফ্রী কোর্স',
-    link: '/free-course',
-  },
+  // {
+  //   id: 'nav-7',
+  //   title: 'Free Course',
+  //   titleBang: 'ফ্রী কোর্স',
+  //   link: '/free-course',
+  // },
 ];
 
 export const navDropItems = [
