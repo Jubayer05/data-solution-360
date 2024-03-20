@@ -60,7 +60,7 @@ const MainBanner = () => {
   ];
 
   return (
-    <div className="bg-[#f9f9fa] pt-36 pb-10 px-3 -mt-20">
+    <div className="bg-[#f9f9fa] pt-36 pb-10 px-3 -mt-32 md:-mt-20 ">
       {/* <div className="relative w-full h-full"></div> */}
       <div className="relative max-w-6xl mx-auto border border-[#a2aabb] md:px-6 gap-4 rounded-2xl overflow-hidden">
         <div

@@ -78,9 +78,10 @@ const Prospectus = () => {
           Our company services are
         </h2>
         <ul className="list-disc list-inside text-lg capitalize">
-          <li className="my-3">Company data analysis</li>
-          <li className="my-3">Decision making</li>
-          <li className="my-3">Dashboard development</li>
+          <li className="my-3">Business Solution</li>
+          <li className="my-3">Data Solution</li>
+          <li className="my-3">Data Consultancy</li>
+          <li className="my-3">BI Solution</li>
         </ul>
 
         <h2 className="text-center capitalize text-2xl mt-16 font-bold">

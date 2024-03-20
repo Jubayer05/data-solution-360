@@ -18,7 +18,7 @@ const AboutUs = () => {
               For your successful career Data Solution - 360 is always with you.
             </h2>
             <p className="text-lg">
-              Bangladeshi number one data science learning platform.
+              Best Data Science and Data Analytics Learning Platform
             </p>
             <Link href="/about-us" className="inline-block mt-4">
               <button

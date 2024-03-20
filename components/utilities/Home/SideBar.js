@@ -52,7 +52,7 @@ const Sidebar = ({
           />
         </div>
 
-        <ul className="pl-12 pr-6 pt-6 pb-4">
+        <ul className=" list-none pl-12 pr-6 pt-6 pb-4">
           {navItems.map((item) => (
             <li key={item.id}>
               {item.dropdown?.length > 0 ? (
@@ -138,7 +138,7 @@ const Sidebar = ({
           <h2 className="text-center text-xl text-[#fff]">More</h2>
 
           {/* NOTE: DROPDOWN */}
-          <ul className="pt-2 pb-4">
+          <ul className=" list-none pt-2 pb-4">
             {navDropItems.map((item) => (
               <li key={item.id}>
                 <Link
