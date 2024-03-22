@@ -8,8 +8,13 @@ import HomeCourseItem from './HomeCourseItem';
 const HomeCourse = () => {
   const { language, courseData } = useStateContext();
 
-  const onGoingCourses = courseData?.filter((val) => val.status === true);
-  const upComingCourses = courseData?.filter((val) => val.status === false);
+  const runningCourses = courseData?.filter((val) => val.status === 'Running');
+  const registrationGoingOnCourses = courseData?.filter(
+    (val) => val.status === 'Registration Going on',
+  );
+  const upComingCourses = courseData?.filter(
+    (val) => val.status === 'Upcoming',
+  );
 
   console.log(courseData);
 
@@ -31,10 +36,22 @@ const HomeCourse = () => {
           className="text-headerMain font-heading ml-6 text-xl font-semibold inline-flex 
         items-center gap-2 hover:text-primary transition-all"
         >
-          Registration Going on <FaArrowRightLong />
+          Running Courses <FaArrowRightLong />
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
-          {onGoingCourses.map((item) => (
+          {runningCourses.map((item) => (
+            <HomeCourseItem key={item.id} item={item} />
+          ))}
+        </div>
+
+        <h2
+          className="text-headerMain font-heading ml-6 text-xl font-semibold inline-flex 
+        items-center gap-2 hover:text-primary transition-all"
+        >
+          Registration Going on Courses <FaArrowRightLong />
+        </h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
+          {registrationGoingOnCourses.map((item) => (
             <HomeCourseItem key={item.id} item={item} />
           ))}
         </div>

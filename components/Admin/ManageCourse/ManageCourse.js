@@ -11,6 +11,7 @@ import HeadingDashboard from '../../utilities/HeadingDashboard';
 import RichTextEditor from '../../utilities/RichTextEditor';
 import AddInstructorCourse from '../Course/AddInstructorCourse';
 import AddModule from '../Course/AddModule';
+import CourseStatus from '../Course/CourseStatus';
 import InputBoxManage from './InputBoxManage';
 
 const db = firebase.firestore();
@@ -269,16 +270,28 @@ const ManageCourse = () => {
               <span className="ml-2 italic font-thin">
                 (previous:
                 <span className=" text-[orangered] ml-2">
-                  {modalData?.status ? 'On Going' : 'Upcoming'}
+                  {/* {modalData?.status ? 'On Going' : 'Upcoming'} */}
+                  {modalData?.status || ''}
                 </span>
                 )
               </span>
             </p>
-            <Switch
+            {/* <Switch
               onChange={(value) => setCourseStatus(value)}
               checkedChildren="On Going"
               unCheckedChildren="Upcoming"
               defaultChecked={modalData?.status === false ? false : true}
+            /> */}
+            {/* <Select
+              className="w-full"
+              styles={customStyles}
+              options={selectInstructor}
+              defaultValue={instructors}
+              onChange={handleChange}
+            /> */}
+            <CourseStatus
+              courseStatus={courseStatus}
+              setCourseStatus={setCourseStatus}
             />
           </div>
 
