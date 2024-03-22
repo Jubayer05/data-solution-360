@@ -44,21 +44,6 @@ const MainBanner = () => {
     // ],
   };
 
-  const bannerSlideData = [
-    {
-      id: '1',
-      img: '/banner/slide_1.jpeg',
-    },
-    {
-      id: '2',
-      img: '/banner/slide_2.jpeg',
-    },
-    {
-      id: '3',
-      img: '/banner/slide_3.jpeg',
-    },
-  ];
-
   return (
     <div className="bg-[#f9f9fa] pt-36 pb-10 px-3 -mt-32 md:-mt-20 ">
       {/* <div className="relative w-full h-full"></div> */}

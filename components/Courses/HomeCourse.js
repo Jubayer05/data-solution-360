@@ -2,6 +2,7 @@
 import React from 'react';
 import { FaArrowRightLong } from 'react-icons/fa6';
 
+import Link from 'next/link';
 import { useStateContext } from '../../src/context/ContextProvider';
 import HomeCourseItem from './HomeCourseItem';
 
@@ -68,13 +69,15 @@ const HomeCourse = () => {
           ))}
         </div>
         <div className="flex justify-center">
-          <button
-            className="text-base font-semibold text-[#101828] px-4 py-2 border-2 rounded-md border-transparent
-          bg-[#eaecf0] transition-all duration-300 ease-linear hover:bg-[#d0d5dd] w-[350px] inline-flex items-center
-          justify-center gap-2 uppercase"
-          >
-            See All <FaArrowRightLong />
-          </button>
+          <Link href="https://datasolution360.com/courses">
+            <button
+              className="text-base font-semibold text-[#101828] px-4 py-2 border-2 rounded-md border-transparent
+            bg-[#eaecf0] transition-all duration-300 ease-linear hover:bg-[#d0d5dd] w-[350px] inline-flex items-center
+            justify-center gap-2 uppercase"
+            >
+              See All <FaArrowRightLong />
+            </button>
+          </Link>
         </div>
       </div>
     </div>

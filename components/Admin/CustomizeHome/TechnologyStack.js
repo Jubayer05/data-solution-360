@@ -132,7 +132,7 @@ const TechnologyStack = () => {
               <div
                 key={item?.key}
                 className="bg-white shadow-md w-28 h-28 flex items-center justify-center flex-col
-              rounded-lg  relative group"
+              rounded-lg relative group"
               >
                 <div className="absolute -top-3 -right-3 hidden group-hover:block">
                   <RxCross1

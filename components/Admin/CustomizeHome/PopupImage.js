@@ -9,7 +9,7 @@ import { useStateContext } from '../../../src/context/ContextProvider';
 const db = firebase.firestore();
 
 const PopupImage = () => {
-  const { userEmail, trendingCourse } = useStateContext();
+  const { userEmail, popupImage } = useStateContext();
   const [photoUrl, setPhotoUrl] = useState('');
   const [progressData, setProgressData] = useState('');
 
@@ -19,9 +19,12 @@ const PopupImage = () => {
       photoUrl: photoUrl,
     },
     onSubmit: (values) => {
-      db.collection('trendingCourse')
-        .doc('BoUM4T62rg5qyXHVM7ik')
+      db.collection('popupImage')
+        .doc('fkmw579u5iajG01FzncO')
         .update({
+          ...values,
+          photoUrl: photoUrl,
+        })({
           ...values,
           photoUrl: photoUrl,
         })
@@ -90,8 +93,8 @@ const PopupImage = () => {
     '100%': '#ffccc7',
   };
 
-  const findImageData = trendingCourse.find(
-    (item) => item.key === 'BoUM4T62rg5qyXHVM7ik',
+  const findImageData = popupImage.find(
+    (item) => item.key === 'fkmw579u5iajG01FzncO',
   );
 
   return (

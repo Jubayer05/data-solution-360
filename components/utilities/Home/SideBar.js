@@ -31,7 +31,7 @@ const Sidebar = ({
   return (
     <div className="w-screen z-10 bg-[rgba(0,0,0,0.6)] h-screen fixed top-0 left-0">
       <div
-        className="block md:hidden z-20 fixed overflow-y-scroll bg-[#d6295f] w-9/12 -left-6 -top-5 
+        className="block md:hidden z-20 fixed overflow-y-scroll bg-[#ffffff] w-9/12 -left-6 -top-5 
       pt-5 pb-2 h-[105vh]"
       >
         <div className="flex items-center justify-between pl-10 pr-3 pt-4">
@@ -48,7 +48,7 @@ const Sidebar = ({
 
           <MdClose
             onClick={() => setOpenNav(false)}
-            className="text-2xl text-[#ffffff]"
+            className="text-2xl text-[#333333]"
           />
         </div>
 
@@ -61,7 +61,7 @@ const Sidebar = ({
                     onClick={() => handleDropdownToggle(item.id)}
                     className={`${
                       openDropdown === item.id ? 'bg-[rgba(11,6,32,0.08)]' : ''
-                    } text-[#ffffff] w-full font-semibold flex rounded-md justify-between items-center py-3 px-3 transition-all duration-300 ease-in-out`}
+                    } text-[#333333] w-full font-semibold flex rounded-md justify-between items-center py-3 px-3 transition-all duration-300 ease-in-out`}
                   >
                     <span>
                       {language === 'English' ? item.title : item.titleBang}
@@ -83,8 +83,8 @@ const Sidebar = ({
                             className={`w-full font-semibold flex rounded-md justify-between items-center py-3 pr-3 pl-10
                            ${
                              url === dropdownItem.slug
-                               ? 'text-[#ffffff] visited:text-[#ffffff] bg-[rgba(11,6,32,0.2)] '
-                               : 'text-[#ffffff] visited:text-[#ffffff] '
+                               ? 'text-[#333333] visited:text-[#333333] bg-[rgba(11,6,32,0.2)] '
+                               : 'text-[#333333] visited:text-[#333333] '
                            }
                            my-1 `}
                           >
@@ -107,8 +107,8 @@ const Sidebar = ({
                   className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
               ${
                 url == item.slug
-                  ? 'text-[#ffffff] visited:text-[#ffffff] bg-[rgba(11,6,32,0.2)] '
-                  : 'text-[#ffffff] visited:text-[#ffffff] '
+                  ? 'text-[#333333] visited:text-[#333333] bg-[rgba(11,6,32,0.2)] '
+                  : 'text-[#333333] visited:text-[#333333] '
               } 
                 my-1 `}
                 >
@@ -120,7 +120,7 @@ const Sidebar = ({
               )}
             </li>
           ))}
-          <div className="ml-[13px] mt-3 text-[#fff]">
+          <div className="ml-[13px] mt-3 text-[#333333]">
             <span>Language &nbsp;</span>
             <Switch
               size={50}
@@ -135,7 +135,7 @@ const Sidebar = ({
 
         <div className="pl-12 pr-6 pt-2 pb-4">
           {/* <h2 className="text-center text-xl">Profile</h2> */}
-          <h2 className="text-center text-xl text-[#fff]">More</h2>
+          <h2 className="text-center text-xl text-[#333333]">More</h2>
 
           {/* NOTE: DROPDOWN */}
           <ul className=" list-none pt-2 pb-4">
@@ -146,8 +146,8 @@ const Sidebar = ({
                   className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
                   ${
                     url == item.slug
-                      ? 'text-[#ffffff] visited:text-[#ffffff] bg-[rgba(100,64,251,0.2)] '
-                      : 'text-[#ffffff] visited:text-[#ffffff] '
+                      ? 'text-[#333333] visited:text-[#333333] bg-[rgba(100,64,251,0.2)] '
+                      : 'text-[#333333] visited:text-[#333333] '
                   } 
                   my-1 `}
                 >
@@ -164,8 +164,8 @@ const Sidebar = ({
           {/* NOTE: LOGOUT */}
           {userName ? (
             <button
-              className="w-full flex rounded-md justify-between items-center py-3 px-3 my-1 mt-20 text-[#ffffff] 
-          bg-[rgba(40,97,51,0.2)]"
+              className="w-full flex rounded-md justify-between items-center py-3 px-3 
+              my-1 mt-20 text-[#333333] bg-[rgba(0,0,0,0.2)]"
               onClick={handleLogout}
             >
               <span className="font-bold">Logout</span>

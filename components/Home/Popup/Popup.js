@@ -5,10 +5,10 @@ import { RxCross1 } from 'react-icons/rx';
 import { useStateContext } from '../../../src/context/ContextProvider';
 
 const Popup = ({ handler }) => {
-  const { trendingCourse } = useStateContext();
+  const { popupImage } = useStateContext();
 
-  const findTrendingCourse = trendingCourse.find(
-    (item) => item.key === 'BoUM4T62rg5qyXHVM7ik',
+  const findTrendingCourse = popupImage.find(
+    (item) => item.key === 'fkmw579u5iajG01FzncO',
   );
 
   return (

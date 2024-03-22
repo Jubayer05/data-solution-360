@@ -16,6 +16,7 @@ export const MainContextProvider = ({ children }) => {
   const [courseData, setCourseData] = useState([]);
   const [faqData, setFaqData] = useState([]);
   const [trendingCourse, setTrendingCourse] = useState([]);
+  const [popupImage, setPopupImage] = useState([]);
   const [instructor, setInstructor] = useState([]);
   const [youtubeVideo, setYouTubeVideo] = useState([]);
   const [technologyStack, setTechnologyStack] = useState([]);
@@ -31,6 +32,7 @@ export const MainContextProvider = ({ children }) => {
     loadData('userLogin', setUserData);
     loadData('instructors', setInstructor);
     loadData('trendingCourse', setTrendingCourse);
+    loadData('popupImage', setPopupImage);
     loadData('youtubeVideo', setYouTubeVideo);
     loadData('dashboard_admin', setDashAdmin);
     loadData('student_review', setStudentReview);
@@ -84,6 +86,7 @@ export const MainContextProvider = ({ children }) => {
         uniqueUserName,
         faqData,
         trendingCourse,
+        popupImage,
         youtubeVideo,
         instructor,
         technologyStack,
