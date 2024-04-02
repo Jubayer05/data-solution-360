@@ -29,8 +29,8 @@ const RightSide = ({ courseDetails }) => {
         {/* NOTE: RIGHT HEADER */}
         <div className="flex items-center justify-center gap-4 border-b-1 py-4">
           {courseDetails?.status && (
-            <div className="flex bg-[#ebffe9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
-              <ImClock className="text-[rgb(36,112,44)] mr-[6px]" />
+            <div className="flex bg-[rgba(255,68,68,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
+              <ImClock className=" text-[rgb(208,12,28)] mr-[6px]" />
               <span className="text-sm font-[700]">
                 {new Date(courseDetails?.main_class_starting_date).getTime() >=
                 new Date().getTime()
@@ -49,15 +49,15 @@ const RightSide = ({ courseDetails }) => {
           <div className="flex bg-[rgba(161,68,255,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
             <ImClock className="text-[rgb(120,12,208)] mr-[6px]" />
             <span className="text-sm font-[700]">
-              Total {courseDetails?.total_seat_number} Seat
+              Total Seat {courseDetails?.total_seat_number}
             </span>
           </div>
-          <div className="flex bg-[rgba(255,68,68,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
-            <ImClock className="text-[rgb(208,12,28)] mr-[6px]" />
+          {/* <div className="flex bg-[#ebffe9] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
+            <ImClock className="text-[rgb(36,112,44)] mr-[6px]" />
             <span className="text-sm font-[700]">
               Remain {courseDetails?.remaining_seat_number} Seat
             </span>
-          </div>
+          </div> */}
         </div>
 
         {/* NOTE: PRICE & BUTTON */}

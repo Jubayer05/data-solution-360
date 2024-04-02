@@ -50,13 +50,13 @@ const CourseItem = ({ item, upcoming }) => {
                 </span>
               ) : (
                 <span className="text-[#101828] text-[12px] block -mt-[1px]">
-                  Batch {item?.batch_no}
+                  Batch <strong>{item?.batch_no}</strong>
                 </span>
               )}
             </div>
             <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
               <IoIosPeople />
-              {upcoming ? (
+              {/* {upcoming ? (
                 <span className=" text-[12px] block -mt-[1px]">
                   {item?.total_seat_number} Seats
                 </span>
@@ -64,7 +64,10 @@ const CourseItem = ({ item, upcoming }) => {
                 <span className=" text-[12px] block -mt-[1px]">
                   {item?.remaining_seat_number} Seats Left
                 </span>
-              )}
+              )} */}
+              <span className=" text-[12px] block -mt-[1px]">
+                Total Seat <strong>{item?.total_seat_number}</strong>
+              </span>
             </div>
             {upcoming ? (
               ''
@@ -72,14 +75,17 @@ const CourseItem = ({ item, upcoming }) => {
               <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
                 <ImClock />
                 <span className="text-[12px] -mt-[1px]">
-                  {new Date(item?.main_class_starting_date).getTime() >=
-                  new Date().getTime()
-                    ? Math.ceil(
-                        (new Date(item?.main_class_starting_date).getTime() -
-                          new Date().getTime()) /
-                          (1000 * 60 * 60 * 24),
-                      )
-                    : 0}{' '}
+                  <strong>
+                    {' '}
+                    {new Date(item?.main_class_starting_date).getTime() >=
+                    new Date().getTime()
+                      ? Math.ceil(
+                          (new Date(item?.main_class_starting_date).getTime() -
+                            new Date().getTime()) /
+                            (1000 * 60 * 60 * 24),
+                        )
+                      : 0}{' '}
+                  </strong>
                   Days Left
                 </span>
               </div>
