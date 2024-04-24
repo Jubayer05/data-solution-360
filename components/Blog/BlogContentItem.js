@@ -14,11 +14,11 @@ const BlogContentItem = () => {
       const queryParams = new URLSearchParams(url);
       const id = queryParams.get('id');
 
-      const item = blogData.find((item) => item.id === id);
+      const item = blogData?.find((item) => item.id === id);
       setBlogItem(item);
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [blogData]);
 
   return (
     <div className="max-w-3xl mx-auto pt-24 px-2">

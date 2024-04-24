@@ -19,7 +19,6 @@ const Navbar = ({ home }) => {
     useStateContext();
   const auth = getAuth();
   const user = auth.currentUser;
-  // const [scroll, setScroll] = useState(false);
   const [url, setUrl] = useState(null);
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
