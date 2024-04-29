@@ -4,11 +4,14 @@ import { AiFillCaretRight } from 'react-icons/ai';
 import Modal from 'react-modal';
 import Slider from 'react-slick';
 import StarRatings from 'react-star-ratings';
-import { reviewData } from '../../src/data/data';
+import { useStateContext } from '../../src/context/ContextProvider';
 
 const Review = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const { studentReview } = useStateContext();
+
+  console.log(studentReview);
 
   const openModal = (item) => {
     setModalData(item);
@@ -57,7 +60,7 @@ const Review = () => {
   };
 
   function cutFirst50Words(str) {
-    if (str.length > 30) {
+    if (str?.length > 30) {
       return str.substring(0, 132) + '...';
     } else {
       return str;
@@ -65,7 +68,7 @@ const Review = () => {
   }
 
   function countWords(str) {
-    return str.trim().split(/\s+/).length;
+    return str?.trim().split(/\s+/).length;
   }
 
   return (
@@ -82,30 +85,30 @@ const Review = () => {
 
             <div>
               <Slider {...settings}>
-                {reviewData.map((item) => (
+                {studentReview?.map((item) => (
                   <div
-                    key={item.id}
+                    key={item?.key}
                     className="p-5 m-5 w-[150px] overflow-hidden "
                   >
                     <div className="bg-[white] px-[15px] py-[30px] rounded-[5px] mb-[40px] relative">
                       <div className="flex items-center mb-[15px] h-[100px]">
                         <img
                           className="h-[65px] w-[60px] object-cover rounded-[3px] mr-[15px]"
-                          src={item.photoUrl}
-                          alt={item.name}
+                          src={item?.img}
+                          alt={item?.student_name}
                         />
                         <div>
                           <h2 className="text-xl font-bold leading-8 text-[#231f40]">
-                            {item.name}
+                            {item?.student_name}
                           </h2>
                           <p className="text-[#525fe1] font-medium -mt-2">
-                            {item.job}
+                            {item?.profession}
                           </p>
                         </div>
                       </div>
                       <p className="text-base leading-7 text-[#6f6b80] mb-[24px] h-[140px]">
-                        &ldquo;{cutFirst50Words(item.reviewDetails)}
-                        {countWords(item.reviewDetails) >= 20 ? (
+                        &ldquo;{cutFirst50Words(item?.review)}
+                        {countWords(item?.review) >= 20 ? (
                           <>
                             <a type="button" onClick={() => openModal(item)}>
                               see more
@@ -121,20 +124,20 @@ const Review = () => {
                                 <div className="flex items-center justify-center mb-[15px]">
                                   <img
                                     className="h-[55px] object-cover rounded-[3px] mr-[15px]"
-                                    src={modalData?.photoUrl}
-                                    alt={modalData?.name}
+                                    src={modalData?.img}
+                                    alt={modalData?.student_name}
                                   />
                                   <div>
                                     <h2 className="text-xl font-bold leading-8 text-[#231f40]">
-                                      {modalData?.name}
+                                      {modalData?.student_name}
                                     </h2>
                                     <p className="text-[#525fe1] font-medium -mt-2">
-                                      {modalData?.job}
+                                      {modalData?.profession}
                                     </p>
                                   </div>
                                 </div>
                                 <p className="text-base leading-7 text-[#6f6b80] mb-[24px]">
-                                  {modalData?.reviewDetails}
+                                  {modalData?.review}
                                 </p>
 
                                 <div className="text-center pt-6">
