@@ -12,6 +12,7 @@ import RichTextEditor from '../../utilities/RichTextEditor';
 import AddInstructorCourse from '../Course/AddInstructorCourse';
 import AddModule from '../Course/AddModule';
 import CourseStatus from '../Course/CourseStatus';
+import CourseReview from './CourseReview';
 import InputBoxManage from './InputBoxManage';
 
 const db = firebase.firestore();
@@ -27,6 +28,7 @@ const ManageCourse = () => {
   const [courseModule, setCourseModule] = useState([]);
   const [courseShortData, setCourseShortData] = useState([]);
   const [instructors, setInstructors] = useState([]);
+  const [studentReview, setStudentReview] = useState([]);
   const [courseBenefit, setCourseBenefit] = useState('');
   const [courseDetails, setCourseDetails] = useState('');
   const [courseFor, setCourseFor] = useState('');
@@ -38,6 +40,7 @@ const ManageCourse = () => {
     setCourseModule(modalData?.courseModule || []);
     setCourseShortData(modalData?.courseShortData);
     setInstructors(modalData?.instructors || []);
+    setStudentReview(modalData?.studentReview || []);
     setCourseStatus(modalData?.status);
     setMainClassStart(modalData?.mainClassStartStatus || false);
   }, [modalData]);
@@ -153,6 +156,7 @@ const ManageCourse = () => {
       mainClassStartStatus: mainClassStart,
       courseModule,
       instructors,
+      studentReview,
       courseShortData,
       after_course_benefit: !isContentEmpty(courseBenefit)
         ? courseBenefit
@@ -276,19 +280,6 @@ const ManageCourse = () => {
                 )
               </span>
             </p>
-            {/* <Switch
-              onChange={(value) => setCourseStatus(value)}
-              checkedChildren="On Going"
-              unCheckedChildren="Upcoming"
-              defaultChecked={modalData?.status === false ? false : true}
-            /> */}
-            {/* <Select
-              className="w-full"
-              styles={customStyles}
-              options={selectInstructor}
-              defaultValue={instructors}
-              onChange={handleChange}
-            /> */}
             <CourseStatus
               courseStatus={courseStatus}
               setCourseStatus={setCourseStatus}
@@ -569,6 +560,11 @@ const ManageCourse = () => {
           <AddInstructorCourse
             instructors={instructors}
             setInstructors={setInstructors}
+          />
+
+          <CourseReview
+            studentReview={studentReview}
+            setStudentReview={setStudentReview}
           />
 
           <div className="w-full text-center pt-5 pb-16">
