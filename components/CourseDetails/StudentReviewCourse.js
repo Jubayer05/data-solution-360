@@ -1,9 +1,12 @@
 import React from 'react';
-import { BiSolidQuoteAltRight } from 'react-icons/bi';
+import { useStateContext } from '../../src/context/ContextProvider';
+import ReviewSlider from '../Home/Review/ReviewSlider';
 
 const StudentReviewCourse = ({ courseDetails }) => {
+  const { studentReview } = useStateContext();
+
   return (
-    <div className="max-w-5xl mx-auto my-10">
+    <div className="max-w-6xl mx-auto my-10">
       <div className="flex justify-center flex-col items-center ">
         <div className="text-[rgb(32,180,134)] bg-[#d1fadf] w-fit px-3 py-1 rounded-full text-lg font-semibold">
           Feedback
@@ -13,8 +16,8 @@ const StudentReviewCourse = ({ courseDetails }) => {
         </h2>
       </div>
 
-      <div className="grid grid-cols-3 grid-flow-row gap-5">
-        {courseDetails?.studentReview?.map((item) => (
+      <div className="">
+        {/* {studentReview?.map((item) => (
           <div key={item.id} className="p-4 border rounded-md relative h-fit">
             <p className="text-sm text-[#1d2939]">{item.review}</p>
             <div className="h-[1.5px] bg-slate-300 mb-1 " />
@@ -25,7 +28,8 @@ const StudentReviewCourse = ({ courseDetails }) => {
               <BiSolidQuoteAltRight className="text-xl text-[#fec001]" />
             </span>
           </div>
-        ))}
+        ))} */}
+        <ReviewSlider />
       </div>
     </div>
   );

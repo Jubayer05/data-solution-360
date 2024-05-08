@@ -12,7 +12,7 @@ import {
 } from '../index';
 import WhatsApp from '../utilities/WhatsApp';
 import JoinFree from './JoinFree';
-import Review from './Review';
+import Review from './Review/Review';
 import Subscribe from './Subscribe';
 // import BannerCarousel from "./BannerCarousel";
 
