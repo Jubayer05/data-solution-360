@@ -1,16 +1,13 @@
 /* eslint-disable @next/next/no-img-element */
 import { useFormik } from 'formik';
-import React, { useState } from 'react';
+import React from 'react';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
-import firebase from '../../../firebase';
-import { useStateContext } from '../../../src/context/ContextProvider';
-import YoutubeEmbed from '../../utilities/YoutubeEmbed';
+import firebase from '../../../../firebase';
+import YoutubeEmbed from '../../../utilities/YoutubeEmbed';
 const db = firebase.firestore();
 
-const ManageYoutube = () => {
-  const { youtubeVideo } = useStateContext();
-
+const ManageYoutubeVideo = ({ title, videoInfo }) => {
   const formik = useFormik({
     initialValues: {
       youtubeVideo: '',
@@ -20,7 +17,7 @@ const ManageYoutube = () => {
 
       if (embedId) {
         db.collection('youtubeVideo')
-          .doc('JIURIsvWwmzyyiLM3kNS')
+          .doc(videoInfo.key)
           .update({
             embedId,
           })
@@ -46,12 +43,12 @@ const ManageYoutube = () => {
     <div id="manage_youtube">
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
-          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Manage Youtube</h2>
+          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">{title}</h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
           <h2>Current Youtube Video</h2>
           <div className="w-[400px] mx-auto">
             <YoutubeEmbed
-              embedId={youtubeVideo[0]?.embedId}
+              embedId={videoInfo?.embedId}
               width="300px"
               height="200px"
             />
@@ -87,7 +84,7 @@ const ManageYoutube = () => {
   );
 };
 
-export default ManageYoutube;
+export default ManageYoutubeVideo;
 
 function extractEmbedId(url) {
   let match;

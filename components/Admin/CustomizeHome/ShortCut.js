@@ -29,13 +29,18 @@ const ShortCut = () => {
 
     {
       id: '5',
-      title: 'Manage Youtube',
-      link: '/admin/home-page/#manage_youtube',
+      title: 'Manage Home Youtube',
+      link: '/admin/home-page/#home_youtube',
     },
     {
       id: '6',
       title: 'Technology Stack',
       link: '/admin/home-page/#technology_stack',
+    },
+    {
+      id: '9',
+      title: 'Youtube Students Feedback',
+      link: '/admin/home-page/#students_feedback_video',
     },
     {
       id: '7',

@@ -12,6 +12,7 @@ import {
 } from '../index';
 import WhatsApp from '../utilities/WhatsApp';
 import JoinFree from './JoinFree';
+import AddVideoReview from './Review/AddVideoReview';
 import Review from './Review/Review';
 import Subscribe from './Subscribe';
 // import BannerCarousel from "./BannerCarousel";
@@ -43,6 +44,7 @@ const Home = () => {
         <AboutHome />
         <Technology />
         <Faq />
+        <AddVideoReview />
         <Review />
         <Subscribe />
         <Footer />

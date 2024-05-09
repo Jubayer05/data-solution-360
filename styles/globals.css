@@ -170,3 +170,8 @@ a:visited {
     display: none !important;
   }
 }
+
+.slick-slide > div:first-child {
+  display: flex;
+  justify-content: center;
+}
