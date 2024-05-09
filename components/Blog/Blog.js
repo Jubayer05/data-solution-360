@@ -14,8 +14,8 @@ const Blog = () => {
 
   return (
     <div className="pb-4 pt-20 max-w-6xl mx-auto">
-      <h2 className="text-center mt-6 pb-4 text-5xl text-gray-600">
-        Welcome to Blog Section
+      <h2 className="w-[600px] mx-auto text-center text-4xl font-bold font-heading mt-4 text-headerMain">
+        Welcome to our blog section, where captivating content awaits!
       </h2>
 
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 px-2">

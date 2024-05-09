@@ -67,7 +67,7 @@ const Review = () => {
   }
 
   return (
-    <div className="bg-[#f9f9fa]	py-4 md:pt-8 mb-20 px-3" id="courses">
+    <div className="bg-[#f9f9fa]	py-4 md:pt-8  px-3" id="courses">
       <div className="max-w-6xl bg-[#ffffff] py-4 md:py-8 mx-auto rounded-lg shadow">
         <div
           id="testimonials"

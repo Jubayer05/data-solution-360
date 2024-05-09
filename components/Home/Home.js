@@ -11,10 +11,12 @@ import {
   Technology,
 } from '../index';
 import WhatsApp from '../utilities/WhatsApp';
+import HomeBlog from './BlogHome';
 import JoinFree from './JoinFree';
 import AddVideoReview from './Review/AddVideoReview';
 import Review from './Review/Review';
 import Subscribe from './Subscribe';
+import BlogHome from './BlogHome';
 // import BannerCarousel from "./BannerCarousel";
 
 const Home = () => {
@@ -46,6 +48,7 @@ const Home = () => {
         <Faq />
         <AddVideoReview />
         <Review />
+        <BlogHome />
         <Subscribe />
         <Footer />
       </>
