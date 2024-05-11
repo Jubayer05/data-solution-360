@@ -309,7 +309,10 @@ const MyBlogs = () => {
             />
           </div>
 
-          <div className="w-full p-3 border">
+          <div className="w-full mt-10">
+            <label htmlFor="photoUrl" className="font-semibold mt-3 block">
+              Main blog image
+            </label>
             <RichTextEditor
               onDataChange={setBlogDetails}
               title="Full blog description"

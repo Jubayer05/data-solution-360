@@ -1,37 +1,51 @@
-import 'quill/dist/quill.snow.css';
-import React, { useEffect, useRef } from 'react';
-let Quill = null;
+import { convertToHTML } from 'draft-convert';
+import { EditorState } from 'draft-js';
+import dynamic from 'next/dynamic';
+import { useState } from 'react';
 
-const RichTextEditor = ({ value, onDataChange }) => {
-  const editorRef = useRef(null);
+const Editor = dynamic(
+  () => {
+    return import('react-draft-wysiwyg').then((mod) => mod.Editor);
+  },
+  { ssr: false },
+);
 
-  useEffect(() => {
-    // Load Quill dynamically only on the client-side
-    import('quill').then((module) => {
-      Quill = module.default;
-      const editor = new Quill(editorRef.current, {
-        theme: 'snow',
-        modules: {
-          toolbar: [
-            [{ header: '1' }, { header: '2' }, { font: [] }],
-            [{ size: [] }],
-            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
-            [{ list: 'ordered' }, { list: 'bullet' }],
-            ['link', 'image', 'video'],
-            ['clean'],
-          ],
-        },
-      });
+const RichTextEditor = ({ value, title, onDataChange }) => {
+  const [editorState, setEditorState] = useState(() =>
+    EditorState.createEmpty(),
+  );
 
-      editor.on('text-change', () => {
-        onDataChange(editor.root.innerHTML);
-      });
+  // Handler for changes in the editor content
+  const handleEditorChange = (state) => {
+    setEditorState(state);
 
-      editor.root.innerHTML = value;
-    });
-  }, [value, onDataChange]);
+    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+    onDataChange(currentContentAsHTML);
+  };
 
-  return <div ref={editorRef} />;
+  return (
+    <div className="mt-10">
+      <div className="font-bold">
+        <span> {title} </span>
+        <div className="ml-2 italic font-thin">
+          (previous:
+          <div
+            className=" text-[orangered] ml-2"
+            dangerouslySetInnerHTML={{ __html: value }}
+          ></div>
+          )
+        </div>
+      </div>
+      <Editor
+        editorState={editorState}
+        editorStyle={{ minHeight: '140px', border: '1px solid' }}
+        toolbarClassName="toolbarClassName"
+        wrapperClassName="demoWrapper"
+        editorClassName="editorClassName"
+        onEditorStateChange={handleEditorChange}
+      />
+    </div>
+  );
 };
 
 export default RichTextEditor;

@@ -9,6 +9,7 @@ import { RiLiveLine } from 'react-icons/ri';
 import { useStateContext } from '../../src/context/ContextProvider';
 
 import { colors } from '../../src/data/data';
+import AddVideoReview from '../Home/Review/AddVideoReview';
 import RightSide from './RightSide';
 import StudentReviewCourse from './StudentReviewCourse';
 const { Panel } = Collapse;
@@ -382,6 +383,9 @@ const CourseDetails = () => {
         </div>
         {/* NOTE: RIGHT SIDE */}
         <RightSide courseDetails={courseDetails} />
+      </div>
+      <div className="py-10">
+        <AddVideoReview bgWhite={true} />
       </div>
       <StudentReviewCourse courseDetails={courseDetails} />
     </div>

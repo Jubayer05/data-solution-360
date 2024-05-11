@@ -3,7 +3,7 @@ import React from 'react';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import YoutubeEmbed from '../../utilities/YoutubeEmbed';
 
-const AddVideoReview = () => {
+const AddVideoReview = ({ bgWhite }) => {
   const { youtubeVideo } = useStateContext();
 
   const findVideo = youtubeVideo.find(
@@ -11,7 +11,12 @@ const AddVideoReview = () => {
   );
 
   return (
-    <div className="bg-[#f9f9fa]	py-4 md:pb-10 px-3" id="courses">
+    <div
+      className={`${
+        bgWhite ? 'bg-[#ffffff]' : 'bg-[#f9f9fa]'
+      }	py-4 md:pb-10 px-3`}
+      id="courses"
+    >
       <div className="max-w-6xl bg-[#ffffff] py-4 md:py-12 mx-auto rounded-lg shadow px-5">
         <div className="max-w-6xl mx-auto flex justify-between items-center flex-col lg:flex-row gap-4 px-2">
           <div className="flex-1 p-2 md:pl-14">

@@ -1,4 +1,5 @@
 import 'antd/dist/antd.css';
+import 'quill/dist/quill.snow.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import { MainContextProvider } from '../src/context/ContextProvider';
