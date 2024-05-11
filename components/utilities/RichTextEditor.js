@@ -2,7 +2,7 @@
 
 import dynamic from 'next/dynamic'; // Import dynamic from 'next/dynamic'
 import React, { useState } from 'react';
-import 'react-quill/dist/quill.snow.css';
+// import 'react-quill/dist/quill.snow.css';
 
 // Use dynamic to load ReactQuill only on the client side
 const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });

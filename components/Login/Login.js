@@ -5,7 +5,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
-import PhoneLogin from './PhoneLogin';
 
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -354,7 +353,7 @@ const Login = () => {
               </p>
 
               <div className="flex justify-center items-center mt-4">
-                <PhoneLogin />
+                {/* <PhoneLogin /> */}
 
                 <Icon
                   onClick={handleFacebookLogin}
