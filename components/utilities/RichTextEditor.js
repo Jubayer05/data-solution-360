@@ -1,80 +1,37 @@
-// MyEditor.jsx
+import 'quill/dist/quill.snow.css';
+import React, { useEffect, useRef } from 'react';
+let Quill = null;
 
-import dynamic from 'next/dynamic'; // Import dynamic from 'next/dynamic'
-import React, { useState } from 'react';
-// import 'react-quill/dist/quill.snow.css';
+const RichTextEditor = ({ value, onDataChange }) => {
+  const editorRef = useRef(null);
 
-// Use dynamic to load ReactQuill only on the client side
-const ReactQuill = dynamic(() => import('react-quill'), { ssr: false });
+  useEffect(() => {
+    // Load Quill dynamically only on the client-side
+    import('quill').then((module) => {
+      Quill = module.default;
+      const editor = new Quill(editorRef.current, {
+        theme: 'snow',
+        modules: {
+          toolbar: [
+            [{ header: '1' }, { header: '2' }, { font: [] }],
+            [{ size: [] }],
+            ['bold', 'italic', 'underline', 'strike', 'blockquote'],
+            [{ list: 'ordered' }, { list: 'bullet' }],
+            ['link', 'image', 'video'],
+            ['clean'],
+          ],
+        },
+      });
 
-const RichTextEditor = ({ onDataChange, title, value }) => {
-  const [content, setContent] = useState('');
+      editor.on('text-change', () => {
+        onDataChange(editor.root.innerHTML);
+      });
 
-  const handleContentChange = (value) => {
-    setContent(value);
-    onDataChange(value);
-  };
+      editor.root.innerHTML = value;
+    });
+  }, [value, onDataChange]);
 
-  const quillModules = {
-    toolbar: [
-      ['bold', 'italic', 'underline'],
-      [{ list: 'ordered' }, { list: 'bullet' }],
-      // [{ size: ['small', false, 'large', 'huge'] }],
-      [{ indent: '-1' }, { indent: '+1' }],
-      [{ header: [1, 2, 3, 4, 5, 6, false] }],
-      [{ color: [] }, { background: [] }],
-      // [{ font: [] }],
-      [{ align: [] }],
-      ['link', 'image', 'video'],
-      ['clean'],
-    ],
-  };
-
-  return (
-    <div className="py-8">
-      <p className="font-semibold mt-3 block text-[#17012e]">
-        {title}
-        <span className="ml-2 italic font-thin">
-          (previous:
-          <span
-            className=" text-[orangered] ml-2"
-            dangerouslySetInnerHTML={{
-              __html: value,
-            }}
-          />
-          )
-        </span>
-      </p>
-      <ReactQuill
-        value={content}
-        onChange={handleContentChange}
-        theme="snow"
-        modules={quillModules}
-        style={{ height: '200px' }}
-        formats={[
-          'header',
-          'font',
-          'size',
-          'bold',
-          'italic',
-          'underline',
-          'strike',
-          'blockquote',
-          'list',
-          'bullet',
-          'indent',
-          'link',
-          'image',
-          'video',
-          'color',
-          'background',
-          'align',
-        ]}
-      />
-    </div>
-  );
+  return <div ref={editorRef} />;
 };
-
-// export default MyEditor;
 
 export default RichTextEditor;
