@@ -68,12 +68,12 @@ export const navItems2 = [
     titleBang: 'সাবস্ক্রাইব',
     link: '/#subscribe',
   },
-  // {
-  //   id: 'nav-7',
-  //   title: 'Free Course',
-  //   titleBang: 'ফ্রী কোর্স',
-  //   link: '/free-course',
-  // },
+  {
+    id: 'nav-7',
+    title: 'Practice Zone',
+    titleBang: 'প্র্যাক্টিস জোন',
+    link: '/practice-code',
+  },
 ];
 
 export const navDropItems = [

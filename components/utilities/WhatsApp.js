@@ -1,6 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { CustomChat, FacebookProvider } from 'react-facebook';
+import { FacebookProvider, CustomChat } from 'react-facebook';
 
 const WhatsApp = () => {
   const handleClick = () => {

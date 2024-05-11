@@ -48,6 +48,7 @@ const RichTextEditor = ({ onDataChange, title, value }) => {
       <ReactQuill
         value={content}
         onChange={handleContentChange}
+        theme="snow"
         modules={quillModules}
         style={{ height: '200px' }}
         formats={[

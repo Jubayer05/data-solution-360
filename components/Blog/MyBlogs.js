@@ -309,7 +309,7 @@ const MyBlogs = () => {
             />
           </div>
 
-          <div className="w-full p-3">
+          <div className="w-full p-3 border">
             <RichTextEditor
               onDataChange={setBlogDetails}
               title="Full blog description"

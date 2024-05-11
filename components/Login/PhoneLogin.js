@@ -1,5 +1,4 @@
 import { Icon } from '@iconify/react';
-import 'firebaseui/dist/firebaseui.css';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import firebase from '../../firebase';
