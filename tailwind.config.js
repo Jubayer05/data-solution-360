@@ -1,3 +1,5 @@
+const { and } = require('firebase/firestore');
+
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',
@@ -66,6 +68,9 @@ module.exports = {
 
       lineHeight: {
         20: '80px',
+      },
+      animation: {
+        'spin-slow': 'spin 30s linear infinite',
       },
     },
   },

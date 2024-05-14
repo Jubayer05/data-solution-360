@@ -385,7 +385,7 @@ const CourseDetails = () => {
         <RightSide courseDetails={courseDetails} />
       </div>
       <div className="py-10">
-        <AddVideoReview bgWhite={true} />
+        <AddVideoReview coursePage={true} />
       </div>
       <StudentReviewCourse courseDetails={courseDetails} />
     </div>

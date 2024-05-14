@@ -10,7 +10,7 @@ const Editor = dynamic(
   { ssr: false },
 );
 
-const RichTextEditor = ({ value, title, onDataChange }) => {
+const RichTextEditor = ({ value, title, onDataChange, showPrevious }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
@@ -25,20 +25,26 @@ const RichTextEditor = ({ value, title, onDataChange }) => {
 
   return (
     <div className="mt-10">
-      <div className="font-bold">
+      <div className="font-bold mb-3">
         <span> {title} </span>
-        <div className="ml-2 italic font-thin">
-          (previous:
-          <div
-            className=" text-[orangered] ml-2"
-            dangerouslySetInnerHTML={{ __html: value }}
-          ></div>
-          )
-        </div>
+        {value && (
+          <div className="ml-2 italic font-thin">
+            (previous:
+            <div
+              className=" text-[orangered] ml-2"
+              dangerouslySetInnerHTML={{ __html: value }}
+            ></div>
+            )
+          </div>
+        )}
       </div>
       <Editor
         editorState={editorState}
-        editorStyle={{ minHeight: '140px', border: '1px solid' }}
+        editorStyle={{
+          minHeight: '140px',
+          border: '1px solid',
+          backgroundColor: '#ffffff',
+        }}
         toolbarClassName="toolbarClassName"
         wrapperClassName="demoWrapper"
         editorClassName="editorClassName"

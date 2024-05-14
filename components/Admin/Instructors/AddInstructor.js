@@ -1,16 +1,30 @@
 /* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import React, { useState } from 'react';
+import Select from 'react-select';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import RichTextEditor from '../../utilities/RichTextEditor';
 const db = firebase.firestore();
 
 const initialInstructorState = {
   instructorName: '',
   photoUrl: '',
   jobTitle: '',
+  role: '',
 };
+
+const selectLanguage = [
+  {
+    label: <div>Core Team Member</div>,
+    value: 'Core Team Member',
+  },
+  {
+    label: <div>Employee</div>,
+    value: 'Employee',
+  },
+];
 
 const AddInstructor = () => {
   const { instructor } = useStateContext();
@@ -20,11 +34,31 @@ const AddInstructor = () => {
     ...initialInstructorState,
   });
   const [progressData, setProgressData] = useState(0);
+  const [details, setDetails] = useState('');
 
   const conicColors = {
     '0%': '#87d068',
     '50%': '#ffe58f',
     '100%': '#ffccc7',
+  };
+
+  const customStyles = {
+    menu: (provided, state) => ({
+      ...provided,
+      borderBottom: '1px dotted pink',
+      padding: 20,
+    }),
+    control: (_, {}) => ({
+      display: 'flex',
+      border: '1px solid #e5e5e5',
+      padding: '5px 10px',
+      borderRadius: '6px',
+      backgroundColor: '#ffffff',
+    }),
+  };
+
+  const handleChangeRole = (item) => {
+    setInstructorInfo({ ...instructorInfo, role: item.value });
   };
 
   // Handler for file submission
@@ -70,13 +104,21 @@ const AddInstructor = () => {
     if (
       instructorInfo.instructorName !== '' &&
       instructorInfo.photoUrl !== '' &&
-      instructorInfo.jobTitle !== ''
+      instructorInfo.jobTitle !== '' &&
+      details !== '' &&
+      instructorInfo.role !== ''
     ) {
       db.collection('instructors')
-        .add({ ...instructorInfo })
+        .add({ ...instructorInfo, details: details })
         .then(() => {
-          alert('Instructor information was successfully uploaded.');
-          window.location.reload();
+          alert('Instructor ');
+          Swal.fire(
+            'Success!',
+            'Member information was successfully uploaded.',
+            'success',
+          ).then(() => {
+            window.location.reload();
+          });
         })
         .catch((error) => {
           alert(error.message + '' + 'Something went wrong');
@@ -126,7 +168,7 @@ const AddInstructor = () => {
           <p className="text-base">No instructor information were added!</p>
         ) : (
           instructor?.map((item) => (
-            <div key={item.id} className="my-4 shadow-md flex items-center">
+            <div key={item.key} className="my-4 shadow-md flex items-center">
               <div className="flex-1">
                 <div className="px-4 py-2 rounded-lg text-base font-normal flex items-center justify-between gap-10 bg-white">
                   <div className="flex items-center gap-4">
@@ -155,14 +197,12 @@ const AddInstructor = () => {
         )}
       </div>
       <div className="bg-[#f0f0f0] shadow-lg rounded-lg border-dashed px-6 py-3 mt-10">
-        <h2 className="text-xl text text-center my-4 font-bold">
-          Add Instructor
-        </h2>
+        <h2 className="text-xl text text-center my-4 font-bold">Add Members</h2>
         <div className="grid gap-4 grid-cols-2 ">
           <div className="col-span-1">
             <InputBox
               value={instructorInfo.instructorName}
-              title="Instructor Name"
+              title="Name"
               name="instructorName"
               id="instructorName"
               type="text"
@@ -170,6 +210,18 @@ const AddInstructor = () => {
             />
           </div>
           <div className="col-span-1">
+            <p htmlFor className="font-semibold block text-[#17012e]">
+              Select Member&apos;s Role
+            </p>
+            <Select
+              className="w-full mt-2"
+              styles={customStyles}
+              options={selectLanguage}
+              defaultValue={selectLanguage[0]}
+              onChange={handleChangeRole}
+            />
+          </div>
+          <div className="col-span-2">
             <InputBox
               value={instructorInfo.jobTitle}
               title="Job Title"
@@ -179,9 +231,49 @@ const AddInstructor = () => {
               func={handleChange}
             />
           </div>
+          <div className="col-span-1">
+            <InputBox
+              value={instructorInfo.facebookLink}
+              title="Facebook Link"
+              name="facebookLink"
+              id="facebookLink"
+              type="text"
+              func={handleChange}
+            />
+          </div>
+          <div className="col-span-1">
+            <InputBox
+              value={instructorInfo.linkedInLink}
+              title="LinkedIn Link"
+              name="linkedInLink"
+              id="linkedInLink"
+              type="text"
+              func={handleChange}
+            />
+          </div>
+          <div className="col-span-1">
+            <InputBox
+              value={instructorInfo.whatsappNumber}
+              title="Whatsapp Number"
+              name="whatsappNumber"
+              id="whatsappNumber"
+              type="text"
+              func={handleChange}
+            />
+          </div>
+          <div className="col-span-1">
+            <InputBox
+              value={instructorInfo.youtubeLink}
+              title="Youtube Link"
+              name="youtubeLink"
+              id="youtubeLink"
+              type="text"
+              func={handleChange}
+            />
+          </div>
           <div className="col-span-2">
             <label htmlFor className="font-semibold block text-[#17012e]">
-              Image of the instructor
+              Image of the member
             </label>
             <input
               id="photoUrl"
@@ -196,12 +288,18 @@ const AddInstructor = () => {
           size="small"
           strokeColor={conicColors}
         />
+
+        <RichTextEditor
+          title="Add Members information"
+          onDataChange={setDetails}
+        />
+
         <div className="w-full text-center pt-5 pb-4">
           <button
             onClick={handleAddInstructor}
             className="px-4 py-3 bg-blue-500 text-white rounded-md"
           >
-            Add Instructor
+            Add Member
           </button>
         </div>
       </div>

@@ -73,7 +73,7 @@ export const linksAdmin = [
         icon: <MdOutlineUnsubscribe />,
       },
       {
-        name: 'Instructors',
+        name: 'Team Member & Instructor',
         link: '/admin/instructors',
         icon: <GiTeacher />,
       },

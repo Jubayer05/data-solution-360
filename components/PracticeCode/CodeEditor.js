@@ -1,33 +1,29 @@
-// components/CodeEditor.js
-import React, { useEffect, useRef } from 'react';
+// CodeEditorWindow.js
 
-const CodeEditor = ({ value, language, onChange }) => {
-  const editorRef = useRef(null);
+import React, { useState } from 'react';
 
-  useEffect(() => {
-    const editor = monaco.editor.create(editorRef.current, {
-      value,
-      language,
-      theme: 'vs-dark',
-    });
+import Editor from '@monaco-editor/react';
 
-    editor.onDidChangeModelContent(() => {
-      onChange(editor.getValue());
-    });
+const CodeEditor = ({ onChange, language, code, theme }) => {
+  const [value, setValue] = useState(code || '');
 
-    return () => {
-      editor.dispose();
-    };
-  }, [value, language, onChange]);
+  const handleEditorChange = (value) => {
+    setValue(value);
+    onChange('code', value);
+  };
 
   return (
-    <div></div>
-    // <Editor
-    //   height="90vh"
-    //   defaultLanguage="javascript"
-    //   defaultValue="// some comment"
-    // />
+    <div className="overlay rounded-md overflow-hidden w-full h-full shadow-4xl border">
+      <Editor
+        height="60vh"
+        width={`100%`}
+        language={language || 'javascript'}
+        value={value}
+        theme={theme}
+        defaultValue="// some comment"
+        onChange={handleEditorChange}
+      />
+    </div>
   );
 };
-
 export default CodeEditor;

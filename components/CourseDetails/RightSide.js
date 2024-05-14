@@ -7,6 +7,8 @@ import { ImClock } from 'react-icons/im';
 import YoutubeEmbed from '../utilities/YoutubeEmbed';
 
 const RightSide = ({ courseDetails }) => {
+  console.log(courseDetails?.status === 'Registration Going on');
+
   return (
     <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-360px]">
       <div className="mb-3">
@@ -28,7 +30,7 @@ const RightSide = ({ courseDetails }) => {
       <div className="border-1 rounded-md">
         {/* NOTE: RIGHT HEADER */}
         <div className="flex items-center justify-center gap-4 border-b-1 py-4">
-          {courseDetails?.status && (
+          {courseDetails?.status === 'Registration Going on' && (
             <div className="flex bg-[rgba(255,68,68,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
               <ImClock className=" text-[rgb(208,12,28)] mr-[6px]" />
               <span className="text-sm font-[700]">
@@ -64,14 +66,19 @@ const RightSide = ({ courseDetails }) => {
         {courseDetails?.status && (
           <div className="py-4 px-5 border-b-1">
             <div className="flex items-center">
-              <div>
-                <span className="text-[orangered] font-bold text-lg">
-                  <strike>{courseDetails?.price}/-</strike>
-                </span>
-              </div>
+              {courseDetails?.status === 'Registration Going on' && (
+                <div>
+                  <span className="text-[orangered] font-bold text-lg">
+                    <strike>{courseDetails?.price}/-</strike>
+                  </span>
+                </div>
+              )}
               <div className="ml-4">
                 <span className="text-[#1d2939] font-bold text-3xl">
-                  {courseDetails?.discounted_price}/-
+                  {courseDetails?.status === 'Registration Going on'
+                    ? courseDetails?.discounted_price
+                    : courseDetails?.price}
+                  /-
                 </span>
               </div>
               <div className="flex items-center ml-auto border-b-1 cursor-pointer">
