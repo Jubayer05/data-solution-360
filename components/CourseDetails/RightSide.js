@@ -106,7 +106,7 @@ const RightSide = ({ courseDetails }) => {
                 item.value !== '' && (
                   <div key={item.name} className="flex items-start">
                     <div>
-                      <ImPointRight className="text-xl text-[#2e7d32] font-semibold" />
+                      <ImPointRight className="text-base text-[#2e7d32] font-semibold" />
                     </div>
 
                     <span className="ml-2 ">{item.value}</span>
