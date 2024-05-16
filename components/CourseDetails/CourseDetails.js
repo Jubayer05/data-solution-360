@@ -42,7 +42,7 @@ const CourseDetails = () => {
           </p>
 
           {/* NOTE: ORIENTATION SECTION */}
-          {courseDetails?.status === true && (
+          {courseDetails?.orientation_class !== '-' && (
             <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
               <img className="w-[60px] mr-4" src="/course/webinar.png" alt="" />
               <div>
@@ -68,7 +68,7 @@ const CourseDetails = () => {
           )}
 
           {/* NOTE: COURSE DETAILS (BATCH, STARTING, DAY, TIME) */}
-          {courseDetails?.status === true && (
+          {
             <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-1 md:gap-6">
               <div className="pl-3 pr-2">
                 <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
@@ -111,7 +111,7 @@ const CourseDetails = () => {
                 <span>{courseDetails?.class_time}</span>
               </div>
             </div>
-          )}
+          }
 
           {/* NOTE: COURSE INCLUDED ITEMS */}
           <div className="bg-[#101828] p-3 md:p-8 pl-5 md:pl-12 font-normal text-[#eaecf0] rounded-lg mt-8">
@@ -173,20 +173,6 @@ const CourseDetails = () => {
                   <p className="m-0">For best performers only</p>
                 </div>
               </div>
-            </div>
-          </div>
-
-          {/* NOTE: ABOUT COURSE  */}
-          <div className="mt-16">
-            <h2 className="text-3xl font-bold mb-3 font-heading">
-              About Course
-            </h2>
-            <div className="h-[.5px] w-[100%] bg-slate-300" />
-            <div className="mt-4">
-              <p
-                className="text-lg font-normal"
-                dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
-              />
             </div>
           </div>
 
@@ -285,6 +271,20 @@ const CourseDetails = () => {
                   </Collapse>
                 </div>
               ))}
+            </div>
+          </div>
+
+          {/* NOTE: ABOUT COURSE  */}
+          <div className="mt-16">
+            <h2 className="text-3xl font-bold mb-3 font-heading">
+              About Course
+            </h2>
+            <div className="h-[.5px] w-[100%] bg-slate-300" />
+            <div className="mt-4">
+              <p
+                className="text-lg font-normal"
+                dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
+              />
             </div>
           </div>
 
