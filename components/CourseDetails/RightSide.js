@@ -3,9 +3,8 @@ import Link from 'next/link';
 import React from 'react';
 import { BiShareAlt } from 'react-icons/bi';
 import { BsTelephone } from 'react-icons/bs';
-import { ImPointRight } from 'react-icons/im';
-
 import { ImClock } from 'react-icons/im';
+import { IoMdCheckmarkCircleOutline } from 'react-icons/io';
 import YoutubeEmbed from '../utilities/YoutubeEmbed';
 
 const RightSide = ({ courseDetails }) => {
@@ -99,17 +98,21 @@ const RightSide = ({ courseDetails }) => {
         )}
         {/* NOTE: COURSE DETAILS IN POINTS */}
         <div className="py-4 px-5 border-b-1">
-          <p className="font-bold text-lg">You will get from this course</p>
+          <p className="font-bold text-xl mb-5">
+            You will get from this course
+          </p>
           <div className="grid grid-cols-2 gap-x-4 gap-y-3 text-[#3a4e67]">
             {courseDetails?.courseShortData?.map(
               (item) =>
                 item.value !== '' && (
                   <div key={item.name} className="flex items-start">
                     <div>
-                      <ImPointRight className="text-base text-[#2e7d32] font-semibold" />
+                      <IoMdCheckmarkCircleOutline className="text-xl text-[#2e7d32] font-semibold" />
                     </div>
 
-                    <span className="ml-2 ">{item.value}</span>
+                    <span className="ml-2 text-[17px] font-semibold -mt-0.5">
+                      {item.value}
+                    </span>
                   </div>
                 ),
             )}

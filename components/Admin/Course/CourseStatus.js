@@ -56,11 +56,11 @@ const CourseStatus = ({ courseStatus, setCourseStatus }) => {
                 <img
                   className="w-20 h-20 rounded-full"
                   src={item.photoUrl}
-                  alt={item.instructorName}
+                  alt={item.profileName}
                 />
                 <div>
                   <p className="text-xl m-0">
-                    <strong>{item.instructorName}</strong>
+                    <strong>{item.profileName}</strong>
                   </p>
                   <p className="ml-1 text-base m-0">{item.jobTitle}</p>
                 </div>

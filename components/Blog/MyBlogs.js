@@ -2,11 +2,11 @@
 import { Progress, Table } from 'antd';
 import { useEffect, useState } from 'react';
 import { ImCancelCircle } from 'react-icons/im';
-import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
+import CustomModal from '../utilities/CustomModal';
 import HeadingDashboard from '../utilities/HeadingDashboard';
 import RichTextEditor from '../utilities/RichTextEditor';
 const db = firebase.firestore();
@@ -28,20 +28,6 @@ const MyBlogs = () => {
 
   const closeModal = () => {
     setIsOpen(false);
-  };
-
-  const customStyles = {
-    content: {
-      background: '#fff',
-      // innerWidth: '768px',
-      top: '55%',
-      left: '50%',
-      right: 'auto',
-      bottom: '-30%',
-      // marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      zIndex: 100,
-    },
   };
 
   const columns = [
@@ -211,12 +197,7 @@ const MyBlogs = () => {
           }}
         />
       </div>
-      <Modal
-        isOpen={modalIsOpen}
-        onRequestClose={closeModal}
-        style={customStyles}
-        contentLabel="Example Modal"
-      >
+      <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
         <div className="flex justify-between">
           <div />
           <h2 className="text-2xl font-bold text-center mb-8 ">
@@ -331,7 +312,7 @@ const MyBlogs = () => {
 
           {/* <p>{blogData?.date}</p> */}
         </div>
-      </Modal>
+      </CustomModal>
     </div>
   );
 };

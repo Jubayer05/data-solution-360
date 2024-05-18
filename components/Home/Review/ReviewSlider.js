@@ -28,6 +28,11 @@ const ReviewSlider = () => {
       marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
     },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+      backdropFilter: 'blur(0.5px)',
+      zIndex: 500,
+    },
   };
 
   const settings = {
@@ -105,7 +110,6 @@ const ReviewSlider = () => {
                   </a>
                   <Modal
                     isOpen={modalIsOpen}
-                    // onAfterOpen={afterOpenModal}
                     onRequestClose={closeModal}
                     style={customStyles}
                     contentLabel="Example Modal"

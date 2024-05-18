@@ -1,10 +1,10 @@
 import { Table } from 'antd';
 import React, { useState } from 'react';
-import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import CustomModal from '../../utilities/CustomModal';
 const db = firebase.firestore();
 
 const EditFaq = () => {
@@ -36,18 +36,8 @@ const EditFaq = () => {
     });
   };
 
-  const customStyles = {
-    content: {
-      background: '#fff',
-      // innerWidth: '768px',
-      top: '55%',
-      left: '50%',
-      right: 'auto',
-      bottom: '-30%',
-      // marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      zIndex: 100,
-    },
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   const handleView = (record) => {
@@ -123,12 +113,7 @@ const EditFaq = () => {
               y: 400,
             }}
           />
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setIsOpen(false)}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
+          <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
             <div className="w-[350px] sm:w-[550px] text-base">
               <h2>
                 <strong>Question: </strong> {modalData?.faqTitle}
@@ -150,7 +135,7 @@ const EditFaq = () => {
                 Close
               </button>
             </div>
-          </Modal>
+          </CustomModal>
         </div>
       </div>
     </div>

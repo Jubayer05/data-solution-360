@@ -1,18 +1,18 @@
 /* eslint-disable @next/next/no-img-element */
+import Link from 'next/link';
 import React, { useState } from 'react';
-import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
-import { ImCancelCircle } from 'react-icons/im';
-import { IoLogoYoutube } from 'react-icons/io';
-import Modal from 'react-modal';
+import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { useStateContext } from '../../src/context/ContextProvider';
+import CustomModal from '../utilities/CustomModal';
+import MemberDetails from './MemberDetails';
 
 const Team = () => {
-  const { instructor } = useStateContext();
+  const { teamMember } = useStateContext();
 
-  const findCoreMember = instructor.filter(
+  const findCoreMember = teamMember.filter(
     (member) => member.role === 'Core Team Member',
   );
-  const findEmployee = instructor.filter(
+  const findEmployee = teamMember.filter(
     (member) => member.role === 'Employee',
   );
 
@@ -61,13 +61,18 @@ const MemberInfo = ({ item }) => {
     content: {
       background: '#fff',
       innerWidth: '768px',
-      top: '55%',
+      top: '50%',
       left: '50%',
       right: 'auto',
       bottom: '-30%',
-      // marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
+      borderRadius: '15px',
       zIndex: 50,
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
+      backdropFilter: 'blur(8px)',
+      zIndex: 500,
     },
   };
   return (
@@ -94,26 +99,21 @@ const MemberInfo = ({ item }) => {
           className="text-xl font-semibold font-heading hover:text-red-500 cursor-pointer"
           onClick={() => openModal(item)}
         >
-          {item?.instructorName}
+          {item?.profileName}
         </h2>
-        <p className="font-body">{item.jobTitle}</p>
+        <p className="font-body">{item?.jobTitle}</p>
       </div>
 
       <div className="flex justify-center gap-2 mt-5">
-        <div
-          className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
-  hover:text-gray-700 transition-all duration-300`}
-          // style={{ backgroundColor: `${icon.brandColor}` }}
-        >
-          <IoLogoYoutube />
-        </div>
-        <div
-          className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
-  hover:text-gray-700 transition-all duration-300`}
-          // style={{ backgroundColor: `${icon.brandColor}` }}
-        >
-          <FaFacebookF />
-        </div>
+        <Link href={item?.facebookLink} target="_blank">
+          <div
+            className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
+          hover:text-gray-700 transition-all duration-300`}
+            // style={{ backgroundColor: `${icon.brandColor}` }}
+          >
+            <FaFacebookF />
+          </div>
+        </Link>
         <div
           className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
   hover:text-gray-700 transition-all duration-300`}
@@ -121,62 +121,12 @@ const MemberInfo = ({ item }) => {
         >
           <FaLinkedinIn />
         </div>
-        <div
-          className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
-  hover:text-gray-700 transition-all duration-300`}
-          // style={{ backgroundColor: `${icon.brandColor}` }}
-        >
-          <FaWhatsapp />
-        </div>
       </div>
       <div className="p-5">
         <>
-          <Modal
-            isOpen={modalIsOpen}
-            // onAfterOpen={afterOpenModal}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
-            <div className="max-w-5xl min-w-[600px] mx-5">
-              <ImCancelCircle
-                className="fixed right-3 top-3 text-2xl z-100 
-              text-red-500 cursor-pointer"
-                onClick={closeModal}
-              />
-
-              <div className="flex items-center justify-between mb-[15px] text-center">
-                <img
-                  className="w-[170px] h-[170px] object-cover rounded-full"
-                  src={modalData?.photoUrl}
-                  alt={modalData?.name}
-                />
-
-                <div className="text-left mr-auto ml-5">
-                  <h2 className="text-2xl font-bold leading-8 text-[#231f40]">
-                    {modalData?.instructorName}
-                  </h2>
-                  <p className="text-[#c9417c] font-medium mt-2">
-                    {modalData?.jobTitle}
-                  </p>
-                </div>
-              </div>
-              <div>
-                <p className="mt-10 text-lg font-semibold">
-                  Know More About {item.instructorName}
-                </p>
-                <div
-                  className="text-sm text-gray-600 mt-5"
-                  dangerouslySetInnerHTML={{
-                    __html: modalData?.details,
-                  }}
-                />
-              </div>
-              <p className="text-base leading-7 text-[#6f6b80] mb-[24px]">
-                {modalData?.reviewDetails}
-              </p>
-            </div>
-          </Modal>
+          <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+            <MemberDetails data={modalData} closeModal={closeModal} />
+          </CustomModal>
         </>
       </div>
     </div>

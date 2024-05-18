@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Collapse } from 'antd';
 import Link from 'next/link';
+
 import React, { useEffect, useState } from 'react';
 import { AiOutlineFundProjectionScreen } from 'react-icons/ai';
 import { BsCalendarDay, BsClock } from 'react-icons/bs';
@@ -8,15 +9,20 @@ import { GoCalendar } from 'react-icons/go';
 import { RiLiveLine } from 'react-icons/ri';
 import { useStateContext } from '../../src/context/ContextProvider';
 
+import { ImCancelCircle } from 'react-icons/im';
 import { colors } from '../../src/data/data';
 import AddVideoReview from '../Home/Review/AddVideoReview';
+import CustomModal from '../utilities/CustomModal';
 import RightSide from './RightSide';
 import StudentReviewCourse from './StudentReviewCourse';
+import MemberDetails from '../About/MemberDetails';
 const { Panel } = Collapse;
 
 const CourseDetails = () => {
   const { courseData } = useStateContext();
   const [courseDetails, setCourseDetails] = useState('');
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -25,6 +31,31 @@ const CourseDetails = () => {
       setCourseDetails(item);
     }
   }, [courseData]);
+
+  const openModal = (item) => {
+    setModalData(item);
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    setIsOpen(false);
+  };
+
+  const customStyles = {
+    content: {
+      background: '#fff',
+      top: '50%',
+      left: '50%',
+      right: 'auto',
+      bottom: 'auto',
+      marginRight: '-50%',
+      transform: 'translate(-50%, -50%)',
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.04)',
+      backdropFilter: 'blur(0.5px)',
+      zIndex: 500,
+    },
+  };
 
   console.log(courseDetails);
 
@@ -42,33 +73,38 @@ const CourseDetails = () => {
           </p>
 
           {/* NOTE: ORIENTATION SECTION */}
-          {courseDetails?.orientation_class !== '-' && (
-            <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
-              <img className="w-[60px] mr-4" src="/course/webinar.png" alt="" />
-              <div>
-                <span className="cursor-pointer font-heading">
-                  Free Orientation Class
-                </span>
-                <div className="flex items-center text-base mt-1">
-                  <GoCalendar />
-                  {/* TODO: Make it simple date with day name */}
-                  <span className="ml-1.5">
-                    {courseDetails?.orientation_class}
+          {courseDetails?.status !== 'Upcoming' &&
+            courseDetails?.orientation_class !== '-' && (
+              <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
+                <img
+                  className="w-[60px] mr-4"
+                  src="/course/webinar.png"
+                  alt=""
+                />
+                <div>
+                  <span className="cursor-pointer font-heading">
+                    Free Orientation Class
                   </span>
+                  <div className="flex items-center text-base mt-1">
+                    <GoCalendar />
+                    {/* TODO: Make it simple date with day name */}
+                    <span className="ml-1.5">
+                      {courseDetails?.orientation_class}
+                    </span>
+                  </div>
+                </div>
+                <div className="ml-auto">
+                  <Link href={`${courseDetails?.join_link}`} target="_blank">
+                    <button className="bg-[#1f0835] text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
+                      Book Your Seat Now
+                    </button>
+                  </Link>
                 </div>
               </div>
-              <div className="ml-auto">
-                <Link href={`${courseDetails?.join_link}`} target="_blank">
-                  <button className="bg-[#1f0835] text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
-                    Book Your Seat Now
-                  </button>
-                </Link>
-              </div>
-            </div>
-          )}
+            )}
 
           {/* NOTE: COURSE DETAILS (BATCH, STARTING, DAY, TIME) */}
-          {
+          {courseDetails?.status !== 'Upcoming' && (
             <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-1 md:gap-6">
               <div className="pl-3 pr-2">
                 <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
@@ -111,7 +147,7 @@ const CourseDetails = () => {
                 <span>{courseDetails?.class_time}</span>
               </div>
             </div>
-          }
+          )}
 
           {/* NOTE: COURSE INCLUDED ITEMS */}
           <div className="bg-[#101828] p-3 md:p-8 pl-5 md:pl-12 font-normal text-[#eaecf0] rounded-lg mt-8">
@@ -343,6 +379,7 @@ const CourseDetails = () => {
                 <div
                   key={item.id}
                   className="bg-white mt-4 border-l-[3px] border-[#4478ff] rounded-[6px] shadow-lg py-3 px-4 cursor-pointer flex items-center gap-4 hover:bg-[#eaecf0]"
+                  onClick={() => openModal(item)}
                 >
                   <img
                     src={item.photoUrl}
@@ -351,7 +388,7 @@ const CourseDetails = () => {
                   />
                   <div>
                     <p className="m-0 text-xl text-[#1d2939] font-bold">
-                      {item.instructorName}
+                      {item.profileName}
                     </p>
                     <p className="m-0 text-base text-[#475467]">
                       {item.jobTitle}
@@ -359,6 +396,9 @@ const CourseDetails = () => {
                   </div>
                 </div>
               ))}
+              <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+                <MemberDetails data={modalData} closeModal={closeModal} />
+              </CustomModal>
             </div>
           </div>
           {/* NOTE: REQUIREMENTS */}

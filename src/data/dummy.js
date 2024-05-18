@@ -15,7 +15,7 @@ import {
   MdOutlineContentPaste,
   MdOutlineUnsubscribe,
 } from 'react-icons/md';
-import { RiHomeGearFill } from 'react-icons/ri';
+import { RiHomeGearFill, RiTeamLine } from 'react-icons/ri';
 
 export const linksAdmin = [
   {
@@ -73,7 +73,12 @@ export const linksAdmin = [
         icon: <MdOutlineUnsubscribe />,
       },
       {
-        name: 'Team Member & Instructor',
+        name: 'Team Member',
+        link: '/admin/team_member',
+        icon: <RiTeamLine />,
+      },
+      {
+        name: 'Instructor',
         link: '/admin/instructors',
         icon: <GiTeacher />,
       },

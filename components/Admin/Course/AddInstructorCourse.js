@@ -9,23 +9,23 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
   const { instructor } = useStateContext();
 
   const selectInstructor = instructor.map(
-    ({ instructorName, photoUrl, jobTitle }) => ({
+    ({ profileName, photoUrl, jobTitle }) => ({
       label: (
         <div className="flex items-center gap-4">
           <img
             className="w-10 h-10 rounded-full"
             src={photoUrl}
-            alt={instructorName}
+            alt={profileName}
           />
           <div>
             <p className="text-lg m-0">
-              <strong>{instructorName}</strong>
+              <strong>{profileName}</strong>
             </p>
             <p className="ml-1 text-sm m-0">{jobTitle}</p>
           </div>
         </div>
       ),
-      value: { instructorName, photoUrl, jobTitle },
+      value: { profileName, photoUrl, jobTitle },
     }),
   );
 
@@ -47,7 +47,7 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
   const handleChange = (item) => {
     const findInstructor = instructors?.find(
       (val) =>
-        val.instructorName === item.value.instructorName &&
+        val.profileName === item.value.profileName &&
         val.jobTitle === item.value.jobTitle,
     );
     if (!findInstructor) {
@@ -77,11 +77,11 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
                 <img
                   className="w-20 h-20 rounded-full"
                   src={item.photoUrl}
-                  alt={item.instructorName}
+                  alt={item.profileName}
                 />
                 <div>
                   <p className="text-xl m-0">
-                    <strong>{item.instructorName}</strong>
+                    <strong>{item.profileName}</strong>
                   </p>
                   <p className="ml-1 text-base m-0">{item.jobTitle}</p>
                 </div>

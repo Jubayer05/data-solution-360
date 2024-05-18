@@ -60,9 +60,13 @@ const ManageCourse = () => {
       left: '50%',
       right: 'auto',
       bottom: '50%',
-      // marginRight: '-50%',
       transform: 'translate(-50%, -50%)',
       zIndex: 100,
+    },
+    overlay: {
+      backgroundColor: 'rgba(0, 0, 0, 0.75)',
+      backdropFilter: 'blur(8px)',
+      zIndex: 500,
     },
   };
 

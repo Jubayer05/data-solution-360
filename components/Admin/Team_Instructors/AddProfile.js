@@ -4,16 +4,8 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
-import { useStateContext } from '../../../src/context/ContextProvider';
 import RichTextEditor from '../../utilities/RichTextEditor';
 const db = firebase.firestore();
-
-const initialInstructorState = {
-  instructorName: '',
-  photoUrl: '',
-  jobTitle: '',
-  role: '',
-};
 
 const selectLanguage = [
   {
@@ -26,15 +18,11 @@ const selectLanguage = [
   },
 ];
 
-const AddInstructor = () => {
-  const { instructor } = useStateContext();
-  // console.log(instructor);
-
-  const [instructorInfo, setInstructorInfo] = useState({
-    ...initialInstructorState,
-  });
+const AddProfile = ({ profile, db_name, showRole }) => {
+  const [profileInfo, setProfileInfo] = useState({});
   const [progressData, setProgressData] = useState(0);
   const [details, setDetails] = useState('');
+  const [editProfile, setEditProfile] = useState(null);
 
   const conicColors = {
     '0%': '#87d068',
@@ -58,20 +46,20 @@ const AddInstructor = () => {
   };
 
   const handleChangeRole = (item) => {
-    setInstructorInfo({ ...instructorInfo, role: item.value });
+    setProfileInfo({ ...profileInfo, role: item.value });
   };
 
   // Handler for file submission
   const handleFileSubmit = (e) => {
     const fileSize = e.target.files[0].size;
-    const instructorImg = e.target.files[0];
-    // console.log(instructorImg.size);
+    const profileImg = e.target.files[0];
+    // console.log(profileImg.size);
 
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`instructorImage/${instructorImg?.name}`)
-        .put(instructorImg);
+        .ref(`profileImage/${profileImg?.name}`)
+        .put(profileImg);
       uploadTask.on(
         'state_changed',
         (snapshot) => {
@@ -86,12 +74,12 @@ const AddInstructor = () => {
         () => {
           firebase
             .storage()
-            .ref('instructorImage')
-            .child(instructorImg?.name)
+            .ref('profileImage')
+            .child(profileImg?.name)
             .getDownloadURL()
             .then((url) => {
               // NOTE: use this url
-              setInstructorInfo({ ...instructorInfo, photoUrl: url });
+              setProfileInfo({ ...profileInfo, photoUrl: url });
             });
         },
       );
@@ -100,18 +88,17 @@ const AddInstructor = () => {
     }
   };
 
-  const handleAddInstructor = () => {
+  const handleAddProfile = () => {
     if (
-      instructorInfo.instructorName !== '' &&
-      instructorInfo.photoUrl !== '' &&
-      instructorInfo.jobTitle !== '' &&
+      profileInfo.profileName !== '' &&
+      profileInfo.photoUrl !== '' &&
+      profileInfo.jobTitle !== '' &&
       details !== '' &&
-      instructorInfo.role !== ''
+      profileInfo.role !== ''
     ) {
-      db.collection('instructors')
-        .add({ ...instructorInfo, details: details })
+      db.collection(db_name)
+        .add({ ...profileInfo, details: details })
         .then(() => {
-          alert('Instructor ');
           Swal.fire(
             'Success!',
             'Member information was successfully uploaded.',
@@ -123,18 +110,51 @@ const AddInstructor = () => {
         .catch((error) => {
           alert(error.message + '' + 'Something went wrong');
         });
-
-      setInstructorInfo({ ...initialInstructorState });
     } else {
       alert('Please provide a valid information!');
     }
   };
 
   const handleChange = (e) => {
-    setInstructorInfo({ ...instructorInfo, [e.target.name]: e.target.value });
+    setProfileInfo({ ...profileInfo, [e.target.name]: e.target.value });
   };
 
-  const handleDeleteInstructor = (item) => {
+  const editBtnClick = (item) => {
+    setDetails(item.details);
+    setEditProfile(item);
+  };
+
+  const handleEditMember = () => {
+    Swal.fire({
+      title: 'Are you sure for edit?',
+      text: 'Please check and be aware of making changes!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Make Edit!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        db.collection(db_name)
+          .doc(editProfile.key)
+          .update({ ...editProfile, ...profileInfo, details })
+          .then(() => {
+            Swal.fire(
+              'Done!',
+              'Your request for edit is completed.',
+              'success',
+            ).then(() => {
+              window.location.reload();
+            });
+          })
+          .catch((error) => {
+            Swal.fire('Error!', 'Something went wrong.', 'error');
+          });
+      }
+    });
+  };
+
+  const handleDeleteProfile = (item) => {
     Swal.fire({
       title: 'Are you sure?',
       text: "You won't be able to revert this!",
@@ -145,11 +165,17 @@ const AddInstructor = () => {
       confirmButtonText: 'Yes, delete it!',
     }).then((result) => {
       if (result.isConfirmed) {
-        db.collection('instructors')
+        db.collection(db_name)
           .doc(item.key)
           .delete()
           .then(() => {
-            Swal.fire('Deleted!', 'Your file has been deleted.', 'success');
+            Swal.fire(
+              'Deleted!',
+              'Your file has been deleted.',
+              'success',
+            ).then(() => {
+              window.location.reload();
+            });
           })
           .catch((error) => {
             Swal.fire('Error!', 'Something went wrong.', 'error');
@@ -162,12 +188,12 @@ const AddInstructor = () => {
     <div>
       <div className="bg-[#f0f0f0] shadow-lg rounded-lg border-dashed px-6 py-3 mt-5">
         <h2 className="text-xl text text-center my-4 font-bold">
-          Instructor List
+          Profile List
         </h2>
-        {instructor?.length === 0 ? (
-          <p className="text-base">No instructor information were added!</p>
+        {profile?.length === 0 ? (
+          <p className="text-base">No profile information were added!</p>
         ) : (
-          instructor?.map((item) => (
+          profile?.map((item) => (
             <div key={item.key} className="my-4 shadow-md flex items-center">
               <div className="flex-1">
                 <div className="px-4 py-2 rounded-lg text-base font-normal flex items-center justify-between gap-10 bg-white">
@@ -175,21 +201,29 @@ const AddInstructor = () => {
                     <img
                       className="w-20 h-20 rounded-full"
                       src={item.photoUrl}
-                      alt={item.instructorName}
+                      alt={item.profileName}
                     />
                     <div>
                       <p className="text-xl m-0">
-                        <strong>{item.instructorName}</strong>
+                        <strong>{item.profileName}</strong>
                       </p>
                       <p className="ml-1 text-base m-0">{item.jobTitle}</p>
                     </div>
                   </div>
-                  <button
-                    onClick={() => handleDeleteInstructor(item)}
-                    className="px-4 py-3 mx-4 bg-red-500 text-white rounded-md"
-                  >
-                    Remove
-                  </button>
+                  <div>
+                    <button
+                      onClick={() => editBtnClick(item)}
+                      className="px-4 py-2 mx-1 bg-[#3174ae] text-white rounded-md"
+                    >
+                      Edit
+                    </button>
+                    <button
+                      onClick={() => handleDeleteProfile(item)}
+                      className="px-4 py-2 mx-1 bg-red-500 text-white rounded-md"
+                    >
+                      Remove
+                    </button>
+                  </div>
                 </div>
               </div>
             </div>
@@ -197,33 +231,48 @@ const AddInstructor = () => {
         )}
       </div>
       <div className="bg-[#f0f0f0] shadow-lg rounded-lg border-dashed px-6 py-3 mt-10">
-        <h2 className="text-xl text text-center my-4 font-bold">Add Members</h2>
+        <h2 className="text-xl text text-center my-4 font-bold">
+          {editProfile ? 'Edit' : 'Add'} Member
+        </h2>
         <div className="grid gap-4 grid-cols-2 ">
-          <div className="col-span-1">
+          <div className={showRole ? 'col-span-1' : 'col-span-2'}>
             <InputBox
-              value={instructorInfo.instructorName}
+              value={profileInfo.profileName}
+              editProfile={editProfile}
               title="Name"
-              name="instructorName"
-              id="instructorName"
+              name="profileName"
+              id="profileName"
               type="text"
               func={handleChange}
             />
           </div>
-          <div className="col-span-1">
-            <p htmlFor className="font-semibold block text-[#17012e]">
-              Select Member&apos;s Role
-            </p>
-            <Select
-              className="w-full mt-2"
-              styles={customStyles}
-              options={selectLanguage}
-              defaultValue={selectLanguage[0]}
-              onChange={handleChangeRole}
-            />
-          </div>
+          {showRole && (
+            <div className="col-span-1">
+              <p htmlFor className="font-semibold block text-[#17012e]">
+                Select Member&apos;s Role{' '}
+                {editProfile && (
+                  <span className="ml-2 italic font-thin">
+                    (previous:
+                    <span className=" text-[orangered] ml-2">
+                      {editProfile.role}
+                    </span>
+                    )
+                  </span>
+                )}
+              </p>
+              <Select
+                className="w-full mt-2"
+                styles={customStyles}
+                options={selectLanguage}
+                defaultValue={selectLanguage[0]}
+                onChange={handleChangeRole}
+              />
+            </div>
+          )}
           <div className="col-span-2">
             <InputBox
-              value={instructorInfo.jobTitle}
+              editProfile={editProfile}
+              value={profileInfo.jobTitle}
               title="Job Title"
               name="jobTitle"
               id="jobTitle"
@@ -233,7 +282,8 @@ const AddInstructor = () => {
           </div>
           <div className="col-span-1">
             <InputBox
-              value={instructorInfo.facebookLink}
+              editProfile={editProfile}
+              value={profileInfo.facebookLink}
               title="Facebook Link"
               name="facebookLink"
               id="facebookLink"
@@ -243,7 +293,8 @@ const AddInstructor = () => {
           </div>
           <div className="col-span-1">
             <InputBox
-              value={instructorInfo.linkedInLink}
+              editProfile={editProfile}
+              value={profileInfo.linkedInLink}
               title="LinkedIn Link"
               name="linkedInLink"
               id="linkedInLink"
@@ -251,30 +302,17 @@ const AddInstructor = () => {
               func={handleChange}
             />
           </div>
-          <div className="col-span-1">
-            <InputBox
-              value={instructorInfo.whatsappNumber}
-              title="Whatsapp Number"
-              name="whatsappNumber"
-              id="whatsappNumber"
-              type="text"
-              func={handleChange}
-            />
-          </div>
-          <div className="col-span-1">
-            <InputBox
-              value={instructorInfo.youtubeLink}
-              title="Youtube Link"
-              name="youtubeLink"
-              id="youtubeLink"
-              type="text"
-              func={handleChange}
-            />
-          </div>
+
           <div className="col-span-2">
             <label htmlFor className="font-semibold block text-[#17012e]">
               Image of the member
             </label>
+            {editProfile && (
+              <span className="ml-2 italic font-thin">
+                (previous:
+                <img src={editProfile.photoUrl} className="w-20" alt="" />)
+              </span>
+            )}
             <input
               id="photoUrl"
               onChange={handleFileSubmit}
@@ -292,14 +330,15 @@ const AddInstructor = () => {
         <RichTextEditor
           title="Add Members information"
           onDataChange={setDetails}
+          value={details}
         />
 
         <div className="w-full text-center pt-5 pb-4">
           <button
-            onClick={handleAddInstructor}
+            onClick={editProfile ? handleEditMember : handleAddProfile}
             className="px-4 py-3 bg-blue-500 text-white rounded-md"
           >
-            Add Member
+            {editProfile ? 'Change Edit & Submit' : 'Add Member'}
           </button>
         </div>
       </div>
@@ -307,13 +346,28 @@ const AddInstructor = () => {
   );
 };
 
-export default AddInstructor;
+export default AddProfile;
 
-const InputBox = ({ title, type, id, func, placeholder, name, value }) => {
+const InputBox = ({
+  title,
+  type,
+  id,
+  func,
+  placeholder,
+  name,
+  value,
+  editProfile,
+}) => {
   return (
     <div className="w-full">
       <label htmlFor={id} className="font-semibold block text-[#17012e]">
         {title}
+        {editProfile && (
+          <span className="ml-2 italic font-thin">
+            (previous:
+            <span className=" text-[orangered] ml-2">{editProfile[name]}</span>)
+          </span>
+        )}
       </label>
       <input
         value={value}

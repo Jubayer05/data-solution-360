@@ -2,11 +2,11 @@
 import { Progress, Table } from 'antd';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
-import Modal from 'react-modal';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import CustomModal from '../../utilities/CustomModal';
 const db = firebase.firestore();
 
 const StudentFeedback = () => {
@@ -125,18 +125,8 @@ const StudentFeedback = () => {
     });
   };
 
-  const customStyles = {
-    content: {
-      background: '#fff',
-      // innerWidth: '768px',
-      top: '55%',
-      left: '50%',
-      right: 'auto',
-      bottom: '-30%',
-      // marginRight: '-50%',
-      transform: 'translate(-50%, -50%)',
-      zIndex: 100,
-    },
+  const closeModal = () => {
+    setIsOpen(false);
   };
 
   const columns = [
@@ -216,12 +206,7 @@ const StudentFeedback = () => {
             />
           </div>
 
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={() => setIsOpen(false)}
-            style={customStyles}
-            contentLabel="Example Modal"
-          >
+          <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
             <div className="w-[350px] sm:w-[600px] text-base">
               <img src={modalData?.img} className="w-32 " alt="" />
               <h3>
@@ -249,7 +234,7 @@ const StudentFeedback = () => {
                 Close
               </button>
             </div>
-          </Modal>
+          </CustomModal>
           <form onSubmit={formik.handleSubmit}>
             {/* NOTE: STUDENT NAME */}
             <div className="flex items-center mt-3">
