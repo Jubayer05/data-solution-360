@@ -8,26 +8,24 @@ import { useStateContext } from '../../../src/context/ContextProvider';
 const AddInstructorCourse = ({ instructors, setInstructors }) => {
   const { instructor } = useStateContext();
 
-  const selectInstructor = instructor.map(
-    ({ profileName, photoUrl, jobTitle }) => ({
-      label: (
-        <div className="flex items-center gap-4">
-          <img
-            className="w-10 h-10 rounded-full"
-            src={photoUrl}
-            alt={profileName}
-          />
-          <div>
-            <p className="text-lg m-0">
-              <strong>{profileName}</strong>
-            </p>
-            <p className="ml-1 text-sm m-0">{jobTitle}</p>
-          </div>
+  const selectInstructor = instructor.map((item) => ({
+    label: (
+      <div className="flex items-center gap-4">
+        <img
+          className="w-10 h-10 rounded-full"
+          src={item.photoUrl}
+          alt={item.profileName}
+        />
+        <div>
+          <p className="text-lg m-0">
+            <strong>{item.profileName}</strong>
+          </p>
+          <p className="ml-1 text-sm m-0">{item.jobTitle}</p>
         </div>
-      ),
-      value: { profileName, photoUrl, jobTitle },
-    }),
-  );
+      </div>
+    ),
+    value: { ...item },
+  }));
 
   const customStyles = {
     menu: (provided, state) => ({

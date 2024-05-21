@@ -3,6 +3,7 @@ import React from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 
 const MemberDetails = ({ data, closeModal }) => {
+  console.log(data);
   return (
     <div className="max-w-5xl min-w-[600px] mx-5">
       <ImCancelCircle
