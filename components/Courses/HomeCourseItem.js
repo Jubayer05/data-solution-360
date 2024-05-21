@@ -10,8 +10,6 @@ const CourseItem = ({ item, upcoming }) => {
     100 - (item?.discounted_price / item?.price) * 100,
   );
 
-  console.log(item);
-
   return (
     <div
       className="w-full mx-auto rounded-lg overflow-hidden sm:mx-2 border hover:border-[#676767] 

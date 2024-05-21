@@ -10,6 +10,12 @@ const ShortCut = () => {
       title: 'Slide Main Banner',
       link: '/admin/home-page/#slide_main_banner',
     },
+    {
+      id: '9',
+      title: 'Countdown',
+      link: '/admin/home-page/#countdown_admin',
+    },
+
     { id: '1', title: 'Add Faq', link: '/admin/home-page/#add_faq' },
     {
       id: '2',

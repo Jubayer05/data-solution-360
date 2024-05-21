@@ -35,7 +35,7 @@ const Technology = () => {
         <div className="flex justify-center items-center flex-wrap gap-6 mt-8 max-w-5xl mx-auto">
           {technologyStack?.map((item) => (
             <div
-              key={item.id}
+              key={item.key}
               className="bg-white shadow-md w-20 h-20 md:w-28 md:h-28 flex items-center 
               justify-center flex-col rounded-lg overflow-hidden"
             >

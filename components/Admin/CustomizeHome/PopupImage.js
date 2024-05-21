@@ -24,9 +24,6 @@ const PopupImage = () => {
         .update({
           ...values,
           photoUrl: photoUrl,
-        })({
-          ...values,
-          photoUrl: photoUrl,
         })
         .then(() => {
           Swal.fire({

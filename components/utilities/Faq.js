@@ -18,7 +18,7 @@ const Faq = ({ title }) => {
       )}
       {showMore
         ? faqData.map((item) => (
-            <div key={item.id} className="m-5">
+            <div key={item.key} className="m-5">
               <Collapse
                 collapsible="header"
                 expandIconPosition="end"
@@ -27,7 +27,7 @@ const Faq = ({ title }) => {
                 <Panel
                   className="text-[14px] md:text-lg font-semibold"
                   header={item.faqTitle}
-                  key={item.id}
+                  key={item.key}
                 >
                   <div
                     className="text-base font-normal"
@@ -38,7 +38,7 @@ const Faq = ({ title }) => {
             </div>
           ))
         : faqData?.slice(0, 4).map((item) => (
-            <div key={item.id} className="m-5">
+            <div key={item.key} className="m-5">
               <Collapse
                 collapsible="header"
                 expandIconPosition="end"
@@ -47,7 +47,7 @@ const Faq = ({ title }) => {
                 <Panel
                   className="text-[14px] md:text-lg font-semibold"
                   header={item.faqTitle}
-                  key={item.id}
+                  key={item.key}
                 >
                   <div
                     className="text-base font-normal"

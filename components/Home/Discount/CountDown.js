@@ -41,7 +41,11 @@ const Countdown = ({ targetDate }) => {
         <span className="font-normal text-xs md:text-sm">
           Expires in: &nbsp;
         </span>{' '}
-        <span className="text-base md:text-xl"> {countdown}</span>
+        {targetDate ? (
+          <span className="text-base md:text-xl"> {countdown}</span>
+        ) : (
+          0
+        )}
       </h2>
     </div>
   );
