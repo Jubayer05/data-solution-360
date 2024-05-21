@@ -1,31 +1,19 @@
+import { Switch } from 'antd';
 import { useFormik } from 'formik';
-import React from 'react';
+import React, { useState } from 'react';
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 
 const CountdownAdmin = () => {
-  const validate = (values) => {
-    const errors = {};
-
-    if (!values.courseLink) {
-      errors.courseLink = 'Required';
-    }
-
-    if (!values.countdownEnd) {
-      errors.countdownEnd = 'Required';
-    }
-
-    return errors;
-  };
+  const [countdownStatus, setCountdownStatus] = useState(true);
 
   const formik = useFormik({
     initialValues: {
       countdownEnd: '',
       courseLink: '',
     },
-    validate,
     onSubmit: (values) => {
       firebase
         .firestore()
@@ -33,6 +21,7 @@ const CountdownAdmin = () => {
         .doc('s0N0oL5xGJenV4XBD892')
         .update({
           ...values,
+          countdownStatus,
         })
         .then(() => {
           Swal.fire({
@@ -58,6 +47,15 @@ const CountdownAdmin = () => {
           <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Countdown</h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
           <form onSubmit={formik.handleSubmit}>
+            <div className="flex items-center mb-3 gap-3">
+              <span>Count down status: </span>
+              <Switch
+                onChange={(value) => setCountdownStatus(value)}
+                checkedChildren="on"
+                unCheckedChildren="off"
+                defaultChecked={true}
+              />
+            </div>
             {/* NOTE: countdown date */}
             <div className="flex items-center mb-3">
               <label htmlFor="countdownEnd" className="w-[240px] sm:w-[300px]">
