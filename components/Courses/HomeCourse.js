@@ -38,37 +38,20 @@ const HomeCourse = () => {
           className="text-headerMain font-heading ml-6 text-xl font-semibold inline-flex 
         items-center gap-2 hover:text-primary transition-all"
         >
-          Registration Going on Courses <FaArrowRightLong />
+          Our Courses <FaArrowRightLong />
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
           {registrationGoingOnCourses.map((item) => (
             <HomeCourseItem key={item.id} item={item} />
           ))}
-        </div>
-
-        <h2
-          className="text-headerMain font-heading ml-6 text-xl font-semibold inline-flex 
-        items-center gap-2 hover:text-primary transition-all"
-        >
-          Running Courses <FaArrowRightLong />
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
           {runningCourses.map((item) => (
             <HomeCourseItem key={item.id} item={item} />
           ))}
-        </div>
-
-        <h2
-          className="mt-2 text-headerMain font-heading ml-6 text-xl font-semibold 
-        inline-flex items-center gap-2 hover:text-primary transition-all"
-        >
-          Upcoming Courses <FaArrowRightLong />
-        </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 p-5 pt-0">
           {upComingCourses.map((item) => (
             <HomeCourseItem key={item.id} item={item} upcoming={true} />
           ))}
         </div>
+
         <div className="flex justify-center">
           <Link href="https://datasolution360.com/courses">
             <button

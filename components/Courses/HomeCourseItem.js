@@ -10,11 +10,20 @@ const CourseItem = ({ item, upcoming }) => {
     100 - (item?.discounted_price / item?.price) * 100,
   );
 
+  console.log(item);
+
   return (
     <div
       className="w-full mx-auto rounded-lg overflow-hidden sm:mx-2 border hover:border-[#676767] 
-    transition-border duration-300 cursor-pointer"
+    transition-border duration-300 cursor-pointer relative"
     >
+      <div className="w-[120px] h-[120px] bg-[orangered] absolute -rotate-45 -left-16 -top-16 flex justify-center items-end">
+        <p className="mb-2 text-[13px] text-white font-semibold">
+          {item?.status == 'Registration Going on'
+            ? 'Registering'
+            : item?.status}
+        </p>
+      </div>
       <Link href={`/course-details/${item.key}`}>
         <img src={item.img} alt="" className="w-full h-44" />
         <div
