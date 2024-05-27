@@ -5,6 +5,7 @@ const db = firebase.firestore();
 const StateContext = createContext();
 
 export const MainContextProvider = ({ children }) => {
+  const [globalLoading, setGlobalLoading] = useState(true);
   const [language, setLanguage] = useState('English');
   const [userName, setUserName] = useState('');
   // const [email, setEmail] = useState("");
@@ -53,6 +54,7 @@ export const MainContextProvider = ({ children }) => {
         ...doc.data(),
       }));
       setState(data);
+      setGlobalLoading(false);
     });
   };
   const loadDataByOrder = (database, setState, orderProperty, orderBy) => {
@@ -64,6 +66,7 @@ export const MainContextProvider = ({ children }) => {
           ...doc.data(),
         }));
         setState(data);
+        setGlobalLoading(false);
       });
   };
 
@@ -95,6 +98,7 @@ export const MainContextProvider = ({ children }) => {
         technologyStack,
         studentReview,
         slidesMainBannerData,
+        globalLoading,
       }}
     >
       {children}

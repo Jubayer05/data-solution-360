@@ -1,4 +1,6 @@
+/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
+import { useStateContext } from '../../src/context/ContextProvider';
 import {
   AboutHome,
   Discount,
@@ -21,6 +23,7 @@ import Subscribe from './Subscribe';
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(false);
+  const { globalLoading } = useStateContext();
 
   useEffect(() => {
     const hasVisitedBefore = sessionStorage.getItem('popup');
@@ -33,25 +36,35 @@ const Home = () => {
 
   return (
     <div className="bg-[#f9f9fa]">
-      <>
-        {showPopup && <Popup handler={setShowPopup} />}
-        <Discount />
-        <Navbar />
-        <MainBanner />
-        {/* <BannerCompanies /> */}
-        {/* <BannerCarousel /> */}
-        <HomeCourse />
-        <JoinFree />
-        <Service />
-        <AboutHome />
-        <AddVideoReview />
-        <Technology />
-        <Faq />
-        <Review />
-        <BlogHome />
-        <Subscribe />
-        <Footer />
-      </>
+      {globalLoading ? (
+        <div className="flex justify-center items-center min-h-screen">
+          <img
+            src="/logo/logo.png"
+            className="w-[250px] animate-pulse"
+            alt=""
+          />
+        </div>
+      ) : (
+        <>
+          {showPopup && <Popup handler={setShowPopup} />}
+          <Discount />
+          <Navbar />
+          <MainBanner />
+          {/* <BannerCompanies /> */}
+          {/* <BannerCarousel /> */}
+          <HomeCourse />
+          <JoinFree />
+          <Service />
+          <AboutHome />
+          <AddVideoReview />
+          <Technology />
+          <Faq />
+          <Review />
+          <BlogHome />
+          <Subscribe />
+          <Footer />
+        </>
+      )}
       <WhatsApp />
     </div>
   );

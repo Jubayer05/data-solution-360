@@ -69,8 +69,15 @@ module.exports = {
       lineHeight: {
         20: '80px',
       },
+      keyframes: {
+        pulse: {
+          '0%, 100%': { transform: 'scale(.9)' },
+          '50%': { transform: 'scale(1.2)' },
+        },
+      },
       animation: {
         'spin-slow': 'spin 30s linear infinite',
+        pulse: 'pulse 4s infinite',
       },
     },
   },
