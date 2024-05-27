@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { IoIosPeople } from 'react-icons/io';
+import Typewriter from 'typewriter-effect';
 
 import Link from 'next/link';
 import { ImClock } from 'react-icons/im';
@@ -18,17 +19,23 @@ const CourseItem = ({ item, upcoming }) => {
     transition-border duration-300 cursor-pointer relative"
     >
       <div className="w-[120px] h-[120px] bg-[orangered] absolute -rotate-45 -left-16 -top-16 flex justify-center items-end">
-        <p className="mb-2 text-[13px] text-white font-semibold">
-          {item?.status == 'Registration Going on'
-            ? 'Registering'
-            : item?.status}
-        </p>
+        <div>
+          {item?.status == 'Registration Going on' ? (
+            <p className="mb-1 text-[11px] leading-[1] text-white font-semibold text-center">
+              Registration <br /> Going on
+            </p>
+          ) : (
+            <p className="mb-2 text-[13px] text-white font-semibold">
+              {item?.status}
+            </p>
+          )}
+        </div>
       </div>
       <Link href={`/course-details/${item.key}`}>
-        <img src={item.img} alt="" className="w-full h-44" />
+        <img src={item.img} alt="" className="w-full h-[260px]" />
         <div
           className="rounded-lg rounded-t-none flex flex-col"
-          style={{ height: 'calc(100% - 176px)' }}
+          style={{ height: 'calc(100% - 260px)' }}
         >
           {/* <div className="flex items-center justify-between">
             <div className="flex items-center">
@@ -104,6 +111,23 @@ const CourseItem = ({ item, upcoming }) => {
           >
             {item.title}
           </p>
+          {item?.status == 'Registration Going on' && (
+            <div className="text-xl">
+              <p
+                className=" flex-1 text-lg font-bold mb-1.5 mt-2 
+          px-4 text-[#39b94a] text-center"
+              >
+                <Typewriter
+                  options={{
+                    strings: ['Registration', 'Going on'],
+                    autoStart: true,
+                    loop: true,
+                    deleteSpeed: 15,
+                  }}
+                />
+              </p>
+            </div>
+          )}
           <div
             className="flex justify-end font-medium text-[14px] flex-wrap text-[#4F547B]
             bg-[#f9f9fa] py-4 px-2"
