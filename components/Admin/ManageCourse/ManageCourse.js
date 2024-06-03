@@ -359,7 +359,37 @@ const ManageCourse = () => {
           />
 
           {/* NOTE: PRICE BOX */}
-          <div className="grid gap-4 grid-cols-2">
+          <div className="grid gap-x-4 grid-cols-2">
+            {/* NOTE: InputBox component for the Number of Modules */}
+            <InputBoxManage
+              title="Module Number"
+              id="module_number"
+              placeholder="Example - 8"
+              func={handleInputChange}
+              type="number"
+              value={modalData?.module_number}
+            />
+
+            {/* NOTE: InputBox component for the Number of Live Class */}
+            <InputBoxManage
+              title="Live Class Number"
+              id="live_class_number"
+              placeholder="Example - 10"
+              func={handleInputChange}
+              type="number"
+              value={modalData?.live_class_number}
+            />
+
+            {/* NOTE: InputBox component for the Number of Real World Project */}
+            <InputBoxManage
+              title="Project Number"
+              id="project_number"
+              placeholder="Example - 10"
+              func={handleInputChange}
+              type="number"
+              value={modalData?.project_number}
+            />
+
             {/* InputBox component for the course price */}
             <InputBoxManage
               title="Price"
@@ -461,7 +491,7 @@ const ManageCourse = () => {
               </div>
             </div>
           </div>
-          <div className="grid grid-cols-1">
+          <div className="grid grid-cols-2">
             {/* NOTE: Checkbox component for selecting class days */}
             <div>
               <label className="font-semibold mt-8 block">
@@ -483,7 +513,17 @@ const ManageCourse = () => {
                 />
               </div>
             </div>
+            {/* NOTE: InputBox component for the Extra support */}
+            <InputBoxManage
+              title="Extra Support"
+              id="extraSupport"
+              placeholder="Extra 5 months support after course finished."
+              func={handleInputChange}
+              type="text"
+              value={modalData?.extra_support}
+            />
           </div>
+
           <div className="grid grid-cols-1 gap-4 pb-8">
             <RichTextEditor
               onDataChange={setCourseFor}

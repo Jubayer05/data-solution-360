@@ -119,7 +119,7 @@ const CourseItem = ({ item, upcoming }) => {
               >
                 <Typewriter
                   options={{
-                    strings: ['Registration', 'Going on'],
+                    strings: ['Registration Going on', 'Registration Going on'],
                     autoStart: true,
                     loop: true,
                     deleteSpeed: 15,

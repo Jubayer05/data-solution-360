@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @import '@fontsource/hind-siliguri';
-@import '~antd/dist/antd.css';
+/* @import '~antd/dist/antd.css'; */
 
 @layer base {
   h1 {
@@ -107,6 +107,18 @@ ul {
 
 .ant-tooltip-placement-top {
   padding-bottom: 6px;
+}
+
+.ant-breadcrumb > ol {
+  align-items: center;
+}
+
+.ant-collapse-header {
+  align-items: center !important;
+}
+
+.ant-collapse-content {
+  background-color: inherit !important;
 }
 
 a {

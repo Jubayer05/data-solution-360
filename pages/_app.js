@@ -1,4 +1,4 @@
-import 'antd/dist/antd.css';
+// import 'antd/dist/reset.css';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -28,11 +28,13 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
+    // <ConfigProvider>
     <MainContextProvider>
       <UtilityContextProvider>
         <Component {...pageProps} />
       </UtilityContextProvider>
     </MainContextProvider>
+    // </ConfigProvider>
   );
 }
 

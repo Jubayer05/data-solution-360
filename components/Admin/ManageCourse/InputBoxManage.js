@@ -3,12 +3,23 @@ import React from 'react';
 const InputBoxManage = ({ title, type, id, func, placeholder, value }) => {
   return (
     <div className="w-full mt-5">
-      <label htmlFor={id} className="font-semibold mt-3 block text-[#17012e]">
+      <label
+        htmlFor={id}
+        className={`${
+          value ? '' : 'font-bold animate-bounce text-lg'
+        } font-semibold mt-3 block text-[#17012e]`}
+      >
         {title}{' '}
-        <span className="ml-2 italic font-thin">
-          (previous:
-          <span className=" text-[orangered] ml-2">{value}</span>)
-        </span>
+        {value ? (
+          <span className="ml-2 italic font-thin">
+            (previous:
+            <span className=" text-[orangered] ml-2">{value}</span>)
+          </span>
+        ) : (
+          <span className="ml-2 italic text-red-600 font-semibold">
+            (Not Provide)
+          </span>
+        )}
       </label>
       <input
         id={id}
