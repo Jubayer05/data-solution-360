@@ -9,13 +9,6 @@ import { Breadcrumb } from 'antd';
 import { BiShareAlt } from 'react-icons/bi';
 
 const BannerCourseDetails = ({ courseDetails }) => {
-  const moduleNumber = courseDetails?.courseModule?.length;
-  const liveClassNumber = courseDetails?.courseModule?.reduce((acc, cur) => {
-    return acc + parseInt(cur.liveClassNumber);
-  }, 0);
-  const projectNumber = courseDetails?.courseModule?.reduce((acc, cur) => {
-    return acc + parseInt(cur.projectNumber);
-  }, 0);
   return (
     <div className="flex items-start flex-col-reverse md:flex-row max-w-7xl mx-auto font-bold font-heading">
       {/* NOTE: LEFT SIDE */}
@@ -52,7 +45,7 @@ const BannerCourseDetails = ({ courseDetails }) => {
 
         <div className="h-[1px] w-full bg-slate-300 mt-3 mb-4" />
         {/* NOTE: BEST OUTLINE */}
-        <dir className="flex justify-between">
+        <dir className="grid grid-cols-2 md:grid-cols-4">
           <div>
             <h2 className="text-[28px] text-center">
               {courseDetails?.module_number}
@@ -114,7 +107,7 @@ const BannerCourseDetails = ({ courseDetails }) => {
 
         {/* NOTE: COURSE DETAILS (BATCH, STARTING, DAY, TIME) */}
         {courseDetails?.status !== 'Upcoming' && (
-          <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center gap-1 md:gap-6">
+          <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center flex-wrap gap-x-2 gap-y-4 md:gap-6">
             <div className="pl-3 pr-2">
               <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
                 <span>{courseDetails?.batch_no}</span> Batch

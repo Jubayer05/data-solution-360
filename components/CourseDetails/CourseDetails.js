@@ -19,6 +19,7 @@ import StudentReviewCourse from './StudentReviewCourse';
 const { Panel } = Collapse;
 
 const CourseDetails = () => {
+  const [innerWidth, setInnerWidth] = useState();
   const { courseData } = useStateContext();
   const [courseDetails, setCourseDetails] = useState('');
   const [modalIsOpen, setIsOpen] = useState(false);
@@ -32,6 +33,12 @@ const CourseDetails = () => {
     }
   }, [courseData]);
 
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setInnerWidth(window.innerWidth);
+    }
+  }, [courseData]);
+
   const openModal = (item) => {
     setModalData(item);
     setIsOpen(true);
@@ -39,8 +46,6 @@ const CourseDetails = () => {
   const closeModal = () => {
     setIsOpen(false);
   };
-
-  console.log(courseDetails);
 
   return (
     <div>
@@ -51,11 +56,11 @@ const CourseDetails = () => {
         <BannerCourseDetails courseDetails={courseDetails} />
       </div>
 
-      <div className="max-w-4xl mx-auto mt-10 mb-5">
+      <div className="max-w-4xl mx-auto mt-10 mb-5 px-3">
         <YoutubeEmbed
           embedId={courseDetails?.youtube_video}
           width="100%"
-          height="500px"
+          height={innerWidth <= 768 ? '300px' : '500px'}
         />
       </div>
 
@@ -123,7 +128,7 @@ const CourseDetails = () => {
               </div>
             </div>
           </div> */}
-      <div className="max-w-6xl mx-auto">
+      <div className="max-w-6xl mx-auto px-3">
         {/* NOTE: COURSE MODULE  */}
         <div className="mt-16">
           <h2 className="text-3xl font-bold mb-3 font-heading">

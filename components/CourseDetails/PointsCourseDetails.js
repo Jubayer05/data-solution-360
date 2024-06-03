@@ -9,7 +9,7 @@ const PointsCourseDetails = ({ courseDetails }) => {
     return acc + parseInt(cur.projectNumber);
   }, 0);
   return (
-    <div className="max-w-6xl mx-auto mt-10 flex gap-5">
+    <div className="max-w-6xl mx-auto px-3 mt-10 flex gap-5 flex-col md:flex-row">
       {/* NOTE: COURSE DETAILS IN POINTS */}
       <div className="flex-1 py-4 px-5 border-b-1 shadow-[rgba(17,_17,_26,_0.1)_0px_0px_16px] rounded-lg">
         <p
@@ -35,7 +35,7 @@ const PointsCourseDetails = ({ courseDetails }) => {
           )}
         </div>
       </div>
-      <div className="w-[30%] mt-4">
+      <div className="w-[100%] md:w-[30%] mt-4">
         {/* NOTE: SUPPORT*/}
         <div className="bg-gradient-to-r from-[#b6f492] to-[rgb(51,139,147)] px-4 py-2 rounded-xl flex items-center gap-3">
           <img src="/course/support.png" className="w-[110px]" alt="" />
