@@ -153,14 +153,14 @@ const BannerCourseDetails = ({ courseDetails }) => {
       </div>
       {/* NOTE: RIGHT SIDE */}
       <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-360px]">
-        <div className="mb-3 bg-white px-1.5 py-1.5 rounded-xl w-[90%] ml-auto mt-5">
+        <div className="mb-3 bg-white px-1.5 py-1.5 rounded-xl w-[90%] mx-auto md:ml-auto  mt-5">
           <img
             src={courseDetails?.img}
             alt=""
             className="rounded-xl w-[100%]"
           />
           {courseDetails?.status && (
-            <div className="py-4 px-5 border-b-1">
+            <div className="py-4 px-5">
               <div className="flex items-center">
                 {courseDetails?.status === 'Registration Going on' && (
                   <div>

@@ -68,12 +68,37 @@ const Review = () => {
 
   return (
     <div className="bg-[#f9f9fa]	py-4 md:pt-8  px-3" id="courses">
-      <div className="max-w-6xl bg-[#ffffff] py-4 md:py-8 mx-auto rounded-lg shadow">
+      <div className="relative overflow-hidden max-w-6xl mx-auto rounded-lg shadow">
+        <div
+          className="absolute h-[200px] w-[200px] top-[-100px] left-[-100px]
+        rounded-full bg-[#4478ff] filter blur-[100px]"
+        />
+        <div
+          className="absolute h-[200px] w-[200px] bottom-[-100px] left-[-100px]
+        rounded-full bg-[#4478ff] filter blur-[100px]"
+        />
+        <div
+          className="absolute h-[200px] w-[200px] top-[-200px] left-[45%]
+        rounded-full bg-[#12b76a] filter blur-[100px]"
+        />
+        <div
+          className="absolute h-[200px] w-[200px] bottom-[-200px] left-[45%]
+        rounded-full bg-[#4478ff] filter blur-[100px]"
+        />
+        <div
+          className="absolute h-[200px] w-[200px] top-[-100px] right-[-100px]
+        rounded-full bg-[#4478ff] filter blur-[100px]"
+        />
+        <div
+          className="absolute h-[200px] w-[200px] bottom-[-100px] right-[-100px]
+        rounded-full bg-[#12b76a] filter blur-[100px]"
+        />
+        <div className="absolute w-full h-full bg-white opacity-60 left-0" />
         <div
           id="testimonials"
-          className="bg-[url('/review/review-bg.jpg')] flex items-center justify-center bg-center bg-cover bg-no-repeat"
+          className="flex items-center justify-center py-4 md:py-8"
         >
-          <div className="my-4 max-w-[350px] sm:max-w-2xl md:max-w-4xl lg:max-w-[1100px]">
+          <div className="my-4 max-w-[350px] sm:max-w-2xl md:max-w-4xl lg:max-w-[1100px] z-50">
             <h1 className="text-center text-3xl font-bold font-heading text-headerMain">
               Our Lovely Students{' '}
               <span className="text-[#ffab00]"> Feedback</span>

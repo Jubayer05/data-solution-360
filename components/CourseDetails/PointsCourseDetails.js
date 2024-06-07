@@ -5,9 +5,6 @@ import { GoLinkExternal } from 'react-icons/go';
 import { LuBadgeCheck } from 'react-icons/lu';
 
 const PointsCourseDetails = ({ courseDetails }) => {
-  const projectNumber = courseDetails?.courseModule?.reduce((acc, cur) => {
-    return acc + parseInt(cur.projectNumber);
-  }, 0);
   return (
     <div className="max-w-6xl mx-auto px-3 mt-10 flex gap-5 flex-col md:flex-row">
       {/* NOTE: COURSE DETAILS IN POINTS */}

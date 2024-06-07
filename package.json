@@ -29,6 +29,7 @@
     "react-dom": "^18.2.0",
     "react-draft-wysiwyg": "^1.15.0",
     "react-facebook": "^9.0.12",
+    "react-fast-marquee": "^1.6.4",
     "react-icons": "^4.4.0",
     "react-lottie": "^1.2.3",
     "react-modal": "^3.16.1",

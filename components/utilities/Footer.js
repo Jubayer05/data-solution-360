@@ -91,9 +91,10 @@ const Footer = () => {
                 className="border-b-[1.5px] border-solid border-transparent cursor-pointer text-[#212529] hover:text-[orangered]
                   hover:border-[orangered] ease-in-out duration-300 text-base flex items-center justify-center md:justify-start mt-2 gap-2"
               >
-                <SlLocationPin className="text-lg" />{' '}
+                <SlLocationPin className="text-lg w-8" />{' '}
                 <span className="text-left">
-                  House 22, 1st Floor, Road 119, Gulshan -1
+                  House - 04 ( Lift - 2 ) , Road - 12, Block - J, Baridhara,
+                  Dhaka, 1212
                 </span>
               </li>
               <li className="text-base flex items-center justify-center md:justify-start cursor-pointer mt-4">

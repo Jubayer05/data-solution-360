@@ -3,27 +3,26 @@ import React from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 
 const MemberDetails = ({ data, closeModal }) => {
-  console.log(data);
   return (
-    <div className="max-w-5xl min-w-[600px] mx-5">
+    <div className="max-w-5xl max-h-[500px] md:min-w-[600px] mx-5 overflow-y-auto overflow-x-hidden">
       <ImCancelCircle
-        className="fixed right-3 top-3 text-2xl z-100 
+        className="fixed right-3 top-3 text-xl md:text-2xl z-100 
               text-red-500 cursor-pointer"
         onClick={closeModal}
       />
 
       <div className="flex items-center justify-between mb-[15px] text-center">
         <img
-          className="w-[170px] h-[170px] object-cover rounded-full"
+          className="w-[100px] h-[100px] md:w-[170px] md:h-[170px] object-cover rounded-full"
           src={data?.photoUrl}
           alt={data?.name}
         />
 
         <div className="text-left mr-auto ml-5">
-          <h2 className="text-2xl font-bold leading-8 text-[#231f40]">
+          <h2 className="text-lg md:text-2xl font-bold leading-6 md:leading-8 text-[#231f40]">
             {data?.profileName}
           </h2>
-          <p className="text-[#c9417c] font-medium mt-2">{data?.jobTitle}</p>
+          <p className="text-[#c9417c] font-medium mt-2 ">{data?.jobTitle}</p>
         </div>
       </div>
       <div>

@@ -15,8 +15,8 @@ const CourseItem = ({ item, upcoming }) => {
 
   return (
     <div
-      className="w-full mx-auto rounded-lg overflow-hidden sm:mx-2 border hover:border-[#676767] 
-    transition-border duration-300 cursor-pointer relative"
+      className="w-full mx-auto rounded-lg overflow-hidden sm:mx-2 hover:border-[#676767] 
+    transition-border duration-300 cursor-pointer relative bg-white border"
     >
       <div className="w-[120px] h-[120px] bg-[orangered] absolute -rotate-45 -left-16 -top-16 flex justify-center items-end">
         <div>
@@ -37,25 +37,6 @@ const CourseItem = ({ item, upcoming }) => {
           className="rounded-lg rounded-t-none flex flex-col"
           style={{ height: 'calc(100% - 260px)' }}
         >
-          {/* <div className="flex items-center justify-between">
-            <div className="flex items-center">
-              <span className="text-[orange] font-heading mr-2">5</span>
-              <div className="flex text-[orange] ">
-                <BsStarFill className="mx-[1px]" />
-                <BsStarFill className="mx-[1px]" />
-                <BsStarFill className="mx-[1px]" />
-                <BsStarFill className="mx-[1px]" />
-                <BsStarFill className="mx-[1px]" />
-              </div>
-              <div className="font-bold ml-1 text-gray-500">
-                ({item.review})
-              </div>
-            </div>
-            <div className="flex items-center text-[#4F547B]">
-              <BiBarChart className="mr-0.5" />
-              <span>all level</span>
-            </div>
-          </div> */}
           <div className="p-2 border-b-1 border-[#d6dae1] flex items-center flex-wrap">
             <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded">
               {upcoming ? (
@@ -70,15 +51,7 @@ const CourseItem = ({ item, upcoming }) => {
             </div>
             <div className="py-1 px-2 m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
               <IoIosPeople />
-              {/* {upcoming ? (
-                <span className=" text-[12px] block -mt-[1px]">
-                  {item?.total_seat_number} Seats
-                </span>
-              ) : (
-                <span className=" text-[12px] block -mt-[1px]">
-                  {item?.remaining_seat_number} Seats Left
-                </span>
-              )} */}
+
               <span className=" text-[12px] block -mt-[1px]">
                 Total Seat <strong>{item?.total_seat_number}</strong>
               </span>
