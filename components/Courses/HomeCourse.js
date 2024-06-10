@@ -29,18 +29,18 @@ const HomeCourse = () => {
             <span className="font-bangla">আপনার জন্য সেরা কোর্স</span>
           )}
         </h2>
-        <p className="text-center text-base font-bold font-heading  mb-2 md:mb-6  text-white	">
+        <p className="text-center text-base font-bold font-heading  mb-2 md:mb-6 px-2 text-white	">
           At this moment Data Solution - 360 provides this following courses for
           you.
         </p>
 
         <h2
-          className="text-white font-heading ml-10 text-xl font-semibold inline-flex 
-        items-center gap-2 hover:text-primary transition-all"
+          className="text-white font-heading md:ml-10 text-xl font-semibold inline-flex 
+        items-center gap-2 hover:text-primary transition-all px-2"
         >
           Our Courses <FaArrowRightLong />
         </h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-5 px-8 pt-0">
+        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-5 px-1 md:px-8 pt-0">
           {registrationGoingOnCourses.map((item) => (
             <HomeCourseItem key={item.id} item={item} />
           ))}
@@ -52,11 +52,11 @@ const HomeCourse = () => {
           ))}
         </div>
 
-        <div className="flex justify-center mt-8">
+        <div className="flex justify-center mt-8 ">
           <Link href="https://datasolution360.com/courses">
             <button
               className="text-base font-semibold text-[#101828] px-4 py-2 border-2 rounded-md border-transparent
-            bg-[#eaecf0] transition-all duration-300 ease-linear hover:bg-[#d0d5dd] w-[350px] inline-flex items-center
+            bg-[#eaecf0] transition-all duration-300 ease-linear hover:bg-[#d0d5dd] md:w-[350px] inline-flex items-center
             justify-center gap-2 uppercase"
             >
               See All <FaArrowRightLong />

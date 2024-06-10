@@ -12,7 +12,7 @@ const Popup = ({ handler }) => {
   );
 
   return (
-    <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-[60] flex justify-center items-center">
+    <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-[1000] flex justify-center items-center">
       <div className="-top-36 h-[230px] md:h-[350px] lg:h-[380px] w-[350px] md:w-[500px] lg:w-[600px] rounded-md relative flex items-center flex-col bg-cover">
         <img
           // src={trendingCourse[0]?.photoUrl}

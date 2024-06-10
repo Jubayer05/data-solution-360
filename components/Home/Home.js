@@ -54,6 +54,7 @@ const Home = () => {
           {/* <BannerCarousel /> */}
           <HomeCourse />
           <JoinFree />
+          {/* <GameChanger /> */}
           <Service />
           <AboutHome />
           <AddVideoReview />

@@ -20,6 +20,7 @@ module.exports = {
       bangla: ['Hind Siliguri', 'sans-serif'],
     },
     extend: {
+      scrollbar: ['webkit'],
       fontSize: {
         xs: '.75rem',
         sm: '.875rem',
@@ -72,7 +73,7 @@ module.exports = {
       keyframes: {
         pulse: {
           '0%, 100%': { transform: 'scale(.9)' },
-          '50%': { transform: 'scale(1.2)' },
+          '50%': { transform: 'scale(1.2)', opacity: '0.8' },
         },
       },
       animation: {
@@ -81,5 +82,5 @@ module.exports = {
       },
     },
   },
-  plugins: [],
+  plugins: [require('tailwind-scrollbar-hide')],
 };

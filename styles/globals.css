@@ -187,3 +187,67 @@ a:visited {
   display: flex;
   justify-content: center;
 }
+
+.sticky_position {
+  position: -webkit-sticky;
+  position: sticky;
+  top: 0;
+  padding: 5px;
+  background-color: #cae8ca;
+  border: 2px solid #4caf50;
+}
+
+:root {
+  --cards: 4;
+  --cardHeight: 57vh;
+  --cardTopPadding: 2.5em;
+  --cardMargin: 4vw;
+}
+
+.container {
+  width: 90%;
+  margin: 0 auto;
+}
+
+#cards {
+  position: relative;
+  list-style: none;
+  padding-left: 0;
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: repeat(var(--cards), var(--cardHeight));
+  gap: var(--cardMargin);
+  padding-bottom: calc(var(--cards) * var(--cardTopPadding));
+  margin-bottom: var(--cardMargin);
+}
+
+#card1 {
+  --index: 1;
+}
+#card2 {
+  --index: 2;
+}
+#card3 {
+  --index: 3;
+}
+#card4 {
+  --index: 4;
+}
+
+.card {
+  position: sticky;
+  top: 0;
+  padding-top: calc(var(--index) * var(--cardTopPadding));
+}
+
+.card-body {
+  box-sizing: border-box;
+  padding: 0 0 0 30px;
+  border-radius: 50px;
+  box-shadow: 0 0 30px 0 rgba(0, 0, 0, 0.3);
+  height: var(--cardHeight);
+  display: flex;
+  justify-content: center;
+  /* align-items: center; */
+  transition: all 0.5s;
+}
