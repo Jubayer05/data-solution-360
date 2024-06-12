@@ -26,8 +26,8 @@ const CourseItem = ({ item, upcoming }) => {
         </div>
       </div>
       <Link href={`/course-details/${item.key}`}>
-        <img src={item.img} alt="" className="w-full h-[140px] md:h-[260px]" />
-        <div className="rounded-lg rounded-t-none flex flex-col h-[calc(100%-140px)] md:h-[calc(100%-260px)]">
+        <img src={item.img} alt="" className="w-full h-[240px] md:h-[260px]" />
+        <div className="rounded-lg rounded-t-none flex flex-col h-[calc(100%-240px)] md:h-[calc(100%-260px)]">
           <div className="p-0.5 md:p-2 border-b-1 border-[#d6dae1] flex items-center flex-wrap">
             <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded">
               {upcoming ? (

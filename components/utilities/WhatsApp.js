@@ -43,12 +43,12 @@ const WhatsApp = () => {
           }`}
       >
         <p className="text-base md:text-xl font-bold text-center">
-          কথা বলুন <br /> ক্যারিয়ার কাউন্সিলরের সাথে
+          আপনার জিজ্ঞেসা <br /> ক্যারিয়ার কাউন্সিলরকে বলুন
         </p>
         <img
-          src="/course/support.png"
+          src="/icon/technical-support.png"
           alt="whatsapp"
-          className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] rounded-full"
+          className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] rounded-full border-1"
         />
         <div className="h-[50px]" />
         <button

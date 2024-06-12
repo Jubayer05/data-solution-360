@@ -64,9 +64,9 @@ const Home = () => {
           <BlogHome />
           <Subscribe />
           <Footer />
+          <WhatsApp />
         </>
       )}
-      <WhatsApp />
     </div>
   );
 };

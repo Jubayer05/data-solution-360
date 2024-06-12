@@ -40,7 +40,7 @@ const HomeCourse = () => {
         >
           Our Courses <FaArrowRightLong />
         </h2>
-        <div className="grid grid-cols-2 sm:grid-cols-2 lg:grid-cols-3 gap-1 md:gap-5 px-1 md:px-8 pt-0">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5 px-[1px] md:px-8 pt-0">
           {registrationGoingOnCourses.map((item) => (
             <HomeCourseItem key={item.id} item={item} />
           ))}
