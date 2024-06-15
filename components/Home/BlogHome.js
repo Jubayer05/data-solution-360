@@ -2,6 +2,7 @@ import { Empty } from 'antd';
 import { convert } from 'html-to-text';
 import Link from 'next/link';
 import React from 'react';
+import { FaBlog } from 'react-icons/fa';
 import { useStateContext } from '../../src/context/ContextProvider';
 
 const BlogHome = () => {
@@ -11,18 +12,30 @@ const BlogHome = () => {
 
   return (
     <div className="bg-[#f9f9fa]	py-4 md:pt-20 mb-20 px-3" id="courses">
-      <div
-        style={{ backgroundImage: "url('/Background/bg-4.jpg')" }}
-        className="max-w-6xl relative mx-auto rounded-lg shadow bg-cover bg-center overflow-hidden"
-      >
-        <div className="w-full h-full bg-black opacity-70 absolute" />
+      <div className="max-w-6xl bg-white relative mx-auto rounded-lg shadow bg-cover bg-center overflow-hidden">
+        <div className="w-full h-full  absolute" />
         <div className="flex justify-center">
           <div className="py-4 md:py-8 z-50">
-            <h2 className="text-center text-3xl font-bold font-heading mt-4 text-white">
-              Explore our blog for captivating content.
-            </h2>
-            <div className="w-36 h-1.5 bg-gradient-to-r from-orange-600 to-blue-700 rounded-full mx-auto"></div>
-
+            <div className="flex items-center gap-3">
+              <h2 className="text-center text-[26px] md:text-[36px] font-bold font-heading m-0 text-black flex justify-center items-center gap-3">
+                Blogs
+                <span className="text-[#12b76a]">
+                  <FaBlog />
+                </span>
+              </h2>
+              <div className="flex-1 h-[1px] bg-[#eaecf0]" />
+              <div className="text-center ">
+                <Link href="/blog" className="inline-block">
+                  <button
+                    className="text-base font-semibold px-4 pb-3 pt-2 border-2 rounded-md
+               bg-[#101828] transition-all duration-300 ease-linear hover:bg-white hover:text-[#101828]
+                text-white border-[#101828]"
+                  >
+                    Explore All Blogs
+                  </button>
+                </Link>
+              </div>
+            </div>
             <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 justify-center items-stretch flex-wrap gap-6 mt-8 max-w-5xl mx-auto">
               {selectedBlog?.map((item) => (
                 <div
@@ -67,18 +80,6 @@ const BlogHome = () => {
                   </div>
                 </div>
               ))}
-            </div>
-
-            <div className="text-center mt-8">
-              <Link href="/blog" className="inline-block mt-4">
-                <button
-                  className="text-base font-semibold px-4 pb-3 pt-2 border-2 rounded-md
-               bg-primary-bg transition-all duration-300 ease-linear hover:bg-white hover:text-primary
-                text-white border-primary"
-                >
-                  Explore All Blogs
-                </button>
-              </Link>
             </div>
           </div>
         </div>

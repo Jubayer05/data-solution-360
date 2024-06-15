@@ -27,11 +27,11 @@ const JoinFree = () => {
         <div className="relative">
           <Lottie options={defaultOptions} />
         </div>
-        <div className="pr-20">
-          <h2 className="text-[#ffffff] text-[26px] md:text-[36px] leading-[50px]">
+        <div className="md:pr-20">
+          <h2 className="text-[#ffffff] text-[24px] md:text-[36px] leading-[35px] md:leading-[50px] mb-5 md:mb-0">
             Build your career learning Data Science with Data Solution 360
           </h2>
-          <p className="text-[#ffffff] text-[16px]">
+          <p className="text-[#ffffff] text-[16px] mb-5 md:mb-0">
             You will get continuous support and guidance from our team even
             after you finish the course.
           </p>
