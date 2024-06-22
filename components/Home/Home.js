@@ -22,16 +22,15 @@ import Subscribe from './Subscribe';
 // import BannerCarousel from "./BannerCarousel";
 
 const Home = () => {
-  const [showPopup, setShowPopup] = useState(false);
+  const [showPopup, setShowPopup] = useState(true);
   const { globalLoading } = useStateContext();
 
   useEffect(() => {
-    const hasVisitedBefore = sessionStorage.getItem('popup');
-    if (!hasVisitedBefore) {
-      setShowPopup(true);
-
-      sessionStorage.setItem('popup', true);
-    }
+    // const hasVisitedBefore = sessionStorage.getItem('popup');
+    // if (!hasVisitedBefore) {
+    //   setShowPopup(true);
+    //   sessionStorage.setItem('popup', true);
+    // }
   }, []);
 
   return (

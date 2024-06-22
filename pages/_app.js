@@ -1,4 +1,5 @@
 // import 'antd/dist/reset.css';
+import { Analytics } from '@vercel/analytics/react';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
@@ -29,11 +30,13 @@ function MyApp({ Component, pageProps }) {
 
   return (
     // <ConfigProvider>
-    <MainContextProvider>
-      <UtilityContextProvider>
-        <Component {...pageProps} />
-      </UtilityContextProvider>
-    </MainContextProvider>
+    <Analytics>
+      <MainContextProvider>
+        <UtilityContextProvider>
+          <Component {...pageProps} />
+        </UtilityContextProvider>
+      </MainContextProvider>
+    </Analytics>
     // </ConfigProvider>
   );
 }
