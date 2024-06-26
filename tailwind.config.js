@@ -68,6 +68,7 @@ module.exports = {
       },
 
       lineHeight: {
+        body: '34px',
         20: '80px',
       },
       keyframes: {

@@ -1,7 +1,8 @@
-import { convertToHTML } from 'draft-convert';
 import { EditorState } from 'draft-js';
 import dynamic from 'next/dynamic';
 import { useState } from 'react';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
+import { customConvertToHTML } from './RichTextEditor/CustomConvertHtml'; // Adjust the path as needed
 
 const Editor = dynamic(
   () => {
@@ -10,7 +11,7 @@ const Editor = dynamic(
   { ssr: false },
 );
 
-const RichTextEditor = ({ value, title, onDataChange, showPrevious }) => {
+const RichTextEditor = ({ value, title, onDataChange }) => {
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
@@ -19,19 +20,19 @@ const RichTextEditor = ({ value, title, onDataChange, showPrevious }) => {
   const handleEditorChange = (state) => {
     setEditorState(state);
 
-    let currentContentAsHTML = convertToHTML(editorState.getCurrentContent());
+    const currentContentAsHTML = customConvertToHTML(state.getCurrentContent());
     onDataChange(currentContentAsHTML);
   };
 
   return (
     <div className="mt-10">
       <div className="font-bold mb-3">
-        <span> {title} </span>
+        <span>{title}</span>
         {value && (
           <div className="ml-2 italic font-thin">
             (previous:
             <div
-              className=" text-[orangered] ml-2"
+              className="editor-content"
               dangerouslySetInnerHTML={{ __html: value }}
             ></div>
             )
@@ -42,13 +43,28 @@ const RichTextEditor = ({ value, title, onDataChange, showPrevious }) => {
         editorState={editorState}
         editorStyle={{
           minHeight: '140px',
-          border: '1px solid',
+          border: '1px solid #ccc',
           backgroundColor: '#ffffff',
+          padding: '10px',
         }}
         toolbarClassName="toolbarClassName"
         wrapperClassName="demoWrapper"
         editorClassName="editorClassName"
+        textAlignment="left"
         onEditorStateChange={handleEditorChange}
+        toolbar={{
+          options: [
+            'inline',
+            'blockType',
+            'fontSize',
+            'list',
+            'textAlign',
+            'history',
+          ],
+          textAlign: {
+            options: ['left', 'center', 'right', 'justify'],
+          },
+        }}
       />
     </div>
   );

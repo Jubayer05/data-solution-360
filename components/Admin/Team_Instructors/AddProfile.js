@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
-import RichTextEditor from '../../utilities/RichTextEditor';
+import RichTextEditorJodit from '../../utilities/RichTextEditor/RichTextEditor';
 const db = firebase.firestore();
 
 const selectLanguage = [
@@ -327,7 +327,7 @@ const AddProfile = ({ profile, db_name, showRole }) => {
           strokeColor={conicColors}
         />
 
-        <RichTextEditor
+        <RichTextEditorJodit
           title="Add Members information"
           onDataChange={setDetails}
           value={details}

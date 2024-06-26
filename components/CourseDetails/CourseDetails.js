@@ -47,6 +47,8 @@ const CourseDetails = () => {
     setIsOpen(false);
   };
 
+  console.log(courseDetails?.details);
+
   return (
     <div>
       <div
@@ -238,8 +240,8 @@ const CourseDetails = () => {
           <h2 className="text-3xl font-bold mb-3 font-heading">About Course</h2>
           <div className="h-[.5px] w-[100%] bg-slate-300" />
           <div className="mt-4">
-            <p
-              className="text-lg font-normal"
+            <div
+              className="text-lg font-normal leading-body"
               dangerouslySetInnerHTML={{ __html: courseDetails?.details }}
             />
           </div>
@@ -250,9 +252,9 @@ const CourseDetails = () => {
           <div className="mt-4">
             {courseDetails?.drive_link && (
               <>
-                <p className="text-2xl mt-12 capitalize">
+                <h2 className="text-3xl font-bold mb-3 font-heading">
                   Full Course Details Link
-                </p>
+                </h2>
 
                 <button className="bg-[#1f0835] text-[#f9fbff] py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
                   <Link
@@ -265,17 +267,21 @@ const CourseDetails = () => {
                 </button>
               </>
             )}
-            <p className="text-2xl mt-12 capitalize">Who this course is for</p>
+            <h2 className="text-3xl font-bold mb-3 font-heading capitalize mt-16">
+              Who this course is for
+            </h2>
             <div
-              className="text-lg font-normal"
+              className="text-lg font-normal leading-body"
               dangerouslySetInnerHTML={{
                 __html: courseDetails?.who_is_the_course_for,
               }}
             />
 
-            <p className="text-2xl mt-12 capitalize">course benefit</p>
+            <h2 className="text-3xl font-bold mb-3 font-heading capitalize mt-10">
+              course benefit
+            </h2>
             <div
-              className="font-normal text-lg capitalize"
+              className="font-normal text-lg capitalize leading-body"
               dangerouslySetInnerHTML={{
                 __html: courseDetails?.after_course_benefit,
               }}
@@ -284,8 +290,10 @@ const CourseDetails = () => {
         </div>
 
         {/* NOTE: ABOUT INSTRUCTOR */}
-        <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-3">Instructor</h2>
+        <div className="mt-12">
+          <h2 className="text-3xl font-bold mb-3 font-heading capitalize">
+            Instructors
+          </h2>
           <div className="h-[.5px] w-[100%] bg-slate-300" />
 
           <div className="mt-8 bg-[#fff1e9] px-8 py-5 border-l-[3px] border-[#fd6506] rounded-[8px] shadow-lg overflow-hidden">
@@ -322,7 +330,9 @@ const CourseDetails = () => {
         </div>
         {/* NOTE: REQUIREMENTS */}
         <div className="mt-16">
-          <h2 className="text-2xl font-bold mb-3">Requirements</h2>
+          <h2 className="text-3xl font-bold mb-3 font-heading capitalize">
+            Requirements
+          </h2>
           <div className="mt-3 mb-8 h-[.5px] w-[100%] bg-slate-300" />
           <p className="text-lg font-normal pb-10">
             Laptop/desktop with internet connection
@@ -331,7 +341,9 @@ const CourseDetails = () => {
 
         {/* NOTE: HELP */}
         <div className="mt-8">
-          <h2 className="text-2xl font-bold mb-3">Help</h2>
+          <h2 className="text-3xl font-bold mb-3 font-heading capitalize">
+            Help
+          </h2>
           <div className="mt-3 mb-8 h-[.5px] w-[100%] bg-slate-300" />
           <p className="text-lg font-normal cursor-pointer">
             For any batch related information call{' '}

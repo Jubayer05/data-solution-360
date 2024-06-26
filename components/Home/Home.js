@@ -26,11 +26,11 @@ const Home = () => {
   const { globalLoading } = useStateContext();
 
   useEffect(() => {
-    // const hasVisitedBefore = sessionStorage.getItem('popup');
-    // if (!hasVisitedBefore) {
-    //   setShowPopup(true);
-    //   sessionStorage.setItem('popup', true);
-    // }
+    const hasVisitedBefore = sessionStorage.getItem('popup');
+    if (!hasVisitedBefore) {
+      setShowPopup(true);
+      sessionStorage.setItem('popup', true);
+    }
   }, []);
 
   return (

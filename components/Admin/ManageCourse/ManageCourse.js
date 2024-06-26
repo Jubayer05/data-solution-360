@@ -8,7 +8,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import HeadingDashboard from '../../utilities/HeadingDashboard';
-import RichTextEditor from '../../utilities/RichTextEditor';
+import RichTextEditorJodit from '../../utilities/RichTextEditor/RichTextEditor';
 import AddInstructorCourse from '../Course/AddInstructorCourse';
 import AddModule from '../Course/AddModule';
 import CourseStatus from '../Course/CourseStatus';
@@ -234,7 +234,7 @@ const ManageCourse = () => {
     }
   };
 
-  console.log(modalData);
+  // console.log(modalData);
 
   return (
     <div>
@@ -525,18 +525,18 @@ const ManageCourse = () => {
           </div>
 
           <div className="grid grid-cols-1 gap-4 pb-8">
-            <RichTextEditor
+            <RichTextEditorJodit
               onDataChange={setCourseFor}
               title="Who is the course for"
               value={modalData?.who_is_the_course_for}
             />
 
-            <RichTextEditor
+            <RichTextEditorJodit
               onDataChange={setCourseBenefit}
               title="After Course Benefit"
               value={modalData?.after_course_benefit}
             />
-            <RichTextEditor
+            <RichTextEditorJodit
               onDataChange={setCourseDetails}
               title="Course Description"
               value={modalData?.details}

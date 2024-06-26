@@ -5,7 +5,7 @@ import { FiPhoneCall } from 'react-icons/fi';
 import { IoLogoWhatsapp } from 'react-icons/io5';
 
 const WhatsApp = () => {
-  const [showPopup, setShowPopup] = useState(true);
+  const [showPopup, setShowPopup] = useState(false);
   const popupRef = useRef(null);
 
   const handleClick = () => {

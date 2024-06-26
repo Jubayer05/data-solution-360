@@ -1,9 +1,11 @@
 // import 'antd/dist/reset.css';
+import 'draft-js/dist/Draft.css';
 import Router from 'next/router';
 import NProgress from 'nprogress';
 import 'nprogress/nprogress.css';
 import 'quill/dist/quill.snow.css';
 import { useEffect } from 'react';
+import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import { MainContextProvider } from '../src/context/ContextProvider';

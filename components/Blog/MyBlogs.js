@@ -8,7 +8,7 @@ import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
 import CustomModal from '../utilities/CustomModal';
 import HeadingDashboard from '../utilities/HeadingDashboard';
-import RichTextEditor from '../utilities/RichTextEditor';
+import RichTextEditorJodit from '../utilities/RichTextEditor/RichTextEditor';
 const db = firebase.firestore();
 
 const MyBlogs = () => {
@@ -294,7 +294,7 @@ const MyBlogs = () => {
             <label htmlFor="photoUrl" className="font-semibold mt-3 block">
               Main blog image
             </label>
-            <RichTextEditor
+            <RichTextEditorJodit
               onDataChange={setBlogDetails}
               title="Full blog description"
               value={modalData?.details}
