@@ -3,19 +3,22 @@ import { Avatar, Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { FiLogIn, FiLogOut } from 'react-icons/fi';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
+import { LuUserCircle } from 'react-icons/lu';
 import { VscTriangleUp } from 'react-icons/vsc';
 
 import { getAuth, signOut } from 'firebase/auth';
 
 import Link from 'next/link';
 import { BiSolidChevronRight } from 'react-icons/bi';
+import Swal from 'sweetalert2';
 import { useStateContext } from '../../src/context/ContextProvider';
 import { navDropItems, navItems, navItems2 } from '../../src/data/data';
 import styles from '../../styles/utility/Navbar.module.css';
+import LoginModal from '../Login/LoginModal';
 import Sidebar from './Home/SideBar';
 
 const Navbar = ({ home }) => {
-  const { language, setLanguage, userName, findAdmin, photoUrl } =
+  const { language, setLanguage, userName, findAdmin, photoUrl, userEmail } =
     useStateContext();
   const auth = getAuth();
   const user = auth.currentUser;
@@ -23,14 +26,32 @@ const Navbar = ({ home }) => {
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
   const [scrolled80px, setScrolled80px] = useState(false);
+  const [modalIsOpen, setIsOpen] = useState(false);
+
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    Swal.fire({
+      // title: 'Are you sure?',
+      text: 'Do you want to exit the login/register process?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Exit',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsOpen(false);
+      }
+    });
+  };
 
   useEffect(() => {
     function handleScroll() {
       if (window.scrollY >= 80 && !scrolled80px) {
-        console.log('Scroll 80px successful');
         setScrolled80px(true);
       } else if (window.scrollY < 80 && scrolled80px) {
-        console.log('Scrolled back to the top');
         setScrolled80px(false);
       }
     }
@@ -41,8 +62,6 @@ const Navbar = ({ home }) => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, [scrolled80px]);
-
-  console.log(scrolled80px);
 
   useEffect(() => {
     if (eng) {
@@ -71,7 +90,7 @@ const Navbar = ({ home }) => {
       });
   };
 
-  // console.log(photoUrl);
+  // console.log(userEmail);
 
   return (
     <div
@@ -100,6 +119,7 @@ const Navbar = ({ home }) => {
             photoUrl={photoUrl}
             language={language}
             userName={userName}
+            userEmail={userEmail}
           />
         )}
         <div
@@ -210,13 +230,14 @@ const Navbar = ({ home }) => {
               />
             </div>
 
-            {userName ? (
+            {userEmail ? (
               <div
                 className={`${styles.dropdown__container} relative font-semibold text-left mr-4 py-4`}
               >
                 <Avatar
                   size={48}
                   src={user?.photoURL || ''}
+                  icon={<LuUserCircle />}
                   className="cursor-pointer"
                 />
 
@@ -266,16 +287,16 @@ const Navbar = ({ home }) => {
                 </div>
               </div>
             ) : (
-              <Link href="/login">
+              <>
                 <button
+                  onClick={() => openModal()}
                   type="button"
                   style={{
                     borderRadius: '5px',
                   }}
-                  className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 
+                  className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-white 
                           bg-primary-bg transition-all duration-300 ease-linear hover:bg-white capitalize font-semibold
                            hover:text-primary hover:border-primary`}
-                  onClick={() => {}}
                 >
                   <FiLogIn className="text-sm" />{' '}
                   <span
@@ -286,7 +307,15 @@ const Navbar = ({ home }) => {
                     {language === 'English' ? 'Log in' : 'লগ ইন'}
                   </span>
                 </button>
-              </Link>
+                <div className="p-5">
+                  <>
+                    <LoginModal
+                      modalIsOpen={modalIsOpen}
+                      closeModal={closeModal}
+                    />
+                  </>
+                </div>
+              </>
             )}
           </div>
         </div>

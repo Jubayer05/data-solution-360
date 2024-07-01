@@ -82,7 +82,6 @@ const Review = () => {
 export default Review;
 
 const StudentReviewItem = ({ item, index }) => {
-  console.log(item);
   return (
     <div
       className={`${

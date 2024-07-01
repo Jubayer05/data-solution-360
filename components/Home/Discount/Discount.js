@@ -9,8 +9,6 @@ const Discount = () => {
   const [countdownData, setCountdownData] = useState([]);
   const [targetDate, setTargetDate] = useState();
 
-  console.log(countdownData[0]);
-
   useEffect(() => {
     db.collection('countdown_time').onSnapshot((snap) => {
       const data = snap.docs.map((doc) => ({

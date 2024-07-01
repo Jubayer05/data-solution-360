@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import firebase from '../../firebase';
+import firebase, { auth } from '../../firebase';
+
 const db = firebase.firestore();
 
 const StateContext = createContext();
@@ -27,9 +28,9 @@ export const MainContextProvider = ({ children }) => {
 
   useEffect(() => {
     setLanguage(localStorage.getItem('lan'));
-    setUserName(localStorage.getItem('userName'));
-    setUserEmail(localStorage.getItem('emailUser'));
-    setPhotoUrl(localStorage.getItem('photoUrl'));
+    setUserName(auth.currentUser?.displayName);
+    setUserEmail(auth.currentUser?.email);
+    setPhotoUrl(auth.currentUser?.photoURL);
 
     loadData('userLogin', setUserData);
     loadData('instructors', setInstructor);
