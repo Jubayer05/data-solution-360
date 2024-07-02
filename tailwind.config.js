@@ -36,6 +36,9 @@ module.exports = {
       backgroundColor: {
         'primary-bg': '#fd6406',
         'main-bg': '#ffffff',
+        primary_btn: '#001f3f',
+        secondary_btn: '#3d9970',
+        brand_btn: '#fd6406',
       },
       borderWidth: {
         1: '1px',

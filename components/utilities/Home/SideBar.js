@@ -1,4 +1,4 @@
-import { Avatar, Switch } from 'antd';
+import { Avatar } from 'antd';
 import React, { useState } from 'react';
 import { AiOutlineUser } from 'react-icons/ai';
 import {
@@ -10,7 +10,9 @@ import { FiLogIn, FiLogOut } from 'react-icons/fi';
 import { MdClose } from 'react-icons/md';
 
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 import { navDropItems, navItems } from '../../../src/data/data';
+import LoginModal from '../../Login/LoginModal';
 
 const Sidebar = ({
   url,
@@ -21,6 +23,7 @@ const Sidebar = ({
   language,
   handleLogout,
   userName,
+  userEmail,
 }) => {
   const [openDropdown, setOpenDropdown] = useState(null);
 
@@ -28,10 +31,30 @@ const Sidebar = ({
     setOpenDropdown(openDropdown === itemId ? null : itemId);
   };
 
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const openModal = () => {
+    setIsOpen(true);
+  };
+  const closeModal = () => {
+    Swal.fire({
+      // title: 'Are you sure?',
+      text: 'Do you want to exit the login/register process?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Exit',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        setIsOpen(false);
+      }
+    });
+  };
+
   return (
     <div className="w-screen z-10 bg-[rgba(0,0,0,0.6)] h-screen fixed top-0 left-0">
       <div
-        className="block md:hidden z-20 fixed overflow-y-scroll bg-[#ffffff] w-9/12 -left-6 -top-5 
+        className="md:hidden z-20 fixed overflow-y-scroll bg-[#ffffff] w-[75%] -left-5 -top-5 
       pt-5 pb-2 h-[105vh]"
       >
         <div className="flex items-center justify-between pl-10 pr-3 pt-4">
@@ -41,7 +64,7 @@ const Sidebar = ({
             <Avatar
               size={56}
               icon={<AiOutlineUser />}
-              style={{ display: 'flex' }}
+              style={{ display: 'flex', backgroundColor: '#3d9970' }}
               className="cursor-pointer flex justify-center items-center"
             />
           )}
@@ -52,7 +75,7 @@ const Sidebar = ({
           />
         </div>
 
-        <ul className=" list-none pl-12 pr-6 pt-6 pb-4">
+        <ul className="list-none pl-10 pr-5 pt-6 pb-4">
           {navItems.map((item) => (
             <li key={item.id}>
               {item.dropdown?.length > 0 ? (
@@ -120,7 +143,7 @@ const Sidebar = ({
               )}
             </li>
           ))}
-          <div className="ml-[13px] mt-3 text-[#333333]">
+          {/* <div className="ml-[13px] mt-3 text-[#333333]">
             <span>Language &nbsp;</span>
             <Switch
               size={50}
@@ -129,58 +152,68 @@ const Sidebar = ({
               defaultChecked
               onClick={() => setEng(!eng)}
             />
-          </div>
+          </div> */}
         </ul>
-        <div className="h-[1px] mb-4 bg-slate-300" />
+        {userEmail && <div className="h-[1px] mb-4 bg-slate-300" />}
 
-        <div className="pl-12 pr-6 pt-2 pb-4">
+        <div className="pl-12 pr-6 pt-2 pb-4 ">
           {/* <h2 className="text-center text-xl">Profile</h2> */}
-          <h2 className="text-center text-xl text-[#333333]">More</h2>
+          {userEmail && (
+            <h2 className="text-center text-xl text-[#333333]">More</h2>
+          )}
 
           {/* NOTE: DROPDOWN */}
-          <ul className=" list-none pt-2 pb-4">
-            {navDropItems.map((item) => (
-              <li key={item.id}>
-                <Link
-                  href={item.link}
-                  className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-3
+          {userEmail && (
+            <ul className=" list-none pt-2 pb-4">
+              {navDropItems.map((item) => (
+                <li key={item.id}>
+                  <Link
+                    href={item.link}
+                    className={`w-full font-semibold flex rounded-md justify-between items-center py-3 px-2
                   ${
                     url == item.slug
                       ? 'text-[#333333] visited:text-[#333333] bg-[rgba(100,64,251,0.2)] '
                       : 'text-[#333333] visited:text-[#333333] '
                   } 
                   my-1 `}
-                >
-                  <span>
-                    {language === 'English' ? item.title : item.titleBang}
-                  </span>
+                  >
+                    <span>
+                      {language === 'English' ? item.title : item.titleBang}
+                    </span>
 
-                  <BiChevronRight className="text-xl" />
-                </Link>
-              </li>
-            ))}
-          </ul>
+                    <BiChevronRight className="text-xl" />
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          )}
 
           {/* NOTE: LOGOUT */}
-          {userName ? (
+        </div>
+        <div className={userEmail ? 'h-0' : 'h-36'} />
+        <div className="pl-10 pr-5 pb-2">
+          {userEmail ? (
             <button
-              className="w-full flex rounded-md justify-between items-center py-3 px-3 
-              my-1 mt-20 text-[#333333] bg-[rgba(0,0,0,0.2)]"
+              className="w-full flex rounded-md justify-between items-center py-3 px-6 
+              my-1 mt-8 text-[#ffffff] bg-primary_btn"
               onClick={handleLogout}
             >
               <span className="font-bold">Logout</span>
               <FiLogOut className="text-lg" />
             </button>
           ) : (
-            <Link href="/login">
+            <div>
+              <>
+                <LoginModal modalIsOpen={modalIsOpen} closeModal={closeModal} />
+              </>
               <button
+                onClick={() => openModal()}
                 type="button"
                 style={{
                   borderRadius: '5px',
                 }}
-                className={`w-full flex rounded-md font-bold justify-center items-center py-3 px-3 my-1 mt-20 text-[#fff] 
-                bg-[rgba(40,97,51,0.2)]`}
-                onClick={() => {}}
+                className={`w-full flex rounded-md font-bold justify-center items-center 
+                  py-3 px-3 my-1 mt-8 text-[#fff] bg-secondary_btn`}
               >
                 <FiLogIn className="text-sm" />{' '}
                 <span
@@ -191,7 +224,7 @@ const Sidebar = ({
                   {language === 'English' ? 'Log in' : 'লগ ইন'}
                 </span>
               </button>
-            </Link>
+            </div>
           )}
         </div>
       </div>

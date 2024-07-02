@@ -158,8 +158,11 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
       ) : (
         <>
           {step === 1 && (
-            <form onSubmit={handleCheckUserAndSendCode} className="mb-4 px-5">
-              <h2 className="-mt-4 text-[26px] font-bold">
+            <form
+              onSubmit={handleCheckUserAndSendCode}
+              className="mb-4 px-3 md:px-5"
+            >
+              <h2 className="-mt-4 text-[22px] md:text-[26px] font-bold">
                 Email / Phone Number
               </h2>
               <div className="mb-4">
@@ -173,8 +176,9 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
               </div>
               <button
                 type="submit"
-                className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] 
-            transition duration-300 flex items-center justify-center gap-2 text-lg"
+                className="w-full bg-primary-bg text-white px-4 py-3 rounded-md 
+                hover:bg-[#d85403] transition duration-300 flex items-center 
+                justify-center gap-2 md:text-lg"
               >
                 Next Step <FaArrowRight />
               </button>
@@ -188,8 +192,9 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                 <button
                   onClick={() => setLoginStatePhone(!loginStatePhone)}
                   type="submit"
-                  className="w-full bg-[#f7d5c0] border-[#fd6404] border-2 px-4 py-3 rounded-md hover:bg-[#f5b993] 
-            transition duration-300 flex items-center justify-center gap-2 text-lg font-semibold"
+                  className="w-full bg-[#f7d5c0] border-[#fd6404] border-2 px-4 py-3 rounded-md
+                   hover:bg-[#f5b993] transition duration-300 flex items-center justify-center 
+                   gap-2 text-base md:text-lg font-semibold"
                 >
                   {loginStatePhone ? 'Login with Email' : 'Login with Phone'}{' '}
                   <FaArrowRight />
@@ -198,7 +203,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
           {step === 2 && (
-            <form onSubmit={handleVerifyCode} className="mb-4 px-5">
+            <form onSubmit={handleVerifyCode} className="mb-4 px-3 md:px-5">
               <h2 className="-mt-4 text-[26px] font-bold">Enter OTP</h2>
               <p>An OTP has been sent to this number {phoneNumber}</p>
               <div className="my-4">
@@ -207,7 +212,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                   id="verificationCode"
                   value={verificationCode}
                   onChange={(e) => setVerificationCode(e.target.value)}
-                  className="mt-1 block w-full px-3 py-3 text-lg border border-gray-300 rounded-md
+                  className="mt-1 block w-full px-3 py-3 text-base md:text-lg border border-gray-300 rounded-md
               shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="Enter verification code"
                 />
@@ -222,7 +227,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
           {step === 3 && (
-            <form onSubmit={handleLogin} className="mb-4 px-5">
+            <form onSubmit={handleLogin} className="mb-4 px-3 md:px-5">
               <h2 className="-mt-4 text-[26px] font-bold">
                 Enter your password
               </h2>
@@ -233,7 +238,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mt-1 block w-full px-3 py-3 text-lg border border-gray-300 rounded-md
+                  className="mt-1 block w-full px-3 py-3 text-base md:text-lg border border-gray-300 rounded-md
               shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="Enter your password"
                 />
@@ -249,7 +254,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
           )}
 
           {step === 4 && (
-            <form onSubmit={handleSetPassword} className="mb-4 px-5">
+            <form onSubmit={handleSetPassword} className="mb-4 px-3 md:px-5">
               <h2 className="-mt-4 text-[26px] font-bold">Set password</h2>
               <p>Enter a strong password for your profile.</p>
               <div className="my-4">
@@ -258,7 +263,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                   id="password"
                   value={password}
                   onChange={(e) => setPassword(e.target.value)}
-                  className="mt-1 block w-full px-3 py-3 text-lg border border-gray-300 rounded-md
+                  className="mt-1 block w-full px-3 py-3 text-base md:text-lg border border-gray-300 rounded-md
               shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="Enter your password"
                 />
@@ -282,7 +287,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                 </p>
                 <button
                   onClick={() => (window.location.href = '/students/dashboard')}
-                  className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] transition duration-300 flex items-center justify-center gap-2 text-lg"
+                  className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] transition duration-300 flex items-center justify-center gap-2 text-base md:text-lg"
                 >
                   Go to Dashboard
                 </button>

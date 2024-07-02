@@ -36,12 +36,12 @@ const LoginModal = ({ children, modalIsOpen, closeModal }) => {
       style={customStyles}
       contentLabel="Example Modal"
     >
-      <div className="flex items-center justify-between px-5">
-        <h2 className="font-bangla text-xl font-semibold">
+      <div className="flex items-center justify-between px-3 md:px-5">
+        <h2 className="font-bangla text-lg md:text-xl font-semibold">
           Learn with Data Solution 360
         </h2>
         <button onClick={closeModal}>
-          <RxCross2 className="text-2xl" />
+          <RxCross2 className="text-xl md:text-2xl" />
         </button>
       </div>
       <hr className="my-6" />
