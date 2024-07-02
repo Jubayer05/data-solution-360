@@ -1,11 +1,8 @@
-// components/PhoneAuth.js
-import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa6';
+import React, { useState } from 'react';
+import { FaArrowRight } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import Swal from 'sweetalert2';
 import firebase, { auth, handleAuthError } from '../../firebase';
 import * as congratulationsData from '../../src/data/json/congratulations.json';
 import * as animationData from '../../src/data/json/login_loading.json';
@@ -21,25 +18,11 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [step, setStep] = useState(1);
-  const [haveAccount, setHaveAccount] = useState(false);
-  const [userData, setUserData] = useState([]);
-
-  const router = useRouter();
 
   const phoneNumberEmail = `${phoneNumber?.replace(
     /\D/g,
     '',
   )}@datasolution360.com`;
-
-  useEffect(() => {
-    db.collection('userLogin').onSnapshot((snap) => {
-      const userData = snap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setUserData(userData);
-    });
-  }, []);
 
   // NOTE: HANDLE SET USER AND SEND CODE
   const handleCheckUserAndSendCode = async (e) => {
@@ -60,15 +43,19 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             size: 'invisible',
           },
         );
+        await recaptchaVerifier.render(); // Ensure reCAPTCHA is rendered
+
         const confirmationResult = await auth.signInWithPhoneNumber(
           phoneNumber,
           recaptchaVerifier,
         );
+        console.log(confirmationResult);
         setVerificationId(confirmationResult.verificationId);
         setStep(2); // Go to verify code step
       }
     } catch (err) {
       setError(err.message);
+      console.error('Error during user check and send code:', err);
     } finally {
       setLoading(false);
     }
@@ -90,6 +77,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
       setStep(4); // Go to set password step
     } catch (err) {
       setError(err.message);
+      console.error('Error during verify code:', err);
     } finally {
       setLoading(false);
     }
@@ -114,11 +102,13 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
         .then(() => {
           setStep(5); // Go to success step
         })
-        .catch(() => {
-          Swal.fire('Can not create account', 'error');
+        .catch((err) => {
+          setError('Cannot create account');
+          console.error('Error creating account in Firestore:', err);
         });
     } catch (err) {
       setError(err.message);
+      console.error('Error setting password:', err);
     } finally {
       setLoading(false);
     }
@@ -136,6 +126,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
       // router.push('/students/dashboard');
     } catch (err) {
       handleAuthError(err);
+      console.error('Error during login:', err);
       // Swal.fire('Hey!', err.message, 'error');
       // setError(err.message);
     } finally {
@@ -159,8 +150,6 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
       preserveAspectRatio: 'xMidYMid slice',
     },
   };
-
-  // console.log(error);
 
   return (
     <div className="max-w-md mx-auto pt-6 rounded-lg">
@@ -285,7 +274,6 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
 
-          {/* {step === 5 && ( */}
           {step === 5 && success && (
             <div className="flex items-center justify-center flex-col">
               <Lottie options={congratulationsLottie} />
@@ -303,7 +291,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </div>
           )}
 
-          {/* {error && <p className="text-red-500 text-sm">{error.message}</p>} */}
+          {error && <p className="text-red-500 text-sm">{error}</p>}
         </>
       )}
     </div>
