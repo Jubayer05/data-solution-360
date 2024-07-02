@@ -9,7 +9,6 @@ export const MainContextProvider = ({ children }) => {
   const [globalLoading, setGlobalLoading] = useState(true);
   const [language, setLanguage] = useState('English');
   const [userName, setUserName] = useState('');
-  // const [email, setEmail] = useState("");
   const [userEmail, setUserEmail] = useState('');
   const [photoUrl, setPhotoUrl] = useState('');
   const [userData, setUserData] = useState([]);
@@ -27,11 +26,26 @@ export const MainContextProvider = ({ children }) => {
   const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);
 
   useEffect(() => {
-    setLanguage(localStorage.getItem('lan'));
-    setUserName(auth.currentUser?.displayName);
-    setUserEmail(auth.currentUser?.email);
-    setPhotoUrl(auth.currentUser?.photoURL);
+    // Set the language from localStorage
+    setLanguage(localStorage.getItem('lan') || 'English');
 
+    // Set up the Firebase authentication state observer
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      if (user) {
+        // User is signed in, update the state
+        setUserName(user.displayName);
+        setUserEmail(user.email);
+        setPhotoUrl(user.photoURL);
+      } else {
+        // User is signed out, clear the state
+        setUserName('');
+        setUserEmail('');
+        setPhotoUrl('');
+      }
+      setGlobalLoading(false); // Ensure loading state is updated
+    });
+
+    // Load data from Firestore
     loadData('userLogin', setUserData);
     loadData('instructors', setInstructor);
     loadData('team_members', setTeamMember);
@@ -41,11 +55,13 @@ export const MainContextProvider = ({ children }) => {
     loadData('dashboard_admin', setDashAdmin);
     loadData('student_review', setStudentReview);
     loadData('slides_main_banner', setSlidesMainBannerData);
-
     loadData('technology_stack', setTechnologyStack);
     loadDataByOrder('faqData', setFaqData, 'orderFaq', 'asc');
     loadDataByOrder('blogData', setBlogData, 'orderNo', 'asc');
     loadDataByOrder('course_data', setCourseData, 'createdAt', 'desc');
+
+    // Cleanup subscription on unmount
+    return () => unsubscribe();
   }, []);
 
   const loadData = (database, setState) => {
@@ -55,9 +71,9 @@ export const MainContextProvider = ({ children }) => {
         ...doc.data(),
       }));
       setState(data);
-      setGlobalLoading(false);
     });
   };
+
   const loadDataByOrder = (database, setState, orderProperty, orderBy) => {
     db.collection(database)
       .orderBy(orderProperty, orderBy)
@@ -67,15 +83,12 @@ export const MainContextProvider = ({ children }) => {
           ...doc.data(),
         }));
         setState(data);
-        setGlobalLoading(false);
       });
   };
 
   const findCurrentUser = userData.find((item) => item.email === userEmail);
   const findAdmin = dashAdmin.find((item) => item.email === userEmail);
   const uniqueUserName = userEmail?.split('@')[0];
-
-  // console.log(userData);
 
   return (
     <StateContext.Provider
