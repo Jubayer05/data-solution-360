@@ -47,8 +47,6 @@ const CourseDetails = () => {
     setIsOpen(false);
   };
 
-  console.log(courseDetails?.details);
-
   return (
     <div>
       <div
@@ -58,13 +56,15 @@ const CourseDetails = () => {
         <BannerCourseDetails courseDetails={courseDetails} />
       </div>
 
-      <div className="max-w-4xl mx-auto mt-10 mb-5 px-3">
-        <YoutubeEmbed
-          embedId={courseDetails?.youtube_video}
-          width="100%"
-          height={innerWidth <= 768 ? '300px' : '500px'}
-        />
-      </div>
+      {courseDetails?.youtube_video && (
+        <div className="max-w-4xl mx-auto mt-10 mb-5 px-3">
+          <YoutubeEmbed
+            embedId={courseDetails?.youtube_video}
+            width="100%"
+            height={innerWidth <= 768 ? '300px' : '500px'}
+          />
+        </div>
+      )}
 
       {/* NOTE: POINTS Course details */}
       <PointsCourseDetails courseDetails={courseDetails} />
@@ -323,7 +323,11 @@ const CourseDetails = () => {
                 </div>
               </div>
             ))}
-            <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+            <CustomModal
+              modalIsOpen={modalIsOpen}
+              closeModal={closeModal}
+              setIsOpen={setIsOpen}
+            >
               <MemberDetails data={modalData} closeModal={closeModal} />
             </CustomModal>
           </div>
