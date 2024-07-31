@@ -7,8 +7,8 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
-import HeadingDashboard from '../../utilities/HeadingDashboard';
 import RichTextEditorJodit from '../../utilities/RichTextEditor/RichTextEditor';
+import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import AddInstructorCourse from '../Course/AddInstructorCourse';
 import AddModule from '../Course/AddModule';
 import CourseStatus from '../Course/CourseStatus';
@@ -174,23 +174,23 @@ const ManageCourse = () => {
       status: courseStatus,
     };
 
-    db.collection('course_data')
-      .doc(modalData.key)
-      .update(updatedCourse)
-      .then(() => {
-        Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
-          () => {
-            window.location.reload();
-          },
-        );
-      })
-      .catch((error) => {
-        Swal.fire('Error!', 'Something went wrong.', 'error');
-        console.log(error);
-      });
-  };
+    console.log(updatedCourse);
 
-  const handleYoutubeReset = () => {};
+    // db.collection('course_data')
+    //   .doc(modalData.key)
+    //   .update(updatedCourse)
+    //   .then(() => {
+    //     Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
+    //       () => {
+    //         window.location.reload();
+    //       },
+    //     );
+    //   })
+    //   .catch((error) => {
+    //     Swal.fire('Error!', 'Something went wrong.', 'error');
+    //     console.log(error);
+    //   });
+  };
 
   const handleInputChange = (key, value) => {
     const updatedObject = {
@@ -233,8 +233,6 @@ const ManageCourse = () => {
       alert('File Size must be under 1mb');
     }
   };
-
-  // console.log(modalData);
 
   return (
     <div>
@@ -631,7 +629,7 @@ export default ManageCourse;
 
 const isContentEmpty = (content) => {
   // Use a regular expression to check if the content contains only whitespace or line breaks
-  const isEmpty = /^(<p><br><\/p>\s*)*$/.test(content);
+  const isEmpty = /^(<div><br><\/div>\s*)*$/.test(content);
   return isEmpty;
 };
 
