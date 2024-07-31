@@ -176,20 +176,20 @@ const ManageCourse = () => {
 
     console.log(updatedCourse);
 
-    // db.collection('course_data')
-    //   .doc(modalData.key)
-    //   .update(updatedCourse)
-    //   .then(() => {
-    //     Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
-    //       () => {
-    //         window.location.reload();
-    //       },
-    //     );
-    //   })
-    //   .catch((error) => {
-    //     Swal.fire('Error!', 'Something went wrong.', 'error');
-    //     console.log(error);
-    //   });
+    db.collection('course_data')
+      .doc(modalData.key)
+      .update(updatedCourse)
+      .then(() => {
+        Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
+          () => {
+            window.location.reload();
+          },
+        );
+      })
+      .catch((error) => {
+        Swal.fire('Error!', 'Something went wrong.', 'error');
+        console.log(error);
+      });
   };
 
   const handleInputChange = (key, value) => {
