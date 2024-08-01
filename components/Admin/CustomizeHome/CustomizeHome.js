@@ -1,5 +1,5 @@
 import React from 'react';
-import HeadingDashboard from '../../utilities/HeadingDashboard';
+import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import AddFaq from './AddFaq';
 import CountdownAdmin from './CountDown';
 import EditFaq from './EditFaq';

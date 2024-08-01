@@ -2,7 +2,7 @@ import { Table } from 'antd';
 import { useEffect, useState } from 'react';
 
 import firebase from '../../../firebase';
-import HeadingDashboard from '../../utilities/HeadingDashboard';
+import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 const db = firebase.firestore();
 
 const UserMessageInbox = () => {
