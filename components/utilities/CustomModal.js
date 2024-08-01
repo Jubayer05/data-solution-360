@@ -1,7 +1,8 @@
 import React from 'react';
+import { FaXmark } from 'react-icons/fa6';
 import Modal from 'react-modal';
 
-const CustomModal = ({ children, modalIsOpen, closeModal }) => {
+const CustomModal = ({ children, modalIsOpen, closeModal, setIsOpen }) => {
   const customStyles = {
     content: {
       background: '#fff',
@@ -19,10 +20,14 @@ const CustomModal = ({ children, modalIsOpen, closeModal }) => {
       boxSizing: 'border-box',
     },
     overlay: {
-      backgroundColor: 'rgba(0, 0, 0, 0.75)',
-      backdropFilter: 'blur(8px)',
+      backgroundColor: 'rgba(0, 0, 0, 0.35)',
+      backdropFilter: 'blur(5px)',
       zIndex: 950,
     },
+  };
+
+  const handleCloseModal = () => {
+    setIsOpen(false);
   };
   return (
     <Modal
@@ -31,6 +36,12 @@ const CustomModal = ({ children, modalIsOpen, closeModal }) => {
       style={customStyles}
       contentLabel="Example Modal"
     >
+      <div className="flex justify-end mr-3">
+        <FaXmark
+          className="text-2xl cursor-pointer"
+          onClick={() => handleCloseModal()}
+        />
+      </div>
       {children}
     </Modal>
   );

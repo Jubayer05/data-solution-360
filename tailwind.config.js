@@ -8,15 +8,15 @@ module.exports = {
   darkMode: 'class',
   theme: {
     fontFamily: {
-      // heading: ['Roboto Slab', 'serif'],
-      // subHeading: ['Roboto', 'sans-serif'],
+      dash_heading: ['Roboto Slab', 'serif'],
+      // dash_heading: ['Roboto', 'sans-serif'],
       // body: ['Roboto', 'sans-serif'],
       heading: ['Hind Siliguri', 'sans-serif'],
       subHeading: ['Hind Siliguri', 'sans-serif'],
       body: ['Hind Siliguri', 'sans-serif'],
 
-      // body: ['Poppins', 'sans-serif'],
-      // body: ['Montserrat', 'sans-serif'],
+      // dash_heading: ['Poppins', 'sans-serif'],
+      // dash_heading: ['Montserrat', 'sans-serif'],
       bangla: ['Hind Siliguri', 'sans-serif'],
     },
     extend: {
@@ -36,9 +36,12 @@ module.exports = {
       backgroundColor: {
         'primary-bg': '#fd6406',
         'main-bg': '#ffffff',
+        dashboard_primary_bg: '#f9f9fa',
         primary_btn: '#001f3f',
         secondary_btn: '#3d9970',
         brand_btn: '#fd6406',
+        link_bg: '#fd65063a',
+        hover_btn: '#fecb6c3a',
       },
       borderWidth: {
         1: '1px',
@@ -46,6 +49,7 @@ module.exports = {
       borderColor: {
         primary: '#fd6406',
         color: 'rgba(0, 0, 0, 0.1)',
+        dashboard_border: 'rgb(234, 236, 240)',
       },
       textColor: {
         nav: '#000000',

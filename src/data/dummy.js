@@ -6,7 +6,7 @@ import {
 } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { FaUserEdit } from 'react-icons/fa';
-import { FiActivity, FiHelpCircle, FiLogOut } from 'react-icons/fi';
+import { FiHelpCircle, FiLogOut } from 'react-icons/fi';
 import { GiTeacher } from 'react-icons/gi';
 import { ImBlog } from 'react-icons/im';
 import { IoMdSettings } from 'react-icons/io';
@@ -15,6 +15,8 @@ import {
   MdOutlineContentPaste,
   MdOutlineUnsubscribe,
 } from 'react-icons/md';
+import { RiVideoAddLine } from 'react-icons/ri';
+
 import { RiHomeGearFill, RiTeamLine } from 'react-icons/ri';
 
 export const linksAdmin = [
@@ -108,49 +110,39 @@ export const linksAdmin = [
 
 export const linksStudents = [
   {
-    title: 'Dashboard',
-    links: [
-      {
-        name: 'Home',
-        link: '/students/dashboard',
-        icon: <AiOutlineHome />,
-      },
-      {
-        name: 'Profile',
-        link: '/students/profile',
-        icon: <CgProfile />,
-      },
-      {
-        name: 'My Courses',
-        link: '/students/myCourse',
-        icon: <MdOutlineContentPaste />,
-      },
-      {
-        name: 'My Activity',
-        link: '/students/myActivity',
-        icon: <FiActivity />,
-      },
-    ],
+    name: 'Home',
+    link: '/students/dashboard',
+    icon: <AiOutlineHome />,
+  },
+  {
+    name: 'Class Joining',
+    link: '/students/class-joining',
+    icon: <RiVideoAddLine />,
+  },
+  {
+    name: 'Profile',
+    link: '/students/profile',
+    icon: <CgProfile />,
+  },
+  {
+    name: 'My Courses',
+    link: '/students/my-course',
+    icon: <MdOutlineContentPaste />,
   },
 
   {
-    title: 'More',
-    links: [
-      {
-        name: 'Settings',
-        link: '/students/settings/editProfile',
-        icon: <IoMdSettings />,
-      },
-      {
-        name: 'Help',
-        link: '/contact',
-        icon: <FiHelpCircle />,
-      },
-      {
-        name: 'Log out',
-        link: '/students/logout',
-        icon: <FiLogOut />,
-      },
-    ],
+    name: 'Settings',
+    link: '/students/settings/editProfile',
+    icon: <IoMdSettings />,
+  },
+  {
+    name: 'Help',
+    link: '/contact',
+    icon: <FiHelpCircle />,
+  },
+  {
+    name: 'Log out',
+    link: '/students/logout',
+    icon: <FiLogOut />,
   },
 ];

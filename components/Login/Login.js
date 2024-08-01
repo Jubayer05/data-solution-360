@@ -1,5 +1,4 @@
 /* eslint-disable @next/next/no-img-element */
-import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
@@ -21,7 +20,6 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
   const [userData, setUserData] = useState([]);
   const [adminData, setAdminData] = useState([]);
 
-  const Router = useRouter();
   const validateEmail = (email) => {
     const re =
       /^(([^<>()[\]\\.,;:\s@"]+(\.[^<>()[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
@@ -29,14 +27,14 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
   };
 
   useEffect(() => {
-    db.collection('userLogin').onSnapshot((snap) => {
+    db.collection('student_data').onSnapshot((snap) => {
       const userData = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
       }));
       setUserData(userData);
     });
-    db.collection('dashboard_admin').onSnapshot((snap) => {
+    db.collection('dashboard_users').onSnapshot((snap) => {
       const data = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -67,21 +65,28 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
                 ).then(() => {
                   window.location.href = '/students/dashboard';
                 });
-              } else if (validUser.status === 'teacher') {
+              }
+            }
+          })
+          .catch((error) => {
+            const errorMessage = error.message;
+            alert(errorMessage);
+          });
+      } else if (
+        adminData.find((item) => item.email === formData.email) !== undefined
+      ) {
+        auth
+          .signInWithEmailAndPassword(formData.email, formData.password)
+          .then((userCredential) => {
+            const user = userCredential.user;
+            if (findAdminData) {
+              if (findAdminData.role === 'admin') {
                 Swal.fire(
                   'Hey!',
                   'You are successfully logged in.',
                   'success',
                 ).then(() => {
-                  window.location.href = '/teacher/dashboard';
-                });
-              } else if (validUser.status === 'admin') {
-                Swal.fire(
-                  'Hey!',
-                  'You are successfully logged in.',
-                  'success',
-                ).then(() => {
-                  window.location.href = '/admin/dashboard';
+                  window.location.href = '/students/dashboard';
                 });
               }
             }
@@ -112,37 +117,14 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
             .createUserWithEmailAndPassword(formData.email, formData.password)
             .then((userCredential) => {
               const user = userCredential.user;
-
-              const validUser = userData.find(
-                (item) => item.email === user.email,
-              );
-
-              // NOTE: ADD FIRESTORE DB
-              if (!validUser) {
-                db.collection('userLogin')
-                  .add({
-                    name: formData.email,
-                    email: formData.email,
-                    status: 'student',
-                  })
-                  .then(() => {
-                    // NOTE: HANDLE VERIFICATION EMAIL MESSAGE
-                    if (user !== null) {
-                      user.sendEmailVerification({
-                        url: 'https://datasolution360.com/',
-                      });
-                      Swal.fire(
-                        'Hey!',
-                        'A verification email has been sent to your email. Please verify your email.',
-                        'success',
-                      ).then(() => {
-                        window.location.href = '/students/register';
-                      });
-                    }
-                  })
-                  .catch(() => {
-                    Swal.fire('Can not create account', 'error');
-                  });
+              if (user) {
+                Swal.fire(
+                  'Hey!',
+                  'You are successfully registered..',
+                  'success',
+                ).then(() => {
+                  window.location.href = '/';
+                });
               }
             })
             .catch((error) => {

@@ -1,10 +1,9 @@
 /* eslint-disable @next/next/no-img-element */
-import { Avatar, Switch } from 'antd';
+import { Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
-import { FiLogIn, FiLogOut } from 'react-icons/fi';
+import { FiLogIn } from 'react-icons/fi';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
-import { LuUserCircle } from 'react-icons/lu';
-import { VscTriangleUp } from 'react-icons/vsc';
+import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
 import { getAuth, signOut } from 'firebase/auth';
 
@@ -12,8 +11,7 @@ import Link from 'next/link';
 import { BiSolidChevronRight } from 'react-icons/bi';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../src/context/ContextProvider';
-import { navDropItems, navItems, navItems2 } from '../../src/data/data';
-import styles from '../../styles/utility/Navbar.module.css';
+import { navItems, navItems2 } from '../../src/data/data';
 import LoginModal from '../Login/LoginModal';
 import Sidebar from './Home/SideBar';
 
@@ -231,60 +229,15 @@ const Navbar = ({ home }) => {
             </div>
 
             {userEmail ? (
-              <div
-                className={`${styles.dropdown__container} relative font-semibold text-left mr-4 py-4`}
-              >
-                <Avatar
-                  size={48}
-                  src={user?.photoURL || ''}
-                  icon={<LuUserCircle />}
-                  className="cursor-pointer"
-                />
-
-                <div
-                  className={`${styles.dropdown__content} absolute z-50 bg-white shadow-2xl top-[80px] -right-4 w-[240px] pt-5 pb-2 px-8 rounded-lg`}
-                >
-                  <div className="relative">
-                    <VscTriangleUp className="absolute top-[-39px] -right-2 text-nav text-3xl" />
-                    <ul className="list-none">
-                      {navDropItems.map((item) => (
-                        <li key={item.id}>
-                          <Link
-                            href={item.link}
-                            className={`block font-semibold rounded-md py-3 cursor-pointer hover:text-navWhite px-4 hover:bg-[rgb(32,52,110)]
-                  ${
-                    url == item.slug
-                      ? 'text-[#6440fb] visited:text-[#6440fb] bg-[rgba(100,64,251,0.2)] '
-                      : 'text-[#140342] visited:text-[#140342] '
-                  }`}
-                          >
-                            <span>{item.title}</span>
-                          </Link>
-                        </li>
-                      ))}
-                      <li className="py-3 mt-2 bg-primary-bg hover:bg-[rgb(32,52,110)] flex items-center justify-center text-nav rounded-md cursor-pointer hover:text-navWhite px-4">
-                        <button
-                          type="button"
-                          className={`text-md px-3 hover:drop-shadow-xl flex items-center justify-center text-gray-300 
-                        transition-all duration-300 ease-linear
-                        `}
-                          onClick={handleLogout}
-                        >
-                          <FiLogOut className="text-sm" />{' '}
-                          <span
-                            className={`pl-2 ${
-                              language === 'English'
-                                ? 'font-body'
-                                : 'font-bangla'
-                            }`}
-                          >
-                            {language === 'English' ? 'Logout' : 'লগ আউট'}
-                          </span>
-                        </button>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
+              <div>
+                <Link href="/students/dashboard">
+                  <button
+                    className="px-4 py-3 bg-primary_btn text-white rounded-lg flex items-center
+                  justify-center gap-2"
+                  >
+                    Dashboard <MdOutlineDashboardCustomize />
+                  </button>
+                </Link>
               </div>
             ) : (
               <>

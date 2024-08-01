@@ -2,15 +2,16 @@ import firebase from 'firebase/compat/app';
 import 'firebase/compat/auth';
 import 'firebase/compat/firestore';
 import 'firebase/compat/storage';
+import { getFirestore } from 'firebase/firestore';
 import Swal from 'sweetalert2';
 
 const firebaseConfig = {
-  apiKey: 'AIzaSyBYRPbYsEBbDIdPcN32JStfomTkcmJJKes',
-  authDomain: 'data-solution-360.firebaseapp.com',
-  projectId: 'data-solution-360',
-  storageBucket: 'data-solution-360.appspot.com',
-  messagingSenderId: '14980860098',
-  appId: '1:14980860098:web:021631d89050c588e6135b',
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
 if (!firebase.apps.length) {
@@ -19,6 +20,9 @@ if (!firebase.apps.length) {
   firebase.app();
 }
 
+const app = firebase.initializeApp(firebaseConfig);
+
+export const db = getFirestore(app);
 export const auth = firebase.auth();
 
 export const handleAuthError = (error) => {
@@ -41,6 +45,15 @@ export const handleAuthError = (error) => {
   }
 
   Swal.fire('Hey!', errorMessage, 'error');
+};
+
+export const handleLogout = async () => {
+  try {
+    await firebase.auth().signOut();
+    window.location.href = '/';
+  } catch (error) {
+    console.error('Error signing out: ', error);
+  }
 };
 
 export default firebase;

@@ -16,7 +16,7 @@ const Discount = () => {
         ...doc.data(),
       }));
       setCountdownData(data);
-      setTargetDate(new Date(`${data[0].countdownEnd}T23:59:59`));
+      setTargetDate(new Date(`${data[0]?.countdownEnd}T23:59:59`));
     });
   }, []);
 

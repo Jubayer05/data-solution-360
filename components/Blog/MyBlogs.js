@@ -7,8 +7,8 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
 import CustomModal from '../utilities/CustomModal';
-import HeadingDashboard from '../utilities/HeadingDashboard';
 import RichTextEditorJodit from '../utilities/RichTextEditor/RichTextEditor';
+import HeadingDashboard from '../utilities/dashboard/HeadingDashboard';
 const db = firebase.firestore();
 
 const MyBlogs = () => {
@@ -197,7 +197,11 @@ const MyBlogs = () => {
           }}
         />
       </div>
-      <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+      <CustomModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        setIsOpen={setIsOpen}
+      >
         <div className="flex justify-between">
           <div />
           <h2 className="text-2xl font-bold text-center mb-8 ">

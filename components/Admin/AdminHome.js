@@ -3,7 +3,7 @@ import { BsThreeDotsVertical } from 'react-icons/bs';
 
 import { useStateContext } from '../../src/context/ContextProvider';
 import { dashboardAdmin } from '../../src/data/data';
-import HeadingDashboard from '../utilities/HeadingDashboard';
+import HeadingDashboard from '../utilities/dashboard/HeadingDashboard';
 
 const AdminHome = () => {
   const { userName } = useStateContext();

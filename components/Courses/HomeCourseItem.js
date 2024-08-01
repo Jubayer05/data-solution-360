@@ -59,22 +59,29 @@ const CourseItem = ({ item, upcoming, running }) => {
             {upcoming || running ? (
               ''
             ) : (
-              <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
-                <ImClock />
-                <span className="text-[10px] md:text-[12px] -mt-[1px]">
-                  <strong>
-                    {' '}
-                    {new Date(item?.main_class_starting_date).getTime() >=
-                    new Date().getTime()
-                      ? Math.ceil(
-                          (new Date(item?.main_class_starting_date).getTime() -
-                            new Date().getTime()) /
-                            (1000 * 60 * 60 * 24),
-                        )
-                      : 0}{' '}
-                  </strong>
-                  Days Left
-                </span>
+              <div>
+                {new Date(item?.main_class_starting_date).getTime() >=
+                  new Date().getTime() && (
+                  <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
+                    <ImClock />
+                    <span className="text-[10px] md:text-[12px] -mt-[1px]">
+                      <strong>
+                        {' '}
+                        {new Date(item?.main_class_starting_date).getTime() >=
+                        new Date().getTime()
+                          ? Math.ceil(
+                              (new Date(
+                                item?.main_class_starting_date,
+                              ).getTime() -
+                                new Date().getTime()) /
+                                (1000 * 60 * 60 * 24),
+                            )
+                          : 0}{' '}
+                      </strong>
+                      Days Left
+                    </span>
+                  </div>
+                )}
               </div>
             )}
           </div>

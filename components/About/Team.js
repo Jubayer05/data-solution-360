@@ -106,7 +106,11 @@ const MemberInfo = ({ item }) => {
       </div>
       <div className="p-5">
         <>
-          <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+          <CustomModal
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
+            setIsOpen={setIsOpen}
+          >
             <MemberDetails data={modalData} closeModal={closeModal} />
           </CustomModal>
         </>

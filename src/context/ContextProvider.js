@@ -24,6 +24,7 @@ export const MainContextProvider = ({ children }) => {
   const [technologyStack, setTechnologyStack] = useState([]);
   const [studentReview, setStudentReview] = useState([]);
   const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);
+  
 
   useEffect(() => {
     // Set the language from localStorage
@@ -46,13 +47,13 @@ export const MainContextProvider = ({ children }) => {
     });
 
     // Load data from Firestore
-    loadData('userLogin', setUserData);
+    loadData('student_data', setUserData);
     loadData('instructors', setInstructor);
     loadData('team_members', setTeamMember);
     loadData('trendingCourse', setTrendingCourse);
     loadData('popupImage', setPopupImage);
     loadData('youtubeVideo', setYouTubeVideo);
-    loadData('dashboard_admin', setDashAdmin);
+    loadData('dashboard_users', setDashAdmin);
     loadData('student_review', setStudentReview);
     loadData('slides_main_banner', setSlidesMainBannerData);
     loadData('technology_stack', setTechnologyStack);

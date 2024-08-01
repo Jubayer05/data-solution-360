@@ -9,10 +9,13 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import { MainContextProvider } from '../src/context/ContextProvider';
+import { StudentContextProvider } from '../src/context/StudentContext';
 import { UtilityContextProvider } from '../src/context/UtilitiesContext';
 import '../styles/globals.css';
 
 function MyApp({ Component, pageProps }) {
+
+  
   useEffect(() => {
     const handleRouteChangeStart = () => NProgress.start();
     const handleRouteChangeComplete = () => NProgress.done();
@@ -34,7 +37,9 @@ function MyApp({ Component, pageProps }) {
     // <Analytics>
     <MainContextProvider>
       <UtilityContextProvider>
-        <Component {...pageProps} />
+        <StudentContextProvider>
+          <Component {...pageProps} />
+        </StudentContextProvider>
       </UtilityContextProvider>
     </MainContextProvider>
     // </Analytics>

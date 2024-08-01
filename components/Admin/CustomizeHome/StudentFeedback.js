@@ -206,7 +206,11 @@ const StudentFeedback = () => {
             />
           </div>
 
-          <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+          <CustomModal
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
+            setIsOpen={setIsOpen}
+          >
             <div className="w-[350px] sm:w-[600px] text-base">
               <img src={modalData?.img} className="w-32 " alt="" />
               <h3>

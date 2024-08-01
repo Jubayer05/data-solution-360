@@ -1,4 +1,4 @@
-import React, { createContext, useContext, useState } from "react";
+import React, { createContext, useContext, useEffect, useState } from 'react';
 
 const StateContext = createContext();
 
@@ -13,11 +13,13 @@ export const UtilityContextProvider = ({ children }) => {
   const [activeMenu, setActiveMenu] = useState(true);
   const [isClicked, setIsClicked] = useState(initialState);
   const [screenSize, setScreenSize] = useState(undefined);
-  const [language, setLanguage] = useState("English");
+  const [language, setLanguage] = useState('English');
+  const [enrolledCourse, setEnrolledCourse] = useState(null);
 
   const handleClick = (clicked) => {
     setIsClicked({ initialState, [clicked]: true });
   };
+
 
   return (
     <StateContext.Provider
@@ -31,6 +33,8 @@ export const UtilityContextProvider = ({ children }) => {
         setScreenSize,
         language,
         setLanguage,
+        enrolledCourse,
+        setEnrolledCourse,
       }}
     >
       {children}

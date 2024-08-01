@@ -113,7 +113,11 @@ const EditFaq = () => {
               y: 400,
             }}
           />
-          <CustomModal modalIsOpen={modalIsOpen} closeModal={closeModal}>
+          <CustomModal
+            modalIsOpen={modalIsOpen}
+            closeModal={closeModal}
+            setIsOpen={setIsOpen}
+          >
             <div className="w-[350px] sm:w-[550px] text-base">
               <h2>
                 <strong>Question: </strong> {modalData?.faqTitle}

@@ -8,7 +8,7 @@ import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
-import HeadingDashboard from '../utilities/HeadingDashboard';
+import HeadingDashboard from '../utilities/dashboard/HeadingDashboard';
 
 const Editor = dynamic(
   () => {
