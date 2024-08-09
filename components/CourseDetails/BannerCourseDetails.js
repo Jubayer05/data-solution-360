@@ -164,18 +164,29 @@ const BannerCourseDetails = ({ courseDetails }) => {
               <div className="flex items-center">
                 {courseDetails?.status === 'Registration Going on' && (
                   <div>
-                    <span className="text-[orangered] font-bold text-lg">
-                      <strike>{courseDetails?.price}/-</strike>
-                    </span>
+                    {courseDetails?.discounted_price !== '0' ||
+                    !courseDetails?.discounted_price ? (
+                      <span className="text-[orangered] font-bold text-lg">
+                        <strike>{courseDetails?.price}/-</strike>
+                      </span>
+                    ) : (
+                      <span className="text-[#1d2939] font-bold text-3xl">
+                        {courseDetails?.price}
+                        /-
+                      </span>
+                    )}
                   </div>
                 )}
                 <div className="ml-4">
-                  <span className="text-[#1d2939] font-bold text-3xl">
-                    {courseDetails?.status === 'Registration Going on'
-                      ? courseDetails?.discounted_price
-                      : courseDetails?.price}
-                    /-
-                  </span>
+                  {courseDetails?.discounted_price !== '0' ||
+                    (!courseDetails?.discounted_price && (
+                      <span className="text-[#1d2939] font-bold text-3xl">
+                        {courseDetails?.status === 'Registration Going on'
+                          ? courseDetails?.discounted_price
+                          : courseDetails?.price}
+                        /-
+                      </span>
+                    ))}
                 </div>
                 <div className="flex items-center ml-auto border-b-1 cursor-pointer">
                   <BiShareAlt />
