@@ -1,9 +1,19 @@
 import { ConfigProvider, Table } from 'antd';
-import React from 'react';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { FaRegPlayCircle } from 'react-icons/fa';
 import { IoMdPlay } from 'react-icons/io';
+import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
+import { videosPlaylist } from '../../../../src/data/data';
 
 const RecordingContent = () => {
+  const { activeMenu, showedItem, setShowedItem } = useStateContextDashboard();
+  const [currentUrl, setCurrentUrl] = useState(null);
+
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
+
   const columns = [
     {
       title: 'Title',
@@ -27,6 +37,7 @@ const RecordingContent = () => {
       title: 'Class Date',
       dataIndex: 'class_date',
       align: 'center',
+      render: (_, record) => <p>Sat, 2 Dec, 2024</p>,
       width: 150,
     },
 
@@ -38,89 +49,23 @@ const RecordingContent = () => {
       width: 80,
       render: (_, record) => (
         <div className="flex items-center justify-center">
-          <button
-            className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1 
+          <Link href={`${currentUrl}/videos`}>
+            <button
+              className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1 
           px-3 py-2 font-medium"
-          >
-            <IoMdPlay className="text-lg" /> Play
-          </button>
+              onClick={() => setShowedItem(record)}
+            >
+              <IoMdPlay className="text-lg" /> Play
+            </button>
+          </Link>
         </div>
       ),
     },
   ];
 
-  const moduleData = [
-    {
-      moduleNumber: 'Module - 1',
-      moduleName: 'Mastering Data Analytics',
-      classRecording: [
-        {
-          title: 'Introduction',
-          duration: '1 hour',
-          class_date: 'Thursday, 30 May 2024',
-          link_url: 'http://recording-page1.com',
-        },
-        {
-          title: 'Data Wrangling',
-          duration: '2 hours',
-          class_date: 'Friday, 31 May 2024',
-          link_url: 'http://recording-page2.com',
-        },
-        {
-          title: 'Exploratory Data Analysis',
-          duration: '1.5 hours',
-          class_date: 'Saturday, 1 June 2024',
-          link_url: 'http://recording-page3.com',
-        },
-      ],
-    },
-    {
-      moduleNumber: 'Module - 2',
-      moduleName: 'Advanced Machine Learning',
-      classRecording: [
-        {
-          title: 'Supervised Learning',
-          duration: '1.5 hours',
-          class_date: 'Monday, 3 June 2024',
-          link_url: 'http://recording-page4.com',
-        },
-        {
-          title: 'Unsupervised Learning',
-          duration: '2 hours',
-          class_date: 'Tuesday, 4 June 2024',
-          link_url: 'http://recording-page5.com',
-        },
-      ],
-    },
-    {
-      moduleNumber: 'Module - 3',
-      moduleName: 'Deep Learning Specialization',
-      classRecording: [
-        {
-          title: 'Neural Networks Basics',
-          duration: '2 hours',
-          class_date: 'Thursday, 6 June 2024',
-          link_url: 'http://recording-page7.com',
-        },
-        {
-          title: 'Convolutional Neural Networks',
-          duration: '1.5 hours',
-          class_date: 'Friday, 7 June 2024',
-          link_url: 'http://recording-page8.com',
-        },
-        {
-          title: 'Recurrent Neural Networks',
-          duration: '2 hours',
-          class_date: 'Saturday, 8 June 2024',
-          link_url: 'http://recording-page9.com',
-        },
-      ],
-    },
-  ];
-
   return (
     <div className="min-h-screen">
-      {moduleData.map((item) => (
+      {videosPlaylist.map((item) => (
         <div
           key={item.moduleName}
           className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"
@@ -143,7 +88,7 @@ const RecordingContent = () => {
             >
               <Table
                 columns={columns}
-                dataSource={[...item.classRecording]}
+                dataSource={[...item.videoUrl]}
                 pagination={false}
                 className="w-full"
               />

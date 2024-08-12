@@ -1,4 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
+import { videosPlaylist } from '../data/data';
 
 const StateContext = createContext();
 
@@ -15,11 +16,15 @@ export const UtilityContextProvider = ({ children }) => {
   const [screenSize, setScreenSize] = useState(undefined);
   const [language, setLanguage] = useState('English');
   const [enrolledCourse, setEnrolledCourse] = useState(null);
+  const [showedItem, setShowedItem] = useState();
 
   const handleClick = (clicked) => {
     setIsClicked({ initialState, [clicked]: true });
   };
 
+  useEffect(() => {
+    setShowedItem(videosPlaylist[0].videoUrl[0]);
+  }, []);
 
   return (
     <StateContext.Provider
@@ -35,6 +40,8 @@ export const UtilityContextProvider = ({ children }) => {
         setLanguage,
         enrolledCourse,
         setEnrolledCourse,
+        showedItem,
+        setShowedItem,
       }}
     >
       {children}

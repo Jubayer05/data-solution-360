@@ -69,67 +69,6 @@ const CourseDetails = () => {
       {/* NOTE: POINTS Course details */}
       <PointsCourseDetails courseDetails={courseDetails} />
 
-      {/* NOTE: COURSE INCLUDED ITEMS */}
-      {/* <div className="bg-[#101828] p-3 md:p-8 pl-5 md:pl-12 font-normal text-[#eaecf0] rounded-lg mt-8">
-            <div className="flex items-center gap-4">
-              <div className="text-base">During the whole course</div>
-              <div className="grow h-[.5px] bg-[#eaecf0]" />
-            </div>
-
-            <div className="grid grid-cols-2 gap-y-6 gap-x-4 md:gap-x-12 mt-6">
-              <div className="relative bg-[#1d2939] py-3 pr-4 pl-8 border-b-2 border-l-2 rounded-[4px] border-[#475467]">
-                <img
-                  className="w-[40px] absolute top-[20%] left-[-8%]"
-                  src="/course/seo.png"
-                  alt=""
-                />
-                <div>
-                  <p className="m-0 text-base text-primary">Evaluation Test</p>
-                  <p className="m-0">Test yourself for regular exam</p>
-                </div>
-              </div>
-
-              <div className="relative bg-[#1d2939] py-3 pr-4 pl-8 border-b-2 border-l-2 rounded-[4px] border-[#475467]">
-                <img
-                  className="w-[40px] absolute top-[20%] left-[-8%]"
-                  src="/course/support.png"
-                  alt=""
-                />
-                <div>
-                  <p className="m-0 text-base text-[#6993ff]">Support Class</p>
-                  <p className="m-0">Solve your problems regularly</p>
-                </div>
-              </div>
-
-              <div className="relative bg-[#1d2939] py-3 pr-4 pl-8 border-b-2 border-l-2 rounded-[4px] border-[#475467]">
-                <img
-                  className="w-[40px] absolute top-[20%] left-[-8%]"
-                  src="/course/growth.png"
-                  alt=""
-                />
-                <div>
-                  <p className="m-0 text-base text-[#ff8c4b]">
-                    Progress Tracking
-                  </p>
-                  <p className="m-0">Keep yourself always on track</p>
-                </div>
-              </div>
-
-              <div className="relative bg-[#1d2939] py-3 pr-4 pl-8 border-b-2 border-l-2 rounded-[4px] border-[#475467]">
-                <img
-                  className="w-[40px] absolute top-[20%] left-[-8%]"
-                  src="/course/portfolio.png"
-                  alt=""
-                />
-                <div>
-                  <p className="m-0 text-base text-[#ffab00]">
-                    Scope for Internship
-                  </p>
-                  <p className="m-0">For best performers only</p>
-                </div>
-              </div>
-            </div>
-          </div> */}
       <div className="max-w-6xl mx-auto px-3">
         {/* NOTE: COURSE MODULE  */}
         <div className="mt-16">

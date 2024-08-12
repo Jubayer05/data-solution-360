@@ -1,13 +1,14 @@
 /* eslint-disable @next/next/no-img-element */
 
 import { Progress } from 'antd';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import { BsPatchQuestionFill } from 'react-icons/bs';
 import { FaChevronRight } from 'react-icons/fa6';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { colors } from '../../../../src/data/data';
 
-const HeadingEnrolled = () => {
+const HeadingEnrolled = ({ item }) => {
   const [activeBtn, setActiveBtn] = useState('Modules');
   const { setMyCourseShowComp } = useStudentContext();
   const segmentBtn = [
@@ -88,19 +89,21 @@ const HeadingEnrolled = () => {
           </button>
         </div>
       </div>
-      <div
-        className="w-full flex items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
-      mt-3 cursor-pointer hover:shadow-md transition-all duration-200"
-      >
-        <img src="/icon/video-player.png" className="w-[70px]" alt="" />
-        <div className="flex-1">
-          <h2 className="text-xl font-bold leading-6 ">Pre Recorded Video</h2>
-          <p className="text-xs mt-1">35 Videos</p>
+      <Link href={`/students/my-course/${item?.key}/videos`}>
+        <div
+          className="w-full flex items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
+        mt-3 cursor-pointer hover:shadow-md transition-all duration-200"
+        >
+          <img src="/icon/video-player.png" className="w-[70px]" alt="" />
+          <div className="flex-1">
+            <h2 className="text-xl font-bold leading-6 ">Pre Recorded Video</h2>
+            <p className="text-xs mt-1">35 Videos</p>
+          </div>
+          <div>
+            <FaChevronRight />
+          </div>
         </div>
-        <div>
-          <FaChevronRight />
-        </div>
-      </div>
+      </Link>
 
       <div className="w-full flex items-center gap-2 bg-white border px-5 py-4 rounded-md my-5">
         {segmentBtn.map((item) => (

@@ -1,5 +1,3 @@
-const { and } = require('firebase/firestore');
-
 module.exports = {
   content: [
     './pages/**/*.{js,ts,jsx,tsx}',

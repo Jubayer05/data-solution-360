@@ -50,7 +50,7 @@ const EnrolledCourseMainComp = () => {
       } mx-auto flex items-center gap-5`}
     >
       <div className="w-[75%]">
-        <HeadingEnrolled />
+        <HeadingEnrolled item={courseDetails} />
         {myCourseShowComp === 'Modules' ? (
           <ModuleEnrolled courseDetails={courseDetails} />
         ) : myCourseShowComp === 'Assignment' ? (

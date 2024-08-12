@@ -433,3 +433,120 @@ export const userNamePrefix = [
   'Sheikh',
   'Imam',
 ];
+
+
+export const videosPlaylist = [
+  {
+    id: 1,
+    title: 'Introduction to Data Science',
+    totalVideo: 5,
+    videoUrl: [
+      {
+        id: 1,
+        title: 'Basic Data Science',
+        duration: 3,
+        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
+      },
+      {
+        id: 2,
+        title: 'Data Science Tools',
+        duration: 4,
+        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
+      },
+      {
+        id: 3,
+        title: 'Data Science Workflow',
+        duration: 5,
+        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
+      },
+    ],
+  },
+  {
+    id: 2,
+    title: 'Machine Learning Basics',
+    totalVideo: 3,
+    videoUrl: [
+      {
+        id: 1,
+        title: 'Introduction to Machine Learning',
+        duration: 4,
+        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
+      },
+      {
+        id: 2,
+        title: 'Supervised Learning',
+        duration: 6,
+        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
+      },
+    ],
+  },
+  {
+    id: 3,
+    title: 'Deep Learning Fundamentals',
+    totalVideo: 4,
+    videoUrl: [
+      {
+        id: 1,
+        title: 'Introduction to Deep Learning',
+        duration: 5,
+        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
+      },
+      {
+        id: 2,
+        title: 'Neural Networks',
+        duration: 7,
+        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
+      },
+      {
+        id: 3,
+        title: 'Training Deep Networks',
+        duration: 6,
+        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
+      },
+    ],
+  },
+  {
+    id: 4,
+    title: 'Data Visualization Techniques',
+    totalVideo: 2,
+    videoUrl: [
+      {
+        id: 1,
+        title: 'Introduction to Data Visualization',
+        duration: 3,
+        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
+      },
+      {
+        id: 2,
+        title: 'Visualization Tools',
+        duration: 4,
+        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
+      },
+    ],
+  },
+  {
+    id: 5,
+    title: 'Data Preprocessing',
+    totalVideo: 3,
+    videoUrl: [
+      {
+        id: 1,
+        title: 'Introduction to Data Preprocessing',
+        duration: 4,
+        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
+      },
+      {
+        id: 2,
+        title: 'Handling Missing Data',
+        duration: 5,
+        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
+      },
+      {
+        id: 3,
+        title: 'Data Normalization',
+        duration: 3,
+        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
+      },
+    ],
+  },
+];

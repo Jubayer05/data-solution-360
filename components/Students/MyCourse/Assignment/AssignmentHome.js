@@ -40,7 +40,7 @@ const AssignmentHome = () => {
       render: (_, record) => (
         <div className="text-white  ">
           {record?.submitted_user.find(
-            (item) => item.email === findCurrentUser.email,
+            (item) => item.email === findCurrentUser?.email,
           ) ? (
             <span className="bg-secondary_btn pb-1 px-2 rounded-full text-base font-semibold">
               success

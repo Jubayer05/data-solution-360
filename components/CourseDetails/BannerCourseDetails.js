@@ -164,16 +164,23 @@ const BannerCourseDetails = ({ courseDetails }) => {
               <div className="flex items-center">
                 {courseDetails?.status === 'Registration Going on' && (
                   <div>
-                    {courseDetails?.discounted_price !== '0' ||
+                    {courseDetails?.discounted_price == '0' ||
                     !courseDetails?.discounted_price ? (
-                      <span className="text-[orangered] font-bold text-lg">
-                        <strike>{courseDetails?.price}/-</strike>
-                      </span>
-                    ) : (
                       <span className="text-[#1d2939] font-bold text-3xl">
                         {courseDetails?.price}
                         /-
                       </span>
+                    ) : (
+                      <>
+                        <span className="text-[orangered] font-bold text-lg">
+                          <strike>{courseDetails?.price}/-</strike>
+                        </span>{' '}
+                        &nbsp;
+                        <span className="text-[#1d2939] font-bold text-3xl">
+                          {courseDetails?.discounted_price}
+                          /-
+                        </span>
+                      </>
                     )}
                   </div>
                 )}
@@ -203,39 +210,6 @@ const BannerCourseDetails = ({ courseDetails }) => {
             </div>
           )}
         </div>
-
-        {/* <div className="border-1 rounded-md"> */}
-        {/* NOTE: RIGHT HEADER */}
-        {/* <div className="flex items-center justify-center gap-4 border-b-1 py-4">
-            {courseDetails?.status === 'Registration Going on' && (
-              <div className="flex bg-[rgba(255,68,68,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
-                <ImClock className=" text-[rgb(208,12,28)] mr-[6px]" />
-                <span className="text-sm font-[700]">
-                  {new Date(
-                    courseDetails?.main_class_starting_date,
-                  ).getTime() >= new Date().getTime()
-                    ? Math.ceil(
-                        (new Date(
-                          courseDetails?.main_class_starting_date,
-                        ).getTime() -
-                          new Date().getTime()) /
-                          (1000 * 60 * 60 * 24),
-                      )
-                    : 0}{' '}
-                  Days Left
-                </span>
-              </div>
-            )}
-            <div className="flex bg-[rgba(161,68,255,0.15)] text-[#1d2939] px-[6px] py-[10px] items-center justify-center rounded-[4px]">
-              <ImClock className="text-[rgb(120,12,208)] mr-[6px]" />
-              <span className="text-sm font-[700]">
-                Total Seat {courseDetails?.total_seat_number}
-              </span>
-            </div>
-          </div> */}
-
-        {/* NOTE: PRICE & BUTTON */}
-        {/* </div> */}
       </div>
     </div>
   );

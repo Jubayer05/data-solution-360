@@ -1,18 +1,191 @@
 /* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
-import React from 'react';
+import React, { useState } from 'react';
 import { BsExclamationDiamond } from 'react-icons/bs';
 import { FaArrowRight } from 'react-icons/fa6';
+import CustomModal from '../../utilities/CustomModal';
+import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
 const Report = () => {
+  const [modalIsOpen, setIsOpen] = useState(false);
+  const [scoreModal, setScoreModal] = useState(false);
+
+  const closeModal = () => {
+    setIsOpen(false);
+    setScoreModal(false);
+  };
+
   return (
     <div className="bg-white border border-dashboard_border p-5 rounded">
       <div className="flex justify-between">
         <h5 className="text-base font-bold">Total Progress</h5>
-        <button className="flex items-center gap-2 text-sm">
+        <button
+          className="flex items-center gap-2 text-sm"
+          onClick={() => setIsOpen(true)}
+        >
           How calculate result? <BsExclamationDiamond />
         </button>
       </div>
+      <CustomModal
+        modalIsOpen={modalIsOpen}
+        closeModal={closeModal}
+        setIsOpen={setIsOpen}
+      >
+        <img
+          src="/icon/loudspeaker.png"
+          className="w-20 mx-auto -mt-5"
+          alt=""
+        />
+        <h2 className="text-3xl font-bold text-center mt-2 mb-5 text-[orangered]">
+          **Important**
+        </h2>
+        <div className="h-[350px] overflow-y-scroll px-10 pb-10">
+          <p>
+            Welcome to the DataSolution360 Dashboard! You are about to embark on
+            your skill development journey with us, where it's crucial to
+            understand a few key aspects. What are they? Let's find out.
+          </p>
+
+          <p>
+            &rarr; Progress Report We update your progress report every day at 3
+            AM. Your overall progress calculation is as follows: Live Test/Live
+            Coding Test 50% + Quiz 20% + Assignment 30% = 100%. Now, an
+            important point: If you've completed all the exams and see that your
+            overall progress is low, don't panic. Once the results of your
+            remaining assessments are published, your progress report will be
+            updated that night.
+          </p>
+
+          <p>
+            &rarr; Additional Information: Live Classes: You can easily join
+            live classes from the &quot;Class Joining&quot; tab on the
+            dashboard. You can join each class 10 minutes before it starts. The
+            recording of your class will be uploaded to your dashboard within
+            1-3 hours after the class ends.
+          </p>
+
+          <p>
+            Quiz: Your quiz will open at a specific time, and you can
+            participate in the quiz anytime within 24-48 hours of it opening.
+            After participating and submitting the quiz, or when the time is up,
+            you will receive your results. Once the quiz deadline passes, you'll
+            be able to see the answers along with your results. Your quiz score
+            will be added to your progress report at 3 AM.
+          </p>
+
+          <p>
+            Assignment: Your assignment will open at a specific time, and you
+            can submit the assignment anytime within 24-48 hours of it opening.
+            You will not receive your results immediately after submitting the
+            assignment. The instructor will check your assignment and give
+            feedback, after which you will be able to see your assignment
+            results, and your progress will be updated at 3 AM.
+          </p>
+
+          <p>
+            Live Test: Just like in college or university, your live test will
+            start at a specific time. You need to complete and submit your test
+            within the allotted time (10-20 or 30 minutes). If you can't finish
+            in time, only the portion you completed will be submitted. You won't
+            receive your results immediately after submitting the live test.
+            After the teacher checks your test and gives feedback, you'll
+            receive your results, and your progress will be updated at 3 AM.
+          </p>
+
+          <p>
+            Live Coding Test: If you are enrolled in a coding-related course,
+            you might have to take a live coding test. The live coding test will
+            start at a specific time, just like the live test. You'll solve the
+            problem by coding, and once the time is up, you need to submit it.
+          </p>
+        </div>
+        <div className="px-10 pt-5 bg-white">
+          <ButtonDashboard
+            onClick={closeModal}
+            className="w-full bg-[#101828] text-white hover:bg-[#101828dc] rounded-md"
+          >
+            Thanks, Got it
+          </ButtonDashboard>
+        </div>
+      </CustomModal>
+      <CustomModal
+        modalIsOpen={scoreModal}
+        closeModal={closeModal}
+        setIsOpen={setScoreModal}
+      >
+        <img src="/icon/question.png" className="w-20 mx-auto -mt-5" alt="" />
+        <h2 className="text-3xl font-bold text-center mt-2 mb-5">
+          How to get score?
+        </h2>
+        <div className="h-[350px] overflow-y-scroll px-10 pb-10">
+          <p>
+            Welcome to the DataSolution360 Dashboard! You are about to embark on
+            your skill development journey with us, where it's crucial to
+            understand a few key aspects. What are they? Let's find out.
+          </p>
+
+          <p>
+            &rarr; Progress Report We update your progress report every day at 3
+            AM. Your overall progress calculation is as follows: Live Test/Live
+            Coding Test 50% + Quiz 20% + Assignment 30% = 100%. Now, an
+            important point: If you've completed all the exams and see that your
+            overall progress is low, don't panic. Once the results of your
+            remaining assessments are published, your progress report will be
+            updated that night.
+          </p>
+
+          <p>
+            &rarr; Additional Information: Live Classes: You can easily join
+            live classes from the &quot;Class Joining&quot; tab on the
+            dashboard. You can join each class 10 minutes before it starts. The
+            recording of your class will be uploaded to your dashboard within
+            1-3 hours after the class ends.
+          </p>
+
+          <p>
+            Quiz: Your quiz will open at a specific time, and you can
+            participate in the quiz anytime within 24-48 hours of it opening.
+            After participating and submitting the quiz, or when the time is up,
+            you will receive your results. Once the quiz deadline passes, you'll
+            be able to see the answers along with your results. Your quiz score
+            will be added to your progress report at 3 AM.
+          </p>
+
+          <p>
+            Assignment: Your assignment will open at a specific time, and you
+            can submit the assignment anytime within 24-48 hours of it opening.
+            You will not receive your results immediately after submitting the
+            assignment. The instructor will check your assignment and give
+            feedback, after which you will be able to see your assignment
+            results, and your progress will be updated at 3 AM.
+          </p>
+
+          <p>
+            Live Test: Just like in college or university, your live test will
+            start at a specific time. You need to complete and submit your test
+            within the allotted time (10-20 or 30 minutes). If you can't finish
+            in time, only the portion you completed will be submitted. You won't
+            receive your results immediately after submitting the live test.
+            After the teacher checks your test and gives feedback, you'll
+            receive your results, and your progress will be updated at 3 AM.
+          </p>
+
+          <p>
+            Live Coding Test: If you are enrolled in a coding-related course,
+            you might have to take a live coding test. The live coding test will
+            start at a specific time, just like the live test. You'll solve the
+            problem by coding, and once the time is up, you need to submit it.
+          </p>
+        </div>
+        <div className="px-10 pt-5 bg-white">
+          <ButtonDashboard
+            onClick={closeModal}
+            className="w-full bg-[#101828] text-white hover:bg-[#101828dc] rounded-md"
+          >
+            Thanks, Got it
+          </ButtonDashboard>
+        </div>
+      </CustomModal>
       <div className="flex items-center gap-2 mt-5">
         <img
           src="/icon/fox.png"
@@ -96,6 +269,7 @@ const Report = () => {
       </button>
 
       <button
+        onClick={() => setScoreModal(true)}
         className="flex justify-center items-center gap-2 bg-[#c8ffe6] hover:bg-[#acf2d2]
         font-semibold  py-2 px-4 rounded border-green-400 border w-full mt-4 text-[#009351] transition-all duration-200"
       >

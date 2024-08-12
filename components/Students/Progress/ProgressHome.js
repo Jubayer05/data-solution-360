@@ -1,24 +1,35 @@
-import React from 'react';
+/* eslint-disable @next/next/no-img-element */
+import React, { useEffect, useState } from 'react';
 import { FaFacebook, FaWhatsapp } from 'react-icons/fa6';
 import { LuChevronRight, LuClipboardSignature } from 'react-icons/lu';
 import LeaderBoard from './LeaderBoard';
+
+import Link from 'next/link';
 import Report from './Report';
 
 const ProgressHome = () => {
+  const [currentUrl, setCurrentUrl] = useState(null);
+
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
+
   return (
     <div className="h-[calc(100vh-100px)] fixed top-[90px] overflow-y-scroll mr-5">
       <Report />
-      <button
-        className="flex justify-between items-center gap-2 bg-[#ffffff] 
+      <Link href={`${currentUrl}/notice`}>
+        <button
+          className="flex justify-between items-center gap-2 bg-[#ffffff] text-black visited:text-black
         font-semibold  py-3 px-5 rounded border-dashboard_border border w-full mt-4 hover:text-primary transition-all duration-200"
-      >
-        <span className="flex items-center gap-2 text-lg">
-          {' '}
-          <LuClipboardSignature className="text-primary text-2xl" /> How to
-          calculate score{' '}
-        </span>{' '}
-        <LuChevronRight className="text-primary text-2xl" />
-      </button>
+        >
+          <p className="flex items-center gap-2 text-lg">
+            {' '}
+            <LuClipboardSignature className="text-primary text-2xl" /> Notice
+            Board (3)
+          </p>{' '}
+          <LuChevronRight className="text-primary text-2xl" />
+        </button>
+      </Link>
 
       <LeaderBoard />
 
