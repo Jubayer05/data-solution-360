@@ -25,13 +25,13 @@ export { default as CourseDetails } from './CourseDetails/CourseDetails';
 export { default as Services } from './Services/Services';
 
 export { default as Button } from './utilities/Button';
+export { default as DashboardFormat } from './utilities/dashboard/DashboardFormatStudent';
+export { default as DashboardNavbar } from './utilities/dashboard/DashboardNav';
+export { default as Sidebar } from './utilities/dashboard/Sidebar';
 export { default as FaqComp } from './utilities/Faq';
 export { default as Footer } from './utilities/Footer';
 export { default as Navbar } from './utilities/Navbar';
 export { default as WhatsApp } from './utilities/WhatsApp';
-export { default as DashboardFormat } from './utilities/dashboard/DashboardFormatStudent';
-export { default as DashboardNavbar } from './utilities/dashboard/DashboardNav';
-export { default as Sidebar } from './utilities/dashboard/Sidebar';
 
 export { default as LoginComp } from './Login/Login';
 
@@ -43,8 +43,6 @@ export { default as SubscribedUser } from './Admin/SubscribedUser/SubscribedUser
 export { default as Instructors } from './Admin/Team_Instructors/Instructors';
 
 export { default as DashboardStudent } from './Students/DashboardStu';
-export { default as StudentActivity } from './Students/MyActivity';
-export { default as StudentCourse } from './Students/MyCourse';
 export { default as ProfileStudent } from './Students/Profile/Profile';
 
 export { default as FreeCourse } from './FreeCourse/FreeCourse';

@@ -1,5 +1,6 @@
 /* eslint-disable @next/next/no-img-element */
-import React from 'react';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { bg_colors, colors } from '../../../src/data/data';
 
 const LeaderBoard = () => {
@@ -36,11 +37,19 @@ const LeaderBoard = () => {
     },
   ];
 
+  const [currentUrl, setCurrentUrl] = useState(null);
+
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
+
   return (
     <div className="px-3 pt-3 pb-5 bg-white mt-4 rounded border border-dashboard_border">
       <div className="flex justify-between">
         <h4>Leader board</h4>
-        <button>See All</button>
+        <Link href={`${currentUrl}/leaderboard`}>
+          <button>See All</button>
+        </Link>
       </div>
       <div>
         {leaderBoardArr.map((item, index) => (

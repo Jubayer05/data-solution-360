@@ -2,7 +2,7 @@ import React from 'react';
 import { DashboardFormat } from '../../../../components';
 import NoticeHome from '../../../../components/Students/NoticeBoard/NoticeHome';
 
-const enrolledCoursePage = () => {
+const notice = () => {
   return (
     <div>
       <DashboardFormat component={<NoticeHome />} />
@@ -10,4 +10,4 @@ const enrolledCoursePage = () => {
   );
 };
 
-export default enrolledCoursePage;
+export default notice;

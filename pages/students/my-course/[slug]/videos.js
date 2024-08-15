@@ -2,7 +2,7 @@ import React from 'react';
 import { DashboardFormat } from '../../../../components';
 import HomeRecordedVideo from '../../../../components/Students/MyCourse/Videos/HomeRecordedVideo';
 
-const enrolledCoursePage = () => {
+const videos = () => {
   return (
     <div>
       <DashboardFormat component={<HomeRecordedVideo />} />
@@ -10,4 +10,4 @@ const enrolledCoursePage = () => {
   );
 };
 
-export default enrolledCoursePage;
+export default videos;

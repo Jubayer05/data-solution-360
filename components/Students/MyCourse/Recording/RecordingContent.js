@@ -65,12 +65,12 @@ const RecordingContent = () => {
 
   return (
     <div className="min-h-screen">
-      {videosPlaylist.map((item) => (
+      {videosPlaylist.map((item, index) => (
         <div
           key={item.moduleName}
           className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"
         >
-          <h2 className="-mt-2 text-xl font-semibold">{item.moduleNumber}</h2>
+          <h2 className="-mt-2 text-lg font-semibold">Module-{index + 1}</h2>
           <hr className="mt-3 mb-5" />
           <div
             className="flex justify-center items-center gap-6 rounded-xl overflow-hidden

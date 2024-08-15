@@ -1,6 +1,7 @@
 /* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
-import React, { useState } from 'react';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
 import { BsExclamationDiamond } from 'react-icons/bs';
 import { FaArrowRight } from 'react-icons/fa6';
 import CustomModal from '../../utilities/CustomModal';
@@ -9,6 +10,11 @@ import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 const Report = () => {
   const [modalIsOpen, setIsOpen] = useState(false);
   const [scoreModal, setScoreModal] = useState(false);
+  const [currentUrl, setCurrentUrl] = useState(null);
+
+  useEffect(() => {
+    setCurrentUrl(window.location.href);
+  }, []);
 
   const closeModal = () => {
     setIsOpen(false);
@@ -261,12 +267,15 @@ const Report = () => {
           className="flex-1 font-bold text-lg"
         />
       </div>
-      <button
-        className="flex justify-center items-center gap-2 bg-secondary_btn hover:bg-[#34825f]
+      {/* NOTE:  */}
+      <Link href={`${currentUrl}/report`}>
+        <button
+          className="flex justify-center items-center gap-2 bg-secondary_btn hover:bg-[#34825f]
         font-semibold  py-2 px-4 rounded border-green-400 border w-full mt-4 text-white transition-all duration-200"
-      >
-        Report Details <FaArrowRight />
-      </button>
+        >
+          Report Details <FaArrowRight />
+        </button>
+      </Link>
 
       <button
         onClick={() => setScoreModal(true)}

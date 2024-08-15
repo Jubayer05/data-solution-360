@@ -6,15 +6,17 @@ import {
 } from 'react-icons/ai';
 import { CgProfile } from 'react-icons/cg';
 import { FaUserEdit } from 'react-icons/fa';
-import { FiHelpCircle, FiLogOut } from 'react-icons/fi';
+import { FiBookOpen, FiHelpCircle, FiLogOut } from 'react-icons/fi';
 import { GiTeacher } from 'react-icons/gi';
+import { RiFileVideoFill } from 'react-icons/ri';
+
 import { ImBlog } from 'react-icons/im';
-import { IoMdSettings } from 'react-icons/io';
 import {
   MdCastForEducation,
   MdOutlineContentPaste,
   MdOutlineUnsubscribe,
 } from 'react-icons/md';
+
 import { RiVideoAddLine } from 'react-icons/ri';
 
 import { RiHomeGearFill, RiTeamLine } from 'react-icons/ri';
@@ -110,39 +112,28 @@ export const linksAdmin = [
 
 export const linksStudents = [
   {
-    name: 'Home',
-    link: '/students/dashboard',
-    icon: <AiOutlineHome />,
-  },
-  {
     name: 'Class Joining',
     link: '/students/class-joining',
     icon: <RiVideoAddLine />,
-  },
-  {
-    name: 'Profile',
-    link: '/students/profile',
-    icon: <CgProfile />,
   },
   {
     name: 'My Courses',
     link: '/students/my-course',
     icon: <MdOutlineContentPaste />,
   },
-
   {
-    name: 'Settings',
-    link: '/students/settings/editProfile',
-    icon: <IoMdSettings />,
+    name: 'Resource',
+    link: '/students/resource',
+    icon: <FiBookOpen />,
   },
   {
-    name: 'Help',
-    link: '/contact',
-    icon: <FiHelpCircle />,
+    name: 'Recording',
+    link: '/students/recording',
+    icon: <RiFileVideoFill />,
   },
   {
-    name: 'Log out',
-    link: '/students/logout',
-    icon: <FiLogOut />,
+    name: 'Profile',
+    link: '/students/profile',
+    icon: <CgProfile />,
   },
 ];
