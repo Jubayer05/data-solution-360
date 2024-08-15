@@ -70,19 +70,19 @@ const ReportHome = () => {
             <div className="h-[350px] overflow-y-scroll px-10 pb-10">
               <p>
                 Welcome to the DataSolution360 Dashboard! You are about to
-                embark on your skill development journey with us, where it's
-                crucial to understand a few key aspects. What are they? Let's
-                find out.
+                embark on your skill development journey with us, where
+                it&lsquo;s crucial to understand a few key aspects. What are
+                they? Let&lsquo;s find out.
               </p>
 
               <p>
                 &rarr; Progress Report We update your progress report every day
                 at 3 AM. Your overall progress calculation is as follows: Live
                 Test/Live Coding Test 50% + Quiz 20% + Assignment 30% = 100%.
-                Now, an important point: If you've completed all the exams and
-                see that your overall progress is low, don't panic. Once the
-                results of your remaining assessments are published, your
-                progress report will be updated that night.
+                Now, an important point: If you&lsquo;ve completed all the exams
+                and see that your overall progress is low, don&lsquo;t panic.
+                Once the results of your remaining assessments are published,
+                your progress report will be updated that night.
               </p>
 
               <p>
@@ -98,9 +98,9 @@ const ReportHome = () => {
                 participate in the quiz anytime within 24-48 hours of it
                 opening. After participating and submitting the quiz, or when
                 the time is up, you will receive your results. Once the quiz
-                deadline passes, you'll be able to see the answers along with
-                your results. Your quiz score will be added to your progress
-                report at 3 AM.
+                deadline passes, you&lsquo;ll be able to see the answers along
+                with your results. Your quiz score will be added to your
+                progress report at 3 AM.
               </p>
 
               <p>
@@ -117,19 +117,19 @@ const ReportHome = () => {
                 Live Test: Just like in college or university, your live test
                 will start at a specific time. You need to complete and submit
                 your test within the allotted time (10-20 or 30 minutes). If you
-                can't finish in time, only the portion you completed will be
-                submitted. You won't receive your results immediately after
-                submitting the live test. After the teacher checks your test and
-                gives feedback, you'll receive your results, and your progress
-                will be updated at 3 AM.
+                can&lsquo;t finish in time, only the portion you completed will
+                be submitted. You won&lsquo;t receive your results immediately
+                after submitting the live test. After the teacher checks your
+                test and gives feedback, you&lsquo;ll receive your results, and
+                your progress will be updated at 3 AM.
               </p>
 
               <p>
                 Live Coding Test: If you are enrolled in a coding-related
                 course, you might have to take a live coding test. The live
                 coding test will start at a specific time, just like the live
-                test. You'll solve the problem by coding, and once the time is
-                up, you need to submit it.
+                test. You&lsquo;ll solve the problem by coding, and once the
+                time is up, you need to submit it.
               </p>
             </div>
             <div className="px-10 pt-5 bg-white">
