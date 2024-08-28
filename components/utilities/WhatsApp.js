@@ -58,7 +58,7 @@ const WhatsApp = () => {
         w-full py-2 rounded-md text-base md:text-lg"
         >
           <Link
-            href="tel:+8801996104096"
+            href="tel:+8801881581649"
             className="flex items-center justify-center gap-2 "
           >
             <FiPhoneCall className="text-base md:text-xl" />
