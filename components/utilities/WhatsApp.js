@@ -9,7 +9,7 @@ const WhatsApp = () => {
   const popupRef = useRef(null);
 
   const handleClick = () => {
-    const phoneNumber = '8801996104096'; // Replace with your desired phone number
+    const phoneNumber = '8801881581649'; // Replace with your desired phone number
     const url = `https://api.whatsapp.com/send?phone=${phoneNumber}`;
     window.open(url, '_blank');
   };
@@ -58,7 +58,7 @@ const WhatsApp = () => {
         w-full py-2 rounded-md text-base md:text-lg"
         >
           <Link
-            href="tel:+8801881581649"
+            href="tel:+8801996104096"
             className="flex items-center justify-center gap-2 "
           >
             <FiPhoneCall className="text-base md:text-xl" />
