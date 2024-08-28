@@ -1,8 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable react-hooks/exhaustive-deps */
 import React, { useEffect, useState } from 'react';
 
-import { Tooltip } from 'antd';
+import { Badge, Tooltip } from 'antd';
+import Image from 'next/image';
+import Link from 'next/link';
 import { RiNotification3Line } from 'react-icons/ri';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
@@ -82,8 +83,6 @@ const DashboardNavbar = () => {
     return initials?.toUpperCase(); // Ensure the initials are in uppercase
   }
 
-  console.log(insideCourse);
-
   return (
     <div
       className={`border-b border-dashboard_border fixed right-0 bg-white z-50 ${
@@ -94,10 +93,12 @@ const DashboardNavbar = () => {
         <div>
           {enrolledCourse && insideCourse && (
             <div className="flex items-center gap-2">
-              <img
+              <Image
+                width={500}
+                height={300}
                 src={enrolledCourse?.img}
                 alt="Logo"
-                className="h-12 rounded-md"
+                className="h-12 w-24 rounded-md"
               />
               <div className="">
                 <h4 className="text-base font-heading font-semibold">
@@ -120,25 +121,23 @@ const DashboardNavbar = () => {
         </div>
 
         <div className="flex items-center ">
-          <div className="hover:bg-hover_btn px-1 rounded-md">
-            <NavButton
-              icon={<RiNotification3Line />}
-              customFunc={() => handleClick('notification')}
-              title="Notification"
-              color="green"
-              dotColor="pink"
-            />
-          </div>
+          <Link href="/students/notification">
+            <div className="cursor-pointer mr-3 bg-hover_btn px-2 py-1 rounded">
+              <Badge count={5}>
+                <RiNotification3Line className="text-2xl" />
+              </Badge>
+            </div>
+          </Link>
           <Tooltip title="Profile" color="#707070">
             <div
               className="ml-2 flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
               onClick={() => handleClick('userProfile')}
             >
-              {/* <img src={avatar} alt="" className="h-8 w-8 rounded-full" /> */}
+              {/* <Imagewidth={500} height={300}src={avatar} alt="" className="h-8 w-8 rounded-full" /> */}
               <div className="flex items-center">
                 <div className="border-[3px] border-[#0389d7] rounded-full flex items-center justify-center">
                   {findCurrentUser?.photoUrl ? (
-                    <img
+                    <Image
                       className="w-[40px] h-[40px] rounded-full"
                       src={findCurrentUser?.photoUrl}
                       alt={userName}

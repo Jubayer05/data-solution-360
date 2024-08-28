@@ -2,7 +2,7 @@ import React from 'react';
 import { FaXmark } from 'react-icons/fa6';
 import Modal from 'react-modal';
 
-const CustomModal = ({ children, modalIsOpen, closeModal, setIsOpen }) => {
+const CustomModal = ({ children, modalIsOpen, closeModal, setModalIsOpen }) => {
   const customStyles = {
     content: {
       background: '#fff',
@@ -27,7 +27,7 @@ const CustomModal = ({ children, modalIsOpen, closeModal, setIsOpen }) => {
   };
 
   const handleCloseModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
   return (
     <Modal

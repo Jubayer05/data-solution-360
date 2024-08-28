@@ -5,6 +5,134 @@ import { IoLogoYoutube } from 'react-icons/io';
 import { MdContentCopy, MdReviews } from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
 
+import {
+  AiOutlineFundView,
+  AiOutlineHome,
+  AiOutlineVideoCameraAdd,
+} from 'react-icons/ai';
+import { FaUserEdit } from 'react-icons/fa';
+import { FiBookOpen, FiHelpCircle, FiLogOut } from 'react-icons/fi';
+import { GiTeacher } from 'react-icons/gi';
+import { RiFileVideoFill } from 'react-icons/ri';
+
+import { ImBlog } from 'react-icons/im';
+import {
+  MdCastForEducation,
+  MdOutlineContentPaste,
+  MdOutlineUnsubscribe,
+} from 'react-icons/md';
+
+import { RiVideoAddLine } from 'react-icons/ri';
+
+import { RiHomeGearFill, RiTeamLine } from 'react-icons/ri';
+
+export const linksAdmin = [
+  {
+    title: 'Dashboard',
+    links: [
+      {
+        name: 'Home',
+        link: '/admin/dashboard',
+        icon: <AiOutlineHome />,
+      },
+      {
+        name: 'Customize Home Page',
+        link: '/admin/home-page',
+        icon: <RiHomeGearFill />,
+      },
+    ],
+  },
+
+  {
+    title: 'Pages',
+    links: [
+      {
+        name: 'Add a course',
+        link: '/admin/add-course',
+        icon: <AiOutlineVideoCameraAdd />,
+      },
+      {
+        name: 'Manage Courses',
+        link: '/admin/manage-course',
+        icon: <MdCastForEducation />,
+      },
+      {
+        name: 'Add blog content',
+        link: '/admin/addBlogContent',
+        icon: <ImBlog />,
+      },
+      {
+        name: 'Manage my blogs',
+        link: '/admin/myBlogs',
+        icon: <AiOutlineFundView />,
+      },
+      {
+        name: 'Subscribed Users',
+        link: '/admin/subscribed-user',
+        icon: <MdOutlineUnsubscribe />,
+      },
+      {
+        name: 'Team Member',
+        link: '/admin/team_member',
+        icon: <RiTeamLine />,
+      },
+      {
+        name: 'Instructor',
+        link: '/admin/instructors',
+        icon: <GiTeacher />,
+      },
+    ],
+  },
+  {
+    title: 'More',
+    links: [
+      {
+        name: 'Edit profile',
+        link: '/admin/editProfile',
+        icon: <FaUserEdit />,
+      },
+      {
+        name: 'Help',
+        link: '/admin/help',
+        icon: <FiHelpCircle />,
+      },
+      {
+        name: 'Log out',
+        link: '/admin/logout',
+        icon: <FiLogOut />,
+      },
+    ],
+  },
+];
+
+export const linksStudents = [
+  {
+    name: 'Class Joining',
+    link: '/students/class-joining',
+    icon: <RiVideoAddLine />,
+  },
+  {
+    name: 'My Course',
+    link: '/students/my-course',
+    icon: <MdOutlineContentPaste />,
+  },
+  {
+    name: 'Resource',
+    link: '/students/resource',
+    icon: <FiBookOpen />,
+  },
+  {
+    name: 'Recording',
+    link: '/students/recording',
+    icon: <RiFileVideoFill />,
+  },
+  {
+    name: 'Profile',
+    link: '/students/profile',
+    icon: <CgProfile />,
+  },
+];
+
 export const navItems = [
   {
     id: 'nav-1',
@@ -302,15 +430,6 @@ export const dashboardAdmin = [
   },
 ];
 
-export const freeCourseData = [
-  {
-    id: '1',
-    title: 'Complete Data analyst boot-camp',
-    photoUrl: '/course/free-course-1.jpg',
-    link: '/free-course/overview/data-analyst-boot-camp',
-  },
-];
-
 export const colors = [
   '#3498db',
   '#e74c3c',
@@ -432,546 +551,4 @@ export const userNamePrefix = [
   'Rabbi',
   'Sheikh',
   'Imam',
-];
-
-export const videosPlaylist = [
-  {
-    id: 1,
-    title: 'Introduction to Data Science',
-    totalVideo: 5,
-    videoUrl: [
-      {
-        id: 1,
-        title: 'Basic Data Science',
-        duration: 3,
-        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
-      },
-      {
-        id: 2,
-        title: 'Data Science Tools',
-        duration: 4,
-        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
-      },
-      {
-        id: 3,
-        title: 'Data Science Workflow',
-        duration: 5,
-        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
-      },
-    ],
-  },
-  {
-    id: 2,
-    title: 'Machine Learning Basics',
-    totalVideo: 3,
-    videoUrl: [
-      {
-        id: 1,
-        title: 'Introduction to Machine Learning',
-        duration: 4,
-        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
-      },
-      {
-        id: 2,
-        title: 'Supervised Learning',
-        duration: 6,
-        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
-      },
-    ],
-  },
-  {
-    id: 3,
-    title: 'Deep Learning Fundamentals',
-    totalVideo: 4,
-    videoUrl: [
-      {
-        id: 1,
-        title: 'Introduction to Deep Learning',
-        duration: 5,
-        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
-      },
-      {
-        id: 2,
-        title: 'Neural Networks',
-        duration: 7,
-        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
-      },
-      {
-        id: 3,
-        title: 'Training Deep Networks',
-        duration: 6,
-        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
-      },
-    ],
-  },
-  {
-    id: 4,
-    title: 'Data Visualization Techniques',
-    totalVideo: 2,
-    videoUrl: [
-      {
-        id: 1,
-        title: 'Introduction to Data Visualization',
-        duration: 3,
-        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
-      },
-      {
-        id: 2,
-        title: 'Visualization Tools',
-        duration: 4,
-        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
-      },
-    ],
-  },
-  {
-    id: 5,
-    title: 'Data Preprocessing',
-    totalVideo: 3,
-    videoUrl: [
-      {
-        id: 1,
-        title: 'Introduction to Data Preprocessing',
-        duration: 4,
-        url: 'https://drive.google.com/file/d/1Oxs7j4q6mcpppZNCHFg7dZWr1oB2DquI/view?usp=sharing',
-      },
-      {
-        id: 2,
-        title: 'Handling Missing Data',
-        duration: 5,
-        url: 'https://drive.google.com/file/d/1H7kPGU6gUHolwZ1iip5Hu-yJWj37iBd1/view?usp=sharing',
-      },
-      {
-        id: 3,
-        title: 'Data Normalization',
-        duration: 3,
-        url: 'https://drive.google.com/file/d/1UtnmmCXReWSIBU9lgO_mHNj7_XVqNbHg/view?usp=sharing',
-      },
-    ],
-  },
-];
-
-export const moduleProgressData = [
-  {
-    key: 'a1b2c3',
-    moduleNumber: '1',
-    title: 'Basic Data Science',
-    attendancePercentage: '40',
-    quizPercentage: '70',
-  },
-  {
-    key: 'd4e5f6',
-    moduleNumber: '2',
-    title: 'Introduction to Python',
-    attendancePercentage: '85',
-    quizPercentage: '90',
-  },
-  {
-    key: 'g7h8i9',
-    moduleNumber: '3',
-    title: 'Statistics Fundamentals',
-    attendancePercentage: '75',
-    quizPercentage: '80',
-  },
-  {
-    key: 'j1k2l3',
-    moduleNumber: '4',
-    title: 'Data Visualization',
-    attendancePercentage: '65',
-    quizPercentage: '88',
-  },
-  {
-    key: 'm4n5o6',
-    moduleNumber: '5',
-    title: 'Machine Learning Basics',
-    attendancePercentage: '50',
-    quizPercentage: '76',
-  },
-  {
-    key: 'p7q8r9',
-    moduleNumber: '6',
-    title: 'Advanced Python Programming',
-    attendancePercentage: '92',
-    quizPercentage: '94',
-  },
-  {
-    key: 's1t2u3',
-    moduleNumber: '7',
-    title: 'Data Cleaning Techniques',
-    attendancePercentage: '70',
-    quizPercentage: '83',
-  },
-  {
-    key: 'v4w5x6',
-    moduleNumber: '8',
-    title: 'Supervised Learning',
-    attendancePercentage: '60',
-    quizPercentage: '75',
-  },
-  {
-    key: 'y7z8a9',
-    moduleNumber: '9',
-    title: 'Unsupervised Learning',
-    attendancePercentage: '68',
-    quizPercentage: '81',
-  },
-  {
-    key: 'b1c2d3',
-    moduleNumber: '10',
-    title: 'Model Evaluation & Tuning',
-    attendancePercentage: '80',
-    quizPercentage: '89',
-  },
-];
-
-export const leaderBoardArr = [
-  {
-    id: '1',
-    name: 'John Doe',
-    email: 'john.doe@example.com',
-    marksPercentage: '92',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/1.jpg',
-  },
-  {
-    id: '2',
-    name: 'Jane Smith',
-    email: 'jane.smith@example.com',
-    marksPercentage: '85',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/2.jpg',
-  },
-  {
-    id: '3',
-    name: 'Robert Brown',
-    email: 'robert.brown@example.com',
-    marksPercentage: '88',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/3.jpg',
-  },
-  {
-    id: '4',
-    name: 'Emily Johnson',
-    email: 'emily.johnson@example.com',
-    marksPercentage: '90',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/4.jpg',
-  },
-  {
-    id: '5',
-    name: 'Michael Williams',
-    email: 'michael.williams@example.com',
-    marksPercentage: '94',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/5.jpg',
-  },
-  {
-    id: '6',
-    name: 'Sarah Davis',
-    email: 'sarah.davis@example.com',
-    marksPercentage: '87',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/6.jpg',
-  },
-  {
-    id: '7',
-    name: 'James Wilson',
-    email: 'james.wilson@example.com',
-    marksPercentage: '89',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/7.jpg',
-  },
-  {
-    id: '8',
-    name: 'Linda Martinez',
-    email: 'linda.martinez@example.com',
-    marksPercentage: '91',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/8.jpg',
-  },
-  {
-    id: '9',
-    name: 'David Anderson',
-    email: 'david.anderson@example.com',
-    marksPercentage: '93',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/9.jpg',
-  },
-  {
-    id: '10',
-    name: 'Karen Thomas',
-    email: 'jubayer0504@gmail.com',
-    marksPercentage: '84',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/10.jpg',
-  },
-  {
-    id: '11',
-    name: 'Charles Moore',
-    email: 'charles.moore@example.com',
-    marksPercentage: '95',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/11.jpg',
-  },
-  {
-    id: '12',
-    name: 'Patricia Jackson',
-    email: 'patricia.jackson@example.com',
-    marksPercentage: '82',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/12.jpg',
-  },
-  {
-    id: '13',
-    name: 'Joseph White',
-    email: 'joseph.white@example.com',
-    marksPercentage: '87',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/13.jpg',
-  },
-  {
-    id: '14',
-    name: 'Barbara Harris',
-    email: 'barbara.harris@example.com',
-    marksPercentage: '89',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/14.jpg',
-  },
-  {
-    id: '15',
-    name: 'Christopher Clark',
-    email: 'christopher.clark@example.com',
-    marksPercentage: '91',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/15.jpg',
-  },
-  {
-    id: '16',
-    name: 'Elizabeth Lewis',
-    email: 'elizabeth.lewis@example.com',
-    marksPercentage: '85',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/16.jpg',
-  },
-  {
-    id: '17',
-    name: 'Daniel Walker',
-    email: 'daniel.walker@example.com',
-    marksPercentage: '88',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/17.jpg',
-  },
-  {
-    id: '18',
-    name: 'Nancy Hall',
-    email: 'nancy.hall@example.com',
-    marksPercentage: '92',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/18.jpg',
-  },
-  {
-    id: '19',
-    name: 'Matthew Young',
-    email: 'matthew.young@example.com',
-    marksPercentage: '84',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/19.jpg',
-  },
-  {
-    id: '20',
-    name: 'Karen Hernandez',
-    email: 'karen.hernandez@example.com',
-    marksPercentage: '93',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/20.jpg',
-  },
-  {
-    id: '21',
-    name: 'George King',
-    email: 'george.king@example.com',
-    marksPercentage: '86',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/21.jpg',
-  },
-  {
-    id: '22',
-    name: 'Susan Wright',
-    email: 'susan.wright@example.com',
-    marksPercentage: '90',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/22.jpg',
-  },
-  {
-    id: '23',
-    name: 'Paul Lopez',
-    email: 'paul.lopez@example.com',
-    marksPercentage: '87',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/23.jpg',
-  },
-  {
-    id: '24',
-    name: 'Donna Hill',
-    email: 'donna.hill@example.com',
-    marksPercentage: '94',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/24.jpg',
-  },
-  {
-    id: '25',
-    name: 'Mark Scott',
-    email: 'mark.scott@example.com',
-    marksPercentage: '89',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/25.jpg',
-  },
-  {
-    id: '26',
-    name: 'Laura Green',
-    email: 'laura.green@example.com',
-    marksPercentage: '85',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/26.jpg',
-  },
-  {
-    id: '27',
-    name: 'Steven Adams',
-    email: 'steven.adams@example.com',
-    marksPercentage: '91',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/27.jpg',
-  },
-  {
-    id: '28',
-    name: 'Betty Baker',
-    email: 'betty.baker@example.com',
-    marksPercentage: '83',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/28.jpg',
-  },
-  {
-    id: '29',
-    name: 'Kevin Gonzalez',
-    email: 'kevin.gonzalez@example.com',
-    marksPercentage: '95',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/29.jpg',
-  },
-  {
-    id: '30',
-    name: 'Sandra Nelson',
-    email: 'sandra.nelson@example.com',
-    marksPercentage: '90',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/30.jpg',
-  },
-  {
-    id: '31',
-    name: 'Edward Carter',
-    email: 'edward.carter@example.com',
-    marksPercentage: '88',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/31.jpg',
-  },
-  {
-    id: '32',
-    name: 'Dorothy Mitchell',
-    email: 'dorothy.mitchell@example.com',
-    marksPercentage: '91',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/32.jpg',
-  },
-  {
-    id: '33',
-    name: 'Brian Perez',
-    email: 'brian.perez@example.com',
-    marksPercentage: '93',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/33.jpg',
-  },
-  {
-    id: '34',
-    name: 'Ashley Roberts',
-    email: 'ashley.roberts@example.com',
-    marksPercentage: '92',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/34.jpg',
-  },
-  {
-    id: '35',
-    name: 'Ronald Turner',
-    email: 'ronald.turner@example.com',
-    marksPercentage: '84',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/35.jpg',
-  },
-  {
-    id: '36',
-    name: 'Amy Phillips',
-    email: 'amy.phillips@example.com',
-    marksPercentage: '90',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/36.jpg',
-  },
-  {
-    id: '37',
-    name: 'Jason Campbell',
-    email: 'jason.campbell@example.com',
-    marksPercentage: '89',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/37.jpg',
-  },
-  {
-    id: '38',
-    name: 'Angela Parker',
-    email: 'angela.parker@example.com',
-    marksPercentage: '85',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/38.jpg',
-  },
-  {
-    id: '39',
-    name: 'Gary Evans',
-    email: 'gary.evans@example.com',
-    marksPercentage: '87',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/39.jpg',
-  },
-  {
-    id: '40',
-    name: 'Melissa Edwards',
-    email: 'melissa.edwards@example.com',
-    marksPercentage: '91',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/40.jpg',
-  },
-  {
-    id: '41',
-    name: 'Jeffrey Collins',
-    email: 'jeffrey.collins@example.com',
-    marksPercentage: '92',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/41.jpg',
-  },
-  {
-    id: '42',
-    name: 'Deborah Stewart',
-    email: 'deborah.stewart@example.com',
-    marksPercentage: '89',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/42.jpg',
-  },
-  {
-    id: '43',
-    name: 'Frank Sanchez',
-    email: 'frank.sanchez@example.com',
-    marksPercentage: '84',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/43.jpg',
-  },
-  {
-    id: '44',
-    name: 'Rebecca Morris',
-    email: 'rebecca.morris@example.com',
-    marksPercentage: '93',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/44.jpg',
-  },
-  {
-    id: '45',
-    name: 'Raymond Rogers',
-    email: 'raymond.rogers@example.com',
-    marksPercentage: '95',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/45.jpg',
-  },
-  {
-    id: '46',
-    name: 'Stephanie Reed',
-    email: 'stephanie.reed@example.com',
-    marksPercentage: '87',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/46.jpg',
-  },
-  {
-    id: '47',
-    name: 'Gregory Cook',
-    email: 'gregory.cook@example.com',
-    marksPercentage: '92',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/47.jpg',
-  },
-  {
-    id: '48',
-    name: 'Sharon Morgan',
-    email: 'sharon.morgan@example.com',
-    marksPercentage: '88',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/48.jpg',
-  },
-  {
-    id: '49',
-    name: 'Dennis Bell',
-    email: 'dennis.bell@example.com',
-    marksPercentage: '91',
-    photoUrl: 'https://randomuser.me/api/portraits/med/men/49.jpg',
-  },
-  {
-    id: '50',
-    name: 'Cynthia Murphy',
-    email: 'cynthia.murphy@example.com',
-    marksPercentage: '90',
-    photoUrl: 'https://randomuser.me/api/portraits/med/women/50.jpg',
-  },
 ];

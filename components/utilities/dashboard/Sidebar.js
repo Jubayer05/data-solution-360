@@ -1,17 +1,19 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { AiOutlineMenuFold } from 'react-icons/ai';
 
 import { Tooltip } from 'antd';
+import Image from 'next/image';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
-import { linksAdmin, linksStudents } from '../../../src/data/dummy';
+import { linksAdmin, linksStudents } from '../../../src/data/data';
 
 const Sidebar = () => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContextDashboard();
   const [url, setUrl] = useState('');
+  const [currentPage, setCurrentPage] = useState([]);
   useEffect(() => {
     const url = window.location.href.split('/');
+    setCurrentPage(url.map((str) => str.toUpperCase()));
     setUrl(url[3]);
   }, []);
 
@@ -46,7 +48,13 @@ const Sidebar = () => {
               onClick={handleCloseMenu}
               className="items-center gap-3 ml-3 flex text-xl font-extrabold tracking-tight dark:text-white text-slate-900"
             >
-              <img src="/logo/logo_dashboard.png" className="w-32" alt="" />
+              <Image
+                width={500}
+                height={300}
+                src="/logo/logo_dashboard.png"
+                className="w-32"
+                alt=""
+              />
             </Link>
           )}
         </div>
@@ -68,11 +76,17 @@ const Sidebar = () => {
                       activeMenu
                         ? 'justify-start pl-5 rounded-lg'
                         : 'justify-center py-2 rounded'
-                    } gap-5 p-2 text-md text-gray-600 mx-1 hover:bg-[#fecb6c3a]`}
+                    } ${
+                      currentPage.includes(
+                        item?.name?.split(' ').join('-').toUpperCase(),
+                      )
+                        ? 'bg-[#fecb6c55]'
+                        : ' '
+                    } gap-5 p-2 text-md text-gray-600 mx-1 hover:bg-[#fecb6c55]`}
                   >
                     <span className="text-xl"> {item.icon}</span>
                     {activeMenu && (
-                      <span className="capitalize">{item.name}</span>
+                      <span className="capitalize">{item.name} </span>
                     )}
                   </Link>
                 </div>
@@ -100,6 +114,12 @@ const Sidebar = () => {
                         activeMenu
                           ? 'justify-start pl-5 rounded-lg'
                           : 'justify-center py-2 rounded'
+                      } ${
+                        currentPage.includes(
+                          item?.name?.split(' ').join('-').toUpperCase(),
+                        )
+                          ? 'bg-[#fecb6c55]'
+                          : ' '
                       } gap-5 p-2 text-md text-gray-600 mx-1 hover:bg-link_bg`}
                     >
                       <span className="text-xl"> {link.icon}</span>

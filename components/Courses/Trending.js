@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import Slider from 'react-slick';
@@ -55,7 +55,9 @@ const Trending = () => {
             //   minHeight: '100vh',
             // }}
           >
-            <img
+            <Image
+              width={500}
+              height={300}
               className="w-full rounded-lg shadow-lg"
               src={item?.photoUrl}
               alt="trending course"

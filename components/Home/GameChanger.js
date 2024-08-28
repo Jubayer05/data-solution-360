@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { useStateContext } from '../../src/context/ContextProvider';
+import Image from 'next/image';
 
 const GameChanger = () => {
   const { userEmail, technologyStack } = useStateContext();
@@ -52,7 +52,9 @@ const GameChanger = () => {
                         </p>
                       </div>
                       <div className="bg-white w-[35%] h-full flex justify-center items-center">
-                        <img
+                        <Image
+                          width={500}
+                          height={300}
                           src="/icon/medal.png"
                           className="w-[120px] animate-pulse"
                           alt=""
@@ -82,7 +84,9 @@ const GameChanger = () => {
                         </p>
                       </div>
                       <div className="bg-white w-[35%] h-full flex justify-center items-center">
-                        <img
+                        <Image
+                          width={500}
+                          height={300}
                           src="/icon/medal.png"
                           className="w-[120px] animate-pulse"
                           alt=""
@@ -112,7 +116,9 @@ const GameChanger = () => {
                         </p>
                       </div>
                       <div className="bg-white w-[35%] h-full flex justify-center items-center">
-                        <img
+                        <Image
+                          width={500}
+                          height={300}
                           src="/icon/medal.png"
                           className="w-[120px] animate-pulse"
                           alt=""
@@ -142,7 +148,9 @@ const GameChanger = () => {
                         </p>
                       </div>
                       <div className="bg-white w-[35%] h-full flex justify-center items-center">
-                        <img
+                        <Image
+                          width={500}
+                          height={300}
                           src="/icon/medal.png"
                           className="w-[120px] animate-pulse"
                           alt=""

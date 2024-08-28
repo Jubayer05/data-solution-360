@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 
@@ -12,7 +11,9 @@ const MemberDetails = ({ data, closeModal }) => {
       />
 
       <div className="flex items-center justify-between mb-[15px] text-center">
-        <img
+        <Image
+          width={500}
+          height={300}
           className="w-[100px] h-[100px] md:w-[170px] md:h-[170px] object-cover rounded-full"
           src={data?.photoUrl}
           alt={data?.name}

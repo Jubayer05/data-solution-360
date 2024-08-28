@@ -1,9 +1,9 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { MdOnlinePrediction } from 'react-icons/md';
 import { useStateContext } from '../../src/context/ContextProvider';
 import PhoneAuth from '../Login/PhoneLogin';
+import Image from 'next/image';
 
 const JoinLive = () => {
   const { findCurrentUser } = useStateContext();
@@ -28,7 +28,9 @@ const JoinLive = () => {
       <hr className="mt-3" />
       <div className="flex gap-2 mt-10">
         <div className="w-[60%]">
-          <img
+          <Image
+            width={500}
+            height={300}
             src="https://firebasestorage.googleapis.com/v0/b/data-solution-360.appspot.com/o/courseImage%2Fsocialmedia46308%40gmail.com%2FData-Analytics-%26-Data-Science-2.png?alt=media&token=719bdc37-6747-4246-9de2-5227554d27a7"
             alt=""
             className="w-full object-cover rounded-xl"

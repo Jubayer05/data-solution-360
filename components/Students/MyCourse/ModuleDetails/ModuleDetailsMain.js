@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
+import { useStudentContext } from '../../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import ModuleBreadcrumb from './ModuleBreadcrumb';
 import ModuleIntro from './ModuleIntro';
@@ -22,6 +23,13 @@ const ModuleDetailsMain = () => {
     },
   ];
   const { activeMenu } = useStateContextDashboard();
+  const { setModuleShowComp } = useStudentContext();
+
+  const handleSegmentClick = (item) => {
+    setActiveBtn(item.title);
+    setModuleShowComp(item.title);
+  };
+
   return (
     <div
       className={`${
@@ -47,7 +55,7 @@ const ModuleDetailsMain = () => {
           {segmentBtn.map((item) => (
             <button
               key={item.id}
-              onClick={() => setActiveBtn(item.title)}
+              onClick={() => handleSegmentClick(item)}
               className={`${
                 activeBtn === item.title
                   ? 'bg-primary_btn hover:bg-[#001f3fdb] text-white'

@@ -1,5 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
-
 import React, { useEffect, useState } from 'react';
 import { useStateContext } from '../../../../src/context/ContextProvider';
 import { useStudentContext } from '../../../../src/context/StudentContext';
@@ -17,7 +15,7 @@ const EnrolledCourseMainComp = () => {
   const { activeMenu, setEnrolledCourse } = useStateContextDashboard();
   const { myCourseShowComp } = useStudentContext();
   const [courseDetails, setCourseDetails] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
@@ -37,10 +35,10 @@ const EnrolledCourseMainComp = () => {
 
   const openModal = (item) => {
     setModalData(item);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   return (

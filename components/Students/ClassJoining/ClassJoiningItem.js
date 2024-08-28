@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { FaCalendarDay, FaCalendarDays } from 'react-icons/fa6';
 import { FiClock } from 'react-icons/fi';
@@ -6,13 +6,13 @@ import { LuCalendarDays } from 'react-icons/lu';
 import CustomModal from '../../utilities/CustomModal';
 
 const ClassJoiningItem = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
   const listItem = [
     {
@@ -46,7 +46,7 @@ const ClassJoiningItem = () => {
         <CustomModal
           modalIsOpen={modalIsOpen}
           closeModal={closeModal}
-          setIsOpen={setIsOpen}
+          setModalIsOpen={setModalIsOpen}
         >
           <h2 className="font-bold leading-[130%] text-[24px] flex-1 text-center mt-10">
             Mastering Social Media Banner Design: The Next Level
@@ -106,7 +106,13 @@ const ClassJoiningItem = () => {
       </p>
       <div className="bg-[#d3ffd3ac] p-4 rounded-2xl">
         <div className="flex gap-4 items-center">
-          <img src="/icon/live.png" className="w-[20px]" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/icon/live.png"
+            className="w-[20px]"
+            alt=""
+          />
           <p className="text-[20px] font-semibold ">Live Class</p>
         </div>
 

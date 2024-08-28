@@ -1,5 +1,6 @@
-import React from "react";
-import { DashboardFormat, ProfileStudent } from "../../components";
+import React from 'react';
+import { DashboardFormat, ProfileStudent } from '../../components';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const profile = () => {
   return (
@@ -9,4 +10,5 @@ const profile = () => {
   );
 };
 
-export default profile;
+// export default profile;
+export default ProtectedRoute(profile, 'student');

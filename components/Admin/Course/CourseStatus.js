@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 /* eslint-disable jsx-a11y/alt-text */
 import React from 'react';
 import Select from 'react-select';
@@ -53,7 +52,9 @@ const CourseStatus = ({ courseStatus, setCourseStatus }) => {
           <div className="flex-1">
             <div className="px-4 py-2 rounded-lg text-base font-normal flex items-center justify-between gap-10 bg-white">
               <div className="flex items-center gap-4">
-                <img
+                <Image
+                width={500}
+                height={300}
                   className="w-20 h-20 rounded-full"
                   src={item.photoUrl}
                   alt={item.profileName}

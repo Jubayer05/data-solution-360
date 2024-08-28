@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 import Slider from 'react-slick';
 
@@ -72,7 +72,9 @@ const BannerCompanies = () => {
         <Slider {...settings}>
           {companyLogos.map((item) => (
             <div key={item.id}>
-              <img
+              <Image
+                width={500}
+                height={300}
                 className="w-[70px] h-[35px] sm:w-[85px] sm:h-[45px] md:w-[100px] md:h-[55px]"
                 src={item.img}
                 alt=""

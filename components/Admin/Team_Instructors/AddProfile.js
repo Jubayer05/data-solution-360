@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import Select from 'react-select';
 import Swal from 'sweetalert2';
@@ -198,7 +198,9 @@ const AddProfile = ({ profile, db_name, showRole }) => {
               <div className="flex-1">
                 <div className="px-4 py-2 rounded-lg text-base font-normal flex items-center justify-between gap-10 bg-white">
                   <div className="flex items-center gap-4">
-                    <img
+                    <Image
+                      width={500}
+                      height={300}
                       className="w-20 h-20 rounded-full"
                       src={item.photoUrl}
                       alt={item.profileName}
@@ -310,7 +312,14 @@ const AddProfile = ({ profile, db_name, showRole }) => {
             {editProfile && (
               <span className="ml-2 italic font-thin">
                 (previous:
-                <img src={editProfile.photoUrl} className="w-20" alt="" />)
+                <Image
+                  width={500}
+                  height={300}
+                  src={editProfile.photoUrl}
+                  className="w-20"
+                  alt=""
+                />
+                )
               </span>
             )}
             <input

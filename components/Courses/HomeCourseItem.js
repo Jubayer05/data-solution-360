@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react';
 import { IoIosPeople } from 'react-icons/io';
 import Typewriter from 'typewriter-effect';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRightLong } from 'react-icons/fa6';
 import { ImClock } from 'react-icons/im';
@@ -35,7 +35,13 @@ const CourseItem = ({ item, upcoming, running }) => {
         </div>
       </div>
       <Link href={`/course-details/${item.key}`}>
-        <img src={item.img} alt="" className="w-full h-[240px] md:h-[200px]" />
+        <Image
+          width={1000}
+          height={300}
+          src={item.img}
+          alt=""
+          className="w-full h-[240px] md:h-[200px]"
+        />
         <div className="rounded-lg rounded-t-none flex flex-col h-[calc(100%-240px)] md:h-[calc(100%-200px)]">
           <div className="p-0.5 md:p-2 border-b-1 border-[#d6dae1] flex items-center flex-wrap">
             <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded">

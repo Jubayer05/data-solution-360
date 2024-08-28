@@ -1,6 +1,7 @@
 import React from 'react';
 import { DashboardFormat } from '../../components';
 import ClassJoiningMain from '../../components/Students/ClassJoining/ClassJoiningMain';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const classJoining = () => {
   return (
@@ -10,4 +11,5 @@ const classJoining = () => {
   );
 };
 
-export default classJoining;
+// export default classJoining;
+export default ProtectedRoute(classJoining, 'student');

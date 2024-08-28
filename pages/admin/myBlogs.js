@@ -1,5 +1,6 @@
 import React from 'react';
 import { DashboardFormat, MyBlogs } from '../../components';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const myBlogs = () => {
   return (
@@ -9,4 +10,5 @@ const myBlogs = () => {
   );
 };
 
-export default myBlogs;
+// export default myBlogs;
+export default ProtectedRoute(myBlogs, 'admin');

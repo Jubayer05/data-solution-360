@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Collapse } from 'antd';
 import Link from 'next/link';
 
@@ -7,6 +6,7 @@ import { AiOutlineFundProjectionScreen } from 'react-icons/ai';
 import { RiLiveLine } from 'react-icons/ri';
 import { useStateContext } from '../../src/context/ContextProvider';
 
+import Image from 'next/image';
 import { bg_colors, colors } from '../../src/data/data';
 import MemberDetails from '../About/MemberDetails';
 import AddVideoReview from '../Home/Review/AddVideoReview';
@@ -22,7 +22,7 @@ const CourseDetails = () => {
   const [innerWidth, setInnerWidth] = useState();
   const { courseData } = useStateContext();
   const [courseDetails, setCourseDetails] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
   useEffect(() => {
@@ -41,10 +41,10 @@ const CourseDetails = () => {
 
   const openModal = (item) => {
     setModalData(item);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   return (
@@ -237,7 +237,13 @@ const CourseDetails = () => {
 
           <div className="mt-8 bg-[#fff1e9] px-8 py-5 border-l-[3px] border-[#fd6506] rounded-[8px] shadow-lg overflow-hidden">
             <div className="flex items-center gap-2">
-              <img src="/icon/medal.png" className="w-12" alt="" />
+              <Image
+                width={500}
+                height={300}
+                src="/icon/medal.png"
+                className="w-12"
+                alt=""
+              />
               <h2 className="text-lg font-bold">Lead Instructor</h2>
             </div>
 
@@ -247,7 +253,9 @@ const CourseDetails = () => {
                 className="bg-white mt-4 border-l-[3px] border-[#4478ff] rounded-[6px] shadow-lg py-3 px-4 cursor-pointer flex items-center gap-4 hover:bg-[#eaecf0]"
                 onClick={() => openModal(item)}
               >
-                <img
+                <Image
+                  width={500}
+                  height={300}
                   src={item.photoUrl}
                   className="w-[60px] h-[60px] rounded-full"
                   alt=""
@@ -265,7 +273,7 @@ const CourseDetails = () => {
             <CustomModal
               modalIsOpen={modalIsOpen}
               closeModal={closeModal}
-              setIsOpen={setIsOpen}
+              setModalIsOpen={setModalIsOpen}
             >
               <MemberDetails data={modalData} closeModal={closeModal} />
             </CustomModal>

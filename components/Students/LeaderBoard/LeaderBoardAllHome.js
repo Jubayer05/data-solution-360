@@ -1,12 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
 // import { videosPlaylist } from '../../../../src/data/data';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
-import { bg_colors, colors, leaderBoardArr } from '../../../src/data/data';
+import { bg_colors, colors } from '../../../src/data/data';
+import { leaderBoardArr } from '../../../src/data/dummy';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
+import Image from 'next/image';
 
 const LeaderBoardHome = () => {
   const { activeMenu } = useStateContextDashboard();
@@ -63,7 +64,9 @@ const LeaderBoardHome = () => {
               >
                 {index + 1}
               </span>
-              <img
+              <Image
+                width={500}
+                height={300}
                 src={item.photoUrl}
                 className="w-[50px] rounded-full"
                 alt=""
@@ -96,7 +99,9 @@ const LeaderBoardHome = () => {
               <span className="text-lg font-bold" style={{ color: colors[6] }}>
                 {findUserLeaderboardIndex + 1}
               </span>
-              <img
+              <Image
+                width={500}
+                height={300}
                 src={findUserLeaderboard?.photoUrl}
                 className="w-[50px] rounded-full"
                 alt=""
@@ -122,7 +127,9 @@ const LeaderBoardHome = () => {
                 // style={{ backgroundColor: bg_colors[index] }}
               >
                 <span className="text-lg font-bold">{index + 4}</span>
-                <img
+                <Image
+                  width={500}
+                  height={300}
                   src={item.photoUrl}
                   className="w-[50px] rounded-full"
                   alt=""

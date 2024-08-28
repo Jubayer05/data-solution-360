@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 import { useStateContext } from '../../src/context/ContextProvider';
 import { services } from '../../src/data/data';
@@ -54,7 +54,13 @@ const ServiceItem = ({ item, index }) => {
       }  overflow-hidden text-center p-1.5 md:p-4 pt-2 md:pt-8  
       border-[#eaecf0] w-full mx-auto`}
     >
-      <img src={item.img} alt="" className="w-20 h-20 mx-auto " />
+      <Image
+        width={500}
+        height={300}
+        src={item.img}
+        alt=""
+        className="w-20 h-20 mx-auto "
+      />
       <h2 className="text-xl font-bold text-center mt-6 mb-3 capitalize">
         {item.title}
       </h2>

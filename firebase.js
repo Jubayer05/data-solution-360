@@ -24,6 +24,7 @@ const app = firebase.initializeApp(firebaseConfig);
 
 export const db = getFirestore(app);
 export const auth = firebase.auth();
+export const firestore = firebase.firestore();
 
 export const handleAuthError = (error) => {
   let errorMessage = '';

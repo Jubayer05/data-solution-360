@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { useFormik } from 'formik';
 import React from 'react';
 import Swal from 'sweetalert2';

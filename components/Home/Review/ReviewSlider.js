@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import Slider from 'react-slick';
@@ -6,16 +6,16 @@ import StarRatings from 'react-star-ratings';
 import { useStateContext } from '../../../src/context/ContextProvider';
 
 const ReviewSlider = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const { studentReview } = useStateContext();
 
   const openModal = (item) => {
     setModalData(item);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const customStyles = {
@@ -87,7 +87,9 @@ const ReviewSlider = () => {
             relative shadow-[0_3px_10px_rgb(0,0,0,0.2)]"
           >
             <div className="flex items-center mb-[15px] h-[100px]">
-              <img
+              <Image
+                width={500}
+                height={300}
                 className="h-[65px] w-[60px] object-cover rounded-[3px] mr-[15px]"
                 src={item?.img}
                 alt={item?.student_name}
@@ -116,7 +118,9 @@ const ReviewSlider = () => {
                   >
                     <div className="max-w-xl mx-5">
                       <div className="flex items-center justify-center mb-[15px]">
-                        <img
+                        <Image
+                          width={500}
+                          height={300}
                           className="h-[55px] object-cover rounded-[3px] mr-[15px]"
                           src={modalData?.img}
                           alt={modalData?.student_name}

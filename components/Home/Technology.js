@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 import Marquee from 'react-fast-marquee';
 import { useStateContext } from '../../src/context/ContextProvider';
@@ -35,7 +35,13 @@ const Technology = () => {
                     className="bg-white shadow w-24 h-24 md:w-28 md:h-28 flex items-center 
               justify-center flex-col rounded-lg overflow-hidden mx-3 md:mx-6"
                   >
-                    <img src={item.img} alt="" className="w-12 md:w-20" />
+                    <Image
+                      width={500}
+                      height={300}
+                      src={item.img}
+                      alt=""
+                      className="w-12 md:w-20"
+                    />
                     <p className="m-0 text-sm md:text-base text-center leading-4 ">
                       {item?.titleIcon}
                     </p>
@@ -50,7 +56,13 @@ const Technology = () => {
                     className="bg-white shadow-md w-24 h-24 md:w-28 md:h-28 flex items-center 
                 justify-center flex-col rounded-lg overflow-hidden mx-3 md:mx-6"
                   >
-                    <img src={item.img} alt="" className="w-12 md:w-20" />
+                    <Image
+                      width={500}
+                      height={300}
+                      src={item.img}
+                      alt=""
+                      className="w-12 md:w-20"
+                    />
                     <p className="m-0 text-sm md:text-base text-center leading-4 ">
                       {item?.titleIcon}
                     </p>

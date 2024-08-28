@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { useStateContext } from '../../src/context/ContextProvider';
 import {
@@ -19,6 +18,7 @@ import JoinFree from './JoinFree';
 import AddVideoReview from './Review/AddVideoReview';
 import Review from './Review/Review';
 import Subscribe from './Subscribe';
+import Image from 'next/image';
 // import BannerCarousel from "./BannerCarousel";
 
 const Home = () => {
@@ -37,7 +37,9 @@ const Home = () => {
     <div className="bg-[#f9f9fa]">
       {globalLoading ? (
         <div className="flex justify-center items-center min-h-screen">
-          <img
+          <Image
+            width={500}
+            height={300}
             src="/logo/logo.png"
             className="w-[250px] animate-pulse"
             alt=""

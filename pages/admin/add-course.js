@@ -1,7 +1,8 @@
-import React from "react";
-import { AddCourseComp, DashboardFormat } from "../../components";
+import React from 'react';
+import { AddCourseComp, DashboardFormat } from '../../components';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
-const addBlogContent = () => {
+const addCourse = () => {
   return (
     <div>
       <DashboardFormat component={<AddCourseComp />} />
@@ -9,4 +10,4 @@ const addBlogContent = () => {
   );
 };
 
-export default addBlogContent;
+export default ProtectedRoute(addCourse, 'admin');

@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { Empty } from 'antd';
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useStateContext } from '../../src/context/ContextProvider';
 
@@ -27,7 +27,13 @@ const BlogContentItem = () => {
       <h3 className="text-lg font-bold">Data Solution 360</h3>
       <p className="-mt-1 text-sm">Posted on {blogItem?.date}</p>
       {blogItem?.img ? (
-        <img src={blogItem?.img} className="w-full" alt="" />
+        <Image
+          width={1000}
+          height={500}
+          src={blogItem?.img}
+          className="w-full"
+          alt=""
+        />
       ) : (
         <Empty description={false} />
       )}

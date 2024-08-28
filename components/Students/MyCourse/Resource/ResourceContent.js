@@ -20,12 +20,12 @@ import Modal from 'react-modal';
  * There are many lins. All should be workable
  */
 
-const ResourceContent = () => {
+const ResourceContent = ({ item }) => {
   const [modalData, setModalData] = useState(null);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const customStyles = {
@@ -50,7 +50,7 @@ const ResourceContent = () => {
 
   const handleClickCheckBtn = (item) => {
     setModalData(item);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
 
   const columns = [
@@ -102,75 +102,6 @@ const ResourceContent = () => {
     },
   ];
 
-  const moduleData = [
-    {
-      moduleNumber: 'Module - 1',
-      moduleName: 'Mastering Data Analytics',
-      classRecording: [
-        {
-          title: 'Introduction',
-          duration: '1 hour',
-          class_date: 'Thursday, 30 May 2024',
-          link_url: 'http://recording-page1.com',
-        },
-        {
-          title: 'Data Wrangling',
-          duration: '2 hours',
-          class_date: 'Friday, 31 May 2024',
-          link_url: 'http://recording-page2.com',
-        },
-        {
-          title: 'Exploratory Data Analysis',
-          duration: '1.5 hours',
-          class_date: 'Saturday, 1 June 2024',
-          link_url: 'http://recording-page3.com',
-        },
-      ],
-    },
-    {
-      moduleNumber: 'Module - 2',
-      moduleName: 'Advanced Machine Learning',
-      classRecording: [
-        {
-          title: 'Supervised Learning',
-          duration: '1.5 hours',
-          class_date: 'Monday, 3 June 2024',
-          link_url: 'http://recording-page4.com',
-        },
-        {
-          title: 'Unsupervised Learning',
-          duration: '2 hours',
-          class_date: 'Tuesday, 4 June 2024',
-          link_url: 'http://recording-page5.com',
-        },
-      ],
-    },
-    {
-      moduleNumber: 'Module - 3',
-      moduleName: 'Deep Learning Specialization',
-      classRecording: [
-        {
-          title: 'Neural Networks Basics',
-          duration: '2 hours',
-          class_date: 'Thursday, 6 June 2024',
-          link_url: 'http://recording-page7.com',
-        },
-        {
-          title: 'Convolutional Neural Networks',
-          duration: '1.5 hours',
-          class_date: 'Friday, 7 June 2024',
-          link_url: 'http://recording-page8.com',
-        },
-        {
-          title: 'Recurrent Neural Networks',
-          duration: '2 hours',
-          class_date: 'Saturday, 8 June 2024',
-          link_url: 'http://recording-page9.com',
-        },
-      ],
-    },
-  ];
-
   const formatUrl = (url) => {
     const parts = url.split('_');
     if (parts.length > 1) {
@@ -181,7 +112,7 @@ const ResourceContent = () => {
 
   return (
     <div className="min-h-screen">
-      {moduleData.map((item) => (
+      {item?.moduleData.map((item) => (
         <div
           key={item.moduleName}
           className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"

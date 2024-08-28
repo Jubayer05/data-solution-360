@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
@@ -27,7 +26,7 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
   };
 
   useEffect(() => {
-    db.collection('student_data').onSnapshot((snap) => {
+    db.collection('users').onSnapshot((snap) => {
       const userData = snap.docs.map((doc) => ({
         id: doc.id,
         ...doc.data(),
@@ -118,13 +117,20 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
             .then((userCredential) => {
               const user = userCredential.user;
               if (user) {
-                Swal.fire(
-                  'Hey!',
-                  'You are successfully registered..',
-                  'success',
-                ).then(() => {
-                  window.location.href = '/';
-                });
+                db.collection('users')
+                  .add({
+                    email: user.email,
+                    role: 'admin',
+                  })
+                  .then(() => {
+                    Swal.fire(
+                      'Hey!',
+                      'You are successfully registered.',
+                      'success',
+                    ).then(() => {
+                      window.location.href = '/';
+                    });
+                  });
               }
             })
             .catch((error) => {

@@ -9,7 +9,7 @@ const db = firebase.firestore();
 
 const EditFaq = () => {
   const { faqData } = useStateContext();
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
   const handleDelete = (record) => {
@@ -37,12 +37,12 @@ const EditFaq = () => {
   };
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const handleView = (record) => {
     setModalData(record);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
 
   const columns = [
@@ -116,7 +116,7 @@ const EditFaq = () => {
           <CustomModal
             modalIsOpen={modalIsOpen}
             closeModal={closeModal}
-            setIsOpen={setIsOpen}
+            setModalIsOpen={setModalIsOpen}
           >
             <div className="w-[350px] sm:w-[550px] text-base">
               <h2>
@@ -133,7 +133,7 @@ const EditFaq = () => {
 
             <div className="flex justify-center ">
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => setModalIsOpen(false)}
                 className="bg-[orangered] text-white py-1 px-2 rounded"
               >
                 Close

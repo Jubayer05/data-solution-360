@@ -1,5 +1,6 @@
-import React from "react";
-import { AddNewBlog, DashboardFormat } from "../../components";
+import React from 'react';
+import { AddNewBlog, DashboardFormat } from '../../components';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const addBlogContent = () => {
   return (
@@ -9,4 +10,5 @@ const addBlogContent = () => {
   );
 };
 
-export default addBlogContent;
+// export default addBlogContent;
+export default ProtectedRoute(addBlogContent, 'admin');

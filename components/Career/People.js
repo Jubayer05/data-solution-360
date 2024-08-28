@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 
 const People = () => {
@@ -31,7 +31,9 @@ const People = () => {
             key={item.name}
             className="w-full border-1 rounded-lg overflow-hidden"
           >
-            <img
+            <Image
+              width={500}
+              height={300}
               className="h-[300px] w-full transition-all 0.2s"
               src={item.img}
               alt=""

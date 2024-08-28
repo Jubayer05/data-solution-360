@@ -1,12 +1,12 @@
-/* eslint-disable @next/next/no-img-element */
 import { Collapse } from 'antd';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import { FaArrowLeft, FaArrowRight, FaRegCirclePlay } from 'react-icons/fa6';
 import { MdOutlineOndemandVideo } from 'react-icons/md';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
-import { videosPlaylist } from '../../../../src/data/data';
+import { videosPlaylist } from '../../../../src/data/dummy';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
 
 const HomeRecordedVideo = () => {
@@ -33,7 +33,13 @@ const HomeRecordedVideo = () => {
               <FaArrowLeft />
               Back
             </ButtonDashboard>
-            <img src="/icon/video_recorded.png" className="w-8 ml-5" alt="" />
+            <Image
+              width={500}
+              height={300}
+              src="/icon/video_recorded.png"
+              className="w-8 ml-5"
+              alt=""
+            />
             <h3 className="text-lg font-semibold">Pre Recorded Video</h3>
             <div
               className="flex items-center gap-2 bg-gray-200 px-3 py-1 text-xs font-medium

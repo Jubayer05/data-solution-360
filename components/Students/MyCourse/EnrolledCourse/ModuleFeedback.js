@@ -1,3 +1,4 @@
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { MdStarBorderPurple500 } from 'react-icons/md';
 import StarRatings from 'react-star-ratings';
@@ -10,7 +11,7 @@ const ModuleFeedback = ({ item }) => {
     message: '',
     user: {},
   });
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [rating, setRating] = useState(1);
   const { findCurrentUser } = useStateContext();
 
@@ -20,10 +21,10 @@ const ModuleFeedback = ({ item }) => {
   };
 
   const openModal = (item) => {
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const handleSubmit = () => {
@@ -47,10 +48,16 @@ const ModuleFeedback = ({ item }) => {
       <CustomModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        setIsOpen={setIsOpen}
+        setModalIsOpen={setModalIsOpen}
       >
         <div className="px-10">
-          <img src="/icon/review.png" className="w-20 mx-auto" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/icon/review.png"
+            className="w-20 mx-auto"
+            alt=""
+          />
           <h3 className="text-center font-semibold font-heading mt-3">
             Give feedback about Module {item.moduleNumber}
           </h3>

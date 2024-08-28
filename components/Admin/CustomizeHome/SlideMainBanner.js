@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
@@ -140,7 +140,13 @@ const SlideMainBanner = () => {
                   />
                 </div> */}
                 <div className="flex items-center gap-2">
-                  <img src={item?.img} alt="" className="w-28" />
+                  <Image
+                    width={500}
+                    height={300}
+                    src={item?.img}
+                    alt=""
+                    className="w-28"
+                  />
                   <div>
                     <p className="m-0">{item?.titleCourse}</p>
                     <Link

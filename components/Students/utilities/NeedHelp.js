@@ -1,11 +1,17 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 import { MdOutlinePhoneInTalk } from 'react-icons/md';
 
 const NeedHelp = () => {
   return (
     <div className="flex justify-between items-center mt-10 mb-5 p-10  border rounded-2xl">
-      <img src="/icon/technical-support.png" className="w-[120px] " alt="" />
+      <Image
+        width={500}
+        height={300}
+        src="/icon/technical-support.png"
+        className="w-[120px] "
+        alt=""
+      />
       <div className="text-center">
         <h2 className="text-[24px] font-bold text-primary">Need Help?</h2>
         <p>

@@ -1,11 +1,11 @@
-/* eslint-disable @next/next/no-img-element */
 import { ConfigProvider, Progress, Table } from 'antd';
 import React, { useEffect, useState } from 'react';
 // import { videosPlaylist } from '../../../../src/data/data';
+import Image from 'next/image';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
-import { moduleProgressData } from '../../../src/data/data';
+import { moduleProgressData } from '../../../src/data/dummy';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
 const ReportDetails = () => {
@@ -101,7 +101,9 @@ const ReportDetails = () => {
                     <div className="border border-x-0 border-gray-200 mt-3 py-3">
                       <div className="flex gap-10">
                         <div className="w-[35%] flex items-center gap-2">
-                          <img
+                          <Image
+                            width={500}
+                            height={300}
                             src="/icon/profile.png"
                             className="w-[26px]"
                             alt=""
@@ -137,7 +139,9 @@ const ReportDetails = () => {
                     <div className="border border-x-0 border-gray-200 mt-3 py-3">
                       <div className="flex gap-10">
                         <div className="w-[35%] flex items-center gap-2">
-                          <img
+                          <Image
+                            width={500}
+                            height={300}
                             src="/icon/quiz.png"
                             className="w-[26px]"
                             alt=""

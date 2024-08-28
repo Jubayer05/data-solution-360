@@ -1,8 +1,8 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import React from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import Image from 'next/image';
 
 const Popup = ({ handler }) => {
   const { popupImage } = useStateContext();
@@ -14,7 +14,9 @@ const Popup = ({ handler }) => {
   return (
     <div className="w-screen h-screen fixed top-0 left-0 bg-[#0000008f] z-[1000] flex justify-center items-center">
       <div className="-top-36 h-[230px] md:h-[350px] lg:h-[380px] w-[350px] md:w-[500px] lg:w-[600px] rounded-md relative flex items-center flex-col bg-cover">
-        <img
+        <Image
+          width={500}
+          height={300}
           // src={trendingCourse[0]?.photoUrl}
           src={findTrendingCourse?.photoUrl}
           alt="Popup img"

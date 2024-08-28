@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
@@ -46,15 +46,15 @@ const Team = () => {
 export default Team;
 
 const MemberInfo = ({ item }) => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
   const openModal = (item) => {
     setModalData(item);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   return (
@@ -64,12 +64,16 @@ const MemberInfo = ({ item }) => {
     rounded-md"
     >
       <div className="relative flex justify-center">
-        <img
+        <Image
+          width={500}
+          height={300}
           className="w-[135px] h-[135px] mt-8 rounded-full"
           src={item.photoUrl}
           alt=""
         />
-        <img
+        <Image
+          width={500}
+          height={300}
           src="/team/team-shape.png"
           className="absolute animate-spin-slow"
           alt=""
@@ -109,7 +113,7 @@ const MemberInfo = ({ item }) => {
           <CustomModal
             modalIsOpen={modalIsOpen}
             closeModal={closeModal}
-            setIsOpen={setIsOpen}
+            setModalIsOpen={setModalIsOpen}
           >
             <MemberDetails data={modalData} closeModal={closeModal} />
           </CustomModal>

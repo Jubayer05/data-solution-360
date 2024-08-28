@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
@@ -131,7 +131,9 @@ const TrendingCourse = () => {
           <div className="w-full grid grid-cols-2 gap-2">
             {trendingCourse?.map((item) => (
               <div key={item.key} className="relative group">
-                <img
+                <Image
+                  width={500}
+                  height={300}
                   src={item?.photoUrl}
                   alt="Trending Images"
                   className="rounded-lg"

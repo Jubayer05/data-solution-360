@@ -1,11 +1,11 @@
-import React from 'react';
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
+import React from 'react';
 
 import { BsCalendarDay, BsClock } from 'react-icons/bs';
 import { GoCalendar } from 'react-icons/go';
 
 import { Breadcrumb } from 'antd';
+import Image from 'next/image';
 import { BiShareAlt } from 'react-icons/bi';
 
 const BannerCourseDetails = ({ courseDetails }) => {
@@ -82,7 +82,13 @@ const BannerCourseDetails = ({ courseDetails }) => {
         {courseDetails?.status !== 'Upcoming' &&
           courseDetails?.orientation_class !== '-' && (
             <div className="flex items-center bg-[rgb(255,241,233)] px-4 py-3 mt-10 rounded">
-              <img className="w-[60px] mr-4" src="/course/webinar.png" alt="" />
+              <Image
+                width={500}
+                height={300}
+                className="w-[60px] mr-4"
+                src="/course/webinar.png"
+                alt=""
+              />
               <div>
                 <span className="cursor-pointer font-heading">
                   Free Orientation Class
@@ -154,7 +160,9 @@ const BannerCourseDetails = ({ courseDetails }) => {
       {/* NOTE: RIGHT SIDE */}
       <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-360px]">
         <div className="mb-3 bg-white px-1.5 py-1.5 rounded-xl w-[90%] mx-auto md:ml-auto  mt-5">
-          <img
+          <Image
+            width={500}
+            height={300}
             src={courseDetails?.img}
             alt=""
             className="rounded-xl w-[100%]"

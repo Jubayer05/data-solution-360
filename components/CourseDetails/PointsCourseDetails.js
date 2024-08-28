@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { GoLinkExternal } from 'react-icons/go';
@@ -35,7 +35,13 @@ const PointsCourseDetails = ({ courseDetails }) => {
       <div className="w-[100%] md:w-[30%] mt-4">
         {/* NOTE: SUPPORT*/}
         <div className="bg-gradient-to-r from-[#b6f492] to-[rgb(51,139,147)] px-4 py-2 rounded-xl flex items-center gap-3">
-          <img src="/course/support.png" className="w-[110px]" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/course/support.png"
+            className="w-[110px]"
+            alt=""
+          />
           <div>
             <h2 className="text-xl font-semibold text-white">Support</h2>
             <p className="font-semibold text-white mt-2">
@@ -45,7 +51,13 @@ const PointsCourseDetails = ({ courseDetails }) => {
         </div>
         {/* NOTE: PROJECT*/}
         <div className="mt-4 bg-gradient-to-b from-[#5128a1] to-[#20094f] px-4 py-2 rounded-xl flex items-center gap-3">
-          <img src="/course/newbie.png" className="w-[110px]" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/course/newbie.png"
+            className="w-[110px]"
+            alt=""
+          />
           <div>
             <h2 className="text-xl font-semibold text-white">Project</h2>
             <p className="font-normal text-white mt-2">
@@ -55,7 +67,13 @@ const PointsCourseDetails = ({ courseDetails }) => {
         </div>
         {/* NOTE:  COURSE DETAILS LINK*/}
         <div className="bg-gradient-to-r from-[#6972e2] to-[#954ece] px-4 py-2 rounded-xl flex items-center gap-3 mt-4">
-          <img src="/course/details.png" className="w-[110px]" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/course/details.png"
+            className="w-[110px]"
+            alt=""
+          />
           <div>
             <h2 className="text-xl font-semibold text-white">
               Course Details Link

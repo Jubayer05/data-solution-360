@@ -1,6 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
-
 import { Progress } from 'antd';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { BsPatchQuestionFill } from 'react-icons/bs';
@@ -74,7 +73,13 @@ const HeadingEnrolled = ({ item }) => {
           </div>
         </div>
         <div className="w-full flex items-center gap-4 bg-white border px-5 py-4 rounded-md">
-          <img src="/icon/question-mark.png" className="w-[50px]" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/icon/question-mark.png"
+            className="w-[50px]"
+            alt=""
+          />
           <div className="flex-1">
             <h2 className="text-xl font-bold leading-6 ">
               Problem Solving Class
@@ -94,9 +99,17 @@ const HeadingEnrolled = ({ item }) => {
           className="w-full flex items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
         mt-3 cursor-pointer hover:shadow-md transition-all duration-200"
         >
-          <img src="/icon/video-player.png" className="w-[70px]" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/icon/video-player.png"
+            className="w-[60px]"
+            alt=""
+          />
           <div className="flex-1">
-            <h2 className="text-xl font-bold leading-6 ">Pre Recorded Video</h2>
+            <h2 className="text-xl font-bold leading-6 ">
+              Recorded Live Class
+            </h2>
             <p className="text-xs mt-1">35 Videos</p>
           </div>
           <div>

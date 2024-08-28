@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress, Table } from 'antd';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 import Swal from 'sweetalert2';
@@ -13,7 +13,7 @@ const db = firebase.firestore();
 
 const MyBlogs = () => {
   const { userEmail, blogData } = useStateContext();
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [blogDataState, setBlogDataState] = useState();
   const [convertContent, setConvertedContent] = useState(null);
   const [modalData, setModalData] = useState(null);
@@ -27,7 +27,7 @@ const MyBlogs = () => {
   }, [modalData]);
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const columns = [
@@ -125,7 +125,7 @@ const MyBlogs = () => {
 
   const handleEditClick = (record) => {
     setModalData(record);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
 
   const handleDelete = (record) => {
@@ -200,7 +200,7 @@ const MyBlogs = () => {
       <CustomModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        setIsOpen={setIsOpen}
+        setModalIsOpen={setModalIsOpen}
       >
         <div className="flex justify-between">
           <div />
@@ -279,7 +279,13 @@ const MyBlogs = () => {
             Main blog image
           </label>
           <span className="italic font-thin">previous:</span>
-          <img src={modalData?.img} className="w-80 my-4" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src={modalData?.img}
+            className="w-80 my-4"
+            alt=""
+          />
           <input
             id="photoUrl"
             onChange={handleFileSubmit}

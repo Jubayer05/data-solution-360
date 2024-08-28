@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { BiNotepad } from 'react-icons/bi';
@@ -44,7 +44,13 @@ const NoticeHome = () => {
             </h2>
             <div className="bg-[#f9f9fa] m-4 py-3 px-5 rounded-lg">
               <div className="flex items-center gap-3">
-                <img src="/icon/3d-pin.png" className="w-8" alt="" />
+                <Image
+                  width={500}
+                  height={300}
+                  src="/icon/3d-pin.png"
+                  className="w-8"
+                  alt=""
+                />
                 <h3 className="text-xl font-bold">{currentContent?.title}</h3>
                 <p className="ml-auto">{currentContent?.date}</p>
               </div>

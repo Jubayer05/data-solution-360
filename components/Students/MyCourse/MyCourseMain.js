@@ -25,7 +25,7 @@ const MyCourseMain = () => {
         } mx-auto flex items-start gap-6`}
       >
         {/* NOTE: LEFT SIDE */}
-        <div className="w-[75%] ">
+        <div className="w-[75%]">
           <div className="bg-white shadow-lg rounded-lg px-6 pb-8 pt-4 my-5">
             <h2 className="font-heading font-bold text-2xl my-2 ">
               My Courses

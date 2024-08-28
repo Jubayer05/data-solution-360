@@ -1,11 +1,13 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 import { BiSolidHandRight } from 'react-icons/bi';
 
 const Prospectus = () => {
   return (
     <div className="max-w-6xl mx-auto pb-20">
-      <img
+      <Image
+        width={500}
+        height={300}
         className="w-[150px] md:w-[300px] mx-auto mt-10"
         src="/logo/logo.png"
         alt="Logo"

@@ -1,6 +1,7 @@
 import React from 'react';
 import { DashboardFormat } from '../../components';
 import ResourceHome from '../../components/Students/MyCourse/Resource/ResourceHome';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const resource = () => {
   return (
@@ -10,4 +11,4 @@ const resource = () => {
   );
 };
 
-export default resource;
+export default ProtectedRoute(resource, 'student');

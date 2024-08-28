@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
 import React, { useState } from 'react';
@@ -6,6 +5,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import Image from 'next/image';
 const db = firebase.firestore();
 
 const PopupImage = () => {
@@ -102,7 +102,9 @@ const PopupImage = () => {
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
           <h2>Current Popup Image</h2>
           <div className="w-[400px] mx-auto">
-            <img
+            <Image
+              width={500}
+              height={300}
               src={findImageData?.photoUrl}
               alt="Trending Images"
               className="rounded-lg"

@@ -1,5 +1,6 @@
 import { Empty } from 'antd';
 import { convert } from 'html-to-text';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { FaBlog } from 'react-icons/fa';
@@ -43,7 +44,13 @@ const BlogHome = () => {
                   className="shadow-xl rounded-xl border overflow-hidden flex flex-col mt-6 bg-white"
                 >
                   {item.img ? (
-                    <img className="h-[250px]" src={item.img} alt="" />
+                    <Image
+                      width={500}
+                      height={300}
+                      className="h-[250px]"
+                      src={item.img}
+                      alt=""
+                    />
                   ) : (
                     <Empty className="h-[250px] pt-16" description={false} />
                   )}

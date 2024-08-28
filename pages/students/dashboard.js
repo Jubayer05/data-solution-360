@@ -1,5 +1,6 @@
 import React from 'react';
 import { DashboardFormat, DashboardStudent } from '../../components';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const dashboard = () => {
   return (
@@ -9,4 +10,4 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+export default ProtectedRoute(dashboard, 'student');

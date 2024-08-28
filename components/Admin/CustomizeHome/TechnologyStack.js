@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
@@ -140,7 +140,13 @@ const TechnologyStack = () => {
                     className="text-2xl cursor-pointer bg-black border-2 p-1 rounded-full text-white"
                   />
                 </div>
-                <img src={item?.img} alt="" className="w-20" />
+                <Image
+                  width={500}
+                  height={300}
+                  src={item?.img}
+                  alt=""
+                  className="w-20"
+                />
                 <p className="m-0">{item?.titleIcon}</p>
               </div>
             ))}

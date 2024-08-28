@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { Checkbox, Switch, Table } from 'antd';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import { ImCancelCircle } from 'react-icons/im';
 import Modal from 'react-modal';
@@ -19,7 +19,7 @@ const db = firebase.firestore();
 
 const ManageCourse = () => {
   const { courseData, userEmail } = useStateContext();
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [courseDataObj, setCourseDataObj] = useState({});
   const [modalData, setModalData] = useState(null);
   const [orientation, setOrientation] = useState(true);
@@ -48,7 +48,7 @@ const ManageCourse = () => {
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const customStyles = {
@@ -118,7 +118,7 @@ const ManageCourse = () => {
 
   const handleEditClick = (record) => {
     setModalData(record);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
 
   const handleDelete = (record) => {
@@ -302,7 +302,13 @@ const ManageCourse = () => {
             Course image
           </label>
           <span className="italic font-thin">previous:</span>
-          <img src={modalData?.img} className="w-80 my-4" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src={modalData?.img}
+            className="w-80 my-4"
+            alt=""
+          />
           <input
             id="photoUrl"
             onChange={handleFileSubmit}

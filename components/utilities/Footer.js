@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { Tooltip } from 'antd';
+import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
 import { CiPhone } from 'react-icons/ci';
@@ -20,7 +20,13 @@ const Footer = () => {
       <div className="flex flex-col md:!flex-row items-stretch justify-between h-full max-w-[1240px] mx-auto flex-wrap">
         {/* NOTE: BASIC INFO */}
         <div className="w-full md:w-[260px] text-center md:text-left flex md:block justify-center items-center flex-col">
-          <img src="/logo/logo.png" alt="logo" className="h-20" />
+          <Image
+            width={500}
+            height={300}
+            src="/logo/logo.png"
+            alt="logo"
+            className="h-20 w-[100px]"
+          />
           <p className="text-base mt-3">
             Online Live Data Science Learning Platform
           </p>

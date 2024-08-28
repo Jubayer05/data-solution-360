@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React, { useState } from 'react';
 import Masonry from 'react-masonry-css';
 import { useStateContext } from '../../../src/context/ContextProvider';
 
 const Review = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const { studentReview } = useStateContext();
 
@@ -91,7 +91,9 @@ const StudentReviewItem = ({ item, index }) => {
       <div>{item?.review}</div>
       <div className="h-[0.5px] bg-slate-300 w-full my-3" />
       <div className="flex items-center gap-3">
-        <img
+        <Image
+          width={500}
+          height={300}
           src={item?.img}
           className="w-[50px] h-[50px] rounded-full"
           alt=""

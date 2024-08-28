@@ -1,5 +1,6 @@
 import React from 'react';
 import { DashboardFormat, SubscribedUser } from '../../components';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const subscribedUser = () => {
   return (
@@ -9,4 +10,6 @@ const subscribedUser = () => {
   );
 };
 
-export default subscribedUser;
+// export default subscribedUser;
+export default ProtectedRoute(subscribedUser, 'admin');
+

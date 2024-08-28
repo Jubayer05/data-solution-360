@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { ImCheckmark } from 'react-icons/im';
 import Swal from 'sweetalert2';
@@ -38,7 +38,7 @@ const PersonalDetails = () => {
   const handleUpdate = () => {
     firebase
       .firestore()
-      .collection('student_data')
+      .collection('users')
       .doc(findCurrentUser.key)
       .update({
         ...studentInfo,
@@ -63,7 +63,9 @@ const PersonalDetails = () => {
 
   return (
     <div>
-      <img
+      <Image
+        width={500}
+        height={300}
         src={studentInfo?.photoUrl || '/icon/profile.png'}
         alt="Profile"
         className="h-[150px] w-[150px] mx-auto rounded-full"

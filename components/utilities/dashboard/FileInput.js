@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import React, { useRef, useState } from 'react';
 import { RiImageAddFill } from 'react-icons/ri';

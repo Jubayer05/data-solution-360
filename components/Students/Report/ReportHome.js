@@ -1,18 +1,18 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { BsExclamationDiamond } from 'react-icons/bs';
 import { FaArrowLeft } from 'react-icons/fa6';
 // import { videosPlaylist } from '../../../../src/data/data';
+import Image from 'next/image';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import ReportDetails from './ReportDetails';
 
 const ReportHome = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
-  const { activeMenu, showedItem, setShowedItem } = useStateContextDashboard();
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { activeMenu } = useStateContextDashboard();
   const [currentUrl, setCurrentUrl] = useState(null);
 
   useEffect(() => {
@@ -20,7 +20,7 @@ const ReportHome = () => {
   }, []);
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const router = useRouter();
@@ -45,21 +45,29 @@ const ReportHome = () => {
 
         {/* NOTE: HEADING SEGMENT */}
         <div className="flex justify-between items-center gap-5 mt-8">
-          <img src="/icon/rising.png" className="w-8" alt="" />
+          <Image
+            width={500}
+            height={300}
+            src="/icon/rising.png"
+            className="w-8"
+            alt=""
+          />
           <h5 className="text-base font-bold">Progress</h5>
           <div className="flex-1 h-[0.5px] bg-gray-300" />
           <button
             className="flex items-center gap-2 text-sm"
-            onClick={() => setIsOpen(true)}
+            onClick={() => setModalIsOpen(true)}
           >
             How calculate result? <BsExclamationDiamond />
           </button>
           <CustomModal
             modalIsOpen={modalIsOpen}
             closeModal={closeModal}
-            setIsOpen={setIsOpen}
+            setModalIsOpen={setModalIsOpen}
           >
-            <img
+            <Image
+              width={500}
+              height={300}
               src="/icon/loudspeaker.png"
               className="w-20 mx-auto -mt-5"
               alt=""
@@ -197,7 +205,9 @@ const ReportHome = () => {
 
             <div className="flex-1 border border-[#12b76a] p-5 mr-10 rounded-lg">
               <div className="flex items-center gap-2">
-                <img
+                <Image
+                  width={500}
+                  height={300}
                   src="/icon/medal.png"
                   className="w-[70px] rounded-full border-2 border-[#12b76a] p-1"
                   alt=""

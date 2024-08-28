@@ -31,9 +31,9 @@ const Sidebar = ({
     setOpenDropdown(openDropdown === itemId ? null : itemId);
   };
 
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const openModal = () => {
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
     Swal.fire({
@@ -46,7 +46,7 @@ const Sidebar = ({
       confirmButtonText: 'Yes, Exit',
     }).then((result) => {
       if (result.isConfirmed) {
-        setIsOpen(false);
+        setModalIsOpen(false);
       }
     });
   };

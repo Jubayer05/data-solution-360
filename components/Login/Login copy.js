@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import { Icon } from '@iconify/react';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
+import Image from 'next/image';
 
 const db = firebase.firestore();
 const auth = firebase.auth();
@@ -226,7 +226,9 @@ const Login = () => {
               style={{ marginTop: '30px' }}
             >
               <Link href="/">
-                <img
+                <Image
+                  width={500}
+                  height={300}
                   className="w-[100px] mx-auto mb-5"
                   src="/logo/logo.png"
                   alt=""

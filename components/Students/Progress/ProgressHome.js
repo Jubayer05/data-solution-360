@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import React, { useEffect, useState } from 'react';
 import { FaFacebook, FaWhatsapp } from 'react-icons/fa6';
 import { LuChevronRight, LuClipboardSignature } from 'react-icons/lu';

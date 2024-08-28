@@ -1,5 +1,5 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
-import { videosPlaylist } from '../data/data';
+import { videosPlaylist } from '../data/dummy';
 
 const StateContext = createContext();
 

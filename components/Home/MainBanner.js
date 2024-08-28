@@ -1,10 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
 import Link from 'next/link';
 import React from 'react';
 import Lottie from 'react-lottie';
 import Slider from 'react-slick';
 import * as animationData from '../../public/banner/loader.json';
 import { useStateContext } from '../../src/context/ContextProvider';
+import Image from 'next/image';
 
 const MainBanner = () => {
   const { slidesMainBannerData } = useStateContext();
@@ -111,7 +111,9 @@ const MainBanner = () => {
                   </Link>
                 </div>
                 <div className="flex-1 overflow-visible z-10">
-                  <img
+                  <Image
+                    width={500}
+                    height={300}
                     className="w-[500px] rounded-2xl ml-auto"
                     src={item.img}
                     alt=""

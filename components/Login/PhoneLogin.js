@@ -92,10 +92,11 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
       const user = firebase.auth().currentUser;
       await user.updatePassword(password);
       setSuccess('Account created and password set successfully!');
-      db.collection('student_data')
+      db.collection('users')
         .add({
           email: phoneNumberEmail,
           phone: phoneNumber,
+          role: 'student',
         })
         .then(() => {
           setStep(5); // Go to success step

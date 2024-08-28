@@ -1,6 +1,7 @@
-import React from "react";
-import { DashboardFormat } from "../../components";
-import AdminHome from "../../components/Admin/AdminHome";
+import React from 'react';
+import { DashboardFormat } from '../../components';
+import AdminHome from '../../components/Admin/AdminHome';
+import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const dashboard = () => {
   return (
@@ -10,4 +11,5 @@ const dashboard = () => {
   );
 };
 
-export default dashboard;
+// export default dashboard;
+export default ProtectedRoute(dashboard, 'admin');

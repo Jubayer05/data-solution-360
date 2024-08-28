@@ -1,6 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import React from 'react';
-import { freeCourseData } from '../../src/data/data';
+import { freeCourseData } from '../../src/data/dummy';
 
 const FreeCourseHome = () => {
   return (
@@ -23,7 +22,7 @@ const FreeCourseItem = ({ item }) => {
   };
   return (
     // <div className="hello w-[300px] rounded-lg overflow-hidden border-1">
-    //   <img className="w-[300px]" src="/course/free-course-1.jpg" alt="" />
+    //   <Imagewidth={500} height={300}className="w-[300px]" src="/course/free-course-1.jpg" alt="" />
     //   <div className="p-3">
     //     <h2 className="font-heading text-lg">
     //       Complete Data analyst boot-camp{' '}

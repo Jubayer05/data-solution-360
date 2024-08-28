@@ -1,4 +1,3 @@
-/* eslint-disable @next/next/no-img-element */
 import { Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { FiLogIn } from 'react-icons/fi';
@@ -7,6 +6,7 @@ import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
 import { getAuth, signOut } from 'firebase/auth';
 
+import Image from 'next/image';
 import Link from 'next/link';
 import { BiSolidChevronRight } from 'react-icons/bi';
 import Swal from 'sweetalert2';
@@ -24,10 +24,10 @@ const Navbar = ({ home }) => {
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
   const [scrolled80px, setScrolled80px] = useState(false);
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const openModal = () => {
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
   const closeModal = () => {
     Swal.fire({
@@ -40,7 +40,7 @@ const Navbar = ({ home }) => {
       confirmButtonText: 'Yes, Exit',
     }).then((result) => {
       if (result.isConfirmed) {
-        setIsOpen(false);
+        setModalIsOpen(false);
       }
     });
   };
@@ -99,7 +99,13 @@ const Navbar = ({ home }) => {
       <div className="max-w-6xl mx-auto md:flex md:justify-between md:items-center md:h-20">
         <div className="flex justify-between items-center z-[900]">
           <Link href="/">
-            <img src="/logo/logo.png" className="h-16 " alt="logo" />
+            <Image
+              width={500}
+              height={300}
+              src="/logo/logo.png"
+              className="h-16 w-[80px]"
+              alt="logo"
+            />
           </Link>
           <HiOutlineMenuAlt1
             onClick={() => setOpenNav(true)}
@@ -201,20 +207,6 @@ const Navbar = ({ home }) => {
                     )}
                   </div>
                 ))}
-                {findAdmin && (
-                  <li className="">
-                    <Link
-                      href="/admin/dashboard"
-                      className={`${
-                        language === 'English' ? 'font-body' : 'font-bangla'
-                      } cursor-pointer font-semibold tracking-[0.02em]
-                      capitalize px-2 py-1 transition-all 
-                      duration-500 rounded-md text-nav hover:text-primary visited:text-nav flex items-center`}
-                    >
-                      {language === 'English' ? 'Dashboard' : 'ড্যাশবোর্ড'}
-                    </Link>
-                  </li>
-                )}
               </ul>
             </div>
             <div className="mr-3">
@@ -230,7 +222,9 @@ const Navbar = ({ home }) => {
 
             {userEmail ? (
               <div>
-                <Link href="/students/dashboard">
+                <Link
+                  href={findAdmin ? '/admin/dashboard' : '/students/dashboard'}
+                >
                   <button
                     className="px-4 py-3 bg-primary_btn text-white rounded-lg flex items-center
                   justify-center gap-2"

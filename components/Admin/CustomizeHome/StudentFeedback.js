@@ -1,6 +1,6 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress, Table } from 'antd';
 import { useFormik } from 'formik';
+import Image from 'next/image';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
@@ -13,7 +13,7 @@ const StudentFeedback = () => {
   const { userEmail, studentReview } = useStateContext();
   const [img, setImg] = useState('');
   const [progressData, setProgressData] = useState('');
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
 
   const formik = useFormik({
@@ -126,7 +126,7 @@ const StudentFeedback = () => {
   };
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
   };
 
   const columns = [
@@ -135,7 +135,15 @@ const StudentFeedback = () => {
       dataIndex: 'img',
       width: 140,
       align: 'center',
-      render: (item) => <img src={item} className="w-20 rounded-full" />,
+      render: (item) => (
+        <Image
+          width={500}
+          height={300}
+          src={item}
+          alt=""
+          className="w-20 rounded-full"
+        />
+      ),
     },
     {
       title: 'Student Name',
@@ -183,7 +191,7 @@ const StudentFeedback = () => {
 
   const handleView = (record) => {
     setModalData(record);
-    setIsOpen(true);
+    setModalIsOpen(true);
   };
 
   return (
@@ -209,10 +217,16 @@ const StudentFeedback = () => {
           <CustomModal
             modalIsOpen={modalIsOpen}
             closeModal={closeModal}
-            setIsOpen={setIsOpen}
+            setModalIsOpen={setModalIsOpen}
           >
             <div className="w-[350px] sm:w-[600px] text-base">
-              <img src={modalData?.img} className="w-32 " alt="" />
+              <Image
+                width={500}
+                height={300}
+                src={modalData?.img}
+                className="w-32 "
+                alt=""
+              />
               <h3>
                 <strong>Name: </strong> {modalData?.student_name}
               </h3>
@@ -232,7 +246,7 @@ const StudentFeedback = () => {
 
             <div className="flex justify-center ">
               <button
-                onClick={() => setIsOpen(false)}
+                onClick={() => setModalIsOpen(false)}
                 className="bg-[orangered] text-white py-1 px-2 rounded"
               >
                 Close

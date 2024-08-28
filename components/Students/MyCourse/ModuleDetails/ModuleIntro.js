@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import React from 'react';
 import { FiClock } from 'react-icons/fi';
 import { LuCalendarDays } from 'react-icons/lu';
@@ -50,7 +50,13 @@ const ModuleIntro = () => {
         px-5 rounded border-dashboard_border border mt-4 transition-all duration-200"
                 >
                   <span className="flex items-center gap-2">
-                    <img src="/icon/resource.png" className="w-6" alt="" />
+                    <Image
+                      width={500}
+                      height={300}
+                      src="/icon/resource.png"
+                      className="w-6"
+                      alt=""
+                    />
                     Resource(3)
                   </span>
                 </button>
@@ -59,7 +65,13 @@ const ModuleIntro = () => {
         px-5 rounded border-dashboard_border border mt-4 transition-all duration-200"
                 >
                   <span className="flex items-center gap-2">
-                    <img src="/icon/video-player.png" className="w-6" alt="" />
+                    <Image
+                      width={500}
+                      height={300}
+                      src="/icon/video-player.png"
+                      className="w-6"
+                      alt=""
+                    />
                     Pre Recorded Video(40)
                   </span>
                 </button>

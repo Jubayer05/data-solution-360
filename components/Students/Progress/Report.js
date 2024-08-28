@@ -1,5 +1,5 @@
-/* eslint-disable @next/next/no-img-element */
 import { Progress } from 'antd';
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { BsExclamationDiamond } from 'react-icons/bs';
@@ -8,7 +8,7 @@ import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
 const Report = () => {
-  const [modalIsOpen, setIsOpen] = useState(false);
+  const [modalIsOpen, setModalIsOpen] = useState(false);
   const [scoreModal, setScoreModal] = useState(false);
   const [currentUrl, setCurrentUrl] = useState(null);
 
@@ -17,7 +17,7 @@ const Report = () => {
   }, []);
 
   const closeModal = () => {
-    setIsOpen(false);
+    setModalIsOpen(false);
     setScoreModal(false);
   };
 
@@ -27,7 +27,7 @@ const Report = () => {
         <h5 className="text-base font-bold">Total Progress</h5>
         <button
           className="flex items-center gap-2 text-sm"
-          onClick={() => setIsOpen(true)}
+          onClick={() => setModalIsOpen(true)}
         >
           How calculate result? <BsExclamationDiamond />
         </button>
@@ -35,13 +35,17 @@ const Report = () => {
       <CustomModal
         modalIsOpen={modalIsOpen}
         closeModal={closeModal}
-        setIsOpen={setIsOpen}
+        setModalIsOpen={setModalIsOpen}
       >
-        <img
-          src="/icon/loudspeaker.png"
-          className="w-20 mx-auto -mt-5"
-          alt=""
-        />
+        <div className="bg-[#ff950028] w-[100px] h-[100px] mx-auto flex items-center justify-center rounded-full">
+          <Image
+            width={500}
+            height={200}
+            src="/icon/loudspeaker.png"
+            className="w-20 mx-auto -mt-5"
+            alt=""
+          />
+        </div>
         <h2 className="text-3xl font-bold text-center mt-2 mb-5 text-[orangered]">
           **Important**
         </h2>
@@ -119,9 +123,18 @@ const Report = () => {
       <CustomModal
         modalIsOpen={scoreModal}
         closeModal={closeModal}
-        setIsOpen={setScoreModal}
+        setModalIsOpen={setScoreModal}
       >
-        <img src="/icon/question.png" className="w-20 mx-auto -mt-5" alt="" />
+        <div className="bg-[#ff950028] w-[100px] h-[100px] mx-auto flex items-center justify-center rounded-full">
+          <Image
+            width={500}
+            height={300}
+            src="/icon/question.png"
+            className="w-20 mx-auto -mt-5"
+            alt=""
+          />
+        </div>
+
         <h2 className="text-3xl font-bold text-center mt-2 mb-5">
           How to get score?
         </h2>
@@ -197,7 +210,9 @@ const Report = () => {
         </div>
       </CustomModal>
       <div className="flex items-center gap-2 mt-5">
-        <img
+        <Image
+          width={500}
+          height={300}
           src="/icon/fox.png"
           className="w-[70px] rounded-full border-2 border-orange-500 p-1"
           alt=""

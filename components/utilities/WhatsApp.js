@@ -1,4 +1,4 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
 import { FiPhoneCall } from 'react-icons/fi';
@@ -45,7 +45,9 @@ const WhatsApp = () => {
         <p className="text-base md:text-xl font-bold text-center">
           আপনার জিজ্ঞেসা <br /> ক্যারিয়ার কাউন্সিলরকে বলুন
         </p>
-        <img
+        <Image
+          width={500}
+          height={300}
           src="/icon/technical-support.png"
           alt="whatsapp"
           className="w-[100px] md:w-[150px] h-[100px] md:h-[150px] rounded-full border-1"

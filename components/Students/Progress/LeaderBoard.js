@@ -1,42 +1,10 @@
-/* eslint-disable @next/next/no-img-element */
+import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { bg_colors, colors } from '../../../src/data/data';
+import { leaderBoardArr } from '../../../src/data/dummy';
 
 const LeaderBoard = () => {
-  const leaderBoardArr = [
-    {
-      position: '1',
-      name: 'John Smith',
-      marksPercentage: '85',
-      photoUrl: 'https://randomuser.me/api/portraits/med/men/1.jpg',
-    },
-    {
-      position: '2',
-      name: 'Emily Davis',
-      marksPercentage: '90',
-      photoUrl: 'https://randomuser.me/api/portraits/med/women/1.jpg',
-    },
-    {
-      position: '3',
-      name: 'Michael Johnson',
-      marksPercentage: '75',
-      photoUrl: 'https://randomuser.me/api/portraits/med/men/2.jpg',
-    },
-    {
-      position: '4',
-      name: 'Sarah Brown',
-      marksPercentage: '80',
-      photoUrl: 'https://randomuser.me/api/portraits/med/women/2.jpg',
-    },
-    {
-      position: '5',
-      name: 'David Wilson',
-      marksPercentage: '88',
-      photoUrl: 'https://randomuser.me/api/portraits/med/men/3.jpg',
-    },
-  ];
-
   const [currentUrl, setCurrentUrl] = useState(null);
 
   useEffect(() => {
@@ -64,7 +32,13 @@ const LeaderBoard = () => {
             >
               {item.position}
             </span>
-            <img src={item.photoUrl} className="w-[50px] rounded-full" alt="" />
+            <Image
+              width={500}
+              height={300}
+              src={item.photoUrl}
+              className="w-[50px] rounded-full"
+              alt=""
+            />
             <p className="font-semibold">{item.name}</p>
             <div className="ml-auto">
               <p className="text-lg font-bold" style={{ color: colors[index] }}>
