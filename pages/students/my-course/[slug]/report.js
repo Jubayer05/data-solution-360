@@ -6,7 +6,7 @@ import ProtectedRoute from '../../../../components/utilities/ProtectedRoute/Prot
 const report = () => {
   return (
     <div>
-      <DashboardFormat component={<ReportHome />} />
+      <DashboardFormat status="student" component={<ReportHome />} />
     </div>
   );
 };

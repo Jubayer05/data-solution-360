@@ -18,7 +18,6 @@ const Editor = dynamic(
 import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
-import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import AddInstructorCourse from './AddInstructorCourse';
 import AddModule from './AddModule';
 import InputBox from './InputBox';
@@ -156,7 +155,7 @@ const AddCourse = () => {
 
   return (
     <div className="flex justify-center items-center flex-col">
-      <HeadingDashboard title="Add a new course" />
+      <h2>Add a new course</h2>
       <div className="w-3/4 shadow-lg p-10">
         {/* NOTE: InputBox component for the course title */}
         <InputBox

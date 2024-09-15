@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import React from 'react';
+import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { BsCalendarDay, BsClock } from 'react-icons/bs';
 import { GoCalendar } from 'react-icons/go';
@@ -7,8 +7,81 @@ import { GoCalendar } from 'react-icons/go';
 import { Breadcrumb } from 'antd';
 import Image from 'next/image';
 import { BiShareAlt } from 'react-icons/bi';
+import Swal from 'sweetalert2';
+import firebase from '../../firebase';
+import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 
 const BannerCourseDetails = ({ courseDetails }) => {
+  const { findCurrentUser } = useStateContext();
+  const [courseDataBatch, setCourseDataBatch] = useState([]);
+  const db = firebase.firestore();
+
+  useEffect(() => {
+    loadData('course_data_batch', setCourseDataBatch);
+  }, []);
+
+  const currentCourse = useMemo(() => {
+    return courseDataBatch.find(
+      (course) => course.unique_batch_id === courseDetails?.unique_batch_id,
+    );
+  }, [courseDataBatch, courseDetails]);
+
+  const handleJoinNow = useCallback(() => {
+    if (!findCurrentUser) {
+      Swal.fire('Warning', 'Please login first.', 'warning');
+    } else {
+      if (currentCourse?.enrolled_students) {
+        if (
+          !currentCourse.enrolled_students.includes(findCurrentUser.student_id)
+        ) {
+          Swal.fire({
+            title: 'Do you want to join the course?',
+            text: 'Click "Yes" to join the course.',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Join the course',
+          }).then((result) => {
+            if (result.isConfirmed) {
+              const updatedCourse = {
+                ...currentCourse,
+                enrolled_students: [
+                  ...currentCourse.enrolled_students,
+                  findCurrentUser.student_id,
+                ],
+              };
+              db.collection('course_data_batch')
+                .doc(currentCourse.id)
+                .update(updatedCourse)
+                .then(() => {
+                  setCourseDataBatch((prevBatch) =>
+                    prevBatch.map((batch) =>
+                      batch.id === currentCourse.id ? updatedCourse : batch,
+                    ),
+                  );
+                  Swal.fire(
+                    'Success',
+                    'Your request to join the course has been recorded. Please wait for approval.',
+                    'success',
+                  );
+                });
+            }
+          });
+        } else {
+          Swal.fire(
+            'Warning',
+            'You have already joined this course.',
+            'warning',
+          );
+        }
+      } else {
+        Swal.fire('Warning', 'Enrollment has not started yet.', 'warning');
+      }
+    }
+  }, [currentCourse, findCurrentUser, db]);
+
   return (
     <div className="flex items-start flex-col-reverse md:flex-row max-w-7xl mx-auto font-bold font-heading">
       {/* NOTE: LEFT SIDE */}
@@ -209,11 +282,13 @@ const BannerCourseDetails = ({ courseDetails }) => {
                 </div>
               </div>
               <div>
-                <Link href={`${courseDetails?.join_link}`} target="_blank">
-                  <button className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] rounded-[8px] mt-6 hover:opacity-[0.8] transition-all">
-                    Join Live Batch
-                  </button>
-                </Link>
+                <button
+                  className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] 
+                rounded-[8px] mt-6 hover:opacity-[0.8] transition-all"
+                  onClick={handleJoinNow}
+                >
+                  Join Live Batch
+                </button>
               </div>
             </div>
           )}

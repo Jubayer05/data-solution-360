@@ -6,7 +6,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const resource = () => {
   return (
     <div>
-      <DashboardFormat component={<ResourceHome />} />
+      <DashboardFormat status="student" component={<ResourceHome />} />
     </div>
   );
 };

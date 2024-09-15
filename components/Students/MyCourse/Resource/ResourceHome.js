@@ -41,7 +41,9 @@ const ResourceHome = () => {
     <div>
       <div
         className={`${
-          activeMenu ? 'w-full mx-auto px-4' : 'w-full pr-6 pl-[96px]'
+          activeMenu
+            ? 'w-full mx-auto px-4'
+            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
         } mx-auto flex items-start gap-6`}
       >
         <div className="w-[80%] mt-6 mx-auto">

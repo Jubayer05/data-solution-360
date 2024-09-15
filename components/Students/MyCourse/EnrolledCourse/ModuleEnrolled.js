@@ -1,16 +1,12 @@
 import Link from 'next/link';
 import React from 'react';
-import {
-  MdAssignmentAdd,
-  MdLiveTv,
-  MdStarBorderPurple500,
-} from 'react-icons/md';
+import { MdAssignmentAdd, MdLiveTv } from 'react-icons/md';
 import { SiTestcafe } from 'react-icons/si';
 import { colors } from '../../../../src/data/data';
 import ModuleFeedback from './ModuleFeedback';
 
 const ModuleEnrolled = ({ courseDetails }) => {
-  // console.log(courseDetails?.courseModule[0]);
+  console.log(courseDetails);
   return (
     <div className="grid grid-cols-2 gap-4">
       {courseDetails?.courseModule?.map((item, index) => (

@@ -6,7 +6,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const classJoining = () => {
   return (
     <div>
-      <DashboardFormat component={<ClassJoiningMain />} />
+      <DashboardFormat status="student" component={<ClassJoiningMain />} />
     </div>
   );
 };

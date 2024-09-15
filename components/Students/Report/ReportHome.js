@@ -33,7 +33,9 @@ const ReportHome = () => {
     <div>
       <div
         className={`${
-          activeMenu ? 'w-full mx-auto px-16' : 'w-full pr-6 pl-[96px]'
+          activeMenu
+            ? 'w-full mx-auto px-16'
+            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
         } mx-auto `}
       >
         <div className="flex items-end gap-4 pt-6">

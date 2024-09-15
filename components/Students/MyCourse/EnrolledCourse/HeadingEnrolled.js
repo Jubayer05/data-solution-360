@@ -40,48 +40,51 @@ const HeadingEnrolled = ({ item }) => {
 
   return (
     <div>
-      <div className="grid grid-cols-2 py-2 gap-3">
-        <div className="w-full flex items-center gap-4 bg-primary_btn px-3 py-3 rounded-md cursor-pointer">
+      {/* Main grid layout */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 py-2 gap-3">
+        <div className="w-full flex items-center gap-2 md:gap-4 bg-primary_btn px-1.5 md:px-3 py-3 rounded-md cursor-pointer">
           <div
             style={{ backgroundColor: colors[20] }}
-            className={`p-2 rounded-lg text-white text-center text-base font-normal`}
+            className="p-1 py-2 md:p-2 rounded-lg text-white text-center text-xs md:text-base font-normal"
           >
-            <p className="m-0 text-sm">Module</p>
+            <p className="m-0 text-xs">Module</p>
             <p className="m-0 font-bold">1</p>
           </div>
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
-              <p className="bg-gray-300 px-2 py-0.5 text-xs rounded">
+              <p className="bg-gray-300 px-1 md:px-2 py-0.5 text-xs rounded">
                 6 July - 12 July
               </p>
-              <Progress
-                percent={30}
-                status="active"
-                trailColor="#eaeaea"
-                strokeColor="#12b76a"
-                showInfo={false}
-                className="w-[100px]"
-              />
-              <p className="text-white text-xs">2/7 Days End</p>
+              <div>
+                <Progress
+                  percent={30}
+                  status="active"
+                  trailColor="#eaeaea"
+                  strokeColor="#12b76a"
+                  showInfo={false}
+                  className="w-[80px] sm:w-[100px]"
+                />
+                <p className="text-white text-xs">2/7 Days End</p>
+              </div>
             </div>
-            <h2 className="text-xl font-bold leading-6 text-white">
-              Mastering Module one
+            <h2 className="text-lg sm:text-xl font-bold leading-6 text-white">
+              Mastering Module One
             </h2>
           </div>
           <div>
             <FaChevronRight className="text-white" />
           </div>
         </div>
-        <div className="w-full flex items-center gap-4 bg-white border px-5 py-4 rounded-md">
+        <div className="w-full flex flex-col sm:flex-row items-center gap-4 bg-white border px-5 py-3 rounded-md">
           <Image
             width={500}
             height={300}
             src="/icon/question-mark.png"
-            className="w-[50px]"
-            alt=""
+            className="w-[40px] sm:w-[50px]"
+            alt="Question Icon"
           />
           <div className="flex-1">
-            <h2 className="text-xl font-bold leading-6 ">
+            <h2 className="text-lg sm:text-xl font-bold leading-6">
               Problem Solving Class
             </h2>
             <p className="text-xs mt-1">2/7 Days End</p>
@@ -94,20 +97,22 @@ const HeadingEnrolled = ({ item }) => {
           </button>
         </div>
       </div>
+
+      {/* Video section */}
       <Link href={`/students/my-course/${item?.key}/videos`}>
         <div
-          className="w-full flex items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
+          className="w-full flex  items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
         mt-3 cursor-pointer hover:shadow-md transition-all duration-200"
         >
           <Image
             width={500}
             height={300}
             src="/icon/video-player.png"
-            className="w-[60px]"
-            alt=""
+            className="w-[50px] sm:w-[60px]"
+            alt="Video Player Icon"
           />
           <div className="flex-1">
-            <h2 className="text-xl font-bold leading-6 ">
+            <h2 className="text-lg sm:text-xl font-bold leading-6">
               Recorded Live Class
             </h2>
             <p className="text-xs mt-1">35 Videos</p>
@@ -118,7 +123,8 @@ const HeadingEnrolled = ({ item }) => {
         </div>
       </Link>
 
-      <div className="w-full flex items-center gap-2 bg-white border px-5 py-4 rounded-md my-5">
+      {/* Button section */}
+      <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-5 py-4 rounded-md my-5">
         {segmentBtn.map((item) => (
           <button
             key={item.id}

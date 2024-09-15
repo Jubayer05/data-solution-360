@@ -37,6 +37,7 @@ module.exports = {
         dashboard_primary_bg: '#f9f9fa',
         primary_btn: '#001f3f',
         secondary_btn: '#3d9970',
+        tertiary_btn: '#4c6ef5',
         brand_btn: '#fd6406',
         link_bg: '#fd65063a',
         hover_btn: '#fecb6c3a',

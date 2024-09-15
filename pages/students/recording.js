@@ -6,7 +6,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const recording = () => {
   return (
     <div>
-      <DashboardFormat component={<RecordingHome />} />
+      <DashboardFormat status="student" component={<RecordingHome />} />
     </div>
   );
 };

@@ -22,21 +22,22 @@ const AssignmentHome = () => {
     {
       title: 'Title',
       dataIndex: 'title',
-      width: 250,
+      // width: 150,
       align: 'left',
+      // fixed: 'left',
     },
     {
       title: 'Submission Date',
       dataIndex: 'submission_date',
       align: 'center',
-      width: 150,
+      // width: 150,
     },
     {
       title: 'Status',
       dataIndex: '',
       key: 'x',
       align: 'center',
-      width: 80,
+      // width: 80,
       render: (_, record) => (
         <div className="text-white  ">
           {record?.submitted_user.find(
@@ -59,7 +60,7 @@ const AssignmentHome = () => {
       dataIndex: '',
       key: 'x',
       align: 'center',
-      width: 80,
+      // width: 80,
       render: (_, record) => (
         <div className="flex items-center justify-center">
           <button
@@ -109,6 +110,7 @@ const AssignmentHome = () => {
             dataSource={[...assignmentData]}
             pagination={false}
             className="w-full"
+            scroll={{ x: 600 }}
           />
         </ConfigProvider>
       </div>

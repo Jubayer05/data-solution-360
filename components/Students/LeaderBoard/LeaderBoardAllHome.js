@@ -2,12 +2,12 @@ import { useRouter } from 'next/router';
 import React from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
 // import { videosPlaylist } from '../../../../src/data/data';
+import Image from 'next/image';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import { bg_colors, colors } from '../../../src/data/data';
 import { leaderBoardArr } from '../../../src/data/dummy';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
-import Image from 'next/image';
 
 const LeaderBoardHome = () => {
   const { activeMenu } = useStateContextDashboard();
@@ -40,7 +40,9 @@ const LeaderBoardHome = () => {
     <div>
       <div
         className={`${
-          activeMenu ? 'w-full mx-auto px-16' : 'w-full pr-6 pl-[96px]'
+          activeMenu
+            ? 'w-full mx-auto px-16'
+            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
         } mx-auto mb-10`}
       >
         <div className="flex items-end gap-4 pt-6">

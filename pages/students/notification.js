@@ -6,7 +6,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const notification = () => {
   return (
     <div>
-      <DashboardFormat component={<NotificationHome />} />
+      <DashboardFormat status="student" component={<NotificationHome />} />
     </div>
   );
 };

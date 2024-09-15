@@ -5,7 +5,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const dashboard = () => {
   return (
     <div>
-      <DashboardFormat component={<DashboardStudent />} />
+      <DashboardFormat status="student" component={<DashboardStudent />} />
     </div>
   );
 };

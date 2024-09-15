@@ -5,7 +5,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const profile = () => {
   return (
     <div>
-      <DashboardFormat component={<ProfileStudent />} />
+      <DashboardFormat status="student" component={<ProfileStudent />} />
     </div>
   );
 };

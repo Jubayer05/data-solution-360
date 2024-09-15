@@ -8,16 +8,17 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 import { ImClock } from 'react-icons/im';
 
 const EnrolledCourseHome = ({ item }) => {
+  // console.log(item.unique_batch_id);
   return (
     <div
       className="w-full mx-auto rounded-lg overflow-hidden hover:border-[#676767] 
     transition-border duration-300 cursor-pointer relative bg-white border"
     >
-      <Link href={`/students/my-course/${item.key}`}>
+      <Link href={`/students/my-course/${item.unique_batch_id}`}>
         <Image
           width={500}
           height={300}
-          src={item.img}
+          src={item?.courseData?.img}
           alt=""
           className="w-full h-[240px] md:h-[200px]"
         />
@@ -25,28 +26,32 @@ const EnrolledCourseHome = ({ item }) => {
           <div className="p-0.5 md:p-2 border-b-1 border-[#d6dae1] flex items-center flex-wrap">
             <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded">
               <span className="text-[#101828] text-[10px] md:text-[12px] block -mt-[1px]">
-                Batch <strong>{item?.batch_no}</strong>
+                Batch <strong>{item?.courseData?.batch_no}</strong>
               </span>
             </div>
             <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
               <IoIosPeople />
 
               <span className="text-[10px] md:text-[12px] block -mt-[1px]">
-                Total Seat <strong>{item?.total_seat_number}</strong>
+                Total Seat{' '}
+                <strong>{item?.courseData?.total_seat_number}</strong>
               </span>
             </div>
 
-            {new Date(item?.main_class_starting_date).getTime() >=
+            {new Date(item?.courseData?.main_class_starting_date).getTime() >=
               new Date().getTime() && (
               <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
                 <ImClock />
                 <span className="text-[10px] md:text-[12px] -mt-[1px]">
                   <strong>
                     {' '}
-                    {new Date(item?.main_class_starting_date).getTime() >=
-                    new Date().getTime()
+                    {new Date(
+                      item?.courseData?.main_class_starting_date,
+                    ).getTime() >= new Date().getTime()
                       ? Math.ceil(
-                          (new Date(item?.main_class_starting_date).getTime() -
+                          (new Date(
+                            item?.courseData?.main_class_starting_date,
+                          ).getTime() -
                             new Date().getTime()) /
                             (1000 * 60 * 60 * 24),
                         )
@@ -63,7 +68,7 @@ const EnrolledCourseHome = ({ item }) => {
           >
             {item.title}
           </p>
-          {item?.status == 'Registration Going on' && (
+          {item?.courseData?.status == 'Registration Going on' && (
             <div className="text-xl">
               <p
                 className=" flex-1 text-[13px] md:text-lg font-bold mb-1.5 md:mt-1 

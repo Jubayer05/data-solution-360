@@ -6,7 +6,7 @@ import ProtectedRoute from '../../../components/utilities/ProtectedRoute/Protect
 const myCourses = () => {
   return (
     <div>
-      <DashboardFormat component={<MyCourseMain />} />
+      <DashboardFormat status="student" component={<MyCourseMain />} />
     </div>
   );
 };

@@ -17,12 +17,9 @@ import LoginModal from '../../Login/LoginModal';
 const Sidebar = ({
   url,
   setOpenNav,
-  eng,
-  setEng,
   photoUrl,
   language,
   handleLogout,
-  userName,
   userEmail,
 }) => {
   const [openDropdown, setOpenDropdown] = useState(null);

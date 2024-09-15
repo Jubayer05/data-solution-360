@@ -6,7 +6,7 @@ import ProtectedRoute from '../../../../../../components/utilities/ProtectedRout
 const moduleSlug = () => {
   return (
     <div>
-      <DashboardFormat component={<ModuleDetailsMain />} />
+      <DashboardFormat status="student" component={<ModuleDetailsMain />} />
     </div>
   );
 };

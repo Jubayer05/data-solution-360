@@ -6,7 +6,10 @@ import ProtectedRoute from '../../../../components/utilities/ProtectedRoute/Prot
 const enrolledCoursePage = () => {
   return (
     <div>
-      <DashboardFormat component={<EnrolledCourseMainComp />} />
+      <DashboardFormat
+        status="student"
+        component={<EnrolledCourseMainComp />}
+      />
     </div>
   );
 };

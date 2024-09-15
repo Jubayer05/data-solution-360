@@ -6,7 +6,7 @@ import ProtectedRoute from '../../../../../../../components/utilities/ProtectedR
 const quiz = () => {
   return (
     <div>
-      <DashboardFormat component={<BeforeStartQuiz />} />
+      <DashboardFormat status="student" component={<BeforeStartQuiz />} />
     </div>
   );
 };

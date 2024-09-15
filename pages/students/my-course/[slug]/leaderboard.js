@@ -7,7 +7,7 @@ import ProtectedRoute from '../../../../components/utilities/ProtectedRoute/Prot
 const leaderBoard = () => {
   return (
     <div>
-      <DashboardFormat component={<LeaderBoardHome />} />
+      <DashboardFormat status="student" component={<LeaderBoardHome />} />
     </div>
   );
 };

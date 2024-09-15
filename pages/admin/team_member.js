@@ -6,7 +6,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const subscribedUser = () => {
   return (
     <div>
-      <DashboardFormat component={<TeamMember />} />
+      <DashboardFormat status="admin" component={<TeamMember />} />
     </div>
   );
 };

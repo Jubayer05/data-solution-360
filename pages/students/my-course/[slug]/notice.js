@@ -6,7 +6,7 @@ import ProtectedRoute from '../../../../components/utilities/ProtectedRoute/Prot
 const notice = () => {
   return (
     <div>
-      <DashboardFormat component={<NoticeHome />} />
+      <DashboardFormat status="student" component={<NoticeHome />} />
     </div>
   );
 };

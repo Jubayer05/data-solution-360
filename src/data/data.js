@@ -2,7 +2,11 @@ import { CgProfile } from 'react-icons/cg';
 import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 import { FiVideo } from 'react-icons/fi';
 import { IoLogoYoutube } from 'react-icons/io';
-import { MdContentCopy, MdReviews } from 'react-icons/md';
+import {
+  MdContentCopy,
+  MdOutlineCreateNewFolder,
+  MdReviews,
+} from 'react-icons/md';
 import { RiAdminFill } from 'react-icons/ri';
 
 import {
@@ -10,8 +14,7 @@ import {
   AiOutlineHome,
   AiOutlineVideoCameraAdd,
 } from 'react-icons/ai';
-import { FaUserEdit } from 'react-icons/fa';
-import { FiBookOpen, FiHelpCircle, FiLogOut } from 'react-icons/fi';
+import { FiBookOpen } from 'react-icons/fi';
 import { GiTeacher } from 'react-icons/gi';
 import { RiFileVideoFill } from 'react-icons/ri';
 
@@ -29,6 +32,7 @@ import { RiHomeGearFill, RiTeamLine } from 'react-icons/ri';
 export const linksAdmin = [
   {
     title: 'Dashboard',
+    key: '1',
     links: [
       {
         name: 'Home',
@@ -36,36 +40,79 @@ export const linksAdmin = [
         icon: <AiOutlineHome />,
       },
       {
-        name: 'Customize Home Page',
+        name: 'Edit Home Page',
         link: '/admin/home-page',
         icon: <RiHomeGearFill />,
       },
     ],
   },
-
   {
-    title: 'Pages',
+    title: 'Courses',
+    key: '2',
     links: [
       {
         name: 'Add a course',
-        link: '/admin/add-course',
+        link: '/admin/course/add-course',
         icon: <AiOutlineVideoCameraAdd />,
       },
       {
         name: 'Manage Courses',
-        link: '/admin/manage-course',
+        link: '/admin/course/manage-course',
         icon: <MdCastForEducation />,
       },
       {
-        name: 'Add blog content',
+        name: 'New batch',
+        link: '/admin/course/create-new-batch',
+        icon: <MdOutlineCreateNewFolder />,
+      },
+      {
+        name: 'All batch',
+        link: '/admin/course/all-batch',
+        icon: <MdOutlineContentPaste />,
+      },
+    ],
+  },
+  {
+    title: 'Blog',
+    key: '3',
+    links: [
+      {
+        name: 'Add blog',
         link: '/admin/addBlogContent',
         icon: <ImBlog />,
       },
       {
-        name: 'Manage my blogs',
+        name: 'Edit Blog',
         link: '/admin/myBlogs',
         icon: <AiOutlineFundView />,
       },
+    ],
+  },
+  {
+    title: 'Students',
+    key: '4',
+    links: [
+      {
+        name: 'New Students',
+        link: '/admin/new-student',
+        icon: <MdOutlineUnsubscribe />,
+      },
+      {
+        name: 'All Students',
+        link: '/admin/team_member',
+        icon: <RiTeamLine />,
+      },
+      {
+        name: 'Instructor',
+        link: '/admin/instructors',
+        icon: <GiTeacher />,
+      },
+    ],
+  },
+  {
+    title: 'Others',
+    key: '5',
+    links: [
       {
         name: 'Subscribed Users',
         link: '/admin/subscribed-user',
@@ -80,26 +127,6 @@ export const linksAdmin = [
         name: 'Instructor',
         link: '/admin/instructors',
         icon: <GiTeacher />,
-      },
-    ],
-  },
-  {
-    title: 'More',
-    links: [
-      {
-        name: 'Edit profile',
-        link: '/admin/editProfile',
-        icon: <FaUserEdit />,
-      },
-      {
-        name: 'Help',
-        link: '/admin/help',
-        icon: <FiHelpCircle />,
-      },
-      {
-        name: 'Log out',
-        link: '/admin/logout',
-        icon: <FiLogOut />,
       },
     ],
   },

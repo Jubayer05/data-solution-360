@@ -1,8 +1,7 @@
 import React, { useEffect, useState } from 'react';
-import { useStateContext } from '../../../../src/context/ContextProvider';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
-import ProgressHome from '../../Progress/ProgressHome';
+import { loadData } from '../../../../src/hooks/loadData';
 import AssignmentHome from '../Assignment/AssignmentHome';
 import RecordingContent from '../Recording/RecordingContent';
 import ResourceContent from '../Resource/ResourceContent';
@@ -11,17 +10,21 @@ import ModuleEnrolled from './ModuleEnrolled';
 
 const EnrolledCourseMainComp = () => {
   const [innerWidth, setInnerWidth] = useState();
-  const { courseData } = useStateContext();
   const { activeMenu, setEnrolledCourse } = useStateContextDashboard();
   const { myCourseShowComp } = useStudentContext();
   const [courseDetails, setCourseDetails] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [courseData, setCourseData] = useState([]);
+
+  useEffect(() => {
+    loadData('course_data_batch', setCourseData);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const slug = window.location.href.split('/').slice(-1)[0];
-      const item = courseData.find((item) => item.key === slug);
+      const item = courseData.find((item) => item.unique_batch_id === slug);
       setCourseDetails(item);
       setEnrolledCourse(item);
     }
@@ -30,27 +33,37 @@ const EnrolledCourseMainComp = () => {
   useEffect(() => {
     if (typeof window !== 'undefined') {
       setInnerWidth(window.innerWidth);
+      const handleResize = () => setInnerWidth(window.innerWidth);
+      window.addEventListener('resize', handleResize);
+
+      return () => {
+        window.removeEventListener('resize', handleResize);
+      };
     }
-  }, [courseData]);
+    loadData('course_data_batch', setCourseData);
+  }, []);
 
   const openModal = (item) => {
     setModalData(item);
     setModalIsOpen(true);
   };
+
   const closeModal = () => {
     setModalIsOpen(false);
   };
 
+  console.log(courseDetails);
+
   return (
     <div
       className={`${
-        activeMenu ? '' : 'w-full pr-6 pl-[56px]'
-      } mx-auto flex items-center gap-5`}
+        activeMenu ? '' : 'w-full'
+      } mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-5 mt-10 sm:mt-0`}
     >
-      <div className="w-[75%]">
-        <HeadingEnrolled item={courseDetails} />
+      <div className={`w-full lg:w-[100%] pr-3 sm:pr-6 pl-[84px] lg:pl-[56px]`}>
+        <HeadingEnrolled item={courseDetails?.courseData} />
         {myCourseShowComp === 'Modules' ? (
-          <ModuleEnrolled courseDetails={courseDetails} />
+          <ModuleEnrolled courseDetails={courseDetails?.courseData} />
         ) : myCourseShowComp === 'Assignment' ? (
           <AssignmentHome />
         ) : myCourseShowComp === 'Recording' ? (
@@ -65,9 +78,9 @@ const EnrolledCourseMainComp = () => {
           ''
         )}
       </div>
-      <div className="w-[25%] min-w-[350px]">
+      {/* <div className="w-full lg:w-[25%] min-w-[350px]">
         <ProgressHome />
-      </div>
+      </div> */}
     </div>
   );
 };

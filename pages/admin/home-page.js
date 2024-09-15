@@ -6,7 +6,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const dashboard = () => {
   return (
     <div>
-      <DashboardFormat component={<CustomizeHome />} />
+      <DashboardFormat status="admin" component={<CustomizeHome />} />
     </div>
   );
 };

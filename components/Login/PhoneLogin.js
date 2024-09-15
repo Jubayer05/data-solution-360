@@ -3,6 +3,7 @@ import { FaArrowRight } from 'react-icons/fa';
 import Lottie from 'react-lottie';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
+import { v4 as uuidv4 } from 'uuid';
 import firebase, { auth, handleAuthError } from '../../firebase';
 import * as congratulationsData from '../../src/data/json/congratulations.json';
 import * as animationData from '../../src/data/json/login_loading.json';
@@ -97,6 +98,8 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
           email: phoneNumberEmail,
           phone: phoneNumber,
           role: 'student',
+          student_id: uuidv4().split('-')[0],
+          enrolled_courses: [],
         })
         .then(() => {
           setStep(5); // Go to success step

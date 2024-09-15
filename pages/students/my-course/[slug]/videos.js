@@ -6,7 +6,7 @@ import ProtectedRoute from '../../../../components/utilities/ProtectedRoute/Prot
 const videos = () => {
   return (
     <div>
-      <DashboardFormat component={<HomeRecordedVideo />} />
+      <DashboardFormat status="student" component={<HomeRecordedVideo />} />
     </div>
   );
 };

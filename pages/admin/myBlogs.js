@@ -5,7 +5,7 @@ import ProtectedRoute from '../../components/utilities/ProtectedRoute/ProtectedR
 const myBlogs = () => {
   return (
     <div>
-      <DashboardFormat component={<MyBlogs />} />
+      <DashboardFormat status="admin" component={<MyBlogs />} />
     </div>
   );
 };
