@@ -9,7 +9,7 @@ const WhatsApp = () => {
   const popupRef = useRef(null);
 
   const handleClick = () => {
-    const phoneNumber = '8801881581649'; // Replace with your desired phone number
+    const phoneNumber = '8801892432631'; // Replace with your desired phone number
     const url = `https://api.whatsapp.com/send?phone=${phoneNumber}`;
     window.open(url, '_blank');
   };

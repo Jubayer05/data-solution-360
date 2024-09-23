@@ -3,9 +3,9 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../../firebase';
 
 import { Table } from 'antd';
+import Link from 'next/link';
 import { loadData } from '../../../../src/hooks/loadData';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
-import AddModule from '../../Course/AddModule';
 
 const db = firebase.firestore();
 
@@ -15,6 +15,7 @@ const ModuleDetails = () => {
 
   const [enrolledUsers, setEnrolledUsers] = useState([]);
   const [updatedModule, setUpdatedModule] = useState([]);
+  console.log(updatedModule);
 
   useEffect(() => {
     loadData('course_data_batch', setCourseDataBatch);
@@ -46,6 +47,10 @@ const ModuleDetails = () => {
     // The effect will run only when the enrolled_students array changes
   }, [currentEnrolledCourse?.enrolled_students]);
 
+  useEffect(() => {
+    setUpdatedModule(currentEnrolledCourse?.course_modules);
+  }, [currentEnrolledCourse]);
+
   // console.log(currentEnrolledCourse);
 
   const columns = [
@@ -63,14 +68,40 @@ const ModuleDetails = () => {
       // render: (_, record, index) => <p>{record}</p>,
     },
     {
-      title: 'Live Class Link',
+      title: 'Total Class',
+      dataIndex: 'liveClassNumber',
+      align: 'center',
+    },
+    {
+      title: 'Class Complete',
       dataIndex: 'phone',
       align: 'center',
     },
     {
-      title: 'Quiz',
-      dataIndex: 'phone',
+      title: 'Module Status',
+      // dataIndex: 'moduleStatus',
       align: 'center',
+      render: (_, record) => (
+        <div>
+          {record?.moduleStatus == 'finished' ? (
+            <span className="bg-green-50 border border-green-500 px-2 text-xs rounded-full font-semibold text-[#48bb78]">
+              Finished
+            </span>
+          ) : record?.moduleStatus === 'running' ? (
+            <span className="bg-blue-100 border border-blue-500 px-2 text-xs rounded-full font-semibold text-[#4299e1]">
+              Running
+            </span>
+          ) : record?.moduleStatus === 'upcoming' ? (
+            <span className="bg-purple-100 border border-purple-500 px-2 text-xs rounded-full font-semibold text-[#6b46c1]">
+              Upcoming
+            </span>
+          ) : (
+            <span className="bg-purple-100 border border-purple-500 px-2 text-xs rounded-full font-semibold text-[#6b46c1]">
+              Upcoming
+            </span>
+          ) }
+        </div>
+      ),
     },
     {
       title: 'Action',
@@ -79,12 +110,11 @@ const ModuleDetails = () => {
       fixed: 'right',
       render: (_, record, index) => (
         <div className="flex items-center justify-center gap-5">
-          <ButtonDashboard
-            onClick={() => handleRejectBtn(record)}
-            className="bg-primary_btn hover:bg-[#002346bc] text-white"
-          >
-            Edit
-          </ButtonDashboard>
+          <Link href={`${url}/modules/${record.id}`}>
+            <ButtonDashboard className="bg-primary_btn hover:bg-[#002346bc] text-white">
+              Edit
+            </ButtonDashboard>
+          </Link>
           {/* Add more actions as needed */}
         </div>
       ),
@@ -112,10 +142,6 @@ const ModuleDetails = () => {
             scroll={{
               y: 500,
             }}
-          />
-          <AddModule
-            courseModule={currentEnrolledCourse?.course_modules}
-            setCourseModule={setUpdatedModule}
           />
         </div>
       </div>

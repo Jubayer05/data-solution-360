@@ -23,9 +23,14 @@ const EnrolledCourseDetails = () => {
     (course) => course.id === url,
   );
 
+  // console.log(currentEnrolledCourse?.batchNumber);
+
   return (
     <div>
-      <HeadingDashboard title={currentEnrolledCourse?.courseData.title} />
+      <HeadingDashboard
+        title={currentEnrolledCourse?.courseData.title}
+        batchNo={currentEnrolledCourse?.batchNumber}
+      />
       <div className="max-w-5xl mx-auto my-20">
         <EnrolledStudent />
         <ModuleDetails />

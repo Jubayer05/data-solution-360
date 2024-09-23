@@ -7,7 +7,7 @@ import EnrolledCourseHome from './EnrolledCourseHome';
 import TodayClassRight from './TodayClassRight';
 
 const MyCourseMain = () => {
-  const { language, courseData, findCurrentUser } = useStateContext();
+  const { courseData, findCurrentUser, enrolledCourseIds } = useStateContext();
   const { activeMenu } = useStateContextDashboard();
   const [courseDataBatch, setCourseDataBatch] = useState([]);
 
@@ -15,33 +15,11 @@ const MyCourseMain = () => {
     loadData('course_data_batch', setCourseDataBatch, {
       orderBy: 'batchNumber',
       orderDirection: 'asc',
+      filterFunction: (course) =>
+        enrolledCourseIds.includes(course.unique_batch_id) &&
+        course.enrolled_students.includes(findCurrentUser.student_id),
     });
-  }, []);
-
-  const courseData2 = [
-    { unique_batch_id: 'uuid1', enrolled_student: ['student1', 'student3'] },
-    { unique_batch_id: 'uuid2', enrolled_student: ['student1', 'student2'] },
-    { unique_batch_id: 'uuid3', enrolled_student: ['student1', 'student2'] },
-  ];
-
-  const studentInfo = {
-    enrolled_courses: [{ batchId: 'uuid2' }, { batchId: 'uuid3' }],
-    student_id: 'student2',
-  };
-
-  const enrolledCourseIds = findCurrentUser?.enrolled_courses.map(
-    (course) => course.batchId,
-  );
-
-  console.log(enrolledCourseIds);
-
-  const findEnrolledCourse = courseDataBatch.filter(
-    (course) =>
-      enrolledCourseIds.includes(course.unique_batch_id) &&
-      course.enrolled_students.includes(findCurrentUser.student_id),
-  );
-
-  console.log(findEnrolledCourse);
+  }, [enrolledCourseIds, findCurrentUser]);
 
   const registrationGoingOnCourses = courseData?.filter(
     (val) => val.status === 'Registration Going on',
@@ -67,7 +45,7 @@ const MyCourseMain = () => {
             <div
               className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6`}
             >
-              {findEnrolledCourse.map((item) => (
+              {courseDataBatch.map((item) => (
                 <EnrolledCourseHome key={item.id} item={item} running={true} />
               ))}
             </div>

@@ -89,6 +89,9 @@ export const MainContextProvider = ({ children }) => {
   const findCurrentUser = userData.find((item) => item.email === userEmail);
   const findAdmin = dashAdmin.find((item) => item.email === userEmail);
   const uniqueUserName = userEmail?.split('@')[0];
+  const enrolledCourseIds = findCurrentUser?.enrolled_courses?.map(
+    (course) => course.batchId,
+  );
 
   return (
     <StateContext.Provider
@@ -98,6 +101,7 @@ export const MainContextProvider = ({ children }) => {
         userName,
         userEmail,
         findCurrentUser,
+        enrolledCourseIds,
         findAdmin,
         blogData,
         courseData,

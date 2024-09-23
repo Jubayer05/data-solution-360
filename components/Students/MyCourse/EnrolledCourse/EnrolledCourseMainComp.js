@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from 'react';
+import { useStateContext } from '../../../../src/context/ContextProvider';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import { loadData } from '../../../../src/hooks/loadData';
@@ -10,38 +11,48 @@ import ModuleEnrolled from './ModuleEnrolled';
 
 const EnrolledCourseMainComp = () => {
   const [innerWidth, setInnerWidth] = useState();
-  const { activeMenu, setEnrolledCourse } = useStateContextDashboard();
+  const { activeMenu, enrolledCourse, setEnrolledCourse } =
+    useStateContextDashboard();
+  const { findCurrentUser, enrolledCourseIds } = useStateContext();
   const { myCourseShowComp } = useStudentContext();
   const [courseDetails, setCourseDetails] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const [courseData, setCourseData] = useState([]);
-
-  useEffect(() => {
-    loadData('course_data_batch', setCourseData);
-  }, []);
+  const [courseDataBatch, setCourseDataBatch] = useState([]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
       const slug = window.location.href.split('/').slice(-1)[0];
-      const item = courseData.find((item) => item.unique_batch_id === slug);
-      setCourseDetails(item);
+      const item = courseDataBatch.find(
+        (item) => item.unique_batch_id === slug,
+      );
+      // setCourseDetails(item);
       setEnrolledCourse(item);
     }
-  }, [courseData, setEnrolledCourse]);
+  }, [courseDataBatch, setEnrolledCourse]);
 
   useEffect(() => {
-    if (typeof window !== 'undefined') {
-      setInnerWidth(window.innerWidth);
-      const handleResize = () => setInnerWidth(window.innerWidth);
-      window.addEventListener('resize', handleResize);
+    loadData('course_data_batch', setCourseDataBatch, {
+      orderBy: 'batchNumber',
+      orderDirection: 'asc',
+      filterFunction: (course) =>
+        enrolledCourseIds.includes(course.unique_batch_id) &&
+        course.enrolled_students.includes(findCurrentUser.student_id),
+    });
+  }, [enrolledCourseIds, findCurrentUser]);
 
-      return () => {
-        window.removeEventListener('resize', handleResize);
-      };
-    }
-    loadData('course_data_batch', setCourseData);
-  }, []);
+  // useEffect(() => {
+  //   if (typeof window !== 'undefined') {
+  //     setInnerWidth(window.innerWidth);
+  //     const handleResize = () => setInnerWidth(window.innerWidth);
+  //     window.addEventListener('resize', handleResize);
+
+  //     return () => {
+  //       window.removeEventListener('resize', handleResize);
+  //     };
+  //   }
+  //   loadData('course_data_batch', setCourseDataBatch);
+  // }, []);
 
   const openModal = (item) => {
     setModalData(item);
@@ -52,7 +63,7 @@ const EnrolledCourseMainComp = () => {
     setModalIsOpen(false);
   };
 
-  console.log(courseDetails);
+  // console.log(enrolledCourse);
 
   return (
     <div
@@ -61,9 +72,9 @@ const EnrolledCourseMainComp = () => {
       } mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-5 mt-10 sm:mt-0`}
     >
       <div className={`w-full lg:w-[100%] pr-3 sm:pr-6 pl-[84px] lg:pl-[56px]`}>
-        <HeadingEnrolled item={courseDetails?.courseData} />
+        <HeadingEnrolled item={enrolledCourse} />
         {myCourseShowComp === 'Modules' ? (
-          <ModuleEnrolled courseDetails={courseDetails?.courseData} />
+          <ModuleEnrolled />
         ) : myCourseShowComp === 'Assignment' ? (
           <AssignmentHome />
         ) : myCourseShowComp === 'Recording' ? (

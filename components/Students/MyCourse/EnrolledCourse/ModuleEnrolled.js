@@ -2,18 +2,20 @@ import Link from 'next/link';
 import React from 'react';
 import { MdAssignmentAdd, MdLiveTv } from 'react-icons/md';
 import { SiTestcafe } from 'react-icons/si';
+import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import { colors } from '../../../../src/data/data';
 import ModuleFeedback from './ModuleFeedback';
 
 const ModuleEnrolled = ({ courseDetails }) => {
-  console.log(courseDetails);
+  const { enrolledCourse } = useStateContextDashboard();
+  console.log(enrolledCourse?.course_modules[0]);
   return (
     <div className="grid grid-cols-2 gap-4">
-      {courseDetails?.courseModule?.map((item, index) => (
+      {enrolledCourse?.course_modules?.map((item, index) => (
         <div
-          key={item.key}
+          key={item.id}
           className={`${
-            item.moduleNumber == 5 ? 'bg-primary_btn text-white' : ''
+            item.moduleStatus == 'running' ? 'bg-primary_btn text-white' : ''
           } px-5 py-7  rounded-md cursor-pointer border-[2px] hover:border-[#56d478]`}
         >
           <div className="w-full flex items-center gap-4 ">
@@ -30,14 +32,14 @@ const ModuleEnrolled = ({ courseDetails }) => {
                   6 July - 12 July
                 </p>
 
-                {item.moduleNumber < 5 ? (
+                {item.moduleStatus == 'finished' ? (
                   <p
                     className="ml-auto text-xs bg-[#daffe8] text-green-600 px-2 py-0.5 
                   rounded-2xl border border-[#22c55e]"
                   >
                     Finished
                   </p>
-                ) : item.moduleNumber == 5 ? (
+                ) : item.moduleStatus == 'running' ? (
                   <p className="ml-auto text-xs bg-orange-500 px-2 py-0.5 rounded-2xl">
                     Ongoing
                   </p>
@@ -55,18 +57,22 @@ const ModuleEnrolled = ({ courseDetails }) => {
           </div>
           <div
             className={`${
-              item.moduleNumber == 5 ? 'bg-white' : 'bg-[#c7c7c7]'
+              item.moduleStatus == 'running' ? 'bg-white' : 'bg-[#c7c7c7]'
             } h-[.5px] my-[14px]`}
           />
           <h2 className="text-xl font-bold leading-6 ">{item.moduleName}</h2>
           <div className="flex mt-10 mb-5 gap-4">
             <div className="flex items-center gap-2">
               <MdLiveTv className="" />
-              <p className="text-sm font-semibold ">2 Live Class</p>
+              <p className="text-sm font-semibold ">
+                {item?.liveClassNumber} Live Class
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <MdAssignmentAdd className="" />
-              <p className="text-sm font-semibold ">1 Assignment</p>
+              <p className="text-sm font-semibold ">
+                {item?.projectNumber || 0} Project
+              </p>
             </div>
             <div className="flex items-center gap-2">
               <SiTestcafe className="" />

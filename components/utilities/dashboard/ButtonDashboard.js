@@ -3,9 +3,11 @@ const ButtonDashboard = ({
   onClick,
   type = 'button',
   className = '',
+  disabled,
 }) => {
   return (
     <button
+      disabled={disabled}
       type={type}
       onClick={onClick}
       className={`px-5 py-2 bg-[#001f3f0e] rounded flex items-center font-semibold

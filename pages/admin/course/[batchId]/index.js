@@ -1,7 +1,7 @@
 import React from 'react';
-import { DashboardFormat } from '../../../components';
-import EnrolledCourseDetails from '../../../components/Admin/Batch/EnrolledCourseDetails';
-import ProtectedRoute from '../../../components/utilities/ProtectedRoute/ProtectedRoute';
+import { DashboardFormat } from '../../../../components';
+import EnrolledCourseDetails from '../../../../components/Admin/Batch/EnrolledCourseDetails';
+import ProtectedRoute from '../../../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const enrolledCourseDetails = () => {
   return (

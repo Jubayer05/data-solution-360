@@ -12,6 +12,7 @@ const db = firebase.firestore();
  * @param {string} options.whereField - Field for filtering the data.
  * @param {string | number} options.whereCondition - Condition value for filtering.
  * @param {number} options.limit - Limit the number of documents fetched.
+ * @param {function} options.filterFunction - Optional filter function to apply additional filtering.
  */
 export const loadData = async (collectionName, setState, options = {}) => {
   try {
@@ -34,12 +35,17 @@ export const loadData = async (collectionName, setState, options = {}) => {
 
     // Fetch the data
     const snapshot = await query.get();
-    const data = snapshot.docs.map((doc) => ({
+    let data = snapshot.docs.map((doc) => ({
       id: doc.id,
       ...doc.data(),
     }));
 
-    // Update the state with the fetched data
+    // Apply additional filtering if a filterFunction is provided
+    if (options.filterFunction) {
+      data = data.filter(options.filterFunction);
+    }
+
+    // Update the state with the fetched and filtered data
     setState(data);
   } catch (error) {
     console.error('Error loading data from Firestore:', error);

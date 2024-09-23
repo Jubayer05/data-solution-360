@@ -35,7 +35,7 @@ const ModuleFeedback = ({ item }) => {
 
   return (
     <div className="w-full">
-      {item.moduleNumber < 5 && (
+      {item.moduleStatus == 'finished' && (
         <button
           onClick={() => openModal(item)}
           className="flex justify-center items-center gap-2 bg-hover_btn hover:bg-[#fecb63] font-semibold
