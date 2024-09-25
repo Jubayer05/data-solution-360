@@ -50,7 +50,6 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
           phoneNumber,
           recaptchaVerifier,
         );
-        console.log(confirmationResult);
         setVerificationId(confirmationResult.verificationId);
         setStep(2); // Go to verify code step
       }

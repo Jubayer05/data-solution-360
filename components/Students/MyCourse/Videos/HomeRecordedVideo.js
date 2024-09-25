@@ -1,23 +1,51 @@
-import { Collapse } from 'antd';
+import { Collapse, Empty } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import { FaArrowLeft, FaArrowRight, FaRegCirclePlay } from 'react-icons/fa6';
-import { MdOutlineOndemandVideo } from 'react-icons/md';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
-import { videosPlaylist } from '../../../../src/data/dummy';
+import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
+import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
 
 const HomeRecordedVideo = () => {
-  const { activeMenu, showedItem, setShowedItem } = useStateContextDashboard();
+  const { activeMenu } = useStateContextDashboard();
+  const [showedItem, setShowedItem] = useState();
   const router = useRouter();
+  const { courseDataBatch } = useEnrolledCourseData();
+  const { courseId } = router.query;
+
+  const currentCourseData = courseDataBatch?.find(
+    (course) => course.unique_batch_id === courseId,
+  );
+
+  useEffect(() => {
+    const findRecordingLink = (modules) => {
+      for (let i = 0; i < modules.length; i++) {
+        for (let j = 0; j < modules[i].lessons.length; j++) {
+          if (modules[i].lessons[j].recordingLink) {
+            return {
+              url: modules[i].lessons[j].recordingLink,
+              title: modules[i].lessons[j].title,
+            }; // Return the first valid recordingLink found
+          }
+        }
+      }
+      return null; // Return null if no recordingLink is found
+    };
+
+    if (currentCourseData && currentCourseData.course_modules) {
+      const initialContent = findRecordingLink(
+        currentCourseData.course_modules,
+      );
+      setShowedItem(initialContent || 'No recording link available'); // Set default message if none is found
+    }
+  }, [currentCourseData]);
 
   const handleBack = () => {
     router.back();
   };
-
-  // console.log(videoUrls);
 
   return (
     <div>
@@ -25,7 +53,7 @@ const HomeRecordedVideo = () => {
         className={`${
           activeMenu
             ? 'w-full mx-auto px-4'
-            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+            : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
         } mx-auto flex items-start gap-6`}
       >
         {/* NOTE: LEFT SIDE */}
@@ -42,21 +70,21 @@ const HomeRecordedVideo = () => {
               className="w-8 ml-5"
               alt=""
             />
-            <h3 className="text-lg font-semibold">Pre Recorded Video</h3>
-            <div
+            <h3 className="text-lg font-semibold">Class Recording Video</h3>
+            {/* <div
               className="flex items-center gap-2 bg-gray-200 px-3 py-1 text-xs font-medium
           rounded-sm "
             >
               <MdOutlineOndemandVideo className="text-base" />
               31 Videos
-            </div>
+            </div> */}
           </div>
           <div className="px-6 pb-2 my-5 ">
             <h2 className="font-heading font-bold text-2xl my-2 ">
               My Courses
             </h2>
             <div>
-              {showedItem?.url && (
+              {showedItem?.url ? (
                 <iframe
                   src={`https://drive.google.com/file/d/${getDriveFileId(
                     showedItem?.url,
@@ -65,10 +93,16 @@ const HomeRecordedVideo = () => {
                   height="400"
                   allow="autoplay"
                 ></iframe>
+              ) : (
+                <div className="w-full h-[300px] border flex justify-center items-center bg-white rounded-md">
+                  <Empty />
+                </div>
               )}
             </div>
             <div className="mt-6">
-              <p className="text-lg font-medium mb-2">{showedItem?.title}</p>
+              <p className="text-lg font-medium mb-2">
+                {capitalizeWords(showedItem?.title)}
+              </p>
               <div className="flex items-center gap-3 bg-white p-3 shadow rounded-md">
                 <ButtonDashboard className="w-full">
                   <FaArrowLeft />
@@ -87,8 +121,8 @@ const HomeRecordedVideo = () => {
         <div className="w-[40%] sticky top-52 bg-white shadow-lg rounded-lg py-5 my-5 overflow-y-scroll h-[500px]">
           <h2 className="text-xl font-semibold px-5">Playlist</h2>
 
-          {videosPlaylist?.map((item, index) => (
-            <div key={item.id} className="w-full">
+          {currentCourseData?.course_modules?.map((item, index) => (
+            <div key={item.unique_batch_id} className="w-full">
               <Collapse
                 className="my-2 overflow-hidden rounded-none"
                 collapsible="header"
@@ -102,7 +136,9 @@ const HomeRecordedVideo = () => {
                     }}
                   />
                 )}
-                defaultActiveKey={index === 0 ? [`${item.id}`] : null}
+                defaultActiveKey={
+                  index === 0 ? [`${item.unique_batch_id}`] : null
+                }
               >
                 <Collapse.Panel
                   className="text-base relative"
@@ -113,10 +149,10 @@ const HomeRecordedVideo = () => {
                         <div className="pl-2">
                           <div>
                             <p className="text-base mb-0 font-normal text-white">
-                              {item.title}
+                              {capitalizeWords(item.moduleName)}
                             </p>
                             <p className="text-base mb-0 font-normal text-gray-300 mt-5">
-                              {item.totalVideo} videos
+                              {item?.lessons.length} videos
                             </p>
                           </div>
                         </div>
@@ -125,16 +161,29 @@ const HomeRecordedVideo = () => {
                   }
                   key={item.id}
                 >
-                  {item?.videoUrl?.map((video) => (
+                  {item?.lessons?.map((video) => (
                     <div
                       key={video.id}
                       className="flex items-center gap-2 py-2 my-1 hover:text-blue-500 cursor-pointer 
                       font-medium"
-                      onClick={() => setShowedItem(video)}
+                      onClick={() =>
+                        setShowedItem({
+                          url: video?.recordingLink,
+                          title: video?.title,
+                        })
+                      }
                     >
                       <FaRegCirclePlay className="text-lg mt-1" />
                       <p className="flex-1">{video.title}</p>
-                      <p>{video.duration} min</p>
+                      {video?.recordingLink ? (
+                        <span className="bg-green-100 border border-green-500 px-2 text-[10px] rounded-full font-semibold text-green-700">
+                          Available
+                        </span>
+                      ) : (
+                        <span className="bg-red-100 border border-red-500 px-2 text-[10px] rounded-full font-semibold text-red-700">
+                          Unavailable
+                        </span>
+                      )}
                     </div>
                   ))}
                 </Collapse.Panel>

@@ -175,11 +175,85 @@ const EnrolledStudent = () => {
               'Rejected!',
               'User has been removed from the course and batch.',
               'success',
-            );
+            ).then(() => {
+              window.location.reload();
+            });
           })
           .catch((error) => {
             console.error('Error:', error);
             Swal.fire('Error', 'Failed to update the user or batch.', 'error');
+          });
+      }
+    });
+  };
+
+  const handleRemoveBtn = (record) => {
+    Swal.fire({
+      title: 'Are you sure you want to remove this user from the course?',
+      text: 'This will remove the user from the course, but they will remain in the database.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Remove',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Remove the user from the enrolled_courses
+        const updatedCourses = record.enrolled_courses.filter(
+          (course) => course.batchId !== currentEnrolledCourse.unique_batch_id,
+        );
+
+        // Update the user's enrolled_courses in the database
+        const updateUserPromise = db
+          .collection('users')
+          .doc(record.id)
+          .update({ enrolled_courses: updatedCourses });
+
+        // Remove the user from the course's enrolled_students
+        const removeFromCourseBatchPromise = db
+          .collection('course_data_batch')
+          .where('unique_batch_id', '==', currentEnrolledCourse.unique_batch_id)
+          .get()
+          .then((querySnapshot) => {
+            const batchUpdatePromises = [];
+            querySnapshot.forEach((doc) => {
+              const batchData = doc.data();
+              const updatedEnrolledStudents =
+                batchData.enrolled_students.filter(
+                  (studentId) => studentId !== record.student_id,
+                );
+
+              // Update the course data batch with the new list of enrolled students
+              batchUpdatePromises.push(
+                db.collection('course_data_batch').doc(doc.id).update({
+                  enrolled_students: updatedEnrolledStudents,
+                }),
+              );
+            });
+            return Promise.all(batchUpdatePromises);
+          });
+
+        // Execute both promises
+        Promise.all([updateUserPromise, removeFromCourseBatchPromise])
+          .then(() => {
+            Swal.fire(
+              'Removed!',
+              'The user has been removed from the course.',
+              'success',
+            );
+
+            // Update the enrolledUsers state to reflect the change
+            setEnrolledUsers((prevUsers) =>
+              prevUsers.filter((user) => user.id !== record.id),
+            );
+          })
+          .catch((error) => {
+            console.error('Error:', error);
+            Swal.fire(
+              'Error',
+              'Failed to remove the user from the course.',
+              'error',
+            );
           });
       }
     });
@@ -229,7 +303,12 @@ const EnrolledStudent = () => {
           >
             Reject
           </ButtonDashboard>
-          {/* Add more actions as needed */}
+          <ButtonDashboard
+            onClick={() => handleRemoveBtn(record)}
+            className="bg-[#b71c1c] hover:bg-[#880e4f] hover:opacity-80 text-white"
+          >
+            Remove
+          </ButtonDashboard>
         </div>
       ),
     },

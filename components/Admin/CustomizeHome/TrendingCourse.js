@@ -46,7 +46,6 @@ const TrendingCourse = () => {
     },
   });
 
-  // console.log(trendingCourse[0]);
 
   const handleFileSubmit = (e) => {
     const fileSize = document.getElementById('photoUrl').files[0].size;

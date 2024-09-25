@@ -53,7 +53,6 @@ const AddProfile = ({ profile, db_name, showRole }) => {
   const handleFileSubmit = (e) => {
     const fileSize = e.target.files[0].size;
     const profileImg = e.target.files[0];
-    // console.log(profileImg.size);
 
     if (fileSize < 1024000) {
       const uploadTask = firebase

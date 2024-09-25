@@ -45,7 +45,6 @@ const Faq = () => {
 export default Faq;
 
 const Triggers = ({ item, triggerOpen }) => {
-  console.log(triggerOpen);
   return (
     <p className="flex justify-between items-center">
       <span>{item.question}</span>{' '}

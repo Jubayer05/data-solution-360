@@ -2,28 +2,30 @@ import React, { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
+import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import ModuleBreadcrumb from './ModuleBreadcrumb';
 import ModuleIntro from './ModuleIntro';
 import StudyPlan from './StudyPlan';
 
+const segmentBtn = [
+  {
+    id: '1',
+    title: 'All',
+  },
+  {
+    id: '2',
+    title: 'Live Class',
+  },
+  {
+    id: '3',
+    title: 'Quiz',
+  },
+];
 const ModuleDetailsMain = () => {
   const [activeBtn, setActiveBtn] = useState('All');
-  const segmentBtn = [
-    {
-      id: '1',
-      title: 'All',
-    },
-    {
-      id: '2',
-      title: 'Live Class',
-    },
-    {
-      id: '3',
-      title: 'Quiz',
-    },
-  ];
   const { activeMenu } = useStateContextDashboard();
   const { setModuleShowComp } = useStudentContext();
+  const { moduleData, enrolledCourse } = useEnrolledCourseData();
 
   const handleSegmentClick = (item) => {
     setActiveBtn(item.title);
@@ -48,7 +50,7 @@ const ModuleDetailsMain = () => {
         </button>
         <ModuleBreadcrumb />
 
-        <ModuleIntro />
+        <ModuleIntro moduleData={moduleData} />
 
         <h3 className="text-2xl font-bold">Study Plan</h3>
         <div className="w-full flex items-center gap-2 bg-white border px-5 py-4 rounded-md mt-2 mb-5">
@@ -67,7 +69,7 @@ const ModuleDetailsMain = () => {
             </button>
           ))}
         </div>
-        <StudyPlan />
+        <StudyPlan moduleData={moduleData} enrolledCourse={enrolledCourse} />
       </div>
     </div>
   );

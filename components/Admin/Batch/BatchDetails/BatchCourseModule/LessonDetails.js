@@ -2,6 +2,8 @@ import Link from 'next/link';
 import React from 'react';
 import { MdCancel } from 'react-icons/md';
 import { colors } from '../../../../../src/data/data';
+import { convertToAMPM } from '../../../../../src/utils/convertAMPM';
+import { formatDate } from '../../../../../src/utils/convertDate';
 
 const LessonDetails = ({
   currentLesson,
@@ -9,10 +11,7 @@ const LessonDetails = ({
   moduleData,
   setModuleData,
   updateModuleInFirestore,
-  setCurrentLesson,
 }) => {
-  console.log(currentLesson);
-
   const handleRemoveQuiz = (item) => {
     const updatedModuleData = {
       ...moduleData,
@@ -32,7 +31,7 @@ const LessonDetails = ({
   };
 
   return (
-    <div className="flex-[40%] border-1 p-5 rounded-lg bg-white mt-10">
+    <div className="flex-[40%] w-[40%] border-1 p-5 rounded-lg bg-white mt-10">
       <h2 className="text-xl text-center pb-4 text-[#231f40] font-medium font-dash_heading ">
         Lesson Details:
         <br />
@@ -65,7 +64,15 @@ const LessonDetails = ({
         <h2 className="text-base pb-1 mt-5 text-[#231f40] font-medium font-dash_heading ">
           Live Class
         </h2>
-        <p className="text-sm">{currentLesson?.liveClassLink}</p>
+        <p className="text-sm break-all">{currentLesson?.liveClassLink}</p>
+        <p className="text-sm">
+          <strong>class time: </strong>{' '}
+          {convertToAMPM(currentLesson?.classTime)}
+        </p>
+        <p className="text-sm">
+          <strong>class date: </strong>
+          {formatDate(currentLesson?.classDate)}
+        </p>
         <div>
           {currentLesson?.liveClassLink && currentLesson?.classFinished ? (
             <span className="bg-green-50 border border-green-500 px-2 text-xs rounded-full font-semibold text-[#48bb78]">
@@ -91,7 +98,7 @@ const LessonDetails = ({
           <Link
             href={currentLesson?.resourceLink}
             target="_blank"
-            className="text-blue-600 visited:text-blue-600"
+            className="text-blue-600 visited:text-blue-600 break-all"
           >
             {currentLesson?.resourceLink}
           </Link>
@@ -106,7 +113,7 @@ const LessonDetails = ({
           <Link
             href={currentLesson?.recordingLink}
             target="_blank"
-            className="text-blue-600 visited:text-blue-600"
+            className="text-blue-600 visited:text-blue-600 break-all"
           >
             {currentLesson?.recordingLink}
           </Link>

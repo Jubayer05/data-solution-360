@@ -20,8 +20,6 @@ const MyBlogs = () => {
   const [progressData, setProgressData] = useState('');
   const [blogDetails, setBlogDetails] = useState('');
 
-  console.log(modalData);
-
   useEffect(() => {
     setBlogDataState(modalData);
   }, [modalData]);
@@ -120,7 +118,6 @@ const MyBlogs = () => {
     } else {
       alert('File Size must be under 500kb');
     }
-    console.log(fileSize);
   };
 
   const handleEditClick = (record) => {

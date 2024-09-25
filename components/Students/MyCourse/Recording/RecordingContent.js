@@ -4,10 +4,11 @@ import React, { useEffect, useState } from 'react';
 import { FaRegPlayCircle } from 'react-icons/fa';
 import { IoMdPlay } from 'react-icons/io';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
-import { videosPlaylist } from '../../../../src/data/dummy';
+import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
+import { formatDate } from '../../../../src/utils/convertDate';
 
-const RecordingContent = () => {
-  const { activeMenu, showedItem, setShowedItem } = useStateContextDashboard();
+const RecordingContent = ({ item }) => {
+  const { setShowedItem } = useStateContextDashboard();
   const [currentUrl, setCurrentUrl] = useState(null);
 
   useEffect(() => {
@@ -28,17 +29,31 @@ const RecordingContent = () => {
       ),
     },
     {
-      title: 'Duration',
-      dataIndex: 'duration',
-      align: 'center',
-      width: 150,
-    },
-    {
       title: 'Class Date',
       dataIndex: 'class_date',
       align: 'center',
-      render: (_, record) => <p>Sat, 2 Dec, 2024</p>,
+      render: (_, record) => <p>{formatDate(record.classDate)}</p>,
       width: 150,
+    },
+
+    {
+      title: 'Availability',
+
+      align: 'center',
+      width: 150,
+      render: (_, record) => (
+        <p>
+          {record?.recordingLink ? (
+            <span className="bg-green-100 border border-green-500 px-2 text-xs rounded-full font-semibold text-green-700">
+              Available
+            </span>
+          ) : (
+            <span className="bg-red-100 border border-red-500 px-2 text-xs rounded-full font-semibold text-red-700">
+              Unavailable
+            </span>
+          )}
+        </p>
+      ),
     },
 
     {
@@ -49,7 +64,7 @@ const RecordingContent = () => {
       width: 80,
       render: (_, record) => (
         <div className="flex items-center justify-center">
-          <Link href={`${currentUrl}/videos`}>
+          <Link href={`/students/my-course/${item?.batchId}/videos`}>
             <button
               className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1 
           px-3 py-2 font-medium"
@@ -65,12 +80,15 @@ const RecordingContent = () => {
 
   return (
     <div className="min-h-screen">
-      {videosPlaylist.map((item, index) => (
+      {item?.moduleData?.map((itemData, index) => (
         <div
-          key={item.moduleName}
+          key={itemData.moduleName}
           className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"
         >
-          <h2 className="mt-1 text-lg font-semibold">Module-{index + 1}</h2>
+          <h2 className="-mt-2 text-xl font-semibold capitalize">
+            Module - {itemData?.moduleNumber}:{' '}
+            {capitalizeWords(itemData?.moduleName)}
+          </h2>
           <hr className="mt-3 mb-5" />
           <div
             className="flex justify-center items-center gap-6 rounded-xl overflow-hidden
@@ -88,7 +106,7 @@ const RecordingContent = () => {
             >
               <Table
                 columns={columns}
-                dataSource={[...item.videoUrl]}
+                dataSource={[...itemData.lessons]}
                 pagination={false}
                 className="w-full"
               />

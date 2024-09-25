@@ -8,7 +8,6 @@ import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 const NotificationHome = () => {
   const { activeMenu, enrolledCourse } = useStateContextDashboard();
 
-  console.log(enrolledCourse);
 
   return (
     <div>

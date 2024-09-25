@@ -3,13 +3,14 @@ import React, { useEffect, useState } from 'react';
 import { FaChevronRight } from 'react-icons/fa';
 import Select from 'react-select';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
-import { courseData } from '../../../../src/data/dummy';
+import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import RecordingContent from './RecordingContent';
 
 const RecordingHome = () => {
   const { activeMenu } = useStateContextDashboard();
   const [activeBtn, setActiveBtn] = useState('Live Class');
   const [currentContent, setCurrentContent] = useState(null);
+  const { courseDataBatch } = useEnrolledCourseData();
 
   const customStyles = {
     menu: (provided, state) => ({
@@ -31,17 +32,29 @@ const RecordingHome = () => {
   };
 
   useEffect(() => {
-    setCurrentContent(courseData[0]);
-  }, []);
+    const initialContent = {
+      title: courseDataBatch[0]?.courseData.title,
+      moduleData: courseDataBatch[0]?.course_modules,
+      batchId: courseDataBatch[0]?.unique_batch_id,
+    };
+    setCurrentContent(initialContent);
+  }, [courseDataBatch]);
 
   // NOTE: THIS WILL BE THE ENROLLED COURSE BY USER
-  const selectInstructor = courseData.map((option) => ({
-    label: option.title,
-    value: option.moduleData,
+  const selectRecording = courseDataBatch.map((option) => ({
+    label: option.courseData.title,
+    value: {
+      course_modules: option.course_modules,
+      batchId: option.unique_batch_id,
+    },
   }));
 
   const handleChange = (item) => {
-    setCurrentContent({ moduleData: item.value, title: item.label });
+    setCurrentContent({
+      moduleData: item.value.course_modules,
+      title: item.label,
+      batchId: item.value.batchId,
+    });
   };
 
   return (
@@ -57,8 +70,8 @@ const RecordingHome = () => {
           <Select
             className=" w-1/3 mb-6"
             styles={customStyles}
-            options={selectInstructor}
-            defaultValue={selectInstructor[0]}
+            options={selectRecording}
+            defaultValue={currentContent}
             onChange={handleChange}
           />
           {/* <Link href={`/students/my-course/${item?.key}/videos`}> */}
@@ -77,7 +90,7 @@ const RecordingHome = () => {
               <h2 className="text-xl font-bold leading-6 ">
                 Recorded Live Class
               </h2>
-              <p className="text-xs mt-1">35 Videos</p>
+              <p className="text-xs mt-1">{currentContent?.title}</p>
             </div>
             <div>
               <FaChevronRight />

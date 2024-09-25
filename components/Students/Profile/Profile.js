@@ -1,12 +1,10 @@
 import React from 'react';
-import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import ChangePassword from '../auth/ChangePassword';
 import PersonalDetails from './PersonalDetails';
 
 const Profile = ({ title }) => {
-  const { findCurrentUser, userName } = useStateContext();
   const { activeMenu } = useStateContextDashboard();
 
   return (
@@ -16,7 +14,7 @@ const Profile = ({ title }) => {
         className={`${
           activeMenu
             ? 'max-w-6xl mx-auto px-4'
-            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+            : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
         } mx-auto mt-10`}
       >
         <div className=" grid grid-cols-1 sm:grid-cols-2 gap-10  mt-10 pb-20">

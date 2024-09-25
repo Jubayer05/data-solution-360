@@ -1,6 +1,5 @@
 import React from 'react';
 import { IoIosPeople } from 'react-icons/io';
-import Typewriter from 'typewriter-effect';
 
 import Image from 'next/image';
 import Link from 'next/link';
@@ -8,7 +7,6 @@ import { FaArrowRightLong } from 'react-icons/fa6';
 import { ImClock } from 'react-icons/im';
 
 const EnrolledCourseHome = ({ item }) => {
-  // console.log(item.unique_batch_id);
   return (
     <div
       className="w-full mx-auto rounded-lg overflow-hidden hover:border-[#676767] 
@@ -20,7 +18,7 @@ const EnrolledCourseHome = ({ item }) => {
           height={300}
           src={item?.courseData?.img}
           alt=""
-          className="w-full h-[240px] md:h-[200px]"
+          className="w-full h-[240px] md:h-[160px]"
         />
         <div className="rounded-lg rounded-t-none flex flex-col h-[calc(100%-240px)] md:h-[calc(100%-200px)]">
           <div className="p-0.5 md:p-2 border-b-1 border-[#d6dae1] flex items-center flex-wrap">
@@ -68,7 +66,7 @@ const EnrolledCourseHome = ({ item }) => {
           >
             {item.title}
           </p>
-          {item?.courseData?.status == 'Registration Going on' && (
+          {/* {item?.courseData?.status == 'Registration Going on' && (
             <div className="text-xl">
               <p
                 className=" flex-1 text-[13px] md:text-lg font-bold mb-1.5 md:mt-1 
@@ -84,7 +82,7 @@ const EnrolledCourseHome = ({ item }) => {
                 />
               </p>
             </div>
-          )}
+          )} */}
           <div
             className="flex justify-end font-medium text-[14px] flex-wrap text-[#4F547B]
             bg-[#f9f9fa] py-4 px-2"

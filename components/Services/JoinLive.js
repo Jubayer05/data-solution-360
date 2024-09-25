@@ -1,13 +1,23 @@
+import Image from 'next/image';
 import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { MdOnlinePrediction } from 'react-icons/md';
 import { useStateContext } from '../../src/context/ContextProvider';
+import useEnrolledCourseData from '../../src/hooks/useEnrolledCourseData';
 import PhoneAuth from '../Login/PhoneLogin';
-import Image from 'next/image';
 
 const JoinLive = () => {
   const { findCurrentUser } = useStateContext();
   const [hasZoomLink, setHasZoomLink] = useState(true);
+  const router = useRouter();
+  const { moduleData, enrolledCourse } = useEnrolledCourseData();
+  const { courseId, moduleId, liveId } = router.query;
+
+  const findCurrentLesson = moduleData?.lessons?.find(
+    (lesson) => lesson.id === liveId,
+  );
+  console.log(findCurrentLesson);
   /*
    * Title: JOIN Live Class functionality
    * Description:
@@ -31,27 +41,26 @@ const JoinLive = () => {
           <Image
             width={500}
             height={300}
-            src="https://firebasestorage.googleapis.com/v0/b/data-solution-360.appspot.com/o/courseImage%2Fsocialmedia46308%40gmail.com%2FData-Analytics-%26-Data-Science-2.png?alt=media&token=719bdc37-6747-4246-9de2-5227554d27a7"
+            src={enrolledCourse?.courseData?.img}
             alt=""
             className="w-full object-cover rounded-xl"
           />
           <p className="text-lg font-bold mt-5">
-            Mastering Social Media Banner Design: The Next Level
+            {enrolledCourse?.courseData?.title}
           </p>
-          <div className="flex justify-between mt-3">
+          <div className="flex justify-between mt-3 gap-3">
             <p className="bg-yellow-100 inline-block px-3 rounded-md">
-              Social Media Banner Design 1
+              <strong>Module: </strong> {moduleData?.moduleName}
             </p>
             <p className="text-base font-medium">
-              Class Time: <span className="text-primary">10PM - 11.30PM</span>
+              Class Time: <span className="text-primary">10PM - 11.30PM</span>{' '}
+              <strong className="text-blue-700">Focus it addTime</strong>
             </p>
           </div>
         </div>
         <div className="w-[40%]">
           <div className="border-l-[3px] border-[#000000] pl-5 py-2 rounded">
-            <p className="font-semibold text-lg">
-              Social Media Banner Design 1
-            </p>
+            <p className="font-semibold text-lg">{findCurrentLesson?.title}</p>
             <div className="flex mt-2 items-center gap-3">
               <p
                 className="text-base flex justify-center items-center gap-2 px-2 rounded 
@@ -71,8 +80,11 @@ const JoinLive = () => {
           {findCurrentUser?.email ? (
             <Link
               href={
-                hasZoomLink ? 'https://zoom.us/' : '/students/class-joining'
+                findCurrentLesson.liveClassLink
+                  ? findCurrentLesson.liveClassLink
+                  : '/students/class-joining'
               }
+              target="_blank"
               className="flex justify-center items-center gap-2 bg-[#fecb63] hover:bg-[#e7b655] 
             font-semibold py-2 px-5 rounded transition-all duration-200 text-black visited:text-black mt-5"
             >

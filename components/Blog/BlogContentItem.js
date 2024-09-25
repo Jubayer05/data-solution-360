@@ -6,7 +6,6 @@ import { useStateContext } from '../../src/context/ContextProvider';
 const BlogContentItem = () => {
   const [blogItem, setBlogItem] = useState({});
   const { blogData } = useStateContext();
-  // console.log(blogData);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

@@ -4,6 +4,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import { colors } from '../../../../../src/data/data';
 import ButtonDashboard from '../../../../utilities/dashboard/ButtonDashboard';
 import InputBox from '../../../Course/InputBox';
+import AddClassDateAndTime from './AddClassDate&Time';
 import AddQuiz from './AddQuiz';
 import AddResourceRecording from './AddResourceRecording';
 import LessonDetails from './LessonDetails';
@@ -139,7 +140,7 @@ const AddLiveClass = ({
       </div>
       <div className="max-w-6xl mx-auto flex justify-center gap-5 pb-20">
         {/* NOTE: Update Lessons */}
-        <div className="flex-[60%] mt-10">
+        <div className="flex-[60%] w-[60%] mt-10">
           <div className="bg-white border-1 p-5 rounded-lg">
             <h2 className="text-xl text-center pb-4 text-[#231f40] font-medium font-dash_heading ">
               Lesson Update: <br />
@@ -212,6 +213,15 @@ const AddLiveClass = ({
               </div>
             </div>
           </div>
+
+          <AddClassDateAndTime
+            moduleData={moduleData}
+            setModuleData={setModuleData}
+            updateModuleInFirestore={updateModuleInFirestore}
+            indexLesson={indexLesson}
+            currentLesson={currentLesson}
+            setCurrentLesson={setCurrentLesson}
+          />
 
           <AddResourceRecording
             moduleData={moduleData}

@@ -77,7 +77,6 @@ const Navbar = ({ home }) => {
   }, []);
 
   const handleLogout = () => {
-    // console.log('Hello');
     signOut(auth)
       .then(() => {
         localStorage.clear();
@@ -88,7 +87,6 @@ const Navbar = ({ home }) => {
       });
   };
 
-  // console.log(userEmail);
 
   return (
     <div

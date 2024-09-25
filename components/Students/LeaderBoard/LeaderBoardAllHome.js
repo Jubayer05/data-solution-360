@@ -34,7 +34,6 @@ const LeaderBoardHome = () => {
   const findUserLeaderboardIndex = sortedArray.findIndex(
     (item) => item.email === userEmail,
   );
-  console.log(findUserLeaderboard);
 
   return (
     <div>

@@ -1,7 +1,7 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
-import { loadData } from '../../../src/hooks/loadData';
+import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import CourseItem from '../../Courses/HomeCourseItem';
 import EnrolledCourseHome from './EnrolledCourseHome';
 import TodayClassRight from './TodayClassRight';
@@ -9,17 +9,7 @@ import TodayClassRight from './TodayClassRight';
 const MyCourseMain = () => {
   const { courseData, findCurrentUser, enrolledCourseIds } = useStateContext();
   const { activeMenu } = useStateContextDashboard();
-  const [courseDataBatch, setCourseDataBatch] = useState([]);
-
-  useEffect(() => {
-    loadData('course_data_batch', setCourseDataBatch, {
-      orderBy: 'batchNumber',
-      orderDirection: 'asc',
-      filterFunction: (course) =>
-        enrolledCourseIds.includes(course.unique_batch_id) &&
-        course.enrolled_students.includes(findCurrentUser.student_id),
-    });
-  }, [enrolledCourseIds, findCurrentUser]);
+  const { courseDataBatch } = useEnrolledCourseData();
 
   const registrationGoingOnCourses = courseData?.filter(
     (val) => val.status === 'Registration Going on',

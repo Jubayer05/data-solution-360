@@ -10,4 +10,5 @@ const dashboard = () => {
   );
 };
 
+// export default dashboard;
 export default ProtectedRoute(dashboard, 'student');

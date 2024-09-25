@@ -29,7 +29,6 @@ const ModuleFeedback = ({ item }) => {
 
   const handleSubmit = () => {
     const feedbackDataNew = { ...feedbackData, user: findCurrentUser };
-    console.log(feedbackDataNew);
     // TODO: submit to database letter.
   };
 

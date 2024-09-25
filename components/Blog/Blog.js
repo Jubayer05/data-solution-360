@@ -8,10 +8,6 @@ import { useStateContext } from '../../src/context/ContextProvider';
 const Blog = () => {
   const { blogData } = useStateContext();
 
-  // const text = ;
-
-  // console.log(text);
-
   return (
     <div className="pb-4 pt-20 max-w-6xl mx-auto">
       <h2 className="w-[600px] mx-auto text-center text-4xl font-bold font-heading mt-4 text-headerMain">

@@ -102,7 +102,6 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
         );
       }
     } else {
-      console.log(formData.email);
       Swal.fire('Hey!', 'Please Provide a valid email', 'error');
     }
   };

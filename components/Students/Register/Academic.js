@@ -80,7 +80,6 @@ const Academic = () => {
   //   } else {
   //     alert("File Size must be under 500kb");
   //   }
-  //   console.log(fileSize);
   // };
 
   return (

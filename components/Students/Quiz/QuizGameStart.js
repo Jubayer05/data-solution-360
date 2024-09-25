@@ -56,7 +56,6 @@ const QuizGameStart = () => {
       ...selectedAnswers,
       [questionIndex]: option,
     });
-    console.log(selectedAnswers);
   };
 
   const handleSubmitQuiz = () => {

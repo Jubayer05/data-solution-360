@@ -174,8 +174,6 @@ const ManageCourse = () => {
       status: courseStatus,
     };
 
-    console.log(updatedCourse);
-
     db.collection('course_data')
       .doc(modalData.key)
       .update(updatedCourse)
@@ -188,7 +186,6 @@ const ManageCourse = () => {
       })
       .catch((error) => {
         Swal.fire('Error!', 'Something went wrong.', 'error');
-        console.log(error);
       });
   };
 

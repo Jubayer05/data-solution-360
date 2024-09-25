@@ -38,7 +38,6 @@ const Trending = () => {
     // ],
   };
 
-  // console.log(findImageData);
 
   return (
     <div className="max-w-7xl mx-auto mt-10">

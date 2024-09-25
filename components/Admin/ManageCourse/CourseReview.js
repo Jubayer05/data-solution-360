@@ -12,7 +12,6 @@ const initialReviewState = {
 
 const CourseReview = ({ studentReview, setStudentReview }) => {
   const { review } = useStateContext();
-  // console.log(review);
 
   const [reviewInfo, setReviewInfo] = useState({
     ...initialReviewState,

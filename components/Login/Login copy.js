@@ -152,7 +152,6 @@ const Login = () => {
         );
       }
     } else {
-      console.log(formData.email);
       Swal.fire('Hey!', 'Please Provide a valid email', 'error');
     }
   };

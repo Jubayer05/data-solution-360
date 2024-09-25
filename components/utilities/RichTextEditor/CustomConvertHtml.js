@@ -4,7 +4,6 @@ export const customConvertToHTML = (contentState) => {
   return convertToHTML({
     blockToHTML: (block) => {
       const alignment = block.data['text-align'];
-      console.log(block);
       let alignmentClass = 'text-left'; // Default to left alignment
       if (alignment) {
         alignmentClass = `text-${alignment}`;
