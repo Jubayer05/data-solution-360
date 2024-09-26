@@ -25,7 +25,7 @@ const InputBox = ({
         disabled={disabled}
         value={value}
         id={id}
-        onChange={func}
+        onChange={(e) => func(id, e.target.value)} // Corrected onChange handler
         name={name}
         type={type}
         placeholder={placeholder}

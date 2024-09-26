@@ -1,9 +1,9 @@
 /* eslint-disable jsx-a11y/alt-text */
+import Image from 'next/image';
 import React from 'react';
 import Select from 'react-select';
 import { v4 as uuidv4 } from 'uuid';
 import { useStateContext } from '../../../src/context/ContextProvider';
-import Image from 'next/image';
 
 const AddInstructorCourse = ({ instructors, setInstructors }) => {
   const { instructor } = useStateContext();
@@ -19,9 +19,7 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
           alt={item.profileName}
         />
         <div>
-          <p className="text-lg m-0">
-            <strong>{item.profileName}</strong>
-          </p>
+          <p className="text-lg m-0 font-semibold">{item.profileName}</p>
           <p className="ml-1 text-sm m-0">{item.jobTitle}</p>
         </div>
       </div>
@@ -64,46 +62,50 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
   };
 
   return (
-    <div className="bg-[#f0f0f0] shadow-lg rounded-lg border-dashed px-6 py-3 mt-10">
-      <h2 className="text-xl text text-center my-4 font-bold">
+    <div className="bg-white border-1 p-5 rounded-lg mt-5 ">
+      <h2 className="text-lg text-center text-[#2ecc71] font-medium font-dash_heading my-4">
         Choose Instructor From List
       </h2>
-      <p>Previous</p>
-      {instructors?.map((item) => (
-        <div key={item.id} className="my-4 shadow-md flex items-center">
-          <div className="flex-1">
-            <div className="px-4 py-2 rounded-lg text-base font-normal flex items-center justify-between gap-10 bg-white">
+
+      {instructors?.length > 0 && (
+        <div className="mb-4">
+          <h3 className="text-base font-semibold mb-2">Selected Instructors</h3>
+          {instructors?.map((item) => (
+            <div
+              key={item.id}
+              className="flex items-center justify-between p-4 bg-[#f0f0f0] rounded-md shadow-md mb-4"
+            >
               <div className="flex items-center gap-4">
                 <Image
                   width={500}
                   height={300}
-                  className="w-20 h-20 rounded-full"
+                  className="w-16 h-16 rounded-full"
                   src={item.photoUrl}
                   alt={item.profileName}
                 />
                 <div>
-                  <p className="text-xl m-0">
-                    <strong>{item.profileName}</strong>
-                  </p>
-                  <p className="ml-1 text-base m-0">{item.jobTitle}</p>
+                  <p className="text-lg font-semibold">{item.profileName}</p>
+                  <p className="text-sm">{item.jobTitle}</p>
                 </div>
               </div>
               <button
                 onClick={() => handleDeleteInstructor(item)}
-                className="px-4 py-3 mx-4 bg-red-500 text-white rounded-md"
+                className="bg-red-500 text-white py-2 px-4 rounded-md hover:bg-red-600 transition-all"
               >
                 Remove
               </button>
             </div>
-          </div>
+          ))}
         </div>
-      ))}
+      )}
+
       <Select
         className="w-full"
         styles={customStyles}
         options={selectInstructor}
         defaultValue={instructors}
         onChange={handleChange}
+        placeholder="Select an Instructor"
       />
     </div>
   );

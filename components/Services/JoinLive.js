@@ -80,7 +80,7 @@ const JoinLive = () => {
           {findCurrentUser?.email ? (
             <Link
               href={
-                findCurrentLesson.liveClassLink
+                findCurrentLesson?.liveClassLink
                   ? findCurrentLesson.liveClassLink
                   : '/students/class-joining'
               }

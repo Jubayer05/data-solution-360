@@ -21,7 +21,7 @@ const MyCourseMain = () => {
   return (
     <div className="p-0 sm:p-4">
       <div
-        className={`flex flex-col md:flex-row md:items-start
+        className={`flex flex-col md:flex-row md:items-start 
            gap-6 ${
              activeMenu
                ? 'w-full mx-auto px-4'
@@ -29,11 +29,11 @@ const MyCourseMain = () => {
            }`}
       >
         {/* LEFT SIDE */}
-        <div className={`flex-1`}>
+        <div className={`flex-1 `}>
           <div className="bg-white shadow-lg rounded-lg px-6 pb-8 pt-4 my-5">
             <h2 className="font-heading font-bold text-2xl my-2">My Courses</h2>
             <div
-              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6`}
+              className={`grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6 `}
             >
               {courseDataBatch.map((item) => (
                 <EnrolledCourseHome key={item.id} item={item} running={true} />

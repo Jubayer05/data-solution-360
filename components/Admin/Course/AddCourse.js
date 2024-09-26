@@ -19,7 +19,6 @@ import 'react-draft-wysiwyg/dist/react-draft-wysiwyg.css';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import AddInstructorCourse from './AddInstructorCourse';
-import AddModule from './AddModule';
 import InputBox from './InputBox';
 
 // Initial state for the course data
@@ -121,6 +120,8 @@ const AddCourse = () => {
 
   // Handler for form submission
   const handleSubmit = () => {
+    console.log(courseData, userEmail);
+
     if (courseData.title != '') {
       firebase
         .firestore()
@@ -146,7 +147,7 @@ const AddCourse = () => {
           });
         })
         .catch((error) => {
-          alert(error.message + '' + 'Something went wrong');
+          Swal.fire('Error!', 'Something went wrong.', 'error');
         });
     } else {
       Swal.fire('Warning!', 'A Title and a image is required!', 'warning');
@@ -154,32 +155,37 @@ const AddCourse = () => {
   };
 
   return (
-    <div className="flex justify-center items-center flex-col">
-      <h2>Add a new course</h2>
-      <div className="w-3/4 shadow-lg p-10">
-        {/* NOTE: InputBox component for the course title */}
+    <div className="flex justify-center items-center flex-col my-10">
+      <div className="w-3/4 bg-white shadow-lg border-1 p-10 rounded-lg">
+        <h2 className="text-2xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+          Add a New Course
+        </h2>
+        {/* Title Input */}
         <InputBox
           title="Title"
-          id="courseTitle"
+          id="title"
           func={handleInputChange}
-          placeholder="Example - Beginner to advance power bi course"
+          placeholder="Example - Beginner to advanced power bi course"
           type="text"
         />
 
-        {/* NOTE: InputBox component for the course image */}
+        {/* Image Upload */}
         <div className="mt-4">
-          <label htmlFor className="font-semibold block text-[#17012e]">
+          <label
+            htmlFor="photoUrl"
+            className="font-semibold block text-[#17012e]"
+          >
             Course Image
           </label>
           <input
             id="photoUrl"
             onChange={handleFileSubmit}
             type="file"
-            className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
+            className="w-full px-4 py-2 text-lg outline-none border mt-1.5 rounded"
           />
         </div>
 
-        {/* NOTE: InputBox component for the short description */}
+        {/* Short Description */}
         <InputBox
           title="Short Description"
           id="shortDescription"
@@ -188,9 +194,8 @@ const AddCourse = () => {
           type="text"
         />
 
-        {/* NOTE: PRICE BOX */}
-        <div className="grid gap-4 grid-cols-2">
-          {/* NOTE: InputBox component for the course price */}
+        {/* Pricing Section */}
+        <div className="grid gap-4 grid-cols-2 mt-4">
           <InputBox
             title="Price"
             id="price"
@@ -198,8 +203,6 @@ const AddCourse = () => {
             placeholder="Example - 1500"
             type="number"
           />
-
-          {/* NOTE: InputBox component for the discounted price */}
           <InputBox
             title="Discounted price"
             id="discountedPrice"
@@ -209,8 +212,8 @@ const AddCourse = () => {
           />
         </div>
 
-        <div className="grid gap-4 grid-cols-3">
-          {/* NOTE: InputBox component for the total seat number */}
+        {/* Class Details */}
+        <div className="grid gap-4 grid-cols-3 mt-4">
           <InputBox
             title="Total Seat Number"
             id="totalSeatNumber"
@@ -218,8 +221,6 @@ const AddCourse = () => {
             placeholder="Example - 40"
             type="number"
           />
-
-          {/* NOTE: InputBox component for the batch number */}
           <InputBox
             title="Batch No"
             id="batchNumber"
@@ -227,8 +228,6 @@ const AddCourse = () => {
             placeholder="Example - 05"
             type="number"
           />
-
-          {/* NOTE: InputBox component for the class time */}
           <InputBox
             title="Class Time"
             id="classTime"
@@ -238,62 +237,55 @@ const AddCourse = () => {
           />
         </div>
 
-        <div className="grid gap-4 grid-cols-3">
-          {/* NOTE: InputBox component for the orientation class */}
+        <div className="grid gap-4 grid-cols-3 mt-4">
           <InputBox
             title="Orientation Class"
             id="orientationClass"
             func={handleInputChange}
             type="date"
           />
-
-          {/* NOTE: InputBox component for the main class starting date */}
           <InputBox
             title="Main class starting date"
             id="mainClassStartingDate"
             func={handleInputChange}
             type="date"
           />
-
-          {/* NOTE: Checkbox component for selecting class days */}
           <div>
             <label className="font-semibold mt-8 block">Class Day</label>
-            <div>
-              <Checkbox.Group
-                options={plainOptions}
-                onChange={(e) => handleInputChange('class_days', e)}
-              />
-            </div>
+            <Checkbox.Group
+              options={plainOptions}
+              onChange={(e) => handleInputChange('class_days', e)}
+            />
           </div>
         </div>
 
-        {/* NOTE: InputBox component for the course target audience */}
         <InputBox
           title="Who is the course for"
           id="classTime"
           placeholder="Example - for all students who want to learn power bi"
           func={handleInputChange}
           type="text"
+          className="mt-4"
         />
 
-        {/* NOTE: InputBox component for the after-course benefit */}
         <InputBox
           title="After Course Benefit"
           id="classTime"
           placeholder="Example - scope of internships"
           func={handleInputChange}
           type="text"
+          className="mt-4"
         />
 
-        {/* NOTE: INSTRUCTORS */}
         <AddInstructorCourse
           instructors={instructors}
           setInstructors={setInstructors}
+          className="mt-6"
         />
 
-        {/* NOTE: Course Description */}
+        {/* Course Description */}
         <p className="font-semibold mt-6">Course Description</p>
-        <div className="w-full border-1 p-3 bg-white">
+        <div className="w-full border-1 p-3 bg-white rounded mt-2">
           <Editor
             editorState={editorState}
             editorStyle={{ minHeight: '140px' }}
@@ -304,13 +296,13 @@ const AddCourse = () => {
           />
         </div>
 
-        {/* NOTE: InputBox component for the Course Details */}
         <InputBox
           title="Drive Link"
           id="driveLink"
           placeholder="https://drive.google.com/file/xyz"
           func={handleInputChange}
           type="text"
+          className="mt-4"
         />
 
         <InputBox
@@ -319,21 +311,21 @@ const AddCourse = () => {
           placeholder="https://facebook.com/file/xyz"
           func={handleInputChange}
           type="text"
+          className="mt-4"
         />
 
-        <AddModule
+        {/* <AddModule
           courseModule={courseModule}
           setCourseModule={setCourseModule}
-        />
+          className="mt-6"
+        /> */}
 
-        {/* NOTE: Minimum 7 short point for course details */}
         <div className="border-1 mt-5 py-6 px-3 rounded-lg bg-[#f0f0f0]">
           <p className="text-lg font-semibold text-[#17012e]">
             Add minimum 7 course details in point{' '}
             <span className="italic text-[orangered]">(required)</span>
           </p>
           <div className="grid gap-4 grid-cols-3">
-            {/* NOTE: InputBox component for the point wise course details */}
             {courseShortData?.map((item) => (
               <div key={item.name}>
                 <label
@@ -347,18 +339,18 @@ const AddCourse = () => {
                   id={item.name}
                   onChange={(e) => (item.value = e.target.value)}
                   type="text"
-                  className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
+                  className="w-full px-4 py-2 text-lg outline-none border-1 mt-1.5 rounded"
                 />
               </div>
             ))}
           </div>
         </div>
 
-        <div className="w-full text-center pt-5 pb-16">
-          {/* NOTE: Submit button */}
+        {/* Submit Button */}
+        <div className="w-full text-center pt-5 pb-8">
           <button
             onClick={handleSubmit}
-            className="px-4 py-3 bg-blue-500 text-white rounded-md"
+            className="px-6 py-3 bg-blue-500 text-white rounded-md hover:bg-blue-600"
           >
             Submit Content
           </button>

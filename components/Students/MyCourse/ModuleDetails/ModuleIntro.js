@@ -1,4 +1,5 @@
 import Image from 'next/image';
+import Link from 'next/link';
 import React from 'react';
 import { FiClock } from 'react-icons/fi';
 import { LuCalendarDays } from 'react-icons/lu';
@@ -48,38 +49,40 @@ const ModuleIntro = ({ moduleData }) => {
               </p>
             </div>
             <div className="flex gap-3">
-              <button
-                className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2
+              <Link href="/students/resource">
+                <button
+                  className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2
         px-5 rounded border-dashboard_border border mt-4 transition-all duration-200"
-              >
-                <span className="flex items-center gap-2">
-                  <Image
-                    width={500}
-                    height={300}
-                    src="/icon/resource.png"
-                    className="w-6"
-                    alt=""
-                  />
-                  Resource({moduleData?.liveClassNumber}) <br />
-                  <strong className="text-primary">Focus it linkable</strong>
-                </span>
-              </button>
-              <button
-                className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2
+                >
+                  <span className="flex items-center gap-2">
+                    <Image
+                      width={500}
+                      height={300}
+                      src="/icon/resource.png"
+                      className="w-6"
+                      alt=""
+                    />
+                    Resource({moduleData?.liveClassNumber})
+                  </span>
+                </button>
+              </Link>
+              <Link href="/students/recording">
+                <button
+                  className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2
         px-5 rounded border-dashboard_border border mt-4 transition-all duration-200"
-              >
-                <span className="flex items-center gap-2">
-                  <Image
-                    width={500}
-                    height={300}
-                    src="/icon/video-player.png"
-                    className="w-6"
-                    alt=""
-                  />
-                  Pre Recorded Video(40) <br />
-                  <strong className="text-primary">Focus it</strong>
-                </span>
-              </button>
+                >
+                  <span className="flex items-center gap-2">
+                    <Image
+                      width={500}
+                      height={300}
+                      src="/icon/video-player.png"
+                      className="w-6"
+                      alt=""
+                    />
+                    Class Recording
+                  </span>
+                </button>
+              </Link>
             </div>
           </div>
         </div>
