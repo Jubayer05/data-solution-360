@@ -19,7 +19,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
 
   return (
     <div className="mt-2 mb-10 w-full border border-dashboard_border rounded-lg overflow-hidden shadow-md">
-      {moduleShowComp == 'All' || moduleShowComp == 'Live Class' ? (
+      {moduleShowComp == 'Live Class' ? (
         <div>
           {moduleData?.lessons.map((item, index) => (
             <div
@@ -108,6 +108,28 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
         </div>
       ) : (
         <div>
+          <div className="bg-white border-b-1">
+            <p className="ml-10 pt-5 font-dash_heading font-semibold text-primary">
+              NOTE:{' '}
+            </p>
+            <ol className="text-sm list-decimal mx-10 pb-8">
+              <li className="pt-3">
+                There will be 10 total quizzes (MCQ, 4 options each). Time will
+                be 20 minutes.
+              </li>
+              <li className="mt-3">
+                The quiz should be participated within the deadline from the day
+                the quiz is unlocked.
+              </li>
+              <li className="mt-3">
+                Do not click the quiz just to see or see what happens when you
+                click this button. Because, once you open it, you have to get
+                out by answering the whole thing. And if you click once, do an
+                answer and come out, then you will not get a chance to
+                participate later.
+              </li>
+            </ol>
+          </div>
           {moduleData?.lessons
             .filter((item) => item.quizData && item.quizData.length > 0)
             .map((item, index) => (

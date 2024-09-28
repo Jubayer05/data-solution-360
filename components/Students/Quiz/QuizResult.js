@@ -1,24 +1,27 @@
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FaRegCircleCheck } from 'react-icons/fa6';
 import { MdOutlineCancel } from 'react-icons/md';
 
-const QuizResult = ({ quizData, selectedAnswers }) => {
+const QuizResult = ({ userAlreadyGiveQuiz }) => {
+  // console.log(selectedAnswers);
+  const quizData = userAlreadyGiveQuiz?.quizDataUser;
+
+
+
   return (
     <div>
-      {quizData.map((question, index) => {
-        const userAnswer = selectedAnswers[index];
-        const isCorrect = userAnswer === question.correctAnswer;
-
+      {quizData?.map((quiz, index) => {
         return (
           <div key={index} className="mb-16">
             <p className="mb-2 text-gray-700 font-bold p-4">
               <span className="text-2xl">{index + 1}. </span>
-              {question.question}
+              {quiz.question}
             </p>
             <div>
-              {question.options.map((option, optionIndex) => {
-                const isUserAnswer = userAnswer === option;
-                const isOptionCorrect = option === question.correctAnswer;
+              {quiz.options.map((option, optionIndex) => {
+                const isUserAnswer = quiz.user_answer === option.text;
+                const isOptionCorrect = option.text === quiz.correct_answer;
                 let bgColor = '';
                 if (isUserAnswer) {
                   bgColor = isOptionCorrect
@@ -42,7 +45,7 @@ const QuizResult = ({ quizData, selectedAnswers }) => {
                       >
                         {optionIndex + 1}
                       </div>
-                      {option}
+                      {option.text}
                     </div>
                     <div>
                       {isOptionCorrect ? (

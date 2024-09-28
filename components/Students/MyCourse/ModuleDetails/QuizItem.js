@@ -12,8 +12,6 @@ const QuizItem = ({ item, enrolledCourse, moduleData }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
 
-  // console.log(enrolledCourse);
-
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, []);
@@ -61,32 +59,14 @@ const QuizItem = ({ item, enrolledCourse, moduleData }) => {
             <h2
               className={`text-[20px] font-semibold mt-2 leading-6 font-subHeading`}
             >
-              Quiz Title
+              {item?.title}
             </h2>
             <div>
               <p>Check the result to see the answer sheet of the quiz.</p>
-              <p className="text-sm">
-                <span className="text-xs">Notes:</span> The quiz will be based
-                on the prerecorded videos of the module and what has been taught
-                in the module.
+              <p className="text-sm italic mt-1 text-[#656565]">
+                The quiz will be based on the prerecorded videos of the module
+                and what has been taught in the module.
               </p>
-              <ol className="text-sm list-decimal ml-10">
-                <li className="mt-3">
-                  There will be 10 total quizzes (MCQ, 4 options each). Time
-                  will be 20 minutes.
-                </li>
-                <li className="mt-3">
-                  The quiz should be participated within the deadline from the
-                  day the quiz is unlocked.
-                </li>
-                <li className="mt-3">
-                  Do not click the quiz just to see or see what happens when you
-                  click this button. Because, once you open it, you have to get
-                  out by answering the whole thing. And if you click once, do an
-                  answer and come out, then you will not get a chance to
-                  participate later.
-                </li>
-              </ol>
             </div>
           </div>
         </div>
@@ -181,7 +161,9 @@ const QuizItem = ({ item, enrolledCourse, moduleData }) => {
         <div className="px-10 pt-5 bg-white">
           <button
             disabled={checked ? false : true}
-            onClick={() => (window.location.href = `${currentUrl}/quiz`)}
+            onClick={() =>
+              (window.location.href = `${currentUrl}/quiz/${item.id}`)
+            }
             className="w-full bg-[#101828] text-white hover:bg-[#101828dc] rounded-md px-5 py-2 bg-[#001f3f0e] 
             flex items-center font-semibold justify-center gap-3  transition duration-300"
           >

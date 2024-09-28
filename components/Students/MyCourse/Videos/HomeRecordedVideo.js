@@ -13,12 +13,7 @@ const HomeRecordedVideo = () => {
   const { activeMenu } = useStateContextDashboard();
   const [showedItem, setShowedItem] = useState();
   const router = useRouter();
-  const { courseDataBatch } = useEnrolledCourseData();
-  const { courseId } = router.query;
-
-  const currentCourseData = courseDataBatch?.find(
-    (course) => course.unique_batch_id === courseId,
-  );
+  const { enrolledCourse } = useEnrolledCourseData();
 
   useEffect(() => {
     const findRecordingLink = (modules) => {
@@ -35,13 +30,11 @@ const HomeRecordedVideo = () => {
       return null; // Return null if no recordingLink is found
     };
 
-    if (currentCourseData && currentCourseData.course_modules) {
-      const initialContent = findRecordingLink(
-        currentCourseData.course_modules,
-      );
+    if (enrolledCourse && enrolledCourse.course_modules) {
+      const initialContent = findRecordingLink(enrolledCourse.course_modules);
       setShowedItem(initialContent || 'No recording link available'); // Set default message if none is found
     }
-  }, [currentCourseData]);
+  }, [enrolledCourse]);
 
   const handleBack = () => {
     router.back();
@@ -121,7 +114,7 @@ const HomeRecordedVideo = () => {
         <div className="w-[40%] sticky top-52 bg-white shadow-lg rounded-lg py-5 my-5 overflow-y-scroll h-[500px]">
           <h2 className="text-xl font-semibold px-5">Playlist</h2>
 
-          {currentCourseData?.course_modules?.map((item, index) => (
+          {enrolledCourse?.course_modules?.map((item, index) => (
             <div key={item.unique_batch_id} className="w-full">
               <Collapse
                 className="my-2 overflow-hidden rounded-none"

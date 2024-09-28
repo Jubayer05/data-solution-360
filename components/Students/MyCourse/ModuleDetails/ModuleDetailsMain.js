@@ -10,14 +10,10 @@ import StudyPlan from './StudyPlan';
 const segmentBtn = [
   {
     id: '1',
-    title: 'All',
-  },
-  {
-    id: '2',
     title: 'Live Class',
   },
   {
-    id: '3',
+    id: '2',
     title: 'Quiz',
   },
 ];

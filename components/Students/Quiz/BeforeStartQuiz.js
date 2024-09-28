@@ -5,15 +5,34 @@ import { FaArrowLeft, FaArrowRightLong } from 'react-icons/fa6';
 import Image from 'next/image';
 import { useState } from 'react';
 import { BiStopwatch } from 'react-icons/bi';
+import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
+import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
+import CheckQuizAnswer from './CheckQuizAnswer';
+import PastQuizResult from './PastQuizResult';
 import QuizGameStart from './QuizGameStart';
 
 const BeforeStartQuiz = () => {
+  const { findCurrentUser } = useStateContext();
   const { activeMenu } = useStateContextDashboard();
   const [startQuiz, setStartQuiz] = useState(false);
-
+  const [showResult, setShowResult] = useState(false);
+  const [checkAnswer, setCheckAnswer] = useState(false);
+  const { moduleData } = useEnrolledCourseData();
   const router = useRouter();
+  const { quizId } = router.query;
+
+  const findLessons = moduleData?.lessons?.find((quiz) => quiz.id === quizId);
+
+  const quizData = findLessons?.quizData;
+
+  // Check if the user has already submitted the quiz
+  const userAlreadyGiveQuiz = Array.isArray(findLessons?.user_quizData)
+    ? findLessons.user_quizData.find(
+        (user) => user.student_id === findCurrentUser.student_id,
+      )
+    : null;
 
   const handleBack = () => {
     router.back();
@@ -22,13 +41,20 @@ const BeforeStartQuiz = () => {
   return (
     <div>
       {startQuiz ? (
-        <QuizGameStart />
+        <QuizGameStart quizData={quizData} findLessons={findLessons} />
+      ) : showResult ? (
+        <PastQuizResult
+          setShowResult={setShowResult}
+          setCheckAnswer={setCheckAnswer}
+        />
+      ) : checkAnswer ? (
+        <CheckQuizAnswer userAlreadyGiveQuiz={userAlreadyGiveQuiz} />
       ) : (
         <div
           className={`${
             activeMenu
               ? 'w-full mx-auto px-16'
-              : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+              : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
           } mx-auto `}
         >
           <div className="flex items-end gap-4 pt-6">
@@ -66,7 +92,7 @@ const BeforeStartQuiz = () => {
                 <div>
                   <p>Total Marks</p>
                   <p className="text-xl font-bold text-[#12b76a] text-center">
-                    10
+                    {quizData?.length * 2 || 0}
                   </p>
                 </div>
               </div>
@@ -75,7 +101,7 @@ const BeforeStartQuiz = () => {
                 <span className="text-lg font-semibold">Time:</span>
                 <div className="bg-gray-200 flex items-center gap-1 px-3 py-2 font-bold text-xl rounded">
                   <BiStopwatch className="text-2xl" />
-                  <p>10 Minutes</p>
+                  <p>{quizData?.length * 2 || 0} Minutes</p>
                 </div>
               </div>
             </div>
@@ -114,12 +140,21 @@ const BeforeStartQuiz = () => {
               </p>
               <p>Thank you</p>
 
-              <ButtonDashboard
-                onClick={() => setStartQuiz(true)}
-                className=" bg-[#101828] text-white hover:bg-[#101828ca] mx-auto mt-8"
-              >
-                Start Exam <FaArrowRightLong />
-              </ButtonDashboard>
+              {userAlreadyGiveQuiz ? (
+                <ButtonDashboard
+                  onClick={() => setShowResult(true)}
+                  className=" bg-[#101828] text-white hover:bg-[#101828ca] mx-auto mt-8"
+                >
+                  Show Result <FaArrowRightLong />
+                </ButtonDashboard>
+              ) : (
+                <ButtonDashboard
+                  onClick={() => setStartQuiz(true)}
+                  className=" bg-[#101828] text-white hover:bg-[#101828ca] mx-auto mt-8"
+                >
+                  Start Exam <FaArrowRightLong />
+                </ButtonDashboard>
+              )}
             </div>
           </div>
         </div>

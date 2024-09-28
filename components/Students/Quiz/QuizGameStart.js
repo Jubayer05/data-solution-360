@@ -2,17 +2,19 @@ import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 import { IoTimerOutline } from 'react-icons/io5';
-import { quizData } from '../../../src/data/dummy';
+import Swal from 'sweetalert2';
+import { useStateContext } from '../../../src/context/ContextProvider';
+import useUpdateLessonData from '../../../src/hooks/useUpdateLessonData';
 import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import PastQuizResult from './PastQuizResult';
-import QuizResult from './QuizResult';
 
-const TOTAL_TIME = 20 * 60;
-
-const QuizGameStart = () => {
-  const [selectedAnswers, setSelectedAnswers] = useState({});
-  const [score, setScore] = useState(0);
+const QuizGameStart = ({ quizData, findLessons }) => {
+  // console.log(findLessons);
+  const TOTAL_TIME = quizData?.length * 5 * 60;
+  const { findCurrentUser } = useStateContext();
+  const { updateLessonData, loading } = useUpdateLessonData();
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(TOTAL_TIME);
 
@@ -20,6 +22,12 @@ const QuizGameStart = () => {
   const closeModal = () => {
     setModalIsOpen(false);
   };
+
+  useEffect(() => {
+    if (userAlreadyGiveQuiz) {
+      setIsQuizCompleted(true);
+    }
+  }, [userAlreadyGiveQuiz]);
 
   useEffect(() => {
     const savedProgress = localStorage.getItem('quizProgress');
@@ -51,24 +59,100 @@ const QuizGameStart = () => {
     localStorage.setItem('quizProgress', JSON.stringify(quizProgress));
   }, [selectedAnswers, timeRemaining]);
 
-  const handleOptionClick = (questionIndex, option) => {
-    setSelectedAnswers({
-      ...selectedAnswers,
-      [questionIndex]: option,
-    });
+  const handleOptionClick = (question, option) => {
+    const findQuestion = selectedAnswers.find(
+      (item) => item.id === question.id,
+    );
+
+    if (findQuestion) {
+      findQuestion.user_answer = option.text;
+    } else {
+      setSelectedAnswers([
+        ...selectedAnswers,
+        { user_answer: option.text, ...question },
+      ]);
+    }
   };
 
-  const handleSubmitQuiz = () => {
+  const userAlreadyGiveQuiz = Array.isArray(findLessons?.user_quizData)
+    ? findLessons.user_quizData.find(
+        (user) => user.student_id === findCurrentUser.student_id,
+      )
+    : null;
+
+  const handleSubmitQuiz = async () => {
     let calculatedScore = 0;
-    quizData.forEach((question, index) => {
-      if (selectedAnswers[index] === question.correctAnswer) {
+    const submissionDate = new Date().toISOString();
+
+    // Calculate the user's score by comparing their answers with the correct answers
+    quizData?.forEach((question) => {
+      const userAnswer = selectedAnswers.find(
+        (item) => item.id === question.id,
+      )?.user_answer;
+
+      if (userAnswer?.trim() === question.correct_answer?.trim()) {
         calculatedScore += 1;
       }
     });
-    setScore(calculatedScore);
-    setIsQuizCompleted(true);
-    localStorage.removeItem('quizProgress');
-    closeModal();
+
+    // Check if the user has already submitted the quiz
+    const userAlreadyGiveQuiz = Array.isArray(findLessons?.user_quizData)
+      ? findLessons.user_quizData.find(
+          (user) => user.student_id === findCurrentUser.student_id,
+        )
+      : null;
+
+    if (userAlreadyGiveQuiz) {
+      Swal.fire('Warning', 'You have already taken this quiz.', 'warning');
+      return; // Exit early to prevent duplicate submission
+    }
+
+    // Update the quiz data with the user's answers
+    const updatedQuizData = quizData?.map((question) => {
+      const findQuestion = selectedAnswers.find(
+        (item) => item.id === question.id,
+      );
+      if (findQuestion) {
+        question.user_answer = findQuestion.user_answer;
+      }
+      return question;
+    });
+
+    // Prepare the new quiz data to be stored
+    const updatedLessonContent = {
+      quizDataUser: updatedQuizData,
+      obtained_marks: calculatedScore,
+      student_id: findCurrentUser.student_id,
+      submission_date: submissionDate,
+    };
+
+    try {
+      // Await the updateLessonData to ensure it completes before moving forward
+      await updateLessonData({
+        user_quizData: [
+          ...(findLessons?.user_quizData || []), // Preserve previous quiz attempts
+          updatedLessonContent,
+        ],
+      });
+
+      // Mark the quiz as completed only after the update is successful
+      setIsQuizCompleted(true);
+      localStorage.removeItem('quizProgress');
+      closeModal();
+
+      Swal.fire({
+        title: 'Quiz Submitted',
+        text: 'Your quiz has been submitted successfully!',
+        icon: 'success',
+      });
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: 'There was a problem submitting your quiz. Please try again later.',
+        icon: 'error',
+      });
+      console.error('Quiz submission error:', error);
+    }
   };
 
   const formatTime = (seconds) => {
@@ -82,7 +166,7 @@ const QuizGameStart = () => {
       {isQuizCompleted ? (
         <div>
           <PastQuizResult />
-          <QuizResult quizData={quizData} selectedAnswers={selectedAnswers} />
+          {/* <QuizResult quizData={quizData} selectedAnswers={selectedAnswers} /> */}
         </div>
       ) : (
         <div>
@@ -94,7 +178,7 @@ const QuizGameStart = () => {
           </div>
 
           <div className="mb-8">
-            {quizData.map((question, index) => (
+            {quizData?.map((question, index) => (
               <div key={index} className="mb-6">
                 <p className="mb-2 text-gray-700 font-bold p-4">
                   <span className="inline-flex justify-center items-center text-lg w-7 h-7 rounded-full bg-blue-500 text-white">
@@ -107,9 +191,10 @@ const QuizGameStart = () => {
                   {question.options.map((option, optionIndex) => (
                     <div
                       key={optionIndex}
-                      onClick={() => handleOptionClick(index, option)}
+                      onClick={() => handleOptionClick(question, option)}
                       className={`cursor-pointer p-4 mb-4 rounded-lg border flex items-center gap-2 ${
-                        selectedAnswers[index] === option
+                        selectedAnswers.find((item) => item.id === question.id)
+                          ?.user_answer === option.text
                           ? 'bg-[#1f2b43] border-[#1f2b43] text-white'
                           : 'border-gray-300'
                       }`}
@@ -119,7 +204,7 @@ const QuizGameStart = () => {
                       >
                         {optionIndex + 1}
                       </div>
-                      {option}
+                      {option.text}
                     </div>
                   ))}
                 </div>

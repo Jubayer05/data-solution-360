@@ -1,23 +1,11 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { FiClock } from 'react-icons/fi';
-import { LuCalendarDays } from 'react-icons/lu';
 import { MdOutlineVideoCall, MdOutlineVideoCameraFront } from 'react-icons/md';
 import { colors } from '../../../../src/data/data';
 import { formatDateWithoutYear } from '../../../../src/utils/convertDate';
 
 const ModuleIntro = ({ moduleData }) => {
-  const listItem = [
-    {
-      title: 'Module Introduction',
-      time: <FiClock size={16} />,
-      date: <LuCalendarDays size={16} />,
-    },
-  ];
-
-  console.log(moduleData);
-
   return (
     <div className="mt-10  w-full">
       <div className="flex justify-between items-center self-stretch rounded-lg border bg-white p-4 gap-4 my-4">
@@ -45,7 +33,7 @@ const ModuleIntro = ({ moduleData }) => {
               </p>
               <p className="flex gap-1 items-center">
                 <MdOutlineVideoCameraFront className="text-xl" />{' '}
-                {moduleData?.projectNumber || 0} Support Class
+                {moduleData?.projectNumber || 0} Project
               </p>
             </div>
             <div className="flex gap-3">

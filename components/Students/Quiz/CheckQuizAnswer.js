@@ -1,13 +1,17 @@
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import React from 'react';
 import { FaArrowRightLong, FaRegCircleCheck } from 'react-icons/fa6';
 import { MdOutlineCancel } from 'react-icons/md';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
-import QuizGameStart from './QuizGameStart';
+import QuizResult from './QuizResult';
 
-const CheckQuizAnswer = () => {
+const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
   const { activeMenu } = useStateContextDashboard();
+  const router = useRouter();
+  const { courseId, moduleId } = router.query;
 
   return (
     <div>
@@ -15,7 +19,7 @@ const CheckQuizAnswer = () => {
         className={`${
           activeMenu
             ? 'w-full mx-auto px-4'
-            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+            : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
         } mx-auto flex items-start gap-6`}
       >
         <div className="w-full mx-auto mb-10">
@@ -84,11 +88,14 @@ const CheckQuizAnswer = () => {
                 <p className="text-lg"> = Your Answer</p>
               </div>
             </div>
-            <QuizGameStart />
+            {/* <QuizGameStart /> */}
+            <QuizResult userAlreadyGiveQuiz={userAlreadyGiveQuiz} />
 
-            <ButtonDashboard className="mx-auto mt-5 flex-1 bg-[#101828] text-white hover:bg-[#101828ca]">
-              Back to Module <FaArrowRightLong />
-            </ButtonDashboard>
+            <Link href={`/students/my-course/${courseId}/module/${moduleId}`}>
+              <ButtonDashboard className="mx-auto mt-5 flex-1 bg-[#101828] text-white hover:bg-[#101828ca]">
+                Back to Module <FaArrowRightLong />
+              </ButtonDashboard>
+            </Link>
           </div>
         </div>
       </div>
