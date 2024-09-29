@@ -59,7 +59,7 @@ const AddClassDateAndTime = ({
           title="Enter Class Date"
           type="date"
           value={classDate}
-          func={(e) => setClassDate(e.target.value)}
+          func={(id, value) => setClassDate(value)}
         />
       </div>
 
@@ -70,7 +70,7 @@ const AddClassDateAndTime = ({
           title="Enter Class Time"
           type="time"
           value={classTime}
-          func={(e) => setClassTime(e.target.value)}
+          func={(id, value) => setClassTime(value)}
         />
       </div>
 

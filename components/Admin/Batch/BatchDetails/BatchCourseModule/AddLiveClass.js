@@ -169,7 +169,7 @@ const AddLiveClass = ({
                   title="Enter Live Class Link"
                   disabled={currentLesson?.classFinished ? true : false}
                   value={liveClassLink}
-                  func={(e) => setLiveClassLink(e.target.value)}
+                  func={(id, value) => setLiveClassLink(value)}
                 />
                 <ButtonDashboard
                   // disabled={currentLesson?.classFinished ? true : false}

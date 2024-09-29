@@ -94,7 +94,7 @@ const AddResourceRecording = ({
             className="py-1"
             title="Enter Resources Google Drive Link"
             value={resourceLink}
-            func={(e) => setResourceLink(e.target.value)}
+            func={(id, value) => setResourceLink(value)}
           />
           <ButtonDashboard
             onClick={handleAddResource}
@@ -114,7 +114,7 @@ const AddResourceRecording = ({
             className="py-1"
             title="Enter class recording link"
             value={recordingLink}
-            func={(e) => setRecordingLink(e.target.value)}
+            func={(id, value) => setRecordingLink(value)}
           />
           <ButtonDashboard
             onClick={handleAddRecording}

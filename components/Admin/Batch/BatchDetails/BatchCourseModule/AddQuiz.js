@@ -127,10 +127,10 @@ const AddQuiz = ({
             title="Enter your quiz question"
             placeholder="Which of the following is a programming language?"
             value={currentQuiz.question}
-            func={(e) =>
+            func={(id, value) =>
               setCurrentQuiz({
                 ...currentQuiz,
-                question: e.target.value,
+                question: value,
               })
             }
           />
@@ -143,12 +143,12 @@ const AddQuiz = ({
             title="Option A"
             placeholder="HTML"
             value={currentQuiz.options[0].text}
-            func={(e) =>
+            func={(id, value) =>
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
                   option.id === 'a'
-                    ? { ...option, text: e.target.value }
+                    ? { ...option, text: value }
                     : option,
                 ),
               })
@@ -159,12 +159,12 @@ const AddQuiz = ({
             title="Option B"
             placeholder="Python"
             value={currentQuiz.options[1].text}
-            func={(e) =>
+            func={(id, value) =>
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
                   option.id === 'b'
-                    ? { ...option, text: e.target.value }
+                    ? { ...option, text: value }
                     : option,
                 ),
               })
@@ -175,12 +175,12 @@ const AddQuiz = ({
             title="Option C"
             placeholder="SQL"
             value={currentQuiz.options[2].text}
-            func={(e) =>
+            func={(id, value) =>
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
                   option.id === 'c'
-                    ? { ...option, text: e.target.value }
+                    ? { ...option, text: value }
                     : option,
                 ),
               })
@@ -191,12 +191,12 @@ const AddQuiz = ({
             title="Option D"
             placeholder="CSS"
             value={currentQuiz.options[3].text}
-            func={(e) =>
+            func={(id, value) =>
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
                   option.id === 'd'
-                    ? { ...option, text: e.target.value }
+                    ? { ...option, text: value }
                     : option,
                 ),
               })
