@@ -2,6 +2,7 @@ import React from 'react';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
+import ProgressHome from '../../Progress/ProgressHome';
 import AssignmentHome from '../Assignment/AssignmentHome';
 import RecordingContent from '../Recording/RecordingContent';
 import ResourceContent from '../Resource/ResourceContent';
@@ -16,10 +17,14 @@ const EnrolledCourseMainComp = () => {
   return (
     <div
       className={`${
-        activeMenu ? '' : 'w-full'
+        activeMenu ? 'w-full' : 'w-full'
       } mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-5 my-10 sm:mt-0`}
     >
-      <div className={`w-full lg:w-[100%] pr-3 sm:pr-6 pl-[84px] lg:pl-[56px]`}>
+      <div
+        className={`w-full lg:w-[100%] pr-3 sm:pr-6  ${
+          activeMenu ? '' : 'pl-[84px] lg:pl-[56px]'
+        }`}
+      >
         <HeadingEnrolled item={enrolledCourse} />
         {myCourseShowComp === 'Modules' ? (
           <ModuleEnrolled />
@@ -37,9 +42,9 @@ const EnrolledCourseMainComp = () => {
           ''
         )}
       </div>
-      {/* <div className="w-full lg:w-[25%] min-w-[350px]">
+      <div className="w-full lg:w-[25%] min-w-[350px]">
         <ProgressHome />
-      </div> */}
+      </div>
     </div>
   );
 };

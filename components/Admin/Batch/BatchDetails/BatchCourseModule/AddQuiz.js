@@ -68,6 +68,10 @@ const AddQuiz = ({
 
     const updatedModuleData = {
       ...moduleData,
+      additionalInfo: {
+        ...moduleData?.additionalInfo,
+        totalQuizNum: (moduleData?.additionalInfo?.totalQuizNum || 0) + 1,
+      },
       lessons: moduleData.lessons.map((lesson) =>
         lesson.id === currentLesson.id
           ? {
@@ -93,8 +97,6 @@ const AddQuiz = ({
 
   const handleSubmitQuiz = () => {};
 
-  // console.log(currentLesson?.quizData);
-
   return (
     <div className="bg-white border-1 p-5 rounded-lg mt-5">
       <h2 className="text-lg pb-2 text-[#fc3376] text-center font-medium font-dash_heading ">
@@ -102,24 +104,6 @@ const AddQuiz = ({
       </h2>
 
       <div className="relative">
-        {/* {(currentLesson?.quizData?.length || 0) == numberOfQuiz && (
-          <div className="absolute w-full bg-[#ffffffec] h-full z-10">
-            <div className="w-full h-full flex justify-center items-center flex-col gap-4">
-              <p className="font-heading text-base text-primary font-semibold">
-                Without clicking submit button your quiz data will not add to
-                this lesson.
-              </p>
-              <ButtonDashboard
-                onClick={handleSubmitQuiz}
-                className="bg-secondary_btn hover:bg-[#3d9970bc] text-white py-2.5 w-2/5"
-              >
-                Submit Quiz
-              </ButtonDashboard>
-            </div>
-          </div>
-        )} */}
-        {/* Number of quiz */}
-
         {/* Quiz Question */}
         <div className="flex gap-3 items-end mt-3">
           <InputBox
@@ -147,9 +131,7 @@ const AddQuiz = ({
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
-                  option.id === 'a'
-                    ? { ...option, text: value }
-                    : option,
+                  option.id === 'a' ? { ...option, text: value } : option,
                 ),
               })
             }
@@ -163,9 +145,7 @@ const AddQuiz = ({
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
-                  option.id === 'b'
-                    ? { ...option, text: value }
-                    : option,
+                  option.id === 'b' ? { ...option, text: value } : option,
                 ),
               })
             }
@@ -179,9 +159,7 @@ const AddQuiz = ({
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
-                  option.id === 'c'
-                    ? { ...option, text: value }
-                    : option,
+                  option.id === 'c' ? { ...option, text: value } : option,
                 ),
               })
             }
@@ -195,9 +173,7 @@ const AddQuiz = ({
               setCurrentQuiz({
                 ...currentQuiz,
                 options: currentQuiz.options.map((option) =>
-                  option.id === 'd'
-                    ? { ...option, text: value }
-                    : option,
+                  option.id === 'd' ? { ...option, text: value } : option,
                 ),
               })
             }

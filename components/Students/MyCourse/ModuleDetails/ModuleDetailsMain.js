@@ -18,7 +18,7 @@ const segmentBtn = [
   },
 ];
 const ModuleDetailsMain = () => {
-  const [activeBtn, setActiveBtn] = useState('All');
+  const [activeBtn, setActiveBtn] = useState('Live Class');
   const { activeMenu } = useStateContextDashboard();
   const { setModuleShowComp } = useStudentContext();
   const { moduleData, enrolledCourse } = useEnrolledCourseData();

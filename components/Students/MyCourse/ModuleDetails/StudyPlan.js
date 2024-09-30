@@ -130,16 +130,24 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
               </li>
             </ol>
           </div>
-          {moduleData?.lessons
+          {/* moduleData?.lessons.map((lesson, index) => {
+        const userAlreadyGiveQuiz = Array.isArray(lesson?.user_quizData)
+          ? lesson.user_quizData.find(
+              (user) => user.student_id === findCurrentUser.student_id,
+            )
+          : null; */}
+          {/* {moduleData?.lessons
+
             .filter((item) => item.quizData && item.quizData.length > 0)
             .map((item, index) => (
-              <QuizItem
-                key={index}
-                item={item}
-                moduleData={moduleData}
-                enrolledCourse={enrolledCourse}
-              />
-            ))}
+              
+            ))} */}
+          <QuizItem
+            // key={index}
+            // item={item}
+            moduleData={moduleData}
+            enrolledCourse={enrolledCourse}
+          />
         </div>
       )}
     </div>

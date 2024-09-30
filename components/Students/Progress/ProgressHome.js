@@ -4,10 +4,13 @@ import { LuChevronRight, LuClipboardSignature } from 'react-icons/lu';
 import LeaderBoard from './LeaderBoard';
 
 import Link from 'next/link';
+import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import Report from './Report';
 
 const ProgressHome = () => {
   const [currentUrl, setCurrentUrl] = useState(null);
+  const { enrolledCourse } = useEnrolledCourseData();
+  console.log(enrolledCourse);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);

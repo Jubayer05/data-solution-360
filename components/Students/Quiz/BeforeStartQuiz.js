@@ -6,6 +6,7 @@ import Image from 'next/image';
 import { useState } from 'react';
 import { BiStopwatch } from 'react-icons/bi';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import { useStudentContext } from '../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -16,9 +17,10 @@ import QuizGameStart from './QuizGameStart';
 const BeforeStartQuiz = () => {
   const { findCurrentUser } = useStateContext();
   const { activeMenu } = useStateContextDashboard();
+  const { showResult, setShowResult, checkAnswer, setCheckAnswer } =
+    useStudentContext();
   const [startQuiz, setStartQuiz] = useState(false);
-  const [showResult, setShowResult] = useState(false);
-  const [checkAnswer, setCheckAnswer] = useState(false);
+
   const { moduleData } = useEnrolledCourseData();
   const router = useRouter();
   const { quizId } = router.query;
@@ -38,15 +40,14 @@ const BeforeStartQuiz = () => {
     router.back();
   };
 
+  console.log(showResult, checkAnswer);
+
   return (
     <div>
       {startQuiz ? (
         <QuizGameStart quizData={quizData} findLessons={findLessons} />
       ) : showResult ? (
-        <PastQuizResult
-          setShowResult={setShowResult}
-          setCheckAnswer={setCheckAnswer}
-        />
+        <PastQuizResult />
       ) : checkAnswer ? (
         <CheckQuizAnswer userAlreadyGiveQuiz={userAlreadyGiveQuiz} />
       ) : (

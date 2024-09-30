@@ -69,12 +69,6 @@ const useUpdateLessonData = () => {
         .collection('course_data_batch')
         .doc(courseDoc.id) // Use the document ID from the query result
         .update(courseData);
-
-      Swal.fire({
-        title: 'Success',
-        text: 'Quiz has been submitted successfully!',
-        icon: 'success',
-      });
     } catch (err) {
       console.error('Failed to update lesson:', err);
       Swal.fire({

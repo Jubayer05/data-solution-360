@@ -4,6 +4,7 @@ import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 import { IoTimerOutline } from 'react-icons/io5';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import useSubmitQuizAndUpdateLeaderboard from '../../../src/hooks/useSubmitQuizAndUpdateLeaderboard';
 import useUpdateLessonData from '../../../src/hooks/useUpdateLessonData';
 import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -11,9 +12,11 @@ import PastQuizResult from './PastQuizResult';
 
 const QuizGameStart = ({ quizData, findLessons }) => {
   // console.log(findLessons);
-  const TOTAL_TIME = quizData?.length * 5 * 60;
+  const TOTAL_TIME = quizData?.length * 2 * 60;
   const { findCurrentUser } = useStateContext();
   const { updateLessonData, loading } = useUpdateLessonData();
+  const { submitQuizAndUpdateLeaderboard } =
+    useSubmitQuizAndUpdateLeaderboard();
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(TOTAL_TIME);
@@ -124,9 +127,15 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       obtained_marks: calculatedScore,
       student_id: findCurrentUser.student_id,
       submission_date: submissionDate,
+      timeTaken: TOTAL_TIME - timeRemaining,
     };
 
     try {
+      await submitQuizAndUpdateLeaderboard(
+        findCurrentUser.student_id,
+        calculatedScore,
+      );
+
       // Await the updateLessonData to ensure it completes before moving forward
       await updateLessonData({
         user_quizData: [
@@ -217,7 +226,8 @@ const QuizGameStart = ({ quizData, findLessons }) => {
                 Back
               </ButtonDashboard>
               <p className="bg-gray-200 px-2 py-1 rounded-md">
-                {Object.keys(selectedAnswers).length}/10 Questions Answered
+                {Object.keys(selectedAnswers).length}/{quizData.length}{' '}
+                Questions Answered
               </p>
               <ButtonDashboard
                 onClick={() => setModalIsOpen(true)}
@@ -244,7 +254,8 @@ const QuizGameStart = ({ quizData, findLessons }) => {
         />
         <h2 className="text-3xl font-bold text-center mt-2  text-[orangered]">
           {' '}
-          {Object.keys(selectedAnswers).length}/10 Questions Answered
+          {Object.keys(selectedAnswers).length}/{quizData.length} Questions
+          Answered
         </h2>
         <p className="text-center mb-10">Are you sure want to submit?</p>
         <div className="flex justify-between items-center gap-2 px-8 py-4">

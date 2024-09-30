@@ -13,7 +13,6 @@ import ModuleFeedback from './ModuleFeedback';
 const ModuleEnrolled = () => {
   const { enrolledCourse } = useEnrolledCourseData();
 
-  console.log(enrolledCourse?.course_modules);
   return (
     <div className="grid grid-cols-2 gap-4">
       {enrolledCourse?.course_modules?.map((item, index) => (

@@ -11,7 +11,12 @@ import QuizResult from './QuizResult';
 const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
   const { activeMenu } = useStateContextDashboard();
   const router = useRouter();
-  const { courseId, moduleId } = router.query;
+  const { courseId, moduleId, quizId } = router.query;
+
+  const obtained_percentage =
+    (userAlreadyGiveQuiz?.obtained_marks /
+      userAlreadyGiveQuiz?.quizDataUser?.length) *
+    100;
 
   return (
     <div>
@@ -27,7 +32,7 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
             <h3 className="text-xl font-heading font-bold text-center pt-5">
               Quiz Result
             </h3>
-            <div className="w-[70%] mx-auto bg-[#f9f9fa] px-5 py-7 rounded flex gap-5 mt-8">
+            <div className="w-[75%] mx-auto bg-[#f9f9fa] px-5 py-7 rounded flex gap-5 mt-8">
               <div className="bg-[#ffffff] flex-1 p-4 rounded-md">
                 <Image
                   width={500}
@@ -37,7 +42,8 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
                   alt=""
                 />
                 <h2 className="text-2xl font-heading font-bold text-[#4478ff] text-center mb-1">
-                  4/10
+                  {userAlreadyGiveQuiz?.obtained_marks}/
+                  {userAlreadyGiveQuiz?.quizDataUser?.length}
                 </h2>
                 <p className="text-sm font-semibold text-center">Correct</p>
               </div>
@@ -50,7 +56,7 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
                   alt=""
                 />
                 <h2 className="text-2xl font-heading font-bold text-[#12b76a] text-center mb-1">
-                  40%
+                  {obtained_percentage.toFixed(2)}%
                 </h2>
                 <p className="text-sm font-semibold text-center">
                   Scores earned
@@ -65,7 +71,8 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
                   alt=""
                 />
                 <h2 className="text-2xl font-heading font-bold text-[#ff4444] text-center mb-1">
-                  20:00/20:00 Min.
+                  {Math.ceil(userAlreadyGiveQuiz?.timeTaken / 60)}:00/
+                  {userAlreadyGiveQuiz?.quizDataUser?.length * 2}:00 Min
                 </h2>
                 <p className="text-sm font-semibold text-center">Time</p>
               </div>
