@@ -42,20 +42,6 @@ const useSubmitQuizAndUpdateLeaderboard = () => {
       return;
     }
 
-    // let userQuizData = lessonData.user_quizData || [];
-    // let userIndex = userQuizData.findIndex(
-    //   (quiz) => quiz.student_id === userId,
-    // );
-
-    // if (userIndex === -1) {
-    //   userQuizData.push({
-    //     userId,
-    //     score: newQuizScore,
-    //   });
-    // } else {
-    //   userQuizData[userIndex].score = newQuizScore;
-    // }
-
     // 2. Check if leaderboard_data exists; if not, create it
     let leaderboard = enrolledCourse.leaderboard_data || [];
 
@@ -66,14 +52,14 @@ const useSubmitQuizAndUpdateLeaderboard = () => {
 
     // If the user is not on the leaderboard, add them
     if (leaderboardIndex === -1) {
-      leaderboard.push({ userId, totalScore: newQuizScore, rank: null });
+      leaderboard.push({ userId, totalQuizScore: newQuizScore, rank: null });
     } else {
       // If the user is already on the leaderboard, update their score
-      leaderboard[leaderboardIndex].totalScore += newQuizScore;
+      leaderboard[leaderboardIndex].totalQuizScore += newQuizScore;
     }
 
     // Sort the leaderboard by total score in descending order and reassign ranks
-    leaderboard.sort((a, b) => b.totalScore - a.totalScore);
+    leaderboard.sort((a, b) => b.totalQuizScore - a.totalQuizScore);
 
     // Assign ranks based on the sorted leaderboard
     leaderboard = leaderboard.map((user, index) => ({

@@ -4,6 +4,8 @@ import firebase from '../../../firebase';
 
 import { loadData } from '../../../src/hooks/loadData';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
+import AddAssignment from './BatchDetails/Assignment/AddAssignment';
+import AssignmentComp from './BatchDetails/Assignment/AssignmentComp';
 import EnrolledStudent from './BatchDetails/EnrolledStudents';
 import ModuleDetails from './BatchDetails/ModuleDetails';
 
@@ -34,6 +36,8 @@ const EnrolledCourseDetails = () => {
       <div className="max-w-5xl mx-auto my-20">
         <EnrolledStudent />
         <ModuleDetails />
+        <AssignmentComp />
+        <AddAssignment />
       </div>
     </div>
   );

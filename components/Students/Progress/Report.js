@@ -7,7 +7,7 @@ import { FaArrowRight } from 'react-icons/fa6';
 import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
-const Report = () => {
+const Report = ({ totalQuizNumber, findUsersScore, liveClassCount }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [scoreModal, setScoreModal] = useState(false);
   const [currentUrl, setCurrentUrl] = useState(null);
@@ -15,6 +15,14 @@ const Report = () => {
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, []);
+
+  const obtained_percentage_quiz = Math.ceil(
+    (findUsersScore?.totalQuizScore / totalQuizNumber) * 100,
+  );
+
+  const obtained_percentage_attendance = Math.ceil(
+    (findUsersScore?.attendanceScore / liveClassCount) * 100,
+  );
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -231,7 +239,7 @@ const Report = () => {
       <div className="flex items-center gap-2 mt-4 bg-gray-100 px-2 py-2 border border-dashboard_border rounded">
         <p className="rounded font-semibold text-gray-600">Total Score</p>
         <Progress
-          percent={60}
+          percent={obtained_percentage_quiz}
           status="active"
           trailColor="#ffffff"
           strokeColor="#12b76a"
@@ -245,7 +253,7 @@ const Report = () => {
             strokeColor="#a855f7"
             status="active"
             type="circle"
-            percent={75}
+            percent={obtained_percentage_quiz}
             size={70}
             strokeWidth={12}
             className="shadow-lg rounded-full mb-1"
@@ -267,19 +275,19 @@ const Report = () => {
           <Progress
             strokeColor="#5d91ff"
             type="circle"
-            percent={75}
+            percent={obtained_percentage_attendance}
             size={70}
             strokeWidth={12}
             className="shadow-lg rounded-full mb-1"
           />
-          <p>Live Test</p>
+          <p>Attendance</p>
         </div>
       </div>
 
       <div className="flex items-center gap-2 mt-4 bg-gray-100 px-2 py-2 border border-dashboard_border rounded">
         <p className="rounded font-semibold text-gray-600">Attendance</p>
         <Progress
-          percent={46}
+          percent={obtained_percentage_attendance}
           status="active"
           trailColor="#ffffff"
           strokeColor="#12b76a"

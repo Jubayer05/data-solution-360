@@ -1,11 +1,14 @@
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { MdOnlinePrediction } from 'react-icons/md';
+import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
 import useEnrolledCourseData from '../../src/hooks/useEnrolledCourseData';
+import { convertToAMPM } from '../../src/utils/convertAMPM';
 import PhoneAuth from '../Login/PhoneLogin';
+const db = firebase.firestore();
 
 const JoinLive = () => {
   const { findCurrentUser } = useStateContext();
@@ -13,11 +16,71 @@ const JoinLive = () => {
   const router = useRouter();
   const { moduleData, enrolledCourse } = useEnrolledCourseData();
   const { courseId, moduleId, liveId } = router.query;
+  const [courseData, setCourseData] = useState([]);
+
+  useEffect(() => {
+    setCourseData({ ...enrolledCourse });
+  }, [enrolledCourse]);
 
   const findCurrentLesson = moduleData?.lessons?.find(
     (lesson) => lesson.id === liveId,
   );
-  console.log(findCurrentLesson);
+
+  const handleAttendance = async (userId, sessionId) => {
+    if (!courseId || !moduleId) {
+      console.log('Missing courseId or moduleId from router query');
+      return;
+    }
+
+    if (!enrolledCourse) {
+      console.log('No enrolled course data found');
+      return;
+    }
+
+    // Find the user's data in the leaderboard
+    let leaderboard = enrolledCourse.leaderboard_data || [];
+    let userIndex = leaderboard.findIndex((user) => user.userId === userId);
+
+    // If the user is not in the leaderboard, add them with attendance score
+    if (userIndex === -1) {
+      leaderboard.push({
+        userId,
+        totalQuizScore: 0,
+        attendanceScore: 1,
+        rank: null,
+        hasJoinedLive: { [sessionId]: true }, // Add sessionId to track attendance
+      });
+    } else {
+      // Check if the user has already joined the live class for this session
+      if (
+        leaderboard[userIndex].hasJoinedLive &&
+        leaderboard[userIndex].hasJoinedLive[sessionId]
+      ) {
+        console.log('User has already joined the live class for this session');
+        return; // Prevent multiple attendance gains for the same session
+      }
+
+      // If user exists, update their attendance score
+      leaderboard[userIndex].attendanceScore =
+        (leaderboard[userIndex].attendanceScore || 0) + 1;
+
+      // Mark that the user has joined this session
+      leaderboard[userIndex].hasJoinedLive = {
+        ...leaderboard[userIndex].hasJoinedLive,
+        [sessionId]: true,
+      };
+    }
+
+    // Update courseData with the new leaderboard
+    courseData.leaderboard_data = leaderboard;
+
+    // Update Firestore with the updated leaderboard
+    await db
+      .collection('course_data_batch')
+      .doc(enrolledCourse.id)
+      .update(courseData);
+  };
+
   /*
    * Title: JOIN Live Class functionality
    * Description:
@@ -53,8 +116,10 @@ const JoinLive = () => {
               <strong>Module: </strong> {moduleData?.moduleName}
             </p>
             <p className="text-base font-medium">
-              Class Time: <span className="text-primary">10PM - 11.30PM</span>{' '}
-              <strong className="text-blue-700">Focus it addTime</strong>
+              Class Time:{' '}
+              <span className="text-primary">
+                {convertToAMPM(findCurrentLesson?.classTime)}
+              </span>{' '}
             </p>
           </div>
         </div>
@@ -79,6 +144,9 @@ const JoinLive = () => {
           </div>
           {findCurrentUser?.email ? (
             <Link
+              onClick={() =>
+                handleAttendance(findCurrentUser?.student_id, liveId)
+              }
               href={
                 findCurrentLesson?.liveClassLink
                   ? findCurrentLesson.liveClassLink

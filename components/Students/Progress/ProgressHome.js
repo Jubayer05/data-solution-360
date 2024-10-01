@@ -4,21 +4,58 @@ import { LuChevronRight, LuClipboardSignature } from 'react-icons/lu';
 import LeaderBoard from './LeaderBoard';
 
 import Link from 'next/link';
+import { useStateContext } from '../../../src/context/ContextProvider';
 import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import Report from './Report';
 
 const ProgressHome = () => {
   const [currentUrl, setCurrentUrl] = useState(null);
   const { enrolledCourse } = useEnrolledCourseData();
-  console.log(enrolledCourse);
+  const { findCurrentUser } = useStateContext();
+
+  const totalQuizNumber = enrolledCourse?.course_modules?.reduce(
+    (sum, item) => sum + (item?.additionalInfo?.totalQuizNum || 0),
+    0,
+  );
+
+  const findUsersScore = enrolledCourse?.leaderboard_data?.find(
+    (item) => item.userId === findCurrentUser.student_id,
+  );
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, []);
 
+  const calculateCompletedLiveClasses = (courseModules) => {
+    let liveClassCount = 0;
+
+    // Traverse through each module in the course_modules
+    courseModules?.forEach((module) => {
+      // Traverse through each lesson in the module
+      module.lessons.forEach((lesson) => {
+        // Check if liveClassLink exists in the lesson
+        if (lesson.liveClassLink) {
+          liveClassCount++; // Increment the counter if liveClassLink is present
+        }
+      });
+    });
+
+    return liveClassCount; // Return the total count of live classes
+  };
+
+  // Usage Example:
+  // Assuming you have the enrolledCourse data with course_modules
+  const liveClassCount = calculateCompletedLiveClasses(
+    enrolledCourse.course_modules,
+  );
+
   return (
     <div className="h-[calc(100vh-100px)] fixed top-[90px] overflow-y-scroll mr-5">
-      <Report />
+      <Report
+        totalQuizNumber={totalQuizNumber}
+        findUsersScore={findUsersScore}
+        liveClassCount={liveClassCount}
+      />
       <Link href={`${currentUrl}/notice`}>
         <button
           className="flex justify-between items-center gap-2 bg-[#ffffff] text-black visited:text-black

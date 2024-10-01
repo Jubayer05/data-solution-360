@@ -15,6 +15,10 @@ const LessonDetails = ({
   const handleRemoveQuiz = (item) => {
     const updatedModuleData = {
       ...moduleData,
+      additionalInfo: {
+        ...moduleData?.additionalInfo,
+        totalQuizNum: (moduleData?.additionalInfo?.totalQuizNum || 0) - 1,
+      },
       lessons: moduleData.lessons.map((lesson) =>
         lesson.id === currentLesson.id
           ? {
