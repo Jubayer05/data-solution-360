@@ -1,4 +1,4 @@
-import { Table } from 'antd';
+import { ConfigProvider, Spin, Table } from 'antd'; // Import Spin from 'antd'
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
@@ -17,6 +17,7 @@ const AssignmentDetails = () => {
   const router = useRouter();
   const { batchId, assignmentId } = router.query;
   const [marks, setMarks] = useState({}); // State to track marks input for each student
+  const [loading, setLoading] = useState({}); // State to track loading status for each student
 
   useEffect(() => {
     loadData('course_data_batch', setCourseDataBatch); // Load course data
@@ -44,6 +45,16 @@ const AssignmentDetails = () => {
   const handleUpdateMarks = async (studentId) => {
     const studentMarks = marks[studentId];
 
+    if (studentMarks > currentAssignment?.total_marks) {
+      Swal.fire({
+        title: 'Invalid Marks',
+        text: 'Marks cannot be greater than total marks.',
+        icon: 'warning',
+        confirmButtonText: 'OK',
+      });
+      return;
+    }
+
     if (studentMarks < 0) {
       Swal.fire({
         title: 'Invalid Marks',
@@ -53,6 +64,11 @@ const AssignmentDetails = () => {
       });
       return;
     }
+
+    setLoading((prevLoading) => ({
+      ...prevLoading,
+      [studentId]: true,
+    }));
 
     if (currentAssignment) {
       try {
@@ -64,20 +80,32 @@ const AssignmentDetails = () => {
             return student; // Return unchanged student
           });
 
+        const courseData = {
+          ...currentEnrolledCourse,
+          assignment_data: [
+            ...currentEnrolledCourse?.assignment_data.filter(
+              (item) => item.id !== assignmentId,
+            ),
+            {
+              ...currentAssignment,
+              submitted_students: updatedSubmittedStudents,
+            },
+          ],
+        };
+
         // Update the Firestore database
         await db
           .collection('course_data_batch')
           .doc(batchId)
-          .update({
-            [`assignment_data.${currentAssignment.id}.submitted_students`]:
-              updatedSubmittedStudents,
-          });
+          .update(courseData);
 
         Swal.fire({
           title: 'Marks Updated',
           text: 'The marks have been updated successfully.',
           icon: 'success',
           confirmButtonText: 'OK',
+        }).then(() => {
+          window.location.reload();
         });
 
         // Clear the input field for the updated student
@@ -90,6 +118,11 @@ const AssignmentDetails = () => {
           icon: 'error',
           confirmButtonText: 'OK',
         });
+      } finally {
+        setLoading((prevLoading) => ({
+          ...prevLoading,
+          [studentId]: false,
+        }));
       }
     }
   };
@@ -182,8 +215,21 @@ const AssignmentDetails = () => {
           <ButtonDashboard
             className="bg-secondary_btn hover:bg-[#4eae5c] text-white"
             onClick={() => handleUpdateMarks(record.student_id)}
+            disabled={loading[record.student_id]} // Disable while loading
           >
-            Update
+            {loading[record.student_id] ? (
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorPrimary: '#ffffff',
+                  },
+                }}
+              >
+                <Spin size="small" />
+              </ConfigProvider>
+            ) : (
+              'Update'
+            )}
           </ButtonDashboard>
         </div>
       ),

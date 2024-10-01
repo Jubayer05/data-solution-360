@@ -68,7 +68,11 @@ const AddAssignment = () => {
         .doc(findCourseData?.id)
         .update(newCourseData);
 
-      Swal.fire('Success', 'Assignment added successfully!', 'success');
+      Swal.fire('Success', 'Assignment added successfully!', 'success').then(
+        () => {
+          window.location.reload();
+        },
+      );
 
       // Reset input fields to initial state
       setTitle('');
@@ -83,7 +87,6 @@ const AddAssignment = () => {
       );
     } finally {
       setLoading(false); // End loading
-      window.location.reload();
     }
   };
 
