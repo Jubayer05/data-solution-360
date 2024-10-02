@@ -25,7 +25,7 @@ const MyCourseMain = () => {
            gap-6 ${
              activeMenu
                ? 'w-full mx-auto px-4'
-               : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+               : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
            }`}
       >
         {/* LEFT SIDE */}

@@ -49,7 +49,7 @@ const PastQuizResult = ({}) => {
           className={`${
             activeMenu
               ? 'w-full mx-auto px-4'
-              : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+              : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
           } mx-auto flex items-start gap-6`}
         >
           <div className="w-[70%] mx-auto mb-10">
@@ -131,7 +131,7 @@ const PastQuizResult = ({}) => {
                     <div className="flex items-center justify-between font-semibold font-heading mt-1">
                       <p>Total Score</p>
                       <p className="text-[#12b76a]">
-                        {obtained_percentage.toFixed(2)}%
+                        {Math.ceil(obtained_percentage)}%
                       </p>
                     </div>
                   </div>

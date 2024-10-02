@@ -76,6 +76,11 @@ const AddLiveClass = ({
   const handleResetLiveClass = () => {
     const updatedModuleData = {
       ...moduleData,
+      additionalInfo: {
+        ...moduleData?.additionalInfo,
+        totalLiveClassNum:
+          (moduleData?.additionalInfo?.totalLiveClassNum || 0) + 1,
+      },
       lessons: moduleData.lessons.map((lesson) =>
         lesson.id === currentLesson.id
           ? {

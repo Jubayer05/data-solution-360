@@ -14,12 +14,23 @@ const useUpdateLessonData = () => {
 
   // Function to update lesson data
   const updateLessonData = async (updatedLessonData) => {
-    const { courseId, moduleId, quizId } = router.query;
+    const { courseId, moduleId, quizId, liveId } = router.query;
 
-    if (!courseId || !moduleId || !quizId) {
+    // Check that at least courseId and moduleId are present
+    if (!courseId || !moduleId) {
       Swal.fire({
         title: 'Error',
-        text: 'Missing courseId, moduleId, or quizId in query.',
+        text: 'Missing courseId or moduleId in query.',
+        icon: 'error',
+      });
+      return;
+    }
+
+    // Ensure at least one of quizId or liveId is provided
+    if (!quizId && !liveId) {
+      Swal.fire({
+        title: 'Error',
+        text: 'Missing quizId or liveId in query.',
         icon: 'error',
       });
       return;
@@ -28,17 +39,17 @@ const useUpdateLessonData = () => {
     try {
       setLoading(true);
 
-      // Step 1: Query Firestore to find the course document by the `courseId` field
+      // Step 1: Query Firestore to find the course document by the `courseId`
       const courseQuerySnapshot = await firestore
         .collection('course_data_batch')
-        .where('unique_batch_id', '==', courseId) // Search for the document where courseId matches
+        .where('unique_batch_id', '==', courseId)
         .get();
 
       if (courseQuerySnapshot.empty) {
         throw new Error('Course not found');
       }
 
-      // Assuming `courseId` is unique, so we can take the first document in the result
+      // Assuming `courseId` is unique, take the first document in the result
       const courseDoc = courseQuerySnapshot.docs[0];
       const courseData = courseDoc.data();
 
@@ -50,10 +61,13 @@ const useUpdateLessonData = () => {
         throw new Error('Module not found');
       }
 
-      // Step 3: Find the lesson by quizId in module data
+      // Step 3: Determine the lesson index based on quizId or liveId
       const lessonIndex = courseData.course_modules[
         moduleIndex
-      ].lessons.findIndex((lesson) => lesson.id === quizId);
+      ].lessons.findIndex((lesson) => {
+        return lesson.id === quizId || lesson.id === liveId;
+      });
+
       if (lessonIndex === -1) {
         throw new Error('Lesson not found');
       }
@@ -69,6 +83,15 @@ const useUpdateLessonData = () => {
         .collection('course_data_batch')
         .doc(courseDoc.id) // Use the document ID from the query result
         .update(courseData);
+
+      // Optionally: Notify the user of success
+      if (quizId) {
+        Swal.fire({
+          title: 'Success',
+          text: 'Lesson data updated successfully.',
+          icon: 'success',
+        });
+      }
     } catch (err) {
       console.error('Failed to update lesson:', err);
       Swal.fire({

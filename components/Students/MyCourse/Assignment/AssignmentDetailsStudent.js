@@ -46,8 +46,7 @@ const AssignmentDetailsStudent = () => {
             student_id: findCurrentUser?.student_id,
             submittedAt: new Date().toISOString(),
             assignmentLink: assignmentLink,
-            full_name:
-              findCurrentUser?.full_name || findCurrentUser?.primary_number,
+            full_name: findCurrentUser?.full_name || findCurrentUser?.phone,
           },
         ],
       },

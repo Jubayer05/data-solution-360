@@ -1,5 +1,6 @@
+import { ConfigProvider, Spin } from 'antd';
 import Image from 'next/image';
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
 import { IoTimerOutline } from 'react-icons/io5';
 import Swal from 'sweetalert2';
@@ -11,17 +12,19 @@ import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import PastQuizResult from './PastQuizResult';
 
 const QuizGameStart = ({ quizData, findLessons }) => {
-  // console.log(findLessons);
   const TOTAL_TIME = quizData?.length * 2 * 60;
   const { findCurrentUser } = useStateContext();
-  const { updateLessonData, loading } = useUpdateLessonData();
+  const { updateLessonData } = useUpdateLessonData();
   const { submitQuizAndUpdateLeaderboard } =
     useSubmitQuizAndUpdateLeaderboard();
   const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [isQuizCompleted, setIsQuizCompleted] = useState(false);
   const [timeRemaining, setTimeRemaining] = useState(TOTAL_TIME);
-
+  const [loading, setLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+
+  const countdownRef = useRef(null); // To store the countdown interval ID
+
   const closeModal = () => {
     setModalIsOpen(false);
   };
@@ -40,10 +43,10 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       setTimeRemaining(timeRemaining);
     }
 
-    const countdown = setInterval(() => {
+    countdownRef.current = setInterval(() => {
       setTimeRemaining((prevTime) => {
         if (prevTime <= 1) {
-          clearInterval(countdown);
+          clearInterval(countdownRef.current);
           handleSubmitQuiz();
           return 0;
         }
@@ -51,7 +54,7 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       });
     }, 1000);
 
-    return () => clearInterval(countdown);
+    return () => clearInterval(countdownRef.current); // Cleanup on unmount
   }, []);
 
   useEffect(() => {
@@ -84,6 +87,11 @@ const QuizGameStart = ({ quizData, findLessons }) => {
     : null;
 
   const handleSubmitQuiz = async () => {
+    if (isQuizCompleted) {
+      return; // Prevent resubmission if the quiz is already completed
+    }
+
+    setLoading(true);
     let calculatedScore = 0;
     const submissionDate = new Date().toISOString();
 
@@ -99,12 +107,6 @@ const QuizGameStart = ({ quizData, findLessons }) => {
     });
 
     // Check if the user has already submitted the quiz
-    const userAlreadyGiveQuiz = Array.isArray(findLessons?.user_quizData)
-      ? findLessons.user_quizData.find(
-          (user) => user.student_id === findCurrentUser.student_id,
-        )
-      : null;
-
     if (userAlreadyGiveQuiz) {
       Swal.fire('Warning', 'You have already taken this quiz.', 'warning');
       return; // Exit early to prevent duplicate submission
@@ -144,7 +146,9 @@ const QuizGameStart = ({ quizData, findLessons }) => {
         ],
       });
 
-      // Mark the quiz as completed only after the update is successful
+      // Stop the timer
+      clearInterval(countdownRef.current);
+      setLoading(false);
       setIsQuizCompleted(true);
       localStorage.removeItem('quizProgress');
       closeModal();
@@ -175,7 +179,6 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       {isQuizCompleted ? (
         <div>
           <PastQuizResult />
-          {/* <QuizResult quizData={quizData} selectedAnswers={selectedAnswers} /> */}
         </div>
       ) : (
         <div>
@@ -267,7 +270,19 @@ const QuizGameStart = ({ quizData, findLessons }) => {
             onClick={handleSubmitQuiz}
             className="bg-[#101828] text-white hover:bg-[#101828ca]"
           >
-            Submit Answer
+            {loading ? (
+              <ConfigProvider
+                theme={{
+                  token: {
+                    colorPrimary: '#ffffff',
+                  },
+                }}
+              >
+                <Spin size="small" />
+              </ConfigProvider>
+            ) : (
+              'Submit Answer'
+            )}
           </ButtonDashboard>
         </div>
       </CustomModal>

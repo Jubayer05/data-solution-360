@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
@@ -6,8 +7,8 @@ import { MdOnlinePrediction } from 'react-icons/md';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
 import useEnrolledCourseData from '../../src/hooks/useEnrolledCourseData';
+import useUpdateLessonData from '../../src/hooks/useUpdateLessonData';
 import { convertToAMPM } from '../../src/utils/convertAMPM';
-import PhoneAuth from '../Login/PhoneLogin';
 const db = firebase.firestore();
 
 const JoinLive = () => {
@@ -17,6 +18,7 @@ const JoinLive = () => {
   const { moduleData, enrolledCourse } = useEnrolledCourseData();
   const { courseId, moduleId, liveId } = router.query;
   const [courseData, setCourseData] = useState([]);
+  const { updateLessonData } = useUpdateLessonData();
 
   useEffect(() => {
     setCourseData({ ...enrolledCourse });
@@ -25,6 +27,14 @@ const JoinLive = () => {
   const findCurrentLesson = moduleData?.lessons?.find(
     (lesson) => lesson.id === liveId,
   );
+
+  const userAlreadyGiveQuiz = Array.isArray(
+    findCurrentLesson?.user_joinLiveClass,
+  )
+    ? findCurrentLesson.user_joinLiveClass.find(
+        (user) => user === findCurrentUser.student_id,
+      )
+    : null;
 
   const handleAttendance = async (userId, sessionId) => {
     if (!courseId || !moduleId) {
@@ -79,35 +89,40 @@ const JoinLive = () => {
       .collection('course_data_batch')
       .doc(enrolledCourse.id)
       .update(courseData);
+
+    if (userAlreadyGiveQuiz) {
+      return;
+    } else {
+      console.log('HITTEDDDDDDDDDDDDD');
+      // Await the updateLessonData to ensure it completes before moving forward
+      await updateLessonData({
+        user_joinLiveClass: [
+          ...(findCurrentLesson?.user_joinLiveClass || []), // Preserve previous quiz attempts
+          findCurrentUser.student_id,
+        ],
+      });
+    }
   };
 
-  /*
-   * Title: JOIN Live Class functionality
-   * Description:
-   * Author: Jubayer Ahmed
-   * Date: 13 July, 2024
-   *
-   * 1. Create a new database for join live class
-   * 2. Database will have each batch information
-   * 3. Each batch will have a unique identifier
-   * 4. Each batch will contain a images, join zoom link btn, Course title, class time
-   * 5. If not authenticated then show the login button
-   * 6. By clicking zoom links redirect zoom apps
-   * 7. Handle Admin dashboard to manage it
-   */
   return (
     <div className="max-w-5xl mx-auto my-20">
       <h2 className="text-2xl font-semibold">Join Live Class</h2>
       <hr className="mt-3" />
       <div className="flex gap-2 mt-10">
         <div className="w-[60%]">
-          <Image
-            width={500}
-            height={300}
-            src={enrolledCourse?.courseData?.img}
-            alt=""
-            className="w-full object-cover rounded-xl"
-          />
+          {enrolledCourse?.courseData?.img ? (
+            <Image
+              width={500}
+              height={300}
+              src={enrolledCourse?.courseData?.img}
+              alt=""
+              className="w-full object-cover rounded-xl"
+            />
+          ) : (
+            <div className="min-h-40 flex justify-center items-center">
+              <Spin size="medium" />
+            </div>
+          )}
           <p className="text-lg font-bold mt-5">
             {enrolledCourse?.courseData?.title}
           </p>
@@ -160,7 +175,9 @@ const JoinLive = () => {
             </Link>
           ) : (
             <div className="border mt-5 rounded pt-2 pb-5">
-              <PhoneAuth />
+              <div className="min-h-40 flex justify-center items-center">
+                <Spin size="medium" />
+              </div>
               <p className="text-center font-semibold">
                 For any help please call: +8801996104096{' '}
               </p>

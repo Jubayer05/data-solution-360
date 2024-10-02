@@ -46,7 +46,7 @@ const HomeRecordedVideo = () => {
         className={`${
           activeMenu
             ? 'w-full mx-auto px-4'
-            : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+            : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
         } mx-auto flex items-start gap-6`}
       >
         {/* NOTE: LEFT SIDE */}

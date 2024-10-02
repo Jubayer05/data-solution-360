@@ -1,11 +1,12 @@
 import { Progress } from 'antd';
 import { useRouter } from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import { BsExclamationDiamond } from 'react-icons/bs';
 import { FaArrowLeft } from 'react-icons/fa6';
 // import { videosPlaylist } from '../../../../src/data/data';
 import Image from 'next/image';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
+import useCourseStatistics from '../../../src/hooks/useCourseStatistics';
 import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import ReportDetails from './ReportDetails';
@@ -13,11 +14,13 @@ import ReportDetails from './ReportDetails';
 const ReportHome = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const { activeMenu } = useStateContextDashboard();
-  const [currentUrl, setCurrentUrl] = useState(null);
 
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, []);
+  const {
+    obtained_percentage_quiz,
+    obtained_percentage_attendance,
+    obtained_percentage_assignment,
+    average_percentage,
+  } = useCourseStatistics();
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -35,7 +38,7 @@ const ReportHome = () => {
         className={`${
           activeMenu
             ? 'w-full mx-auto px-16'
-            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+            : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
         } mx-auto `}
       >
         <div className="flex items-end gap-4 pt-6">
@@ -168,7 +171,7 @@ const ReportHome = () => {
                   strokeColor="#a855f7"
                   status="active"
                   type="circle"
-                  percent={75}
+                  percent={obtained_percentage_quiz}
                   size={70}
                   strokeWidth={12}
                   className="shadow-lg rounded-full mb-1"
@@ -182,7 +185,7 @@ const ReportHome = () => {
                 <Progress
                   strokeColor="#ff7d4e"
                   type="circle"
-                  percent={75}
+                  percent={obtained_percentage_assignment}
                   size={70}
                   strokeWidth={12}
                   className="shadow-lg rounded-full mb-1"
@@ -196,7 +199,7 @@ const ReportHome = () => {
                 <Progress
                   strokeColor="#5d91ff"
                   type="circle"
-                  percent={75}
+                  percent={obtained_percentage_attendance}
                   size={70}
                   strokeWidth={12}
                   className="shadow-lg rounded-full mb-1"
@@ -231,7 +234,7 @@ const ReportHome = () => {
                     Total Score
                   </p>
                   <Progress
-                    percent={60}
+                    percent={average_percentage}
                     size={['100%', 12]}
                     status="active"
                     trailColor="#ffffff"
@@ -245,7 +248,7 @@ const ReportHome = () => {
                     Attendance
                   </p>
                   <Progress
-                    percent={46}
+                    percent={obtained_percentage_attendance}
                     size={['100%', 12]}
                     status="active"
                     trailColor="#ffffff"

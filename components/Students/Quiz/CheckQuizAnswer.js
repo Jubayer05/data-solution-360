@@ -24,7 +24,7 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
         className={`${
           activeMenu
             ? 'w-full mx-auto px-4'
-            : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+            : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
         } mx-auto flex items-start gap-6`}
       >
         <div className="w-full mx-auto mb-10">
@@ -56,7 +56,7 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
                   alt=""
                 />
                 <h2 className="text-2xl font-heading font-bold text-[#12b76a] text-center mb-1">
-                  {obtained_percentage.toFixed(2)}%
+                  {Math.ceil(obtained_percentage)}%
                 </h2>
                 <p className="text-sm font-semibold text-center">
                   Scores earned

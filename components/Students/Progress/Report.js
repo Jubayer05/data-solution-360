@@ -4,25 +4,24 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { BsExclamationDiamond } from 'react-icons/bs';
 import { FaArrowRight } from 'react-icons/fa6';
+import useCourseStatistics from '../../../src/hooks/useCourseStatistics';
 import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
-const Report = ({ totalQuizNumber, findUsersScore, liveClassCount }) => {
+const Report = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [scoreModal, setScoreModal] = useState(false);
   const [currentUrl, setCurrentUrl] = useState(null);
+  const {
+    obtained_percentage_quiz,
+    obtained_percentage_attendance,
+    obtained_percentage_assignment,
+    average_percentage,
+  } = useCourseStatistics();
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
   }, []);
-
-  const obtained_percentage_quiz = Math.ceil(
-    (findUsersScore?.totalQuizScore / totalQuizNumber) * 100,
-  );
-
-  const obtained_percentage_attendance = Math.ceil(
-    (findUsersScore?.attendanceScore / liveClassCount) * 100,
-  );
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -239,7 +238,7 @@ const Report = ({ totalQuizNumber, findUsersScore, liveClassCount }) => {
       <div className="flex items-center gap-2 mt-4 bg-gray-100 px-2 py-2 border border-dashboard_border rounded">
         <p className="rounded font-semibold text-gray-600">Total Score</p>
         <Progress
-          percent={obtained_percentage_quiz}
+          percent={average_percentage}
           status="active"
           trailColor="#ffffff"
           strokeColor="#12b76a"
@@ -264,7 +263,7 @@ const Report = ({ totalQuizNumber, findUsersScore, liveClassCount }) => {
           <Progress
             strokeColor="#ff7d4e"
             type="circle"
-            percent={75}
+            percent={obtained_percentage_assignment}
             size={70}
             strokeWidth={12}
             className="shadow-lg rounded-full mb-1"

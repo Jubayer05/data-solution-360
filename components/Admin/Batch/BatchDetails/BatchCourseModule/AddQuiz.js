@@ -64,7 +64,7 @@ const AddQuiz = ({
     if (!currentQuiz.correct_answer) {
       Swal.fire('Warning', 'Please select the correct answer.', 'warning');
       return;
-    }
+  }
 
     const updatedModuleData = {
       ...moduleData,
