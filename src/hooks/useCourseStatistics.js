@@ -12,6 +12,9 @@ const useCourseStatistics = () => {
     useState(0);
   const [obtained_percentage_assignment, setAssignmentPercentage] = useState(0);
   const [average_percentage, setAveragePercentage] = useState(0);
+  const [totalQuizNumber, setTotalQuizNumber] = useState(0);
+  const [liveClassCount, setLiveClassCount] = useState(0);
+  const [assignmentNumber, setAssignmentNumber] = useState(0);
 
   // Function to calculate completed live classes
   const calculateCompletedLiveClasses = (courseModules) => {
@@ -31,16 +34,19 @@ const useCourseStatistics = () => {
       const liveClassCount = calculateCompletedLiveClasses(
         enrolledCourse.course_modules,
       );
+      setLiveClassCount(liveClassCount);
 
       const totalQuizNumber = enrolledCourse?.course_modules?.reduce(
         (sum, item) => sum + (item?.additionalInfo?.totalQuizNum || 0),
         0,
       );
+      setTotalQuizNumber(totalQuizNumber);
 
       const totalAssignmentNum = enrolledCourse?.assignment_data?.reduce(
         (sum, item) => sum + parseInt(item?.total_marks || 0),
         0,
       );
+      setAssignmentNumber(totalAssignmentNum);
 
       const usersTotalAssignmentMarks = enrolledCourse?.assignment_data?.reduce(
         (sum, item) =>
@@ -91,6 +97,9 @@ const useCourseStatistics = () => {
     obtained_percentage_attendance,
     obtained_percentage_assignment,
     average_percentage,
+    totalQuizNumber,
+    liveClassCount,
+    assignmentNumber,
   };
 };
 

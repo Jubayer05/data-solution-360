@@ -1,0 +1,3 @@
+export const QUIZ_PERCENTAGE = 30;
+export const ATTENDANCE_PERCENTAGE = 20;
+export const ASSIGNMENT_PERCENTAGE = 50;

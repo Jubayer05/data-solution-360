@@ -6,32 +6,33 @@ import Image from 'next/image';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import { bg_colors, colors } from '../../../src/data/data';
-import { leaderBoardArr } from '../../../src/data/dummy';
+import useLeaderboardData from '../../../src/hooks/useLeaderBoardData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
 const LeaderBoardHome = () => {
   const { activeMenu } = useStateContextDashboard();
   const { userEmail } = useStateContext();
-
   const router = useRouter();
+  const allLeaderBoardData = useLeaderboardData();
 
   const handleBack = () => {
     router.back();
   };
 
-  const sortedArray = leaderBoardArr.sort(
-    (a, b) => b.marksPercentage - a.marksPercentage,
+  const sortedArray = allLeaderBoardData?.sort(
+    (a, b) => b.totalStudentScore - a.totalStudentScore,
   );
 
-  const topThree = sortedArray.slice(0, 3);
+  const topThree = sortedArray?.slice(0, 3);
+  console.log(topThree);
 
-  const remainingSorted = sortedArray.slice(3);
+  const remainingSorted = sortedArray?.slice(3);
 
-  const findUserLeaderboard = sortedArray.find(
+  const findUserLeaderboard = sortedArray?.find(
     (item) => item.email === userEmail,
   );
 
-  const findUserLeaderboardIndex = sortedArray.findIndex(
+  const findUserLeaderboardIndex = sortedArray?.findIndex(
     (item) => item.email === userEmail,
   );
 
@@ -41,7 +42,7 @@ const LeaderBoardHome = () => {
         className={`${
           activeMenu
             ? 'w-full mx-auto px-16'
-            : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+            : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
         } mx-auto mb-10`}
       >
         <div className="flex items-end gap-4 pt-6">
@@ -53,7 +54,7 @@ const LeaderBoardHome = () => {
 
         {/* NOTE: TOP THREE PROFILE */}
         <div className="grid grid-cols-3 gap-5 my-5">
-          {topThree.map((item, index) => (
+          {topThree?.map((item, index) => (
             <div
               key={item.photoUrl}
               className={`flex items-center px-4 py-2 gap-2 rounded`}
@@ -68,17 +69,17 @@ const LeaderBoardHome = () => {
               <Image
                 width={500}
                 height={300}
-                src={item.photoUrl}
+                src={item.photoUrl || '/icon/profile.png'}
                 className="w-[50px] rounded-full"
                 alt=""
               />
-              <p className="font-semibold">{item.name}</p>
+              <p className="font-semibold">{item.full_name}</p>
               <div className="ml-auto">
                 <p
                   className="text-lg font-bold"
                   style={{ color: colors[index] }}
                 >
-                  {item.marksPercentage}%
+                  {item.totalStudentScore}%
                 </p>
                 <p className="text-xs -mt-1">Marks</p>
               </div>
@@ -103,14 +104,14 @@ const LeaderBoardHome = () => {
               <Image
                 width={500}
                 height={300}
-                src={findUserLeaderboard?.photoUrl}
+                src={findUserLeaderboard?.photoUrl || '/icon/profile.png'}
                 className="w-[50px] rounded-full"
                 alt=""
               />
-              <p className="font-semibold">{findUserLeaderboard?.name}</p>
+              <p className="font-semibold">{findUserLeaderboard?.full_name}</p>
               <div className="ml-auto">
                 <p className="text-lg font-bold" style={{ color: colors[6] }}>
-                  {findUserLeaderboard?.marksPercentage}%
+                  {findUserLeaderboard?.totalStudentScore}%
                 </p>
                 <p className="text-xs -mt-1">Marks</p>
               </div>
@@ -121,7 +122,7 @@ const LeaderBoardHome = () => {
           <p className="mt-5 text-lg font-semibold">Others</p>
           <hr className="my-2" />
           <div className="grid grid-cols-3 gap-6 mb-5 ">
-            {remainingSorted.map((item, index) => (
+            {remainingSorted?.map((item, index) => (
               <div
                 key={item.photoUrl}
                 className={`flex items-center px-4 py-2 gap-2 rounded-lg border-b-1`}
@@ -131,13 +132,15 @@ const LeaderBoardHome = () => {
                 <Image
                   width={500}
                   height={300}
-                  src={item.photoUrl}
+                  src={item.photoUrl || '/icon/profile.png'}
                   className="w-[50px] rounded-full"
                   alt=""
                 />
-                <p className="font-semibold">{item.name}</p>
+                <p className="font-semibold">{item.full_name}</p>
                 <div className="ml-auto">
-                  <p className="text-lg font-bold">{item.marksPercentage}%</p>
+                  <p className="text-lg font-bold">
+                    {item?.totalStudentScore}%
+                  </p>
                   <p className="text-xs -mt-1">Marks</p>
                 </div>
               </div>

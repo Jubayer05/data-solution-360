@@ -45,6 +45,7 @@ const FileInput = ({ folderName, setImageState }) => {
             .getDownloadURL()
             .then((url) => {
               setImageState(url);
+              console.log(url);
             });
         },
       );

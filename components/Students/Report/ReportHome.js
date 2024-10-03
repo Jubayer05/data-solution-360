@@ -261,6 +261,12 @@ const ReportHome = () => {
           </div>
         </div>
         {/* NOTE: MODULE SEGMENT */}
+        <p className="font-dash_heading mt-8">
+          <strong className="text-primary">Note:</strong> Your module progress
+          is calculated based on <strong className="text-primary"> 40%</strong>{' '}
+          class attendance and <strong className="text-primary">60%</strong>{' '}
+          quiz performance.
+        </p>
         <ReportDetails />
       </div>
     </div>

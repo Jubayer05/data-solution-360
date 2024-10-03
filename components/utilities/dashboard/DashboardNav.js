@@ -138,6 +138,8 @@ const DashboardNavbar = () => {
                 <div className="border-[3px] border-[#0389d7] rounded-full flex items-center justify-center">
                   {findCurrentUser?.photoUrl ? (
                     <Image
+                      width={500}
+                      height={300}
                       className="w-[40px] h-[40px] rounded-full"
                       src={findCurrentUser?.photoUrl}
                       alt={userName}

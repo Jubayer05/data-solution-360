@@ -21,10 +21,8 @@ const PersonalDetails = () => {
   const { findCurrentUser } = useStateContext();
 
   useEffect(() => {
-    // Ensure findCurrentUser is returning the correct object
     if (findCurrentUser) {
       setStudentInfo({ ...findCurrentUser, photoUrl });
-      setPhotoUrl(findCurrentUser.photoUrl);
     }
   }, [findCurrentUser, photoUrl]);
 
@@ -36,13 +34,18 @@ const PersonalDetails = () => {
   };
 
   const handleUpdate = () => {
+    const updatedData = { ...studentInfo };
+    if (photoUrl) {
+      updatedData.photoUrl = photoUrl;
+    } else {
+      delete updatedData.photoUrl; // Remove photoUrl if it's undefined
+    }
+
     firebase
       .firestore()
       .collection('users')
       .doc(findCurrentUser.key)
-      .update({
-        ...studentInfo,
-      })
+      .update(updatedData)
       .then(() => {
         Swal.fire({
           title: 'Hello',
@@ -57,16 +60,18 @@ const PersonalDetails = () => {
         });
       })
       .catch((err) => {
-        Swal.fire('Hello!', 'Profile cannot updated!', 'error');
+        Swal.fire('Hello!', 'Profile cannot be updated!', 'error');
       });
   };
+
+  // console.log(findCurrentUser);
 
   return (
     <div>
       <Image
         width={500}
         height={300}
-        src={studentInfo?.photoUrl || '/icon/profile.png'}
+        src={findCurrentUser?.photoUrl || '/icon/profile.png'}
         alt="Profile"
         className="h-[150px] w-[150px] mx-auto rounded-full"
       />

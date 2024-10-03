@@ -1,23 +1,20 @@
 import { ConfigProvider, Progress, Table } from 'antd';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 // import { videosPlaylist } from '../../../../src/data/data';
 import Image from 'next/image';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
 import { MdOutlineArrowOutward } from 'react-icons/md';
 import { useStateContext } from '../../../src/context/ContextProvider';
-import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
 const ReportDetails = () => {
-  const { activeMenu, showedItem, setShowedItem } = useStateContextDashboard();
-  const [currentUrl, setCurrentUrl] = useState(null);
   const { findCurrentUser } = useStateContext();
   const { enrolledCourse } = useEnrolledCourseData();
-
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, []);
+  const router = useRouter();
+  const { courseId } = router.query;
 
   const columns = [
     {
@@ -29,10 +26,16 @@ const ReportDetails = () => {
         <div>
           <div className="flex items-center gap-5">
             <h2 className="text-xl font-bold">Module-{record?.moduleNumber}</h2>
-            <ButtonDashboard className="text-sm pl-2 pr-2 pt-[6px] pb-[6px]">
-              <span>Visit Module</span>
-              <MdOutlineArrowOutward className="text-lg" />{' '}
-            </ButtonDashboard>
+            <Link
+              href={
+                `/students/my-course/${courseId}/module/${record?.id}` || ''
+              }
+            >
+              <ButtonDashboard className="text-sm pl-2 pr-2 pt-[6px] pb-[6px]">
+                <span>Visit Module</span>
+                <MdOutlineArrowOutward className="text-lg" />{' '}
+              </ButtonDashboard>
+            </Link>
           </div>
           <p className="mt-1.5 text-base font-medium text-slate-500">
             {record.moduleName}
@@ -47,25 +50,43 @@ const ReportDetails = () => {
       width: '42%',
       align: 'center',
       render: (_, record) => {
-        // Calculate the total possible marks
-        const totalMarks = record?.additionalInfo?.totalQuizNum;
+        // Step 1: Calculate total quiz marks
+        const totalQuizMarks = record?.additionalInfo?.totalQuizNum || 1;
+        const totalLiveClassNum =
+          record?.additionalInfo?.totalLiveClassNum || 1;
 
-        // Calculate the user's obtained marks
-        const obtainedMarks = record.lessons?.reduce((acc, lesson) => {
+        // Step 2: Calculate user's obtained quiz marks
+        const userQuizMarks = record.lessons?.reduce((sum, lesson) => {
           const userQuizData = lesson?.user_quizData?.find(
             (stu) => stu.student_id === findCurrentUser?.student_id,
           );
-          return acc + (userQuizData?.obtained_marks || 0);
+          return sum + (userQuizData?.obtained_marks || 0); // Assuming obtained_marks is the user's score for each lesson
         }, 0);
 
-        // Calculate the percentage
-        const percent = totalMarks > 0 ? (obtainedMarks / totalMarks) * 100 : 0;
+        const userAttendClass = record.lessons?.reduce((sum, lesson) => {
+          const userAttendData = lesson?.user_joinLiveClass?.find(
+            (stu) => stu === findCurrentUser?.student_id,
+          );
+          return sum + (userAttendData ? 1 : 0); // Assuming obtained_marks is the user's score for each lesson
+        }, 0);
+
+        // Step 3: Calculate the quiz percentage
+        const quizPercentage =
+          totalQuizMarks > 0 ? (userQuizMarks / totalQuizMarks) * 100 : 0;
+
+        const attendancePercentage =
+          totalLiveClassNum > 0
+            ? (userAttendClass / totalLiveClassNum) * 100
+            : 0;
+
+        const overAllPercent =
+          attendancePercentage * (40 / 100) + quizPercentage * (60 / 100);
 
         return (
           <div>
             <div className="flex items-center gap-2">
               <Progress
-                percent={Math.ceil(percent)} // Round the percentage to nearest integer
+                percent={Math.ceil(overAllPercent)} // Round the percentage to nearest integer
                 size="small"
                 status="active"
                 trailColor="#d0d5dd"
@@ -86,7 +107,7 @@ const ReportDetails = () => {
   return (
     <div>
       {/* NOTE: MODULE SEGMENT */}
-      <div className="min-h-screen my-10 border">
+      <div className="min-h-screen mt-4 mb-10 border">
         <ConfigProvider
           theme={{
             components: {
@@ -99,17 +120,20 @@ const ReportDetails = () => {
         >
           <Table
             columns={columns}
-            dataSource={[...(enrolledCourse?.course_modules || [])]}
+            dataSource={
+              enrolledCourse?.course_modules?.map((module) => ({
+                ...module,
+                key: module.id,
+              })) || []
+            }
             pagination={false}
             expandable={{
               expandedRowRender: (record) => {
                 // Step 1: Calculate total quiz marks
                 const totalQuizMarks =
-                  record?.additionalInfo?.totalQuizNum || 0;
+                  record?.additionalInfo?.totalQuizNum || 1;
                 const totalLiveClassNum =
-                  record?.additionalInfo?.totalLiveClass;
-
-                console.log(totalQuizMarks);
+                  record?.additionalInfo?.totalLiveClassNum || 1;
 
                 // Step 2: Calculate user's obtained quiz marks
                 const userQuizMarks = record.lessons?.reduce((sum, lesson) => {
@@ -119,10 +143,25 @@ const ReportDetails = () => {
                   return sum + (userQuizData?.obtained_marks || 0); // Assuming obtained_marks is the user's score for each lesson
                 }, 0);
 
+                const userAttendClass = record.lessons?.reduce(
+                  (sum, lesson) => {
+                    const userAttendData = lesson?.user_joinLiveClass?.find(
+                      (stu) => stu === findCurrentUser?.student_id,
+                    );
+                    return sum + (userAttendData ? 1 : 0); // Assuming obtained_marks is the user's score for each lesson
+                  },
+                  0,
+                );
+
                 // Step 3: Calculate the quiz percentage
                 const quizPercentage =
                   totalQuizMarks > 0
                     ? (userQuizMarks / totalQuizMarks) * 100
+                    : 0;
+
+                const attendancePercentage =
+                  totalLiveClassNum > 0
+                    ? (userAttendClass / totalLiveClassNum) * 100
                     : 0;
                 return (
                   <div className="border border-gray-300 flex px-10 py-5 rounded-lg gap-10 bg-white">
@@ -152,7 +191,7 @@ const ReportDetails = () => {
                           <div className="w-[65%]">
                             <div className="flex items-center gap-2">
                               <Progress
-                                percent={Math.ceil(quizPercentage)}
+                                percent={Math.ceil(attendancePercentage)}
                                 size={['100%', 6]}
                                 status="active"
                                 trailColor="#d0d5dd"
