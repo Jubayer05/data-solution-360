@@ -102,6 +102,7 @@ const Navbar = ({ home }) => {
               src="/logo/logo_updated.png"
               className="h-16 w-[80px]"
               alt="logo"
+              unoptimized={true}
             />
           </Link>
           <HiOutlineMenuAlt1
