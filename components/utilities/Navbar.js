@@ -87,7 +87,6 @@ const Navbar = ({ home }) => {
       });
   };
 
-
   return (
     <div
       className={`w-full md:text-center z-[900] px-5 pt-4 pb-3 md:px-4 md:py-0 ${
@@ -100,7 +99,7 @@ const Navbar = ({ home }) => {
             <Image
               width={500}
               height={300}
-              src="/logo/logo.png"
+              src="/logo/logo_updated.png"
               className="h-16 w-[80px]"
               alt="logo"
             />
