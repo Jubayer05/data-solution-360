@@ -1,13 +1,17 @@
 import Link from 'next/link';
-import React from 'react';
-import { useStateContext } from '../../src/context/ContextProvider';
+import React, { useEffect, useState } from 'react';
+import { loadData } from '../../src/hooks/loadData';
 import YoutubeEmbed from '../utilities/YoutubeEmbed';
 
 const AboutUs = () => {
-  const { youtubeVideo } = useStateContext();
+  const [youtubeVideo, setYouTubeVideo] = useState([]);
+
+  useEffect(() => {
+    loadData('youtubeVideo', setYouTubeVideo);
+  }, []);
 
   const findVideo = youtubeVideo.find(
-    (item) => item.key === 'JIURIsvWwmzyyiLM3kNS',
+    (item) => item.id === 'JIURIsvWwmzyyiLM3kNS',
   );
 
   return (

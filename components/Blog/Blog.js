@@ -2,11 +2,18 @@ import { Empty } from 'antd';
 import { convert } from 'html-to-text';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
-import { useStateContext } from '../../src/context/ContextProvider';
+import React, { useEffect, useState } from 'react';
+import { loadData } from '../../src/hooks/loadData';
 
 const Blog = () => {
-  const { blogData } = useStateContext();
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+    loadData('blogData', setBlogData, {
+      orderBy: 'orderNo',
+      orderDirection: 'asc',
+    });
+  }, []);
 
   return (
     <div className="pb-4 pt-20 max-w-6xl mx-auto">

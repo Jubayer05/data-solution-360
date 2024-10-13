@@ -12,19 +12,26 @@ import { BiSolidChevronRight } from 'react-icons/bi';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../src/context/ContextProvider';
 import { navItems, navItems2 } from '../../src/data/data';
+import { loadData } from '../../src/hooks/loadData';
 import LoginModal from '../Login/LoginModal';
 import Sidebar from './Home/SideBar';
 
 const Navbar = ({ home }) => {
-  const { language, setLanguage, userName, findAdmin, photoUrl, userEmail } =
+  const { language, setLanguage, userName, photoUrl, userEmail } =
     useStateContext();
   const auth = getAuth();
-  const user = auth.currentUser;
   const [url, setUrl] = useState(null);
   const [openNav, setOpenNav] = useState(null);
   const [eng, setEng] = useState(true);
   const [scrolled80px, setScrolled80px] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [dashAdmin, setDashAdmin] = useState([]);
+
+  useEffect(() => {
+    loadData('dashboard_users', setDashAdmin);
+  }, []);
+
+  const findAdmin = dashAdmin.find((item) => item.email === userEmail);
 
   const openModal = () => {
     setModalIsOpen(true);

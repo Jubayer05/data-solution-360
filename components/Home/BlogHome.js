@@ -2,12 +2,19 @@ import { Empty } from 'antd';
 import { convert } from 'html-to-text';
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaBlog } from 'react-icons/fa';
-import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 
 const BlogHome = () => {
-  const { blogData } = useStateContext();
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+    loadData('blogData', setBlogData, {
+      orderBy: 'orderNo',
+      orderDirection: 'asc',
+    });
+  }, []);
 
   const selectedBlog = blogData?.slice(0, 3);
 

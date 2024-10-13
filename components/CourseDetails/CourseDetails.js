@@ -7,6 +7,7 @@ import { RiLiveLine } from 'react-icons/ri';
 import { useStateContext } from '../../src/context/ContextProvider';
 
 import Image from 'next/image';
+import { useRouter } from 'next/router';
 import { bg_colors, colors } from '../../src/data/data';
 import MemberDetails from '../About/MemberDetails';
 import AddVideoReview from '../Home/Review/AddVideoReview';
@@ -24,14 +25,16 @@ const CourseDetails = () => {
   const [courseDetails, setCourseDetails] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const router = useRouter();
+
+  const { slug } = router.query;
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
-      const slug = window.location.href.split('/').slice(-1)[0];
       const item = courseData.find((item) => item.key === slug);
       setCourseDetails(item);
     }
-  }, [courseData]);
+  }, [slug, courseData]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

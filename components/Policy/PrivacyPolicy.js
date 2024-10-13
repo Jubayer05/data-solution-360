@@ -1,6 +1,6 @@
 import React from 'react';
 
-const FreeCourse = () => {
+const PrivacyPolicy = () => {
   return (
     <div className="mt-16 font-heading max-w-3xl mx-auto pb-12 px-3">
       <h1 className="text-4xl font-bold text-center">Privacy Policy</h1>
@@ -175,4 +175,4 @@ const FreeCourse = () => {
   );
 };
 
-export default FreeCourse;
+export default PrivacyPolicy;

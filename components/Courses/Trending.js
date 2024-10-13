@@ -1,15 +1,15 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 
 const Trending = () => {
-  const { trendingCourse } = useStateContext();
+  const [trendingCourse, setTrendingCourse] = useState([]);
 
-  // const findTrendingCourse = trendingCourse.find(
-  //   (item) => item.key === 'vMVpfcjol5dGUyiVZDDO',
-  // );
+  useEffect(() => {
+    loadData('trendingCourse', setTrendingCourse);
+  }, []);
 
   const settings = {
     // dots: true,
@@ -37,7 +37,6 @@ const Trending = () => {
     //   },
     // ],
   };
-
 
   return (
     <div className="max-w-7xl mx-auto mt-10">

@@ -119,7 +119,7 @@ const AssignmentHome = () => {
             />
           </ConfigProvider>
         ) : (
-          <div className="min-h-40 flex justify-center items-center">
+          <div className="min-h-40 flex justify-center items-center bg-white">
             <Spin size="medium" />
           </div>
         )}

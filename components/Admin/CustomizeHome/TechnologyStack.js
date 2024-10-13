@@ -1,18 +1,24 @@
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 const db = firebase.firestore();
 
 const TechnologyStack = () => {
-  const { userEmail, technologyStack } = useStateContext();
+  const { userEmail } = useStateContext();
   const [img, setImg] = useState('');
   const [progressData, setProgressData] = useState('');
+  const [technologyStack, setTechnologyStack] = useState([]);
+
+  useEffect(() => {
+    loadData('technology_stack', setTechnologyStack);
+  }, []);
 
   const formik = useFormik({
     initialValues: {

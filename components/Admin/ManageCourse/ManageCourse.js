@@ -620,8 +620,6 @@ const ManageCourse = () => {
               Submit Content
             </button>
           </div>
-
-          {/* <p>{blogData?.date}</p> */}
         </div>
       </Modal>
     </div>

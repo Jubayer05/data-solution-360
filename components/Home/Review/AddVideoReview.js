@@ -1,12 +1,16 @@
-import React from 'react';
-import { useStateContext } from '../../../src/context/ContextProvider';
+import React, { useEffect, useState } from 'react';
+import { loadData } from '../../../src/hooks/loadData';
 import YoutubeEmbed from '../../utilities/YoutubeEmbed';
 
 const AddVideoReview = ({ coursePage }) => {
-  const { youtubeVideo } = useStateContext();
+  const [youtubeVideo, setYouTubeVideo] = useState([]);
+
+  useEffect(() => {
+    loadData('youtubeVideo', setYouTubeVideo);
+  }, []);
 
   const findVideo = youtubeVideo.find(
-    (item) => item.key === 'FwHsK7rTQkUHslLBZZ45',
+    (item) => item.id === 'FwHsK7rTQkUHslLBZZ45',
   );
 
   return (

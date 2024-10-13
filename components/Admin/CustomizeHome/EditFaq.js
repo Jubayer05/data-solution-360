@@ -1,16 +1,23 @@
 import { Table } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
-import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 import CustomModal from '../../utilities/CustomModal';
 const db = firebase.firestore();
 
 const EditFaq = () => {
-  const { faqData } = useStateContext();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
+  const [faqData, setFaqData] = useState([]);
+
+  useEffect(() => {
+    loadData('faqData', setFaqData, {
+      orderBy: 'orderFaq',
+      orderDirection: 'asc',
+    });
+  }, []);
 
   const handleDelete = (record) => {
     Swal.fire({

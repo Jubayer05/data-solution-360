@@ -1,13 +1,20 @@
 import { Collapse } from 'antd';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { IoCaretDownSharp, IoCaretUpSharp } from 'react-icons/io5';
-import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 
 const { Panel } = Collapse;
 
 const Faq = ({ title }) => {
-  const { faqData } = useStateContext();
   const [showMore, setShowMore] = useState(false);
+  const [faqData, setFaqData] = useState([]);
+
+  useEffect(() => {
+    loadData('faqData', setFaqData, {
+      orderBy: 'orderFaq',
+      orderDirection: 'asc',
+    });
+  }, []);
 
   return (
     <div className="flex-1 font-bangla text-lg max-w-4xl mx-auto">

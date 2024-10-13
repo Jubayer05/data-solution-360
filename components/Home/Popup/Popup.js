@@ -1,14 +1,17 @@
-import Link from 'next/link';
-import React from 'react';
-import { RxCross1 } from 'react-icons/rx';
-import { useStateContext } from '../../../src/context/ContextProvider';
 import Image from 'next/image';
+import Link from 'next/link';
+import React, { useEffect, useState } from 'react';
+import { RxCross1 } from 'react-icons/rx';
+import { loadData } from '../../../src/hooks/loadData';
 
 const Popup = ({ handler }) => {
-  const { popupImage } = useStateContext();
+  const [popupImage, setPopupImage] = useState([]);
+  useEffect(() => {
+    loadData('popupImage', setPopupImage);
+  }, []);
 
   const findTrendingCourse = popupImage.find(
-    (item) => item.key === 'fkmw579u5iajG01FzncO',
+    (item) => item.id === 'fkmw579u5iajG01FzncO',
   );
 
   return (
@@ -17,7 +20,6 @@ const Popup = ({ handler }) => {
         <Image
           width={500}
           height={300}
-          // src={trendingCourse[0]?.photoUrl}
           src={findTrendingCourse?.photoUrl}
           alt="Popup img"
           className="rounded-lg"

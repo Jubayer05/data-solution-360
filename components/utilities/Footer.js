@@ -99,8 +99,7 @@ const Footer = () => {
               >
                 <SlLocationPin className="text-lg w-8" />{' '}
                 <span className="text-left">
-                  House - 04 ( Lift - 2 ) , Road - 12, Block - J, Baridhara,
-                  Dhaka, 1212
+                  Flat: 4B, House: 23, Road : 4, Block: F, Banani, Dhaka - 1212
                 </span>
               </li>
               <li className="text-base flex items-center justify-center md:justify-start cursor-pointer mt-4">

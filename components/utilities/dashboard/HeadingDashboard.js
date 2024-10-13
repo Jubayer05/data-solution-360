@@ -12,16 +12,18 @@ const HeadingDashboard = ({ title, batchNo }) => {
       className={`${
         activeMenu
           ? 'max-w-6xl mx-auto px-4'
-          : 'w-full pr-6 pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+          : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
       } flex items-center justify-between mt-3`}
     >
       <div>
         <h2 className="text-3xl pt-6 pb-4 text-[#231f40] text-center font-medium font-dash_heading ">
           <span className="font-bold">{title}</span>
         </h2>
-        <span>
-          Batch Number: <strong className="text-primary">{batchNo}</strong>
-        </span>
+        {batchNo && (
+          <span>
+            Batch Number: <strong className="text-primary">{batchNo}</strong>
+          </span>
+        )}
       </div>
       <button
         type="button"

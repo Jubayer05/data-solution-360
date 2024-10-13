@@ -3,8 +3,6 @@ import { useStateContext } from '../../src/context/ContextProvider';
 import ReviewSlider from '../Home/Review/ReviewSlider';
 
 const StudentReviewCourse = ({ courseDetails }) => {
-  const { studentReview } = useStateContext();
-
   return (
     <div className="max-w-6xl mx-auto my-10">
       <div className="flex justify-center flex-col items-center ">

@@ -1,12 +1,16 @@
 /* eslint-disable jsx-a11y/alt-text */
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Select from 'react-select';
 import { v4 as uuidv4 } from 'uuid';
-import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 
 const AddInstructorCourse = ({ instructors, setInstructors }) => {
-  const { instructor } = useStateContext();
+  const [instructor, setInstructor] = useState();
+
+  useEffect(() => {
+    loadData('instructors', setInstructor);
+  }, []);
 
   const selectInstructor = instructor.map((item) => ({
     label: (

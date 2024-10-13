@@ -1,11 +1,16 @@
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import AddProfile from './AddProfile';
 
 const TeamMember = () => {
-  const { teamMember } = useStateContext();
+  const [teamMember, setTeamMember] = useState([]);
+
+  useEffect(() => {
+    loadData('team_members', setTeamMember);
+  }, []);
+
   return (
     <div>
       <HeadingDashboard title="Team Member Information" />

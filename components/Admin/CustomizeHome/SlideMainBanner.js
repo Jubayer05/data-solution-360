@@ -2,17 +2,23 @@ import { Progress } from 'antd';
 import { useFormik } from 'formik';
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 const db = firebase.firestore();
 
 const SlideMainBanner = () => {
-  const { userEmail, slidesMainBannerData } = useStateContext();
+  const { userEmail } = useStateContext();
   const [img, setImg] = useState('');
   const [progressData, setProgressData] = useState('');
+  const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);
+
+  useEffect(() => {
+    loadData('slides_main_banner', setSlidesMainBannerData);
+  }, []);
 
   const formik = useFormik({
     initialValues: {

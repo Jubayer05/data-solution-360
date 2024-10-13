@@ -3,7 +3,6 @@ import { useStateContext } from '../../src/context/ContextProvider';
 import Image from 'next/image';
 
 const GameChanger = () => {
-  const { userEmail, technologyStack } = useStateContext();
   return (
     <div className="bg-[#f9f9fa]	py-4 md:pt-20 px-3" id="courses">
       <div

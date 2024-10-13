@@ -1,19 +1,17 @@
-import { ConfigProvider, Table } from 'antd';
+import { ConfigProvider, Spin, Table } from 'antd';
 import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { FaRegPlayCircle } from 'react-icons/fa';
 import { IoMdPlay } from 'react-icons/io';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
+import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
 import { formatDate } from '../../../../src/utils/convertDate';
 
 const RecordingContent = ({ item }) => {
   const { setShowedItem } = useStateContextDashboard();
-  const [currentUrl, setCurrentUrl] = useState(null);
 
-  useEffect(() => {
-    setCurrentUrl(window.location.href);
-  }, []);
+  const { enrolledCourse } = useEnrolledCourseData();
 
   const columns = [
     {
@@ -64,7 +62,11 @@ const RecordingContent = ({ item }) => {
       width: 80,
       render: (_, record) => (
         <div className="flex items-center justify-center">
-          <Link href={`/students/my-course/${item?.batchId}/videos`}>
+          <Link
+            href={`/students/my-course/${
+              item?.batchId || enrolledCourse?.unique_batch_id
+            }/videos`}
+          >
             <button
               className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1 
           px-3 py-2 font-medium"
@@ -80,40 +82,51 @@ const RecordingContent = ({ item }) => {
 
   return (
     <div className="min-h-screen">
-      {item?.moduleData?.map((itemData, index) => (
-        <div
-          key={itemData.moduleName}
-          className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"
-        >
-          <h2 className="-mt-2 text-xl font-semibold capitalize">
-            Module - {itemData?.moduleNumber}:{' '}
-            {capitalizeWords(itemData?.moduleName)}
-          </h2>
-          <hr className="mt-3 mb-5" />
-          <div
-            className="flex justify-center items-center gap-6 rounded-xl overflow-hidden
-          border border-dashboard_border "
-          >
-            <ConfigProvider
-              theme={{
-                components: {
-                  Table: {
-                    headerBg: '#02274b',
-                    headerColor: '#ffffff',
-                  },
-                },
-              }}
+      {item?.moduleData || enrolledCourse?.course_modules ? (
+        (item?.moduleData || enrolledCourse?.course_modules)?.map(
+          (itemData, index) => (
+            <div
+              key={itemData.moduleName}
+              className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"
             >
-              <Table
-                columns={columns}
-                dataSource={[...itemData.lessons]}
-                pagination={false}
-                className="w-full"
-              />
-            </ConfigProvider>
-          </div>
+              <h2 className="-mt-2 text-xl font-semibold capitalize">
+                Module - {itemData?.moduleNumber}:{' '}
+                {capitalizeWords(itemData?.moduleName)}
+              </h2>
+              <hr className="mt-3 mb-5" />
+              <div
+                className="flex justify-center items-center gap-6 rounded-xl overflow-hidden
+          border border-dashboard_border "
+              >
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Table: {
+                        headerBg: '#02274b',
+                        headerColor: '#ffffff',
+                      },
+                    },
+                  }}
+                >
+                  <Table
+                    columns={columns}
+                    dataSource={[...itemData.lessons]}
+                    pagination={false}
+                    className="w-full"
+                  />
+                </ConfigProvider>
+              </div>
+            </div>
+          ),
+        )
+      ) : (
+        <div
+          className="min-h-40 flex justify-center items-center rounded-xl overflow-hidden
+        bg-white border border-dashboard_border"
+        >
+          <Spin size="medium" />
         </div>
-      ))}
+      )}
     </div>
   );
 };

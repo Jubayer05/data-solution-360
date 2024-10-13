@@ -282,13 +282,28 @@ const BannerCourseDetails = ({ courseDetails }) => {
                 </div>
               </div>
               <div>
-                <button
-                  className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] 
+                {!currentCourse?.enrolled_students.includes(
+                  findCurrentUser?.student_id,
+                ) ? (
+                  <Link
+                    href={`/purchase/checkout?courseId=${currentCourse?.id}`}
+                  >
+                    <button
+                      className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] 
+                    rounded-[8px] mt-6 hover:opacity-[0.8] transition-all"
+                    >
+                      Join Live Batch
+                    </button>
+                  </Link>
+                ) : (
+                  <button
+                    className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] 
                 rounded-[8px] mt-6 hover:opacity-[0.8] transition-all"
-                  onClick={handleJoinNow}
-                >
-                  Join Live Batch
-                </button>
+                    onClick={handleJoinNow}
+                  >
+                    Join Live Batch
+                  </button>
+                )}
               </div>
             </div>
           )}

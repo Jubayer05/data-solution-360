@@ -3,7 +3,7 @@ import { DashboardFormat } from '../../../components';
 import CreateNewBatch from '../../../components/Admin/Batch/CreateNewBatch';
 import ProtectedRoute from '../../../components/utilities/ProtectedRoute/ProtectedRoute';
 
-const createNewCourse = () => {
+const createNewBatch = () => {
   return (
     <div>
       <DashboardFormat status="admin" component={<CreateNewBatch />} />
@@ -11,4 +11,4 @@ const createNewCourse = () => {
   );
 };
 
-export default ProtectedRoute(createNewCourse, 'admin');
+export default ProtectedRoute(createNewBatch, 'admin');

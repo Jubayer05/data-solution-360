@@ -1,13 +1,17 @@
 import Image from 'next/image';
 import Link from 'next/link';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
-import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 import CustomModal from '../utilities/CustomModal';
 import MemberDetails from './MemberDetails';
 
 const Team = () => {
-  const { teamMember } = useStateContext();
+  const [teamMember, setTeamMember] = useState([]);
+
+  useEffect(() => {
+    loadData('team_members', setTeamMember);
+  }, []);
 
   const findCoreMember = teamMember.filter(
     (member) => member.role === 'Core Team Member',

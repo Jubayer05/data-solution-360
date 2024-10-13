@@ -7,6 +7,7 @@ import { FaArrowLeft, FaArrowRight, FaRegCirclePlay } from 'react-icons/fa6';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
+import YouTubePlayer from '../../../FreeCourse/YoutubePlayer';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
 
 const HomeRecordedVideo = () => {
@@ -64,13 +65,6 @@ const HomeRecordedVideo = () => {
               alt=""
             />
             <h3 className="text-lg font-semibold">Class Recording Video</h3>
-            {/* <div
-              className="flex items-center gap-2 bg-gray-200 px-3 py-1 text-xs font-medium
-          rounded-sm "
-            >
-              <MdOutlineOndemandVideo className="text-base" />
-              31 Videos
-            </div> */}
           </div>
           <div className="px-6 pb-2 my-5 ">
             <h2 className="font-heading font-bold text-2xl my-2 ">
@@ -78,14 +72,15 @@ const HomeRecordedVideo = () => {
             </h2>
             <div>
               {showedItem?.url ? (
-                <iframe
-                  src={`https://drive.google.com/file/d/${getDriveFileId(
-                    showedItem?.url,
-                  )}/preview`}
-                  width="100%"
-                  height="400"
-                  allow="autoplay"
-                ></iframe>
+                // <iframe
+                //   src={`https://drive.google.com/file/d/${getDriveFileId(
+                //     showedItem?.url,
+                //   )}/preview`}
+                //   width="100%"
+                //   height="400"
+                //   allow="autoplay"
+                // ></iframe>
+                <YouTubePlayer url={showedItem?.url} />
               ) : (
                 <div className="w-full h-[300px] border flex justify-center items-center bg-white rounded-md">
                   <Empty />

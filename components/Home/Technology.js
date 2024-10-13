@@ -1,18 +1,22 @@
 import Image from 'next/image';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Marquee from 'react-fast-marquee';
 import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 
 const Technology = () => {
-  const { userEmail, technologyStack } = useStateContext();
+  const { userEmail } = useStateContext();
+  const [technologyStack, setTechnologyStack] = useState([]);
+
+  useEffect(() => {
+    loadData('technology_stack', setTechnologyStack);
+  }, []);
   return (
     <div className="bg-[#f9f9fa]	py-4 md:pt-20 px-3" id="courses">
       <div
         className="max-w-6xl relative mx-auto rounded-lg shadow bg-cover bg-center overflow-hidden bg-white
         "
       >
-        {/* <div className="w-full h-full bg-black opacity-70 absolute" /> */}
-        {/* <div className="bg-[rgba(0,0,0,0.51)]"> */}
         <div className="">
           <div className="py-4 md:py-8 z-50">
             <h2 className="text-center text-3xl font-bold font-heading mt-4 text-black">

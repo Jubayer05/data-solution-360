@@ -6,19 +6,27 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 import CustomModal from '../utilities/CustomModal';
 import RichTextEditorJodit from '../utilities/RichTextEditor/RichTextEditor';
 import HeadingDashboard from '../utilities/dashboard/HeadingDashboard';
 const db = firebase.firestore();
 
 const MyBlogs = () => {
-  const { userEmail, blogData } = useStateContext();
+  const { userEmail } = useStateContext();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [blogDataState, setBlogDataState] = useState();
-  const [convertContent, setConvertedContent] = useState(null);
   const [modalData, setModalData] = useState(null);
   const [progressData, setProgressData] = useState('');
   const [blogDetails, setBlogDetails] = useState('');
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+    loadData('blogData', setBlogData, {
+      orderBy: 'orderNo',
+      orderDirection: 'asc',
+    });
+  }, []);
 
   useEffect(() => {
     setBlogDataState(modalData);

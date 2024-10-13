@@ -4,6 +4,7 @@ import firebase from '../../../firebase';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import Swal from 'sweetalert2';
 import { colors } from '../../../src/data/data';
 import { loadData } from '../../../src/hooks/loadData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -40,6 +41,46 @@ const AllBatch = () => {
     }, {}),
   );
 
+  const handleDeleteBatch = (item) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      html: `
+    <p>You need to agree before deleting this file.</p>
+    <input type="checkbox" id="agreeCheckbox" />
+    <label for="agreeCheckbox">I agree to the terms and conditions</label>
+  `,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+      didOpen: () => {
+        const checkbox = document.getElementById('agreeCheckbox');
+        const confirmButton = Swal.getConfirmButton();
+        confirmButton.disabled = true; // Disable the "Yes" button by default
+
+        // Listen for checkbox changes to enable/disable the "Yes" button
+        checkbox.addEventListener('change', function () {
+          confirmButton.disabled = !checkbox.checked;
+        });
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        db.collection('course_data_batch')
+          .doc(item?.id)
+          .delete()
+          .then(() => {
+            Swal.fire('Deleted!', 'Your batch has been deleted.', 'success');
+          })
+          .catch((err) => {
+            Swal.fire('Error!', 'Something went wrong.', 'error');
+          })
+          .finally(() => {
+            window.location.reload();
+          });
+      }
+    });
+  };
+
   return (
     <div>
       <HeadingDashboard title="All Batch" />
@@ -59,9 +100,9 @@ const AllBatch = () => {
               </h2>
               <div className="grid grid-cols-4 gap-5 mt-5">
                 {item?.info.map((product) => (
-                  <div key={item.key} className="">
+                  <div key={item.key} className="border-1 ">
                     <Link href={`/admin/course/${product.id}`}>
-                      <div className="border-1 p-3">
+                      <div className="p-3">
                         <Image
                           width={500}
                           height={300}
@@ -77,6 +118,22 @@ const AllBatch = () => {
                         </p>
                       </div>
                     </Link>
+                    <div className="flex items-center justify-between gap-2 p-3 border-t-1">
+                      <Link
+                        href={`/admin/course/batch-edit/${product?.unique_batch_id}`}
+                      >
+                        <ButtonDashboard className="bg-[#645cfc] hover:bg-[#5750e5] hover:opacity-80 text-white text-sm pl-3 pr-3 pt-1 pb-1">
+                          Edit
+                        </ButtonDashboard>
+                      </Link>
+
+                      <ButtonDashboard
+                        onClick={() => handleDeleteBatch(product)}
+                        className="bg-[#f64e45] hover:bg-[#cb433b] hover:opacity-80 text-white text-sm pl-3 pr-3 pt-1 pb-1"
+                      >
+                        Delete
+                      </ButtonDashboard>
+                    </div>
                   </div>
                 ))}
               </div>
@@ -84,9 +141,11 @@ const AllBatch = () => {
           ))}
 
           <div className="flex justify-center mt-10">
-            <ButtonDashboard className="bg-secondary_btn hover:bg-secondary_btn hover:opacity-80 text-white">
-              Create a new batch
-            </ButtonDashboard>
+            <Link href="/admin/course/create-new-batch">
+              <ButtonDashboard className="bg-secondary_btn hover:bg-secondary_btn hover:opacity-80 text-white">
+                Create a new batch
+              </ButtonDashboard>
+            </Link>
           </div>
         </div>
       </div>

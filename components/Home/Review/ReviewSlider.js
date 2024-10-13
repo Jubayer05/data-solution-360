@@ -1,14 +1,18 @@
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import Modal from 'react-modal';
 import Slider from 'react-slick';
 import StarRatings from 'react-star-ratings';
-import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 
 const ReviewSlider = () => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
-  const { studentReview } = useStateContext();
+  const [studentReview, setStudentReview] = useState([]);
+
+  useEffect(() => {
+    loadData('student_review', setStudentReview);
+  }, []);
 
   const openModal = (item) => {
     setModalData(item);

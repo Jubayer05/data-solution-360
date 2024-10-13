@@ -1,13 +1,17 @@
+import Image from 'next/image';
 import Link from 'next/link';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
 import Slider from 'react-slick';
 import * as animationData from '../../public/banner/loader.json';
-import { useStateContext } from '../../src/context/ContextProvider';
-import Image from 'next/image';
+import { loadData } from '../../src/hooks/loadData';
 
 const MainBanner = () => {
-  const { slidesMainBannerData } = useStateContext();
+  const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);
+
+  useEffect(() => {
+    loadData('slides_main_banner', setSlidesMainBannerData);
+  }, []);
 
   const defaultOptions = {
     loop: true,

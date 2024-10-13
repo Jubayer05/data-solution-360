@@ -2,11 +2,14 @@
   "cSpell.words": [
     "antd",
     "bangla",
+    "Bkash",
+    "bkashURL",
     "firestore",
     "formik",
     "leaderboard",
     "orangered",
-    "semibold"
+    "semibold",
+    "Swal"
   ],
   "editor.formatOnSave": true,
   "notebook.formatOnSave.enabled": false,

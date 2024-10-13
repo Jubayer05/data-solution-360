@@ -6,28 +6,34 @@ import firebase from '../../../firebase';
 
 import Image from 'next/image';
 import Link from 'next/link';
+import { RiDeleteBin6Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 
 const db = firebase.firestore();
 
 const CreateNewBatch = () => {
-  const { courseData, userEmail } = useStateContext();
+  const { courseData } = useStateContext();
   const [courseDataObj, setCourseDataObj] = useState({});
   const [selectedCourse, setSelectedCourse] = useState(null);
   const [batchNumber, setBatchNumber] = useState(null);
-
   const uniqueId = uuidv4().split('-')[0];
+  const [instructor, setInstructor] = useState([]);
+  const [selectedInstructor, setSelectedInstructor] = useState([]);
+
+  useEffect(() => {
+    loadData('instructors', setInstructor);
+  }, []);
 
   useEffect(() => {
     setCourseDataObj(selectedCourse);
   }, [selectedCourse]);
 
-  // console.log(courseDataObj);
-
-  const selectInstructor = courseData.map((item) => ({
+  // NOTE: SELECT COURSE
+  const selectCourse = courseData.map((item) => ({
     label: (
       <div className="flex items-center gap-4">
         <Image
@@ -41,7 +47,6 @@ const CreateNewBatch = () => {
           <p className="text-lg m-0">
             <strong>{item.title}</strong>
           </p>
-          <p>{item.unique_batch_id}</p>
         </div>
       </div>
     ),
@@ -52,8 +57,45 @@ const CreateNewBatch = () => {
     setSelectedCourse(record.value);
   };
 
+  // NOTE: SELECT INSTRUCTOR
+  const selectInstructor = instructor.map((item) => ({
+    label: (
+      <div className="flex items-center gap-4">
+        <Image
+          width={500}
+          height={300}
+          className="w-10 h-10 rounded-full"
+          src={item.photoUrl}
+          alt={item.profileName}
+        />
+        <div>
+          <p className="text-lg m-0 font-semibold">{item.profileName}</p>
+          <p className="ml-1 text-sm m-0">{item.jobTitle}</p>
+        </div>
+      </div>
+    ),
+    value: { ...item },
+  }));
+
+  const handleRemoveInstructor = (record) => {
+    const updatedInstructors = selectedInstructor.filter(
+      (item) => item.id !== record.id,
+    );
+    setSelectedInstructor(updatedInstructors);
+  };
+
+  const handleChangeInstructor = (record) => {
+    if (
+      selectedInstructor?.findIndex((item) => item?.id === record.value.id) ===
+      -1
+    ) {
+      setSelectedInstructor([...selectedInstructor, record.value]);
+    }
+  };
+
+  // NOTE: HANDLE CREATE NEW BATCH BUTTON
   const handleCreateNewBatch = () => {
-    if (selectedCourse && batchNumber) {
+    if (selectedCourse && batchNumber && selectedInstructor.length !== 0) {
       const updatedCourse = {
         ...courseDataObj,
         unique_batch_id: uniqueId,
@@ -65,6 +107,7 @@ const CreateNewBatch = () => {
         batchNumber: batchNumber,
         course_modules: courseDataObj.courseModule,
         enrolled_students: [],
+        instructors: selectedInstructor,
       };
 
       db.collection('course_data')
@@ -82,7 +125,11 @@ const CreateNewBatch = () => {
           });
         });
     } else {
-      Swal.fire('Warning!', 'Please select a course first.', 'warning');
+      Swal.fire(
+        'Warning!',
+        'Please select a course first, enter a batch number and at least one instructor.',
+        'warning',
+      );
     }
   };
 
@@ -105,7 +152,7 @@ const CreateNewBatch = () => {
           <Select
             className="w-full"
             styles={customStyles}
-            options={selectInstructor}
+            options={selectCourse}
             onChange={handleChange}
           />
 
@@ -121,6 +168,48 @@ const CreateNewBatch = () => {
             type="text"
             id="batch_number"
             onChange={(e) => setBatchNumber(e.target.value)}
+          />
+          <p className="text-lg font-bold font-dash_heading mt-3 block text-[#17012e]">
+            Instructors for the entire course
+          </p>
+          <div className="grid grid-cols-4 gap-5 mt-5">
+            {selectedInstructor?.map((item) => (
+              <div
+                key={item.key}
+                className="border-1 relative cursor-pointer group"
+              >
+                <button
+                  type="button"
+                  onClick={() => handleRemoveInstructor(item)}
+                  className="absolute -top-3 -right-3 z-50 w-[28px] h-[28px] bg-white hover:bg-[#ff5722] 
+                    rounded-full flex justify-center items-center border hover:text-white opacity-0 group-hover:opacity-100"
+                >
+                  <RiDeleteBin6Line />
+                </button>
+                <div className="p-3 ">
+                  <Image
+                    width={500}
+                    height={300}
+                    className="w-[120px] rounded-full h-[120px] mx-auto shadow border "
+                    src={item?.photoUrl}
+                    alt=""
+                  />
+                  <p className="text-gray-700 text-center mt-3 font-heading text-lg font-medium">
+                    <span className="font-bold">{item?.profileName}</span>
+                  </p>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          <p className="font-semibold mt-3 block text-[#17012e]">
+            Select Instructors for this batch
+          </p>
+          <Select
+            className="w-full"
+            styles={customStyles}
+            options={selectInstructor}
+            onChange={handleChangeInstructor}
           />
 
           <div className="flex justify-center mt-10">

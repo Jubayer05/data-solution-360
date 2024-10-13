@@ -1,11 +1,18 @@
 import { Empty } from 'antd';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 
 const BlogContentItem = () => {
   const [blogItem, setBlogItem] = useState({});
-  const { blogData } = useStateContext();
+  const [blogData, setBlogData] = useState([]);
+
+  useEffect(() => {
+    loadData('blogData', setBlogData, {
+      orderBy: 'orderNo',
+      orderDirection: 'asc',
+    });
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {

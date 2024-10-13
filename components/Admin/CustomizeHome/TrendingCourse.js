@@ -1,18 +1,24 @@
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
 import Image from 'next/image';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 const db = firebase.firestore();
 
 const TrendingCourse = () => {
-  const { userEmail, trendingCourse } = useStateContext();
+  const { userEmail } = useStateContext();
   const [photoUrl, setPhotoUrl] = useState('');
   const [progressData, setProgressData] = useState('');
+  const [trendingCourse, setTrendingCourse] = useState([]);
+
+  useEffect(() => {
+    loadData('trendingCourse', setTrendingCourse);
+  }, []);
 
   const formik = useFormik({
     initialValues: {
@@ -45,7 +51,6 @@ const TrendingCourse = () => {
         });
     },
   });
-
 
   const handleFileSubmit = (e) => {
     const fileSize = document.getElementById('photoUrl').files[0].size;

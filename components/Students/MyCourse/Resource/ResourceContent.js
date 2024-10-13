@@ -1,4 +1,4 @@
-import { ConfigProvider, Table } from 'antd';
+import { ConfigProvider, Spin, Table } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
 import { AiOutlinePlus } from 'react-icons/ai';
@@ -9,22 +9,14 @@ import { FiExternalLink } from 'react-icons/fi';
 import { MdOutlineRemoveRedEye } from 'react-icons/md';
 import { RiFilePaper2Line } from 'react-icons/ri';
 import Modal from 'react-modal';
+import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
 import { formatDate } from '../../../../src/utils/convertDate';
-
-/*
- * Title: Resource
- * Description:
- * Author: Jubayer Ahmed
- * Date: 14 July, 2024
- *
- * TODO:
- * There are many lins. All should be workable
- */
 
 const ResourceContent = ({ item }) => {
   const [modalData, setModalData] = useState(null);
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const { enrolledCourse } = useEnrolledCourseData();
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -107,7 +99,7 @@ const ResourceContent = ({ item }) => {
             className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1 
           px-3 py-2 font-medium"
           >
-            <MdOutlineRemoveRedEye className="text-xl" /> Check Now
+            <MdOutlineRemoveRedEye className="text-xl" /> Check
           </button>
 
           <Link
@@ -124,92 +116,105 @@ const ResourceContent = ({ item }) => {
 
   return (
     <div className="min-h-screen">
-      {item?.moduleData?.map((itemData) => (
-        <div
-          key={itemData.moduleName}
-          className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"
-        >
-          <h2 className="-mt-2 text-xl font-semibold capitalize">
-            Module - {itemData.moduleNumber}:{' '}
-            {capitalizeWords(itemData.moduleName)}
-          </h2>
-          <hr className="mt-3 mb-5" />
-          <div
-            className="flex justify-center items-center gap-6 rounded-xl overflow-hidden
-          border border-dashboard_border "
-          >
-            <ConfigProvider
-              theme={{
-                components: {
-                  Table: {
-                    headerBg: '#02274b',
-                    headerColor: '#ffffff',
-                  },
-                },
-              }}
+      {item?.moduleData || enrolledCourse?.course_modules ? (
+        (item?.moduleData || enrolledCourse?.course_modules)?.map(
+          (itemData, index) => (
+            <div
+              key={itemData.moduleName}
+              className="bg-white p-4 mb-10 rounded-lg border border-dashboard_border"
             >
-              {item?.moduleData && (
-                <Table
-                  columns={columns}
-                  dataSource={[...itemData.lessons]}
-                  pagination={false}
-                  className="w-full"
-                />
-              )}
-            </ConfigProvider>
-          </div>
-          <Modal
-            isOpen={modalIsOpen}
-            onRequestClose={closeModal}
-            style={customStyles}
-            contentLabel="Example Modal"
-            ariaHideApp={false}
-          >
-            <div>
-              <div className="flex justify-between">
-                <h3 className="text-2xl font-semibold font-heading">
-                  Resource
-                </h3>
-                <AiOutlinePlus
-                  onClick={() => closeModal()}
-                  className="text-4xl cursor-pointer rotate-45"
-                />
+              <h2 className="-mt-2 text-xl font-semibold capitalize">
+                Module - {itemData.moduleNumber}:{' '}
+                {capitalizeWords(itemData.moduleName)}
+              </h2>
+              <hr className="mt-3 mb-5" />
+              <div
+                className="flex justify-center items-center gap-6 rounded-xl overflow-hidden
+          border border-dashboard_border "
+              >
+                <ConfigProvider
+                  theme={{
+                    components: {
+                      Table: {
+                        headerBg: '#02274b',
+                        headerColor: '#ffffff',
+                      },
+                    },
+                  }}
+                >
+                  {(item?.moduleData || enrolledCourse?.course_modules) && (
+                    <Table
+                      columns={columns}
+                      dataSource={[...itemData.lessons]}
+                      pagination={false}
+                      className="w-full"
+                    />
+                  )}
+                </ConfigProvider>
               </div>
-              <div className="flex justify-center mt-20">
-                <div className="bg-[#dbe6ff] p-8 rounded-full">
-                  <RiFilePaper2Line className="text-8xl text-[#407bff]" />
-                </div>
-              </div>
-              <p className="text-center mt-8 mb-16">{modalData?.classDate}</p>
-              {modalData?.resourceLink ? (
-                <div className="flex items-center w-full gap-2">
-                  <div className="bg-[#dbe6ff] p-1.5 rounded-md">
-                    <FaLinkSlash className="text-2xl cursor-pointer text-[#407bff]" />
+              <Modal
+                isOpen={modalIsOpen}
+                onRequestClose={closeModal}
+                style={customStyles}
+                contentLabel="Example Modal"
+                ariaHideApp={false}
+              >
+                <div>
+                  <div className="flex justify-between">
+                    <h3 className="text-2xl font-semibold font-heading">
+                      Resource
+                    </h3>
+                    <AiOutlinePlus
+                      onClick={() => closeModal()}
+                      className="text-4xl cursor-pointer rotate-45"
+                    />
                   </div>
-                  <div>
-                    <p className="break-all">
-                      <Link
-                        className="text-sm font-medium text-black visited:text-black break-all"
-                        href={modalData?.resourceLink}
-                        target="_blank"
-                      >
-                        {modalData?.resourceLink}
-                      </Link>
+                  <div className="flex justify-center mt-20">
+                    <div className="bg-[#dbe6ff] p-8 rounded-full">
+                      <RiFilePaper2Line className="text-8xl text-[#407bff]" />
+                    </div>
+                  </div>
+                  <p className="text-center mt-8 mb-16">
+                    {modalData?.classDate}
+                  </p>
+                  {modalData?.resourceLink ? (
+                    <div className="flex items-center w-full gap-2">
+                      <div className="bg-[#dbe6ff] p-1.5 rounded-md">
+                        <FaLinkSlash className="text-2xl cursor-pointer text-[#407bff]" />
+                      </div>
+                      <div>
+                        <p className="break-all">
+                          <Link
+                            className="text-sm font-medium text-black visited:text-black break-all"
+                            href={modalData?.resourceLink}
+                            target="_blank"
+                          >
+                            {modalData?.resourceLink}
+                          </Link>
+                        </p>
+                      </div>
+                      <button className="bg-primary_btn px-4 py-2 rounded">
+                        <FiExternalLink className="text-lg text-white" />
+                      </button>
+                    </div>
+                  ) : (
+                    <p className="font-semibold font-dash_heading text-center">
+                      No Class Resource Provided
                     </p>
-                  </div>
-                  <button className="bg-primary_btn px-4 py-2 rounded">
-                    <FiExternalLink className="text-lg text-white" />
-                  </button>
+                  )}
                 </div>
-              ) : (
-                <p className="font-semibold font-dash_heading text-center">
-                  No Class Resource Provided
-                </p>
-              )}
+              </Modal>
             </div>
-          </Modal>
+          ),
+        )
+      ) : (
+        <div
+          className="min-h-40 flex justify-center items-center rounded-xl overflow-hidden
+        bg-white border border-dashboard_border"
+        >
+          <Spin size="medium" />
         </div>
-      ))}
+      )}
     </div>
   );
 };
