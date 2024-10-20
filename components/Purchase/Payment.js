@@ -6,19 +6,34 @@ import { useStateContext } from '../../src/context/ContextProvider';
 
 const Payment = ({ payableAmount, batchData }) => {
   const [amount, setAmount] = useState(10);
-  const [bkashURL, setBkashURL] = useState(null); // State to hold the bKash URL
+  const [bkashURL, setBkashURL] = useState(null);
   const { findCurrentUser } = useStateContext();
+  const [loading, setLoading] = useState(false); // Loading state
 
   const handlePayment = async () => {
+    setLoading(true); // Start loading
+    sessionStorage.setItem('currentCourse', JSON.stringify(batchData));
+    sessionStorage.setItem('findCurrentUser', JSON.stringify(findCurrentUser));
     try {
       if (findCurrentUser?.student_id) {
-        // Step 1: Create Payment
+        // Step 1: Generate Grant Token
+        const tokenResponse = await fetch('/api/bkash/grant-token', {
+          method: 'POST',
+        });
+        const tokenData = await tokenResponse.json();
+        const { token: id_token } = tokenData;
+
+        sessionStorage.setItem('token', JSON.stringify(id_token));
+
+        // Step 2: Create Payment
         const createResponse = await fetch('/api/bkash/create-payment', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json',
+            Authorization: `Bearer ${id_token}`, // Correct Authorization header
           },
           body: JSON.stringify({
+            token: id_token,
             amount,
             additionalInfo: {
               id: batchData?.id,
@@ -30,13 +45,12 @@ const Payment = ({ payableAmount, batchData }) => {
 
         const createData = await createResponse.json();
 
-        console.log('Create Payment Response:', createResponse.ok); // Debugging response
-
         if (createResponse.ok) {
-          const { bkashURL } = createData; // Extract bKash URL and payment ID
-          setBkashURL(bkashURL); // Set the bKash URL to state
+          const { bkashURL } = createData;
+          setBkashURL(bkashURL); // Redirect to bKash
         } else {
           console.error('Error creating payment:', createData.error);
+          Swal.fire('Error!', 'Payment creation failed.', 'error');
         }
       } else {
         Swal.fire(
@@ -47,6 +61,9 @@ const Payment = ({ payableAmount, batchData }) => {
       }
     } catch (error) {
       console.error('Error during payment:', error.message);
+      Swal.fire('Error!', 'An error occurred during payment.', 'error');
+    } finally {
+      setLoading(false); // Stop loading
     }
   };
 
@@ -55,6 +72,7 @@ const Payment = ({ payableAmount, batchData }) => {
       window.location.href = bkashURL;
     }
   }, [bkashURL]);
+
   useEffect(() => {
     if (payableAmount) {
       setAmount(payableAmount);
@@ -82,10 +100,13 @@ const Payment = ({ payableAmount, batchData }) => {
       </div>
       <button
         onClick={handlePayment}
-        className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] 
-                    rounded-[8px] mt-4 hover:opacity-[0.8] transition-all font-semibold"
+        className={`bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] 
+                    rounded-[8px] mt-4 hover:opacity-[0.8] transition-all font-semibold ${
+                      loading ? 'opacity-50 cursor-not-allowed' : ''
+                    }`}
+        disabled={loading} // Disable button while loading
       >
-        Complete Payment
+        {loading ? 'Processing...' : 'Complete Payment'}
       </button>
     </div>
   );

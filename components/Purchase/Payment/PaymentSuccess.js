@@ -1,16 +1,15 @@
 import { Spin } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import Lottie from 'react-lottie';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
-import { useStateContext } from '../../../src/context/ContextProvider';
 import successAnimationData from '../../../src/data/json/payment-success.json';
-import { loadData } from '../../../src/hooks/loadData';
+const db = firebase.firestore();
 
 const defaultOptions = {
-  loop: true,
+  loop: false,
   autoplay: true,
   animationData: successAnimationData,
   rendererSettings: {
@@ -18,12 +17,7 @@ const defaultOptions = {
   },
 };
 
-const enrollStudentInCourse = async (
-  currentCourse,
-  studentId,
-  db,
-  setCourseDataBatch,
-) => {
+const enrollStudentInCourse = async (currentCourse, studentId) => {
   const updatedCourse = {
     ...currentCourse,
     enrolled_students: [...currentCourse.enrolled_students, studentId],
@@ -34,20 +28,19 @@ const enrollStudentInCourse = async (
       .collection('course_data_batch')
       .doc(currentCourse.id)
       .update(updatedCourse);
-    setCourseDataBatch((prevBatch) =>
-      prevBatch.map((batch) =>
-        batch.id === currentCourse.id ? updatedCourse : batch,
-      ),
-    );
   } catch (error) {
     Swal.fire('Dear user!', 'Error updating course:', 'error');
   }
 };
 
-const addUserToEnrolledCourses = async (batchId, findCurrentUser, db) => {
+const addUserToEnrolledCourses = async (
+  batchId,
+  findCurrentUser,
+  paymentResponse,
+) => {
   const updatedCourses = [
     ...findCurrentUser?.enrolled_courses,
-    { batchId, leaderBoard: null },
+    { batchId, leaderBoard: null, paymentInfo: paymentResponse || {} },
   ];
 
   try {
@@ -68,97 +61,123 @@ const PaymentSuccess = () => {
   const { paymentID } = router.query;
   const [paymentResponse, setPaymentResponse] = useState(null);
   const [loading, setLoading] = useState(true);
-  const [courseDataBatch, setCourseDataBatch] = useState([]);
-  const db = firebase.firestore();
-  const { findCurrentUser } = useStateContext();
+  const [attemptCount, setAttemptCount] = useState(0);
 
-  useEffect(() => {
-    // Load the batch data from Firestore
-    loadData('course_data_batch', setCourseDataBatch);
-  }, []);
-
-  // Memoized function to find the current course based on the unique_batch_id
-  const currentCourse = useMemo(() => {
-    if (courseDataBatch && paymentResponse?.additionalInfo?.unique_batch_id) {
-      return courseDataBatch.find(
-        (course) =>
-          course.unique_batch_id ===
-          paymentResponse.additionalInfo.unique_batch_id,
-      );
-    }
-    return null;
-  }, [courseDataBatch, paymentResponse]);
+  const id_token = JSON.parse(sessionStorage.getItem('token'));
+  const batchId = JSON.parse(sessionStorage.getItem('batchId'));
+  const currentCourse = JSON.parse(sessionStorage.getItem('currentCourse'));
+  const findCurrentUser = JSON.parse(sessionStorage.getItem('findCurrentUser'));
 
   const updateDatabaseAfterPayment = useCallback(
-    async (batchId, studentId) => {
-      if (!findCurrentUser) {
+    (batchId, studentId) => {
+      if (!findCurrentUser?.student_id) {
         Swal.fire('Error', 'User not logged in.', 'error');
         return;
       }
 
+      setLoading(true);
+
+      // Check if student is already enrolled in the course
       if (
         currentCourse?.enrolled_students &&
         !currentCourse.enrolled_students.includes(studentId)
       ) {
-        await enrollStudentInCourse(
-          currentCourse,
-          studentId,
-          db,
-          setCourseDataBatch,
-        );
-      }
+        // console.log('START: UPDATING COURSE_DATA_BATCH', 'Hello world');
+        enrollStudentInCourse(currentCourse, studentId)
+          .then(() => {
+            const isAlreadyEnrolled = findCurrentUser?.enrolled_courses.some(
+              (course) => course.batchId === batchId,
+            );
 
-      const isAlreadyEnrolled = findCurrentUser?.enrolled_courses.some(
-        (course) => course.batchId === batchId,
-      );
-      if (!isAlreadyEnrolled) {
-        await addUserToEnrolledCourses(batchId, findCurrentUser, db);
+            if (!isAlreadyEnrolled) {
+              return addUserToEnrolledCourses(
+                batchId,
+                findCurrentUser,
+                paymentResponse,
+              );
+            } else {
+              console.log('User is already enrolled in this course.');
+            }
+          })
+          .then(() => {
+            // Optionally handle success for the user enrollment
+            Swal.fire({
+              icon: 'success',
+              title: 'Enrollment Successful!',
+              text: 'You have been successfully enrolled in the course.',
+            }).then(() => {
+              sessionStorage.clear();
+            });
+          })
+          .catch((error) => {
+            // If there's an error during enrollment, show an error message
+            Swal.fire(
+              'Error',
+              'Error enrolling student: ' + error.message,
+              'error',
+            );
+          })
+          .finally(() => {
+            setLoading(false); // Stop loading
+          });
+      } else {
+        setLoading(false);
       }
     },
-    [currentCourse, findCurrentUser, db, setCourseDataBatch],
+    [currentCourse, findCurrentUser],
   );
 
-  useEffect(() => {
-    const verifyPayment = async () => {
-      if (paymentID) {
-        const timeout = setTimeout(() => {
-          setLoading(false);
-          Swal.fire(
-            'Warning',
-            'Payment verification is taking too long, please try again.',
-            'warning',
-          );
-        }, 10000); // 10 seconds timeout
+  const verifyPayment = async () => {
+    setLoading(true);
+    setAttemptCount((prev) => prev + 1);
 
-        try {
-          const response = await fetch(
-            `/api/bkash/callback?paymentID=${paymentID}&status=success`,
-          );
-          clearTimeout(timeout);
-          const data = await response.json();
+    try {
+      const response = await fetch('/api/bkash/verify-payment', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Authorization: `Bearer ${id_token}`,
+          Accept: 'application/json',
+          'X-APP-Key': process.env.NEXT_PUBLIC_BKASH_APP_KEY,
+        },
+        body: JSON.stringify({ paymentID }),
+      });
 
-          if (response.ok) {
-            const batchId = data?.additionalInfo?.unique_batch_id;
-            const studentId = data?.additionalInfo?.student_id;
-            setPaymentResponse(data);
-            updateDatabaseAfterPayment(batchId, studentId);
-          } else {
-            Swal.fire('Error', 'Payment verification failed.', 'error');
-          }
-        } catch (error) {
+      const data = await response.json();
+
+      if (response.ok) {
+        setPaymentResponse(data.paymentStatus);
+        updateDatabaseAfterPayment(batchId, findCurrentUser?.student_id);
+      } else {
+        const errorMessage = data.message || 'Payment verification failed.';
+        if (attemptCount < 2) {
+          setTimeout(() => {
+            verifyPayment(); // Retry after 2 seconds
+          }, 2000); // Delay of 2 seconds before retrying
+        } else {
           Swal.fire(
             'Error',
-            'Error verifying payment: ' + error.message,
+            'Payment verification failed after 2 attempts: ' + errorMessage,
             'error',
           );
-        } finally {
-          setLoading(false);
         }
       }
-    };
+    } catch (error) {
+      Swal.fire('Error', 'Error verifying payment: ' + error.message, 'error');
+    } finally {
+      setLoading(false);
+      sessionStorage.clear();
+    }
+  };
+
+  useEffect(() => {
+    if (!paymentID || !id_token) {
+      console.log('Skipping verifyPayment, values are missing.');
+      return;
+    }
 
     verifyPayment();
-  }, [paymentID, updateDatabaseAfterPayment]);
+  }, [paymentID, id_token]);
 
   if (loading)
     return (
@@ -168,7 +187,7 @@ const PaymentSuccess = () => {
     );
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4">
+    <div className="py-20 flex flex-col justify-center items-center bg-gray-50 px-4 min-h-screen">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-lg text-center">
         {/* Company Logo */}
         <div className="mb-6">
@@ -181,41 +200,35 @@ const PaymentSuccess = () => {
           />
         </div>
 
-        {/* Lottie Animation */}
-        <div className="mb-6">
-          <Lottie options={defaultOptions} />
-        </div>
+        {paymentResponse && !loading ? (
+          <>
+            {/* Lottie Animation */}
+            <div className="mb-6">
+              <Lottie options={defaultOptions} />
+            </div>
 
-        {/* Payment Success Heading */}
-        <div className="mb-4">
-          <h1 className="text-3xl font-bold text-green-600">
-            Payment Successful!
-          </h1>
-        </div>
-        {paymentResponse ? (
-          <div className="text-gray-600 mb-4">
-            <p className="font-semibold">
-              Payment ID: {paymentResponse.paymentId}
-            </p>
-            <p className="font-semibold">Amount: {paymentResponse.amount}</p>
-            <p className="font-semibold">
-              Transaction Status: {paymentResponse.transactionStatus}
-            </p>
-            <p className="font-semibold">
-              Merchant Invoice: {paymentResponse.merchantInvoiceNumber}
-            </p>
-          </div>
+            {/* Payment Success Heading */}
+            <div className="mb-4">
+              <h1 className="text-3xl font-bold text-green-600">
+                Payment Successful!
+              </h1>
+            </div>
+
+            <button
+              onClick={() => router.push('/students/my-course')}
+              className="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
+            >
+              Return to Dashboard
+            </button>
+          </>
         ) : (
-          <p className="text-gray-500">Payment information not available.</p>
+          <div className="flex items-center justify-center flex-col">
+            <Spin size="large" />
+            <div className="mt-4 text-lg text-gray-700">
+              Verifying payment, please wait...
+            </div>
+          </div>
         )}
-
-        <button
-          aria-label="Return to Home"
-          onClick={() => router.push('/')}
-          className="mt-6 bg-green-600 hover:bg-green-700 text-white font-semibold py-2 px-4 rounded-md transition duration-200"
-        >
-          Return to Home
-        </button>
       </div>
     </div>
   );

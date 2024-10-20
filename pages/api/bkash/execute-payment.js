@@ -1,29 +1,37 @@
 import axios from 'axios';
-import getGrantToken from './grant-token';
 
 export default async function executePayment(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { paymentID } = req.body; // Get payment ID from the request
-  try {
-    const token = await getGrantToken(); // Call the function to get grant token
+  const { paymentID } = JSON.parse(req.body); // Get payment ID from the request
+  const token = req.headers.authorization?.split(' ')[1]; // Extract Bearer token from headers
 
+  if (!token) {
+    return res.status(401).json({ error: 'Token missing or invalid' });
+  }
+
+  try {
     const response = await axios.post(
       `${process.env.NEXT_PUBLIC_BKASH_EXECUTE_PAYMENT_URL}`,
-      {
-        paymentID,
-      },
+      { paymentID },
       {
         headers: {
-          Authorization: `Bearer ${token}`,
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`, // Use the token here
+          'X-APP-Key': process.env.NEXT_PUBLIC_BKASH_APP_KEY,
         },
       },
     );
 
+    console.log('Execute Payment:', response.data);
     res.status(200).json(response.data);
   } catch (error) {
-    res.status(500).json({ error: error.message });
+    console.error(
+      'Execute Payment Error:',
+      error.response?.data || error.message,
+    );
+    res.status(500).json({ error: error.response?.data || error.message });
   }
 }

@@ -5,7 +5,7 @@ export default async function createPayment(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  const { amount, additionalInfo } = req.body;
+  const { amount, additionalInfo, token } = req.body;
 
   // Validate amount
   if (!amount || isNaN(amount)) {
@@ -13,23 +13,6 @@ export default async function createPayment(req, res) {
   }
 
   try {
-    // Fetch the grant token
-    const tokenResponse = await fetch(
-      `${req.headers.origin}/api/bkash/grant-token`,
-      {
-        method: 'POST',
-      },
-    );
-
-    if (!tokenResponse.ok) {
-      throw new Error('Failed to fetch grant token');
-    }
-
-    const tokenData = await tokenResponse.json();
-    const token = tokenData.id_token || tokenData.token;
-
-    console.log('Token:', token);
-
     // Create payment request to bKash API
     const paymentData = {
       mode: '0011',
@@ -57,6 +40,7 @@ export default async function createPayment(req, res) {
     );
 
     // Send the response back to the client
+    console.log('Create Payment response:', response.data);
     res.status(200).json(response.data);
   } catch (error) {
     console.error(

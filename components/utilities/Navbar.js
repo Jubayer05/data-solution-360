@@ -94,6 +94,8 @@ const Navbar = ({ home }) => {
       });
   };
 
+  console.log(userEmail);
+
   return (
     <div
       className={`w-full md:text-center z-[900] px-5 pt-4 pb-3 md:px-4 md:py-0 ${
@@ -225,50 +227,49 @@ const Navbar = ({ home }) => {
               />
             </div>
 
-            {userEmail ? (
+            {!userEmail && !modalIsOpen ? (
+              <button
+                onClick={() => openModal()}
+                type="button"
+                style={{
+                  borderRadius: '5px',
+                }}
+                className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-white 
+            bg-primary-bg transition-all duration-300 ease-linear hover:bg-white capitalize font-semibold
+             hover:text-primary hover:border-primary`}
+              >
+                <FiLogIn className="text-sm" />
+                <span
+                  className={`pl-2 ${
+                    language === 'English' ? 'font-body' : 'font-bangla'
+                  }`}
+                >
+                  {language === 'English' ? 'Log in' : 'লগ ইন'}
+                </span>
+              </button>
+            ) : userEmail ? (
               <div>
                 <Link
                   href={findAdmin ? '/admin/dashboard' : '/students/dashboard'}
                 >
                   <button
                     className="px-4 py-3 bg-primary_btn text-white rounded-lg flex items-center
-                  justify-center gap-2"
+      justify-center gap-2"
                   >
                     Dashboard <MdOutlineDashboardCustomize />
                   </button>
                 </Link>
               </div>
-            ) : (
-              <>
-                <button
-                  onClick={() => openModal()}
-                  type="button"
-                  style={{
-                    borderRadius: '5px',
-                  }}
-                  className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-white 
-                          bg-primary-bg transition-all duration-300 ease-linear hover:bg-white capitalize font-semibold
-                           hover:text-primary hover:border-primary`}
-                >
-                  <FiLogIn className="text-sm" />{' '}
-                  <span
-                    className={`pl-2 ${
-                      language === 'English' ? 'font-body' : 'font-bangla'
-                    }`}
-                  >
-                    {language === 'English' ? 'Log in' : 'লগ ইন'}
-                  </span>
-                </button>
-                <div className="p-5">
-                  <>
-                    <LoginModal
-                      modalIsOpen={modalIsOpen}
-                      closeModal={closeModal}
-                    />
-                  </>
-                </div>
-              </>
-            )}
+            ) : null}
+            <LoginModal
+              modalIsOpen={modalIsOpen}
+              closeModal={() => {
+                closeModal();
+                if (userEmail) {
+                  // Optionally handle any logic here after closing the modal, like redirecting to the dashboard
+                }
+              }}
+            />
           </div>
         </div>
       </div>

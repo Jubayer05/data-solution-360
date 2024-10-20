@@ -83,6 +83,8 @@ const DashboardNavbar = () => {
     return initials?.toUpperCase(); // Ensure the initials are in uppercase
   }
 
+  console.log(findCurrentUser);
+
   return (
     <div
       className={`border-b border-dashboard_border fixed right-0 bg-white z-50 ${
@@ -129,39 +131,43 @@ const DashboardNavbar = () => {
             </div>
           </Link>
           <Tooltip title="Profile" color="#707070">
-            <div
-              className="ml-2 flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg"
-              onClick={() => handleClick('userProfile')}
+            <Link
+              href={
+                findCurrentUser?.role == 'student'
+                  ? '/students/profile'
+                  : '/admin/dashboard'
+              }
             >
-              {/* <Imagewidth={500} height={300}src={avatar} alt="" className="h-8 w-8 rounded-full" /> */}
-              <div className="flex items-center">
-                <div className="border-[3px] border-[#0389d7] rounded-full flex items-center justify-center">
-                  {findCurrentUser?.photoUrl ? (
-                    <Image
-                      width={500}
-                      height={300}
-                      className="w-[40px] h-[40px] rounded-full"
-                      src={findCurrentUser?.photoUrl}
-                      alt={userName}
-                    />
-                  ) : (
-                    <div
-                      className="w-[40px] h-[40px] rounded-full flex justify-center items-center font-semibold
-                     bg-primary_btn text-white tracking-wider"
-                    >
-                      {' '}
-                      {getInitials(findCurrentUser?.full_name)}
-                    </div>
-                  )}
-                </div>
-                <div>
-                  <p className="text-gray-800 font-bold ml-1 text-14 mb-0"></p>
-                  {/* <p className="text-gray-500 font-bold ml-1 text-[10px] mb-0">
+              <div className="ml-2 flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg">
+                <div className="flex items-center">
+                  <div className="border-[3px] border-[#0389d7] rounded-full flex items-center justify-center">
+                    {findCurrentUser?.photoUrl ? (
+                      <Image
+                        width={500}
+                        height={300}
+                        className="w-[40px] h-[40px] rounded-full"
+                        src={findCurrentUser?.photoUrl}
+                        alt={userName}
+                      />
+                    ) : (
+                      <div
+                        className="w-[40px] h-[40px] rounded-full flex justify-center items-center font-semibold
+                    bg-primary_btn text-white tracking-wider"
+                      >
+                        {' '}
+                        {getInitials(findCurrentUser?.full_name)}
+                      </div>
+                    )}
+                  </div>
+                  <div>
+                    <p className="text-gray-800 font-bold ml-1 text-14 mb-0"></p>
+                    {/* <p className="text-gray-500 font-bold ml-1 text-[10px] mb-0">
                     @{uniqueUserName}
-                  </p> */}
+                    </p> */}
+                  </div>
                 </div>
               </div>
-            </div>
+            </Link>
           </Tooltip>
 
           {/* {isClicked.cart && <Cart />}

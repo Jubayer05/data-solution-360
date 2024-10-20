@@ -20,6 +20,7 @@ export const MainContextProvider = ({ children }) => {
 
     // Set up the Firebase authentication state observer
     const unsubscribe = auth.onAuthStateChanged((user) => {
+      console.log(user);
       if (user) {
         // User is signed in, update the state
         setUserName(user.displayName);
@@ -33,6 +34,8 @@ export const MainContextProvider = ({ children }) => {
       }
       setGlobalLoading(false); // Ensure loading state is updated
     });
+
+    console.log(userEmail);
 
     // Load data from Firestore
     loadData('users', setUserData);

@@ -1,11 +1,16 @@
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import Lottie from 'react-lottie'; // Import the Lottie player
 import animationData from '../../../src/data/json/payment-cancelled.json'; // Path to your Lottie JSON file
 
 const PaymentFailure = () => {
   const router = useRouter();
   const { paymentID } = router.query;
+
+  useEffect(() => {
+    sessionStorage.clear();
+  }, []);
 
   const defaultOptions = {
     loop: true,
@@ -17,7 +22,7 @@ const PaymentFailure = () => {
   };
 
   return (
-    <div className="min-h-screen flex flex-col justify-center items-center bg-gray-50 px-4">
+    <div className="min-h-screen py-10 flex flex-col justify-center items-center bg-gray-50 px-4">
       <div className="bg-white shadow-md rounded-lg p-6 max-w-lg text-center">
         {/* Company Logo */}
         <div className="mb-6">

@@ -11,53 +11,60 @@ import * as animationData from '../../src/data/json/login_loading.json';
 const db = firebase.firestore();
 
 const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
-  const [phoneNumber, setPhoneNumber] = useState('');
-  const [verificationCode, setVerificationCode] = useState('');
-  const [verificationId, setVerificationId] = useState('');
+  const [phoneNumberInput, setPhoneNumberInput] = useState('');
+  const [otpCode, setOtpCode] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [step, setStep] = useState(1);
 
-  const phoneNumberEmail = `${phoneNumber?.replace(
+  const phoneNumberEmail = `${phoneNumberInput?.replace(
     /\D/g,
     '',
   )}@datasolution360.com`;
+
+  const phoneNumber = phoneNumberInput?.replace(/^\+/, '');
 
   // NOTE: HANDLE SET USER AND SEND CODE
   const handleCheckUserAndSendCode = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setError('');
-    setSuccess('');
+    setError(''); // Clear any previous error
+    setSuccess(''); // Clear any previous success message
     try {
-      const methods = await auth.fetchSignInMethodsForEmail(phoneNumberEmail);
-      if (methods.length > 0) {
-        // User exists
-        setStep(3); // Go to password input step
-      } else {
-        // User does not exist, send OTP
-        const recaptchaVerifier = new firebase.auth.RecaptchaVerifier(
-          'recaptcha-container',
-          {
-            size: 'invisible',
-          },
-        );
-        await recaptchaVerifier.render(); // Ensure reCAPTCHA is rendered
+      // Check if the user already exists in Firebase Auth using phoneNumberEmail
+      const userRecord = await firebase
+        .auth()
+        .fetchSignInMethodsForEmail(phoneNumberEmail);
 
-        const confirmationResult = await auth.signInWithPhoneNumber(
-          phoneNumber,
-          recaptchaVerifier,
-        );
-        setVerificationId(confirmationResult.verificationId);
-        setStep(2); // Go to verify code step
+      if (userRecord.length > 0) {
+        // If user exists, go directly to login
+        setStep(3); // Skip OTP and proceed to login step
+        setSuccess('User found! Please enter your password to login.');
+      } else {
+        // If user does not exist, send OTP for account creation
+        const res = await fetch('/api/otp/sendOtp', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ phoneNumber }), // Send phoneNumber in request body
+        });
+
+        const data = await res.json();
+
+        if (res.ok) {
+          setSuccess(data.message); // Show success message
+          setStep(2); // Proceed to OTP verification step
+        } else {
+          setError(data.message || 'Failed to send OTP'); // Handle errors
+        }
       }
     } catch (err) {
-      setError(err.message);
-      console.error('Error during user check and send code:', err);
+      setError('Error during sending OTP or checking user: ' + err.message); // Catch request errors
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading
     }
   };
 
@@ -67,51 +74,78 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
     setLoading(true);
     setError('');
     setSuccess('');
+
     try {
-      const credential = firebase.auth.PhoneAuthProvider.credential(
-        verificationId,
-        verificationCode,
-      );
-      const userCredential = await auth.signInWithCredential(credential);
-      await userCredential.user.updateEmail(phoneNumberEmail);
-      setStep(4); // Go to set password step
+      const res = await fetch('/api/otp/verifyOtp', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ phoneNumber, inputOtp: otpCode }), // Send OTP for verification
+      });
+
+      const data = await res.json();
+
+      if (res.ok) {
+        setSuccess(data.message); // Show success message
+        setStep(4); // Proceed to set password step
+      } else {
+        setError(data.message || 'Invalid OTP, please try again'); // Show error if OTP is invalid
+      }
     } catch (err) {
-      setError(err.message);
-      console.error('Error during verify code:', err);
+      setError('Error during OTP verification: ' + err.message); // Handle request errors
     } finally {
-      setLoading(false);
+      setLoading(false); // Stop loading
     }
   };
 
-  const handleSetPassword = async (e) => {
+  const handleSetPassword = (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
     setSuccess('');
-    try {
-      const user = firebase.auth().currentUser;
-      await user.updatePassword(password);
-      setSuccess('Account created and password set successfully!');
-      db.collection('users')
-        .add({
-          email: phoneNumberEmail,
-          phone: phoneNumber,
-          role: 'student',
-          student_id: uuidv4().split('-')[0],
-          enrolled_courses: [],
+
+    let user = firebase.auth().currentUser;
+
+    if (!user) {
+      // If no user is signed in, create a new user with email and password
+      auth
+        .createUserWithEmailAndPassword(phoneNumberEmail, password)
+        .then((newUserCredential) => {
+          user = newUserCredential.user;
+
+          // Show success message for account creation
+          setSuccess('Account created successfully!');
+
+          // Add user details to Firestore
+          return db.collection('users').add({
+            email: phoneNumberEmail,
+            phone: phoneNumberInput,
+            role: 'student',
+            student_id: uuidv4().split('-')[0],
+            enrolled_courses: [],
+          });
         })
-        .then(() => {
-          setStep(5); // Go to success step
+        .then((userDocRef) => {
+          if (userDocRef.id) {
+            setStep(5); // Proceed to success step
+          } else {
+            setError('Failed to add user to the database.');
+          }
         })
         .catch((err) => {
-          setError('Cannot create account');
-          console.error('Error creating account in Firestore:', err);
+          if (err.code === 'auth/email-already-in-use') {
+            setError('This email is already registered.');
+          } else if (err.code === 'auth/weak-password') {
+            setError('The password is too weak.');
+          } else {
+            setError(err.message);
+          }
+          console.error('Error creating account or adding user:', err);
+        })
+        .finally(() => {
+          setLoading(false);
         });
-    } catch (err) {
-      setError(err.message);
-      console.error('Error setting password:', err);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -127,8 +161,6 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
     } catch (err) {
       handleAuthError(err);
       console.error('Error during login:', err);
-      // Swal.fire('Hey!', err.message, 'error');
-      // setError(err.message);
     } finally {
       setLoading(false);
     }
@@ -170,9 +202,9 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                 <PhoneInput
                   className="w-full pt-5 pb-1"
                   placeholder="Enter phone number"
-                  value={phoneNumber}
-                  onChange={setPhoneNumber}
-                  country="US"
+                  value={phoneNumberInput}
+                  onChange={setPhoneNumberInput}
+                  country="BD"
                 />
               </div>
               <button
@@ -206,13 +238,13 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
           {step === 2 && (
             <form onSubmit={handleVerifyCode} className="mb-4 px-3 md:px-5">
               <h2 className="-mt-4 text-[26px] font-bold">Enter OTP</h2>
-              <p>An OTP has been sent to this number {phoneNumber}</p>
+              <p>An OTP has been sent to this number {phoneNumberInput}</p>
               <div className="my-4">
                 <input
                   type="text"
-                  id="verificationCode"
-                  value={verificationCode}
-                  onChange={(e) => setVerificationCode(e.target.value)}
+                  id="otpCode"
+                  value={otpCode}
+                  onChange={(e) => setOtpCode(e.target.value)}
                   className="mt-1 block w-full px-3 py-3 text-base md:text-lg border border-gray-300 rounded-md
               shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
                   placeholder="Enter verification code"
@@ -279,10 +311,14 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
 
-          {step === 5 && success && (
+          {step === 5 && (
             <div className="flex items-center justify-center flex-col">
-              <Lottie options={congratulationsLottie} />
-              <div className="max-w-md mx-auto p-6  text-center">
+              {congratulationsLottie ? (
+                <Lottie options={congratulationsLottie} />
+              ) : (
+                <p>Congratulations!</p>
+              )}
+              <div className="max-w-md mx-auto p-6 text-center">
                 <p className="text-base my-4 text-green-600">
                   Your account has been successfully created.
                 </p>

@@ -1,8 +1,10 @@
+import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import { FaArrowLeft } from 'react-icons/fa6';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
+import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
 import ModuleBreadcrumb from './ModuleBreadcrumb';
 import ModuleIntro from './ModuleIntro';
 import StudyPlan from './StudyPlan';
@@ -22,6 +24,7 @@ const ModuleDetailsMain = () => {
   const { activeMenu } = useStateContextDashboard();
   const { setModuleShowComp } = useStudentContext();
   const { moduleData, enrolledCourse } = useEnrolledCourseData();
+  const router = useRouter();
 
   const handleSegmentClick = (item) => {
     setActiveBtn(item.title);
@@ -35,15 +38,12 @@ const ModuleDetailsMain = () => {
       } mx-auto flex items-center gap-5`}
     >
       <div className="w-full">
-        <button
-          className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2
-        px-5 rounded border-dashboard_border border mt-4 transition-all duration-200"
-        >
-          <span className="flex items-center gap-2">
-            {' '}
-            <FaArrowLeft className="text-lg" /> Go Back
-          </span>{' '}
-        </button>
+        <div className="flex items-end gap-4 pt-6">
+          <ButtonDashboard onClick={() => router.back()}>
+            <FaArrowLeft />
+            Go Back
+          </ButtonDashboard>
+        </div>
         <ModuleBreadcrumb />
 
         <ModuleIntro moduleData={moduleData} />

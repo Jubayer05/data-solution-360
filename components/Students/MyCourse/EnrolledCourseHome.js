@@ -1,10 +1,8 @@
 import React from 'react';
-import { IoIosPeople } from 'react-icons/io';
 
 import Image from 'next/image';
 import Link from 'next/link';
 import { FaArrowRightLong } from 'react-icons/fa6';
-import { ImClock } from 'react-icons/im';
 
 const EnrolledCourseHome = ({ item }) => {
   return (
@@ -27,62 +25,13 @@ const EnrolledCourseHome = ({ item }) => {
                 Batch <strong>{item?.courseData?.batch_no}</strong>
               </span>
             </div>
-            <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
-              <IoIosPeople />
-
-              <span className="text-[10px] md:text-[12px] block -mt-[1px]">
-                Total Seat{' '}
-                <strong>{item?.courseData?.total_seat_number}</strong>
-              </span>
-            </div>
-
-            {new Date(item?.courseData?.main_class_starting_date).getTime() >=
-              new Date().getTime() && (
-              <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
-                <ImClock />
-                <span className="text-[10px] md:text-[12px] -mt-[1px]">
-                  <strong>
-                    {' '}
-                    {new Date(
-                      item?.courseData?.main_class_starting_date,
-                    ).getTime() >= new Date().getTime()
-                      ? Math.ceil(
-                          (new Date(
-                            item?.courseData?.main_class_starting_date,
-                          ).getTime() -
-                            new Date().getTime()) /
-                            (1000 * 60 * 60 * 24),
-                        )
-                      : 0}
-                  </strong>
-                  Days Left
-                </span>
-              </div>
-            )}
           </div>
           <p
-            className="flex-1 text-base leading-5 md:text-lg font-bold mb-1.5 mt-2 text-[#140342]
+            className="flex-1 text-xs leading-5 font-bold mb-1.5 mt-2 text-[#140342]
           px-1 md:px-4"
           >
-            {item.title}
+            {item?.courseData?.title}
           </p>
-          {/* {item?.courseData?.status == 'Registration Going on' && (
-            <div className="text-xl">
-              <p
-                className=" flex-1 text-[13px] md:text-lg font-bold mb-1.5 md:mt-1 
-          px-1 md:px-4 text-[#39b94a] text-center"
-              >
-                <Typewriter
-                  options={{
-                    strings: ['Registration Going on', 'Registration Going on'],
-                    autoStart: true,
-                    loop: true,
-                    deleteSpeed: 15,
-                  }}
-                />
-              </p>
-            </div>
-          )} */}
           <div
             className="flex justify-end font-medium text-[14px] flex-wrap text-[#4F547B]
             bg-[#f9f9fa] py-4 px-2"

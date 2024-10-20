@@ -19,6 +19,11 @@ const Checkout = () => {
     (checkout) => checkout.id === courseId,
   );
 
+  sessionStorage.setItem(
+    'batchId',
+    JSON.stringify(findBatchData?.unique_batch_id),
+  );
+
   const findCheckoutCourse = findBatchData?.courseData;
 
   return (
