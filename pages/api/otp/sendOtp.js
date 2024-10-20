@@ -18,7 +18,7 @@ export default async function handler(req, res) {
     try {
       await axios.get(apiUrl, {
         params: {
-          api_key: process.env.BULKSMSBD_API_KEY,
+          api_key: 'GD42SGxtuPyeFjwFJtns',
           type: 'text',
           number: phoneNumber,
           senderid: '8809617621561', // Replace with your sender ID
