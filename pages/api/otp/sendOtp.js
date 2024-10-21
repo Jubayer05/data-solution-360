@@ -5,6 +5,17 @@ const generateOtp = () => {
 };
 
 export default async function handler(req, res) {
+  // Set CORS headers to allow requests from any origin (or you can specify a domain)
+  res.setHeader('Access-Control-Allow-Origin', '*');
+  res.setHeader('Access-Control-Allow-Methods', 'GET, POST, OPTIONS');
+  res.setHeader('Access-Control-Allow-Headers', 'Content-Type');
+
+  // Handle the preflight request
+  if (req.method === 'OPTIONS') {
+    res.status(200).end();
+    return;
+  }
+
   if (req.method === 'POST') {
     const { phoneNumber } = req.body;
 
