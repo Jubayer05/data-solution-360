@@ -12,16 +12,19 @@ export default async function executePayment(req, res) {
 
   try {
     // Make the request to the bKash execute payment API using fetch
-    const response = await fetch(process.env.EXECUTE_PAYMENT_URL, {
-      method: 'POST',
-      headers: {
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`, // Use the token here
-        'X-APP-Key': process.env.APP_KEY,
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized/checkout/execute',
+      {
+        method: 'POST',
+        headers: {
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`, // Use the token here
+          'X-APP-Key': process.env.APP_KEY,
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ paymentID }), // Send the payment ID as body
       },
-      body: JSON.stringify({ paymentID }), // Send the payment ID as body
-    });
+    );
 
     // Check if the response is successful
     if (!response.ok) {

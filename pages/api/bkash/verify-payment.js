@@ -16,16 +16,19 @@ export default async function handler(req, res) {
 
   try {
     // Step 1: Call bKash Query Payment API using fetch
-    const response = await fetch(process.env.VERIFY_PAYMENT_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        Authorization: `Bearer ${token}`, // Use the valid token
-        'X-APP-Key': process.env.APP_KEY, // Your bKash app key
+    const response = await fetch(
+      'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized/checkout/payment/status',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Authorization: `Bearer ${token}`, // Use the valid token
+          'X-APP-Key': process.env.APP_KEY, // Your bKash app key
+        },
+        body: JSON.stringify({ paymentID }), // Send paymentID as body
       },
-      body: JSON.stringify({ paymentID }), // Send paymentID as body
-    });
+    );
 
     // Check if the response is successful
     if (!response.ok) {

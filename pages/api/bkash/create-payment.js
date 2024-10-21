@@ -24,15 +24,18 @@ export default async function createPayment(req, res) {
     };
 
     // Make request to bKash create payment API using fetch
-    const response = await fetch(process.env.CREATE_PAYMENT_URL, {
-      method: 'POST',
-      headers: {
-        Authorization: `Bearer ${token}`,
-        'X-APP-Key': process.env.APP_KEY, // Add the X-APP-Key header
-        'Content-Type': 'application/json',
+    const response = await fetch(
+      'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized/checkout/create',
+      {
+        method: 'POST',
+        headers: {
+          Authorization: `Bearer ${token}`,
+          'X-APP-Key': process.env.APP_KEY, // Add the X-APP-Key header
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify(paymentData),
       },
-      body: JSON.stringify(paymentData),
-    });
+    );
 
     // Check if the response is successful
     if (!response.ok) {

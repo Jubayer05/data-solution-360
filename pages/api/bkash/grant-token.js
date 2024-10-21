@@ -4,19 +4,22 @@ export default async function getGrantToken(req, res) {
   }
 
   try {
-    const response = await fetch(process.env.GRANT_TOKEN_URL, {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        Accept: 'application/json',
-        username: process.env.MERCHANT_ID, // Add username to headers
-        password: process.env.PASSWORD, // Add password to headers
+    const response = await fetch(
+      'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized/checkout/token/grant',
+      {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          username: process.env.MERCHANT_ID, // Add username to headers
+          password: process.env.PASSWORD, // Add password to headers
+        },
+        body: JSON.stringify({
+          app_key: process.env.APP_KEY,
+          app_secret: process.env.APP_SECRET,
+        }),
       },
-      body: JSON.stringify({
-        app_key: process.env.APP_KEY,
-        app_secret: process.env.APP_SECRET,
-      }),
-    });
+    );
 
     // Check if the response is successful
     if (!response.ok) {
