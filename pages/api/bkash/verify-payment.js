@@ -19,14 +19,14 @@ export default async function handler(req, res) {
   try {
     // Step 1: Call bKash Query Payment API
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BKASH_VERIFY_PAYMENT_URL}`,
+      `${process.env.VERIFY_PAYMENT_URL}`,
       { paymentID },
       {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
           Authorization: `Bearer ${token}`, // Use the valid token
-          'X-APP-Key': process.env.NEXT_PUBLIC_BKASH_APP_KEY, // Your bKash app key
+          'X-APP-Key': process.env.APP_KEY, // Your bKash app key
         },
       },
     );

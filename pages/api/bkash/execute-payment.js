@@ -14,13 +14,13 @@ export default async function executePayment(req, res) {
 
   try {
     const response = await axios.post(
-      `${process.env.NEXT_PUBLIC_BKASH_EXECUTE_PAYMENT_URL}`,
+      `${process.env.EXECUTE_PAYMENT_URL}`,
       { paymentID },
       {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`, // Use the token here
-          'X-APP-Key': process.env.NEXT_PUBLIC_BKASH_APP_KEY,
+          'X-APP-Key': process.env.APP_KEY,
         },
       },
     );

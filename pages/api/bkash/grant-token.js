@@ -8,17 +8,17 @@ export default async function getGrantToken(req, res) {
 
   try {
     const response = await axios.post(
-      process.env.NEXT_PUBLIC_BKASH_GRANT_TOKEN_URL, // Correct URL for the grant token
+      process.env.GRANT_TOKEN_URL, // Correct URL for the grant token
       {
-        app_key: process.env.NEXT_PUBLIC_BKASH_APP_KEY,
-        app_secret: process.env.NEXT_PUBLIC_BKASH_APP_SECRET,
+        app_key: process.env.APP_KEY,
+        app_secret: process.env.APP_SECRET,
       },
       {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          username: process.env.NEXT_PUBLIC_BKASH_MERCHANT_ID, // Add username to headers
-          password: process.env.NEXT_PUBLIC_BKASH_PASSWORD, // Add password to headers
+          username: process.env.MERCHANT_ID, // Add username to headers
+          password: process.env.PASSWORD, // Add password to headers
         },
       },
     );

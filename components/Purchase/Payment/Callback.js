@@ -19,7 +19,7 @@ const BkashCallback = () => {
             headers: {
               Accept: 'application/json',
               Authorization: `Bearer ${accessToken}`,
-              'X-APP-Key': process.env.NEXT_PUBLIC_BKASH_APP_KEY,
+              'X-APP-Key': process.env.APP_KEY,
             },
             body: JSON.stringify({
               paymentID, // Use the paymentID from Step 2

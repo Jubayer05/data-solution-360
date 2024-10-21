@@ -28,12 +28,12 @@ export default async function createPayment(req, res) {
 
     // Make request to bKash create payment API
     const response = await axios.post(
-      process.env.NEXT_PUBLIC_BKASH_CREATE_PAYMENT_URL,
+      process.env.CREATE_PAYMENT_URL,
       paymentData,
       {
         headers: {
           Authorization: `Bearer ${token}`,
-          'X-APP-Key': process.env.NEXT_PUBLIC_BKASH_APP_KEY, // Add the X-APP-Key header
+          'X-APP-Key': process.env.APP_KEY, // Add the X-APP-Key header
           'Content-Type': 'application/json',
         },
       },

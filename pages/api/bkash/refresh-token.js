@@ -11,18 +11,18 @@ export default async function refreshToken(req, res) {
 
   try {
     const response = await axios.post(
-      process.env.NEXT_PUBLIC_BKASH_REFRESH_TOKEN_URL,
+      process.env.REFRESH_TOKEN_URL,
       {
-        app_key: process.env.NEXT_PUBLIC_BKASH_APP_KEY, // Add your app_key
-        app_secret: process.env.NEXT_PUBLIC_BKASH_APP_SECRET, // Add your app_secret
+        app_key: process.env.APP_KEY, // Add your app_key
+        app_secret: process.env.APP_SECRET, // Add your app_secret
         refresh_token: refreshToken, // Use the provided refresh token
       },
       {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          username: process.env.NEXT_PUBLIC_BKASH_MERCHANT_ID,
-          password: process.env.NEXT_PUBLIC_BKASH_PASSWORD,
+          username: process.env.MERCHANT_ID,
+          password: process.env.PASSWORD,
           Authorization: `Bearer ${req.headers['authorization']}`, // Current token in header
         },
       },
