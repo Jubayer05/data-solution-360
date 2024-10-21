@@ -1,4 +1,3 @@
-import axios from 'axios';
 import { setOtp } from './otpStore';
 
 const generateOtp = () => {
@@ -12,19 +11,19 @@ export default async function handler(req, res) {
     const otp = generateOtp(); // Generate a new OTP
     await setOtp(phoneNumber, otp); // Store OTP in Firestore
 
-    const message = `Your Data Solution 360 account verification code is  ${otp}. The code will expire in 2 minutes.`;
+    const message = `Your Data Solution 360 account verification code is ${otp}. The code will expire in 2 minutes.`;
     const apiUrl = 'http://bulksmsbd.net/api/smsapi';
 
     try {
-      await axios.get(apiUrl, {
-        params: {
-          api_key: 'GD42SGxtuPyeFjwFJtns',
-          type: 'text',
-          number: phoneNumber,
-          senderid: '8809617621561', // Replace with your sender ID
-          message: message,
-        },
-      });
+      const response = await fetch(
+        `${apiUrl}?api_key=GD42SGxtuPyeFjwFJtns&type=text&number=${phoneNumber}&senderid=8809617621561&message=${encodeURIComponent(
+          message,
+        )}`,
+      );
+
+      if (!response.ok) {
+        throw new Error('Failed to send OTP');
+      }
 
       res.status(200).json({ message: 'OTP sent to your phone!' });
     } catch (error) {
