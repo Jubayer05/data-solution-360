@@ -30,7 +30,7 @@ export default async function createPayment(req, res) {
         method: 'POST',
         headers: {
           Authorization: `Bearer ${token}`,
-          'X-APP-Key': process.env.APP_KEY, // Add the X-APP-Key header
+          'X-APP-Key': process.env.BKASH_APP_KEY, // Add the X-APP-Key header
           'Content-Type': 'application/json',
         },
         body: JSON.stringify(paymentData),

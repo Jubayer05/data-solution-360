@@ -138,7 +138,7 @@ const PaymentSuccess = () => {
           'Content-Type': 'application/json',
           Authorization: `Bearer ${id_token}`,
           Accept: 'application/json',
-          'X-APP-Key': process.env.APP_KEY,
+          'X-APP-Key': process.env.BKASH_APP_KEY,
         },
         body: JSON.stringify({ paymentID }),
       });

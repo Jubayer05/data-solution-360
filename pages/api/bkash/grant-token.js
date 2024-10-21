@@ -3,8 +3,8 @@ export default async function getGrantToken(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  console.log('Merchant ID:', process.env.MERCHANT_ID); // Log non-sensitive info if needed
-  console.log('App Key:', process.env.APP_KEY);
+  console.log('Merchant ID:', process.env.BKASH_MERCHANT_ID); // Log non-sensitive info if needed
+  console.log('App Key:', process.env.BKASH_APP_KEY);
 
   try {
     const response = await fetch(
@@ -14,12 +14,12 @@ export default async function getGrantToken(req, res) {
         headers: {
           'Content-Type': 'application/json',
           Accept: 'application/json',
-          username: process.env.MERCHANT_ID, // Add username to headers
-          password: process.env.PASSWORD, // Add password to headers
+          username: process.env.BKASH_MERCHANT_ID, // Add username to headers
+          password: process.env.BKASH_PASSWORD, // Add password to headers
         },
         body: JSON.stringify({
-          app_key: process.env.APP_KEY,
-          app_secret: process.env.APP_SECRET,
+          app_key: process.env.BKASH_APP_KEY,
+          app_secret: process.env.BKASH_APP_SECRET,
         }),
       },
     );

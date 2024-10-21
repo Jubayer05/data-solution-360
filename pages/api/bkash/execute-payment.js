@@ -19,7 +19,7 @@ export default async function executePayment(req, res) {
         headers: {
           Accept: 'application/json',
           Authorization: `Bearer ${token}`, // Use the token here
-          'X-APP-Key': process.env.APP_KEY,
+          'X-APP-Key': process.env.BKASH_APP_KEY,
           'Content-Type': 'application/json',
         },
         body: JSON.stringify({ paymentID }), // Send the payment ID as body

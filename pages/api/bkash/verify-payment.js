@@ -24,7 +24,7 @@ export default async function handler(req, res) {
           'Content-Type': 'application/json',
           Accept: 'application/json',
           Authorization: `Bearer ${token}`, // Use the valid token
-          'X-APP-Key': process.env.APP_KEY, // Your bKash app key
+          'X-APP-Key': process.env.BKASH_APP_KEY, // Your bKash app key
         },
         body: JSON.stringify({ paymentID }), // Send paymentID as body
       },
