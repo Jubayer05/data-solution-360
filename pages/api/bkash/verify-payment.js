@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -17,21 +15,30 @@ export default async function handler(req, res) {
   }
 
   try {
-    // Step 1: Call bKash Query Payment API
-    const response = await axios.post(
-      `${process.env.VERIFY_PAYMENT_URL}`,
-      { paymentID },
-      {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`, // Use the valid token
-          'X-APP-Key': process.env.APP_KEY, // Your bKash app key
-        },
+    // Step 1: Call bKash Query Payment API using fetch
+    const response = await fetch(process.env.VERIFY_PAYMENT_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`, // Use the valid token
+        'X-APP-Key': process.env.APP_KEY, // Your bKash app key
       },
-    );
+      body: JSON.stringify({ paymentID }), // Send paymentID as body
+    });
 
-    const paymentStatus = response.data;
+    // Check if the response is successful
+    if (!response.ok) {
+      const errorData = await response.json();
+      console.log('Error in payment status:', errorData);
+      return res.status(400).json({
+        error: 'Failed to retrieve payment status',
+        details: errorData,
+      });
+    }
+
+    // Parse the response data
+    const paymentStatus = await response.json();
     console.log('Payment status response:', paymentStatus); // Log the response for debugging
 
     // Step 3: Check and return payment status

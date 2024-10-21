@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export default async function createPayment(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -13,43 +11,48 @@ export default async function createPayment(req, res) {
   }
 
   try {
-    // Create payment request to bKash API
+    // Create payment request data
     const paymentData = {
       mode: '0011',
       payerReference: ' ',
       callbackURL: `${req.headers.origin}/bkash/callback`,
-      amount: '1',
+      amount: '1', // Replace '1' with amount.toString() if using dynamic amounts
       additionalInfo: JSON.stringify(additionalInfo),
-      // amount: amount.toString(),
       currency: 'BDT',
       intent: 'sale',
       merchantInvoiceNumber: `Inv-${Date.now()}`,
     };
 
-    // Make request to bKash create payment API
-    const response = await axios.post(
-      process.env.CREATE_PAYMENT_URL,
-      paymentData,
-      {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          'X-APP-Key': process.env.APP_KEY, // Add the X-APP-Key header
-          'Content-Type': 'application/json',
-        },
+    // Make request to bKash create payment API using fetch
+    const response = await fetch(process.env.CREATE_PAYMENT_URL, {
+      method: 'POST',
+      headers: {
+        Authorization: `Bearer ${token}`,
+        'X-APP-Key': process.env.APP_KEY, // Add the X-APP-Key header
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify(paymentData),
+    });
+
+    // Check if the response is successful
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        `Failed to create payment: ${errorData.message || 'Unknown error'}`,
+      );
+    }
+
+    // Parse the response data
+    const responseData = await response.json();
+    console.log('Create Payment response:', responseData);
 
     // Send the response back to the client
-    console.log('Create Payment response:', response.data);
-    res.status(200).json(response.data);
+    res.status(200).json(responseData);
   } catch (error) {
-    console.error(
-      'Error creating payment:',
-      error.response?.data || error.message,
-    );
+    console.error('Error creating payment:', error.message);
     res.status(500).json({
       error: 'Failed to create payment',
-      details: error.response?.data || error.message,
+      details: error.message,
     });
   }
 }

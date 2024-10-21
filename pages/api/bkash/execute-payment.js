@@ -1,5 +1,3 @@
-import axios from 'axios';
-
 export default async function executePayment(req, res) {
   if (req.method !== 'POST') {
     return res.status(405).json({ error: 'Method not allowed' });
@@ -13,25 +11,34 @@ export default async function executePayment(req, res) {
   }
 
   try {
-    const response = await axios.post(
-      `${process.env.EXECUTE_PAYMENT_URL}`,
-      { paymentID },
-      {
-        headers: {
-          Accept: 'application/json',
-          Authorization: `Bearer ${token}`, // Use the token here
-          'X-APP-Key': process.env.APP_KEY,
-        },
+    // Make the request to the bKash execute payment API using fetch
+    const response = await fetch(process.env.EXECUTE_PAYMENT_URL, {
+      method: 'POST',
+      headers: {
+        Accept: 'application/json',
+        Authorization: `Bearer ${token}`, // Use the token here
+        'X-APP-Key': process.env.APP_KEY,
+        'Content-Type': 'application/json',
       },
-    );
+      body: JSON.stringify({ paymentID }), // Send the payment ID as body
+    });
 
-    console.log('Execute Payment:', response.data);
-    res.status(200).json(response.data);
+    // Check if the response is successful
+    if (!response.ok) {
+      const errorData = await response.json();
+      throw new Error(
+        `Failed to execute payment: ${errorData.message || 'Unknown error'}`,
+      );
+    }
+
+    // Parse the response data
+    const responseData = await response.json();
+    console.log('Execute Payment:', responseData);
+
+    // Send the response back to the client
+    res.status(200).json(responseData);
   } catch (error) {
-    console.error(
-      'Execute Payment Error:',
-      error.response?.data || error.message,
-    );
-    res.status(500).json({ error: error.response?.data || error.message });
+    console.error('Execute Payment Error:', error.message);
+    res.status(500).json({ error: error.message });
   }
 }
