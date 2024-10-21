@@ -3,9 +3,6 @@ export default async function getGrantToken(req, res) {
     return res.status(405).json({ error: 'Method not allowed' });
   }
 
-  console.log('Merchant ID:', process.env.BKASH_MERCHANT_ID); // Log non-sensitive info if needed
-  console.log('App Key:', process.env.BKASH_APP_KEY);
-
   try {
     const response = await fetch(
       'https://tokenized.pay.bka.sh/v1.2.0-beta/tokenized/checkout/token/grant',
