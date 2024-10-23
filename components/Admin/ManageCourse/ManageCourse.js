@@ -235,7 +235,7 @@ const ManageCourse = () => {
   return (
     <div>
       <HeadingDashboard title="Manage Courses" />
-      <EditCourseData item={courseData} />
+      {/* <EditCourseData item={courseData} /> */}
       <div className="max-w-3xl mx-auto my-20">
         <Table
           columns={columns}
