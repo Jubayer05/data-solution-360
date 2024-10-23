@@ -13,6 +13,7 @@ import AddInstructorCourse from '../Course/AddInstructorCourse';
 import AddModule from '../Course/AddModule';
 import CourseStatus from '../Course/CourseStatus';
 import CourseReview from './CourseReview';
+import EditCourseData from './EditCourseData';
 import InputBoxManage from './InputBoxManage';
 
 const db = firebase.firestore();
@@ -234,6 +235,7 @@ const ManageCourse = () => {
   return (
     <div>
       <HeadingDashboard title="Manage Courses" />
+      <EditCourseData item={courseData} />
       <div className="max-w-3xl mx-auto my-20">
         <Table
           columns={columns}

@@ -16,7 +16,7 @@ export default async function createPayment(req, res) {
       mode: '0011',
       payerReference: ' ',
       callbackURL: `${req.headers.origin}/bkash/callback`,
-      amount: '1', // Replace '1' with amount.toString() if using dynamic amounts
+      amount: amount.toString(), // Replace '1' with amount.toString() if using dynamic amounts
       additionalInfo: JSON.stringify(additionalInfo),
       currency: 'BDT',
       intent: 'sale',
