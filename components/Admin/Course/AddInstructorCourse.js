@@ -6,13 +6,13 @@ import { v4 as uuidv4 } from 'uuid';
 import { loadData } from '../../../src/hooks/loadData';
 
 const AddInstructorCourse = ({ instructors, setInstructors }) => {
-  const [instructor, setInstructor] = useState();
+  const [instructor, setInstructor] = useState([]);
 
   useEffect(() => {
     loadData('instructors', setInstructor);
   }, []);
 
-  const selectInstructor = instructor.map((item) => ({
+  const selectInstructor = instructor?.map((item) => ({
     label: (
       <div className="flex items-center gap-4">
         <Image
@@ -35,14 +35,18 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
     menu: (provided, state) => ({
       ...provided,
       borderBottom: '1px dotted pink',
-      padding: 20,
+      padding: 30,
     }),
     control: (_, {}) => ({
       display: 'flex',
       border: '1px solid #e5e5e5',
-      padding: '5px 10px',
+      padding: '8px 10px',
       borderRadius: '6px',
-      backgroundColor: '#f1f1f1',
+      // backgroundColor: '#f1f1f1',
+    }),
+    placeholder: (provided, state) => ({
+      ...provided,
+      color: '#aaa', // Ensure the placeholder has a visible color
     }),
   };
 
@@ -65,19 +69,19 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
     setInstructors(filterInstructor);
   };
 
+  const options = [
+    { value: 'instructor1', label: 'Instructor 1' },
+    { value: 'instructor2', label: 'Instructor 2' },
+  ];
   return (
     <div className="bg-white border-1 p-5 rounded-lg mt-5 ">
-      <h2 className="text-lg text-center text-[#2ecc71] font-medium font-dash_heading my-4">
-        Choose Instructor From List
-      </h2>
-
       {instructors?.length > 0 && (
         <div className="mb-4">
           <h3 className="text-base font-semibold mb-2">Selected Instructors</h3>
           {instructors?.map((item) => (
             <div
               key={item.id}
-              className="flex items-center justify-between p-4 bg-[#f0f0f0] rounded-md shadow-md mb-4"
+              className="flex items-center justify-between p-4 border rounded-md shadow mb-4"
             >
               <div className="flex items-center gap-4">
                 <Image
@@ -104,12 +108,16 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
       )}
 
       <Select
+        className="w-full opacity-0 hidden"
+        options={selectInstructor}
+        onChange={handleChange}
+        placeholder="Select an instructor"
+      />
+      <Select
         className="w-full"
         styles={customStyles}
         options={selectInstructor}
-        defaultValue={instructors}
         onChange={handleChange}
-        placeholder="Select an Instructor"
       />
     </div>
   );

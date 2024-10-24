@@ -1,4 +1,5 @@
 import { Checkbox, Switch } from 'antd';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -7,7 +8,11 @@ import { useStateContext } from '../../../src/context/ContextProvider';
 import useFetchDocById from '../../../src/hooks/manageDataById/useLoadDocumentById';
 import useUpdateDocumentById from '../../../src/hooks/manageDataById/useUpdateDocumentById';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
+import FileInput from '../../utilities/dashboard/FileInput';
 import RichTextEditorJodit from '../../utilities/RichTextEditor/RichTextEditor';
+import AddInstructorCourse from '../Course/AddInstructorCourse';
+import AddModule from '../Course/AddModule';
+import CourseStatus from '../Course/CourseStatus';
 import InputBoxManage from './InputBoxManage';
 
 const db = firebase.firestore();
@@ -15,7 +20,6 @@ const db = firebase.firestore();
 const EditCourseItem = () => {
   const { courseData, userEmail } = useStateContext();
   const [courseDataObj, setCourseDataObj] = useState({});
-  const [modalData, setModalData] = useState(null);
   const [orientation, setOrientation] = useState(true);
   const [mainClassStart, setMainClassStart] = useState(null);
   const [courseStatus, setCourseStatus] = useState(false);
@@ -27,6 +31,7 @@ const EditCourseItem = () => {
   const [courseDetails, setCourseDetails] = useState('');
   const [courseFor, setCourseFor] = useState('');
   const [youtube_video, setYoutube_video] = useState('');
+  const [courseImg, setCourseImg] = useState('');
   const [youtubeVideoReset, setYoutubeVideoReset] = useState(false);
   const router = useRouter();
   const { courseId } = router?.query;
@@ -44,17 +49,18 @@ const EditCourseItem = () => {
     setStudentReview(data?.studentReview || []);
     setCourseStatus(data?.status);
     setMainClassStart(data?.mainClassStartStatus || false);
+    setCourseImg(data?.img);
   }, [data]);
 
   const handleSubmit = () => {
     const updatedCourse = {
       ...courseDataObj,
       orientation_class: orientation ? courseDataObj?.orientation_class : '-',
-      // youtube_video: youtubeVideoReset
-      //   ? ''
-      //   : extractEmbedId(youtube_video)
-      //   ? extractEmbedId(youtube_video)
-      //   : courseDataObj?.youtube_video || '',
+      youtube_video: youtubeVideoReset
+        ? ''
+        : extractEmbedId(youtube_video)
+        ? extractEmbedId(youtube_video)
+        : courseDataObj?.youtube_video || '',
       main_class_starting_date: mainClassStart
         ? 'running'
         : courseDataObj?.main_class_starting_date,
@@ -73,11 +79,13 @@ const EditCourseItem = () => {
         ? courseFor
         : courseDataObj?.who_is_the_course_for,
       status: courseStatus,
+      img: courseImg,
     };
 
     // console.log(updatedCourse);
     updateDocument(updatedCourse);
   };
+
   useEffect(() => {
     if (success) {
       Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
@@ -104,12 +112,10 @@ const EditCourseItem = () => {
     return <p>Error: {error.message}</p>;
   }
 
-  console.log(data);
-
   return (
     <div className="max-w-4xl mx-auto my-5 ">
-      <div className="border-1 p-5 rounded-lg bg-white flex justify-between items-center">
-        <div>
+      <div className="border-1 p-5 rounded-lg bg-white justify-between items-center grid grid-cols-3">
+        <div className="col-span-2">
           <h2 className="text-xl text-[#231f40] font-medium font-dash_heading ">
             Course Name: <span className="text-primary">{data?.title}</span>
           </h2>
@@ -135,19 +141,27 @@ const EditCourseItem = () => {
             </span>
           </div>
         </div>
-        <div>
+        <div className="col-span-1">
           <p className="text-sm font-semibold text-primary mb-2">
             Change course status
           </p>
-          {/* <CourseStatus
+          <CourseStatus
             courseStatus={courseStatus}
             setCourseStatus={setCourseStatus}
-          /> */}
+          />
+          <div className="flex justify-center">
+            <ButtonDashboard
+              onClick={handleSubmit}
+              className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
+            >
+              Update Status
+            </ButtonDashboard>
+          </div>
         </div>
       </div>
       <div className="w-full">
-        <div className="bg-white border-1 p-5 rounded-lg mt-5">
-          <h2 className="text-lg pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+        <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
+          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
             Basic Course Info
           </h2>
           {/* NOTE: COURSE TITLE */}
@@ -184,6 +198,21 @@ const EditCourseItem = () => {
             type="text"
             value={data?.short_description}
           />
+
+          <label htmlFor="photoUrl" className="font-semibold mt-3 block">
+            Course image
+          </label>
+          <span className="italic font-thin">previous:</span>
+          <Image
+            width={500}
+            height={300}
+            src={data?.img}
+            className="w-52 my-4 border rounded-md"
+            alt=""
+          />
+
+          <FileInput folderName="courseImage" setImageState={setCourseImg} />
+
           <div className="flex justify-center mt-5">
             <ButtonDashboard
               onClick={handleSubmit}
@@ -193,63 +222,9 @@ const EditCourseItem = () => {
             </ButtonDashboard>
           </div>
         </div>
-        {/* TODO: MAKE A DIFFERENT COMPONENT TO MANAGE FILES */}
-        {/* <label htmlFor="photoUrl" className="font-semibold mt-3 block">
-          Course image
-        </label>
-        <span className="italic font-thin">previous:</span>
-        <Image
-          width={500}
-          height={300}
-          src={data?.img}
-          className="w-80 my-4"
-          alt=""
-          />
-          <input
-          id="photoUrl"
-          onChange={handleFileSubmit}
-          type="file"
-          className="w-full px-4 py-2 outline-none border-1 mt-3 "
-        /> */}
 
-        {/* TODO: DIFFERENT COMPONENT FOR YOUTUBE VIDEO */}
-        {/* <div className="flex items-end gap-2">
-          <div className="w-full mt-5 ">
-            <label
-              htmlFor="youtubeVideo"
-              className="font-semibold mt-3 block text-[#17012e]"
-              >
-              Youtube Video
-              <span className="ml-2 italic font-thin">
-              (previous:
-              {!youtubeVideoReset && (
-                <span className=" text-[orangered] ml-2">
-                    {data?.youtube_video}
-                  </span>
-                )}
-                )
-              </span>
-            </label>
-            <input
-              id="youtubeVideo"
-              onChange={(e) => setYoutube_video(e.target.value)}
-              type="text"
-              
-              className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
-            />
-          </div>
-          {data?.youtube_video && (
-            <button
-              onClick={() => setYoutubeVideoReset(true)}
-              className=" w-1/3 px-4 py-4 bg-[#ff3d50] text-white rounded-md"
-            >
-            Reset Youtube Link
-            </button>
-          )}
-        </div> */}
-
-        <div className="bg-white border-1 p-5 rounded-lg mt-5">
-          <h2 className="text-lg pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+        <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
+          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
             Batch, Class & Student Info
           </h2>
 
@@ -366,8 +341,8 @@ const EditCourseItem = () => {
           </div>
         </div>
 
-        <div className="bg-white border-1 p-5 rounded-lg mt-5">
-          <h2 className="text-lg pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+        <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
+          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
             Description & Course Details Point
           </h2>
           <RichTextEditorJodit
@@ -419,8 +394,8 @@ const EditCourseItem = () => {
           </div>
         </div>
 
-        <div className="bg-white border-1 p-5 rounded-lg mt-5">
-          <h2 className="text-lg pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+        <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
+          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
             Additional Course Info
           </h2>
           {/* NOTE: SHORT DESCRIPTION */}
@@ -468,6 +443,39 @@ const EditCourseItem = () => {
             type="text"
             value={data?.drive_link}
           />
+          <div className="flex items-end gap-2">
+            <div className="w-full mt-5 ">
+              <label
+                htmlFor="youtubeVideo"
+                className="font-semibold mt-3 block text-[#17012e]"
+              >
+                Youtube Video
+                <span className="ml-2 italic font-thin">
+                  (previous:
+                  {!youtubeVideoReset && (
+                    <span className=" text-[orangered] ml-2">
+                      {data?.youtube_video}
+                    </span>
+                  )}
+                  )
+                </span>
+              </label>
+              <input
+                id="youtubeVideo"
+                onChange={(e) => setYoutube_video(e.target.value)}
+                type="text"
+                className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
+              />
+            </div>
+            {data?.youtube_video && (
+              <button
+                onClick={() => setYoutubeVideoReset(true)}
+                className=" w-1/3 px-4 py-4 bg-[#ff3d50] text-white rounded-md"
+              >
+                Reset Youtube Link
+              </button>
+            )}
+          </div>
           <div className="flex justify-center mt-5">
             <ButtonDashboard
               onClick={handleSubmit}
@@ -478,44 +486,79 @@ const EditCourseItem = () => {
           </div>
         </div>
 
-        <div className="grid grid-cols-1 gap-4 pb-8">
-          <RichTextEditorJodit
-            onDataChange={setCourseFor}
-            title="Who is the course for"
-            value={data?.who_is_the_course_for}
-          />
+        <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
+          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+            Who is this course for & Who is this course for
+          </h2>
 
-          <RichTextEditorJodit
-            onDataChange={setCourseBenefit}
-            title="After Course Benefit"
-            value={data?.after_course_benefit}
+          <div className="grid grid-cols-1 gap-4 pb-8">
+            <RichTextEditorJodit
+              onDataChange={setCourseFor}
+              title="Who is the course for"
+              value={data?.who_is_the_course_for}
+            />
+
+            <RichTextEditorJodit
+              onDataChange={setCourseBenefit}
+              title="After Course Benefit"
+              value={data?.after_course_benefit}
+            />
+          </div>
+
+          <div className="flex justify-center mt-5">
+            <ButtonDashboard
+              onClick={handleSubmit}
+              className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
+            >
+              Submit
+            </ButtonDashboard>
+          </div>
+        </div>
+        <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
+          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+            Course Modules
+          </h2>
+          {/* NOTE: MODULE */}
+          <AddModule
+            courseModule={courseModule}
+            setCourseModule={setCourseModule}
           />
+          <div className="flex justify-center mt-5">
+            <ButtonDashboard
+              onClick={handleSubmit}
+              className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
+            >
+              Submit
+            </ButtonDashboard>
+          </div>
         </div>
 
-        {/* <AddModule
-          courseModule={courseModule}
-          setCourseModule={setCourseModule}
-        /> */}
+        <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
+          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+            Course Instructors
+          </h2>
+          {/* NOTE: MODULE */}
+          <AddInstructorCourse
+            instructors={instructors}
+            setInstructors={setInstructors}
+          />
+          <div className="flex justify-center mt-5">
+            <ButtonDashboard
+              onClick={handleSubmit}
+              className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
+            >
+              Submit
+            </ButtonDashboard>
+          </div>
+        </div>
 
         {/* NOTE: INSTRUCTORS */}
-        {/* <AddInstructorCourse
-          instructors={instructors}
-          setInstructors={setInstructors}
-        />
+        {/* 
 
         <CourseReview
           studentReview={studentReview}
           setStudentReview={setStudentReview}
         /> */}
-
-        <div className="w-full text-center pt-5 pb-16">
-          <button
-            onClick={handleSubmit}
-            className="px-4 py-3 bg-blue-500 text-white rounded-md"
-          >
-            Submit Content
-          </button>
-        </div>
       </div>
     </div>
   );

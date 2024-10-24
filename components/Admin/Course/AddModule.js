@@ -245,7 +245,7 @@ const AddModule = ({ courseModule, setCourseModule }) => {
   };
 
   return (
-    <div className="bg-[#f0f0f0] shadow-lg rounded-lg border-dashed px-6 py-3 mt-5">
+    <div className="rounded-lg border-dashed px-6 py-3">
       <h2 className="text-xl text text-center my-4 font-bold">
         Study Plan In Details
       </h2>
@@ -494,14 +494,14 @@ const AddModule = ({ courseModule, setCourseModule }) => {
             </button>
           )}
         </div>
-      </div>
-      <div className="w-full text-center pt-5 pb-4">
-        <button
-          onClick={editValue ? handleEditModule : handleAddModule}
-          className="px-4 py-3 bg-[#85144b] text-white rounded-md"
-        >
-          {editValue ? 'Update Module' : 'Submit New Module'}
-        </button>
+        <div className="w-full text-center pt-5 pb-4">
+          <button
+            onClick={editValue ? handleEditModule : handleAddModule}
+            className="px-4 py-3 bg-[#85144b] text-white rounded-md"
+          >
+            {editValue ? 'Update Module' : 'Add Module'}
+          </button>
+        </div>
       </div>
     </div>
   );
