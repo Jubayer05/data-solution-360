@@ -45,64 +45,39 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
   const findAdminData = adminData.find((item) => item.email === formData.email);
 
   const handleLogin = () => {
-    const validUser = userData.find((item) => item.email === formData.email);
+    const { email, password } = formData;
 
-    if (validateEmail(formData.email)) {
-      if (
-        userData.find((item) => item.email === formData.email) !== undefined
-      ) {
-        auth
-          .signInWithEmailAndPassword(formData.email, formData.password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            if (validUser) {
-              if (validUser.status === 'student') {
-                Swal.fire(
-                  'Hey!',
-                  'You are successfully logged in.',
-                  'success',
-                ).then(() => {
-                  window.location.href = '/students/dashboard';
-                });
-              }
-            }
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            alert(errorMessage);
-          });
-      } else if (
-        adminData.find((item) => item.email === formData.email) !== undefined
-      ) {
-        auth
-          .signInWithEmailAndPassword(formData.email, formData.password)
-          .then((userCredential) => {
-            const user = userCredential.user;
-            if (findAdminData) {
-              if (findAdminData.role === 'admin') {
-                Swal.fire(
-                  'Hey!',
-                  'You are successfully logged in.',
-                  'success',
-                ).then(() => {
-                  window.location.href = '/students/dashboard';
-                });
-              }
-            }
-          })
-          .catch((error) => {
-            const errorMessage = error.message;
-            alert(errorMessage);
-          });
-      } else {
-        Swal.fire(
-          'Hey!',
-          'Please check your email and password again!',
-          'error',
-        );
-      }
+    if (!validateEmail(email)) {
+      return Swal.fire('Hey!', 'Please provide a valid email', 'error');
+    }
+
+    const validUser = userData.find((item) => item.email === email);
+    const findAdminData = adminData.find((item) => item.email === email);
+
+    // If valid user or admin is found
+    if (validUser || findAdminData) {
+      auth
+        .signInWithEmailAndPassword(email, password)
+        .then((userCredential) => {
+          const user = userCredential.user;
+
+          // If valid user and role is admin
+          if (validUser?.role === 'admin') {
+            Swal.fire(
+              'Dear user!',
+              'You are successfully logged in as an admin.',
+              'success',
+            ).then(() => {
+              window.location.href = '/admin/dashboard';
+            });
+          }
+        })
+        .catch((error) => {
+          Swal.fire('Error!', error.message, 'error');
+        });
     } else {
-      Swal.fire('Hey!', 'Please Provide a valid email', 'error');
+      // If no valid user or admin is found
+      Swal.fire('Hey!', 'Please check your email and password again!', 'error');
     }
   };
 
