@@ -2,7 +2,7 @@ import React from 'react';
 
 const InputBoxManage = ({ title, type, id, func, placeholder, value }) => {
   return (
-    <div className="w-full mt-5">
+    <div className="w-full mt-3">
       <label
         htmlFor={id}
         className={`${

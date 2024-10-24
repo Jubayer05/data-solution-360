@@ -59,7 +59,7 @@ const RichTextEditorJodit = ({ value, title, onDataChange }) => {
   );
 
   return (
-    <div className="mt-10">
+    <div className="mt-5">
       <div className="font-bold mb-3">
         <span>{title}</span>
         {value && (
