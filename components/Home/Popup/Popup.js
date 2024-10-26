@@ -25,11 +25,9 @@ const Popup = ({ handler }) => {
           className="rounded-lg"
         />
         <Link href={findTrendingCourse?.trendingCourseLink || '#'}>
-          <button
-            className={`text-md px-3 py-2 hover:drop-shadow-xl flex items-center text-gray-300 rounded-md mt-2
-          bg-primary-bg transition-all duration-300 ease-linear `}
-          >
-            Click Here for Details
+          <button className="mt-3 relative px-8 py-3 font-bold text-white bg-gradient-to-r from-orange-500 to-pink-600 rounded-full shadow-lg hover:from-pink-600 hover:to-orange-500 focus:outline-none focus:ring-4 focus:ring-pink-300 transform transition-all duration-300 hover:scale-105 active:scale-95">
+            <span className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-600 to-pink-700 opacity-0 rounded-full transition-opacity duration-300 group-hover:opacity-100"></span>
+            <span className="relative z-10">Know More</span>
           </button>
         </Link>
         <div className="absolute -top-3 -right-3">
