@@ -255,6 +255,7 @@ const AssignmentDetails = () => {
               pageSize: 15,
             }}
             scroll={{
+              x: 'max-content',
               y: 500,
             }}
           />

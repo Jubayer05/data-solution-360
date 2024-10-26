@@ -246,7 +246,7 @@ const Report = () => {
         />
       </div>
 
-      <div className="flex gap-3 mt-5">
+      <div className="flex flex-wrap gap-3 mt-5">
         <div className="flex-1 bg-white shadow-lg text-center px-1 py-3 border border-dashboard_border rounded">
           <Progress
             strokeColor="#a855f7"

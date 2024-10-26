@@ -198,7 +198,8 @@ const MyBlogs = () => {
             pageSize: 50,
           }}
           scroll={{
-            y: 400,
+            x: 'max-content',
+            y: 500,
           }}
         />
       </div>

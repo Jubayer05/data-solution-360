@@ -18,7 +18,7 @@ const EnrolledCourseMainComp = () => {
     <div
       className={`${
         activeMenu ? 'w-full' : 'w-full'
-      } mx-auto flex flex-col lg:flex-row items-center lg:items-start gap-5 my-10 sm:mt-0`}
+      } mx-auto flex flex-col md:flex-row items-center lg:items-start gap-5 my-10 sm:mt-0`}
     >
       <div
         className={`w-full lg:w-[100%] pr-3 sm:pr-6  ${

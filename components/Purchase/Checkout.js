@@ -27,24 +27,24 @@ const Checkout = () => {
   const findCheckoutCourse = findBatchData?.courseData;
 
   return (
-    <div className="max-w-5xl mx-auto mt-10 mb-5 bg-[#fdfdfd] shadow rounded-lg p-8">
-      <h2 className="text-2xl font-semibold mb-3 font-heading">
+    <div className="max-w-5xl mx-auto mt-10 mb-5 bg-[#fdfdfd] shadow rounded-lg p-4 sm:p-8">
+      <h2 className="text-xl sm:text-2xl font-semibold mb-3 font-heading">
         Complete Your Payment
       </h2>
-      <div className="mt-3 mb-8 h-[.5px] w-[100%] bg-slate-300" />
+      <div className="mt-3 mb-8 h-[.5px] w-full bg-slate-300" />
 
-      <div className="flex items-start gap-8">
-        <div className="flex-[55%] bg-white shadow p-6 rounded-lg">
+      <div className="flex flex-col lg:flex-row gap-8">
+        <div className="lg:flex-[55%] bg-white shadow p-4 sm:p-6 rounded-lg">
           {/* NOTE: COURSE DETAILS */}
           {findCheckoutCourse ? (
             <div>
-              <div className="flex items-center gap-4">
+              <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <Image
                   width={300}
                   height={200}
                   src={findCheckoutCourse.img}
                   alt={findCheckoutCourse.course_name}
-                  className="w-[120px] rounded-lg"
+                  className="w-full sm:w-[120px] rounded-lg"
                 />
                 <div>
                   <h2 className="text-lg font-bold">
@@ -83,7 +83,7 @@ const Checkout = () => {
                     </p>
                   </div>
                 )}
-                <div className="mt-1 h-[.5px] w-[100%] bg-slate-300 " />
+                <div className="mt-1 h-[.5px] w-full bg-slate-300 " />
                 <div className="w-full flex justify-between mt-2">
                   <p className="font-semibold">Total Payment</p>
                   <p className="text-sm text-gray-600 flex items-center font-medium">
@@ -96,7 +96,9 @@ const Checkout = () => {
               </div>
             </div>
           ) : (
-            <Spin size="small" />
+            <div className="flex justify-center items-center h-40">
+              <Spin size="small" />
+            </div>
           )}
 
           {/* NOTE: PAYMENT FORM */}
@@ -110,7 +112,7 @@ const Checkout = () => {
             </p>
           </div>
         </div>
-        <div className="flex-[40%] bg-white shadow p-6 rounded-lg">
+        <div className="lg:flex-[40%] bg-white shadow p-4 sm:p-6 rounded-lg">
           <Payment
             batchData={findBatchData}
             payableAmount={

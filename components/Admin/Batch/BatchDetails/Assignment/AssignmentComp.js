@@ -164,6 +164,7 @@ const AssignmentComp = () => {
               pageSize: 15,
             }}
             scroll={{
+              x: 'max-content',
               y: 500,
             }}
           />

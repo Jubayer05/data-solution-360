@@ -17,7 +17,7 @@ const Blog = () => {
 
   return (
     <div className="pb-4 pt-20 max-w-6xl mx-auto">
-      <h2 className="w-[600px] mx-auto text-center text-4xl font-bold font-heading mt-4 text-headerMain">
+      <h2 className="md:w-[600px] mx-auto text-center text-2xl md:text-4xl font-bold font-heading text-headerMain">
         Welcome to our blog section, where captivating content awaits!
       </h2>
 

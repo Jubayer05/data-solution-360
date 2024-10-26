@@ -115,7 +115,10 @@ const AssignmentHome = () => {
               dataSource={[...assignmentData]}
               pagination={false}
               className="w-full"
-              scroll={{ x: 600 }}
+              scroll={{
+                x: 'max-content',
+                y: 600,
+              }}
             />
           </ConfigProvider>
         ) : (

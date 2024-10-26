@@ -1,4 +1,3 @@
-import { Switch } from 'antd';
 import React, { useEffect, useState } from 'react';
 import { FiLogIn } from 'react-icons/fi';
 import { HiOutlineMenuAlt1 } from 'react-icons/hi';
@@ -94,7 +93,7 @@ const Navbar = ({ home }) => {
       });
   };
 
-  console.log(userEmail);
+  const onClick = () => {};
 
   return (
     <div
@@ -114,10 +113,40 @@ const Navbar = ({ home }) => {
               unoptimized={true}
             />
           </Link>
-          <HiOutlineMenuAlt1
-            onClick={() => setOpenNav(true)}
-            className="text-2xl md:hidden text-nav"
-          />
+          <div className="flex items-center gap-5 md:hidden">
+            {userEmail ? (
+              <div>
+                <Link
+                  href={findAdmin ? '/admin/dashboard' : '/students/dashboard'}
+                >
+                  <button
+                    className="px-4 py-[10px] bg-primary_btn text-white rounded-lg flex items-center
+      justify-center gap-2 text-sm"
+                  >
+                    Dashboard <MdOutlineDashboardCustomize />
+                  </button>
+                </Link>
+              </div>
+            ) : (
+              <button
+                onClick={() => openModal()}
+                className="relative px-8 py-[10px] font-bold text-white bg-gradient-to-r from-orange-500 to-pink-600 
+              rounded-full shadow-lg hover:from-pink-600 hover:to-orange-500 focus:outline-none focus:ring-4 
+              focus:ring-pink-300 transform transition-all duration-300 hover:scale-105 active:scale-95"
+              >
+                <span
+                  className="absolute inset-0 w-full h-full bg-gradient-to-r from-orange-600 to-pink-700 
+              opacity-0 rounded-full transition-opacity duration-300 group-hover:opacity-100"
+                ></span>
+                <span className="relative z-10">Login</span>
+              </button>
+            )}
+
+            <HiOutlineMenuAlt1
+              onClick={() => setOpenNav(true)}
+              className="text-2xl text-nav"
+            />
+          </div>
         </div>
         {openNav && (
           <Sidebar
@@ -216,16 +245,6 @@ const Navbar = ({ home }) => {
                 ))}
               </ul>
             </div>
-            <div className="mr-3">
-              <Switch
-                handleBg="#d6295f"
-                size={50}
-                checkedChildren="en"
-                unCheckedChildren="bn"
-                defaultChecked
-                onClick={() => setEng(!eng)}
-              />
-            </div>
 
             {!userEmail && !modalIsOpen ? (
               <button
@@ -265,9 +284,6 @@ const Navbar = ({ home }) => {
               modalIsOpen={modalIsOpen}
               closeModal={() => {
                 closeModal();
-                if (userEmail) {
-                  // Optionally handle any logic here after closing the modal, like redirecting to the dashboard
-                }
               }}
             />
           </div>

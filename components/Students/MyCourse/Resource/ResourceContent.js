@@ -148,6 +148,10 @@ const ResourceContent = ({ item }) => {
                       dataSource={[...itemData.lessons]}
                       pagination={false}
                       className="w-full"
+                      scroll={{
+                        x: 'max-content',
+                        y: 500,
+                      }}
                     />
                   )}
                 </ConfigProvider>

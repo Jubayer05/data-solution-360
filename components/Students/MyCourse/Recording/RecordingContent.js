@@ -112,6 +112,9 @@ const RecordingContent = ({ item }) => {
                     columns={columns}
                     dataSource={[...itemData.lessons]}
                     pagination={false}
+                    scroll={{
+                      x: 'max-content',
+                    }}
                     className="w-full"
                   />
                 </ConfigProvider>
