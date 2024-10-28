@@ -53,63 +53,86 @@ const AssignmentDetailsStudent = () => {
     ],
   };
 
-  const handleSubmitAssignment = async () => {
-    if (assignmentLink) {
-      // Check if the student has already submitted the assignment
-      const hasAlreadySubmitted = findUserAssignment !== undefined;
+  const handleSubmitAssignment = (item) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      html: `
+    <p>You need to agree before submitting this assignment.</p>
+    <input type="checkbox" id="agreeCheckbox" />
+    <label for="agreeCheckbox">I agree to the terms and conditions and I will not claim for resubmit it.</label>
+  `,
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonText: 'Yes, delete it!',
+      cancelButtonText: 'Cancel',
+      didOpen: () => {
+        const checkbox = document.getElementById('agreeCheckbox');
+        const confirmButton = Swal.getConfirmButton();
+        confirmButton.disabled = true; // Disable the "Yes" button by default
 
-      if (hasAlreadySubmitted) {
-        Swal.fire({
-          title: 'Duplicate Submission',
-          text: 'You have already submitted your assignment. You cannot submit again.',
-          icon: 'warning',
-          confirmButtonText: 'OK',
+        // Listen for checkbox changes to enable/disable the "Yes" button
+        checkbox.addEventListener('change', function () {
+          confirmButton.disabled = !checkbox.checked;
         });
-        return; // Prevent further execution
+      },
+    }).then((result) => {
+      if (result.isConfirmed) {
+        if (assignmentLink) {
+          // Check if the student has already submitted the assignment
+          const hasAlreadySubmitted = findUserAssignment !== undefined;
+
+          if (hasAlreadySubmitted) {
+            Swal.fire({
+              title: 'Duplicate Submission',
+              text: 'You have already submitted your assignment. You cannot submit again.',
+              icon: 'warning',
+              confirmButtonText: 'OK',
+            });
+            return; // Prevent further execution
+          }
+
+          setLoading(true); // Start loading
+          try {
+            // Mock submission process (replace with actual API call or Firebase submission)
+            db.collection('course_data_batch')
+              .doc(enrolledCourse?.id) // Create a collection for submitted assignments
+              .update(courseData);
+
+            // Notify the user of successful submission
+            Swal.fire({
+              title: 'Submission Successful',
+              text: 'Your assignment link has been submitted successfully!',
+              icon: 'success',
+              confirmButtonText: 'OK',
+            }).then(() => {
+              window.location.reload();
+            });
+            setHasSubmitted(true);
+            setAssignmentLink(''); // Clear the assignment link
+          } catch (error) {
+            console.error('Error submitting assignment:', error);
+
+            // Notify the user of failure
+            Swal.fire({
+              title: 'Submission Failed',
+              text: 'There was an issue submitting your assignment. Please try again later.',
+              icon: 'error',
+              confirmButtonText: 'OK',
+            });
+          } finally {
+            setLoading(false); // End loading
+          }
+        } else {
+          // Notify the user to provide an assignment link
+          Swal.fire({
+            title: 'No Assignment Link',
+            text: 'Please enter an assignment link before submitting.',
+            icon: 'warning',
+            confirmButtonText: 'OK',
+          });
+        }
       }
-
-      setLoading(true); // Start loading
-      try {
-        // Mock submission process (replace with actual API call or Firebase submission)
-        await db
-          .collection('course_data_batch')
-          .doc(enrolledCourse?.id) // Create a collection for submitted assignments
-          .update(courseData);
-
-        // Notify the user of successful submission
-        Swal.fire({
-          title: 'Submission Successful',
-          text: 'Your assignment link has been submitted successfully!',
-          icon: 'success',
-          confirmButtonText: 'OK',
-        }).then(() => {
-          window.location.reload();
-        });
-        setHasSubmitted(true);
-        setAssignmentLink(''); // Clear the assignment link
-      } catch (error) {
-        console.error('Error submitting assignment:', error);
-
-        // Notify the user of failure
-        Swal.fire({
-          title: 'Submission Failed',
-          text: 'There was an issue submitting your assignment. Please try again later.',
-          icon: 'error',
-          confirmButtonText: 'OK',
-        });
-      } finally {
-        setLoading(false); // End loading
-      }
-    } else {
-      // Notify the user to provide an assignment link
-      Swal.fire({
-        title: 'No Assignment Link',
-        text: 'Please enter an assignment link before submitting.',
-        icon: 'warning',
-        confirmButtonText: 'OK',
-      });
-      console.log('Please enter an assignment link');
-    }
+    });
   };
 
   return (

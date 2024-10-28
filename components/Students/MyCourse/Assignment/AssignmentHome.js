@@ -50,19 +50,22 @@ const AssignmentHome = () => {
       align: 'center',
       // width: 80,
       render: (_, record) => (
-        <div className="text-white  ">
-          {record?.submitted_user?.find(
-            (item) => item.email === findCurrentUser?.email,
-          ) ? (
-            <span className="bg-secondary_btn pb-1 px-2 rounded-full text-base font-semibold">
-              success
-            </span>
-          ) : (
-            <span className="bg-primary-bg pb-1 px-2 rounded-full text-sm font-semibold">
-              pending
-            </span>
-          )}
-        </div>
+        console.log(record),
+        (
+          <div className="text-white  ">
+            {record?.submitted_students?.find(
+              (item) => item.student_id === findCurrentUser?.student_id,
+            ) ? (
+              <span className="bg-secondary_btn pb-1 px-2 rounded-full text-base font-semibold">
+                success
+              </span>
+            ) : (
+              <span className="bg-primary-bg pb-1 px-2 rounded-full text-sm font-semibold">
+                pending
+              </span>
+            )}
+          </div>
+        )
       ),
     },
     {
