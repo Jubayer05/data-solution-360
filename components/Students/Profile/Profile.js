@@ -9,7 +9,7 @@ const Profile = ({ title }) => {
 
   return (
     <div>
-      <HeadingDashboard title="Your Profile" />
+      <HeadingDashboard title="Your Profile" showLogout={true} />
       <div
         className={`${
           activeMenu

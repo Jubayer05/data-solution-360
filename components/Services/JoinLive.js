@@ -124,7 +124,7 @@ const JoinLive = () => {
             </div>
           )}
           <p className="text-lg font-bold mt-5">
-            {enrolledCourse?.courseData?.title}
+            {enrolledCourse?.courseData?.item_name}
           </p>
           <div className="flex justify-between mt-3 gap-3">
             <p className="bg-yellow-100 inline-block px-3 rounded-md">

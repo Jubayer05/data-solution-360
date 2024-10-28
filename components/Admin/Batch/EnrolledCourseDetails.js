@@ -30,7 +30,7 @@ const EnrolledCourseDetails = () => {
   return (
     <div>
       <HeadingDashboard
-        title={currentEnrolledCourse?.courseData.title}
+        title={currentEnrolledCourse?.courseData.item_name}
         batchNo={currentEnrolledCourse?.batchNumber}
       />
       <div className="max-w-5xl mx-auto my-20">

@@ -111,7 +111,7 @@ const EditBatch = () => {
               <p className="text-base font-dash_heading">
                 <strong>Program Title:</strong>{' '}
                 <strong className="text-[#645cfc]">
-                  {findBatchInfo?.courseData?.title}
+                  {findBatchInfo?.courseData?.item_name}
                 </strong>
               </p>
 

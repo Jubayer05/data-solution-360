@@ -30,7 +30,7 @@ const EnrolledCourseHome = ({ item }) => {
             className="flex-1 text-xs leading-5 font-bold mb-1.5 mt-2 text-[#140342]
           px-1 md:px-4"
           >
-            {item?.courseData?.title}
+            {item?.courseData?.item_name}
           </p>
           <div
             className="flex justify-end font-medium text-[14px] flex-wrap text-[#4F547B]

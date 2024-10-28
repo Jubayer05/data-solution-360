@@ -53,7 +53,7 @@ const HeadingEnrolled = ({ item }) => {
           <div className="flex-1">
             <div className="flex items-center gap-2 mb-2">
               <p className="bg-gray-300 px-1 md:px-2 py-0.5 text-xs rounded">
-                6 July - 12 July
+                6 January - 12 January
               </p>
               <div>
                 <Progress
@@ -62,9 +62,9 @@ const HeadingEnrolled = ({ item }) => {
                   trailColor="#eaeaea"
                   strokeColor="#12b76a"
                   showInfo={false}
-                  className="w-[80px] sm:w-[100px]"
+                  className="w-[50px] sm:w-[100px]"
                 />
-                <p className="text-white text-xs">2/7 Days End</p>
+                <p className="text-white text-[10px]">2/7 Days End</p>
               </div>
             </div>
             <h2 className="text-lg sm:text-xl font-bold leading-6 text-white">
@@ -124,7 +124,7 @@ const HeadingEnrolled = ({ item }) => {
       </Link>
 
       {/* Button section */}
-      <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-5 py-4 rounded-md my-5">
+      <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-3 md:px-5 py-4 rounded-md my-5">
         {segmentBtn.map((item) => (
           <button
             key={item.id}

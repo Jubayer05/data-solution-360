@@ -24,7 +24,7 @@ const AllBatch = () => {
 
   const groupedArr = Object.values(
     courseDataBatch.reduce((acc, item) => {
-      const title = item.courseData.title;
+      const title = item.courseData.item_name;
 
       // Check if the title exists in the accumulator, if not, initialize it
       if (!acc[title]) {

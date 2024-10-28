@@ -26,7 +26,7 @@ const ResourceHome = () => {
 
   useEffect(() => {
     const initialContent = {
-      title: courseDataBatch[0]?.courseData.title,
+      title: courseDataBatch[0]?.courseData.item_name,
       moduleData: courseDataBatch[0]?.course_modules,
     };
     setCurrentContent(initialContent);
@@ -34,7 +34,7 @@ const ResourceHome = () => {
 
   // NOTE: THIS WILL BE THE ENROLLED COURSE BY USER
   const selectCourse = courseDataBatch.map((option) => ({
-    label: option.courseData.title,
+    label: option.courseData.item_name,
     value: option.course_modules,
   }));
 
@@ -51,9 +51,9 @@ const ResourceHome = () => {
             : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
         } mx-auto flex items-start gap-6`}
       >
-        <div className="w-[90%] mt-6 mx-auto">
+        <div className="w-full md:w-[90%] mt-6 mx-auto">
           <Select
-            className=" w-1/3 mb-6"
+            className="w-2/3 md:w-1/3 mb-6"
             styles={customStyles}
             options={selectCourse}
             defaultValue={currentContent}

@@ -34,7 +34,7 @@ const CourseItem = ({ item, upcoming, running }) => {
           )}
         </div>
       </div>
-      <Link href={`/course-details/${item.key}`}>
+      <Link href={`/course-details/${item.item_id}`}>
         <Image
           width={1000}
           height={300}
@@ -95,7 +95,7 @@ const CourseItem = ({ item, upcoming, running }) => {
             className="flex-1 text-base leading-5 md:text-lg font-bold mb-1.5 mt-2 text-[#140342]
           px-1 md:px-4"
           >
-            {item.title}
+            {item.item_name}
           </p>
           {item?.status == 'Registration Going on' && (
             <div className="text-xl">

@@ -45,7 +45,7 @@ const CreateNewBatch = () => {
         />
         <div>
           <p className="text-lg m-0">
-            <strong>{item.title}</strong>
+            <strong>{item.item_name}</strong>
           </p>
         </div>
       </div>

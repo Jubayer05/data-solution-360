@@ -33,7 +33,7 @@ const RecordingHome = () => {
 
   useEffect(() => {
     const initialContent = {
-      title: courseDataBatch[0]?.courseData.title,
+      title: courseDataBatch[0]?.courseData.item_name,
       moduleData: courseDataBatch[0]?.course_modules,
       batchId: courseDataBatch[0]?.unique_batch_id,
     };
@@ -42,7 +42,7 @@ const RecordingHome = () => {
 
   // NOTE: THIS WILL BE THE ENROLLED COURSE BY USER
   const selectRecording = courseDataBatch.map((option) => ({
-    label: option.courseData.title,
+    label: option.courseData.item_name,
     value: {
       course_modules: option.course_modules,
       batchId: option.unique_batch_id,
@@ -66,9 +66,9 @@ const RecordingHome = () => {
             : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
         } mx-auto flex items-start gap-6`}
       >
-        <div className="w-[80%] mt-6 mx-auto">
+        <div className="w-full md:w-[80%] mt-6 mx-auto">
           <Select
-            className=" w-1/3 mb-6"
+            className="w-2/3 md:w-1/3 mb-6"
             styles={customStyles}
             options={selectRecording}
             defaultValue={currentContent}
@@ -76,8 +76,8 @@ const RecordingHome = () => {
           />
           {/* <Link href={`/students/my-course/${item?.key}/videos`}> */}
           <div
-            className="w-1/2 flex items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
-        mt-3 cursor-pointer hover:shadow-md transition-all duration-200 mb-6"
+            className="w-full md:w-1/2 flex items-center gap-4 bg-[#e9efff] border 
+            border-[#7986f7] px-3 md:px-5 py-3 rounded-md mt-3 cursor-pointer hover:shadow-md transition-all duration-200 mb-6"
           >
             <Image
               width={500}
@@ -98,7 +98,7 @@ const RecordingHome = () => {
           </div>
           {/* </Link> */}
 
-          <div className="w-full flex items-center gap-2 bg-white border px-5 py-4 rounded-md my-5">
+          <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-3 md:px-5 py-4 rounded-md my-5">
             {segmentBtn.map((item) => (
               <button
                 key={item.id}

@@ -23,7 +23,7 @@ import InputBox from './InputBox';
 
 // Initial state for the course data
 const initialCourseState = {
-  title: '',
+  item_name: '',
   img: '',
   short_description: '',
   price: '',
@@ -120,9 +120,7 @@ const AddCourse = () => {
 
   // Handler for form submission
   const handleSubmit = () => {
-    console.log(courseData, userEmail);
-
-    if (courseData.title != '') {
+    if (courseData.item_name != '') {
       firebase
         .firestore()
         .collection('course_data')
@@ -162,7 +160,7 @@ const AddCourse = () => {
         </h2>
         {/* Title Input */}
         <InputBox
-          title="Title"
+          title="Item Name"
           id="title"
           func={handleInputChange}
           placeholder="Example - Beginner to advanced power bi course"

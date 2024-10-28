@@ -55,12 +55,13 @@ const ResourceContent = ({ item }) => {
       align: 'left',
       render: (_, record) => (
         <div className="flex items-start gap-2">
-          <FaRegPlayCircle className="text-lg" />{' '}
+          <span>
+            <FaRegPlayCircle className="text-lg inline-block" />
+          </span>
           <span className="-mt-0.5">{capitalizeWords(record.title)}</span>
         </div>
       ),
     },
-
     {
       title: 'Class Date',
       align: 'center',

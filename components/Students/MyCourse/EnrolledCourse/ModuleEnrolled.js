@@ -25,21 +25,21 @@ const ModuleEnrolled = () => {
                 item.moduleStatus === 'running'
                   ? 'bg-primary_btn text-white'
                   : ''
-              } p-5 rounded-md cursor-pointer border-2 hover:border-[#56d478] transition-all`}
+              } p-[10px] md:p-5 rounded-md cursor-pointer border-2 hover:border-[#56d478] transition-all`}
             >
-              <div className="flex items-center gap-4">
+              <div className="flex items-center gap-1.5 md:gap-4">
                 <div
                   style={{ backgroundColor: colors[index] }}
-                  className={`p-2 rounded-lg text-white text-center text-base font-normal`}
+                  className={`p-1 md:p-2 rounded-lg text-white text-center text-base font-normal`}
                 >
-                  <p className="m-0 text-sm">Module</p>
+                  <p className="m-0 text-xs md:text-sm">Module</p>
                   <p className="m-0 font-bold">{item.moduleNumber}</p>
                 </div>
                 <div className="flex-1">
                   <div className="flex items-center gap-2 mb-2">
                     {item?.lessons[0].classDate &&
                       item?.lessons?.at(-1).classDate && (
-                        <p className="bg-gray-300 px-2 py-0.5 text-xs rounded">
+                        <p className="bg-gray-300 px-1.5 md:px-2 py-0.5 text-xs rounded">
                           {formatDateWithoutYear(item?.lessons[0].classDate)} -{' '}
                           {formatDateWithoutYear(
                             item?.lessons?.at(-1).classDate,

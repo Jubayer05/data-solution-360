@@ -33,6 +33,7 @@ const EditCourseItem = () => {
   const [youtube_video, setYoutube_video] = useState('');
   const [courseImg, setCourseImg] = useState('');
   const [youtubeVideoReset, setYoutubeVideoReset] = useState(false);
+  const [itemName, setItemName] = useState('');
   const router = useRouter();
   const { courseId } = router?.query;
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
@@ -44,6 +45,7 @@ const EditCourseItem = () => {
   useEffect(() => {
     setCourseDataObj(data);
     setCourseModule(data?.courseModule || []);
+    setItemName(data?.title || '');
     setCourseShortData(data?.courseShortData);
     setInstructors(data?.instructors || []);
     setStudentReview(data?.studentReview || []);
@@ -65,6 +67,8 @@ const EditCourseItem = () => {
         ? 'running'
         : courseDataObj?.main_class_starting_date,
       mainClassStartStatus: mainClassStart,
+      item_id: courseId,
+      item_name: itemName,
       courseModule,
       instructors,
       studentReview,
@@ -97,6 +101,7 @@ const EditCourseItem = () => {
   }, [success]);
 
   const handleInputChange = (key, value) => {
+    console.log('Key:', key, 'value:', value);
     const updatedObject = {
       ...courseDataObj,
       [key]: value,
@@ -114,10 +119,10 @@ const EditCourseItem = () => {
 
   return (
     <div className="max-w-4xl mx-auto my-5 ">
-      <div className="border-1 p-5 rounded-lg bg-white justify-between items-center grid grid-cols-3">
+      <div className="border-1 p-5 rounded-lg bg-white justify-between items-center grid grid-cols-3 gap-10">
         <div className="col-span-2">
           <h2 className="text-xl text-[#231f40] font-medium font-dash_heading ">
-            Course Name: <span className="text-primary">{data?.title}</span>
+            Course Name: <span className="text-primary">{data?.item_name}</span>
           </h2>
           <div className="mb-4">
             <span>
@@ -161,13 +166,14 @@ const EditCourseItem = () => {
       </div>
       <div className="w-full">
         <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
-          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+          <h2 className="text-xl pb-2 text-[#9b59b6] text-center font-medium font-dash_heading">
             Basic Course Info
           </h2>
           {/* NOTE: COURSE TITLE */}
           <InputBoxManage
             title="Title"
             id="courseTitle"
+            keyName="item_name"
             func={handleInputChange}
             type="text"
             value={data?.title}
@@ -177,6 +183,7 @@ const EditCourseItem = () => {
             <InputBoxManage
               title="Price"
               id="price"
+              keyName="price"
               func={handleInputChange}
               type="number"
               value={data?.price}
@@ -186,6 +193,7 @@ const EditCourseItem = () => {
             <InputBoxManage
               title="Discounted price"
               id="discountedPrice"
+              keyName="discount"
               func={handleInputChange}
               type="number"
               value={data?.discounted_price}
@@ -193,6 +201,7 @@ const EditCourseItem = () => {
           </div>
           <InputBoxManage
             title="Short Description"
+            keyName="short_description"
             id="shortDescription"
             func={handleInputChange}
             type="text"
@@ -232,6 +241,7 @@ const EditCourseItem = () => {
             {/* NOTE: InputBox component for the batch number */}
             <InputBoxManage
               title="Batch No"
+              keyName="batch_no"
               id="batchNumber"
               func={handleInputChange}
               type="number"
@@ -241,6 +251,7 @@ const EditCourseItem = () => {
             {/* NOTE: InputBox component for the class time */}
             <InputBoxManage
               title="Class Time"
+              keyName="class_time"
               id="classTime"
               func={handleInputChange}
               type="text"
@@ -250,6 +261,7 @@ const EditCourseItem = () => {
             <div className="flex gap-4">
               <InputBoxManage
                 title="Orientation Class"
+                keyName="orientation_class"
                 id="orientationClass"
                 func={handleInputChange}
                 type="date"
@@ -269,6 +281,7 @@ const EditCourseItem = () => {
             <div className="flex gap-4">
               <InputBoxManage
                 title="Main class starting date"
+                keyName="main_class_starting_date"
                 id="mainClassStartingDate"
                 func={handleInputChange}
                 type="date"
@@ -315,6 +328,7 @@ const EditCourseItem = () => {
             {/* NOTE: InputBox component for the total seat number */}
             <InputBoxManage
               title="Total Seat Number"
+              keyName="total_seat_number"
               id="totalSeatNumber"
               func={handleInputChange}
               type="number"
@@ -324,6 +338,7 @@ const EditCourseItem = () => {
             {/* NOTE: InputBox component for the total seat number */}
             <InputBoxManage
               title="Remaining Seat Number"
+              keyName="remaining_seat_number"
               id="remainingSeatNumber"
               func={handleInputChange}
               type="number"
@@ -342,7 +357,7 @@ const EditCourseItem = () => {
         </div>
 
         <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
-          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+          <h2 className="text-xl pb-2 text-[#3498db] text-center font-medium font-dash_heading">
             Description & Course Details Point
           </h2>
           <RichTextEditorJodit
@@ -395,7 +410,7 @@ const EditCourseItem = () => {
         </div>
 
         <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
-          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+          <h2 className="text-xl pb-2 text-[#e74c3c] text-center font-medium font-dash_heading">
             Additional Course Info
           </h2>
           {/* NOTE: SHORT DESCRIPTION */}
@@ -405,6 +420,7 @@ const EditCourseItem = () => {
             {/* NOTE: InputBox component for the Number of Modules */}
             <InputBoxManage
               title="Module Number"
+              keyName="module_number"
               id="module_number"
               func={handleInputChange}
               type="number"
@@ -414,6 +430,7 @@ const EditCourseItem = () => {
             {/* NOTE: InputBox component for the Number of Live Class */}
             <InputBoxManage
               title="Live Class Number"
+              keyName="live_class_number"
               id="live_class_number"
               func={handleInputChange}
               type="number"
@@ -423,6 +440,7 @@ const EditCourseItem = () => {
           {/* NOTE: InputBox component for the Number of Real World Project */}
           <InputBoxManage
             title="Project Number"
+            keyName="project_number"
             id="project_number"
             func={handleInputChange}
             type="number"
@@ -431,6 +449,7 @@ const EditCourseItem = () => {
           {/* NOTE: InputBox component for the Extra support */}
           <InputBoxManage
             title="Extra Support"
+            keyName="extra_support"
             id="extraSupport"
             func={handleInputChange}
             type="text"
@@ -438,6 +457,7 @@ const EditCourseItem = () => {
           />
           <InputBoxManage
             title="Drive Link"
+            keyName="drive_link"
             id="driveLink"
             func={handleInputChange}
             type="text"
@@ -487,7 +507,7 @@ const EditCourseItem = () => {
         </div>
 
         <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
-          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+          <h2 className="text-xl pb-2 text-[#1abc9c] text-center font-medium font-dash_heading">
             Who is this course for & Who is this course for
           </h2>
 
@@ -515,7 +535,7 @@ const EditCourseItem = () => {
           </div>
         </div>
         <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
-          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+          <h2 className="text-xl pb-2 text-[#e67e22] text-center font-medium font-dash_heading">
             Course Modules
           </h2>
           {/* NOTE: MODULE */}
@@ -534,7 +554,7 @@ const EditCourseItem = () => {
         </div>
 
         <div className="bg-white border-1 p-5 rounded-lg mt-14 pt-8">
-          <h2 className="text-xl pb-2 text-[#2ecc71] text-center font-medium font-dash_heading">
+          <h2 className="text-xl pb-2 text-[#34495e] text-center font-medium font-dash_heading">
             Course Instructors
           </h2>
           {/* NOTE: MODULE */}

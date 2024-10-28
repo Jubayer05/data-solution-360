@@ -1,6 +1,14 @@
 import React from 'react';
 
-const InputBoxManage = ({ title, type, id, func, placeholder, value }) => {
+const InputBoxManage = ({
+  title,
+  type,
+  id,
+  func,
+  placeholder,
+  keyName,
+  value,
+}) => {
   return (
     <div className="w-full mt-3">
       <label
@@ -24,7 +32,7 @@ const InputBoxManage = ({ title, type, id, func, placeholder, value }) => {
       <input
         id={id}
         onChange={(e) =>
-          func(title.toLowerCase().split(' ').join('_'), e.target.value)
+          func(keyName.toLowerCase().split(' ').join('_'), e.target.value)
         }
         type={type}
         placeholder={placeholder}

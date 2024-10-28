@@ -103,14 +103,14 @@ const BannerCourseDetails = ({ courseDetails }) => {
             {
               title: (
                 <span className="text-lg font-normal text-gray-500">
-                  {courseDetails?.title}
+                  {courseDetails?.item_name}
                 </span>
               ),
             },
           ]}
         />
         <h2 className="text-4xl md:text-4xl mb-3 mt-2 font-[700] text-[#101828]">
-          {courseDetails?.title}
+          {courseDetails?.item_name}
         </h2>
         <p className="font-normal text-lg ">
           {courseDetails?.short_description}
