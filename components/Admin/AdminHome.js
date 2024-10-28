@@ -9,7 +9,10 @@ const AdminHome = () => {
   const { userName } = useStateContext();
   return (
     <div>
-      <HeadingDashboard title={`Welcome to admin dashboard`} />
+      <HeadingDashboard
+        title={`Welcome to admin dashboard`}
+        showLogout={true}
+      />
       <div className="flex justify-center items-center flex-col p-2 md:mx-6">
         <h2 className="text-2xl mt-6 capitalize mb-10"></h2>
 

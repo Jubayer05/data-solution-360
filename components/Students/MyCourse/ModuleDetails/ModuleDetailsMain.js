@@ -33,9 +33,12 @@ const ModuleDetailsMain = () => {
 
   return (
     <div
-      className={`${
-        activeMenu ? 'max-w-6xl' : 'w-full pr-6 pl-[56px]'
-      } mx-auto flex items-center gap-5`}
+      className={`flex flex-col md:flex-row md:items-start 
+        gap-6 ${
+          activeMenu
+            ? 'w-full mx-auto px-4'
+            : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
+        }`}
     >
       <div className="w-full">
         <div className="flex items-end gap-4 pt-6">
