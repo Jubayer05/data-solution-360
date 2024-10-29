@@ -99,7 +99,7 @@ const ModuleDetails = () => {
             <span className="bg-purple-100 border border-purple-500 px-2 text-xs rounded-full font-semibold text-[#6b46c1]">
               Upcoming
             </span>
-          ) }
+          )}
         </div>
       ),
     },
@@ -140,7 +140,6 @@ const ModuleDetails = () => {
               pageSize: 15,
             }}
             scroll={{
-              x: 'max-content',
               y: 500,
             }}
           />

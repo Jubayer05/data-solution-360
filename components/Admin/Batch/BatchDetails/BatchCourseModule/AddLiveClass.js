@@ -1,4 +1,6 @@
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
+import Select from 'react-select';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import { colors } from '../../../../../src/data/data';
@@ -10,6 +12,7 @@ import AddResourceRecording from './AddResourceRecording';
 import LessonDetails from './LessonDetails';
 
 const AddLiveClass = ({
+  courseData,
   moduleData,
   setModuleData,
   updateModuleInFirestore,
@@ -17,9 +20,13 @@ const AddLiveClass = ({
   const [currentLesson, setCurrentLesson] = useState(null);
   const [indexLesson, setIndexLesson] = useState(0);
   const [liveClassLink, setLiveClassLink] = useState('');
+  const [instructorForClass, setInstructorForClass] = useState('');
+  const [classType, setClassType] = useState('');
+
+  console.log(classType, instructorForClass);
 
   useEffect(() => {
-    if (liveClassLink === '') {
+    if (liveClassLink !== '') {
       setCurrentLesson({
         ...moduleData.lessons[indexLesson],
       });
@@ -31,17 +38,49 @@ const AddLiveClass = ({
     }
   }, [moduleData, indexLesson, liveClassLink]);
 
+  const selectOptions = courseData.instructors.map((item) => ({
+    value: item,
+    label: (
+      <div className="flex items-center gap-4">
+        <Image
+          width={500}
+          height={300}
+          className="w-10 h-10 rounded-full"
+          src={item.photoUrl}
+          alt={item.profileName}
+        />
+        <div>
+          <p className="text-lg m-0 font-semibold">{item.profileName}</p>
+          <p className="ml-1 text-sm m-0">{item.jobTitle}</p>
+        </div>
+      </div>
+    ),
+  }));
+
+  const selectClassType = [
+    { value: 'Live Class', label: 'Live Class' },
+    { value: 'Conceptual Class', label: 'Conceptual Class' },
+    { value: 'Solve Class', label: 'Solve Class' },
+  ];
+
   const handleLessonClick = (item, index) => {
     setCurrentLesson(item);
     setIndexLesson(index);
   };
 
   const handleAddLiveClass = () => {
-    if (liveClassLink !== '') {
+    if (liveClassLink && classType && instructorForClass) {
+      const updatedCurrentLesson = {
+        ...currentLesson,
+        liveClassLink: liveClassLink,
+        classType: classType,
+        instructorForClass: instructorForClass,
+      };
+
       const updatedModuleData = {
         ...moduleData,
         lessons: moduleData.lessons.map((lesson) =>
-          lesson.id === currentLesson.id ? currentLesson : lesson,
+          lesson.id === currentLesson.id ? updatedCurrentLesson : lesson,
         ),
       };
       setModuleData(updatedModuleData);
@@ -50,7 +89,7 @@ const AddLiveClass = ({
     } else {
       Swal.fire({
         title: 'Error',
-        text: 'Please enter a valid live class link.',
+        text: 'Live class link, Instructor info and Type of class is required!',
         icon: 'error',
         confirmButtonText: 'Okay',
       });
@@ -168,21 +207,55 @@ const AddLiveClass = ({
               <h2 className="text-lg pb-2 text-[#25ce7f] text-center font-medium font-dash_heading ">
                 Live Class
               </h2>
-              <div className="flex gap-3 items-end">
-                <InputBox
-                  className="py-1"
-                  title="Enter Live Class Link"
-                  disabled={currentLesson?.classFinished ? true : false}
-                  value={liveClassLink}
-                  func={(id, value) => setLiveClassLink(value)}
-                />
-                <ButtonDashboard
-                  // disabled={currentLesson?.classFinished ? true : false}
-                  onClick={handleAddLiveClass}
-                  className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
-                >
-                  Submit
-                </ButtonDashboard>
+              <div className="grid grid-cols-2 gap-3 items-start">
+                <div className="col-span-2">
+                  <InputBox
+                    className="py-1"
+                    title="Enter Live Class Link"
+                    disabled={currentLesson?.classFinished ? true : false}
+                    value={liveClassLink}
+                    func={(id, value) => setLiveClassLink(value)}
+                  />
+                </div>
+                <div className="my-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-1">
+                    Select instructor for the class
+                  </label>
+                  <Select
+                    options={selectOptions}
+                    onChange={(selectedOption) =>
+                      setInstructorForClass(
+                        selectedOption.value, // Update the correct answer
+                      )
+                    }
+                    className="py-2"
+                    placeholder="Sakib Tarafdar"
+                  />
+                </div>
+
+                {/* NOTE: TYPE OF CLASS */}
+                <div className="my-4">
+                  <label className="block text-gray-700 text-sm font-bold mb-1">
+                    Select the type of the class
+                  </label>
+                  <Select
+                    options={selectClassType}
+                    onChange={(selectedOption) =>
+                      setClassType(selectedOption.value)
+                    }
+                    className="p-2"
+                    placeholder="Live Class"
+                  />
+                </div>
+
+                <div className="col-span-2 flex justify-center mt-5">
+                  <ButtonDashboard
+                    onClick={handleAddLiveClass}
+                    className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
+                  >
+                    Submit
+                  </ButtonDashboard>
+                </div>
               </div>
 
               {/* NOTE: Class finish button */}

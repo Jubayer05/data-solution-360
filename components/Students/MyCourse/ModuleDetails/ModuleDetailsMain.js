@@ -26,6 +26,8 @@ const ModuleDetailsMain = () => {
   const { moduleData, enrolledCourse } = useEnrolledCourseData();
   const router = useRouter();
 
+  console.log(moduleData);
+
   const handleSegmentClick = (item) => {
     setActiveBtn(item.title);
     setModuleShowComp(item.title);

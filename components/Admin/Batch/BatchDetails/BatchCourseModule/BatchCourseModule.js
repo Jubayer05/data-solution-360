@@ -21,6 +21,7 @@ const BatchCourseModule = () => {
   const [loading, setLoading] = useState(true);
   const [errorMessage, setErrorMessage] = useState('');
   const [selectedStatus, setSelectedStatus] = useState();
+  const [courseData, setCourseData] = useState([]);
 
   useEffect(() => {
     if (batchId) {
@@ -32,6 +33,7 @@ const BatchCourseModule = () => {
 
           if (courseSnapshot.exists) {
             const courseData = courseSnapshot.data();
+            setCourseData(courseData);
             const foundModule = courseData.course_modules.find(
               (module) => module.id === moduleId,
             );
@@ -128,8 +130,6 @@ const BatchCourseModule = () => {
     );
   }
 
-  console.log(moduleData);
-
   return (
     <div>
       <div className="max-w-6xl mx-auto my-20">
@@ -174,6 +174,7 @@ const BatchCourseModule = () => {
         </div>
         <AddLiveClass
           moduleData={moduleData}
+          courseData={courseData}
           setModuleData={setModuleData}
           updateModuleInFirestore={updateModuleInFirestore}
         />

@@ -8,9 +8,6 @@ const ModuleBreadcrumb = () => {
   return (
     <Breadcrumb
       className="mt-4 text-base font-semibold "
-      itemColor="#000000"
-      linkColor="#000000"
-      linkHoverColor="rgba(44, 90, 0, 0.88)"
       colorBgTextHover="rgba(255, 255, 255, 1)"
       items={[
         {
