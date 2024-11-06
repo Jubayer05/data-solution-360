@@ -13,7 +13,6 @@ const ModuleDetails = () => {
   const [courseDataBatch, setCourseDataBatch] = useState([]);
   const [url, setUrl] = useState('');
 
-  const [enrolledUsers, setEnrolledUsers] = useState([]);
   const [updatedModule, setUpdatedModule] = useState([]);
   console.log(updatedModule);
 
@@ -26,26 +25,6 @@ const ModuleDetails = () => {
   const currentEnrolledCourse = courseDataBatch.find(
     (course) => course.id === url,
   );
-
-  useEffect(() => {
-    // Define the async function inside useEffect to avoid defining it on each render
-    const handleGetUsers = async () => {
-      try {
-        if (currentEnrolledCourse?.enrolled_students?.length > 0) {
-          const users = await fetchUsersByIds(
-            currentEnrolledCourse.enrolled_students,
-          );
-          setEnrolledUsers(users);
-        }
-      } catch (error) {
-        console.error('Error fetching users:', error);
-      }
-    };
-
-    handleGetUsers();
-
-    // The effect will run only when the enrolled_students array changes
-  }, [currentEnrolledCourse?.enrolled_students]);
 
   useEffect(() => {
     setUpdatedModule(currentEnrolledCourse?.course_modules);

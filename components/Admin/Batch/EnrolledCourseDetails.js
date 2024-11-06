@@ -7,6 +7,7 @@ import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import AddAssignment from './BatchDetails/Assignment/AddAssignment';
 import AssignmentComp from './BatchDetails/Assignment/AssignmentComp';
 import EnrolledStudent from './BatchDetails/EnrolledStudents';
+import ManualPayment from './BatchDetails/ManualPayment';
 import ModuleDetails from './BatchDetails/ModuleDetails';
 
 const db = firebase.firestore();
@@ -35,6 +36,7 @@ const EnrolledCourseDetails = () => {
       />
       <div className="max-w-5xl mx-auto my-20">
         <EnrolledStudent />
+        <ManualPayment />
         <ModuleDetails />
         <AssignmentComp />
         <AddAssignment />

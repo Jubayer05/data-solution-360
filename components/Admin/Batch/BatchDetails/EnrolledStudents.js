@@ -261,7 +261,7 @@ const EnrolledStudent = () => {
 
   const columns = [
     {
-      title: 'SL Number',
+      title: 'SL',
       dataIndex: 'serialNumber',
       width: 80,
       align: 'center',
@@ -269,10 +269,9 @@ const EnrolledStudent = () => {
     },
     {
       title: 'Name',
-      dataIndex: 'name',
+      dataIndex: 'full_name',
       width: 150,
       align: 'center',
-      render: (_, __, index) => index + 1,
     },
     {
       title: 'Phone Number',
@@ -280,6 +279,7 @@ const EnrolledStudent = () => {
       align: 'center',
       width: 180,
     },
+
     {
       title: 'Action',
       width: 250,
