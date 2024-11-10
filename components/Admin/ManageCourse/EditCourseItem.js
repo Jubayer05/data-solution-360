@@ -4,7 +4,6 @@ import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
-import { useStateContext } from '../../../src/context/ContextProvider';
 import useFetchDocById from '../../../src/hooks/manageDataById/useLoadDocumentById';
 import useUpdateDocumentById from '../../../src/hooks/manageDataById/useUpdateDocumentById';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -18,7 +17,6 @@ import InputBoxManage from './InputBoxManage';
 const db = firebase.firestore();
 
 const EditCourseItem = () => {
-  const { courseData, userEmail } = useStateContext();
   const [courseDataObj, setCourseDataObj] = useState({});
   const [orientation, setOrientation] = useState(true);
   const [mainClassStart, setMainClassStart] = useState(null);
@@ -33,7 +31,6 @@ const EditCourseItem = () => {
   const [youtube_video, setYoutube_video] = useState('');
   const [courseImg, setCourseImg] = useState('');
   const [youtubeVideoReset, setYoutubeVideoReset] = useState(false);
-  const [itemName, setItemName] = useState('');
   const router = useRouter();
   const { courseId } = router?.query;
   const plainOptions = ['Sat', 'Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri'];
@@ -45,7 +42,6 @@ const EditCourseItem = () => {
   useEffect(() => {
     setCourseDataObj(data);
     setCourseModule(data?.courseModule || []);
-    setItemName(data?.title || '');
     setCourseShortData(data?.courseShortData);
     setInstructors(data?.instructors || []);
     setStudentReview(data?.studentReview || []);
@@ -68,7 +64,6 @@ const EditCourseItem = () => {
         : courseDataObj?.main_class_starting_date,
       mainClassStartStatus: mainClassStart,
       item_id: courseId,
-      item_name: itemName,
       courseModule,
       instructors,
       studentReview,
@@ -176,7 +171,7 @@ const EditCourseItem = () => {
             keyName="item_name"
             func={handleInputChange}
             type="text"
-            value={data?.title}
+            value={data?.item_name}
           />
           <div className="grid grid-cols-2 gap-5 pb-3">
             {/* InputBox component for the course price */}

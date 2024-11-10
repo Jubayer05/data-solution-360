@@ -27,6 +27,8 @@ const BannerCourseDetails = ({ courseDetails }) => {
     );
   }, [courseDataBatch, courseDetails]);
 
+  // console.log(courseDetails?.unique_batch_id);
+
   const handleJoinNow = useCallback(() => {
     if (!findCurrentUser) {
       Swal.fire('Warning', 'Please login first.', 'warning');
@@ -282,9 +284,17 @@ const BannerCourseDetails = ({ courseDetails }) => {
                 </div>
               </div>
               <div>
-                {!currentCourse?.enrolled_students.includes(
-                  findCurrentUser?.student_id,
-                ) ? (
+                {!currentCourse ? (
+                  <button
+                    className="bg-primary-bg text-[#f9fbff] w-full py-[12px] px-[24px] 
+                rounded-[8px] mt-6 hover:opacity-[0.8] transition-all"
+                    onClick={handleJoinNow}
+                  >
+                    Join Live Batch
+                  </button>
+                ) : !currentCourse?.enrolled_students.includes(
+                    findCurrentUser?.student_id,
+                  ) ? (
                   <Link
                     href={`/purchase/checkout?courseId=${currentCourse?.id}`}
                   >
