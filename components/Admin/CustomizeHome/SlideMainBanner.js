@@ -34,8 +34,8 @@ const SlideMainBanner = () => {
         })
         .then(() => {
           Swal.fire({
-            title: 'Hello',
-            text: 'Technology added successfully!',
+            title: 'Success!',
+            text: 'Banner slide added successfully!',
             icon: 'success',
             confirmButtonColor: '#3085d6',
             confirmButtonText: 'Okay',
@@ -46,20 +46,25 @@ const SlideMainBanner = () => {
           });
         })
         .catch((err) => {
-          Swal.fire('Hello!', 'Profile cannot updated!', 'error');
+          Swal.fire({
+            title: 'Error!',
+            text: 'Failed to add the banner slide. Please try again.',
+            icon: 'error',
+            confirmButtonColor: '#3085d6',
+            confirmButtonText: 'Okay',
+          });
         });
     },
   });
 
   const handleFileSubmit = (e) => {
-    // const fileSize = document.getElementById('photoUrl').files[0].size;
     const fileSize = e.target.files[0].size;
     const technologyImg = e.target.files[0];
 
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`technologyIcon/${userEmail}/${technologyImg?.name}`)
+        .ref(`banner_and_popup/${userEmail}/${technologyImg?.name}`)
         .put(technologyImg);
       uploadTask.on(
         'state_changed',
@@ -71,30 +76,31 @@ const SlideMainBanner = () => {
           setProgressData(progress);
         },
         (error) => {
-          alert(error.message + '' + 'Something went wrong');
+          Swal.fire({
+            title: 'Upload Error',
+            text: 'Something went wrong during file upload.',
+            icon: 'error',
+          });
         },
         () => {
           firebase
             .storage()
-            .ref('technologyIcon')
+            .ref('banner_and_popup')
             .child(userEmail)
             .child(technologyImg?.name)
             .getDownloadURL()
             .then((url) => {
-              // NOTE: use this url
               setImg(url);
             });
         },
       );
     } else {
-      alert('File Size must be under 1mb.');
+      Swal.fire({
+        title: 'File Too Large',
+        text: 'File size must be under 1MB.',
+        icon: 'warning',
+      });
     }
-  };
-
-  const conicColors = {
-    '0%': '#87d068',
-    '50%': '#ffe58f',
-    '100%': '#ffccc7',
   };
 
   const handleRemoveTechnology = (item) => {
@@ -109,17 +115,19 @@ const SlideMainBanner = () => {
     }).then((result) => {
       if (result.isConfirmed) {
         db.collection('slides_main_banner')
-          .doc(item.key)
+          .doc(item.id)
           .delete()
           .then(() => {
             Swal.fire(
               'Deleted!',
-              'Your technology item has been deleted.',
+              'The banner slide has been deleted successfully.',
               'success',
-            );
+            ).then(() => {
+              window.location.reload();
+            });
           })
           .catch((error) => {
-            Swal.fire('Error!', 'Something went wrong.', 'error');
+            Swal.fire('Error!', 'Failed to delete the banner slide.', 'error');
           });
       }
     });
@@ -129,7 +137,9 @@ const SlideMainBanner = () => {
     <div id="slide_main_banner">
       <div className="pt-10 pb-4 px-5 ">
         <div className="max-w-3xl mx-auto bg-white shadow-md border-solid rounded-lg border-gray-300 p-5 my-4">
-          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6">Slides Banner</h2>
+          <h2 className=" text-xl text-[#1aa5d3] mt-2 mb-6 font-dash_heading">
+            Slides Banner
+          </h2>
           <div className="mb-6 -mt-3 bg-[#bac6ca] h-0.5" />
           <h2>Current Slides Banner Data</h2>
           <div className="flex justify-between items-center flex-wrap gap-6">
@@ -139,12 +149,6 @@ const SlideMainBanner = () => {
                 className="w-full bg-white shadow-md flex items-center justify-between
               rounded-lg relative group px-3 py-2"
               >
-                {/* <div className="absolute -top-3 -right-3 hidden group-hover:block">
-                  <RxCross1
-                   
-                    className="text-2xl cursor-pointer bg-black border-2 p-1 rounded-full text-white"
-                  />
-                </div> */}
                 <div className="flex items-center gap-2">
                   <Image
                     width={500}
@@ -175,7 +179,6 @@ const SlideMainBanner = () => {
             ))}
           </div>
           <form onSubmit={formik.handleSubmit}>
-            {/* NOTE: photoUrl */}
             <div className="flex items-center mb-3 mt-20">
               <label htmlFor="img" className="w-[240px] sm:w-[300px]">
                 Add Image
@@ -193,7 +196,7 @@ const SlideMainBanner = () => {
               <Progress
                 percent={progressData}
                 size="small"
-                strokeColor={conicColors}
+                // strokeColor={conicColors}
               />
             </div>
 
@@ -240,5 +243,5 @@ const SlideMainBanner = () => {
     </div>
   );
 };
-``;
+
 export default SlideMainBanner;
