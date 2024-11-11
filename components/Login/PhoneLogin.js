@@ -157,7 +157,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
     setSuccess('');
     try {
       await auth.signInWithEmailAndPassword(phoneNumberEmail, password);
-      window.location.assign('/students/dashboard');
+      window.location.reload();
     } catch (err) {
       handleAuthError(err);
       console.error('Error during login:', err);
