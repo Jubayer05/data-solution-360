@@ -4,6 +4,7 @@ import { MdCancel } from 'react-icons/md';
 import { colors } from '../../../../../src/data/data';
 import { convertToAMPM } from '../../../../../src/utils/convertAMPM';
 import { formatDate } from '../../../../../src/utils/convertDate';
+import useIsToday from '../../../../../src/utils/useIsToday';
 
 const LessonDetails = ({
   currentLesson,
@@ -33,6 +34,8 @@ const LessonDetails = ({
     setModuleData(updatedModuleData);
     updateModuleInFirestore(updatedModuleData);
   };
+
+  const classToday = useIsToday(currentLesson?.classDate);
 
   return (
     <div className="flex-[40%] w-[40%] border-1 p-5 rounded-lg bg-white mt-10">
@@ -68,7 +71,9 @@ const LessonDetails = ({
         <h2 className="text-base pb-1 mt-5 text-[#231f40] font-medium font-dash_heading ">
           Live Class
         </h2>
-        <p className="text-sm break-all">{currentLesson?.liveClassLink}</p>
+        <p className="text-sm break-all">
+          <strong>Join Link: </strong> {currentLesson?.liveClassLink}
+        </p>
         <p className="text-sm">
           <strong>class time: </strong>{' '}
           {convertToAMPM(currentLesson?.classTime)}
@@ -77,16 +82,24 @@ const LessonDetails = ({
           <strong>class date: </strong>
           {formatDate(currentLesson?.classDate)}
         </p>
+        <p className="text-sm">
+          <strong>class type: </strong>
+          {currentLesson?.classType}
+        </p>
+        <p className="text-sm">
+          <strong>Instructor: </strong>
+          {currentLesson?.instructorForClass?.profileName}
+        </p>
         <div>
           {currentLesson?.liveClassLink && currentLesson?.classFinished ? (
             <span className="bg-green-50 border border-green-500 px-2 text-xs rounded-full font-semibold text-[#48bb78]">
-              Finished
+              Class Finished
             </span>
-          ) : currentLesson?.liveClassLink && !currentLesson?.classFinished ? (
+          ) : currentLesson?.liveClassLink && classToday ? (
             <span className="bg-blue-100 border border-blue-500 px-2 text-xs rounded-full font-semibold text-[#4299e1]">
-              Running
+              Live Class Today
             </span>
-          ) : !currentLesson?.liveClassLink && !currentLesson?.classFinished ? (
+          ) : currentLesson?.liveClassLink && classToday === false ? (
             <span className="bg-purple-100 border border-purple-500 px-2 text-xs rounded-full font-semibold text-[#6b46c1]">
               Upcoming
             </span>

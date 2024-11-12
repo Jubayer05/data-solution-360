@@ -95,3 +95,18 @@ export function calculateDaysBetween(start, end) {
   // Add 1 to include both start and end date in the count
   return differenceInDays + 1;
 }
+
+export function getFullDayName(abbreviatedDay) {
+  const days = {
+    Sat: 'Saturday',
+    Sun: 'Sunday',
+    Mon: 'Monday',
+    Tue: 'Tuesday',
+    Wed: 'Wednesday',
+    Thu: 'Thursday',
+    Fri: 'Friday',
+  };
+
+  // Return the full name or the original input if not found
+  return days[abbreviatedDay] || abbreviatedDay;
+}

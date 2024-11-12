@@ -10,6 +10,7 @@ import AddClassDateAndTime from './AddClassDate&Time';
 import AddQuiz from './AddQuiz';
 import AddResourceRecording from './AddResourceRecording';
 import LessonDetails from './LessonDetails';
+import ShowStatus from './ShowStatus';
 
 const AddLiveClass = ({
   courseData,
@@ -23,17 +24,15 @@ const AddLiveClass = ({
   const [instructorForClass, setInstructorForClass] = useState('');
   const [classType, setClassType] = useState('');
 
-  console.log(classType, instructorForClass);
-
   useEffect(() => {
     if (liveClassLink !== '') {
       setCurrentLesson({
         ...moduleData.lessons[indexLesson],
+        liveClassLink: liveClassLink,
       });
     } else {
       setCurrentLesson({
         ...moduleData.lessons[indexLesson],
-        liveClassLink: liveClassLink,
       });
     }
   }, [moduleData, indexLesson, liveClassLink]);
@@ -163,21 +162,7 @@ const AddLiveClass = ({
                 {item.title.replace(/^Session \d+:\s*/, '')}
               </p>
 
-              {item?.liveClassLink && item?.classFinished ? (
-                <span className="bg-green-50 border border-green-500 px-2 text-xs rounded-full font-semibold text-[#48bb78]">
-                  Finished
-                </span>
-              ) : item?.liveClassLink && !item?.classFinished ? (
-                <span className="bg-blue-100 border border-blue-500 px-2 text-xs rounded-full font-semibold text-[#4299e1]">
-                  Running
-                </span>
-              ) : !item?.liveClassLink && !item?.classFinished ? (
-                <span className="bg-purple-100 border border-purple-500 px-2 text-xs rounded-full font-semibold text-[#6b46c1]">
-                  Upcoming
-                </span>
-              ) : (
-                ''
-              )}
+              <ShowStatus item={item} />
             </div>
           ))}
         </div>
