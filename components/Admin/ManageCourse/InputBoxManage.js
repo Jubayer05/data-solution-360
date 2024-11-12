@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 const InputBoxManage = ({
   title,
@@ -9,6 +9,24 @@ const InputBoxManage = ({
   keyName,
   value,
 }) => {
+  const inputRef = useRef(null);
+
+  useEffect(() => {
+    if (type === 'number') {
+      const handleWheel = (event) => event.preventDefault();
+      const inputElement = inputRef.current;
+      if (inputElement) {
+        inputElement.addEventListener('wheel', handleWheel);
+      }
+      // Cleanup to remove the event listener when component unmounts
+      return () => {
+        if (inputElement) {
+          inputElement.removeEventListener('wheel', handleWheel);
+        }
+      };
+    }
+  }, [type]);
+
   return (
     <div className="w-full mt-3">
       <label
@@ -30,6 +48,7 @@ const InputBoxManage = ({
         )}
       </label>
       <input
+        ref={inputRef}
         id={id}
         onChange={(e) =>
           func(keyName.toLowerCase().split(' ').join('_'), e.target.value)

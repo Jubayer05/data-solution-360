@@ -39,7 +39,7 @@ const updateDocumentById = async (
  * @param {string} docId - Firestore document ID.
  */
 const useUpdateDocumentById = (collectionName, docId) => {
-  const [loading, setLoading] = useState(false);
+  const [loadingUpdate, setLoading] = useState(false);
   const [error, setError] = useState(null);
   const [success, setSuccess] = useState(false);
 
@@ -67,7 +67,7 @@ const useUpdateDocumentById = (collectionName, docId) => {
     }
   };
 
-  return { updateDocument, loading, error, success };
+  return { updateDocument, loadingUpdate, error, success };
 };
 
 export default useUpdateDocumentById;

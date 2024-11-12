@@ -1,9 +1,8 @@
-import { Checkbox, Switch } from 'antd';
+import { Checkbox, Spin, Switch } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
-import firebase from '../../../firebase';
 import useFetchDocById from '../../../src/hooks/manageDataById/useLoadDocumentById';
 import useUpdateDocumentById from '../../../src/hooks/manageDataById/useUpdateDocumentById';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -13,8 +12,6 @@ import AddInstructorCourse from '../Course/AddInstructorCourse';
 import AddModule from '../Course/AddModule';
 import CourseStatus from '../Course/CourseStatus';
 import InputBoxManage from './InputBoxManage';
-
-const db = firebase.firestore();
 
 const EditCourseItem = () => {
   const [courseDataObj, setCourseDataObj] = useState({});
@@ -104,8 +101,12 @@ const EditCourseItem = () => {
     setCourseDataObj(updatedObject);
   };
 
-  if (loading || loadingUpdate) {
-    return <p>Loading...</p>;
+  if (loading) {
+    return (
+      <div className="flex justify-center items-center h-[80vh] ">
+        <Spin size="medium" />
+      </div>
+    );
   }
 
   if (error || errorUpdate) {
@@ -154,7 +155,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Update Status
+              {loadingUpdate ? 'Processing...' : 'Update Status'}
             </ButtonDashboard>
           </div>
         </div>
@@ -188,7 +189,7 @@ const EditCourseItem = () => {
             <InputBoxManage
               title="Discounted price"
               id="discountedPrice"
-              keyName="discount"
+              keyName="discounted_price"
               func={handleInputChange}
               type="number"
               value={data?.discounted_price}
@@ -222,7 +223,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Submit
+              {loadingUpdate ? 'Processing...' : 'Submit'}
             </ButtonDashboard>
           </div>
         </div>
@@ -346,7 +347,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Submit
+              {loadingUpdate ? 'Processing...' : 'Submit'}
             </ButtonDashboard>
           </div>
         </div>
@@ -399,7 +400,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Submit
+              {loadingUpdate ? 'Processing...' : 'Submit'}
             </ButtonDashboard>
           </div>
         </div>
@@ -496,7 +497,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Submit
+              {loadingUpdate ? 'Processing...' : 'Submit'}
             </ButtonDashboard>
           </div>
         </div>
@@ -525,7 +526,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Submit
+              {loadingUpdate ? 'Processing...' : 'Submit'}
             </ButtonDashboard>
           </div>
         </div>
@@ -543,7 +544,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Submit
+              {loadingUpdate ? 'Processing...' : 'Submit'}
             </ButtonDashboard>
           </div>
         </div>
@@ -562,7 +563,7 @@ const EditCourseItem = () => {
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"
             >
-              Submit
+              {loadingUpdate ? 'Processing...' : 'Submit'}
             </ButtonDashboard>
           </div>
         </div>
