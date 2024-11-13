@@ -1,3 +1,4 @@
+import { serverTimestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
 import Lottie from 'react-lottie';
@@ -124,6 +125,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             role: 'student',
             student_id: uuidv4().split('-')[0],
             enrolled_courses: [],
+            createdAt: serverTimestamp(),
           });
         })
         .then((userDocRef) => {

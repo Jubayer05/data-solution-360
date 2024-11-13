@@ -98,7 +98,7 @@ const RecordingHome = () => {
           </div>
           {/* </Link> */}
 
-          <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-3 md:px-5 py-4 rounded-md my-5">
+          {/* <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-3 md:px-5 py-4 rounded-md my-5">
             {segmentBtn.map((item) => (
               <button
                 key={item.id}
@@ -113,7 +113,7 @@ const RecordingHome = () => {
                 {item.title}
               </button>
             ))}
-          </div>
+          </div> */}
 
           <RecordingContent item={currentContent} />
         </div>

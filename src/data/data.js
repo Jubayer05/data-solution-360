@@ -99,7 +99,7 @@ export const linksAdmin = [
       },
       {
         name: 'All Students',
-        link: '/admin/team_member',
+        link: '/admin/all-student',
         icon: <RiTeamLine />,
       },
       {

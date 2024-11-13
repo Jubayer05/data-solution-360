@@ -4,6 +4,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { MdOnlinePrediction } from 'react-icons/md';
+import Swal from 'sweetalert2';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
 import useEnrolledCourseData from '../../src/hooks/useEnrolledCourseData';
@@ -37,70 +38,79 @@ const JoinLive = () => {
     : null;
 
   const handleAttendance = async (userId, sessionId) => {
-    if (!courseId || !moduleId) {
-      console.log('Missing courseId or moduleId from router query');
-      return;
-    }
-
-    if (!enrolledCourse) {
-      console.log('No enrolled course data found');
-      return;
-    }
-
-    // Find the user's data in the leaderboard
-    let leaderboard = enrolledCourse.leaderboard_data || [];
-    let userIndex = leaderboard.findIndex((user) => user.userId === userId);
-
-    // If the user is not in the leaderboard, add them with attendance score
-    if (userIndex === -1) {
-      leaderboard.push({
-        userId,
-        totalQuizScore: 0,
-        attendanceScore: 1,
-        rank: null,
-        hasJoinedLive: { [sessionId]: true }, // Add sessionId to track attendance
+    if (findCurrentLesson?.classFinished) {
+      Swal.fire({
+        title: 'Dear Student',
+        text: 'You are trying to join the class which is already finished!',
+        icon: 'error',
       });
     } else {
-      // Check if the user has already joined the live class for this session
-      if (
-        leaderboard[userIndex].hasJoinedLive &&
-        leaderboard[userIndex].hasJoinedLive[sessionId]
-      ) {
-        console.log('User has already joined the live class for this session');
-        return; // Prevent multiple attendance gains for the same session
+      if (!courseId || !moduleId) {
+        console.log('Missing courseId or moduleId from router query');
+        return;
       }
 
-      // If user exists, update their attendance score
-      leaderboard[userIndex].attendanceScore =
-        (leaderboard[userIndex].attendanceScore || 0) + 1;
+      if (!enrolledCourse) {
+        console.log('No enrolled course data found');
+        return;
+      }
 
-      // Mark that the user has joined this session
-      leaderboard[userIndex].hasJoinedLive = {
-        ...leaderboard[userIndex].hasJoinedLive,
-        [sessionId]: true,
-      };
-    }
+      // Find the user's data in the leaderboard
+      let leaderboard = enrolledCourse.leaderboard_data || [];
+      let userIndex = leaderboard.findIndex((user) => user.userId === userId);
 
-    // Update courseData with the new leaderboard
-    courseData.leaderboard_data = leaderboard;
+      // If the user is not in the leaderboard, add them with attendance score
+      if (userIndex === -1) {
+        leaderboard.push({
+          userId,
+          totalQuizScore: 0,
+          attendanceScore: 1,
+          rank: null,
+          hasJoinedLive: { [sessionId]: true }, // Add sessionId to track attendance
+        });
+      } else {
+        // Check if the user has already joined the live class for this session
+        if (
+          leaderboard[userIndex].hasJoinedLive &&
+          leaderboard[userIndex].hasJoinedLive[sessionId]
+        ) {
+          console.log(
+            'User has already joined the live class for this session',
+          );
+          return; // Prevent multiple attendance gains for the same session
+        }
 
-    // Update Firestore with the updated leaderboard
-    await db
-      .collection('course_data_batch')
-      .doc(enrolledCourse.id)
-      .update(courseData);
+        // If user exists, update their attendance score
+        leaderboard[userIndex].attendanceScore =
+          (leaderboard[userIndex].attendanceScore || 0) + 1;
 
-    if (userAlreadyGiveQuiz) {
-      return;
-    } else {
-      console.log('HITTEDDDDDDDDDDDDD');
-      // Await the updateLessonData to ensure it completes before moving forward
-      await updateLessonData({
-        user_joinLiveClass: [
-          ...(findCurrentLesson?.user_joinLiveClass || []), // Preserve previous quiz attempts
-          findCurrentUser.student_id,
-        ],
-      });
+        // Mark that the user has joined this session
+        leaderboard[userIndex].hasJoinedLive = {
+          ...leaderboard[userIndex].hasJoinedLive,
+          [sessionId]: true,
+        };
+      }
+
+      // Update courseData with the new leaderboard
+      courseData.leaderboard_data = leaderboard;
+
+      // Update Firestore with the updated leaderboard
+      await db
+        .collection('course_data_batch')
+        .doc(enrolledCourse.id)
+        .update(courseData);
+
+      if (userAlreadyGiveQuiz) {
+        return;
+      } else {
+        // Await the updateLessonData to ensure it completes before moving forward
+        await updateLessonData({
+          user_joinLiveClass: [
+            ...(findCurrentLesson?.user_joinLiveClass || []), // Preserve previous quiz attempts
+            findCurrentUser.student_id,
+          ],
+        });
+      }
     }
   };
 
@@ -159,17 +169,24 @@ const JoinLive = () => {
           </div>
           {findCurrentUser?.email ? (
             <Link
-              onClick={() =>
-                handleAttendance(findCurrentUser?.student_id, liveId)
-              }
+              onClick={(e) => {
+                if (findCurrentLesson?.classFinished) {
+                  e.preventDefault(); // Prevent link navigation if the class is finished
+                } else {
+                  handleAttendance(findCurrentUser?.student_id, liveId);
+                }
+              }}
               href={
                 findCurrentLesson?.liveClassLink
                   ? findCurrentLesson.liveClassLink
                   : '/students/class-joining'
               }
               target="_blank"
-              className="flex justify-center items-center gap-2 bg-[#fecb63] hover:bg-[#e7b655] 
-            font-semibold py-2 px-5 rounded transition-all duration-200 text-black visited:text-black mt-5"
+              className={`flex justify-center items-center gap-2 font-semibold py-2 px-5 rounded transition-all duration-200 mt-5 ${
+                findCurrentLesson?.classFinished
+                  ? 'bg-gray-300 text-gray-500 cursor-not-allowed' // Disabled style
+                  : 'bg-[#fecb63] hover:bg-[#e7b655] text-black'
+              }`}
             >
               {hasZoomLink ? 'Join Live' : 'Class Recording'}
             </Link>

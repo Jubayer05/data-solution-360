@@ -19,7 +19,7 @@ const MyCourseMain = () => {
   );
 
   return (
-    <div className="p-0 sm:p-4">
+    <div className="p-0">
       <div
         className={`flex flex-col md:flex-row md:items-start 
            gap-6 ${
@@ -29,7 +29,7 @@ const MyCourseMain = () => {
            }`}
       >
         {/* LEFT SIDE */}
-        <div className={`flex-1 `}>
+        <div className={`flex-1`}>
           <div className="bg-white shadow-lg rounded-lg px-6 pb-8 pt-4 my-5">
             <h2 className="font-heading font-bold text-2xl my-2">My Courses</h2>
             <div
@@ -65,8 +65,10 @@ const MyCourseMain = () => {
 
         {/* RIGHT SIDE */}
 
-        <div className="w-full md:w-1/4 sticky top-20 bg-white shadow-lg rounded-lg px-6 py-5 my-5">
-          <TodayClassRight />
+        <div className="w-full md:w-[28%] sticky top-20 bg-white shadow-lg rounded-lg p-4  my-5">
+          {courseDataBatch?.map((item) => (
+            <TodayClassRight key={item.id} item={item} />
+          ))}
         </div>
       </div>
     </div>

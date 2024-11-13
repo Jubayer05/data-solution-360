@@ -1,5 +1,4 @@
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { FaRegPlayCircle } from 'react-icons/fa';
 import { RiLiveLine } from 'react-icons/ri';
@@ -7,7 +6,12 @@ import { useStudentContext } from '../../../../src/context/StudentContext';
 
 import Swal from 'sweetalert2';
 import { convertToAMPM } from '../../../../src/utils/convertAMPM';
-import { formatDateWithoutYear } from '../../../../src/utils/convertDate';
+import {
+  formatDateWithoutYear,
+  getTimeDifference,
+  isToday,
+} from '../../../../src/utils/convertDate';
+import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
 import QuizItem from './QuizItem';
 
 const StudyPlan = ({ moduleData, enrolledCourse }) => {
@@ -30,6 +34,20 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
     }
   };
 
+  const handleJoinLive = (item) => {
+    const timeDifference = getTimeDifference(item?.classTime);
+
+    if (timeDifference > 20) {
+      Swal.fire(
+        'Dear Student',
+        'You can join each class 10 minutes before it starts.',
+        'warning',
+      );
+    } else {
+      window.location.href = `${currentUrl}/join/live/${item?.id}`;
+    }
+  };
+
   return (
     <div className="mt-2 mb-10 w-full border border-dashboard_border rounded-lg overflow-hidden shadow-md">
       {moduleShowComp == 'Live Class' ? (
@@ -39,7 +57,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
               key={item.id}
               className={`flex flex-col md:flex-row justify-between items-start px-4 py-6 md:py-8 gap-4 
               border-b border-x-4 border-x-[transparent] hover:border-x-[gray] ${
-                item?.liveClassLink && !item?.classFinished
+                item?.liveClassLink && isToday(item?.classDate)
                   ? 'bg-primary_btn hover:bg-[#00172e]'
                   : 'bg-white hover:bg-gray-100'
               }`}
@@ -57,7 +75,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
                     <p
                       className={`text-center leading-[19px] tracking-[0.02em] flex justify-center items-center 
                         text-[13px] px-2 py-1 rounded-md border border-[#3d9970] text-[#3d9970] font-semibold ${
-                          item?.liveClassLink && !item?.classFinished
+                          item?.liveClassLink && isToday(item?.classDate)
                             ? 'bg-[#ffffff]'
                             : 'bg-[#85ffc82d]'
                         }`}
@@ -67,7 +85,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
                     <p
                       className={`font-medium text-center leading-[19px] tracking-[0.02em] flex justify-center items-center 
                         text-[13px] px-2 py-1 rounded-md border border-dashboard_border  ${
-                          item?.liveClassLink && !item?.classFinished
+                          item?.liveClassLink && isToday(item?.classDate)
                             ? 'bg-[#ffffff]'
                             : 'bg-[#cfcfcf74]'
                         }`}
@@ -79,7 +97,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
                   </div>
                   <h2
                     className={`text-lg md:text-[22px] font-semibold mt-2 md:mt-5 leading-6 font-subHeading ${
-                      item?.liveClassLink && !item?.classFinished
+                      item?.liveClassLink && isToday(item?.classDate)
                         ? 'text-white'
                         : 'text-black'
                     }`}
@@ -97,21 +115,20 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
                     <FaRegPlayCircle />
                     <span>Class Recording</span>
                   </button>
-                ) : item?.liveClassLink && !item?.classFinished ? (
-                  <Link
-                    href={`${currentUrl}/join/live/${item?.id}`}
+                ) : isToday(item?.classDate) ? (
+                  <ButtonDashboard
+                    onClick={() => handleJoinLive(item)}
+                    // href={`${currentUrl}/join/live/${item?.id}`}
                     className="flex justify-between items-center gap-2 bg-[#fecb63] hover:bg-[#e7b655] 
                     font-semibold py-2 px-5 rounded transition-all duration-200 text-black visited:text-black text-sm md:text-base"
                   >
                     <RiLiveLine />
                     <span>Join Live</span>
-                  </Link>
-                ) : !item?.liveClassLink && !item?.classFinished ? (
+                  </ButtonDashboard>
+                ) : (
                   <span className="bg-[#fff1da] text-orange-400 border border-[#ff893b] px-2 text-xs md:text-sm rounded-full font-semibold">
                     Upcoming
                   </span>
-                ) : (
-                  ''
                 )}
               </div>
             </div>

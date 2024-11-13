@@ -15,8 +15,6 @@ const ClassJoiningItem = ({ item }) => {
     (item) => item.moduleStatus == 'running',
   );
 
-  console.log(item?.courseData?.class_days);
-
   const openModal = () => {
     setModalIsOpen(true);
   };

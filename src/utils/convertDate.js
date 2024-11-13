@@ -110,3 +110,47 @@ export function getFullDayName(abbreviatedDay) {
   // Return the full name or the original input if not found
   return days[abbreviatedDay] || abbreviatedDay;
 }
+
+export function isToday(dateString) {
+  const inputDate = new Date(dateString);
+  const today = new Date();
+
+  return (
+    inputDate.getFullYear() === today.getFullYear() &&
+    inputDate.getMonth() === today.getMonth() &&
+    inputDate.getDate() === today.getDate()
+  );
+}
+
+export function getTimeDifference(givenTime) {
+  const [givenHour, givenMinute] = givenTime.split(':').map(Number);
+
+  // Get the current time
+  const now = new Date();
+  const currentHour = now.getHours();
+  const currentMinute = now.getMinutes();
+
+  // Create Date objects for the current time and given time, on the same date
+  const currentTime = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    currentHour,
+    currentMinute,
+  );
+  const targetTime = new Date(
+    now.getFullYear(),
+    now.getMonth(),
+    now.getDate(),
+    givenHour,
+    givenMinute,
+  );
+
+  // Calculate the difference in milliseconds
+  const differenceMs = targetTime - currentTime;
+
+  // Convert milliseconds to minutes
+  const differenceMinutes = Math.floor(differenceMs / 60000);
+
+  return differenceMinutes;
+}
