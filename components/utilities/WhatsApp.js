@@ -76,12 +76,28 @@ const WhatsApp = () => {
       </div>
 
       <div
-        className="fixed flex items-center gap-2 bottom-[20px] md:bottom-8 right-[0.5rem] md:right-7
-         cursor-pointer bg-slate-700 text-white px-4 py-3 rounded-xl font-bangla text-sm md:text-lg z-[900]"
+        className="fixed bottom-[20px] md:bottom-8 right-[0.5rem] md:right-10 z-[900]"
         onClick={handleOpenPopup}
       >
-        <FiPhoneCall />
-        <span>সাপোর্ট নিন</span>
+        {/* Ripple Effect Wrapper (Light Pink) */}
+        <div
+          className="absolute left-[50%] top-[50%] translate-x-[-50%] translate-y-[-50%] 
+    w-[100px] h-[50px] rounded-xl flex items-center justify-center -z-10"
+        >
+          <div className="absolute w-full h-full bg-[#ff3385] rounded-xl animate-pulseFade [animation-delay:0s]"></div>
+          <div className="absolute w-full h-full bg-[#ff3385] rounded-xl animate-pulseFade [animation-delay:1s]"></div>
+          <div className="absolute w-full h-full bg-[#ff3385] rounded-xl animate-pulseFade [animation-delay:2s]"></div>
+        </div>
+
+        {/* Support Button (Bright Pink) */}
+        <div
+          className="flex items-center gap-2 cursor-pointer bg-[#cf0469] text-white px-4 py-3 
+           rounded-xl font-bangla text-sm md:text-lg z-[10] animate-pulseRing 
+           scale-105 hover:bg-[#7806b6] hover:text-white transition-all duration-300"
+        >
+          <FiPhoneCall />
+          <span>সাপোর্ট নিন</span>
+        </div>
       </div>
     </div>
   );

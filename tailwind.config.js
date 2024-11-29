@@ -82,10 +82,20 @@ module.exports = {
           '0%, 100%': { transform: 'scale(.9)' },
           '50%': { transform: 'scale(1.2)', opacity: '0.8' },
         },
+        growAndFade: {
+          '0%': { opacity: 0.25, transform: 'scale(0)' },
+          '100%': { opacity: 0, transform: 'scale(1)' },
+        },
+        pulseFade: {
+          '0%': { transform: 'scale(1)', opacity: 1 },
+          '100%': { transform: 'scale(2.5)', opacity: 0 },
+        },
       },
       animation: {
         'spin-slow': 'spin 30s linear infinite',
         pulse: 'pulse 4s infinite',
+        growAndFade: 'growAndFade 3s infinite ease-out',
+        pulseFade: 'pulseFade 2s infinite ease-out',
       },
     },
   },
