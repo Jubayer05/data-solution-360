@@ -17,6 +17,8 @@ const BannerCourseDetails = ({ courseDetails }) => {
   const [courseDataBatch, setCourseDataBatch] = useState([]);
   const db = firebase.firestore();
 
+  console.log(courseDetails);
+
   useEffect(() => {
     loadData('course_data_batch', setCourseDataBatch);
   }, []);
@@ -245,7 +247,8 @@ const BannerCourseDetails = ({ courseDetails }) => {
           {courseDetails?.status && (
             <div className="py-4 px-5">
               <div className="flex items-center">
-                {courseDetails?.status === 'Registration Going on' && (
+                {(courseDetails?.status === 'Registration Going on' ||
+                  courseDetails?.status === 'Running') && (
                   <div>
                     {courseDetails?.discounted_price == '0' ||
                     !courseDetails?.discounted_price ? (
@@ -267,17 +270,6 @@ const BannerCourseDetails = ({ courseDetails }) => {
                     )}
                   </div>
                 )}
-                <div className="ml-4">
-                  {courseDetails?.discounted_price !== '0' ||
-                    (!courseDetails?.discounted_price && (
-                      <span className="text-[#1d2939] font-bold text-3xl">
-                        {courseDetails?.status === 'Registration Going on'
-                          ? courseDetails?.discounted_price
-                          : courseDetails?.price}
-                        /-
-                      </span>
-                    ))}
-                </div>
                 <div className="flex items-center ml-auto border-b-1 cursor-pointer">
                   <BiShareAlt />
                   <span>Share</span>
