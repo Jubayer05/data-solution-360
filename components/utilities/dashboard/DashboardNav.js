@@ -10,24 +10,24 @@ import { useStateContextDashboard } from '../../../src/context/UtilitiesContext'
 import { userNamePrefix } from '../../../src/data/data';
 // import { useStateContext } from "../../src/context/UtilitiesContext";
 
-const NavButton = ({ title, link, customFunc, icon, color, dotColor }) => {
-  return (
-    <Tooltip title={title} color="#707070">
-      <button
-        type="button"
-        style={{ color }}
-        className="relative text-xl rounded-full p-3 hover:bg-light-gray"
-        onClick={customFunc}
-      >
-        <span
-          style={{ background: dotColor }}
-          className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
-        />
-        {icon}
-      </button>
-    </Tooltip>
-  );
-};
+// const NavButton = ({ title, link, customFunc, icon, color, dotColor }) => {
+//   return (
+//     <Tooltip title={title} color="#707070">
+//       <button
+//         type="button"
+//         style={{ color }}
+//         className="relative text-xl rounded-full p-3 hover:bg-light-gray"
+//         onClick={customFunc}
+//       >
+//         <span
+//           style={{ background: dotColor }}
+//           className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
+//         />
+//         {icon}
+//       </button>
+//     </Tooltip>
+//   );
+// };
 
 const DashboardNavbar = () => {
   const {

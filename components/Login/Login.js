@@ -190,14 +190,6 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
             </>
           )}
 
-          {/* {!haveAccount && (
-                <p className="text-right text-xs mt-1 font-semibold text-input">
-                  <span className="cursor-pointer hover:underline">
-                    forgot password
-                  </span>
-                </p>
-              )} */}
-
           <div className="mt-2">
             <button
               className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] 
