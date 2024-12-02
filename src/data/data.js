@@ -102,16 +102,27 @@ export const linksAdmin = [
         link: '/admin/all-student',
         icon: <RiTeamLine />,
       },
+    ],
+  },
+  {
+    title: 'Forms',
+    key: '5',
+    links: [
       {
-        name: 'Instructor',
-        link: '/admin/instructors',
-        icon: <GiTeacher />,
+        name: 'Add a new form',
+        link: '/admin/forms/new-form',
+        icon: <MdOutlineUnsubscribe />,
+      },
+      {
+        name: 'Form data',
+        link: '/admin/forms/form-data',
+        icon: <RiTeamLine />,
       },
     ],
   },
   {
     title: 'Others',
-    key: '5',
+    key: '6',
     links: [
       {
         name: 'Subscribed Users',

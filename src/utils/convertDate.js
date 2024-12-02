@@ -73,6 +73,13 @@ export function formatDateWithoutYear(dateString) {
   return `${day} ${month}`;
 }
 
+export const formatFirestoreTimestamp = (timestamp) => {
+  if (!timestamp) return null;
+
+  const date = timestamp.toDate(); // Converts Firestore Timestamp to JS Date
+  return date.toLocaleString(); // Returns a readable date-time string based on client's locale
+};
+
 export function calculateDaysBetween(start, end) {
   if (!start || !end) {
     return 'Date unavailable'; // Default message if either date is missing
