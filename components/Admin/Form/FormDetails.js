@@ -5,7 +5,7 @@ import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
 import useFetchDocById from '../../../src/hooks/manageDataById/useLoadDocumentById';
 import useUpdateDocumentById from '../../../src/hooks/manageDataById/useUpdateDocumentById';
-import { formatFirestoreTimestamp } from '../../../src/utils/convertDate';
+import { formatDateWithTime } from '../../../src/utils/convertDate';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 // import EnrolledStudent from './BatchDetails/EnrolledStudents';
@@ -43,7 +43,7 @@ const FromDetails = () => {
       title: 'Registration Time',
       align: 'center',
       width: 180,
-      render: (item) => <p>{formatFirestoreTimestamp(item?.createdAt)}</p>,
+      render: (item) => <p>{formatDateWithTime(item?.createdAt)}</p>,
     },
 
     {

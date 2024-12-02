@@ -36,6 +36,56 @@ export function formatDate(dateString) {
   return `${day} ${month}, ${year}`;
 }
 
+export function formatDateWithTime(dateString) {
+  if (!dateString) {
+    return 'Date unavailable'; // Default message if date is missing
+  }
+
+  // Create a Date object from the input string
+  const date = new Date(dateString);
+
+  // Check if the date is valid
+  if (isNaN(date)) {
+    return 'Date unavailable'; // Default message if date is invalid
+  }
+
+  // Array of month names
+  const monthNames = [
+    'Jan',
+    'Feb',
+    'Mar',
+    'Apr',
+    'May',
+    'Jun',
+    'Jul',
+    'Aug',
+    'Sep',
+    'Oct',
+    'Nov',
+    'Dec',
+  ];
+
+  // Extract day, month, year, hours, and minutes from the date
+  const day = date.getDate();
+  const month = monthNames[date.getMonth()]; // getMonth() returns 0-based index
+  const year = date.getFullYear();
+  let hours = date.getHours();
+  const minutes = date.getMinutes();
+
+  // Determine AM/PM
+  const ampm = hours >= 12 ? 'PM' : 'AM';
+
+  // Convert hours to 12-hour format
+  hours = hours % 12;
+  hours = hours ? hours : 12; // If hours = 0, set it to 12
+
+  // Format minutes with leading zero if needed
+  const formattedMinutes = minutes < 10 ? `0${minutes}` : minutes;
+
+  // Return the formatted date and time string
+  return `${day} ${month}, ${year} : ${hours}:${formattedMinutes} ${ampm}`;
+}
+
 export function formatDateWithoutYear(dateString) {
   if (!dateString) {
     return 'Date unavailable'; // Default message if date is missing

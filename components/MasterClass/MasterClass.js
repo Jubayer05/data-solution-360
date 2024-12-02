@@ -1,4 +1,4 @@
-import { Radio } from 'antd';
+import { Radio, Spin } from 'antd';
 import { serverTimestamp } from 'firebase/firestore';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
@@ -64,14 +64,19 @@ const MasterClass = () => {
 
     const updatedForm = {
       ...data,
-      id: uuidv4().split('-')[0],
-      subscribed_students: [...data?.subscribed_students, studentInfo],
+      subscribed_students: [
+        ...(data?.subscribed_students || []),
+        {
+          ...studentInfo,
+          createdAt: serverTimestamp(),
+          id: uuidv4().split('-')[0],
+          alreadyCalled: false,
+        },
+      ],
       total_students_registered: parseInt(data?.total_students_registered) + 1,
-      alreadyCalled: false,
-      createdAt: serverTimestamp(),
     };
 
-    updateDocument(updatedForm);
+    updateDocument(updatedForm).then(() => {});
 
     Swal.fire({
       icon: 'success',
@@ -82,8 +87,20 @@ const MasterClass = () => {
     });
   };
 
+  if (loadingUpdate) {
+    return (
+      <div className="min-h-10 flex justify-center items-center">
+        <Spin size="medium" />
+      </div>
+    );
+  }
+
   if (loading) {
-    return <p>Loading...</p>;
+    return (
+      <div className="min-h-10 flex justify-center items-center">
+        <Spin size="medium" />
+      </div>
+    );
   }
 
   return (
