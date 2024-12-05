@@ -1,5 +1,4 @@
 import { Radio, Spin } from 'antd';
-import { serverTimestamp } from 'firebase/firestore';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
@@ -33,6 +32,8 @@ const MasterClass = () => {
       [key]: value,
     }));
   };
+
+  console.log(errorUpdate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -68,7 +69,7 @@ const MasterClass = () => {
         ...(data?.subscribed_students || []),
         {
           ...studentInfo,
-          createdAt: serverTimestamp(),
+          createdAt: new Date().toISOString(),
           id: uuidv4().split('-')[0],
           alreadyCalled: false,
         },
@@ -76,7 +77,7 @@ const MasterClass = () => {
       total_students_registered: parseInt(data?.total_students_registered) + 1,
     };
 
-    updateDocument(updatedForm).then(() => {});
+    updateDocument(updatedForm);
 
     Swal.fire({
       icon: 'success',
