@@ -133,6 +133,7 @@ const AddCourse = () => {
           courseShortData,
           createdAt: new Date().toLocaleDateString(undefined, options),
           status: false,
+          order_course: 0,
         })
         .then(() => {
           Swal.fire(

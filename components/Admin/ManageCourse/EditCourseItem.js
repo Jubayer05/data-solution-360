@@ -150,7 +150,17 @@ const EditCourseItem = () => {
             courseStatus={courseStatus}
             setCourseStatus={setCourseStatus}
           />
-          <div className="flex justify-center">
+
+          <InputBoxManage
+            title="Order of course"
+            id="orderCourse"
+            keyName="order_course"
+            func={handleInputChange}
+            type="number"
+            value={data?.order_course}
+          />
+
+          <div className="flex justify-center mt-5">
             <ButtonDashboard
               onClick={handleSubmit}
               className="bg-primary_btn hover:bg-[#002346bc] text-white py-2.5"

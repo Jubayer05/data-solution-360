@@ -208,7 +208,7 @@ const MyBlogs = () => {
         closeModal={closeModal}
         setModalIsOpen={setModalIsOpen}
       >
-        <div className="flex justify-between">
+        <div className="flex justify-between ">
           <div />
           <h2 className="text-2xl font-bold text-center mb-8 ">
             Edit The Blog

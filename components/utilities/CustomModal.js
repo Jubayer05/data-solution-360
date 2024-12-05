@@ -6,8 +6,9 @@ const CustomModal = ({ children, modalIsOpen, closeModal, setModalIsOpen }) => {
   const customStyles = {
     content: {
       background: '#fff',
-      width: '80%', // Adjust width for smaller screens
-      maxWidth: '668px', // Ensure it doesn't exceed the max width
+      width: '100%',
+      maxWidth: '668px',
+      maxHeight: '90vh',
       margin: '0 auto',
       top: '50%',
       left: '50%',

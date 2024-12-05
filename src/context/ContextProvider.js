@@ -1,5 +1,6 @@
 import React, { createContext, useContext, useEffect, useState } from 'react';
 import firebase, { auth } from '../../firebase';
+import { loadData } from '../hooks/loadData';
 
 const db = firebase.firestore();
 
@@ -20,7 +21,6 @@ export const MainContextProvider = ({ children }) => {
 
     // Set up the Firebase authentication state observer
     const unsubscribe = auth.onAuthStateChanged((user) => {
-      console.log(user);
       if (user) {
         // User is signed in, update the state
         setUserName(user.displayName);
@@ -35,25 +35,17 @@ export const MainContextProvider = ({ children }) => {
       setGlobalLoading(false); // Ensure loading state is updated
     });
 
-    console.log(userEmail);
-
     // Load data from Firestore
     loadData('users', setUserData);
-    loadDataByOrder('course_data', setCourseData, 'createdAt', 'desc');
+    // loadDataByOrder('course_data', setCourseData, 'order_course', 'asc');
+    loadData('course_data', setCourseData, {
+      orderBy: 'order_course',
+      orderDirection: 'asc',
+    });
 
     // Cleanup subscription on unmount
     return () => unsubscribe();
   }, []);
-
-  const loadData = (database, setState) => {
-    db.collection(database).onSnapshot((snap) => {
-      const data = snap.docs.map((doc) => ({
-        key: doc.id,
-        ...doc.data(),
-      }));
-      setState(data);
-    });
-  };
 
   const loadDataByOrder = (database, setState, orderProperty, orderBy) => {
     db.collection(database)
