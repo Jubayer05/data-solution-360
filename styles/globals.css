@@ -355,3 +355,38 @@ a:visited {
 .ant-collapse-content-box {
   margin-top: -12px;
 }
+
+.override-bg > div > * {
+  background-color: transparent !important;
+  font-size: 18px !important;
+  font-family: Jost, sans-serif !important;
+}
+
+.input-container {
+  position: relative;
+}
+
+.input-container input {
+  border: none; /* Remove the default border */
+  border-bottom: 3px solid #0baeff3a; /* Default bottom border */
+  outline: none; /* Remove the outline */
+}
+
+.input-container input:focus {
+  border-bottom: 3px solid transparent; /* Hide the default border on focus */
+}
+
+.input-container .focus-underline {
+  content: '';
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 0;
+  height: 3px; /* Adjust thickness of the animated line */
+  background-color: #13b0ff; /* Customize this color */
+  transition: width 0.4s ease;
+}
+
+.input-container input:focus + .focus-underline {
+  width: 100%; /* Expand the underline on focus */
+}

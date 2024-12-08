@@ -13,7 +13,7 @@ module.exports = {
       subHeading: ['Hind Siliguri', 'sans-serif'],
       body: ['Hind Siliguri', 'sans-serif'],
 
-      // dash_heading: ['Poppins', 'sans-serif'],
+      form: ['Jost', 'sans-serif'],
       // dash_heading: ['Montserrat', 'sans-serif'],
       bangla: ['Hind Siliguri', 'sans-serif'],
     },

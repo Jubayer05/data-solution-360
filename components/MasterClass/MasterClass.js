@@ -1,7 +1,9 @@
 import { Radio, Spin } from 'antd';
-import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
+import { FaRegUser, FaWhatsapp } from 'react-icons/fa6';
+import { IoIosPaperPlane } from 'react-icons/io';
+import { TfiEmail } from 'react-icons/tfi';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import useFetchDocById from '../../src/hooks/manageDataById/useLoadDocumentById';
@@ -32,8 +34,6 @@ const MasterClass = () => {
       [key]: value,
     }));
   };
-
-  console.log(errorUpdate);
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -105,41 +105,18 @@ const MasterClass = () => {
   }
 
   return (
-    <div className="bg-[#ffffff]">
+    <div className="">
       <div className="px-4 py-8 md:py-24 mx-auto">
-        <div className="max-w-[1400px] mx-auto border-1 shadow-md px-10 py-5">
-          <Image
-            width={500}
-            height={500}
-            src="/logo/logo.png"
-            alt="DS-360"
-            className="w-24 mx-auto mt-4"
-          />
-          <h2 className="text-2xl md:text-5xl font-bold mt-10 mb-8 text-center text-gray-900 md:leading-[60px]">
-            <span className="block text-blue-600 uppercase">
-              Free Masterclass
-            </span>
-            <span className="block">
-              Unlock the Secrets of{' '}
-              <strong className="text-blue-600">{data?.courseData}</strong>
-            </span>
-            <span className="block mt-8 text-red-500 uppercase tracking-wide">
-              Register Today – Spots Are Limited!
-            </span>
-          </h2>
-
-          <div
-            dangerouslySetInnerHTML={{ __html: data?.formDetails }}
-            className="text-base"
-          />
-
+        <div className="px-5 md:px-10 py-5">
           <form onSubmit={handleSubmit} className="space-y-6">
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 items-center">
+            <div className="grid grid-cols-1 gap-6 items-center">
               <InputField
                 keyName="full_name"
                 value={studentInfo.full_name}
                 onChange={handleChange}
                 label="Full Name"
+                placeholder="Type Name"
+                icon={<FaRegUser className="text-xl" />}
                 type="text"
               />
 
@@ -148,7 +125,9 @@ const MasterClass = () => {
                 value={studentInfo.email}
                 onChange={handleChange}
                 label="Your Email"
+                placeholder="Type Email"
                 type="email"
+                icon={<TfiEmail className="text-xl" />}
               />
 
               <InputField
@@ -156,12 +135,14 @@ const MasterClass = () => {
                 value={studentInfo.whatsapp_number}
                 onChange={handleChange}
                 label="WhatsApp Number"
+                placeholder="Type Whatsapp Number"
                 type="tel"
+                icon={<FaWhatsapp className="text-2xl" />}
               />
 
-              <div className="mt-6">
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
-                  Occupation:
+              <div className="mt-5 mb-5">
+                <label className="block text-gray-700 text-base font-bold mb-2 font-form capitalize">
+                  Occupation: <span className="text-red-500">*</span>
                 </label>
                 <Radio.Group
                   onChange={(e) => handleChange('occupation', e.target.value)}
@@ -171,15 +152,25 @@ const MasterClass = () => {
                   <div className="space-y-4">
                     <Radio
                       value="Student"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      Student
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-blue-500">&#x1F393;</i>{' '}
+                        {/* Graduation cap icon */}
+                        Student
+                      </span>
                     </Radio>
                     <Radio
                       value="Job Holder"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      Job Holder
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-green-500">&#x1F4BC;</i>{' '}
+                        {/* Briefcase icon */}
+                        Job Holder
+                      </span>
                     </Radio>
                   </div>
                 </Radio.Group>
@@ -191,13 +182,15 @@ const MasterClass = () => {
               value={studentInfo.organization_name}
               onChange={handleChange}
               label="Educational Institute/Company Name"
+              placeholder="Type your organization"
               type="text"
+              icon={<IoIosPaperPlane className="text-2xl" />}
             />
 
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mt-6">
+            <div>
               {/* WhatsApp Group */}
-              <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
+              <div className="mt-10">
+                <label className="block text-gray-700 text-base font-bold mb-2 font-form capitalize">
                   Do you join our masterclass WhatsApp group?{' '}
                   <a
                     href={data?.whatsappGroupLink || '/'}
@@ -218,23 +211,33 @@ const MasterClass = () => {
                   <div className="space-y-4">
                     <Radio
                       value="Yes"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      Yes
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-green-500">&#x2714;</i>{' '}
+                        {/* Checkmark icon */}
+                        Yes
+                      </span>
                     </Radio>
                     <Radio
                       value="No"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      No
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-red-500">&#x2718;</i>{' '}
+                        {/* Cross mark icon */}
+                        No
+                      </span>
                     </Radio>
                   </div>
                 </Radio.Group>
               </div>
 
               {/* Facebook Page */}
-              <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
+              <div className="mt-10">
+                <label className="block text-gray-700 text-base font-bold mb-2 font-form capitalize">
                   Do you follow our Facebook page?{' '}
                   <a
                     href="https://www.facebook.com/Datasolution360"
@@ -255,23 +258,33 @@ const MasterClass = () => {
                   <div className="space-y-4">
                     <Radio
                       value="Yes"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      Yes
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-green-500">&#x2714;</i>{' '}
+                        {/* Checkmark icon */}
+                        Yes
+                      </span>
                     </Radio>
                     <Radio
                       value="No"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      No
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-red-500">&#x2718;</i>{' '}
+                        {/* Cross mark icon */}
+                        No
+                      </span>
                     </Radio>
                   </div>
                 </Radio.Group>
               </div>
 
               {/* YouTube Channel */}
-              <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
+              <div className="mt-10">
+                <label className="block text-gray-700 text-base font-bold mb-2 font-form capitalize">
                   Do you subscribe to our YouTube channel?{' '}
                   <a
                     href="https://www.youtube.com/@datasolution-3607"
@@ -292,23 +305,33 @@ const MasterClass = () => {
                   <div className="space-y-4">
                     <Radio
                       value="Yes"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      Yes
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-green-500">&#x2714;</i>{' '}
+                        {/* Checkmark icon */}
+                        Yes
+                      </span>
                     </Radio>
                     <Radio
                       value="No"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      No
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-red-500">&#x2718;</i>{' '}
+                        {/* Cross mark icon */}
+                        No
+                      </span>
                     </Radio>
                   </div>
                 </Radio.Group>
               </div>
 
               {/* Facebook Community */}
-              <div>
-                <label className="block text-gray-700 text-sm font-semibold mb-2">
+              <div className="mt-10">
+                <label className="block text-gray-700 text-base font-bold mb-2 font-form capitalize">
                   Do you join our Facebook community?{' '}
                   <a
                     href="https://www.facebook.com/groups/371272054987030"
@@ -329,15 +352,25 @@ const MasterClass = () => {
                   <div className="space-y-4">
                     <Radio
                       value="Yes"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      Yes
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-green-500">&#x2714;</i>{' '}
+                        {/* Checkmark icon */}
+                        Yes
+                      </span>
                     </Radio>
                     <Radio
                       value="No"
-                      className="w-full bg-gray-50 border rounded-md py-2 px-4"
+                      className="w-full bg-white border border-gray-300 rounded-md py-3 px-5 font-form text-lg transition-all duration-300 ease-in-out transform hover:scale-105 hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-blue-500"
                     >
-                      No
+                      <span className="flex items-center gap-3">
+                        {/* Optional: Add an icon here */}
+                        <i className="text-red-500">&#x2718;</i>{' '}
+                        {/* Cross mark icon */}
+                        No
+                      </span>
                     </Radio>
                   </div>
                 </Radio.Group>
@@ -359,23 +392,37 @@ const MasterClass = () => {
 
 export default MasterClass;
 
-const InputField = ({ keyName, value, onChange, label, type = 'text' }) => {
+const InputField = ({
+  keyName,
+  value,
+  onChange,
+  label,
+  type = 'text',
+  placeholder,
+  icon,
+}) => {
   return (
-    <div className="w-full">
+    <div className="w-full mt-5 input-container">
       <label
         htmlFor={keyName}
-        className="block text-gray-700 text-sm font-semibold mb-2"
+        className="flex items-center gap-2 text-gray-700 text-base font-bold font-form"
       >
-        {label}
+        {icon} {label}
+        {/* Adding required asterisk */}
+        <span className="text-red-500">*</span> {/* Required indicator */}
       </label>
-      <input
-        type={type}
-        id={keyName}
-        value={value}
-        onChange={(e) => onChange(keyName, e.target.value)}
-        className="w-full px-4 py-3 text-lg outline-[#ff440031] border-1 mt-2 rounded"
-        required
-      />
+      <div className="relative w-full">
+        <input
+          type={type}
+          id={keyName}
+          value={value}
+          placeholder={placeholder}
+          onChange={(e) => onChange(keyName, e.target.value)}
+          className="w-full px-2 py-3 text-lg bg-transparent font-form"
+          required
+        />
+        <span className="focus-underline"></span>
+      </div>
     </div>
   );
 };

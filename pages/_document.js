@@ -13,27 +13,9 @@ class MyDocument extends Document {
             crossOrigin="true"
           />
           <link
-            href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Libre+Baskerville:ital@1&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800;900&display=swap"
+            href="https://fonts.googleapis.com/css2?family=Exo+2:wght@300;400;500;600;700&family=Libre+Baskerville:ital@1&family=Noto+Sans+Bengali:wght@300;400;500;600;700;800;900&family=Oswald:wght@300;400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700&family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700&family=Dosis:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Jost:wght@400;500;600;700&display=swap"
             rel="stylesheet"
-          ></link>
-
-          {/* NOTE: FONT 2 */}
-          <link
-            href="https://fonts.googleapis.com/css2?family=Oswald:wght@300;400;500;600;700&family=Roboto+Slab:wght@100;200;300;400;500;600;700&display=swap"
-            rel="stylesheet"
-          ></link>
-
-          {/* NOTE: FONT 3 */}
-          <link
-            href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap"
-            rel="stylesheet"
-          ></link>
-
-          {/* NOTE: FONT 4 */}
-          <link
-            href="https://fonts.googleapis.com/css2?family=Dosis:wght@300;400;500;600;700&family=Hind+Siliguri:wght@300;400;500;600;700&family=Poppins:wght@100;200;300;400;500;600;700&display=swap"
-            rel="stylesheet"
-          ></link>
+          />
 
           {/* FAVICON ICON */}
           <link

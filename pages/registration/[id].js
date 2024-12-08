@@ -1,10 +1,10 @@
 import React from 'react';
-import MasterClass from '../../components/MasterClass/MasterClass';
+import MasterClassWrapper from '../../components/MasterClass/MasterClassWrapper';
 
 const index = () => {
   return (
     <div>
-      <MasterClass />
+      <MasterClassWrapper />
     </div>
   );
 };
