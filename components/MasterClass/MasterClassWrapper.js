@@ -38,18 +38,19 @@ const MasterClassWrapper = () => {
         className="w-32 md:w-80 absolute right-0 top-0 -z-10"
       />
 
+      <div>
+        <Image
+          width={500}
+          height={500}
+          src="/logo/logo_dashboard.png"
+          alt="DS-360"
+          className="w-[180px] md:w-[300px] z-50 mx-auto pt-10"
+        />
+      </div>
       <div className="flex flex-col md:flex-row gap-5 max-w-[1400px] mx-auto px-4">
         {/* LEFT SIDE */}
         <div className="flex-1 text-center md:text-left">
-          <Image
-            width={500}
-            height={500}
-            src="/logo/logo.png"
-            alt="DS-360"
-            className="w-24 z-50 mt-4 mx-auto md:mx-0"
-          />
-
-          <div className="w-[250px] md:w-[500px] mx-auto md:mx-0 mt-6">
+          <div className="w-[250px] md:w-[350px] mx-auto mt-6">
             <Lottie options={defaultOptions} />
           </div>
 
