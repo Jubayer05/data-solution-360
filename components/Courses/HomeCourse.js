@@ -9,12 +9,16 @@ import HomeCourseItem from './HomeCourseItem';
 const HomeCourse = () => {
   const { language, courseData } = useStateContext();
 
-  const runningCourses = courseData?.filter((val) => val.status === 'Running');
-  const registrationGoingOnCourses = courseData?.filter(
-    (val) => val.status === 'Registration Going on',
+  const runningCourses = courseData?.filter(
+    (val) => val.status === 'Running' && val.hide !== true,
   );
+
+  const registrationGoingOnCourses = courseData?.filter(
+    (val) => val.status === 'Registration Going on' && val.hide !== true,
+  );
+
   const upComingCourses = courseData?.filter(
-    (val) => val.status === 'Upcoming',
+    (val) => val.status === 'Upcoming' && val.hide !== true,
   );
 
   return (

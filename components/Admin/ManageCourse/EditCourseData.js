@@ -35,6 +35,33 @@ const EditCourseData = () => {
     });
   };
 
+  const handleHide = (record) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'This course will be hidded!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, Hide it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        db.collection('course_data')
+          .doc(record.key)
+          .update({
+            ...record,
+            hide: record?.hide == true ? false : true, // Replace 'fieldName' and 'newValue' with your data
+          })
+          .then(() => {
+            Swal.fire('Updated!', 'Your data has been updated.', 'success');
+          })
+          .catch((error) => {
+            Swal.fire('Error!', 'Something went wrong.', 'error');
+          });
+      }
+    });
+  };
+
   return (
     <div className="max-w-5xl mx-auto">
       <HeadingDashboard title="Manage Courses" />
@@ -56,6 +83,13 @@ const EditCourseData = () => {
                   Edit
                 </ButtonDashboard>
               </Link>
+
+              <ButtonDashboard
+                onClick={() => handleHide(product)}
+                className="bg-[#04a273] hover:bg-[#05bc85] hover:opacity-80 text-white text-sm pl-3 pr-3 pt-1 pb-1"
+              >
+                {product?.hide ? 'Unhide' : 'Hide'}
+              </ButtonDashboard>
 
               <ButtonDashboard
                 onClick={() => handleDelete(product)}
