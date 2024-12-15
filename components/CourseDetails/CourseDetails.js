@@ -48,7 +48,7 @@ const CourseDetails = () => {
 
     const timer = setTimeout(() => {
       setIsPopupOpen(true);
-    }, 20000); // 20 seconds
+    }, 15000); // 20 seconds
 
     // Cleanup timer when component unmounts
     return () => clearTimeout(timer);
