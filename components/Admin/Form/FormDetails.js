@@ -18,6 +18,8 @@ const FromDetails = () => {
   const { updateDocument, loadingUpdate, errorUpdate, success } =
     useUpdateDocumentById('form_data', formId);
 
+  console.log(data);
+
   const columns = [
     {
       title: 'SL',
@@ -38,7 +40,6 @@ const FromDetails = () => {
       align: 'center',
       width: 180,
     },
-
     {
       title: 'Registration Time',
       align: 'center',
@@ -46,6 +47,18 @@ const FromDetails = () => {
       render: (item) => <p>{formatDateWithTime(item?.createdAt)}</p>,
     },
 
+    {
+      title: 'Occupation',
+      dataIndex: 'occupation',
+      align: 'center',
+      width: 130,
+    },
+    {
+      title: 'Organization',
+      dataIndex: 'organization_name',
+      align: 'center',
+      width: 150,
+    },
     {
       title: 'Already Called?',
       align: 'center',
@@ -64,11 +77,35 @@ const FromDetails = () => {
         </p>
       ),
     },
-
+    {
+      title: 'Whatsapp Group',
+      dataIndex: 'whatsapp_group',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Facebook Page',
+      dataIndex: 'facebook_page',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Youtube',
+      dataIndex: 'youtube_channel',
+      align: 'center',
+      width: 100,
+    },
+    {
+      title: 'Facebook Join',
+      dataIndex: 'facebook_community',
+      align: 'center',
+      width: 100,
+    },
     {
       title: 'Action',
       width: 150,
       align: 'center',
+      fixed: 'right', // Fixed to the right
       render: (_, record, index) => (
         <div className="flex items-center justify-center gap-5">
           <ButtonDashboard
@@ -81,6 +118,13 @@ const FromDetails = () => {
       ),
     },
   ];
+
+  // Example for rendering the table
+  <Table
+    columns={columns}
+    dataSource={data} // Replace `data` with your table data
+    scroll={{ x: 1500 }} // Enable horizontal scrolling
+  />;
 
   const handleCallUser = (record) => {
     const updatedData = { ...data };
@@ -104,8 +148,8 @@ const FromDetails = () => {
   return (
     <div>
       <HeadingDashboard title="From Details" />
-      <div className="max-w-5xl mx-auto my-20">
-        <div className="max-w-5xl mx-auto border-1 bg-white p-5">
+      <div className="max-w-7xl mx-auto my-20">
+        <div className="max-w-7xl mx-auto border-1 bg-white p-5">
           <Table
             columns={columns}
             dataSource={[...(data?.subscribed_students || [])]}

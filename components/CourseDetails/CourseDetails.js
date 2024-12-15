@@ -11,23 +11,48 @@ import { useRouter } from 'next/router';
 import { bg_colors, colors } from '../../src/data/data';
 import MemberDetails from '../About/MemberDetails';
 import AddVideoReview from '../Home/Review/AddVideoReview';
+import LoginModal from '../Login/LoginModal';
 import CustomModal from '../utilities/CustomModal';
 import YoutubeEmbed from '../utilities/YoutubeEmbed';
 import BannerCourseDetails from './BannerCourseDetails';
 import PointsCourseDetails from './PointsCourseDetails';
+import PopupInterested from './PopupInterested';
 import StudentReviewCourse from './StudentReviewCourse';
 
 const { Panel } = Collapse;
 
 const CourseDetails = () => {
   const [innerWidth, setInnerWidth] = useState();
-  const { courseData } = useStateContext();
+  const { courseData, findCurrentUser } = useStateContext();
   const [courseDetails, setCourseDetails] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
+  const [loginModalIsOpen, setLoginModalIsOpen] = useState(false);
   const [modalData, setModalData] = useState(null);
   const router = useRouter();
-
   const { slug } = router.query;
+  const [isPopupOpen, setIsPopupOpen] = useState(false);
+
+  // Function to handle popup close
+  const handleClosePopup = () => {
+    setIsPopupOpen(false);
+  };
+
+  // Function to handle registration action
+  const handleRegister = () => {
+    setLoginModalIsOpen(true);
+    setIsPopupOpen(false);
+  };
+
+  useEffect(() => {
+    // Check if user is not logged in and set a 10-second timer
+
+    const timer = setTimeout(() => {
+      setIsPopupOpen(true);
+    }, 20000); // 20 seconds
+
+    // Cleanup timer when component unmounts
+    return () => clearTimeout(timer);
+  }, []);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -48,10 +73,23 @@ const CourseDetails = () => {
   };
   const closeModal = () => {
     setModalIsOpen(false);
+    setLoginModalIsOpen(false);
   };
 
   return (
     <div>
+      {isPopupOpen && findCurrentUser === undefined && (
+        <PopupInterested
+          onClose={handleClosePopup}
+          onRegister={handleRegister}
+        />
+      )}
+      <LoginModal
+        modalIsOpen={loginModalIsOpen}
+        closeModal={() => {
+          closeModal();
+        }}
+      />
       <div
         style={{ backgroundImage: "url('/banner/course_bg.png')" }}
         className=" bg-no-repeat bg-cover"

@@ -5,9 +5,10 @@ import { IoLogoYoutube } from 'react-icons/io';
 import {
   MdContentCopy,
   MdOutlineCreateNewFolder,
+  MdOutlineDiscount,
   MdReviews,
 } from 'react-icons/md';
-import { RiAdminFill } from 'react-icons/ri';
+import { RiAdminFill, RiCoupon3Line } from 'react-icons/ri';
 
 import {
   AiOutlineFundView,
@@ -121,8 +122,24 @@ export const linksAdmin = [
     ],
   },
   {
-    title: 'Others',
+    title: 'Coupons',
     key: '6',
+    links: [
+      {
+        name: 'Add Coupon',
+        link: '/admin/coupons/new-coupon',
+        icon: <RiCoupon3Line />,
+      },
+      {
+        name: 'Coupon data',
+        link: '/admin/coupons/coupon-data',
+        icon: <MdOutlineDiscount />,
+      },
+    ],
+  },
+  {
+    title: 'Others',
+    key: '7',
     links: [
       {
         name: 'Subscribed Users',
