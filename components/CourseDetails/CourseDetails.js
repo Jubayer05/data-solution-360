@@ -8,6 +8,7 @@ import { useStateContext } from '../../src/context/ContextProvider';
 
 import Image from 'next/image';
 import { useRouter } from 'next/router';
+import { MdLockOutline } from 'react-icons/md';
 import { bg_colors, colors } from '../../src/data/data';
 import MemberDetails from '../About/MemberDetails';
 import AddVideoReview from '../Home/Review/AddVideoReview';
@@ -44,8 +45,6 @@ const CourseDetails = () => {
   };
 
   useEffect(() => {
-    // Check if user is not logged in and set a 10-second timer
-
     const timer = setTimeout(() => {
       setIsPopupOpen(true);
     }, 15000); // 20 seconds
@@ -121,9 +120,19 @@ const CourseDetails = () => {
             {courseDetails?.courseModule?.map((item, index) => (
               <div
                 key={item.id}
-                className="border rounded self-start"
+                className="border rounded-lg self-start relative"
                 style={{ backgroundColor: bg_colors[index] }}
               >
+                {index >= 4 && findCurrentUser === undefined && (
+                  <div
+                    onClick={() => setIsPopupOpen(true)}
+                    className="absolute bg-gradient-to-br from-purple-500/40 to-blue-500/40 w-full h-full 
+                    z-10 rounded-lg shadow-2xl flex justify-center items-center backdrop-blur-sm cursor-pointer
+                     border border-white/10 transform hover:scale-[1.03] transition duration-500"
+                  >
+                    <MdLockOutline className="text-4xl text-white drop-shadow-lg animate-pulse" />
+                  </div>
+                )}
                 <Collapse
                   collapsible="header"
                   expandIconPosition="end"
@@ -236,15 +245,24 @@ const CourseDetails = () => {
                   Full Course Details Link
                 </h2>
 
-                <button className="bg-[#1f0835] text-[#f9fbff] py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
-                  <Link
-                    href={courseDetails?.drive_link}
-                    className="text-[#f9fbff] visited:text-[#f9fbff]"
-                    target="_blank"
+                {findCurrentUser === undefined ? (
+                  <button
+                    onClick={() => setIsPopupOpen(true)}
+                    className="bg-[#1f0835] text-[#f9fbff] py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all"
                   >
                     See More Details Module
-                  </Link>
-                </button>
+                  </button>
+                ) : (
+                  <button className="bg-[#1f0835] text-[#f9fbff] py-[12px] px-[24px] rounded-[8px] hover:opacity-[0.9] transition-all">
+                    <Link
+                      href={courseDetails?.drive_link}
+                      className="text-[#f9fbff] visited:text-[#f9fbff]"
+                      target="_blank"
+                    >
+                      See More Details Module
+                    </Link>
+                  </button>
+                )}
               </>
             )}
             <h2 className="text-3xl font-bold mb-3 font-heading capitalize mt-16">

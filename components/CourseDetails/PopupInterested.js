@@ -9,7 +9,7 @@ export default function PopupInterested({ onClose, onRegister }) {
         </h2>
         {/* Description */}
         <p className="text-sm sm:text-lg text-white/90 mb-6 sm:mb-8 leading-relaxed text-center">
-          Join our community and unlock premium courses, resources, and much more. Start your journey today!
+        Log in now to access full course details, including exclusive content and tailored resources.
         </p>
 
         {/* Call to Action Buttons */}
