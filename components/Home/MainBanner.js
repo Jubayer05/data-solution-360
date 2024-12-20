@@ -1,10 +1,11 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import Lottie from 'react-lottie';
 import Slider from 'react-slick';
 import * as animationData from '../../public/banner/loader.json';
 import { loadData } from '../../src/hooks/loadData';
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
 const MainBanner = () => {
   const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);

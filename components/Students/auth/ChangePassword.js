@@ -70,7 +70,7 @@ const ChangePassword = () => {
       <InputBoxStudent
         value={password?.new_password}
         title="New Password"
-        id="alternative_Email"
+        id="new_password"
         type="password"
         func={handleChange}
       />

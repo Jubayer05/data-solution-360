@@ -1,7 +1,10 @@
 import { serverTimestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
 import { FaArrowRight } from 'react-icons/fa';
-import Lottie from 'react-lottie';
+
+import dynamic from 'next/dynamic';
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
+
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { v4 as uuidv4 } from 'uuid';

@@ -1,4 +1,4 @@
-import { Empty } from 'antd';
+import { Empty, Spin } from 'antd';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { loadData } from '../../src/hooks/loadData';
@@ -28,26 +28,34 @@ const BlogContentItem = () => {
 
   return (
     <div className="max-w-3xl mx-auto pt-24 px-2">
-      <h2 className="text-5xl mt-4 pb-4 font-bangla">{blogItem?.title}</h2>
-      {/* <h3 className="text-lg font-bold">{blogItem?.author}</h3> */}
-      <h3 className="text-lg font-bold">Data Solution 360</h3>
-      <p className="-mt-1 text-sm">Posted on {blogItem?.date}</p>
-      {blogItem?.img ? (
-        <Image
-          width={1000}
-          height={500}
-          src={blogItem?.img}
-          className="w-full"
-          alt=""
-        />
+      {blogItem ? (
+        <div>
+          <h2 className="text-5xl mt-4 pb-4 font-bangla">{blogItem?.title}</h2>
+          {/* <h3 className="text-lg font-bold">{blogItem?.author}</h3> */}
+          {/* <h3 className="text-lg font-bold">Data Solution 360</h3> */}
+          {/* <p className="-mt-1 text-sm">Posted on {blogItem?.date}</p> */}
+          {blogItem?.img ? (
+            <Image
+              width={1000}
+              height={500}
+              src={blogItem?.img}
+              className="w-full"
+              alt=""
+            />
+          ) : (
+            <Empty description={false} />
+          )}
+          <div className="mt-4"></div>
+          <div
+            className="text-xl pb-8 leading-10 font-bangla"
+            dangerouslySetInnerHTML={{ __html: blogItem?.details }}
+          />
+        </div>
       ) : (
-        <Empty description={false} />
+        <div className="h-[300px] flex justify-center items-center rounded-xl mx-auto">
+          <Spin size="medium" />
+        </div>
       )}
-      <div className="mt-4"></div>
-      <div
-        className="text-xl pb-8 leading-10 font-bangla"
-        dangerouslySetInnerHTML={{ __html: blogItem?.details }}
-      />
     </div>
   );
 };

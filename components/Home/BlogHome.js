@@ -90,7 +90,7 @@ const BlogHome = () => {
                       {/* {item.author} */}
                       Data Solution 360
                     </h3>
-                    <h4 className="text-gray-400 text-sm">{item.date}</h4>
+                    {/* <h4 className="text-gray-400 text-sm">{item.date}</h4> */}
                   </div>
                 </div>
               ))}

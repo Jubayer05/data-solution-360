@@ -90,7 +90,7 @@ const PersonalDetails = () => {
       />
       <InputBoxStudent
         value={studentInfo?.alternative_email}
-        title="Alternative Email"
+        title="Email"
         id="alternative_Email"
         type="email"
         func={handleChange}
@@ -108,15 +108,6 @@ const PersonalDetails = () => {
         title="Primary Number"
         id="primary_Number"
         type="text"
-        func={handleChange}
-        readOnly={true}
-      />
-      <InputBoxStudent
-        value=""
-        disabled={true}
-        title="Primary Email"
-        id="primary_Email"
-        type="email"
         func={handleChange}
         readOnly={true}
       />

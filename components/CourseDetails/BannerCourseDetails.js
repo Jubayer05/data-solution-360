@@ -4,7 +4,7 @@ import React, { useCallback, useEffect, useMemo, useState } from 'react';
 import { BsCalendarDay, BsClock } from 'react-icons/bs';
 import { GoCalendar } from 'react-icons/go';
 
-import { Breadcrumb } from 'antd';
+import { Breadcrumb, Spin } from 'antd';
 import Image from 'next/image';
 import { BiShareAlt } from 'react-icons/bi';
 import Swal from 'sweetalert2';
@@ -237,13 +237,19 @@ const BannerCourseDetails = ({ courseDetails }) => {
       {/* NOTE: RIGHT SIDE */}
       <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-360px]">
         <div className="mb-3 bg-white px-1.5 py-1.5 rounded-xl w-[90%] mx-auto md:ml-auto  mt-5">
-          <Image
-            width={500}
-            height={300}
-            src={courseDetails?.img}
-            alt=""
-            className="rounded-xl w-[100%]"
-          />
+          {courseDetails?.img ? (
+            <Image
+              width={500}
+              height={300}
+              src={courseDetails?.img}
+              alt=""
+              className="rounded-xl w-[100%]"
+            />
+          ) : (
+            <div className="h-[300px] flex justify-center items-center bg-[#f9fbff] rounded-xl mx-auto">
+              <Spin size="small" />
+            </div>
+          )}
           {courseDetails?.status && (
             <div className="py-4 px-5">
               <div className="flex items-center">

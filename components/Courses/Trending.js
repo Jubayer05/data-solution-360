@@ -1,3 +1,4 @@
+import { Spin } from 'antd';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
@@ -53,13 +54,19 @@ const Trending = () => {
             //   minHeight: '100vh',
             // }}
           >
-            <Image
-              width={500}
-              height={300}
-              className="w-full rounded-lg shadow-lg"
-              src={item?.photoUrl}
-              alt="trending course"
-            />
+            {item?.photoUrl ? (
+              <Image
+                width={500}
+                height={300}
+                className="w-full rounded-lg shadow-lg"
+                src={item?.photoUrl}
+                alt="trending course"
+              />
+            ) : (
+              <div className="h-[300px] flex justify-center items-center bg-[#f9fbff] rounded-xl mx-auto">
+                <Spin size="small" />
+              </div>
+            )}
             <div className="flex justify-center mt-10">
               <Link href={item?.trendingCourseLink || '#'}>
                 <button

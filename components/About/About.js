@@ -63,7 +63,7 @@ const About = () => {
             In this model, we teach data analysis to students to make a bigger
             impact in Bangladesh with data-driven decisions. We offer four
             signature courses:
-            <ul className="list-inside list-disc font-bold">
+            <ul className="list-inside list-disc font-bold text-left">
               <li>Become a Data Scientist</li>
               <li>Become a Machine Learning Engineer</li>
               <li>SQL (MySQL) for Data Analyst</li>

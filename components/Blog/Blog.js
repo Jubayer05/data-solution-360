@@ -1,4 +1,4 @@
-import { Empty } from 'antd';
+import { Spin } from 'antd';
 import { convert } from 'html-to-text';
 import Image from 'next/image';
 import Link from 'next/link';
@@ -36,7 +36,9 @@ const Blog = () => {
                 alt=""
               />
             ) : (
-              <Empty className="h-[250px] pt-16" description={false} />
+              <div className="h-[300px] flex justify-center items-center rounded-xl mx-auto">
+                <Spin size="medium" />
+              </div>
             )}
 
             <div className="p-4 flex-1">
@@ -67,7 +69,7 @@ const Blog = () => {
                 {/* {item.author} */}
                 Data Solution 360
               </h3>
-              <h4 className="text-gray-400">{item.date}</h4>
+              {/* <h4 className="text-gray-400">{item.date}</h4> */}
             </div>
           </div>
         ))}
