@@ -35,6 +35,7 @@ const PersonalDetails = () => {
 
   const handleUpdate = () => {
     const updatedData = { ...studentInfo };
+    console.log(updatedData);
     if (photoUrl) {
       updatedData.photoUrl = photoUrl;
     } else {
@@ -44,7 +45,7 @@ const PersonalDetails = () => {
     firebase
       .firestore()
       .collection('users')
-      .doc(findCurrentUser.key)
+      .doc(findCurrentUser.id)
       .update(updatedData)
       .then(() => {
         Swal.fire({
