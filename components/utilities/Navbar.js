@@ -8,6 +8,7 @@ import { getAuth, signOut } from 'firebase/auth';
 import Image from 'next/image';
 import Link from 'next/link';
 import { BiSolidChevronRight } from 'react-icons/bi';
+import { IoIosLogOut } from 'react-icons/io';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../src/context/ContextProvider';
 import { navItems, navItems2 } from '../../src/data/data';
@@ -267,18 +268,29 @@ const Navbar = ({ home }) => {
                 </span>
               </button>
             ) : userEmail ? (
-              <div>
-                <Link
-                  href={findAdmin ? '/admin/dashboard' : '/students/dashboard'}
-                >
-                  <button
-                    className="px-4 py-3 bg-primary_btn text-white rounded-lg flex items-center
-      justify-center gap-2"
+              <>
+                <div>
+                  <Link
+                    href={
+                      findAdmin ? '/admin/dashboard' : '/students/dashboard'
+                    }
                   >
-                    Dashboard <MdOutlineDashboardCustomize />
-                  </button>
-                </Link>
-              </div>
+                    <button
+                      className="px-4 py-3 bg-primary_btn text-white rounded-lg flex items-center
+                    justify-center gap-2"
+                    >
+                      Dashboard <MdOutlineDashboardCustomize />
+                    </button>
+                  </Link>
+                </div>
+                <button
+                  onClick={handleLogout}
+                  className="px-4 py-3 ml-2 bg-primary_btn text-white rounded-lg flex items-center
+                    justify-center gap-2"
+                >
+                  Logout <IoIosLogOut />
+                </button>
+              </>
             ) : null}
             <LoginModal
               modalIsOpen={modalIsOpen}
