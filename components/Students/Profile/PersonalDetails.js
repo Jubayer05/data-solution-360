@@ -5,7 +5,6 @@ import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import FileInput from '../../utilities/dashboard/FileInput';
-import InputBoxStudent from '../utilities/InputBoxStudent';
 
 const PersonalDetails = () => {
   const [studentInfo, setStudentInfo] = useState({
@@ -85,21 +84,21 @@ const PersonalDetails = () => {
       <InputBoxStudent
         value={studentInfo?.full_name}
         title="Full Name"
-        id="full_Name"
+        id="full_name"
         type="text"
         func={handleChange}
       />
       <InputBoxStudent
         value={studentInfo?.alternative_email}
         title="Email"
-        id="alternative_Email"
+        id="alternative_email"
         type="email"
         func={handleChange}
       />
       <InputBoxStudent
         value={studentInfo?.alternative_number}
         title="Alternative Number"
-        id="alternative_Number"
+        id="alternative_number"
         type="text"
         func={handleChange}
       />
@@ -123,3 +122,21 @@ const PersonalDetails = () => {
 };
 
 export default PersonalDetails;
+
+const InputBoxStudent = ({ title, type, id, func, placeholder, value }) => {
+  return (
+    <div className="w-full mt-5">
+      <label htmlFor={id} className="font-semibold mt-3 block text-[#17012e]">
+        {title}
+      </label>
+      <input
+        id={id}
+        value={value}
+        onChange={(e) => func(id.toLowerCase(), e.target.value)}
+        type={type}
+        placeholder={placeholder}
+        className="w-full px-4 py-3 text-lg outline-[#ff440031] border-1 mt-2 rounded"
+      />
+    </div>
+  );
+};
