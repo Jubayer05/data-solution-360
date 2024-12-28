@@ -1,3 +1,4 @@
+import { format } from 'date-fns';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
@@ -31,7 +32,9 @@ const AddCoupon = () => {
         ...rest,
         discount: Number(formData.discount),
         usageLimit: formData.usageLimit ? Number(formData.usageLimit) : null,
-        validUntil: validUntil ? new Date().toISOString() : null,
+        validUntil: validUntil
+          ? format(new Date(validUntil), 'yyyy-MM-dd')
+          : null,
       };
 
       db.collection('coupon_code')

@@ -99,7 +99,7 @@ const Navbar = ({ home }) => {
     <div
       className={`w-full md:text-center z-[900] px-5 pt-4 pb-3 md:px-4 md:py-0 ${
         scrolled80px ? 'bg-white shadow-lg' : ' bg-transparent '
-      } sticky ${home ? 'top-14' : 'top-0'}`}
+      } sticky ${home ? 'top-14' : '-top-[1px]'}`}
     >
       <div className="max-w-6xl mx-auto md:flex md:justify-between md:items-center md:h-20">
         <div className="flex justify-between items-center z-[900]">

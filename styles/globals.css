@@ -183,9 +183,10 @@ a:visited {
 
 .ant-collapse
   > .ant-collapse-item
-  .ant-collapse-header-collapsible-only
+  .ant-collapse-collapsible-header
   .ant-collapse-header-text {
   flex: content !important;
+  cursor: pointer;
 }
 
 .Collapsible__contentInner {

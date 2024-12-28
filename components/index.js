@@ -3,7 +3,6 @@ export { default as Trending } from './Courses/Trending';
 
 export { default as AboutHome } from './Home/AboutUs';
 export { default as BannerCompanies } from './Home/BannerCompanies';
-export { default as Discount } from './Home/Discount/Discount';
 export { default as Faq } from './Home/Faq';
 export { default as HomeComp } from './Home/Home';
 export { default as MainBanner } from './Home/MainBanner';

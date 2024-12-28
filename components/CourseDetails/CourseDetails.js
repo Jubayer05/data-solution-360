@@ -32,6 +32,15 @@ const CourseDetails = () => {
   const router = useRouter();
   const { slug } = router.query;
   const [isPopupOpen, setIsPopupOpen] = useState(false);
+  const [openPanels, setOpenPanels] = useState({}); // Track the state of each panel
+
+  // Toggle function for individual panels
+  const togglePanel = (id) => {
+    setOpenPanels((prevState) => ({
+      ...prevState,
+      [id]: !prevState[id], // Toggle the specific panel's state
+    }));
+  };
 
   // Function to handle popup close
   const handleClosePopup = () => {
@@ -142,7 +151,10 @@ const CourseDetails = () => {
                   <Panel
                     className="text-lg font-semibold"
                     header={
-                      <div className="flex items-center gap-4 ">
+                      <div
+                        className="flex items-center gap-4 "
+                        onClick={() => togglePanel(item.id)}
+                      >
                         <div
                           style={{ backgroundColor: colors[index] }}
                           className={`p-2 rounded-lg text-white text-center text-base font-normal`}
@@ -151,8 +163,10 @@ const CourseDetails = () => {
                           <p className="m-0 font-bold">{item.moduleNumber}</p>
                         </div>
                         <div>
-                          <h2 className="text-xl font-bold leading-6 ">
-                            {item.moduleName}
+                          <h2 className="text-xl font-bold leading-6">
+                            {openPanels[item.id]
+                              ? item.moduleName
+                              : truncateString(item.moduleName)}
                           </h2>
                           <div className="flex items-center gap-4">
                             <div className="flex items-center text-[13px] font-normal">
@@ -371,3 +385,10 @@ const CourseDetails = () => {
 };
 
 export default CourseDetails;
+
+function truncateString(str) {
+  if (str.length > 30) {
+    return str.slice(0, 30) + '...';
+  }
+  return str;
+}

@@ -1,8 +1,9 @@
+import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import { useStateContext } from '../../src/context/ContextProvider';
+import { loadData } from '../../src/hooks/loadData';
 import {
   AboutHome,
-  Discount,
   Faq,
   Footer,
   HomeCourse,
@@ -14,15 +15,16 @@ import {
 } from '../index';
 import WhatsApp from '../utilities/WhatsApp';
 import BlogHome from './BlogHome';
+import CouponCountdown from './Discount/CouponCountdown';
 import JoinFree from './JoinFree';
 import AddVideoReview from './Review/AddVideoReview';
 import Review from './Review/Review';
 import Subscribe from './Subscribe';
-import Image from 'next/image';
 // import BannerCarousel from "./BannerCarousel";
 
 const Home = () => {
   const [showPopup, setShowPopup] = useState(true);
+  const [couponData, setCouponData] = useState([]);
   const { globalLoading } = useStateContext();
 
   useEffect(() => {
@@ -31,7 +33,12 @@ const Home = () => {
       setShowPopup(true);
       sessionStorage.setItem('popup', true);
     }
+    loadData('coupon_code', setCouponData);
   }, []);
+
+  const activeCoupon = couponData.find((data) => data.isActive === true);
+
+  console.log(activeCoupon);
 
   return (
     <div className="bg-[#f9f9fa]">
@@ -48,7 +55,9 @@ const Home = () => {
       ) : (
         <>
           {showPopup && <Popup handler={setShowPopup} />}
-          <Discount />
+          {activeCoupon?.isActive && (
+            <CouponCountdown couponData={activeCoupon} />
+          )}
           <Navbar />
           <MainBanner />
           {/* <BannerCompanies /> */}

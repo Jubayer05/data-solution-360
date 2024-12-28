@@ -1,16 +1,19 @@
 import { useEffect, useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
 
+import { format, fromUnixTime } from 'date-fns';
 import Link from 'next/link';
+import { RiDeleteBinLine } from 'react-icons/ri'; // Import the delete icon
 import Swal from 'sweetalert2';
+import firebase from '../../../firebase';
 import { loadData } from '../../../src/hooks/loadData';
-import { formatDate } from '../../../src/utils/convertDate';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 
+const db = firebase.firestore();
+
 const AllCoupons = () => {
   const [couponData, setCouponData] = useState([]);
-
   useEffect(() => {
     loadData('coupon_code', setCouponData, {
       orderBy: 'validUntil',
@@ -18,52 +21,73 @@ const AllCoupons = () => {
     });
   }, []);
 
-  const groupedArr = Object.values(
-    couponData.reduce((acc, item) => {
-      const title = item.courseData;
-
-      // Check if the title exists in the accumulator, if not, initialize it
-      if (!acc[title]) {
-        acc[title] = {
-          title: title,
-          info: [],
-        };
+  const handleCouponStatus = (item) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You want to change coupon status?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, change it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Change coupon status
+        db.collection('coupon_code')
+          .doc(item.id)
+          .update({
+            isActive: !item.isActive,
+          })
+          .then(() => {
+            Swal.fire('Status changed!', '', 'success').then(() => {
+              window.location.reload();
+            });
+          });
       }
-
-      // Push the current item to the appropriate info array
-      acc[title].info.push(item);
-
-      return acc;
-    }, {}),
-  );
-
-  const handleCopyFormLink = (item) => {
-    const courseName = item?.courseData.replace(/\s+/g, '-');
-
-    // Construct the link with the modified course name
-    const link = `${window.location.origin}/registration/${courseName}?key=${item.id}`;
-
-    navigator.clipboard
-      .writeText(link)
-      .then(() => {
-        Swal.fire({
-          icon: 'success',
-          title: 'Link Copied!',
-          text: 'The form link has been copied to your clipboard.',
-          timer: 2000,
-          showConfirmButton: false,
-        });
-      })
-      .catch((error) => {
-        Swal.fire({
-          icon: 'error',
-          title: 'Oops!',
-          text: 'Failed to copy the link. Please try again.',
-        });
-        console.error('Error copying text: ', error);
-      });
+    });
   };
 
+  const handleDeleteCoupon = (item) => {
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'Do you want to delete this coupon?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, delete it!',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        // Delete the coupon from the database
+        db.collection('coupon_code')
+          .doc(item.id)
+          .delete()
+          .then(() => {
+            Swal.fire(
+              'Deleted!',
+              'The coupon has been deleted.',
+              'success',
+            ).then(() => {
+              setCouponData((prevData) =>
+                prevData.filter((coupon) => coupon.id !== item.id),
+              ); // Update state
+            });
+          })
+          .catch((error) => {
+            Swal.fire(
+              'Error!',
+              'There was an error deleting the coupon.',
+              'error',
+            );
+          });
+      }
+    });
+  };
+
+  const formatTimestamp = (timestamp) => {
+    const date = fromUnixTime(timestamp); // Convert seconds to Date object
+    return format(date, 'yyyy-MM-dd HH:mm:ss'); // Format the date
+  };
   return (
     <div>
       <HeadingDashboard title="All Coupons" />
@@ -74,15 +98,13 @@ const AllCoupons = () => {
           </h2>
 
           <div className="grid grid-cols-4 gap-5 mt-5">
-            {couponData?.map((product, idx) => (
-              <div key={product.id} className="border-1">
-                <Link href={`/admin/forms/${product.id}`}>
-                  <div className="p-3">
-                    <div className="flex items-center justify-center h-20 bg-gray-100 text-center font-heading text-lg font-bold text-gray-700">
-                      Coupon - {product.code} {/* Display form number */}
-                    </div>
+            {couponData?.map((product) => (
+              <div key={product.id} className="relative border-1 group">
+                <div className="p-3">
+                  <div className="flex items-center justify-center h-20 bg-gray-100 text-center font-heading text-lg font-bold text-gray-700">
+                    Coupon - {product.code} {/* Display form number */}
                   </div>
-                </Link>
+                </div>
                 <div className="p-3 border-t-1">
                   <p className="text-gray-500 font-heading text-lg font-medium">
                     Code Name:{' '}
@@ -99,7 +121,7 @@ const AllCoupons = () => {
                   <p className="text-gray-500 font-heading text-lg font-medium">
                     Valid Until:{' '}
                     <span className="font-bold text-orange-500">
-                      {formatDate(product.validUntil)}
+                      {product.validUntil}
                     </span>
                   </p>
                   <p className="text-gray-500 font-heading text-lg font-medium">
@@ -132,6 +154,23 @@ const AllCoupons = () => {
                         : product.usageLimit}
                     </span>
                   </p>
+                  <div className="mt-4 text-center">
+                    <button
+                      className="bg-gradient-to-r from-purple-400 to-pink-500 text-white font-bold py-2 px-6 rounded-full shadow-lg transform hover:scale-105 transition duration-300 ease-in-out"
+                      onClick={() => handleCouponStatus(product)}
+                    >
+                      {product.isActive ? 'Inactive' : 'Active'}
+                    </button>
+                  </div>
+                </div>
+
+                <div className="absolute top-2 right-2 opacity-0 group-hover:opacity-100 transition-opacity duration-300 transform group-hover:scale-110 group-hover:translate-x-2">
+                  <button
+                    className="hover:bg-red-500 text-red-500 rounded-full border-2 border-red-500 bg-white hover:text-white hover:border-red-500 transition-all duration-200 ease-in-out p-2"
+                    onClick={() => handleDeleteCoupon(product)}
+                  >
+                    <RiDeleteBinLine size={20} />
+                  </button>
                 </div>
               </div>
             ))}
