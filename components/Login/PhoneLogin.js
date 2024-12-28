@@ -22,6 +22,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
   const [step, setStep] = useState(1);
+  const [fullName, setFullName] = useState('');
 
   const phoneNumberEmail = `${phoneNumberInput?.replace(
     /\D/g,
@@ -44,7 +45,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
 
       if (userRecord.length > 0) {
         // If user exists, go directly to login
-        setStep(3); // Skip OTP and proceed to login step
+        setStep(4); // Skip OTP and proceed to login step
         setSuccess('User found! Please enter your password to login.');
       } else {
         // If user does not exist, send OTP for account creation
@@ -92,7 +93,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
 
       if (res.ok) {
         setSuccess(data.message); // Show success message
-        setStep(4); // Proceed to set password step
+        setStep(3); // Proceed to set fullname step
       } else {
         setError(data.message || 'Invalid OTP, please try again'); // Show error if OTP is invalid
       }
@@ -123,6 +124,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
 
           // Add user details to Firestore
           return db.collection('users').add({
+            full_name: fullName,
             email: phoneNumberEmail,
             phone: phoneNumberInput,
             role: 'student',
@@ -133,7 +135,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
         })
         .then((userDocRef) => {
           if (userDocRef.id) {
-            setStep(5); // Proceed to success step
+            setStep(6); // Proceed to success step
           } else {
             setError('Failed to add user to the database.');
           }
@@ -265,6 +267,34 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
           {step === 3 && (
+            <form
+              onSubmit={(e) => {
+                e.preventDefault();
+                setStep(5);
+              }}
+              className="mb-4 px-3 md:px-5"
+            >
+              <h2 className="-mt-4 text-[26px] font-bold">Full Name</h2>
+              <div className="my-4">
+                <input
+                  type="text"
+                  id="fullName"
+                  value={fullName}
+                  onChange={(e) => setFullName(e.target.value)}
+                  className="mt-1 block w-full px-3 py-3 text-base md:text-lg border border-gray-300 rounded-md"
+                  placeholder="Enter your full name"
+                />
+              </div>
+              <button
+                type="submit"
+                className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] 
+            transition duration-300 flex items-center justify-center gap-2 text-lg"
+              >
+                Next Step <FaArrowRight />
+              </button>
+            </form>
+          )}
+          {step === 4 && (
             <form onSubmit={handleLogin} className="mb-4 px-3 md:px-5">
               <h2 className="-mt-4 text-[26px] font-bold">
                 Enter your password
@@ -291,7 +321,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
 
-          {step === 4 && (
+          {step === 5 && (
             <form onSubmit={handleSetPassword} className="mb-4 px-3 md:px-5">
               <h2 className="-mt-4 text-[26px] font-bold">Set password</h2>
               <p>Enter a strong password for your profile.</p>
@@ -316,7 +346,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
 
-          {step === 5 && (
+          {step === 6 && (
             <div className="flex items-center justify-center flex-col">
               {congratulationsLottie ? (
                 <Lottie options={congratulationsLottie} />

@@ -6,7 +6,6 @@ import { dashboardAdmin } from '../../src/data/data';
 import HeadingDashboard from '../utilities/dashboard/HeadingDashboard';
 
 const AdminHome = () => {
-  const { userName } = useStateContext();
   return (
     <div>
       <HeadingDashboard

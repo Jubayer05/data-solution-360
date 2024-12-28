@@ -14,13 +14,14 @@ const firebaseConfig = {
   appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
 };
 
+// Initialize Firebase app only if it hasn't been initialized already
 if (!firebase.apps.length) {
   firebase.initializeApp(firebaseConfig);
 } else {
-  firebase.app();
+  firebase.app(); // Use the existing app
 }
 
-const app = firebase.initializeApp(firebaseConfig);
+const app = firebase.app(); // Get the initialized app
 
 export const db = getFirestore(app);
 export const auth = firebase.auth();

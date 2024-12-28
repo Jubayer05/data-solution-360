@@ -41,7 +41,6 @@ export { default as AddCourseComp } from './Admin/Course/AddCourse';
 export { default as SubscribedUser } from './Admin/SubscribedUser/SubscribedUser';
 export { default as Instructors } from './Admin/Team_Instructors/Instructors';
 
-export { default as DashboardStudent } from './Students/DashboardStu';
 export { default as ProfileStudent } from './Students/Profile/Profile';
 
 export { default as FreeCourse } from './FreeCourse/FreeCourse';

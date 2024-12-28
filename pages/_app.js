@@ -1,4 +1,3 @@
-// import 'antd/dist/reset.css';
 import 'draft-js/dist/Draft.css';
 import Router from 'next/router';
 import NProgress from 'nprogress';

@@ -17,10 +17,12 @@ const db = firebase.firestore();
 const EditBatch = () => {
   const [selectedInstructor, setSelectedInstructor] = useState([]);
   const [batchNumber, setBatchNumber] = useState(null);
+  const [discountedPrice, setDiscountedPrice] = useState(null);
   const [courseDataBatch, setCourseDataBatch] = useState([]);
   const router = useRouter();
   const { batchId } = router.query;
   const [instructor, setInstructor] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     loadData('instructors', setInstructor);
@@ -50,9 +52,16 @@ const EditBatch = () => {
     }
   };
 
+  console.log(findBatchInfo);
+
   const handleUpdateBatch = () => {
+    setLoading(true);
     const updatedCourse = {
       ...findBatchInfo,
+      courseData: {
+        ...findBatchInfo.courseData,
+        discounted_price: discountedPrice,
+      },
       batchNumber: batchNumber,
       instructors: selectedInstructor,
     };
@@ -61,13 +70,22 @@ const EditBatch = () => {
       .doc(findBatchInfo.id)
       .update(updatedCourse)
       .then(() => {
-        Swal.fire(
-          'Batch updated!',
-          'Your batch has been updated.',
-          'success',
-        ).then(() => {
-          window.location.reload();
-        });
+        db.collection('course_data')
+          .doc(findBatchInfo.courseData.key)
+          .update({
+            ...findBatchInfo.courseData,
+            discounted_price: discountedPrice,
+          })
+          .then(() => {
+            setLoading(false);
+            Swal.fire(
+              'Batch updated!',
+              'Your batch has been updated.',
+              'success',
+            ).then(() => {
+              window.location.reload();
+            });
+          });
       });
   };
 
@@ -136,6 +154,20 @@ const EditBatch = () => {
                 onChange={(e) => setBatchNumber(e.target.value)}
               />
 
+              <label
+                htmlFor="course_price"
+                className="font-semibold mt-3 block text-[#17012e]"
+              >
+                Edit course price
+              </label>
+              <input
+                placeholder="Example - 2401"
+                className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
+                type="number"
+                id="course_price"
+                onChange={(e) => setDiscountedPrice(e.target.value)}
+              />
+
               <p className="text-lg font-bold font-dash_heading mt-3 block text-[#17012e]">
                 Instructors for the entire course
               </p>
@@ -185,7 +217,15 @@ const EditBatch = () => {
                   className="bg-secondary_btn hover:bg-secondary_btn hover:opacity-80 text-white"
                 >
                   {/* <FaArrowLeft /> */}
-                  Update batch
+                  {loading ? (
+                    <>
+                      {' '}
+                      <Spin size="medium" style={{ color: 'white' }} />{' '}
+                      Updating...
+                    </>
+                  ) : (
+                    'Update batch'
+                  )}
                 </ButtonDashboard>
               </div>
             </div>

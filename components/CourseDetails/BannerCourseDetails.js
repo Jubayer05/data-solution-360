@@ -17,8 +17,6 @@ const BannerCourseDetails = ({ courseDetails }) => {
   const [courseDataBatch, setCourseDataBatch] = useState([]);
   const db = firebase.firestore();
 
-  console.log(courseDetails);
-
   useEffect(() => {
     loadData('course_data_batch', setCourseDataBatch);
   }, []);
