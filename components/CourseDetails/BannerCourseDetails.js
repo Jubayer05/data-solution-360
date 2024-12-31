@@ -27,7 +27,8 @@ const BannerCourseDetails = ({ courseDetails }) => {
     );
   }, [courseDataBatch, courseDetails]);
 
-  // console.log(courseDetails?.unique_batch_id);
+  console.log(courseDetails?.unique_batch_id);
+  console.log(currentCourse);
 
   const handleJoinNow = useCallback(() => {
     if (!findCurrentUser) {

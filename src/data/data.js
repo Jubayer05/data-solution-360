@@ -2,10 +2,13 @@ import { CgProfile } from 'react-icons/cg';
 import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
 import { FiVideo } from 'react-icons/fi';
 import { IoLogoYoutube } from 'react-icons/io';
+import { LiaSellsy } from 'react-icons/lia';
 import {
   MdContentCopy,
   MdOutlineCreateNewFolder,
   MdOutlineDiscount,
+  MdOutlineLeaderboard,
+  MdOutlineSummarize,
   MdReviews,
 } from 'react-icons/md';
 import { RiAdminFill, RiCoupon3Line } from 'react-icons/ri';
@@ -29,6 +32,7 @@ import {
 import { RiVideoAddLine } from 'react-icons/ri';
 
 import { RiHomeGearFill, RiTeamLine } from 'react-icons/ri';
+import { TbReportSearch } from 'react-icons/tb';
 
 export const linksAdmin = [
   {
@@ -134,6 +138,32 @@ export const linksAdmin = [
         name: 'Coupon data',
         link: '/admin/coupons/coupon-data',
         icon: <MdOutlineDiscount />,
+      },
+    ],
+  },
+  {
+    title: 'Lead & Sells',
+    key: '6',
+    links: [
+      {
+        name: 'Lead Tracking',
+        link: '/admin/lead-sells/lead-tracking',
+        icon: <MdOutlineLeaderboard />,
+      },
+      {
+        name: 'Sells Tracking',
+        link: '/admin/lead-sells/sells-tracking',
+        icon: <LiaSellsy />,
+      },
+      {
+        name: 'All Reports',
+        link: '/admin/lead-sells/all-reports',
+        icon: <TbReportSearch />,
+      },
+      {
+        name: 'Summary Reports',
+        link: '/admin/lead-sells/summary-reports',
+        icon: <MdOutlineSummarize />,
       },
     ],
   },

@@ -366,9 +366,6 @@ const EnrolledStudent = () => {
           <Table
             columns={columns}
             dataSource={[...enrolledUsers]}
-            pagination={{
-              pageSize: 15,
-            }}
             scroll={{
               x: 'max-content',
               y: 500,

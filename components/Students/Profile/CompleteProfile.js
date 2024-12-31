@@ -1,6 +1,6 @@
 import Link from 'next/link';
 
-export default function CompleteProfile({ onClose, onRegister }) {
+export default function CompleteProfile({ onClose }) {
   return (
     <div className="fixed inset-0 bg-black bg-opacity-50 backdrop-blur-sm flex justify-center items-center z-50">
       {/* Main Popup Container */}

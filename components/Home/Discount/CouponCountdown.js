@@ -2,13 +2,6 @@ import { differenceInMilliseconds, parse } from 'date-fns';
 import React, { useEffect, useState } from 'react';
 
 const CouponCountdown = ({ couponData }) => {
-  // const couponInfo = {
-  //   codeName: '12-12',
-  //   discount: 12,
-  //   validUntil: new Date('2024-12-31T23:59:59'),
-  //   isActive: true,
-  // };
-
   const [timeRemaining, setTimeRemaining] = useState({
     days: 0,
     hours: 0,

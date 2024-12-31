@@ -112,17 +112,19 @@ const CreateNewBatch = () => {
 
       db.collection('course_data')
         .doc(selectedCourse.key)
-        .update(updatedCourse);
-      db.collection('course_data_batch')
-        .add(newBatch)
+        .update(updatedCourse)
         .then(() => {
-          Swal.fire(
-            'Batch created!',
-            'Your batch has been created.',
-            'success',
-          ).then(() => {
-            window.location.reload();
-          });
+          db.collection('course_data_batch')
+            .add(newBatch)
+            .then(() => {
+              Swal.fire(
+                'Batch created!',
+                'Your batch has been created.',
+                'success',
+              ).then(() => {
+                window.location.reload();
+              });
+            });
         });
     } else {
       Swal.fire(
