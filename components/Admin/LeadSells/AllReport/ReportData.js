@@ -2,6 +2,7 @@ import { Table } from 'antd';
 import { useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../../firebase';
+import PieChartCustom from '../../../utilities/Chart/PieChart';
 import DataFilterComponent from '../../../utilities/FilteredButton';
 
 const db = firebase.firestore();
@@ -135,21 +136,28 @@ const ReportData = ({ sells, setLeads }) => {
     const grouped = {};
 
     data.forEach((item) => {
-      const email = item.sells_processed.email;
-      const name = item.sells_processed.full_name;
+      const { email, name } = item.sells_processed;
 
       if (!grouped[email]) {
-        grouped[email] = [];
+        grouped[email] = { name, data: [] };
       }
 
-      grouped[email].push(item);
+      grouped[email].data.push(item);
     });
 
-    return Object.values(grouped); // Convert the grouped object to an array of subarrays
+    return Object.entries(grouped).map(([email, { name, data }]) => ({
+      email,
+      name,
+      data,
+    }));
   };
 
   const allSellsData = groupByEmail(sells);
-  console.log(allSellsData);
+
+  const pieChartData = allSellsData.map((item) => ({
+    name: `${item.name}`,
+    value: item.data.length,
+  }));
 
   return (
     <div>
@@ -159,16 +167,21 @@ const ReportData = ({ sells, setLeads }) => {
             Your Sells Table ({filteredData?.length})
           </h2>
           <DataFilterComponent setFilteredData={setFilteredData} data={sells} />
+          <PieChartCustom
+            data={pieChartData}
+            colors={['#4caf50', '#2196f3', '#ff5722', '#ffc107']}
+          />
+
           {allSellsData?.map((item, index) => (
             <div key={index} className="mt-10">
               <h2 className="text-xl font-bold mb-4">
                 Sells data by:{' '}
                 <span className="text-primary">
-                  {item[0]?.sells_processed?.name} ({item.length})
+                  {item?.name} ({item?.data.length})
                 </span>
               </h2>
               <Table
-                dataSource={item}
+                dataSource={item?.data}
                 columns={columns}
                 rowKey="id"
                 bordered

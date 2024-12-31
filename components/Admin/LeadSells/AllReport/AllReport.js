@@ -20,8 +20,6 @@ const AllReport = () => {
     loadData('sells_data', setSells);
   }, []);
 
-  useEffect(() => {}, [takeLead]);
-
   return (
     <div>
       <HeadingDashboard title="All Reports" />
