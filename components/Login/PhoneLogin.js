@@ -24,12 +24,17 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
   const [step, setStep] = useState(1);
   const [fullName, setFullName] = useState('');
 
-  const phoneNumberEmail = `${phoneNumberInput?.replace(
-    /\D/g,
-    '',
-  )}@datasolution360.com`;
+  const formatPhoneNumber = (phoneNumberInput) => {
+    const normalizedPhoneNumber = phoneNumberInput
+      ?.replace(/\D/g, '') // Remove all non-digit characters
+      ?.replace(/^0/, '880') // Replace leading '0' with '880'
+      ?.replace(/^(?!880)/, '880'); // If it doesn't start with '880', add it
 
-  const phoneNumber = phoneNumberInput?.replace(/^\+/, '');
+    return normalizedPhoneNumber;
+  };
+
+  const phoneNumber = formatPhoneNumber(phoneNumberInput);
+  const phoneNumberEmail = `${phoneNumber}@datasolution360.com`;
 
   // NOTE: HANDLE SET USER AND SEND CODE
   const handleCheckUserAndSendCode = async (e) => {
