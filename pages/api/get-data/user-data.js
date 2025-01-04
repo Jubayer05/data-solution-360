@@ -5,23 +5,29 @@ import firebase from '../../../firebase';
 const db = firebase.firestore();
 
 export default async function handler(req, res) {
-  const providedApiKey = req.headers['x-api-key'];
-  const validApiKey = process.env.NEXT_PUBLIC_USER_COLLECTION_API_KEY;
+  console.log('Headers received:', req.headers); // Debug incoming headers
+
+  const providedApiKey = req.headers['x-api-key']; // Ensure key is read case-sensitively
+  const validApiKey = process.env.USER_COLLECTION_API_KEY;
 
   if (providedApiKey !== validApiKey) {
+    console.warn('Invalid API Key:', providedApiKey); // Debug invalid key
     return res.status(403).json({ error: 'Unauthorized access' });
   }
 
   if (req.method !== 'GET') {
-    return res.status(405).json({ error: 'Method not allowed' });
+    return res
+      .setHeader('Allow', ['GET'])
+      .status(405)
+      .json({ error: 'Method not allowed' });
   }
 
   try {
     const querySnapshot = await getDocs(collection(db, 'users'));
-    const data = [];
-    querySnapshot.forEach((doc) => {
-      data.push({ id: doc.id, ...doc.data() });
-    });
+    const data = querySnapshot.docs.map((doc) => ({
+      id: doc.id,
+      ...doc.data(),
+    }));
 
     res.status(200).json(data);
   } catch (error) {
