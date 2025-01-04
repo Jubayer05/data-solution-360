@@ -7,7 +7,7 @@ import DataFilterComponent from '../../../utilities/FilteredButton';
 
 const db = firebase.firestore();
 
-const ReportData = ({ sells, setLeads }) => {
+const ReportDataCourse = ({ sells, setLeads }) => {
   const [filteredData, setFilteredData] = useState([]);
 
   // Ant Design Table Columns
@@ -132,30 +132,29 @@ const ReportData = ({ sells, setLeads }) => {
     },
   ];
 
-  const groupByEmail = (data) => {
+  const groupByCourse = (data) => {
     const grouped = {};
 
     data.forEach((item) => {
-      const { email, name } = item.sells_processed;
+      const { course_name } = item;
 
-      if (!grouped[email]) {
-        grouped[email] = { name, data: [] };
+      if (!grouped[course_name]) {
+        grouped[course_name] = { course_name, data: [] };
       }
 
-      grouped[email].data.push(item);
+      grouped[course_name].data.push(item);
     });
 
-    return Object.entries(grouped).map(([email, { name, data }]) => ({
-      email,
-      name,
+    return Object.entries(grouped).map(([course_name, { data }]) => ({
+      course_name,
       data,
     }));
   };
 
-  const allSellsData = groupByEmail(sells);
+  const allSellsData = groupByCourse(filteredData);
 
   const pieChartData = allSellsData.map((item) => ({
-    name: `${item.name}`,
+    name: `${item.course_name}`,
     value: item.data.length,
   }));
 
@@ -164,7 +163,7 @@ const ReportData = ({ sells, setLeads }) => {
       <div className="max-w-6xl mx-auto my-20 font-dash_heading">
         <div className="mt-10 p-10 bg-white rounded-md border-1">
           <h2 className="text-xl font-bold mb-4">
-            Your Sells Table ({filteredData?.length})
+            Sells Table by Course ({filteredData?.length})
           </h2>
           <DataFilterComponent setFilteredData={setFilteredData} data={sells} />
           <PieChartCustom
@@ -177,7 +176,7 @@ const ReportData = ({ sells, setLeads }) => {
               <h2 className="text-xl font-bold mb-4">
                 Sells data by:{' '}
                 <span className="text-primary">
-                  {item?.name} ({item?.data.length})
+                  {item?.course_name} ({item?.data.length})
                 </span>
               </h2>
               <Table
@@ -196,4 +195,4 @@ const ReportData = ({ sells, setLeads }) => {
   );
 };
 
-export default ReportData;
+export default ReportDataCourse;

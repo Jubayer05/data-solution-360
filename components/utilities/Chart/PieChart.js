@@ -20,7 +20,7 @@ const FancyPieChart = ({
 
   return (
     <div className="flex justify-center items-center py-10 bg-gray-100 rounded-lg shadow-lg">
-      <PieChart width={500} height={500}>
+      <PieChart width={350} height={350}>
         <Pie
           data={data}
           dataKey={dataKey}
@@ -29,7 +29,7 @@ const FancyPieChart = ({
           cy="50%"
           // Creates a donut chart effect
           fill="#8884d8"
-          label={(entry) => `${entry[nameKey]}: ${entry[dataKey]}`}
+          label={(entry) => `${entry[dataKey]}`}
           labelStyle={{ fontSize: '12px', fontWeight: 'bold' }}
           isAnimationActive={true} // Enable animation
         >

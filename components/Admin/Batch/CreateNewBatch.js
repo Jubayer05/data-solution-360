@@ -94,7 +94,7 @@ const CreateNewBatch = () => {
   };
 
   // NOTE: HANDLE CREATE NEW BATCH BUTTON
-  const handleCreateNewBatch = () => {
+  const handleCreateNewBatch = async () => {
     if (selectedCourse && batchNumber && selectedInstructor.length !== 0) {
       const updatedCourse = {
         ...courseDataObj,
@@ -102,7 +102,7 @@ const CreateNewBatch = () => {
       };
 
       const newBatch = {
-        courseData: { ...courseDataObj },
+        courseData: { ...updatedCourse },
         unique_batch_id: uniqueId,
         batchNumber: batchNumber,
         course_modules: courseDataObj.courseModule,
@@ -110,22 +110,32 @@ const CreateNewBatch = () => {
         instructors: selectedInstructor,
       };
 
-      db.collection('course_data')
-        .doc(selectedCourse.key)
-        .update(updatedCourse)
-        .then(() => {
-          db.collection('course_data_batch')
-            .add(newBatch)
-            .then(() => {
-              Swal.fire(
-                'Batch created!',
-                'Your batch has been created.',
-                'success',
-              ).then(() => {
-                window.location.reload();
-              });
-            });
+      try {
+        const courseDocRef = db
+          .collection('course_data')
+          .doc(selectedCourse.key);
+        const batchDocRef = db.collection('course_data_batch').doc();
+
+        const batch = db.batch();
+        batch.update(courseDocRef, updatedCourse);
+        batch.set(batchDocRef, newBatch);
+
+        await batch.commit();
+
+        Swal.fire(
+          'Batch created!',
+          'Your batch has been created.',
+          'success',
+        ).then(() => {
+          window.location.reload();
         });
+      } catch (error) {
+        Swal.fire(
+          'Error!',
+          `Failed to create the batch: ${error.message}`,
+          'error',
+        );
+      }
     } else {
       Swal.fire(
         'Warning!',

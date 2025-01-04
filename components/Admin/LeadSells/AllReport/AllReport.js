@@ -5,7 +5,9 @@ import firebase from '../../../../firebase';
 import { loadData } from '../../../../src/hooks/loadData';
 import HeadingDashboard from '../../../utilities/dashboard/HeadingDashboard';
 import LeadsForSells from '../LeadsForSells';
-import ReportData from './ReportData';
+import DueSheet from './DueSheet';
+import ReportDataCourse from './ReportDataCourse';
+import ReportDataPerson from './ReportDataPerson';
 
 const db = firebase.firestore();
 
@@ -30,25 +32,12 @@ const AllReport = () => {
           setTakeLead={setTakeLead}
         />
 
-        <ReportData sells={sells} />
+        <ReportDataPerson sells={sells} />
+        <ReportDataCourse sells={sells} />
+        <DueSheet sells={sells} />
       </div>
     </div>
   );
 };
 
 export default AllReport;
-
-const customStyles = {
-  menu: (provided) => ({
-    ...provided,
-    borderBottom: '1px dotted pink',
-    padding: 20,
-  }),
-  control: () => ({
-    display: 'flex',
-    border: '1px solid #e5e5e5',
-    padding: '5px 10px',
-    borderRadius: '6px',
-    backgroundColor: '#ffffff',
-  }),
-};
