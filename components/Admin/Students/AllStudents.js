@@ -24,15 +24,8 @@ const AllStudents = () => {
     fetchData();
   }, []);
 
-  // Log the user data to ensure it's being loaded correctly
-  useEffect(() => {
-    console.log('Fetched userData:', userData);
-  }, [userData]);
-
   // Sorting logic using useMemo to prevent unnecessary re-sorting on each render
   const sortedData = useMemo(() => {
-    console.log('Sorting userData:', userData); // Debugging line to check data before sorting
-
     return [...userData].sort((a, b) => {
       const defaultDate = new Date(0); // Fallback to a very early date for missing createdAt
 
@@ -51,11 +44,6 @@ const AllStudents = () => {
       return compareDesc(dateA, dateB); // Newest first
     });
   }, [userData]);
-
-  // Log the sorted data to verify sorting
-  useEffect(() => {
-    console.log('Sorted Data:', sortedData);
-  }, [sortedData]);
 
   const handleDelete = async (userId) => {
     try {
@@ -123,7 +111,7 @@ const AllStudents = () => {
       align: 'center',
       width: 120,
       render: (_, record) => (
-        <Button type="primary" danger onClick={() => handleDelete(record.key)}>
+        <Button type="primary" danger onClick={() => handleDelete(record.id)}>
           Delete
         </Button>
       ),
@@ -147,8 +135,7 @@ const AllStudents = () => {
             columns={columns}
             dataSource={sortedData.map((user) => ({
               ...user,
-              id: user.key, // Ensure each row has a unique `key` field for delete
-              key: user.key, // Required by Ant Design Table
+              key: user.id,
             }))}
             pagination={{
               pageSize: 100,

@@ -73,7 +73,6 @@ const EditBatch = () => {
         db.collection('course_data')
           .doc(findBatchInfo.courseData.key)
           .update({
-            ...findBatchInfo.courseData,
             discounted_price: discountedPrice,
           })
           .then(() => {
@@ -166,6 +165,7 @@ const EditBatch = () => {
                 type="number"
                 id="course_price"
                 onChange={(e) => setDiscountedPrice(e.target.value)}
+                onWheel={(e) => e.target.blur()}
               />
 
               <p className="text-lg font-bold font-dash_heading mt-3 block text-[#17012e]">

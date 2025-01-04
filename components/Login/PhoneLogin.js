@@ -131,7 +131,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
           return db.collection('users').add({
             full_name: fullName,
             email: phoneNumberEmail,
-            phone: phoneNumberInput,
+            phone: phoneNumber,
             role: 'student',
             student_id: uuidv4().split('-')[0],
             enrolled_courses: [],
