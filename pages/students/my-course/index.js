@@ -11,4 +11,4 @@ const myCourses = () => {
   );
 };
 
-export default ProtectedRoute(myCourses, 'student');
+export default ProtectedRoute(myCourses, ['student']);

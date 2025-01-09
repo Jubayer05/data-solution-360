@@ -30,4 +30,4 @@ const joinLive = () => {
 };
 
 // export default joinLive;
-export default ProtectedRoute(joinLive, 'student');
+export default ProtectedRoute(joinLive, ['student']);

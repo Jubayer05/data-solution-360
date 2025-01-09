@@ -12,4 +12,4 @@ const videos = () => {
 };
 
 // export default videos;
-export default ProtectedRoute(videos, 'student');
+export default ProtectedRoute(videos, ['student']);

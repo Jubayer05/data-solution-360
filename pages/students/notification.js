@@ -12,4 +12,4 @@ const notification = () => {
 };
 
 // export default notification;
-export default ProtectedRoute(notification, 'student');
+export default ProtectedRoute(notification, ['student']);

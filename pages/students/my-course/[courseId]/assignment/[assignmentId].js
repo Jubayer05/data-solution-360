@@ -14,4 +14,4 @@ const assignmentSlug = () => {
   );
 };
 
-export default ProtectedRoute(assignmentSlug, 'student');
+export default ProtectedRoute(assignmentSlug, ['student']);

@@ -11,4 +11,4 @@ const recording = () => {
   );
 };
 
-export default ProtectedRoute(recording, 'student');
+export default ProtectedRoute(recording, ['student']);

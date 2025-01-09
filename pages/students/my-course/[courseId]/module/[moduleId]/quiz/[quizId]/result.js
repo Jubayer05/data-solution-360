@@ -11,4 +11,4 @@ const quizResult = () => {
   );
 };
 
-export default ProtectedRoute(quizResult, 'student');
+export default ProtectedRoute(quizResult, ['student']);

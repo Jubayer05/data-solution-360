@@ -12,4 +12,4 @@ const leaderBoard = () => {
   );
 };
 
-export default ProtectedRoute(leaderBoard, 'student');
+export default ProtectedRoute(leaderBoard, ['student']);

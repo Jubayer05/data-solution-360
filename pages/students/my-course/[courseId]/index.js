@@ -14,4 +14,4 @@ const enrolledCoursePage = () => {
   );
 };
 
-export default ProtectedRoute(enrolledCoursePage, 'student');
+export default ProtectedRoute(enrolledCoursePage, ['student']);

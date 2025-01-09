@@ -12,4 +12,4 @@ const moduleSlug = () => {
 };
 
 // export default moduleSlug;
-export default ProtectedRoute(moduleSlug, 'student');
+export default ProtectedRoute(moduleSlug, ['student']);

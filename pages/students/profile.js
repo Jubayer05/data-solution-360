@@ -11,4 +11,4 @@ const profile = () => {
 };
 
 // export default profile;
-export default ProtectedRoute(profile, 'student');
+export default ProtectedRoute(profile, ['student']);
