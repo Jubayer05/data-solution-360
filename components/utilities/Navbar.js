@@ -75,6 +75,8 @@ const Navbar = ({ home }) => {
     }
   }, [eng]);
 
+  console.log(findCurrentUser);
+
   useEffect(() => {
     const url = window.location.href.split('/').slice(-1)[0];
     setUrl(url);
@@ -116,9 +118,9 @@ const Navbar = ({ home }) => {
               <div>
                 <Link
                   href={
-                    findCurrentUser?.role === 'admin' || 'content_manager'
-                      ? '/admin/dashboard'
-                      : '/students/dashboard'
+                    findCurrentUser?.role === 'student'
+                      ? '/students/dashboard'
+                      : '/admin/dashboard'
                   }
                 >
                   <button
@@ -272,9 +274,9 @@ const Navbar = ({ home }) => {
               <div>
                 <Link
                   href={
-                    findCurrentUser?.role === 'admin' || 'content_manager'
-                      ? '/admin/dashboard'
-                      : '/students/dashboard'
+                    findCurrentUser?.role === 'student'
+                      ? '/students/dashboard'
+                      : '/admin/dashboard'
                   }
                 >
                   <button
