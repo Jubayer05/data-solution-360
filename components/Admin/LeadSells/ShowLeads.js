@@ -84,7 +84,7 @@ const ShowLeads = ({ leads, setLeads }) => {
             <span className="bg-orange-50 border border-orange-500 px-2 text-xs rounded-full font-semibold text-[#df7c24]">
               Pending
             </span>
-          ) : record?.status === 'completed' ? (
+          ) : record?.status === 'enrolled' ? (
             <span className="bg-green-50 border border-green-500 px-2 text-xs rounded-full font-semibold text-[#48bb78]">
               Completed
             </span>

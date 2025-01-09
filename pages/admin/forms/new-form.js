@@ -11,4 +11,4 @@ const newForm = () => {
   );
 };
 
-export default ProtectedRoute(newForm, 'admin');
+export default ProtectedRoute(newForm, ['admin', 'content_manager']);

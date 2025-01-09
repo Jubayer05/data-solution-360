@@ -11,4 +11,4 @@ const all_student = () => {
   );
 };
 
-export default ProtectedRoute(all_student, 'admin');
+export default ProtectedRoute(all_student, ['admin', 'content_manager']);

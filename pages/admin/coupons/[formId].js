@@ -11,4 +11,4 @@ const formId = () => {
   );
 };
 
-export default ProtectedRoute(formId, 'admin');
+export default ProtectedRoute(formId, ['admin', 'content_manager']);

@@ -11,4 +11,4 @@ const allBatch = () => {
   );
 };
 
-export default ProtectedRoute(allBatch, 'admin');
+export default ProtectedRoute(allBatch, ['admin', 'content_manager']);

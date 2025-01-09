@@ -11,4 +11,4 @@ const editBatch = () => {
   );
 };
 
-export default ProtectedRoute(editBatch, 'admin');
+export default ProtectedRoute(editBatch, ['admin', 'content_manager']);

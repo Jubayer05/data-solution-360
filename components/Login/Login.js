@@ -17,7 +17,6 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
   const [haveAccount, setHaveAccount] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [userData, setUserData] = useState([]);
-  const [adminData, setAdminData] = useState([]);
 
   const validateEmail = (email) => {
     const re =
@@ -33,16 +32,7 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
       }));
       setUserData(userData);
     });
-    db.collection('dashboard_users').onSnapshot((snap) => {
-      const data = snap.docs.map((doc) => ({
-        id: doc.id,
-        ...doc.data(),
-      }));
-      setAdminData(data);
-    });
   }, []);
-
-  const findAdminData = adminData.find((item) => item.email === formData.email);
 
   const handleLogin = () => {
     const { email, password } = formData;
@@ -52,10 +42,9 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
     }
 
     const validUser = userData.find((item) => item.email === email);
-    const findAdminData = adminData.find((item) => item.email === email);
 
     // If valid user or admin is found
-    if (validUser || findAdminData) {
+    if (validUser) {
       auth
         .signInWithEmailAndPassword(email, password)
         .then((userCredential) => {
@@ -73,7 +62,7 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
           }
         })
         .catch((error) => {
-          Swal.fire('Error!', error.message, 'error');
+          Swal.fire('Error!', 'No user found with this email.', 'error');
         });
     } else {
       // If no valid user or admin is found
@@ -82,6 +71,9 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
   };
 
   const handleCreateAccount = () => {
+    const findAdminData = userData.find(
+      (item) => item.email === formData.email,
+    );
     if (findAdminData) {
       if (validateEmail(formData.email)) {
         if (formData.password === formData.confirmPassword) {
@@ -91,20 +83,13 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
             .then((userCredential) => {
               const user = userCredential.user;
               if (user) {
-                db.collection('users')
-                  .add({
-                    email: user.email,
-                    role: 'admin',
-                  })
-                  .then(() => {
-                    Swal.fire(
-                      'Hey!',
-                      'You are successfully registered.',
-                      'success',
-                    ).then(() => {
-                      window.location.href = '/';
-                    });
-                  });
+                Swal.fire(
+                  'Hey!',
+                  'You are successfully registered.',
+                  'success',
+                ).then(() => {
+                  window.location.href = '/';
+                });
               }
             })
             .catch((error) => {

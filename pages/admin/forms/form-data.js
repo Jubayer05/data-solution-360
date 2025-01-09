@@ -11,4 +11,4 @@ const formData = () => {
   );
 };
 
-export default ProtectedRoute(formData, 'admin');
+export default ProtectedRoute(formData, ['admin', 'content_manager']);

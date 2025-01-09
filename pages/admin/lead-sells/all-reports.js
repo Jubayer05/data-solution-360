@@ -11,4 +11,4 @@ const allReport = () => {
   );
 };
 
-export default ProtectedRoute(allReport, 'admin');
+export default ProtectedRoute(allReport, ['admin']);

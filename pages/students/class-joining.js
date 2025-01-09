@@ -12,4 +12,4 @@ const classJoining = () => {
 };
 
 // export default classJoining;
-export default ProtectedRoute(classJoining, 'student');
+export default ProtectedRoute(classJoining, ['student']);

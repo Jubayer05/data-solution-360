@@ -33,25 +33,10 @@ const MainBanner = () => {
     cssEase: 'linear',
     slidesToShow: 1,
     slidesToScroll: 1,
-    // responsive: [
-    //   {
-    //     breakpoint: 768,
-    //     settings: {
-    //       slidesToShow: 2,
-    //     },
-    //   },
-    //   {
-    //     breakpoint: 560,
-    //     settings: {
-    //       slidesToShow: 1,
-    //     },
-    //   },
-    // ],
   };
 
   return (
     <div className="bg-[#f9f9fa] pt-36 pb-10 px-3 -mt-32 md:-mt-20 ">
-      {/* <div className="relative w-full h-full"></div> */}
       <div className="relative max-w-6xl mx-auto border border-[#a2aabb] md:px-6 gap-4 rounded-2xl overflow-hidden">
         <div
           className="absolute h-[200px] w-[200px] top-[-100px] left-[-100px]

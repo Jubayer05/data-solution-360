@@ -10,4 +10,4 @@ const addCourse = () => {
   );
 };
 
-export default ProtectedRoute(addCourse, 'admin');
+export default ProtectedRoute(addCourse, ['admin', 'content_manager']);

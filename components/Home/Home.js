@@ -1,5 +1,6 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { useStateContext } from '../../src/context/ContextProvider';
 import { loadData } from '../../src/hooks/loadData';
 import {
@@ -38,8 +39,6 @@ const Home = () => {
 
   const activeCoupon = couponData.find((data) => data.isActive === true);
 
-  console.log(activeCoupon);
-
   return (
     <div className="bg-[#f9f9fa]">
       {globalLoading ? (
@@ -60,6 +59,7 @@ const Home = () => {
           )}
           <Navbar />
           <MainBanner />
+
           {/* <BannerCompanies /> */}
           {/* <BannerCarousel /> */}
           <HomeCourse />

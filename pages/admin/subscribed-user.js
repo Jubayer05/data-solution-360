@@ -11,5 +11,4 @@ const subscribedUser = () => {
 };
 
 // export default subscribedUser;
-export default ProtectedRoute(subscribedUser, 'admin');
-
+export default ProtectedRoute(subscribedUser, ['admin', 'content_manager']);

@@ -1,25 +1,33 @@
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
+import 'react-loading-skeleton/dist/skeleton.css';
 import { useAuth } from '../../../src/context/auth/AuthContext';
-// import { useAuth } from '../context/AuthContext';
+import PageSkeleton from './LoadingPage';
 
-const ProtectedRoute = (WrappedComponent, accessLevel = 'user') => {
+const ProtectedRoute = (
+  WrappedComponent,
+  allowedRoles = ['user', 'content_manager'],
+) => {
   const HOC = (props) => {
     const { user, loading } = useAuth();
+    console.log(user);
     const router = useRouter();
+    const [isAuthenticated, setIsAuthenticated] = useState(false);
 
     useEffect(() => {
       if (!loading) {
         if (!user) {
           router.push('/'); // Redirect to login if not authenticated
-        } else if (user.role !== accessLevel) {
-          router.push('/'); // Redirect to unauthorized page if access level is insufficient
+        } else if (!allowedRoles.includes(user.role)) {
+          router.push('/unauthorized'); // Redirect to unauthorized page
+        } else {
+          setIsAuthenticated(true); // Authentication successful
         }
       }
-    }, [user, loading, router]);
+    }, [user, loading, router, allowedRoles]); // Add allowedRoles as a dependency
 
-    if (loading || !user) {
-      return <p>Loading...</p>; // Show a loading indicator while checking user
+    if (loading || !isAuthenticated) {
+      return <PageSkeleton />; // Show a loading indicator
     }
 
     return <WrappedComponent {...props} />;

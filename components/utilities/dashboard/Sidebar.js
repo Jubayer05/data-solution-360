@@ -7,12 +7,14 @@ const { Panel } = Collapse;
 import { Tooltip } from 'antd';
 import Image from 'next/image';
 import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
+import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import { linksAdmin, linksStudents } from '../../../src/data/data';
 // import '../../../styles/utility/Sidebar.css';
 
 const Sidebar = ({ status }) => {
   const { activeMenu, setActiveMenu, screenSize } = useStateContextDashboard();
+  const { findCurrentUser } = useStateContext();
   const [url, setUrl] = useState('');
   const [currentPage, setCurrentPage] = useState([]);
   useEffect(() => {
@@ -26,6 +28,10 @@ const Sidebar = ({ status }) => {
       setActiveMenu(false);
     }
   };
+
+  const userRole = findCurrentUser?.role;
+
+  console.log(userRole);
 
   return (
     <div className="md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 h-screen">
@@ -103,77 +109,91 @@ const Sidebar = ({ status }) => {
                   </Link>
                 </div>
               ))
-            : linksAdmin.map((item) => (
-                <div
-                  className={`${activeMenu ? 'mx-3' : 'm-0'}`}
-                  key={item.title}
-                >
-                  <ConfigProvider
-                    theme={{
-                      components: {
-                        Collapse: {
-                          border: '1px solid #000000',
+            : linksAdmin.map((item) => {
+                const filteredLinks = item.links.filter((link) =>
+                  Array.isArray(link.role)
+                    ? link.role.includes(userRole)
+                    : link.role === userRole,
+                );
 
-                          /* here is your component tokens */
-                        },
-                        Panel: {},
-                      },
-                    }}
-                  >
-                    <Collapse
-                      collapsible="header"
-                      expandIconPosition="end"
-                      expandIcon={({ isActive, key }) =>
-                        isActive ? (
-                          <div>
-                            <FaAngleDown className="text-lg group-hover:text-blue-500 font-medium text-blue-500" />
-                          </div>
-                        ) : (
-                          <div>
-                            <FaAngleRight className="text-lg group-hover:text-blue-500 font-medium" />
-                          </div>
-                        )
-                      }
-                      defaultActiveKey={['1']}
-                      ghost={true}
+                return (
+                  filteredLinks.length > 0 && ( // Render Collapse only if there are links
+                    <div
+                      className={`${activeMenu ? 'mx-3' : 'm-0'}`}
+                      key={item.title}
                     >
-                      <Panel
-                        className="text-base -mt-2 group"
-                        header={
-                          <p className="transition duration-300 group-hover:text-blue-500 font-medium">
-                            {item.title}
-                          </p>
-                        }
-                        key={item.id}
+                      <ConfigProvider
+                        theme={{
+                          components: {
+                            Collapse: {
+                              border: '1px solid #000000',
+                              /* here is your component tokens */
+                            },
+                            Panel: {},
+                          },
+                        }}
                       >
-                        {item.links.map((link) => (
-                          <Link
-                            href={`${link.link}`}
-                            key={link.name}
-                            onClick={handleCloseMenu}
-                            className={`flex items-center ${
-                              activeMenu
-                                ? 'justify-start pl-5 rounded-lg'
-                                : 'justify-center py-2 rounded'
-                            } ${
-                              currentPage.includes(
-                                item?.name?.split(' ').join('-').toUpperCase(),
-                              )
-                                ? 'bg-[#fecb6c55]'
-                                : ' '
-                            } gap-5 p-2 text-md text-gray-600 mx-1 hover:bg-[#fecb6c55]`}
+                        <Collapse
+                          collapsible="header"
+                          expandIconPosition="end"
+                          expandIcon={({ isActive, key }) =>
+                            isActive ? (
+                              <div>
+                                <FaAngleDown className="text-lg group-hover:text-blue-500 font-medium text-blue-500" />
+                              </div>
+                            ) : (
+                              <div>
+                                <FaAngleRight className="text-lg group-hover:text-blue-500 font-medium" />
+                              </div>
+                            )
+                          }
+                          defaultActiveKey={['1']}
+                          ghost={true}
+                        >
+                          <Panel
+                            className="text-base -mt-2 group"
+                            header={
+                              <p className="transition duration-300 group-hover:text-blue-500 font-medium">
+                                {item.title}
+                              </p>
+                            }
+                            key={item.id}
                           >
-                            <span className="text-xl"> {link.icon}</span>
-                            {activeMenu && (
-                              <span className="capitalize">{link.name}</span>
-                            )}
-                          </Link>
-                        ))}
-                      </Panel>
-                    </Collapse>
-                  </ConfigProvider>
-                </div>
-              ))}
+                            {filteredLinks.map((link) => (
+                              <Link
+                                href={`${link.link}`}
+                                key={link.name}
+                                onClick={handleCloseMenu}
+                                className={`flex items-center ${
+                                  activeMenu
+                                    ? 'justify-start pl-5 rounded-lg'
+                                    : 'justify-center py-2 rounded'
+                                } ${
+                                  currentPage.includes(
+                                    link.name
+                                      ?.split(' ')
+                                      .join('-')
+                                      .toUpperCase(),
+                                  )
+                                    ? 'bg-[#fecb6c55]'
+                                    : ' '
+                                } gap-5 p-2 text-md text-gray-600 mx-1 hover:bg-[#fecb6c55]`}
+                              >
+                                <span className="text-xl"> {link.icon}</span>
+                                {activeMenu && (
+                                  <span className="capitalize">
+                                    {link.name}
+                                  </span>
+                                )}
+                              </Link>
+                            ))}
+                          </Panel>
+                        </Collapse>
+                      </ConfigProvider>
+                    </div>
+                  )
+                );
+              })}
         </div>
       </>
     </div>

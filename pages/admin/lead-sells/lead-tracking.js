@@ -11,4 +11,4 @@ const leadTracking = () => {
   );
 };
 
-export default ProtectedRoute(leadTracking, 'admin');
+export default ProtectedRoute(leadTracking, ['admin', 'lead_member']);

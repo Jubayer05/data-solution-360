@@ -11,4 +11,4 @@ const myBlogs = () => {
 };
 
 // export default myBlogs;
-export default ProtectedRoute(myBlogs, 'admin');
+export default ProtectedRoute(myBlogs, ['admin', 'content_manager']);

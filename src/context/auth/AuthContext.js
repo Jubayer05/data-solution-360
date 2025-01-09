@@ -12,31 +12,43 @@ export const AuthProvider = ({ children }) => {
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (user) => {
-      if (user) {
+    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
+      setLoading(true); // Set loading true when processing starts
+      if (firebaseUser) {
         try {
+          console.log('Firebase User:', firebaseUser); // Debugging
+
           // Query the 'users' collection by email
           const q = query(
             collection(firestore, 'users'),
-            where('email', '==', user.email),
+            where('email', '==', firebaseUser.email),
           );
           const querySnapshot = await getDocs(q);
 
           if (!querySnapshot.empty) {
-            const userData = querySnapshot.docs[0].data(); // Assuming only one document per email
-            setUser({ ...user, role: userData.role });
+            // Assuming only one document matches
+            const userData = querySnapshot.docs[0].data();
+            console.log('User data from Firestore:', userData); // Debugging
+
+            // Merge Firestore data with Firebase user object
+            setUser({ ...firebaseUser, role: userData.role });
           } else {
-            setUser({ ...user, role: null }); // No user data found
+            console.warn(
+              'No user data found in Firestore for:',
+              firebaseUser.email,
+            );
+            setUser({ ...firebaseUser, role: null });
           }
         } catch (error) {
           console.error('Error fetching user data:', error);
-          setUser({ ...user, role: null });
+          setUser({ ...firebaseUser, role: null });
         }
       } else {
-        setUser(null); // No user logged in
+        console.log('No user is logged in.');
+        setUser(null);
       }
 
-      setLoading(false); // Finish loading after fetching data
+      setLoading(false); // Finish loading
     });
 
     return () => unsubscribe();

@@ -31,8 +31,9 @@ import {
 
 import { RiVideoAddLine } from 'react-icons/ri';
 
-import { RiHomeGearFill, RiTeamLine } from 'react-icons/ri';
-import { TbReportSearch } from 'react-icons/tb';
+import { FaUsersViewfinder } from 'react-icons/fa6';
+import { RiTeamLine } from 'react-icons/ri';
+import { TbHomeEdit, TbReportSearch } from 'react-icons/tb';
 
 export const linksAdmin = [
   {
@@ -43,11 +44,19 @@ export const linksAdmin = [
         name: 'Home',
         link: '/admin/dashboard',
         icon: <AiOutlineHome />,
+        role: ['admin'],
       },
       {
         name: 'Edit Home Page',
         link: '/admin/home-page',
-        icon: <RiHomeGearFill />,
+        icon: <TbHomeEdit />,
+        role: ['content_manager', 'admin'],
+      },
+      {
+        name: 'Set User Role',
+        link: '/admin/user-role',
+        icon: <FaUsersViewfinder />,
+        role: ['admin'],
       },
     ],
   },
@@ -59,21 +68,25 @@ export const linksAdmin = [
         name: 'Add a course',
         link: '/admin/course/add-course',
         icon: <AiOutlineVideoCameraAdd />,
+        role: ['admin', 'content_manager'],
       },
       {
         name: 'Manage Courses',
         link: '/admin/course/manage-course',
         icon: <MdCastForEducation />,
+        role: ['admin', 'content_manager'],
       },
       {
         name: 'New batch',
         link: '/admin/course/create-new-batch',
         icon: <MdOutlineCreateNewFolder />,
+        role: ['admin', 'content_manager'],
       },
       {
         name: 'All batch',
         link: '/admin/course/all-batch',
         icon: <MdOutlineContentPaste />,
+        role: ['admin', 'content_manager'],
       },
     ],
   },
@@ -85,11 +98,13 @@ export const linksAdmin = [
         name: 'Add blog',
         link: '/admin/addBlogContent',
         icon: <ImBlog />,
+        role: ['admin', 'content_manager'],
       },
       {
         name: 'Edit Blog',
         link: '/admin/myBlogs',
         icon: <AiOutlineFundView />,
+        role: ['admin', 'content_manager'],
       },
     ],
   },
@@ -101,11 +116,13 @@ export const linksAdmin = [
         name: 'New Students',
         link: '/admin/new-student',
         icon: <MdOutlineUnsubscribe />,
+        role: ['admin'],
       },
       {
         name: 'All Students',
         link: '/admin/all-student',
         icon: <RiTeamLine />,
+        role: ['admin'],
       },
     ],
   },
@@ -114,14 +131,16 @@ export const linksAdmin = [
     key: '5',
     links: [
       {
-        name: 'Add a new form',
+        name: 'Create form',
         link: '/admin/forms/new-form',
         icon: <MdOutlineUnsubscribe />,
+        role: ['admin', 'content_manager'],
       },
       {
         name: 'Form data',
         link: '/admin/forms/form-data',
         icon: <RiTeamLine />,
+        role: ['admin'],
       },
     ],
   },
@@ -133,11 +152,13 @@ export const linksAdmin = [
         name: 'Add Coupon',
         link: '/admin/coupons/new-coupon',
         icon: <RiCoupon3Line />,
+        role: ['admin', 'content_manager'],
       },
       {
         name: 'Coupon data',
         link: '/admin/coupons/coupon-data',
         icon: <MdOutlineDiscount />,
+        role: ['admin', 'content_manager'],
       },
     ],
   },
@@ -149,21 +170,25 @@ export const linksAdmin = [
         name: 'Lead Tracking',
         link: '/admin/lead-sells/lead-tracking',
         icon: <MdOutlineLeaderboard />,
+        role: ['admin', 'lead_member'],
       },
       {
         name: 'Sells Tracking',
         link: '/admin/lead-sells/sells-tracking',
         icon: <LiaSellsy />,
+        role: ['admin', 'sells_member'],
       },
       {
         name: 'All Reports',
         link: '/admin/lead-sells/all-reports',
         icon: <TbReportSearch />,
+        role: ['admin'],
       },
       {
-        name: 'Summary Reports',
+        name: 'Summary',
         link: '/admin/lead-sells/summary-reports',
         icon: <MdOutlineSummarize />,
+        role: ['admin'],
       },
     ],
   },
@@ -175,16 +200,19 @@ export const linksAdmin = [
         name: 'Subscribed Users',
         link: '/admin/subscribed-user',
         icon: <MdOutlineUnsubscribe />,
+        role: ['admin'],
       },
       {
         name: 'Team Member',
         link: '/admin/team_member',
         icon: <RiTeamLine />,
+        role: ['admin', 'content_manager'],
       },
       {
         name: 'Instructor',
         link: '/admin/instructors',
         icon: <GiTeacher />,
+        role: ['admin', 'content_manager'],
       },
     ],
   },

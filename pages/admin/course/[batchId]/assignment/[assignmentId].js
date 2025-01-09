@@ -11,4 +11,4 @@ const slug = () => {
   );
 };
 
-export default ProtectedRoute(slug, 'admin');
+export default ProtectedRoute(slug, ['admin', 'content_manager']);

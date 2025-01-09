@@ -11,4 +11,4 @@ const sellsTracking = () => {
   );
 };
 
-export default ProtectedRoute(sellsTracking, 'admin');
+export default ProtectedRoute(sellsTracking, ['admin', 'sells_member']);

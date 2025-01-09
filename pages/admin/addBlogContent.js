@@ -11,4 +11,4 @@ const addBlogContent = () => {
 };
 
 // export default addBlogContent;
-export default ProtectedRoute(addBlogContent, 'admin');
+export default ProtectedRoute(addBlogContent, ['admin', 'content_manager']);

@@ -46,7 +46,7 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
       dataIndex: 'status',
       key: 'status',
       align: 'center',
-      width: 80,
+      width: 100,
       render: (text, record) => (
         <div>
           {record?.status == 'pending' ? (
@@ -75,9 +75,19 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
       width: 150,
     },
     {
+      title: 'Lead Created',
+      dataIndex: 'lead_processed',
+      key: 'lead_processed',
+      align: 'center',
+      width: 200,
+      render: (processed) =>
+        `${processed?.name || 'N/A'} (${processed?.email || 'N/A'})`,
+    },
+    {
       title: 'Action',
       key: 'action',
       align: 'center',
+      fixed: 'right',
       width: 100,
       render: (_, record) => (
         <Button
@@ -106,6 +116,7 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
             rowKey="id"
             bordered
             pagination={{ pageSize: 5 }}
+            scroll={{ x: 1500, y: 400 }}
           />
         </div>
       </div>

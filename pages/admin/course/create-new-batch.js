@@ -11,4 +11,4 @@ const createNewBatch = () => {
   );
 };
 
-export default ProtectedRoute(createNewBatch, 'admin');
+export default ProtectedRoute(createNewBatch, ['admin', 'content_manager']);
