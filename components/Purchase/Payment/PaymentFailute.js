@@ -1,8 +1,9 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
-import Lottie from 'react-lottie'; // Import the Lottie player
 import animationData from '../../../src/data/json/payment-cancelled.json'; // Path to your Lottie JSON file
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
 const PaymentFailure = () => {
   const router = useRouter();

@@ -1,7 +1,10 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
-import Lottie from 'react-lottie';
+
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
+
 import * as animationData from '../../src/data/json/form_animation.json';
 import useFetchDocById from '../../src/hooks/manageDataById/useLoadDocumentById';
 import MasterClass from './MasterClass';

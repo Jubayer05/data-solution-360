@@ -1,7 +1,8 @@
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import React from 'react';
-import Lottie from 'react-lottie';
 import registration_success from '../../src/data/json/registration_success.json';
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
 const RegistrationSuccess = () => {
   const defaultOptions = {

@@ -1,11 +1,12 @@
 import { Spin } from 'antd';
+import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useCallback, useEffect, useState } from 'react';
-import Lottie from 'react-lottie';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 import successAnimationData from '../../../src/data/json/payment-success.json';
+const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 const db = firebase.firestore();
 
 const defaultOptions = {
