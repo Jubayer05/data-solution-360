@@ -1,10 +1,10 @@
 import Link from 'next/link';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { BsCalendarDay, BsClock } from 'react-icons/bs';
 import { GoCalendar } from 'react-icons/go';
 
 import { Breadcrumb, Spin } from 'antd';
+import { BookOpen, Calendar, Clock, Users } from 'lucide-react';
 import Image from 'next/image';
 import { BiShareAlt } from 'react-icons/bi';
 import Swal from 'sweetalert2';
@@ -85,6 +85,33 @@ const BannerCourseDetails = ({ courseDetails }) => {
     }
   }, [currentCourse, findCurrentUser, db]);
 
+  if (!courseDetails || courseDetails.status === 'Upcoming') {
+    return null;
+  }
+
+  const courseInfo = [
+    {
+      label: 'Batch Number',
+      value: courseDetails.batch_no,
+      icon: Users,
+    },
+    {
+      label: 'Start Date',
+      value: courseDetails.main_class_starting_date,
+      icon: Calendar,
+    },
+    {
+      label: 'Class Days',
+      value: courseDetails.class_days?.join(', '),
+      icon: BookOpen,
+    },
+    {
+      label: 'Class Time',
+      value: courseDetails.class_time,
+      icon: Clock,
+    },
+  ];
+
   return (
     <div className="flex items-start flex-col-reverse md:flex-row max-w-7xl mx-auto font-bold font-heading">
       {/* NOTE: LEFT SIDE */}
@@ -121,37 +148,43 @@ const BannerCourseDetails = ({ courseDetails }) => {
 
         <div className="h-[1px] w-full bg-slate-300 mt-3 mb-4" />
         {/* NOTE: BEST OUTLINE */}
-        <dir className="grid grid-cols-2 md:grid-cols-4">
-          <div>
-            <h2 className="text-[28px] text-center">
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
+          <div className="flex flex-col items-center p-2 sm:p-4">
+            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
               {courseDetails?.module_number}
             </h2>
-            <p className="text-[#222] font-normal text-center">Modules</p>
+            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
+              Modules
+            </p>
           </div>
-          <div>
-            <h2 className="text-[28px] text-center ">
+
+          <div className="flex flex-col items-center p-2 sm:p-4">
+            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
               {courseDetails?.live_class_number}+
             </h2>
-            <p className="text-[#222] font-normal text-center">Live Class</p>
+            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
+              Live Class
+            </p>
           </div>
-          <div>
-            <h2 className="text-[28px] text-center ">
+
+          <div className="flex flex-col items-center p-2 sm:p-4">
+            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
               {courseDetails?.project_number}
             </h2>
-            <p className="text-[#222] font-normal text-center">
+            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
               Real World Project
             </p>
           </div>
 
-          <div>
-            <h2 className="text-[28px] text-center ">Community</h2>
-            <p className="text-[#222] font-normal text-center">
+          <div className="flex flex-col items-center p-2 sm:p-4">
+            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
+              Community
+            </h2>
+            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
               Large DS-360 Community
             </p>
           </div>
-          <div></div>
-          <div></div>
-        </dir>
+        </div>
         <div className="h-[1px] w-full bg-slate-300 mt-4 mb-3" />
 
         {/* NOTE: ORIENTATION SECTION */}
@@ -188,50 +221,24 @@ const BannerCourseDetails = ({ courseDetails }) => {
           )}
 
         {/* NOTE: COURSE DETAILS (BATCH, STARTING, DAY, TIME) */}
-        {courseDetails?.status !== 'Upcoming' && (
-          <div className="border-l-2 mt-6 px-2 py-4 border-[#ffa36f] flex items-center flex-wrap gap-x-2 gap-y-4 md:gap-6">
-            <div className="pl-3 pr-2">
-              <div className="bg-[#ff8c4b] text-white py-1.5 px-2 text-xs rounded">
-                <span>{courseDetails?.batch_no}</span> Batch
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 p-4">
+          {courseInfo.map((info, index) => (
+            <div
+              key={index}
+              className="bg-white rounded-lg shadow p-4 hover:shadow-md transition-shadow"
+            >
+              <div className="flex items-center gap-3 mb-2">
+                <info.icon className="w-5 h-5 text-blue-500" />
+                <h3 className="text-sm font-medium text-gray-500">
+                  {info.label}
+                </h3>
               </div>
+              <p className="text-base font-semibold text-gray-900 pl-8">
+                {info.value}
+              </p>
             </div>
-            <div className="bg-[#d5caca] w-[2px] h-[40px]" />
-            <div className="px-1 md:px-3">
-              <div className="flex items-center text-xs pb-1.5">
-                <GoCalendar className="text-[#ff8c4b] text-base" />
-                <span className="ml-1.5 cursor-pointer">Start Date</span>
-              </div>
-              <span className=" capitalize">
-                {courseDetails?.main_class_starting_date}
-              </span>
-            </div>
-            <div className="bg-[#d5caca] w-[1px] h-[40px]" />
-            <div className="px-1 md:px-3">
-              <div className="flex items-center text-xs pb-1.5">
-                <BsCalendarDay className="text-[#ff8c4b] text-base" />
-                <span className="ml-1.5 cursor-pointer">Class Days</span>
-              </div>
-              <span>
-                {' '}
-                {courseDetails?.class_days?.map((item, index) => (
-                  <span key={item}>
-                    {item}
-                    {index !== courseDetails?.class_days.length - 1 && `, `}
-                  </span>
-                ))}{' '}
-              </span>
-            </div>
-            <div className="bg-[#d5caca] w-[1px] h-[40px]" />
-            <div className="px-1 md:px-3">
-              <div className="flex items-center text-xs pb-1.5">
-                <BsClock className="text-[#ff8c4b] text-base" />
-                <span className="ml-1.5 cursor-pointer">Class Time</span>
-              </div>
-              {/* <span>রাত ৯:০০ - রাত ১০:৩০</span> */}
-              <span>{courseDetails?.class_time}</span>
-            </div>
-          </div>
-        )}
+          ))}
+        </div>
       </div>
       {/* NOTE: RIGHT SIDE */}
       <div className="my-2 p-4 md:p-0 flex-grow-[1] md:flex-grow-[.42] pb-3 shrink w-[100%] md:w-[40%] static md:sticky top-[-360px]">
