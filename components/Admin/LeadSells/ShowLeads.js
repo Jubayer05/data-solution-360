@@ -1,9 +1,13 @@
 import { Button, message, Table } from 'antd';
+import { format } from 'date-fns';
 import { useState } from 'react';
+import { LuTrash2 } from 'react-icons/lu';
+import { TfiPencilAlt } from 'react-icons/tfi';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import CustomModal from '../../utilities/CustomModal';
 import DataFilterComponent from '../../utilities/FilteredButton';
 
 const db = firebase.firestore();
@@ -13,7 +17,6 @@ const ShowLeads = ({ leads, setLeads }) => {
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
 
-  console.log(leads);
 
   // Filter leads for the current user
   const myLead = leads.filter(
@@ -100,25 +103,51 @@ const ShowLeads = ({ leads, setLeads }) => {
     },
     {
       title: 'Created At',
-      dataIndex: 'createdAt',
       key: 'createdAt',
       align: 'center',
+      render: (date) => {
+        const time = date?.createdAt
+          ? format(new Date(date.createdAt), 'hh:mm a')
+          : 'N/A';
+        const formattedDate = date?.createdAt
+          ? format(new Date(date.createdAt), 'dd MMM yyyy')
+          : 'N/A';
+        return (
+          <div
+            style={{ textAlign: 'center', fontWeight: '500', color: '#555' }}
+          >
+            <div style={{ fontSize: '14px', color: '#555' }}>{time}</div>
+            <div style={{ fontSize: '14px', color: '#555' }}>
+              {formattedDate}
+            </div>
+          </div>
+        );
+      },
       width: 150,
     },
     {
       title: 'Action',
       key: 'action',
       align: 'center',
-      width: 100,
+      width: 120,
+      fixed: 'right',
       render: (_, record) => (
-        <Button
-          type="primary"
-          danger
-          loading={loading}
-          onClick={() => handleDelete(record)}
-        >
-          Delete
-        </Button>
+        <div className="flex justify-center space-x-2">
+          <Button
+            type="primary"
+            icon={<TfiPencilAlt className="w-4 h-4" />}
+            onClick={() => handleEdit(record)}
+            className="flex items-center justify-center"
+          />
+          <Button
+            type="primary"
+            danger
+            icon={<LuTrash2 className="w-4 h-4" />}
+            loading={loading}
+            onClick={() => handleDelete(record)}
+            className="flex items-center justify-center"
+          />
+        </div>
       ),
     },
   ];
@@ -141,6 +170,7 @@ const ShowLeads = ({ leads, setLeads }) => {
             bordered
             pagination={{ pageSize: 5 }}
           />
+          
         </div>
       </div>
     </div>

@@ -1,78 +1,77 @@
 import { parseISO, subDays } from 'date-fns';
-import React, { useEffect, useState } from 'react';
-import ButtonDashboard from './dashboard/ButtonDashboard'; // Assuming you already have this component
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import ButtonDashboard from './dashboard/ButtonDashboard';
 
 const DataFilterComponent = ({ setFilteredData, data }) => {
-  const [activeButton, setActiveButton] = useState('Today'); // Default button is 'Today'
+  const [activeButton, setActiveButton] = useState('Today');
+  const renderCount = useRef(0); // Track the render count
 
-  // Filter data whenever the active button changes
+  // Memoized function to filter data
+  const filterData = useCallback(
+    (filterLabel, currentData) => {
+      if (!currentData) return;
+
+      const currentDate = new Date();
+      let dateLimit;
+
+      switch (filterLabel) {
+        case 'Today':
+          dateLimit = subDays(currentDate, 1);
+          break;
+        case 'All time':
+        default:
+          dateLimit = new Date(0);
+          break;
+      }
+
+      const filtered = currentData.filter((item) => {
+        if (!item?.createdAt) return false;
+        const itemDate = parseISO(item.createdAt);
+        return itemDate >= dateLimit;
+      });
+
+      setFilteredData(filtered);
+      console.log('Filtered data:', filtered); // Debugging filtered data
+    },
+    [setFilteredData],
+  );
+
+  // Handle filtering for the first five renders
   useEffect(() => {
-    if (!data) return; // Ensure data exists
-    filterData(activeButton);
-  }, [activeButton]); // Only depend on `activeButton`
-
-  const filterData = (filterLabel) => {
-    let dateLimit;
-
-    // Get the current date
-    const currentDate = new Date();
-
-    // Determine the date limit based on the selected filter
-    switch (filterLabel) {
-      case 'Today':
-        dateLimit = subDays(currentDate, 1);
-        break;
-      case '3 days':
-        dateLimit = subDays(currentDate, 3);
-        break;
-      case '7 days':
-        dateLimit = subDays(currentDate, 7);
-        break;
-      case '15 days':
-        dateLimit = subDays(currentDate, 15);
-        break;
-      case '30 days':
-        dateLimit = subDays(currentDate, 30);
-        break;
-      case 'All time':
-      default:
-        dateLimit = new Date(0); // Set to epoch to include all data
-        break;
+    if (renderCount.current < 4) {
+      filterData(activeButton, data); // Run the filter logic
+      renderCount.current += 1; // Increment the render count
+      console.log(`Render count: ${renderCount.current}`);
     }
+  }, [data, filterData, activeButton]); // Depend only on `data`, `filterData`, and `activeButton`
 
-    // Filter the data based on the createdAt date string
-    const filtered = data.filter((item) => {
-      if (!item?.createdAt) return false; // Skip items without a valid createdAt
-
-      const itemDate = parseISO(item.createdAt); // Parse the createdAt date string to a Date object
-      return itemDate >= dateLimit;
-    });
-
-    setFilteredData(filtered); // Set the filtered data to the parent component
+  // Handle button click explicitly
+  const handleButtonClick = (label) => {
+    if (activeButton !== label) {
+      setActiveButton(label); // Update active button state
+      filterData(label, data); // Trigger filtering
+    }
   };
 
   return (
     <div>
       <div className="flex space-x-4 mb-6">
-        {/* Render the filter buttons */}
-        {['Today', '3 days', '7 days', '15 days', '30 days', 'All time'].map(
-          (label) => (
-            <ButtonDashboard
-              key={label}
-              onClick={() => setActiveButton(label)} // Set the clicked button as active
-              className={`py-2 px-4 rounded-md text-lg transition duration-200 border-2 ${
-                activeButton === label
-                  ? 'bg-blue-600 text-white border-blue-600' // Active button style (filled)
-                  : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-100' // Default outlined button style
-              }`}
-            >
-              {label}
-            </ButtonDashboard>
-          ),
-        )}
+        {['Today', 'All time'].map((label) => (
+          <ButtonDashboard
+            key={label}
+            onClick={() => handleButtonClick(label)}
+            className={`py-2 px-4 rounded-md text-lg transition duration-200 border-2 ${
+              activeButton === label
+                ? 'bg-blue-600 text-white border-blue-600'
+                : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-100'
+            }`}
+          >
+            {label}
+          </ButtonDashboard>
+        ))}
       </div>
     </div>
   );
 };
 
-export default DataFilterComponent;
+export default React.memo(DataFilterComponent);

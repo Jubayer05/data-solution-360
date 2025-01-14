@@ -1,4 +1,5 @@
 import { Table } from 'antd';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../../firebase';
@@ -124,11 +125,27 @@ const ReportDataPerson = ({ sells, setLeads }) => {
     },
     {
       title: 'Created At',
-      dataIndex: 'createdAt',
       key: 'createdAt',
       align: 'center',
+      render: (date) => {
+        const time = date?.createdAt
+          ? format(new Date(date.createdAt), 'hh:mm a')
+          : 'N/A';
+        const formattedDate = date?.createdAt
+          ? format(new Date(date.createdAt), 'dd MMM yyyy')
+          : 'N/A';
+        return (
+          <div
+            style={{ textAlign: 'center', fontWeight: '500', color: '#555' }}
+          >
+            <div style={{ fontSize: '14px', color: '#555' }}>{time}</div>
+            <div style={{ fontSize: '14px', color: '#555' }}>
+              {formattedDate}
+            </div>
+          </div>
+        );
+      },
       width: 150,
-      render: (timestamp) => new Date(timestamp).toLocaleDateString(),
     },
   ];
 

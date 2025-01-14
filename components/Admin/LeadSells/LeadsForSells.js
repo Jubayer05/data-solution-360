@@ -1,9 +1,11 @@
 import { Button, Table } from 'antd';
+import { format } from 'date-fns';
 import { useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
 import DataFilterComponent from '../../utilities/FilteredButton';
+import StatusBadge from './Utils/StatusBadge';
 
-const LeadsForSells = ({ leads, setTakeLead }) => {
+const LeadsForSells = ({ leads, handleTakeLead }) => {
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
 
@@ -21,7 +23,7 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
       dataIndex: 'customer_phoneNumber',
       key: 'customer_phoneNumber',
       align: 'center',
-      width: 100,
+      width: 120,
     },
     {
       title: 'Course Name',
@@ -49,29 +51,32 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
       width: 100,
       render: (text, record) => (
         <div>
-          {record?.status == 'pending' ? (
-            <span className="bg-orange-50 border border-orange-500 px-2 text-xs rounded-full font-semibold text-[#df7c24]">
-              Pending
-            </span>
-          ) : record?.status === 'enrolled' ? (
-            <span className="bg-green-50 border border-green-500 px-2 text-xs rounded-full font-semibold text-[#48bb78]">
-              Completed
-            </span>
-          ) : record?.status === 'cancelled' ? (
-            <span className="bg-red-100 border border-red-500 px-2 text-xs rounded-full font-semibold text-[#be0909]">
-              Cancelled
-            </span>
-          ) : (
-            ''
-          )}
+          <StatusBadge status={record?.status} />
         </div>
       ),
     },
     {
       title: 'Created At',
-      dataIndex: 'createdAt',
       key: 'createdAt',
       align: 'center',
+      render: (date) => {
+        const time = date?.createdAt
+          ? format(new Date(date.createdAt), 'hh:mm a')
+          : 'N/A';
+        const formattedDate = date?.createdAt
+          ? format(new Date(date.createdAt), 'dd MMM yyyy')
+          : 'N/A';
+        return (
+          <div
+            style={{ textAlign: 'center', fontWeight: '500', color: '#555' }}
+          >
+            <div style={{ fontSize: '14px', color: '#555' }}>{time}</div>
+            <div style={{ fontSize: '14px', color: '#555' }}>
+              {formattedDate}
+            </div>
+          </div>
+        );
+      },
       width: 150,
     },
     {
@@ -80,8 +85,7 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
       key: 'lead_processed',
       align: 'center',
       width: 200,
-      render: (processed) =>
-        `${processed?.name || 'N/A'} (${processed?.email || 'N/A'})`,
+      render: (processed) => `${processed?.name || 'N/A'}`,
     },
     {
       title: 'Action',
@@ -94,7 +98,7 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
           type="primary"
           info
           loading={loading}
-          onClick={() => setTakeLead(record)}
+          onClick={() => handleTakeLead(record)}
         >
           Take Lead
         </Button>
@@ -102,16 +106,18 @@ const LeadsForSells = ({ leads, setTakeLead }) => {
     },
   ];
 
+  const finalFilter = filteredData.filter((item) => item.status === 'pending');
+
   return (
     <div>
       <div className="max-w-7xl mx-auto my-20 font-dash_heading">
         <div className="mt-10 p-10 bg-white rounded-md border-1">
           <h2 className="text-xl font-bold mb-4">
-            Total Leads Table ({filteredData?.length})
+            Total Leads Table ({finalFilter?.length})
           </h2>
           <DataFilterComponent setFilteredData={setFilteredData} data={leads} />
           <Table
-            dataSource={filteredData}
+            dataSource={finalFilter}
             columns={columns}
             rowKey="id"
             bordered

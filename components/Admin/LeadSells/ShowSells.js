@@ -1,45 +1,96 @@
 import { Button, message, Table } from 'antd';
-import { useState } from 'react';
+import { format } from 'date-fns';
+import { useEffect, useState } from 'react';
+import { LuTrash2 } from 'react-icons/lu';
+import { TfiPencilAlt } from 'react-icons/tfi';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import CustomModal from '../../utilities/CustomModal';
 import DataFilterComponent from '../../utilities/FilteredButton';
+import SellsModal from './SellsTrack/SellsModal';
+import StatusBadge from './Utils/StatusBadge';
 
 const db = firebase.firestore();
 
-const ShowSells = ({ sells, setLeads }) => {
+const ShowSells = ({ sells }) => {
   const { findCurrentUser } = useStateContext();
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
+  const [isEditModalOpen, setIsEditModalOpen] = useState(false);
+  const [selectedRecord, setSelectedRecord] = useState(null);
+  const [finalFilter, setFinalFilter] = useState([]);
+  const db = firebase.firestore();
 
-  // Filter leads for the current user
-  const mySells = sells.filter(
-    (sells) => sells.sells_processed.email === findCurrentUser?.email,
-  );
+  // Filter leads for the current user and set initial data
+  useEffect(() => {
+    const mySells =
+      sells?.filter(
+        (sell) => sell.sells_processed?.email === findCurrentUser?.email,
+      ) || [];
 
-  // Delete functionality
+    // Set both filtered data and final filter
+    if (mySells.length > 0) {
+      setFilteredData(mySells);
+      setFinalFilter(mySells);
+    }
+  }, [sells, findCurrentUser?.email]);
+
+  const closeModal = () => {
+    setIsEditModalOpen(false);
+    setSelectedRecord(null);
+  };
+
   const handleDelete = async (record) => {
     try {
       setLoading(true);
-      await db
-        .collection('sells_data')
-        .doc(record?.id)
-        .delete()
-        .then(() => {
-          Swal.fire('Deleted!', 'The lead has been deleted.', 'success').then(
-            () => {
-              setFilteredData((prev) =>
-                prev.filter((lead) => lead.uniqueId !== record?.uniqueId),
-              );
-            },
-          );
-        });
+      await db.collection('sells_data').doc(record?.id).delete();
+
+      Swal.fire('Deleted!', 'The lead has been deleted.', 'success');
+      const updatedData = filteredData.filter((lead) => lead.id !== record?.id);
+      setFilteredData(updatedData);
+      setFinalFilter(updatedData);
     } catch (error) {
       message.error('Failed to delete lead');
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleEdit = (record) => {
+    setSelectedRecord(record);
+    setIsEditModalOpen(true);
+  };
+
+  const handleEditSubmit = async (editedData) => {
+    try {
+      setLoading(true);
+      await db
+        .collection('sells_data')
+        .doc(selectedRecord.id)
+        .update(editedData);
+
+      // Update both filteredData and finalFilter
+      const updatedData = filteredData.map((item) =>
+        item.id === selectedRecord.id ? { ...item, ...editedData } : item,
+      );
+
+      setFilteredData(updatedData);
+      setFinalFilter(updatedData);
+
+      message.success('Record updated successfully'); 
+      closeModal();
+    } catch (error) {
+      message.error('Failed to update record');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  // Handle filter changes
+  const handleFilterChange = (newFilteredData) => {
+    setFinalFilter(newFilteredData);
   };
 
   // Ant Design Table Columns
@@ -69,24 +120,10 @@ const ShowSells = ({ sells, setLeads }) => {
       dataIndex: 'status',
       key: 'status',
       align: 'center',
-      width: 100,
-      render: (status) => (
+      width: 150,
+      render: (record) => (
         <div>
-          {status === 'pending' ? (
-            <span className="bg-orange-50 border border-orange-500 px-2 text-xs rounded-full font-semibold text-[#df7c24]">
-              Pending
-            </span>
-          ) : status === 'enrolled' ? (
-            <span className="bg-green-50 border border-green-500 px-2 text-xs rounded-full font-semibold text-[#48bb78]">
-              Enrolled
-            </span>
-          ) : status === 'cancelled' ? (
-            <span className="bg-red-100 border border-red-500 px-2 text-xs rounded-full font-semibold text-[#be0909]">
-              Cancelled
-            </span>
-          ) : (
-            ''
-          )}
+          <StatusBadge status={record} />
         </div>
       ),
     },
@@ -150,33 +187,57 @@ const ShowSells = ({ sells, setLeads }) => {
       title: 'Lead Processed',
       dataIndex: 'lead_processed',
       key: 'lead_processed',
+      align: 'center',
       width: 200,
-      render: (processed) =>
-        `${processed?.name || 'N/A'} (${processed?.email || 'N/A'})`,
+      render: (processed) => `${processed?.name || 'N/A'}`,
     },
     {
       title: 'Created At',
-      dataIndex: 'createdAt',
       key: 'createdAt',
       align: 'center',
+      render: (date) => {
+        const time = date?.createdAt
+          ? format(new Date(date.createdAt), 'hh:mm a')
+          : 'N/A';
+        const formattedDate = date?.createdAt
+          ? format(new Date(date.createdAt), 'dd MMM yyyy')
+          : 'N/A';
+        return (
+          <div
+            style={{ textAlign: 'center', fontWeight: '500', color: '#555' }}
+          >
+            <div style={{ fontSize: '14px', color: '#555' }}>{time}</div>
+            <div style={{ fontSize: '14px', color: '#555' }}>
+              {formattedDate}
+            </div>
+          </div>
+        );
+      },
       width: 150,
-      render: (timestamp) => new Date(timestamp).toLocaleDateString(),
     },
     {
       title: 'Action',
       key: 'action',
       align: 'center',
-      width: 100,
-      fixed: 'right', // Fixed right column
+      width: 120,
+      fixed: 'right',
       render: (_, record) => (
-        <Button
-          type="primary"
-          danger
-          loading={loading}
-          onClick={() => handleDelete(record)}
-        >
-          Delete
-        </Button>
+        <div className="flex justify-center space-x-2">
+          <Button
+            type="primary"
+            icon={<TfiPencilAlt className="w-4 h-4" />}
+            onClick={() => handleEdit(record)}
+            className="flex items-center justify-center"
+          />
+          <Button
+            type="primary"
+            danger
+            icon={<LuTrash2 className="w-4 h-4" />}
+            loading={loading}
+            onClick={() => handleDelete(record)}
+            className="flex items-center justify-center"
+          />
+        </div>
       ),
     },
   ];
@@ -186,20 +247,30 @@ const ShowSells = ({ sells, setLeads }) => {
       <div className="max-w-6xl mx-auto my-20 font-dash_heading">
         <div className="mt-10 p-10 bg-white rounded-md border-1">
           <h2 className="text-xl font-bold mb-4">
-            Your Sells Table ({filteredData?.length})
+            Your Sells Table ({finalFilter?.length})
           </h2>
           <DataFilterComponent
-            setFilteredData={setFilteredData}
-            data={mySells}
+            setFilteredData={setFinalFilter}
+            data={filteredData}
           />
           <Table
-            dataSource={filteredData}
+            dataSource={finalFilter}
             columns={columns}
             rowKey="id"
             bordered
             pagination={{ pageSize: 5 }}
             scroll={{ x: 1500, y: 400 }} // Adjust x and y values as needed
           />
+          <CustomModal
+            modalIsOpen={isEditModalOpen}
+            closeModal={closeModal}
+            setModalIsOpen={setIsEditModalOpen}
+          >
+            <SellsModal
+              onSubmit={handleEditSubmit}
+              initialData={selectedRecord}
+            />
+          </CustomModal>
         </div>
       </div>
     </div>

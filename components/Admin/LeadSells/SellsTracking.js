@@ -1,5 +1,4 @@
 import { useEffect, useState } from 'react';
-import Select from 'react-select';
 import 'sweetalert2/dist/sweetalert2.css';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../../../firebase';
@@ -7,7 +6,6 @@ import firebase from '../../../firebase';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { loadData } from '../../../src/hooks/loadData';
-import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import LeadsForSells from './LeadsForSells';
 import ShowSells from './ShowSells';
@@ -45,49 +43,40 @@ const SellsTracking = () => {
     setStatus(takeLead?.status);
   }, [takeLead]);
 
-  const handleSubmitLead = () => {
+  const handleTakeLead = (lead) => {
     setLoading(true);
-    if (customerName && customerNumber && paidAmount) {
-      const newSells = {
-        uniqueId,
-        createdAt: timestamp,
-        customer_name: customerName,
-        customer_phoneNumber: customerNumber,
-        course_name: takeLead?.course_name,
-        status,
-        payment,
-        paid_amount: paidAmount,
-        due_amount: dueAmount,
-        due_date: dueDate,
-        due_status: dueStatus,
-        batch_name: batchName,
-        sells_processed: {
-          name: findCurrentUser?.full_name || 'N/A',
-          email: findCurrentUser?.email,
-        },
-        lead_processed: takeLead?.lead_processed,
-      };
 
-      db.collection('sells_data')
-        .add(newSells)
-        .then(() => {
-          db.collection('lead_data')
-            .doc(takeLead?.id)
-            .update({ ...takeLead, status: status })
-            .then(() => {
-              Swal.fire(
-                'Sells Submitted!',
-                'The Sells information has been successfully submitted.',
-                'success',
-              ).then(() => {
-                setLoading(false);
-                window.location.reload();
-              });
+    const newSells = {
+      uniqueId,
+      createdAt: timestamp,
+      customer_name: lead.customer_name,
+      customer_phoneNumber: lead.customer_phoneNumber,
+      course_name: lead.course_name,
+      status: 'processing',
+      sells_processed: {
+        name: findCurrentUser?.full_name || 'N/A',
+        email: findCurrentUser?.email,
+      },
+      lead_processed: lead?.lead_processed,
+    };
+
+    db.collection('sells_data')
+      .add(newSells)
+      .then(() => {
+        db.collection('lead_data')
+          .doc(lead?.id)
+          .update({ ...takeLead, status: 'processing' })
+          .then(() => {
+            Swal.fire(
+              'Lead Taken!',
+              `The lead is taken right now by ${findCurrentUser?.full_name}.`,
+              'success',
+            ).then(() => {
+              setLoading(false);
+              window.location.reload();
             });
-        });
-    } else {
-      Swal.fire('Warning!', 'Please fill in all required fields.', 'warning');
-    }
+          });
+      });
   };
 
   return (
@@ -98,8 +87,9 @@ const SellsTracking = () => {
           leads={leads}
           setLeads={setLeads}
           setTakeLead={setTakeLead}
+          handleTakeLead={handleTakeLead}
         />
-        <div className="max-w-6xl mx-auto border-1 p-8 rounded-lg bg-white mt-10">
+        {/* <div className="max-w-6xl mx-auto border-1 p-8 rounded-lg bg-white mt-10">
           <h2 className="text-2xl pb-4 text-[#231f40] text-center font-medium font-dash_heading">
             <span className="font-bold">Sells From</span>
           </h2>
@@ -281,7 +271,7 @@ const SellsTracking = () => {
               {loading ? 'Submitting Sells...' : 'Submit Sells'}
             </ButtonDashboard>
           </div>
-        </div>
+        </div> */}
 
         <ShowSells sells={sells} />
       </div>

@@ -276,6 +276,8 @@ const Navbar = ({ home }) => {
                   href={
                     findCurrentUser?.role === 'student'
                       ? '/students/dashboard'
+                      : findCurrentUser?.role === 'lead_member'
+                      ? '/admin/lead-sells/lead-tracking'
                       : '/admin/dashboard'
                   }
                 >
