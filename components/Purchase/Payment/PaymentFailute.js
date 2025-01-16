@@ -3,7 +3,15 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import animationData from '../../../src/data/json/payment-cancelled.json'; // Path to your Lottie JSON file
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
+const LottieAnimation = dynamic(
+  () => import('../utilities/Home/LottieAnimation'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
+    ), // Loading placeholder
+  },
+);
 
 const PaymentFailure = () => {
   const router = useRouter();
@@ -38,7 +46,7 @@ const PaymentFailure = () => {
 
         {/* Lottie Animation */}
         <div className="mb-6">
-          <Lottie options={defaultOptions} />
+          <LottieAnimation animationData={animationData} />
         </div>
 
         {/* Payment Failed Heading */}

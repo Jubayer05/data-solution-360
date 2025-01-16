@@ -6,7 +6,15 @@ import { useCallback, useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 import successAnimationData from '../../../src/data/json/payment-success.json';
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
+const LottieAnimation = dynamic(
+  () => import('../utilities/Home/LottieAnimation'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
+    ), // Loading placeholder
+  },
+);
 const db = firebase.firestore();
 
 const defaultOptions = {
@@ -201,7 +209,7 @@ const PaymentSuccess = () => {
           <>
             {/* Lottie Animation */}
             <div className="mb-6">
-              <Lottie options={defaultOptions} />
+              <LottieAnimation animationData={animationData} />
             </div>
 
             {/* Payment Success Heading */}

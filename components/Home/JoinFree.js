@@ -2,7 +2,15 @@ import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import React from 'react';
 import * as animationData from '../../src/data/json/data-analysis.json';
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
+const LottieAnimation = dynamic(
+  () => import('../utilities/Home/LottieAnimation'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
+    ), // Loading placeholder
+  },
+);
 const JoinFree = () => {
   const defaultOptions = {
     loop: true,
@@ -24,7 +32,10 @@ const JoinFree = () => {
         }}
       >
         <div className="relative">
-          <Lottie options={defaultOptions} />
+          <LottieAnimation
+            animationData={animationData}
+            className="w-full max-w-md"
+          />
         </div>
         <div className="md:pr-20">
           <h2 className="text-[#ffffff] text-[24px] md:text-[36px] leading-[35px] md:leading-[50px] mb-5 md:mb-0">

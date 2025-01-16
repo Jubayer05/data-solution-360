@@ -2,7 +2,15 @@ import { serverTimestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
 
 import dynamic from 'next/dynamic';
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
+const LottieAnimation = dynamic(
+  () => import('../utilities/Home/LottieAnimation'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
+    ), // Loading placeholder
+  },
+);
 
 import { ArrowRight } from 'lucide-react';
 import PhoneInput from 'react-phone-number-input';
@@ -199,7 +207,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
     <div className="max-w-md mx-auto pt-6 rounded-lg">
       <div id="recaptcha-container" className=""></div>
       {loading ? (
-        <Lottie options={defaultOptions} />
+        <LottieAnimation animationData={animationData} />
       ) : (
         <>
           {step === 1 && (
@@ -354,7 +362,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
           {step === 6 && (
             <div className="flex items-center justify-center flex-col">
               {congratulationsLottie ? (
-                <Lottie options={congratulationsLottie} />
+                <LottieAnimation animationData={congratulationsLottie} />
               ) : (
                 <p>Congratulations!</p>
               )}

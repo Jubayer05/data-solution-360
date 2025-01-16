@@ -3,7 +3,15 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React from 'react';
 
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
+const LottieAnimation = dynamic(
+  () => import('../utilities/Home/LottieAnimation'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
+    ), // Loading placeholder
+  },
+);
 
 import * as animationData from '../../src/data/json/form_animation.json';
 import useFetchDocById from '../../src/hooks/manageDataById/useLoadDocumentById';
@@ -54,7 +62,7 @@ const MasterClassWrapper = () => {
         {/* LEFT SIDE */}
         <div className="flex-1 text-center md:text-left">
           <div className="w-[250px] md:w-[350px] mx-auto mt-6">
-            <Lottie options={defaultOptions} />
+            <LottieAnimation animationData={animationData} />
           </div>
 
           <h2 className="text-2xl md:text-6xl font-bold mt-8 mb-6 text-gray-900 md:leading-[64px]">

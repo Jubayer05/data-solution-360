@@ -5,23 +5,21 @@ import React, { useEffect, useState } from 'react';
 import Slider from 'react-slick';
 import * as animationData from '../../public/banner/loader.json';
 import { loadData } from '../../src/hooks/loadData';
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
-
+const LottieAnimation = dynamic(
+  () => import('../utilities/Home/LottieAnimation'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
+    ), // Loading placeholder
+  },
+);
 const MainBanner = () => {
   const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);
 
   useEffect(() => {
     loadData('slides_main_banner', setSlidesMainBannerData);
   }, []);
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
 
   const settings = {
     // dots: true,
@@ -83,7 +81,10 @@ const MainBanner = () => {
                     <span className="text-[#e83a30] relative">
                       Live
                       <span className="w-[50px] absolute -right-16 top-[15%]">
-                        <Lottie options={defaultOptions} />
+                        <LottieAnimation
+                          animationData={animationData}
+                          className="w-full max-w-md"
+                        />
                       </span>
                     </span>
                   </h2>

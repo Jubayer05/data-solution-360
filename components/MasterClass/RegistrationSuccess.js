@@ -2,8 +2,15 @@ import dynamic from 'next/dynamic';
 import Image from 'next/image';
 import React from 'react';
 import registration_success from '../../src/data/json/registration_success.json';
-const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
-
+const LottieAnimation = dynamic(
+  () => import('../utilities/Home/LottieAnimation'),
+  {
+    ssr: false,
+    loading: () => (
+      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
+    ), // Loading placeholder
+  },
+);
 const RegistrationSuccess = () => {
   const defaultOptions = {
     loop: true,
@@ -30,7 +37,7 @@ const RegistrationSuccess = () => {
 
         {/* Lottie Animation */}
         <div className="mb-6">
-          <Lottie options={defaultOptions} />
+          <LottieAnimation animationData={animationData} />
         </div>
 
         {/* Thank You Heading */}
