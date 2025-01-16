@@ -1,5 +1,5 @@
+import { Check } from 'lucide-react';
 import React, { useState } from 'react';
-import { ImCheckmark } from 'react-icons/im';
 import Swal from 'sweetalert2';
 import firebase, { auth } from '../../../firebase';
 import InputBoxStudent from '../utilities/InputBoxStudent';
@@ -78,7 +78,7 @@ const ChangePassword = () => {
         onClick={handleUpdatePassword}
         className="w-full mt-5 px-4 py-3 bg-primary_btn text-white rounded flex items-center justify-center gap-2"
       >
-        Update <ImCheckmark />
+        Update <Check />
       </button>
     </div>
   );

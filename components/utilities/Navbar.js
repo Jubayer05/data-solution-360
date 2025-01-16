@@ -1,13 +1,10 @@
 import React, { useEffect, useState } from 'react';
-import { FiLogIn } from 'react-icons/fi';
-import { HiOutlineMenuAlt1 } from 'react-icons/hi';
-import { MdOutlineDashboardCustomize } from 'react-icons/md';
 
 import { getAuth, signOut } from 'firebase/auth';
 
+import { Grid, Grid2X2Icon, Grid3X3, LogIn, Menu } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { BiSolidChevronRight } from 'react-icons/bi';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../src/context/ContextProvider';
 import { navItems, navItems2 } from '../../src/data/data';
@@ -127,7 +124,7 @@ const Navbar = ({ home }) => {
                     className="px-4 py-[10px] bg-primary_btn text-white rounded-lg flex items-center
       justify-center gap-2 text-sm"
                   >
-                    Dashboard <MdOutlineDashboardCustomize />
+                    Dashboard <Grid2X2Icon />
                   </button>
                 </Link>
               </div>
@@ -146,7 +143,7 @@ const Navbar = ({ home }) => {
               </button>
             )}
 
-            <HiOutlineMenuAlt1
+            <Menu
               onClick={() => setOpenNav(true)}
               className="text-2xl text-nav"
             />
@@ -222,7 +219,7 @@ const Navbar = ({ home }) => {
                         </span>
                         {item.dropdown?.length > 0 && (
                           <span className="fort-bold text-xl -mt-0.5">
-                            <BiSolidChevronRight />
+                            <Grid />
                           </span>
                         )}
                       </Link>
@@ -261,7 +258,7 @@ const Navbar = ({ home }) => {
             bg-primary-bg transition-all duration-300 ease-linear hover:bg-white capitalize font-semibold
              hover:text-primary hover:border-primary`}
               >
-                <FiLogIn className="text-sm" />
+                <LogIn className="text-sm" />
                 <span
                   className={`pl-2 ${
                     language === 'English' ? 'font-body' : 'font-bangla'
@@ -285,7 +282,7 @@ const Navbar = ({ home }) => {
                     className="px-4 py-3 bg-primary_btn text-white rounded-lg flex items-center
       justify-center gap-2"
                   >
-                    Dashboard <MdOutlineDashboardCustomize />
+                    Dashboard <Grid3X3 />
                   </button>
                 </Link>
               </div>

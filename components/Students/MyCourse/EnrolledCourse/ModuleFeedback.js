@@ -1,6 +1,6 @@
+import { Star } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { MdStarBorderPurple500 } from 'react-icons/md';
 import StarRatings from 'react-star-ratings';
 import { useStateContext } from '../../../../src/context/ContextProvider';
 import CustomModal from '../../../utilities/CustomModal';
@@ -40,7 +40,7 @@ const ModuleFeedback = ({ item }) => {
           className="flex justify-center items-center gap-2 bg-hover_btn hover:bg-[#fecb63] font-semibold
           py-2 px-4 rounded border-orange-400 border w-full"
         >
-          Feedback <MdStarBorderPurple500 />
+          Feedback <Star />
         </button>
       )}
 

@@ -1,10 +1,10 @@
 import { serverTimestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa';
 
 import dynamic from 'next/dynamic';
 const Lottie = dynamic(() => import('react-lottie'), { ssr: false });
 
+import { ArrowRight } from 'lucide-react';
 import PhoneInput from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
 import { v4 as uuidv4 } from 'uuid';
@@ -225,7 +225,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                 hover:bg-[#d85403] transition duration-300 flex items-center 
                 justify-center gap-2 md:text-lg"
               >
-                Next Step <FaArrowRight />
+                Next Step <ArrowRight />
               </button>
 
               <p className="text-center text-sm mt-3">
@@ -242,7 +242,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                    gap-2 text-base md:text-lg font-semibold"
                 >
                   {loginStatePhone ? 'Login with Email' : 'Login with Phone'}{' '}
-                  <FaArrowRight />
+                  <ArrowRight />
                 </button>
               </div>
             </form>
@@ -295,7 +295,7 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                 className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] 
             transition duration-300 flex items-center justify-center gap-2 text-lg"
               >
-                Next Step <FaArrowRight />
+                Next Step <ArrowRight />
               </button>
             </form>
           )}

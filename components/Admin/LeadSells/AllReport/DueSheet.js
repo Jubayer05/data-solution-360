@@ -1,6 +1,6 @@
 import { Button, Table } from 'antd';
+import { CheckCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { FaCheckDouble } from 'react-icons/fa';
 import { TbCurrencyTaka } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
@@ -133,7 +133,7 @@ const DueSheet = ({ sells }) => {
       width: 100,
       render: (_, record) => (
         <Button type="primary" info onClick={() => handleMarkPaid(record)}>
-          Mark Paid <FaCheckDouble />
+          Mark Paid <CheckCircle />
         </Button>
       ),
     },

@@ -1,10 +1,9 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaArrowLeft, FaArrowRightLong } from 'react-icons/fa6';
 // import { videosPlaylist } from '../../../../src/data/data';
+import { ArrowLeft, ArrowRightFromLineIcon, Watch } from 'lucide-react';
 import Image from 'next/image';
 import { useState } from 'react';
-import { BiStopwatch } from 'react-icons/bi';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStudentContext } from '../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
@@ -60,7 +59,7 @@ const BeforeStartQuiz = () => {
         >
           <div className="flex items-end gap-4 pt-6">
             <ButtonDashboard onClick={handleBack}>
-              <FaArrowLeft />
+              <ArrowLeft />
               Back
             </ButtonDashboard>
           </div>
@@ -101,7 +100,7 @@ const BeforeStartQuiz = () => {
               <div className="flex items-center gap-3">
                 <span className="text-lg font-semibold">Time:</span>
                 <div className="bg-gray-200 flex items-center gap-1 px-3 py-2 font-bold text-xl rounded">
-                  <BiStopwatch className="text-2xl" />
+                  <Watch className="text-2xl" />
                   <p>{quizData?.length * 2 || 0} Minutes</p>
                 </div>
               </div>
@@ -146,14 +145,14 @@ const BeforeStartQuiz = () => {
                   onClick={() => setShowResult(true)}
                   className=" bg-[#101828] text-white hover:bg-[#101828ca] mx-auto mt-8"
                 >
-                  Show Result <FaArrowRightLong />
+                  Show Result <ArrowRightFromLineIcon />
                 </ButtonDashboard>
               ) : (
                 <ButtonDashboard
                   onClick={() => setStartQuiz(true)}
                   className=" bg-[#101828] text-white hover:bg-[#101828ca] mx-auto mt-8"
                 >
-                  Start Exam <FaArrowRightLong />
+                  Start Exam <ArrowRightFromLineIcon />
                 </ButtonDashboard>
               )}
             </div>

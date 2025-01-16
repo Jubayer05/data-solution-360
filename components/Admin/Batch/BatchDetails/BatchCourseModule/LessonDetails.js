@@ -1,6 +1,6 @@
+import { X } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { MdCancel } from 'react-icons/md';
 import { colors } from '../../../../../src/data/data';
 import { convertToAMPM } from '../../../../../src/utils/convertAMPM';
 import { formatDate } from '../../../../../src/utils/convertDate';
@@ -166,7 +166,7 @@ const LessonDetails = ({
               </p>
             </div>
             <div className="">
-              <MdCancel
+              <X
                 onClick={() => handleRemoveQuiz(item)}
                 className="text-xl text-red-500 cursor-pointer hidden group-hover:block"
               />

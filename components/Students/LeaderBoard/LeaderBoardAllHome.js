@@ -1,7 +1,7 @@
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaArrowLeft } from 'react-icons/fa6';
 // import { videosPlaylist } from '../../../../src/data/data';
+import { ArrowLeft } from 'lucide-react';
 import Image from 'next/image';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
@@ -47,7 +47,7 @@ const LeaderBoardHome = () => {
       >
         <div className="flex items-end gap-4 pt-6">
           <ButtonDashboard onClick={handleBack}>
-            <FaArrowLeft />
+            <ArrowLeft />
             Back
           </ButtonDashboard>
         </div>

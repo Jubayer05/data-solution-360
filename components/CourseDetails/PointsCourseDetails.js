@@ -1,8 +1,7 @@
+import { CheckCircle, ExternalLink } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { GoLinkExternal } from 'react-icons/go';
-import { LuBadgeCheck } from 'react-icons/lu';
 
 const PointsCourseDetails = ({ courseDetails }) => {
   return (
@@ -21,7 +20,7 @@ const PointsCourseDetails = ({ courseDetails }) => {
               item.value !== '' && (
                 <div key={item.name} className="flex items-start">
                   <div>
-                    <LuBadgeCheck className="text-2xl text-[#55ce5b] font-bold" />
+                    <CheckCircle className="text-2xl text-[#55ce5b] font-bold" />
                   </div>
 
                   <span className="ml-2 text-[17px] font-semibold -mt-0.5">
@@ -86,7 +85,7 @@ const PointsCourseDetails = ({ courseDetails }) => {
               target="_blank"
               rel="noreferrer"
             >
-              <GoLinkExternal />
+              <ExternalLink />
               View Details
             </Link>
           </div>

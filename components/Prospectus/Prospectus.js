@@ -1,6 +1,6 @@
+import { Hand } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import { BiSolidHandRight } from 'react-icons/bi';
 
 const Prospectus = () => {
   return (
@@ -113,7 +113,7 @@ const ItemComponent = ({ strongText, details }) => {
   return (
     <div className="flex justify-left items-start text-lg mt-2">
       <div>
-        <BiSolidHandRight className="mt-1 text-xl" />
+        <Hand className="mt-1 text-xl" />
       </div>
       {strongText ? (
         <p className="ml-4">

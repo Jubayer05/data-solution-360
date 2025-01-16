@@ -1,12 +1,9 @@
+import { CircleCheck, X } from 'lucide-react';
 import React from 'react';
-import { FaRegCircleCheck } from 'react-icons/fa6';
-import { MdOutlineCancel } from 'react-icons/md';
 
 const QuizResult = ({ userAlreadyGiveQuiz }) => {
   // console.log(selectedAnswers);
   const quizData = userAlreadyGiveQuiz?.quizDataUser;
-
-
 
   return (
     <div>
@@ -49,11 +46,11 @@ const QuizResult = ({ userAlreadyGiveQuiz }) => {
                     <div>
                       {isOptionCorrect ? (
                         <div className="bg-[#d1fadf] rounded-full p-1.5">
-                          <FaRegCircleCheck className="text-lg text-[#1fbc72]" />
+                          <CircleCheck className="text-lg text-[#1fbc72]" />
                         </div>
                       ) : isUserAnswer && !isOptionCorrect ? (
                         <div className="bg-[#fee4ea] rounded-full  p-1">
-                          <MdOutlineCancel className="text-2xl text-[#f1554a]" />
+                          <X className="text-2xl text-[#f1554a]" />
                         </div>
                       ) : (
                         ''

@@ -4,9 +4,9 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 
 import { Spin } from 'antd';
+import { Trash } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import { loadData } from '../../../src/hooks/loadData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -183,7 +183,7 @@ const EditBatch = () => {
                       className="absolute -top-3 -right-3 z-50 w-[28px] h-[28px] bg-white hover:bg-[#ff5722] 
                     rounded-full flex justify-center items-center border hover:text-white opacity-0 group-hover:opacity-100"
                     >
-                      <RiDeleteBin6Line />
+                      <Trash className="text-red-500 cursor-pointer" />
                     </button>
                     <div className="p-3 ">
                       <Image
@@ -216,7 +216,6 @@ const EditBatch = () => {
                   onClick={handleUpdateBatch}
                   className="bg-secondary_btn hover:bg-secondary_btn hover:opacity-80 text-white"
                 >
-                  {/* <FaArrowLeft /> */}
                   {loading ? (
                     <>
                       {' '}

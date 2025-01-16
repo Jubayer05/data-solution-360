@@ -1,13 +1,15 @@
 import { ConfigProvider, Spin, Table } from 'antd';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { AiOutlinePlus } from 'react-icons/ai';
-import { FaRegPlayCircle } from 'react-icons/fa';
-import { FaLinkSlash } from 'react-icons/fa6';
-import { FiExternalLink } from 'react-icons/fi';
 
-import { MdOutlineRemoveRedEye } from 'react-icons/md';
-import { RiFilePaper2Line } from 'react-icons/ri';
+import {
+  ExternalLink,
+  EyeOff,
+  FileText,
+  Link2Off,
+  PlayCircle,
+  Plus,
+} from 'lucide-react';
 import Modal from 'react-modal';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
@@ -56,7 +58,7 @@ const ResourceContent = ({ item }) => {
       render: (_, record) => (
         <div className="flex items-start gap-2">
           <span>
-            <FaRegPlayCircle className="text-lg inline-block" />
+            <PlayCircle className="text-lg inline-block" />
           </span>
           <span className="-mt-0.5">{capitalizeWords(record.title)}</span>
         </div>
@@ -100,7 +102,7 @@ const ResourceContent = ({ item }) => {
             className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1 
           px-3 py-2 font-medium"
           >
-            <MdOutlineRemoveRedEye className="text-xl" /> Check
+            <EyeOff className="text-xl" /> Check
           </button>
 
           <Link
@@ -108,7 +110,7 @@ const ResourceContent = ({ item }) => {
             className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1
             px-3 py-2 font-medium text-black visited:text-black"
           >
-            <FiExternalLink className="text-lg" /> Browse
+            <ExternalLink className="text-lg" /> Browse
           </Link>
         </div>
       ),
@@ -169,14 +171,14 @@ const ResourceContent = ({ item }) => {
                     <h3 className="text-2xl font-semibold font-heading">
                       Resource
                     </h3>
-                    <AiOutlinePlus
+                    <Plus
                       onClick={() => closeModal()}
                       className="text-4xl cursor-pointer rotate-45"
                     />
                   </div>
                   <div className="flex justify-center mt-20">
                     <div className="bg-[#dbe6ff] p-8 rounded-full">
-                      <RiFilePaper2Line className="text-8xl text-[#407bff]" />
+                      <FileText className="text-8xl text-[#407bff]" />
                     </div>
                   </div>
                   <p className="text-center mt-8 mb-16">
@@ -185,7 +187,7 @@ const ResourceContent = ({ item }) => {
                   {modalData?.resourceLink ? (
                     <div className="flex items-center w-full gap-2">
                       <div className="bg-[#dbe6ff] p-1.5 rounded-md">
-                        <FaLinkSlash className="text-2xl cursor-pointer text-[#407bff]" />
+                        <Link2Off className="text-2xl cursor-pointer text-[#407bff]" />
                       </div>
                       <div>
                         <p className="break-all">
@@ -199,7 +201,7 @@ const ResourceContent = ({ item }) => {
                         </p>
                       </div>
                       <button className="bg-primary_btn px-4 py-2 rounded">
-                        <FiExternalLink className="text-lg text-white" />
+                        <ExternalLink className="text-lg text-white" />
                       </button>
                     </div>
                   ) : (

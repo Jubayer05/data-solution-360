@@ -1,8 +1,8 @@
 import { Progress } from 'antd';
 import { useFormik } from 'formik';
+import { X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { RxCross1 } from 'react-icons/rx';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
@@ -145,7 +145,7 @@ const TrendingCourse = () => {
                   className="rounded-lg"
                 />
                 <div className="absolute -top-3 -right-3 hidden group-hover:block">
-                  <RxCross1
+                  <X
                     onClick={() => handleRemoveTechnology(item)}
                     className="text-2xl cursor-pointer bg-black border-2 p-1 rounded-full text-white"
                   />

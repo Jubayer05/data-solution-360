@@ -1,5 +1,5 @@
+import { ArrowRight } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { FaArrowRight } from 'react-icons/fa6';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
 
@@ -223,7 +223,7 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
             transition duration-300 flex items-center justify-center gap-2 text-lg font-semibold"
             >
               {loginStatePhone ? 'Login with Email' : 'Login with Phone'}{' '}
-              <FaArrowRight />
+              <ArrowRight size={16} />
             </button>
           </div>
         </div>

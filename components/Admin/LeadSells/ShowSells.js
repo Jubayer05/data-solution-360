@@ -1,8 +1,7 @@
 import { Button, message, Table } from 'antd';
 import { format } from 'date-fns';
+import { Edit, Trash2 } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { LuTrash2 } from 'react-icons/lu';
-import { TfiPencilAlt } from 'react-icons/tfi';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
@@ -79,7 +78,7 @@ const ShowSells = ({ sells }) => {
       setFilteredData(updatedData);
       setFinalFilter(updatedData);
 
-      message.success('Record updated successfully'); 
+      message.success('Record updated successfully');
       closeModal();
     } catch (error) {
       message.error('Failed to update record');
@@ -225,14 +224,14 @@ const ShowSells = ({ sells }) => {
         <div className="flex justify-center space-x-2">
           <Button
             type="primary"
-            icon={<TfiPencilAlt className="w-4 h-4" />}
+            icon={<Edit className="w-4 h-4" />}
             onClick={() => handleEdit(record)}
             className="flex items-center justify-center"
           />
           <Button
             type="primary"
             danger
-            icon={<LuTrash2 className="w-4 h-4" />}
+            icon={<Trash2 className="w-4 h-4" />}
             loading={loading}
             onClick={() => handleDelete(record)}
             className="flex items-center justify-center"

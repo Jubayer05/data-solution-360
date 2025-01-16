@@ -1,7 +1,7 @@
 import { ConfigProvider, Spin, Table } from 'antd';
+import { Eye } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { MdRemoveRedEye } from 'react-icons/md';
 import { useStateContext } from '../../../../src/context/ContextProvider';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { formatDate } from '../../../../src/utils/convertDate';
@@ -84,7 +84,7 @@ const AssignmentHome = () => {
               className="bg-gray-200 hover:bg-gray-300 rounded flex items-center justify-center gap-1 
             px-3 py-2 font-medium"
             >
-              <MdRemoveRedEye className="text-xl" /> Check Now
+              <Eye className="text-xl" /> Check Now
             </button>
           </Link>
         </div>

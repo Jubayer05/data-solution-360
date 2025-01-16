@@ -1,8 +1,8 @@
 import React from 'react';
 
+import { ArrowRightFromLineIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaArrowRightLong } from 'react-icons/fa6';
 
 const EnrolledCourseHome = ({ item }) => {
   return (
@@ -40,7 +40,7 @@ const EnrolledCourseHome = ({ item }) => {
               className="w-full px-4 py-3 bg-primary_btn hover:bg-[#001f3fd6] text-white flex items-center rounded-md
             justify-center gap-2"
             >
-              Continue <FaArrowRightLong />
+              Continue <ArrowRightFromLineIcon />
             </button>
           </div>
         </div>

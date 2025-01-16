@@ -2,9 +2,9 @@
 import React, { useEffect, useState } from 'react';
 
 import { Badge, Tooltip } from 'antd';
+import { Bell } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { RiNotification3Line } from 'react-icons/ri';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import { userNamePrefix } from '../../../src/data/data';
@@ -126,7 +126,7 @@ const DashboardNavbar = () => {
           <Link href="/students/notification">
             <div className="cursor-pointer mr-3 bg-hover_btn px-2 py-1 rounded">
               <Badge count={5}>
-                <RiNotification3Line className="text-2xl" />
+                <Bell className="text-2xl" />
               </Badge>
             </div>
           </Link>

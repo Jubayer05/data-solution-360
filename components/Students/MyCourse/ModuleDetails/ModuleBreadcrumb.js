@@ -1,6 +1,6 @@
 import { Breadcrumb } from 'antd';
+import { Home } from 'lucide-react';
 import React from 'react';
-import { AiOutlineHome } from 'react-icons/ai';
 
 const ModuleBreadcrumb = () => {
   const globalStyle =
@@ -13,7 +13,7 @@ const ModuleBreadcrumb = () => {
         {
           href: '',
           title: (
-            <AiOutlineHome
+            <Home
               className={globalStyle + ' ' + 'text-lg mt-[6px] text-black'}
             />
           ),

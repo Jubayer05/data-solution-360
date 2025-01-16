@@ -1,7 +1,7 @@
+import { Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import { FiPhoneCall } from 'react-icons/fi';
 import { IoLogoWhatsapp } from 'react-icons/io5';
 
 const WhatsApp = () => {
@@ -61,7 +61,7 @@ const WhatsApp = () => {
             href="tel:+8801996104096"
             className="flex items-center justify-center gap-2 "
           >
-            <FiPhoneCall className="text-base md:text-xl" />
+            <Phone className="text-base md:text-xl" />
             <span>Call</span>
           </Link>
         </button>
@@ -95,7 +95,7 @@ const WhatsApp = () => {
            rounded-xl font-bangla text-sm md:text-lg z-[10] animate-pulseRing 
            scale-105 hover:bg-[#7806b6] hover:text-white transition-all duration-300"
         >
-          <FiPhoneCall />
+          <Phone />
           <span>সাপোর্ট নিন</span>
         </div>
       </div>

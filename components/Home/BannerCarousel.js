@@ -1,16 +1,5 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-import {
-  AiFillEnvironment,
-  AiFillFileExcel,
-  AiFillGift,
-  AiFillHome,
-  AiFillNotification,
-} from 'react-icons/ai';
-import { BiAlarmAdd } from 'react-icons/bi';
-import { DiPython } from 'react-icons/di';
-import { FaAws } from 'react-icons/fa';
-import { SiPowerbi } from 'react-icons/si';
 import { Swiper, SwiperSlide } from 'swiper/react';
 
 import 'swiper/css';
@@ -18,6 +7,17 @@ import 'swiper/css/effect-fade';
 import 'swiper/css/navigation';
 import 'swiper/css/pagination';
 
+import {
+  AlarmPlus,
+  Bell,
+  Cloud,
+  FileText,
+  Gift,
+  Home,
+  MapPin,
+  PieChart,
+  Terminal,
+} from 'lucide-react';
 import { Autoplay, EffectFade, Navigation, Pagination } from 'swiper';
 
 const BannerCarousel = () => {
@@ -25,31 +25,31 @@ const BannerCarousel = () => {
     {
       id: '1',
       title: 'Best data science platform',
-      icon: <AiFillHome />,
+      icon: <Home />,
       transitionDelay: 1.2,
     },
     {
       id: '2',
       title: 'Freelancing guidelines',
-      icon: <AiFillEnvironment />,
+      icon: <MapPin />,
       transitionDelay: 2,
     },
     {
       id: '3',
       title: 'Provide recorded video after classes',
-      icon: <AiFillGift />,
+      icon: <Gift />,
       transitionDelay: 2.8,
     },
     {
       id: '4',
       title: 'life time support',
-      icon: <AiFillNotification />,
+      icon: <Bell />,
       transitionDelay: 3.6,
     },
     {
       id: '5',
       title: 'Unlimited Q&A options',
-      icon: <BiAlarmAdd />,
+      icon: <AlarmPlus />,
       transitionDelay: 4.4,
     },
   ];
@@ -58,28 +58,28 @@ const BannerCarousel = () => {
     {
       id: '1',
       title: 'Python',
-      icon: <DiPython />,
+      icon: <Terminal />,
       bg: '#4b8bbe',
       transitionDelay: 2,
     },
     {
       id: '2',
       title: 'Power BI',
-      icon: <SiPowerbi />,
+      icon: <PieChart />,
       bg: 'goldenrod',
       transitionDelay: 3,
     },
     {
       id: '3',
       title: 'AWS',
-      icon: <FaAws />,
+      icon: <Cloud />,
       bg: '#FF9900 ',
       transitionDelay: 4,
     },
     {
       id: '4',
       title: 'Excel',
-      icon: <AiFillFileExcel />,
+      icon: <FileText />,
       bg: '#1d6f42',
       transitionDelay: 5,
     },

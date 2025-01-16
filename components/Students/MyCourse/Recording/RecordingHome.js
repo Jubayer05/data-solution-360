@@ -1,6 +1,6 @@
+import { ChevronRight } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
 import Select from 'react-select';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
@@ -93,7 +93,7 @@ const RecordingHome = () => {
               <p className="text-xs mt-1">{currentContent?.title}</p>
             </div>
             <div>
-              <FaChevronRight />
+              <ChevronRight />
             </div>
           </div>
           {/* </Link> */}

@@ -1,11 +1,11 @@
+import { XCircle } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import { ImCancelCircle } from 'react-icons/im';
 
 const MemberDetails = ({ data, closeModal }) => {
   return (
     <div className="max-w-5xl max-h-[500px] md:min-w-[600px] mx-5 overflow-y-auto overflow-x-hidden">
-      <ImCancelCircle
+      <XCircle
         className="fixed right-3 top-3 text-xl md:text-2xl z-100 
               text-red-500 cursor-pointer"
         onClick={closeModal}

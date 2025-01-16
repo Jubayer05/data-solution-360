@@ -1,7 +1,7 @@
+import { Facebook, Linkedin } from 'lucide-react'; // Importing icons from lucide-react
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { FaFacebookF, FaLinkedinIn } from 'react-icons/fa';
 import { loadData } from '../../src/hooks/loadData';
 import CustomModal from '../utilities/CustomModal';
 import MemberDetails from './MemberDetails';
@@ -99,29 +99,27 @@ const MemberInfo = ({ item }) => {
           <div
             className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
           hover:text-gray-700 transition-all duration-300`}
-            // style={{ backgroundColor: `${icon.brandColor}` }}
           >
-            <FaFacebookF />
+            <Facebook />
           </div>
         </Link>
-        <div
-          className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
+        <Link href={item?.linkedinLink} target="_blank">
+          <div
+            className={`text-blue-400 p-2 rounded-sm bg-gray-100 cursor-pointer 
   hover:text-gray-700 transition-all duration-300`}
-          // style={{ backgroundColor: `${icon.brandColor}` }}
-        >
-          <FaLinkedinIn />
-        </div>
+          >
+            <Linkedin />
+          </div>
+        </Link>
       </div>
       <div className="p-5">
-        <>
-          <CustomModal
-            modalIsOpen={modalIsOpen}
-            closeModal={closeModal}
-            setModalIsOpen={setModalIsOpen}
-          >
-            <MemberDetails data={modalData} closeModal={closeModal} />
-          </CustomModal>
-        </>
+        <CustomModal
+          modalIsOpen={modalIsOpen}
+          closeModal={closeModal}
+          setModalIsOpen={setModalIsOpen}
+        >
+          <MemberDetails data={modalData} closeModal={closeModal} />
+        </CustomModal>
       </div>
     </div>
   );

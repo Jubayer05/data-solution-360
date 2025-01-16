@@ -1,9 +1,8 @@
+import { ArrowRightFromLineIcon, CircleCheck, X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaArrowRightLong, FaRegCircleCheck } from 'react-icons/fa6';
-import { MdOutlineCancel } from 'react-icons/md';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import QuizResult from './QuizResult';
@@ -80,13 +79,13 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
             <div className="flex justify-center gap-8 my-5">
               <div className="flex items-center gap-2">
                 <div className="bg-[#fee4ea] rounded-full  p-1">
-                  <MdOutlineCancel className="text-2xl text-[#f1554a]" />
+                  <X className="text-2xl text-[#f1554a]" />
                 </div>
                 <p className="text-lg">= Incorrect Answer</p>
               </div>
               <div className="flex items-center gap-2">
                 <div className="bg-[#d1fadf] rounded-full p-1.5">
-                  <FaRegCircleCheck className="text-lg text-[#1fbc72]" />
+                  <CircleCheck className="text-lg text-[#1fbc72]" />
                 </div>
                 <p className="text-lg">= Correct Answer</p>
               </div>
@@ -100,7 +99,7 @@ const CheckQuizAnswer = ({ userAlreadyGiveQuiz }) => {
 
             <Link href={`/students/my-course/${courseId}/module/${moduleId}`}>
               <ButtonDashboard className="mx-auto mt-5 flex-1 bg-[#101828] text-white hover:bg-[#101828ca]">
-                Back to Module <FaArrowRightLong />
+                Back to Module <ArrowRightFromLineIcon />
               </ButtonDashboard>
             </Link>
           </div>

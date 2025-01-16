@@ -1,7 +1,7 @@
+import { X } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { MdCancel } from 'react-icons/md';
 import { loadData } from '../../../src/hooks/loadData';
 
 const Popup = ({ handler }) => {
@@ -50,7 +50,7 @@ const Popup = ({ handler }) => {
           </>
         )}
         <div className="absolute -top-3 md:-top-4 right-3 md:-right-4">
-          <MdCancel
+          <X
             onClick={() => handler(false)}
             className="text-2xl md:text-3xl cursor-pointer text-[#ff0066] rounded-full bg-white"
           />

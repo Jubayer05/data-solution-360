@@ -1,8 +1,11 @@
 import { ConfigProvider, Spin } from 'antd';
+import {
+  ArrowLeftFromLineIcon,
+  ArrowRightFromLineIcon,
+  Timer,
+} from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useRef, useState } from 'react';
-import { FaArrowLeftLong, FaArrowRightLong } from 'react-icons/fa6';
-import { IoTimerOutline } from 'react-icons/io5';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import useSubmitQuizAndUpdateLeaderboard from '../../../src/hooks/useSubmitQuizAndUpdateLeaderboard';
@@ -185,7 +188,7 @@ const QuizGameStart = ({ quizData, findLessons }) => {
           {/* Timer always visible */}
           <div className="fixed top-[54px] right-[20px] mt-4 z-50">
             <p className="text-base font-semibold flex items-center gap-1 bg-green-200 p-1 rounded">
-              <IoTimerOutline /> {formatTime(timeRemaining)}
+              <Timer /> {formatTime(timeRemaining)}
             </p>
           </div>
 
@@ -225,7 +228,7 @@ const QuizGameStart = ({ quizData, findLessons }) => {
 
             <div className="flex justify-between items-center">
               <ButtonDashboard className="">
-                <FaArrowLeftLong />
+                <ArrowLeftFromLineIcon />
                 Back
               </ButtonDashboard>
               <p className="bg-gray-200 px-2 py-1 rounded-md">
@@ -236,7 +239,7 @@ const QuizGameStart = ({ quizData, findLessons }) => {
                 onClick={() => setModalIsOpen(true)}
                 className=" bg-[#101828] text-white hover:bg-[#101828ca]"
               >
-                Finish Exam <FaArrowRightLong />
+                Finish Exam <ArrowRightFromLineIcon />
               </ButtonDashboard>
             </div>
           </div>

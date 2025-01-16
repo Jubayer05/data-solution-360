@@ -1,9 +1,8 @@
 import { Progress } from 'antd';
+import { ChevronRight, HelpCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useState } from 'react';
-import { BsPatchQuestionFill } from 'react-icons/bs';
-import { FaChevronRight } from 'react-icons/fa6';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { colors } from '../../../../src/data/data';
 
@@ -72,7 +71,7 @@ const HeadingEnrolled = ({ item }) => {
             </h2>
           </div>
           <div>
-            <FaChevronRight className="text-white" />
+            <ChevronRight className="text-white" />
           </div>
         </div>
         <div className="w-full flex flex-col sm:flex-row items-center gap-4 bg-white border px-5 py-3 rounded-md">
@@ -93,7 +92,7 @@ const HeadingEnrolled = ({ item }) => {
             className="flex justify-center items-center gap-2 bg-hover_btn hover:bg-[#fecb63] font-semibold
           py-2 px-4 rounded border-orange-400 border "
           >
-            <BsPatchQuestionFill /> Ask Question
+            <HelpCircle /> Ask Question
           </button>
         </div>
       </div>
@@ -118,7 +117,7 @@ const HeadingEnrolled = ({ item }) => {
             <p className="text-xs mt-1">35 Videos</p>
           </div>
           <div>
-            <FaChevronRight />
+            <ChevronRight />
           </div>
         </div>
       </Link>

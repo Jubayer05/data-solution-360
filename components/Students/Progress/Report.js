@@ -1,9 +1,8 @@
 import { Progress } from 'antd';
+import { ArrowRight, Diamond } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { BsExclamationDiamond } from 'react-icons/bs';
-import { FaArrowRight } from 'react-icons/fa6';
 import useCourseStatistics from '../../../src/hooks/useCourseStatistics';
 import CustomModal from '../../utilities/CustomModal';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -36,7 +35,7 @@ const Report = () => {
           className="flex items-center gap-2 text-sm"
           onClick={() => setModalIsOpen(true)}
         >
-          How calculate result? <BsExclamationDiamond />
+          How calculate result? <Diamond />
         </button>
       </div>
       <CustomModal
@@ -299,7 +298,7 @@ const Report = () => {
           className="flex justify-center items-center gap-2 bg-secondary_btn hover:bg-[#34825f]
         font-semibold  py-2 px-4 rounded border-green-400 border w-full mt-4 text-white transition-all duration-200"
         >
-          Report Details <FaArrowRight />
+          Report Details <ArrowRight />
         </button>
       </Link>
 
@@ -308,7 +307,7 @@ const Report = () => {
         className="flex justify-center items-center gap-2 bg-[#c8ffe6] hover:bg-[#acf2d2]
         font-semibold  py-2 px-4 rounded border-green-400 border w-full mt-4 text-[#009351] transition-all duration-200"
       >
-        How to calculate score <FaArrowRight />
+        How to calculate score <ArrowRight />
       </button>
     </div>
   );

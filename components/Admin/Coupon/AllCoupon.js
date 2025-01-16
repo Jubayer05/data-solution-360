@@ -2,8 +2,8 @@ import { useEffect, useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
 
 import { format, fromUnixTime } from 'date-fns';
+import { Trash2 } from 'lucide-react';
 import Link from 'next/link';
-import { RiDeleteBinLine } from 'react-icons/ri'; // Import the delete icon
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 import { loadData } from '../../../src/hooks/loadData';
@@ -169,7 +169,7 @@ const AllCoupons = () => {
                     className="hover:bg-red-500 text-red-500 rounded-full border-2 border-red-500 bg-white hover:text-white hover:border-red-500 transition-all duration-200 ease-in-out p-2"
                     onClick={() => handleDeleteCoupon(product)}
                   >
-                    <RiDeleteBinLine size={20} />
+                    <Trash2 className="text-red-500 cursor-pointer" />
                   </button>
                 </div>
               </div>

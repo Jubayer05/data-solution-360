@@ -1,9 +1,8 @@
 import { Collapse, Empty } from 'antd';
+import { ArrowLeft, ArrowRight, ChevronRight, CirclePlay } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { FaChevronRight } from 'react-icons/fa';
-import { FaArrowLeft, FaArrowRight, FaRegCirclePlay } from 'react-icons/fa6';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
@@ -54,7 +53,7 @@ const HomeRecordedVideo = () => {
         <div className="w-[60%] ">
           <div className="flex items-end gap-4 pt-6">
             <ButtonDashboard onClick={handleBack}>
-              <FaArrowLeft />
+              <ArrowLeft />
               Back
             </ButtonDashboard>
             <Image
@@ -93,12 +92,12 @@ const HomeRecordedVideo = () => {
               </p>
               <div className="flex items-center gap-3 bg-white p-3 shadow rounded-md">
                 <ButtonDashboard className="w-full">
-                  <FaArrowLeft />
+                  <ArrowLeft />
                   Back
                 </ButtonDashboard>
                 <ButtonDashboard className="w-full">
                   Next
-                  <FaArrowRight />
+                  <ArrowRight />
                 </ButtonDashboard>
               </div>
             </div>
@@ -116,7 +115,7 @@ const HomeRecordedVideo = () => {
                 collapsible="header"
                 expandIconPosition="end"
                 expandIcon={({ isActive }) => (
-                  <FaChevronRight
+                  <ChevronRight
                     style={{
                       color: 'white',
                       fontSize: '16px',
@@ -161,7 +160,7 @@ const HomeRecordedVideo = () => {
                         })
                       }
                     >
-                      <FaRegCirclePlay className="text-lg mt-1" />
+                      <CirclePlay className="text-lg mt-1" />
                       <p className="flex-1">{video.title}</p>
                       {video?.recordingLink ? (
                         <span className="bg-green-100 border border-green-500 px-2 text-[10px] rounded-full font-semibold text-green-700">

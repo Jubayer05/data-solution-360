@@ -1,11 +1,9 @@
 import React from 'react';
-import { IoIosPeople } from 'react-icons/io';
 import Typewriter from 'typewriter-effect';
 
+import { ArrowRight, Clock, Users } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { FaArrowRightLong } from 'react-icons/fa6';
-import { ImClock } from 'react-icons/im';
 
 const CourseItem = ({ item, upcoming, running }) => {
   return (
@@ -56,7 +54,7 @@ const CourseItem = ({ item, upcoming, running }) => {
               )}
             </div>
             <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
-              <IoIosPeople />
+              <Users className="text-xl" />
 
               <span className="text-[10px] md:text-[12px] block -mt-[1px]">
                 Total Seat <strong>{item?.total_seat_number}</strong>
@@ -69,7 +67,7 @@ const CourseItem = ({ item, upcoming, running }) => {
                 {new Date(item?.main_class_starting_date).getTime() >=
                   new Date().getTime() && (
                   <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded flex items-center gap-1 text-[#101828]">
-                    <ImClock />
+                    <Clock />
                     <span className="text-[10px] md:text-[12px] -mt-[1px]">
                       <strong>
                         {' '}
@@ -123,7 +121,7 @@ const CourseItem = ({ item, upcoming, running }) => {
               text-[12px] md:text-sm hover:opacity-[0.9] transition-all uppercase tracking-wider inline-flex items-center
             justify-center gap-2"
             >
-              See Details <FaArrowRightLong />
+              See Details <ArrowRight className="text-xl" />
             </button>
           </div>
         </div>

@@ -1,11 +1,10 @@
 import { ConfigProvider, Progress, Table } from 'antd';
 import React from 'react';
 // import { videosPlaylist } from '../../../../src/data/data';
+import { ArrowBigUpDash, ArrowLeft, ArrowUp } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
-import { FaAngleDown, FaAngleUp } from 'react-icons/fa';
-import { MdOutlineArrowOutward } from 'react-icons/md';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -33,7 +32,7 @@ const ReportDetails = () => {
             >
               <ButtonDashboard className="text-sm pl-2 pr-2 pt-[6px] pb-[6px]">
                 <span>Visit Module</span>
-                <MdOutlineArrowOutward className="text-lg" />{' '}
+                <ArrowBigUpDash className="text-lg" />{' '}
               </ButtonDashboard>
             </Link>
           </div>
@@ -252,7 +251,7 @@ const ReportDetails = () => {
                       className="bg-gray-200 hover:bg-gray-300 flex items-center justify-center gap-1 
           px-3 py-2 font-medium rounded-full w-[40px] h-[40px] z-50"
                     >
-                      <FaAngleUp className="text-lg" />{' '}
+                      <ArrowUp className="text-lg" />{' '}
                     </button>
                   </div>
                 ) : (
@@ -262,7 +261,7 @@ const ReportDetails = () => {
                       className="bg-gray-200 hover:bg-gray-300 flex items-center justify-center gap-1 
                     px-3 py-2 font-medium rounded-full w-[40px] h-[40px] z-50"
                     >
-                      <FaAngleDown className="text-lg" />{' '}
+                      <ArrowLeft className="text-lg" />{' '}
                     </button>
                   </div>
                 ),

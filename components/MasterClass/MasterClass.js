@@ -1,9 +1,7 @@
 import { Radio, Spin } from 'antd';
+import { Mail, MessageCircle, Send, User } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { FaRegUser, FaWhatsapp } from 'react-icons/fa6';
-import { IoIosPaperPlane } from 'react-icons/io';
-import { TfiEmail } from 'react-icons/tfi';
 import Swal from 'sweetalert2';
 import { v4 as uuidv4 } from 'uuid';
 import useFetchDocById from '../../src/hooks/manageDataById/useLoadDocumentById';
@@ -116,7 +114,7 @@ const MasterClass = () => {
                 onChange={handleChange}
                 label="Full Name"
                 placeholder="Type Name"
-                icon={<FaRegUser className="text-xl" />}
+                icon={<User className="text-xl" />}
                 type="text"
               />
 
@@ -127,7 +125,7 @@ const MasterClass = () => {
                 label="Your Email"
                 placeholder="Type Email"
                 type="email"
-                icon={<TfiEmail className="text-xl" />}
+                icon={<Mail className="text-xl" />}
               />
 
               <InputField
@@ -137,7 +135,7 @@ const MasterClass = () => {
                 label="WhatsApp Number"
                 placeholder="Type Whatsapp Number"
                 type="tel"
-                icon={<FaWhatsapp className="text-2xl" />}
+                icon={<MessageCircle className="text-2xl" />}
               />
 
               <div className="mt-5 mb-5">
@@ -184,7 +182,7 @@ const MasterClass = () => {
               label="Educational Institute/Company Name"
               placeholder="Type your organization"
               type="text"
-              icon={<IoIosPaperPlane className="text-2xl" />}
+              icon={<Send className="text-2xl" />}
             />
 
             <div>

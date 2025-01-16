@@ -1,6 +1,6 @@
+import { ArrowLeft } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { FaArrowLeft } from 'react-icons/fa6';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
@@ -45,7 +45,7 @@ const ModuleDetailsMain = () => {
       <div className="w-full">
         <div className="flex items-end gap-4 pt-6">
           <ButtonDashboard onClick={() => router.back()}>
-            <FaArrowLeft />
+            <ArrowLeft />
             Go Back
           </ButtonDashboard>
         </div>

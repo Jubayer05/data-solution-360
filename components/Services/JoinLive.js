@@ -1,9 +1,9 @@
 import { Spin } from 'antd';
+import { Activity } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { MdOnlinePrediction } from 'react-icons/md';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
@@ -156,7 +156,7 @@ const JoinLive = () => {
                 className="text-base flex justify-center items-center gap-2 px-2 rounded 
               bg-black text-white w-[30%]"
               >
-                <MdOnlinePrediction /> Live Class
+                <Activity /> Live Class
               </p>
               <p className="w-[70%]">
                 {findCurrentUser?.email && hasZoomLink

@@ -1,6 +1,6 @@
+import { PhoneIncomingIcon } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
-import { MdOutlinePhoneInTalk } from 'react-icons/md';
 
 const NeedHelp = () => {
   return (
@@ -24,7 +24,7 @@ const NeedHelp = () => {
       <div className="text-center md:text-right">
         <p className="text-sm md:text-base font-semibold">Call Us</p>
         <button className="mt-2 px-4 py-3 bg-[#001f3f0e] rounded flex items-center justify-center gap-2 font-semibold text-sm md:text-base">
-          <MdOutlinePhoneInTalk />
+          <PhoneIncomingIcon />
           <span>+8801996104096</span>
         </button>
       </div>

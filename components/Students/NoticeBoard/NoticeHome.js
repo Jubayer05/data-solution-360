@@ -1,8 +1,7 @@
+import { ArrowLeft, NotepadText } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { BiNotepad } from 'react-icons/bi';
-import { FaArrowLeft } from 'react-icons/fa6';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
@@ -33,7 +32,7 @@ const NoticeHome = () => {
         <div className="w-[65%] ">
           <div className="flex items-end gap-4 pt-6">
             <ButtonDashboard onClick={handleBack}>
-              <FaArrowLeft />
+              <ArrowLeft />
               Back
             </ButtonDashboard>
           </div>
@@ -42,7 +41,7 @@ const NoticeHome = () => {
               className="flex items-center gap-2 font-heading font-bold text-lg bg-[#ff48003a]
             px-5 py-2 text-[orangered]"
             >
-              <BiNotepad className="-mt-1" /> Notice
+              <NotepadText className="-mt-1" /> Notice
             </h2>
             <div className="bg-[#f9f9fa] m-4 py-3 px-5 rounded-lg">
               <div className="flex items-center gap-3">

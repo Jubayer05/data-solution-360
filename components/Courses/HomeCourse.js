@@ -1,7 +1,6 @@
 import React from 'react';
-import { BsStack } from 'react-icons/bs';
-import { FaArrowRightLong } from 'react-icons/fa6';
 
+import { ArrowRight, Grid } from 'lucide-react';
 import Link from 'next/link';
 import { useStateContext } from '../../src/context/ContextProvider';
 import HomeCourseItem from './HomeCourseItem';
@@ -31,7 +30,7 @@ const HomeCourse = () => {
             <span className="font-bangla">আপনার জন্য সেরা কোর্স</span>
           )}
           <span className="text-[#12b76a]">
-            <BsStack />
+            <Grid />
           </span>
         </h2>
         <p className="text-center text-base font-bold font-heading  mb-2 md:mb-6 px-2">
@@ -43,7 +42,7 @@ const HomeCourse = () => {
           className="text-white font-heading md:ml-10 text-xl font-semibold inline-flex 
         items-center gap-2 transition-all px-2"
         >
-          Our Courses <FaArrowRightLong />
+          Our Courses <ArrowRight />
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4 md:gap-3 px-[1px] md:px-8 pt-0">
           {registrationGoingOnCourses.map((item) => (
@@ -64,7 +63,7 @@ const HomeCourse = () => {
             bg-[#eaecf0] transition-all duration-300 ease-linear hover:bg-[#d0d5dd] md:w-[350px] inline-flex items-center
             justify-center gap-2 uppercase"
             >
-              See All <FaArrowRightLong />
+              See All <ArrowRight />
             </button>
           </Link>
         </div>

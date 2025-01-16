@@ -1,5 +1,5 @@
+import { Plus } from 'lucide-react';
 import React from 'react';
-import { CgMathPlus } from 'react-icons/cg';
 import { IoCheckmarkDone } from 'react-icons/io5';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import { notifications } from '../../../src/data/dummy';
@@ -7,7 +7,6 @@ import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 
 const NotificationHome = () => {
   const { activeMenu, enrolledCourse } = useStateContextDashboard();
-
 
   return (
     <div>
@@ -39,7 +38,7 @@ const NotificationHome = () => {
               >
                 <div className="flex items-start gap-6 w-full py-2">
                   <div className="bg-gray-400 rounded-md mt-1">
-                    <CgMathPlus className="text-2xl text-white rotate-45" />
+                    <Plus className="text-2xl text-white rotate-45" />
                   </div>
                   <div className="flex items-start justify-between w-full">
                     <div className="flex-1">

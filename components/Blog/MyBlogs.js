@@ -1,7 +1,7 @@
 import { Progress, Table } from 'antd';
+import { XCircle } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
-import { ImCancelCircle } from 'react-icons/im';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../firebase';
@@ -214,7 +214,7 @@ const MyBlogs = () => {
             Edit The Blog
           </h2>
           <div>
-            <ImCancelCircle
+            <XCircle
               onClick={() => closeModal()}
               className="text-2xl cursor-pointer"
             />

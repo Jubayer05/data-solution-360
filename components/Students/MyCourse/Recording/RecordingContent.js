@@ -1,8 +1,7 @@
 import { ConfigProvider, Spin, Table } from 'antd';
+import { PlayCircle, RadioTower } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { FaRegPlayCircle } from 'react-icons/fa';
-import { IoMdPlay } from 'react-icons/io';
 import { useStateContextDashboard } from '../../../../src/context/UtilitiesContext';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
@@ -21,7 +20,7 @@ const RecordingContent = ({ item }) => {
       align: 'left',
       render: (_, record) => (
         <div className="flex items-start gap-2">
-          <FaRegPlayCircle className="text-lg" />{' '}
+          <PlayCircle className="text-lg" />{' '}
           <span className="-mt-0.5">{record.title}</span>
         </div>
       ),
@@ -72,7 +71,7 @@ const RecordingContent = ({ item }) => {
           px-3 py-2 font-medium"
               onClick={() => setShowedItem(record)}
             >
-              <IoMdPlay className="text-lg" /> Play
+              <RadioTower className="text-lg" /> Play
             </button>
           </Link>
         </div>

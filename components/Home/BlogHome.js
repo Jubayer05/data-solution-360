@@ -1,9 +1,9 @@
 import { Empty } from 'antd';
 import { convert } from 'html-to-text';
+import { FileText } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { FaBlog } from 'react-icons/fa';
 import { loadData } from '../../src/hooks/loadData';
 
 const BlogHome = () => {
@@ -28,7 +28,7 @@ const BlogHome = () => {
               <h2 className="text-center text-[26px] md:text-[36px] font-bold font-heading m-0 text-black flex justify-center items-center gap-3">
                 Blogs
                 <span className="text-[#12b76a]">
-                  <FaBlog />
+                  <FileText />
                 </span>
               </h2>
               <div className="flex-1 h-[1px] bg-[#eaecf0]" />

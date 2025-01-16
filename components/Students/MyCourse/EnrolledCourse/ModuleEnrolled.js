@@ -1,8 +1,7 @@
 import { Spin } from 'antd';
+import { Coffee, FilePlus, Tv } from 'lucide-react';
 import Link from 'next/link';
 import React from 'react';
-import { MdAssignmentAdd, MdLiveTv } from 'react-icons/md';
-import { SiTestcafe } from 'react-icons/si';
 import { colors } from '../../../../src/data/data';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import {
@@ -83,19 +82,19 @@ const ModuleEnrolled = () => {
               </h2>
               <div className="flex mt-4 mb-2 gap-4 flex-wrap">
                 <div className="flex items-center gap-2">
-                  <MdLiveTv className="text-xl" />
+                  <Tv className="text-xl" />
                   <p className="text-sm font-semibold ">
                     {item?.liveClassNumber} Live Class
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <MdAssignmentAdd className="text-xl" />
+                  <FilePlus className="text-xl" />
                   <p className="text-sm font-semibold ">
                     {item?.projectNumber || 0} Project
                   </p>
                 </div>
                 <div className="flex items-center gap-2">
-                  <SiTestcafe className="text-xl" />
+                  <Coffee className="text-xl" />
                   <p className="text-sm font-semibold ">0 Test</p>
                 </div>
               </div>

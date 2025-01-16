@@ -2,13 +2,11 @@ import { Collapse } from 'antd';
 import Link from 'next/link';
 
 import React, { useEffect, useState } from 'react';
-import { AiOutlineFundProjectionScreen } from 'react-icons/ai';
-import { RiLiveLine } from 'react-icons/ri';
 import { useStateContext } from '../../src/context/ContextProvider';
 
+import { Lock, Monitor, Video } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
-import { MdLockOutline } from 'react-icons/md';
 import { bg_colors, colors } from '../../src/data/data';
 import MemberDetails from '../About/MemberDetails';
 import AddVideoReview from '../Home/Review/AddVideoReview';
@@ -139,7 +137,7 @@ const CourseDetails = () => {
                     z-10 rounded-lg shadow-2xl flex justify-center items-center backdrop-blur-sm cursor-pointer
                      border border-white/10 transform hover:scale-[1.03] transition duration-500"
                   >
-                    <MdLockOutline className="text-4xl text-white drop-shadow-lg animate-pulse" />
+                    <Lock className="text-4xl text-white drop-shadow-lg animate-pulse" />
                   </div>
                 )}
                 <Collapse
@@ -170,7 +168,7 @@ const CourseDetails = () => {
                           </h2>
                           <div className="flex items-center gap-4">
                             <div className="flex items-center text-[13px] font-normal">
-                              <RiLiveLine /> &nbsp;{' '}
+                              <Video /> &nbsp;{' '}
                               <p className="m-0">
                                 {' '}
                                 <span className="font-semibold">
@@ -180,7 +178,7 @@ const CourseDetails = () => {
                               </p>
                             </div>
                             <div className="flex items-center text-[13px] font-normal">
-                              <AiOutlineFundProjectionScreen /> &nbsp;
+                              <Monitor /> &nbsp;
                               <p className="m-0">
                                 {' '}
                                 <span className="font-semibold">

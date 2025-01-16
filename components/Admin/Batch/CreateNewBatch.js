@@ -4,9 +4,9 @@ import 'sweetalert2/dist/sweetalert2.css';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../../../firebase';
 
+import { Trash } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import { RiDeleteBin6Line } from 'react-icons/ri';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { loadData } from '../../../src/hooks/loadData';
@@ -151,7 +151,6 @@ const CreateNewBatch = () => {
       <div className="max-w-3xl mx-auto my-20">
         <Link href="/admin/course/all-batch">
           <ButtonDashboard className="bg-tertiary_btn hover:bg-tertiary_btn hover:opacity-80 text-white">
-            {/* <FaArrowLeft /> */}
             Visit all batches
           </ButtonDashboard>
         </Link>
@@ -196,7 +195,7 @@ const CreateNewBatch = () => {
                   className="absolute -top-3 -right-3 z-50 w-[28px] h-[28px] bg-white hover:bg-[#ff5722] 
                     rounded-full flex justify-center items-center border hover:text-white opacity-0 group-hover:opacity-100"
                 >
-                  <RiDeleteBin6Line />
+                  <Trash className="text-red-500 cursor-pointer" />
                 </button>
                 <div className="p-3 ">
                   <Image
@@ -229,7 +228,6 @@ const CreateNewBatch = () => {
               onClick={handleCreateNewBatch}
               className="bg-secondary_btn hover:bg-secondary_btn hover:opacity-80 text-white"
             >
-              {/* <FaArrowLeft /> */}
               Create a new batch
             </ButtonDashboard>
           </div>

@@ -1,9 +1,8 @@
 import { Progress } from 'antd';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
-import { BsExclamationDiamond } from 'react-icons/bs';
-import { FaArrowLeft } from 'react-icons/fa6';
 // import { videosPlaylist } from '../../../../src/data/data';
+import { ArrowLeft, Diamond } from 'lucide-react';
 import Image from 'next/image';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import useCourseStatistics from '../../../src/hooks/useCourseStatistics';
@@ -43,7 +42,7 @@ const ReportHome = () => {
       >
         <div className="flex items-end gap-4 pt-6">
           <ButtonDashboard onClick={handleBack}>
-            <FaArrowLeft />
+            <ArrowLeft />
             Back
           </ButtonDashboard>
         </div>
@@ -63,7 +62,7 @@ const ReportHome = () => {
             className="flex items-center gap-2 text-sm"
             onClick={() => setModalIsOpen(true)}
           >
-            How calculate result? <BsExclamationDiamond />
+            How calculate result? <Diamond />
           </button>
           <CustomModal
             modalIsOpen={modalIsOpen}

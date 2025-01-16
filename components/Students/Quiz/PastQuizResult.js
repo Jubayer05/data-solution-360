@@ -1,8 +1,8 @@
+import { ArrowRightFromLineIcon } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React from 'react';
-import { FaArrowRightLong } from 'react-icons/fa6';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStudentContext } from '../../../src/context/StudentContext';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
@@ -146,7 +146,7 @@ const PastQuizResult = ({}) => {
                   href={`/students/my-course/${courseId}/module/${moduleId}`}
                 >
                   <ButtonDashboard className="flex-1 bg-[#101828] text-white hover:bg-[#101828ca]">
-                    Back to Module <FaArrowRightLong />
+                    Back to Module <ArrowRightFromLineIcon />
                   </ButtonDashboard>
                 </Link>
               </div>

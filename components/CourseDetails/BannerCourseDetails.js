@@ -1,12 +1,9 @@
 import Link from 'next/link';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
-import { GoCalendar } from 'react-icons/go';
-
 import { Breadcrumb, Spin } from 'antd';
-import { BookOpen, Calendar, Clock, Users } from 'lucide-react';
+import { BookOpen, Calendar, Clock, Share2, Users } from 'lucide-react';
 import Image from 'next/image';
-import { BiShareAlt } from 'react-icons/bi';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
@@ -203,7 +200,7 @@ const BannerCourseDetails = ({ courseDetails }) => {
                   Free Orientation Class
                 </span>
                 <div className="flex items-center text-base mt-1">
-                  <GoCalendar />
+                  <Calendar />
                   {/* TODO: Make it simple date with day name */}
                   <span className="ml-1.5">
                     {courseDetails?.orientation_class}
@@ -283,7 +280,7 @@ const BannerCourseDetails = ({ courseDetails }) => {
                   </div>
                 )}
                 <div className="flex items-center ml-auto border-b-1 cursor-pointer">
-                  <BiShareAlt />
+                  <Share2 />
                   <span>Share</span>
                 </div>
               </div>

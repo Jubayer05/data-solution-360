@@ -1,9 +1,8 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { FaRegPlayCircle } from 'react-icons/fa';
-import { RiLiveLine } from 'react-icons/ri';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 
+import { PlayCircle, RadioTower } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { convertToAMPM } from '../../../../src/utils/convertAMPM';
 import {
@@ -112,7 +111,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
                     onClick={() => showClassRecording(item)}
                     className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2 px-5 rounded border-dashboard_border border transition-all duration-200 text-sm md:text-base"
                   >
-                    <FaRegPlayCircle />
+                    <PlayCircle />
                     <span>Class Recording</span>
                   </button>
                 ) : isToday(item?.classDate) ? (
@@ -122,7 +121,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
                     className="flex justify-between items-center gap-2 bg-[#fecb63] hover:bg-[#e7b655] 
                     font-semibold py-2 px-5 rounded transition-all duration-200 text-black visited:text-black text-sm md:text-base"
                   >
-                    <RiLiveLine />
+                    <RadioTower />
                     <span>Join Live</span>
                   </ButtonDashboard>
                 ) : (

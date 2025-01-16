@@ -1,7 +1,7 @@
+import { ChevronRight, ClipboardSignature, Facebook } from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { FaFacebook, FaWhatsapp } from 'react-icons/fa6';
-import { LuChevronRight, LuClipboardSignature } from 'react-icons/lu';
+import { FaWhatsapp } from 'react-icons/fa6';
 import LeaderBoard from './LeaderBoard';
 import Report from './Report';
 
@@ -21,10 +21,10 @@ const ProgressHome = () => {
         font-semibold py-3 px-4 rounded border border-dashboard_border w-full mt-4 hover:text-primary transition-all duration-200"
         >
           <p className="flex items-center gap-2 text-lg">
-            <LuClipboardSignature className="text-primary text-2xl" /> Notice
+            <ClipboardSignature className="text-primary text-2xl" /> Notice
             Board (3)
           </p>
-          <LuChevronRight className="text-primary text-2xl" />
+          <ChevronRight className="text-primary text-2xl" />
         </button>
       </Link>
 
@@ -43,7 +43,7 @@ const ProgressHome = () => {
             className="flex justify-center items-center gap-2 bg-[#e9efff] hover:bg-[#d0d0d0] font-semibold
             py-2 px-4 rounded w-full text-[#4478ff] transition-all duration-200"
           >
-            JOIN <FaFacebook />
+            JOIN <Facebook />
           </button>
         </div>
       </div>

@@ -1,9 +1,8 @@
 import { Tooltip } from 'antd';
+import { Mail, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { CiPhone } from 'react-icons/ci';
-import { RiMailUnreadLine } from 'react-icons/ri';
 import { SlLocationPin } from 'react-icons/sl';
 import {
   footerAboutData,
@@ -110,7 +109,7 @@ const Footer = () => {
                   className="border-b-[1.5px] border-solid border-transparent cursor-pointer text-[#212529] hover:text-[orangered]
                   hover:border-[orangered] ease-in-out duration-300 flex items-center gap-2"
                 >
-                  <CiPhone className="text-lg" />
+                  <Phone className="text-lg" />
                   <span>+8801996104096</span>
                 </Link>
               </li>
@@ -123,7 +122,7 @@ const Footer = () => {
                   className="border-b-[1.5px] border-solid border-transparent cursor-pointer text-[#212529] hover:text-[orangered]
                   hover:border-[orangered] ease-in-out duration-300 flex items-center gap-2"
                 >
-                  <RiMailUnreadLine className="text-lg" />
+                  <Mail className="text-lg" />
                   <span>datasolution360.business@gmail.com</span>
                 </Link>
               </li>

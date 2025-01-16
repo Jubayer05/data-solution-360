@@ -1,8 +1,6 @@
+import { Calendar, CalendarDays, CalendarDaysIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
-import { FaCalendarDay, FaCalendarDays } from 'react-icons/fa6';
-import { FiClock } from 'react-icons/fi';
-import { LuCalendarDays } from 'react-icons/lu';
 import { convertToAMPM } from '../../../src/utils/convertAMPM';
 import { formatDate, getFullDayName } from '../../../src/utils/convertDate';
 import useIsToday from '../../../src/utils/useIsToday';
@@ -54,7 +52,7 @@ const ClassJoiningItem = ({ item }) => {
               </h4>
               {item?.courseData?.class_days?.map((dayItem) => (
                 <div key={dayItem} className="flex gap-2 items-center">
-                  <FaCalendarDays className="text-green-500" />
+                  <CalendarDaysIcon className="text-green-500" />
                   <p>
                     {getFullDayName(dayItem)}, {item?.courseData?.class_time}
                   </p>
@@ -67,7 +65,7 @@ const ClassJoiningItem = ({ item }) => {
           onClick={openModal}
           className="flex justify-center items-center gap-2 bg-hover_btn hover:bg-[#fecb63] font-semibold py-2 px-3 sm:px-4 rounded border-orange-400 border text-xs sm:text-sm"
         >
-          Class Routine <FaCalendarDay />
+          Class Routine <CalendarDays />
         </button>
       </div>
 
@@ -102,13 +100,13 @@ const ClassJoiningItem = ({ item }) => {
             </div>
             <div className="w-full md:w-[45%] flex flex-wrap gap-3 md:gap-2 items-center justify-between">
               <div className="flex gap-2 items-center">
-                <LuCalendarDays className="text-[#f16e3e]" />
+                <Calendar className="text-[#f16e3e]" />
                 <p className="text-[#f16e3e] font-medium text-sm">
                   {formatDate(moduleItem?.classDate)}
                 </p>
               </div>
               <div className="flex gap-2 items-center">
-                <FiClock className="text-[#f16e3e]" />
+                <Clock className="text-[#f16e3e]" />
                 <p className="text-[#f16e3e] font-medium text-sm">
                   {convertToAMPM(moduleItem?.classTime)}
                 </p>

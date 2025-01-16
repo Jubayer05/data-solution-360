@@ -1,5 +1,5 @@
+import { X } from 'lucide-react';
 import React, { useState } from 'react';
-import { RxCross2 } from 'react-icons/rx';
 import Modal from 'react-modal';
 import Login from './Login';
 import PhoneAuth from './PhoneLogin';
@@ -41,7 +41,7 @@ const LoginModal = ({ children, modalIsOpen, closeModal }) => {
           Learn with Data Solution 360
         </h2>
         <button onClick={closeModal}>
-          <RxCross2 className="text-xl md:text-2xl" />
+          <X className="text-xl md:text-2xl" />
         </button>
       </div>
       <hr className="my-6" />

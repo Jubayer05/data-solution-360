@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { ImCheckmark } from 'react-icons/im';
 import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
@@ -115,7 +114,7 @@ const PersonalDetails = () => {
         onClick={handleUpdate}
         className="w-full mt-5 px-4 py-3 bg-primary_btn text-white rounded flex items-center justify-center gap-2"
       >
-        Update <ImCheckmark />
+        Update
       </button>
     </div>
   );

@@ -1,6 +1,6 @@
 import React from 'react';
-import { BsChevronDown } from 'react-icons/bs';
 
+import { ChevronDown } from 'lucide-react';
 import { Button, FaqComp } from '../index';
 
 const Faq = () => {
@@ -50,7 +50,7 @@ const Triggers = ({ item, triggerOpen }) => {
       <span>{item.question}</span>{' '}
       <span>
         {/* {item.id === triggerOpen.id ? <AiOutlineDown /> : <AiOutlineRight />} */}
-        <BsChevronDown className="font-bold" />
+        <ChevronDown className="font-bold" />
       </span>
     </p>
   );

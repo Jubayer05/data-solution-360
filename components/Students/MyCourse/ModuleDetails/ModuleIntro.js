@@ -1,7 +1,7 @@
+import { Camera, Video } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { MdOutlineVideoCall, MdOutlineVideoCameraFront } from 'react-icons/md';
 import { colors } from '../../../../src/data/data';
 import { formatDateWithoutYear } from '../../../../src/utils/convertDate';
 
@@ -29,11 +29,11 @@ const ModuleIntro = ({ moduleData }) => {
             </h2>
             <div className="flex flex-wrap gap-4 items-center mt-1">
               <p className="flex items-center gap-1 text-sm">
-                <MdOutlineVideoCall className="text-lg lg:text-xl" />
+                <Video className="text-lg lg:text-xl" />
                 {moduleData?.liveClassNumber} Live Class
               </p>
               <p className="flex items-center gap-1 text-sm">
-                <MdOutlineVideoCameraFront className="text-lg lg:text-xl" />
+                <Camera className="text-lg lg:text-xl" />
                 {moduleData?.projectNumber || 0} Project
               </p>
             </div>
