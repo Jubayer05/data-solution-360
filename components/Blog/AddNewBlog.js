@@ -142,6 +142,7 @@ const AddNewBlog = () => {
             setBlogData({ ...blogData, orderNo: parseInt(e.target.value) })
           }
           type="number"
+          onWheel={(e) => e.target.blur()}
           className="w-full px-4 py-2 outline-none border-1 text-lg mt-3 "
         />
 

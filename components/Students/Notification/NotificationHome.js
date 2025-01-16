@@ -1,6 +1,5 @@
-import { Plus } from 'lucide-react';
+import { CheckCheck, Plus } from 'lucide-react';
 import React from 'react';
-import { IoCheckmarkDone } from 'react-icons/io5';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import { notifications } from '../../../src/data/dummy';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
@@ -25,7 +24,7 @@ const NotificationHome = () => {
           <div className="flex justify-between items-center rounded-md bg-white px-3 py-2">
             <p className="font-semibold">Unread(7)</p>
             <ButtonDashboard className="pt-1 pb-1 bg-transparent hover:bg-gray-200 gap-2">
-              <IoCheckmarkDone className="text-xl" /> Mark all
+              <CheckCheck className="text-xl" /> Mark all
             </ButtonDashboard>
           </div>
           <div className="mt-5 rounded-md bg-white px-5">

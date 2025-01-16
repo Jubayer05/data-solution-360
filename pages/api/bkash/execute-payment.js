@@ -36,7 +36,6 @@ export default async function executePayment(req, res) {
 
     // Parse the response data
     const responseData = await response.json();
-    console.log('Execute Payment:', responseData);
 
     // Send the response back to the client
     res.status(200).json(responseData);

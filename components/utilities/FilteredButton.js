@@ -31,7 +31,6 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
       });
 
       setFilteredData(filtered);
-      console.log('Filtered data:', filtered); // Debugging filtered data
     },
     [setFilteredData],
   );
@@ -41,7 +40,6 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
     if (renderCount.current < 4) {
       filterData(activeButton, data); // Run the filter logic
       renderCount.current += 1; // Increment the render count
-      console.log(`Render count: ${renderCount.current}`);
     }
   }, [data, filterData, activeButton]); // Depend only on `data`, `filterData`, and `activeButton`
 

@@ -36,7 +36,7 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
   const handleJoinLive = (item) => {
     const timeDifference = getTimeDifference(item?.classTime);
 
-    if (timeDifference > 20) {
+    if (timeDifference > 10) {
       Swal.fire(
         'Dear Student',
         'You can join each class 10 minutes before it starts.',

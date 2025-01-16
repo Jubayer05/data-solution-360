@@ -1,5 +1,4 @@
 import { Progress, Table } from 'antd';
-import { XCircle } from 'lucide-react';
 import Image from 'next/image';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -169,7 +168,7 @@ const MyBlogs = () => {
       .then(() => {
         Swal.fire('Updated!', 'Your file has been updated.', 'success').then(
           () => {
-            // window.location.reload();
+            window.location.reload();
           },
         );
       })
@@ -208,17 +207,10 @@ const MyBlogs = () => {
         closeModal={closeModal}
         setModalIsOpen={setModalIsOpen}
       >
-        <div className="flex justify-between ">
-          <div />
+        <div className="flex justify-center ">
           <h2 className="text-2xl font-bold text-center mb-8 ">
             Edit The Blog
           </h2>
-          <div>
-            <XCircle
-              onClick={() => closeModal()}
-              className="text-2xl cursor-pointer"
-            />
-          </div>
         </div>
         <div className="w-3/4 mx-auto">
           <label htmlFor="orderNo" className="font-semibold mt-3 block">
@@ -240,6 +232,7 @@ const MyBlogs = () => {
                 orderNo: parseInt(e.target.value),
               })
             }
+            onWheel={(e) => e.target.blur()}
             type="number"
             className="w-full px-4 py-2 outline-none border-1 text-lg mt-3 "
           />
@@ -337,6 +330,7 @@ export default MyBlogs;
 
 const isContentEmpty = (content) => {
   // Use a regular expression to check if the content contains only whitespace or line breaks
-  const isEmpty = /^(<p><br><\/p>\s*)*$/.test(content);
+  const isEmpty = /^(<div><br><\/div>\s*|<p><br><\/p>\s*)*$/.test(content);
+
   return isEmpty;
 };

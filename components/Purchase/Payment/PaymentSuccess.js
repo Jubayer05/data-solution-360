@@ -83,7 +83,6 @@ const PaymentSuccess = () => {
         currentCourse?.enrolled_students &&
         !currentCourse.enrolled_students.includes(studentId)
       ) {
-        // console.log('START: UPDATING COURSE_DATA_BATCH', 'Hello world');
         enrollStudentInCourse(currentCourse, studentId)
           .then(() => {
             const isAlreadyEnrolled = findCurrentUser?.enrolled_courses.some(
@@ -96,8 +95,6 @@ const PaymentSuccess = () => {
                 findCurrentUser,
                 paymentResponse,
               );
-            } else {
-              console.log('User is already enrolled in this course.');
             }
           })
           .then(() => {
@@ -173,7 +170,6 @@ const PaymentSuccess = () => {
 
   useEffect(() => {
     if (!paymentID || !id_token) {
-      console.log('Skipping verifyPayment, values are missing.');
       return;
     }
 

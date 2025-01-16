@@ -97,6 +97,7 @@ const AddFaq = () => {
                 id="orderFaq"
                 name="orderFaq"
                 type="number"
+                onWheel={(e) => e.target.blur()}
                 onChange={formik.handleChange}
                 value={formik.values.orderFaq}
                 className="w-full px-2 py-3 rounded-md bg-[#f1f1f1] outline-none"

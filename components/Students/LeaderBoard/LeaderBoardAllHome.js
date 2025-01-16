@@ -24,7 +24,6 @@ const LeaderBoardHome = () => {
   );
 
   const topThree = sortedArray?.slice(0, 3);
-  console.log(topThree);
 
   const remainingSorted = sortedArray?.slice(3);
 

@@ -5,10 +5,6 @@ export default async function handler(req, res) {
 
   const { paymentID, status } = req.query;
 
-  // Log the received paymentID and status for debugging
-  console.log('Received paymentID:', paymentID);
-  console.log('Payment status:', status);
-
   // Check if the payment was successful
   if (status === 'success') {
     // Payment was successful
@@ -17,7 +13,6 @@ export default async function handler(req, res) {
     return res.status(200).json({ message: 'Payment successful', paymentID });
   } else {
     // Payment was not successful
-    console.log('Payment was not successful');
     return res.status(400).json({ error: 'Payment was not successful' });
   }
 }

@@ -1,6 +1,6 @@
 import { Collapse } from 'antd';
+import { ChevronDown, ChevronUp } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
-import { IoCaretDownSharp, IoCaretUpSharp } from 'react-icons/io5';
 import { loadData } from '../../src/hooks/loadData';
 
 const { Panel } = Collapse;
@@ -73,11 +73,11 @@ const Faq = ({ title }) => {
         >
           {showMore ? (
             <span className="flex items-center justify-center">
-              See Less <IoCaretUpSharp className="ml-1" />
+              See Less <ChevronUp className="ml-1" />
             </span>
           ) : (
             <span className="flex items-center justify-center">
-              See More <IoCaretDownSharp className="ml-1" />
+              See More <ChevronDown className="ml-1" />
             </span>
           )}
         </button>

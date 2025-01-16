@@ -16,12 +16,10 @@ const useSubmitQuizAndUpdateLeaderboard = () => {
 
   const submitQuizAndUpdateLeaderboard = async (userId, newQuizScore) => {
     if (!courseId || !moduleId || !quizId) {
-      console.log('Missing courseId, moduleId, or quizId from router query');
       return;
     }
 
     if (!enrolledCourse) {
-      console.log('No enrolled course data found');
       return;
     }
 
@@ -30,7 +28,6 @@ const useSubmitQuizAndUpdateLeaderboard = () => {
       (module) => module.id === moduleId,
     );
     if (!moduleData) {
-      console.log('Module not found');
       return;
     }
 
@@ -38,7 +35,6 @@ const useSubmitQuizAndUpdateLeaderboard = () => {
       (lesson) => lesson.id === quizId,
     );
     if (!lessonData) {
-      console.log('Lesson not found');
       return;
     }
 
@@ -70,15 +66,11 @@ const useSubmitQuizAndUpdateLeaderboard = () => {
     // Update courseData's leaderboard_data with the latest leaderboard (overwrite the existing one)
     courseData.leaderboard_data = leaderboard;
 
-    // console.log(courseData.leaderboard_data);
-
     // 3. Update Firestore with the new quiz data and leaderboard data
     await db
       .collection('course_data_batch')
       .doc(enrolledCourse.id) // Use the document ID from the query result
       .update(courseData);
-
-    console.log('Quiz and leaderboard updated successfully');
   };
 
   return { submitQuizAndUpdateLeaderboard };

@@ -33,7 +33,6 @@ const PersonalDetails = () => {
 
   const handleUpdate = () => {
     const updatedData = { ...studentInfo };
-    console.log(updatedData);
     if (photoUrl) {
       updatedData.photoUrl = photoUrl;
     } else {
@@ -62,8 +61,6 @@ const PersonalDetails = () => {
         Swal.fire('Hello!', 'Profile cannot be updated!', 'error');
       });
   };
-
-  // console.log(findCurrentUser);
 
   return (
     <div>

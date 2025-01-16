@@ -72,8 +72,6 @@ const Navbar = ({ home }) => {
     }
   }, [eng]);
 
-  console.log(findCurrentUser);
-
   useEffect(() => {
     const url = window.location.href.split('/').slice(-1)[0];
     setUrl(url);

@@ -46,12 +46,10 @@ const JoinLive = () => {
       });
     } else {
       if (!courseId || !moduleId) {
-        console.log('Missing courseId or moduleId from router query');
         return;
       }
 
       if (!enrolledCourse) {
-        console.log('No enrolled course data found');
         return;
       }
 
@@ -74,9 +72,6 @@ const JoinLive = () => {
           leaderboard[userIndex].hasJoinedLive &&
           leaderboard[userIndex].hasJoinedLive[sessionId]
         ) {
-          console.log(
-            'User has already joined the live class for this session',
-          );
           return; // Prevent multiple attendance gains for the same session
         }
 

@@ -37,10 +37,8 @@ const BkashCallback = () => {
               executeData.error &&
               executeData.error.includes('payment not successful')
             ) {
-              console.log('Payment was not successful.');
               router.push(`/purchase/payment-failure?paymentID=${paymentID}`);
             } else {
-              console.log('An unexpected error occurred.');
               router.push(`/purchase/payment-failure?paymentID=${paymentID}`);
             }
           }
@@ -50,10 +48,8 @@ const BkashCallback = () => {
           router.push(`/purchase/payment-failure?paymentID=${paymentID}`);
         }
       } else if (status === 'failed') {
-        console.log('Payment failed, redirecting...');
         router.push(`/purchase/payment-failure?paymentID=${paymentID}`);
       } else {
-        console.log('Payment details are not valid. Redirecting...');
         router.push(`/purchase/payment-failure?paymentID=${paymentID}`);
       }
     };

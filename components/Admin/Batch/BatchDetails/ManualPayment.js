@@ -50,8 +50,6 @@ const ManualPayment = () => {
     (course) => course.id === url,
   );
 
-  console.log(currentEnrolledCourse);
-
   const handleSubmit = () => {
     if (!userData || !currentEnrolledCourse || !inputAmount) {
       Swal.fire(
@@ -160,6 +158,7 @@ const ManualPayment = () => {
               <input
                 type="number"
                 onChange={(e) => setPhoneNumber(e.target.value)}
+                onWheel={(e) => e.target.blur()}
                 placeholder="01712345678"
                 className="w-full px-4 py-2.5 text-base outline-none border-1 mt-1.5 rounded"
               />
@@ -173,6 +172,7 @@ const ManualPayment = () => {
             <input
               type="number"
               placeholder="5990"
+              onWheel={(e) => e.target.blur()}
               onChange={(e) => setInputAmount(e.target.value)}
               className="w-full px-4 py-2.5 text-base outline-none border-1 mt-1.5 rounded"
             />

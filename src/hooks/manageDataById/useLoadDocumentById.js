@@ -19,7 +19,6 @@ const useFetchDocById = (collectionName, docId) => {
         if (docSnap.exists()) {
           setData(docSnap.data());
         } else {
-          console.log('No such document!');
           setData(null);
         }
       } catch (err) {

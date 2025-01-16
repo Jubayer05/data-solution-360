@@ -1,6 +1,7 @@
+/* eslint-disable jsx-a11y/alt-text */
 import { Progress } from 'antd';
+import { Image } from 'lucide-react';
 import React, { useRef, useState } from 'react';
-import { RiImageAddFill } from 'react-icons/ri';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
 
@@ -45,7 +46,6 @@ const FileInput = ({ folderName, setImageState }) => {
             .getDownloadURL()
             .then((url) => {
               setImageState(url);
-              console.log(url);
             });
         },
       );
@@ -79,7 +79,7 @@ const FileInput = ({ folderName, setImageState }) => {
           onClick={handleButtonClick}
           className="w-full px-4 py-3 bg-[#fecb6c3a] rounded font-semibold flex items-center justify-center gap-2"
         >
-          Upload File <RiImageAddFill />
+          Upload File <Image />
         </button>
       </div>
     </div>

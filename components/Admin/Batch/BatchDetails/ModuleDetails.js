@@ -14,7 +14,6 @@ const ModuleDetails = () => {
   const [url, setUrl] = useState('');
 
   const [updatedModule, setUpdatedModule] = useState([]);
-  console.log(updatedModule);
 
   useEffect(() => {
     loadData('course_data_batch', setCourseDataBatch);
@@ -29,8 +28,6 @@ const ModuleDetails = () => {
   useEffect(() => {
     setUpdatedModule(currentEnrolledCourse?.course_modules);
   }, [currentEnrolledCourse]);
-
-  // console.log(currentEnrolledCourse);
 
   const columns = [
     {

@@ -45,10 +45,10 @@ const AllBatch = () => {
     Swal.fire({
       title: 'Are you sure?',
       html: `
-    <p>You need to agree before deleting this file.</p>
-    <input type="checkbox" id="agreeCheckbox" />
-    <label for="agreeCheckbox">I agree to the terms and conditions</label>
-  `,
+        <p>You need to agree before deleting this file.</p>
+        <input type="checkbox" id="agreeCheckbox" />
+        <label for="agreeCheckbox">I agree to the terms and conditions</label>
+      `,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Yes, delete it!',
@@ -69,13 +69,14 @@ const AllBatch = () => {
           .doc(item?.id)
           .delete()
           .then(() => {
+            // Update state to remove the deleted batch without reloading the page
+            setCourseDataBatch((prevBatchData) =>
+              prevBatchData.filter((batch) => batch.id !== item?.id),
+            );
             Swal.fire('Deleted!', 'Your batch has been deleted.', 'success');
           })
           .catch((err) => {
             Swal.fire('Error!', 'Something went wrong.', 'error');
-          })
-          .finally(() => {
-            window.location.reload();
           });
       }
     });
@@ -91,7 +92,7 @@ const AllBatch = () => {
           </h2>
 
           {groupedArr.map((item, index) => (
-            <div key={item.title} className={`mt-10`}>
+            <div key={index} className={`mt-10`}>
               <h2
                 className="text-xl text-[#231f40] font-bold font-dash_heading "
                 style={{ color: colors[index + 2] }}
@@ -100,7 +101,7 @@ const AllBatch = () => {
               </h2>
               <div className="grid grid-cols-4 gap-5 mt-5">
                 {item?.info.map((product) => (
-                  <div key={item.key} className="border-1 ">
+                  <div key={product.id} className="border-1">
                     <Link href={`/admin/course/${product.id}`}>
                       <div className="p-3">
                         <Image

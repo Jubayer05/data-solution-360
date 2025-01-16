@@ -2,16 +2,22 @@ import { Calendar, CalendarDays, CalendarDaysIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
 import { convertToAMPM } from '../../../src/utils/convertAMPM';
-import { formatDate, getFullDayName } from '../../../src/utils/convertDate';
+import {
+  formatDate,
+  getFullDayName,
+  getTimeDifference,
+} from '../../../src/utils/convertDate';
 import useIsToday from '../../../src/utils/useIsToday';
 import CustomModal from '../../utilities/CustomModal';
 
-const ClassJoiningItem = ({ item }) => {
+const ClassJoiningItem = ({ item, batchId }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
 
   const currentModule = item?.course_modules.find(
     (item) => item.moduleStatus == 'running',
   );
+
+  console.log(batchId);
 
   const openModal = () => {
     setModalIsOpen(true);
@@ -87,11 +93,13 @@ const ClassJoiningItem = ({ item }) => {
         {currentModule?.lessons.map((moduleItem) => (
           <div
             key={moduleItem.id}
-            className="flex flex-wrap md:flex-nowrap justify-between items-center rounded-lg border bg-white p-4 gap-4 my-4"
+            className={`flex flex-wrap md:flex-nowrap justify-between items-center rounded-lg border bg-white p-4 gap-4 my-4 ${
+              !moduleItem?.liveClassLink ? 'blur-md pointer-events-none' : ''
+            }`}
           >
             <div className="w-full md:w-[55%]">
               <h2 className="text-[18px] sm:text-[22px] font-semibold pb-3">
-                {moduleItem.title}
+                {moduleItem?.title}
               </h2>
               <div className="flex gap-1 md:gap-2 flex-col md:flex-row items-start md:items-center">
                 <strong className="text-gray-500">Instructor:</strong>
@@ -102,16 +110,20 @@ const ClassJoiningItem = ({ item }) => {
               <div className="flex gap-2 items-center">
                 <Calendar className="text-[#f16e3e]" />
                 <p className="text-[#f16e3e] font-medium text-sm">
-                  {formatDate(moduleItem?.classDate)}
+                  {moduleItem?.classDate && formatDate(moduleItem.classDate)}
                 </p>
               </div>
               <div className="flex gap-2 items-center">
                 <Clock className="text-[#f16e3e]" />
                 <p className="text-[#f16e3e] font-medium text-sm">
-                  {convertToAMPM(moduleItem?.classTime)}
+                  {moduleItem?.classTime && convertToAMPM(moduleItem.classTime)}
                 </p>
               </div>
-              <HandleButton moduleItem={moduleItem} />
+              <HandleButton
+                moduleItem={moduleItem}
+                batchId={batchId}
+                moduleId={currentModule?.id}
+              />
             </div>
           </div>
         ))}
@@ -122,8 +134,23 @@ const ClassJoiningItem = ({ item }) => {
 
 export default ClassJoiningItem;
 
-const HandleButton = ({ moduleItem }) => {
+const HandleButton = ({ moduleItem, batchId, moduleId }) => {
   const classToday = useIsToday(moduleItem?.classDate);
+
+  const handleJoinLive = (item) => {
+    const timeDifference = getTimeDifference(item?.classTime);
+
+    if (timeDifference > 10) {
+      Swal.fire(
+        'Dear Student',
+        'You can join each class 10 minutes before it starts.',
+        'warning',
+      );
+    } else {
+      window.location.href = `/students/my-course/${batchId}/module/${moduleId}/join/live/${item?.id}`;
+    }
+  };
+
   return (
     <div>
       {moduleItem?.liveClassLink && moduleItem?.classFinished ? (
@@ -131,7 +158,10 @@ const HandleButton = ({ moduleItem }) => {
           Class Finished
         </button>
       ) : moduleItem?.liveClassLink && classToday ? (
-        <button className="px-4 py-2 md:py-3 bg-primary_btn text-white rounded flex items-center justify-center gap-2 text-sm">
+        <button
+          onClick={() => handleJoinLive(moduleItem)}
+          className="px-4 py-2 md:py-3 bg-primary_btn text-white rounded flex items-center justify-center gap-2 text-sm"
+        >
           Join Live Class
         </button>
       ) : moduleItem?.liveClassLink && classToday === false ? (

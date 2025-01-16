@@ -5,8 +5,6 @@ import firebase from '../../../firebase';
 const db = firebase.firestore();
 
 export default async function handler(req, res) {
-  console.log('Headers received:', req.headers); // Debug incoming headers
-
   const providedApiKey = req.headers['x-api-key']; // Ensure key is read case-sensitively
   const validApiKey = process.env.USER_COLLECTION_API_KEY;
 

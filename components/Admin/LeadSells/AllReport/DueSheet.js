@@ -1,7 +1,6 @@
 import { Button, Table } from 'antd';
 import { CheckCircle } from 'lucide-react';
 import { useEffect, useState } from 'react';
-import { TbCurrencyTaka } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../../firebase';
@@ -49,8 +48,6 @@ const DueSheet = ({ sells }) => {
             const updatedDueData = dueData.filter(
               (data) => data.id !== record.id,
             );
-
-            console.log(updatedDueData);
 
             setDueData(updatedDueData);
           });
@@ -139,8 +136,6 @@ const DueSheet = ({ sells }) => {
     },
   ];
 
-  console.log(dueData);
-
   return (
     <div>
       <div className="max-w-6xl mx-auto my-20 font-dash_heading">
@@ -149,10 +144,7 @@ const DueSheet = ({ sells }) => {
 
           <h2 className="text-lg font-bold mb-4 flex items-center">
             Total Due Amount:{' '}
-            <span className="text-primary flex items-center">
-              <TbCurrencyTaka />
-              {totalDue}
-            </span>
+            <span className="text-primary flex items-center">৳ {totalDue}</span>
           </h2>
 
           <Table

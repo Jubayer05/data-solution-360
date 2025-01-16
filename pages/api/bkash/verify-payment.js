@@ -33,7 +33,6 @@ export default async function handler(req, res) {
     // Check if the response is successful
     if (!response.ok) {
       const errorData = await response.json();
-      console.log('Error in payment status:', errorData);
       return res.status(400).json({
         error: 'Failed to retrieve payment status',
         details: errorData,
@@ -42,7 +41,6 @@ export default async function handler(req, res) {
 
     // Parse the response data
     const paymentStatus = await response.json();
-    console.log('Payment status response:', paymentStatus); // Log the response for debugging
 
     // Step 3: Check and return payment status
     if (paymentStatus.statusCode === '0000') {
@@ -60,7 +58,6 @@ export default async function handler(req, res) {
           .json({ message: 'Unknown payment status', paymentStatus });
       }
     } else {
-      console.log('Error in payment status:', paymentStatus);
       return res
         .status(400)
         .json({ error: 'Failed to retrieve payment status', paymentStatus });

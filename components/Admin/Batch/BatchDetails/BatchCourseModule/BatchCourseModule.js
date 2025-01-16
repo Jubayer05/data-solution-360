@@ -115,7 +115,6 @@ const BatchCourseModule = () => {
     };
     setModuleData(updatedModuleData);
     updateModuleInFirestore(updatedModuleData);
-    // console.log(updatedModuleData);
   };
 
   if (loading) {

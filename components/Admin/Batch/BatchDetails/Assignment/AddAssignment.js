@@ -124,6 +124,7 @@ const AddAssignment = () => {
               title="Total Marks"
               placeholder="10"
               type="number"
+              onWheel={(e) => e.target.blur()}
               value={totalMarks}
               func={(id, value) => setTotalMarks(value)}
             />

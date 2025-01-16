@@ -52,8 +52,6 @@ const EditBatch = () => {
     }
   };
 
-  console.log(findBatchInfo);
-
   const handleUpdateBatch = () => {
     setLoading(true);
     const updatedCourse = {

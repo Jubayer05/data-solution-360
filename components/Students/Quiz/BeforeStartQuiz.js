@@ -39,8 +39,6 @@ const BeforeStartQuiz = () => {
     router.back();
   };
 
-  console.log(showResult, checkAnswer);
-
   return (
     <div>
       {startQuiz ? (

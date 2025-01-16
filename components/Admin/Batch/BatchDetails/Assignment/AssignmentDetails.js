@@ -203,6 +203,7 @@ const AssignmentDetails = () => {
           type="number"
           value={marks[record.student_id] || ''}
           onChange={(e) => handleMarksChange(record.student_id, e.target.value)}
+          onWheel={(e) => e.target.blur()}
         />
       ),
     },

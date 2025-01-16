@@ -1,14 +1,14 @@
 import { Avatar } from 'antd';
 import React, { useState } from 'react';
-import { AiOutlineUser } from 'react-icons/ai';
-import {
-  BiChevronRight,
-  BiSolidChevronDown,
-  BiSolidChevronRight,
-} from 'react-icons/bi';
-import { FiLogIn, FiLogOut } from 'react-icons/fi';
-import { MdClose } from 'react-icons/md';
 
+import {
+  ChevronDown,
+  ChevronRight,
+  LogIn,
+  LogOut,
+  User,
+  X,
+} from 'lucide-react';
 import Link from 'next/link';
 import Swal from 'sweetalert2';
 import { navDropItems, navItems } from '../../../src/data/data';
@@ -60,13 +60,13 @@ const Sidebar = ({
           ) : (
             <Avatar
               size={56}
-              icon={<AiOutlineUser />}
+              icon={<User />}
               style={{ display: 'flex', backgroundColor: '#3d9970' }}
               className="cursor-pointer flex justify-center items-center"
             />
           )}
 
-          <MdClose
+          <X
             onClick={() => setOpenNav(false)}
             className="text-2xl text-[#333333]"
           />
@@ -87,9 +87,9 @@ const Sidebar = ({
                       {language === 'English' ? item.title : item.titleBang}
                     </span>
                     {openDropdown === item.id ? (
-                      <BiSolidChevronDown />
+                      <ChevronDown />
                     ) : (
-                      <BiSolidChevronRight />
+                      <ChevronRight />
                     )}
                   </button>
 
@@ -113,7 +113,7 @@ const Sidebar = ({
                                 ? dropdownItem.title
                                 : dropdownItem.titleBang}
                             </span>
-                            <BiChevronRight className="text-xl" />
+                            <ChevronRight className="text-xl" />
                           </Link>
                         </li>
                       ))}
@@ -135,7 +135,7 @@ const Sidebar = ({
                   <span>
                     {language === 'English' ? item.title : item.titleBang}
                   </span>
-                  <BiChevronRight className="text-xl" />
+                  <ChevronRight className="text-xl" />
                 </Link>
               )}
             </li>
@@ -178,7 +178,7 @@ const Sidebar = ({
                       {language === 'English' ? item.title : item.titleBang}
                     </span>
 
-                    <BiChevronRight className="text-xl" />
+                    <ChevronRight className="text-xl" />
                   </Link>
                 </li>
               ))}
@@ -196,7 +196,7 @@ const Sidebar = ({
               onClick={handleLogout}
             >
               <span className="font-bold">Logout</span>
-              <FiLogOut className="text-lg" />
+              <LogOut className="text-lg" />
             </button>
           ) : (
             <div>
@@ -212,7 +212,7 @@ const Sidebar = ({
                 className={`w-full flex rounded-md font-bold justify-center items-center 
                   py-3 px-3 my-1 mt-8 text-[#fff] bg-secondary_btn`}
               >
-                <FiLogIn className="text-sm" />{' '}
+                <LogIn className="text-sm" />{' '}
                 <span
                   className={`pl-2 ${
                     language === 'English' ? 'font-body' : 'font-bangla'

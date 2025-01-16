@@ -29,6 +29,7 @@ const InputBox = ({
         name={name}
         type={type}
         placeholder={placeholder}
+        onWheel={(e) => e.target.blur()}
         className="w-full px-4 py-2.5 text-base outline-none border-1 mt-1.5 rounded"
       />
     </div>

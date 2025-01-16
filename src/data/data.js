@@ -1,40 +1,27 @@
-import { CgProfile } from 'react-icons/cg';
-import { FaFacebookF, FaLinkedinIn, FaWhatsapp } from 'react-icons/fa';
-import { FiVideo } from 'react-icons/fi';
-import { IoLogoYoutube } from 'react-icons/io';
-import { LiaSellsy } from 'react-icons/lia';
 import {
-  MdContentCopy,
-  MdOutlineCreateNewFolder,
-  MdOutlineDiscount,
-  MdOutlineLeaderboard,
-  MdOutlineSummarize,
-  MdReviews,
-} from 'react-icons/md';
-import { RiAdminFill, RiCoupon3Line } from 'react-icons/ri';
+  BarChart,
+  Clipboard,
+  ClipboardList,
+  DollarSign,
+  Edit,
+  Facebook,
+  FileMinus,
+  FilePlus,
+  FileSearch,
+  FileText,
+  Home,
+  Linkedin,
+  MessageCircle,
+  PieChart,
+  PlayCircle,
+  User,
+  UserPlus,
+  Users,
+  Video,
+  Youtube,
+} from 'lucide-react';
 
-import {
-  AiOutlineFundView,
-  AiOutlineHome,
-  AiOutlineVideoCameraAdd,
-} from 'react-icons/ai';
-import { FiBookOpen } from 'react-icons/fi';
-import { GiTeacher } from 'react-icons/gi';
-import { RiFileVideoFill } from 'react-icons/ri';
-
-import { ImBlog } from 'react-icons/im';
-import {
-  MdCastForEducation,
-  MdOutlineContentPaste,
-  MdOutlineUnsubscribe,
-} from 'react-icons/md';
-
-import { RiVideoAddLine } from 'react-icons/ri';
-
-import { FaUsersViewfinder } from 'react-icons/fa6';
-import { RiTeamLine } from 'react-icons/ri';
-import { TbHomeEdit, TbReportSearch } from 'react-icons/tb';
-
+// NOTE: FOCUS
 export const linksAdmin = [
   {
     title: 'Dashboard',
@@ -43,19 +30,19 @@ export const linksAdmin = [
       {
         name: 'Home',
         link: '/admin/dashboard',
-        icon: <AiOutlineHome />,
+        icon: <Home />,
         role: ['admin'],
       },
       {
         name: 'Edit Home Page',
         link: '/admin/home-page',
-        icon: <TbHomeEdit />,
+        icon: <Edit />,
         role: ['content_manager', 'admin'],
       },
       {
         name: 'Set User Role',
         link: '/admin/user-role',
-        icon: <FaUsersViewfinder />,
+        icon: <Users />,
         role: ['admin'],
       },
     ],
@@ -67,25 +54,25 @@ export const linksAdmin = [
       {
         name: 'Add a course',
         link: '/admin/course/add-course',
-        icon: <AiOutlineVideoCameraAdd />,
+        icon: <FilePlus />,
         role: ['admin', 'content_manager'],
       },
       {
         name: 'Manage Courses',
         link: '/admin/course/manage-course',
-        icon: <MdCastForEducation />,
+        icon: <Clipboard />,
         role: ['admin', 'content_manager'],
       },
       {
         name: 'New batch',
         link: '/admin/course/create-new-batch',
-        icon: <MdOutlineCreateNewFolder />,
+        icon: <FileText />,
         role: ['admin', 'content_manager'],
       },
       {
         name: 'All batch',
         link: '/admin/course/all-batch',
-        icon: <MdOutlineContentPaste />,
+        icon: <ClipboardList />,
         role: ['admin', 'content_manager'],
       },
     ],
@@ -97,13 +84,13 @@ export const linksAdmin = [
       {
         name: 'Add blog',
         link: '/admin/addBlogContent',
-        icon: <ImBlog />,
+        icon: <FilePlus />,
         role: ['admin', 'content_manager'],
       },
       {
         name: 'Edit Blog',
         link: '/admin/myBlogs',
-        icon: <AiOutlineFundView />,
+        icon: <FileText />,
         role: ['admin', 'content_manager'],
       },
     ],
@@ -115,13 +102,13 @@ export const linksAdmin = [
       {
         name: 'New Students',
         link: '/admin/new-student',
-        icon: <MdOutlineUnsubscribe />,
+        icon: <UserPlus />,
         role: ['admin'],
       },
       {
         name: 'All Students',
         link: '/admin/all-student',
-        icon: <RiTeamLine />,
+        icon: <Users />,
         role: ['admin'],
       },
     ],
@@ -133,13 +120,13 @@ export const linksAdmin = [
       {
         name: 'Create form',
         link: '/admin/forms/new-form',
-        icon: <MdOutlineUnsubscribe />,
+        icon: <FileText />,
         role: ['admin', 'content_manager'],
       },
       {
         name: 'Form data',
         link: '/admin/forms/form-data',
-        icon: <RiTeamLine />,
+        icon: <ClipboardList />,
         role: ['admin'],
       },
     ],
@@ -151,13 +138,13 @@ export const linksAdmin = [
       {
         name: 'Add Coupon',
         link: '/admin/coupons/new-coupon',
-        icon: <RiCoupon3Line />,
+        icon: <DollarSign />,
         role: ['admin', 'content_manager'],
       },
       {
         name: 'Coupon data',
         link: '/admin/coupons/coupon-data',
-        icon: <MdOutlineDiscount />,
+        icon: <BarChart />,
         role: ['admin', 'content_manager'],
       },
     ],
@@ -169,25 +156,25 @@ export const linksAdmin = [
       {
         name: 'Lead Tracking',
         link: '/admin/lead-sells/lead-tracking',
-        icon: <MdOutlineLeaderboard />,
+        icon: <PieChart />,
         role: ['admin', 'lead_member'],
       },
       {
         name: 'Sells Tracking',
         link: '/admin/lead-sells/sells-tracking',
-        icon: <LiaSellsy />,
+        icon: <DollarSign />,
         role: ['admin', 'sells_member'],
       },
       {
         name: 'All Reports',
         link: '/admin/lead-sells/all-reports',
-        icon: <TbReportSearch />,
+        icon: <FileSearch />,
         role: ['admin'],
       },
       {
         name: 'Summary',
         link: '/admin/lead-sells/summary-reports',
-        icon: <MdOutlineSummarize />,
+        icon: <FileMinus />,
         role: ['admin'],
       },
     ],
@@ -199,50 +186,134 @@ export const linksAdmin = [
       {
         name: 'Subscribed Users',
         link: '/admin/subscribed-user',
-        icon: <MdOutlineUnsubscribe />,
+        icon: <FileText />,
         role: ['admin'],
       },
       {
         name: 'Team Member',
         link: '/admin/team_member',
-        icon: <RiTeamLine />,
+        icon: <Users />,
         role: ['admin', 'content_manager'],
       },
       {
         name: 'Instructor',
         link: '/admin/instructors',
-        icon: <GiTeacher />,
+        icon: <UserPlus />,
         role: ['admin', 'content_manager'],
       },
     ],
   },
 ];
 
+// NOTE: FOCUS
 export const linksStudents = [
   {
     name: 'Class Joining',
     link: '/students/class-joining',
-    icon: <RiVideoAddLine />,
+    icon: <PlayCircle />,
   },
   {
     name: 'My Course',
     link: '/students/my-course',
-    icon: <MdOutlineContentPaste />,
+    icon: <Clipboard />,
   },
   {
     name: 'Resource',
     link: '/students/resource',
-    icon: <FiBookOpen />,
+    icon: <FileText />,
   },
   {
     name: 'Recording',
     link: '/students/recording',
-    icon: <RiFileVideoFill />,
+    icon: <Video />,
   },
   {
     name: 'Profile',
     link: '/students/profile',
-    icon: <CgProfile />,
+    icon: <User />,
+  },
+];
+
+// NOTE: FOCUS
+export const footerFollowUs = [
+  {
+    id: '1',
+    link: 'https://www.facebook.com/Datasolution360',
+    title: 'Facebook',
+    icon: <Facebook />,
+    brandColor: '#1877F2',
+  },
+
+  {
+    id: '2',
+    link: 'https://www.linkedin.com/company/data-solution-360',
+    title: 'LinkedIn',
+    icon: <Linkedin />,
+    brandColor: '#0A66C2',
+  },
+
+  {
+    id: '3',
+    link: 'https://wa.me/+8801996104096',
+    title: 'Whatsapp',
+    icon: <MessageCircle />,
+    brandColor: '#25D366',
+  },
+  {
+    id: '4',
+    link: 'https://www.youtube.com/@datasolution-3607',
+    title: 'Youtube',
+    icon: <Youtube />,
+    brandColor: '#FF0000',
+  },
+];
+
+// NOTE: FOCUS
+export const dashboardAdmin = [
+  {
+    id: '1',
+    title: 'Total Students',
+    gridClass: false,
+    classes: '',
+    bgFrom: ' #1a9f53',
+    bgTo: '#4eda89',
+    icon: <Users />,
+  },
+
+  {
+    id: '2',
+    title: 'Total Courses',
+    gridClass: false,
+    classes: '',
+    bgFrom: '#be0ee1',
+    bgTo: '#ed68ff',
+    icon: <Clipboard />,
+  },
+  {
+    id: '3',
+    title: 'Total Reviews',
+    gridClass: true,
+    bgTo: '#ff5648',
+    bgFrom: '#da5568',
+    icon: <Users />,
+  },
+  {
+    id: '4',
+    title: ' Total Video Lessons',
+    gridClass: false,
+    classes: '',
+    bgFrom: '#2b77e5',
+    bgTo: '#64b3f6',
+    icon: <Video />,
+  },
+  {
+    id: '5',
+    title: 'Total Blog',
+    gridClass: false,
+    classes: '',
+    bgFrom: '#e1940e',
+    bgTo: '#f4d02b',
+    icon: <PlayCircle />,
   },
 ];
 
@@ -268,23 +339,6 @@ export const navItems = [
     slug: 'services',
     titleBang: 'সার্ভিস',
     link: '/services',
-    // dropdown: [
-    //   {
-    //     id: 'dropdown-1',
-    //     title: 'Ed-Tech',
-    //     link: '/services/edTech',
-    //   },
-    //   // {
-    //   //   id: 'dropdown-2',
-    //   //   title: 'B2B',
-    //   //   link: '/services/b2b',
-    //   // },
-    //   // {
-    //   //   id: 'dropdown-3',
-    //   //   title: 'Consultancy',
-    //   //   link: '/services/consultancy',
-    //   // },
-    // ],
   },
   {
     id: 'nav-4',
@@ -309,12 +363,6 @@ export const navItems2 = [
     titleBang: 'সাবস্ক্রাইব',
     link: '/#subscribe',
   },
-  // {
-  //   id: 'nav-7',
-  //   title: 'Practice Zone',
-  //   titleBang: 'প্র্যাক্টিস জোন',
-  //   link: '/practice-code',
-  // },
 ];
 
 export const navDropItems = [
@@ -431,8 +479,6 @@ export const footerExploreData = [
   },
 ];
 
-export const footerUsefulLinksData = [];
-
 export const footerAboutData = [
   {
     id: '1',
@@ -458,88 +504,6 @@ export const footerAboutData = [
     id: '5',
     title: 'Return and Refund Policy',
     Link: '/return-and-refund-policy',
-  },
-];
-
-export const footerFollowUs = [
-  {
-    id: '1',
-    link: 'https://www.facebook.com/Datasolution360',
-    title: 'Facebook',
-    icon: <FaFacebookF />,
-    brandColor: '#1877F2',
-  },
-
-  {
-    id: '2',
-    link: 'https://www.linkedin.com/company/data-solution-360',
-    title: 'LinkedIn',
-    icon: <FaLinkedinIn />,
-    brandColor: '#0A66C2',
-  },
-
-  {
-    id: '3',
-    link: 'https://wa.me/+8801996104096',
-    title: 'Whatsapp',
-    icon: <FaWhatsapp />,
-    brandColor: '#25D366',
-  },
-  {
-    id: '4',
-    link: 'https://www.youtube.com/@datasolution-3607',
-    title: 'Youtube',
-    icon: <IoLogoYoutube />,
-    brandColor: '#FF0000',
-  },
-];
-
-export const dashboardAdmin = [
-  {
-    id: '1',
-    title: 'Total Students',
-    gridClass: false,
-    classes: '',
-    bgFrom: ' #1a9f53',
-    bgTo: '#4eda89',
-    icon: <CgProfile />,
-  },
-
-  {
-    id: '2',
-    title: 'Total Courses',
-    gridClass: false,
-    classes: '',
-    bgFrom: '#be0ee1',
-    bgTo: '#ed68ff',
-    icon: <MdContentCopy />,
-  },
-  {
-    id: '3',
-    title: 'Total Reviews',
-    gridClass: true,
-    bgTo: '#ff5648',
-    bgFrom: '#da5568',
-    icon: <RiAdminFill />,
-  },
-  {
-    id: '4',
-    title: ' Total Video Lessons',
-    gridClass: false,
-
-    classes: '',
-    bgFrom: '#2b77e5',
-    bgTo: '#64b3f6',
-    icon: <MdReviews />,
-  },
-  {
-    id: '5',
-    title: 'Total Blog',
-    gridClass: false,
-    classes: '',
-    bgFrom: '#e1940e',
-    bgTo: '#f4d02b',
-    icon: <FiVideo />,
   },
 ];
 

@@ -1,9 +1,8 @@
 import { Tooltip } from 'antd';
-import { Mail, Phone } from 'lucide-react';
+import { LocateIcon, Mail, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React from 'react';
-import { SlLocationPin } from 'react-icons/sl';
 import {
   footerAboutData,
   footerExploreData,
@@ -96,7 +95,7 @@ const Footer = () => {
                 className="border-b-[1.5px] border-solid border-transparent cursor-pointer text-[#212529] hover:text-[orangered]
                   hover:border-[orangered] ease-in-out duration-300 text-base flex items-center justify-center md:justify-start mt-2 gap-2"
               >
-                <SlLocationPin className="text-lg w-8" />{' '}
+                <LocateIcon className="text-lg w-8" />{' '}
                 <span className="text-left">
                   Flat: 4B, House: 23, Road : 4, Block: F, Banani, Dhaka - 1212
                 </span>

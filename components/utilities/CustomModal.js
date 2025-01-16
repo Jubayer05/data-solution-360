@@ -1,5 +1,5 @@
+import { X } from 'lucide-react';
 import React from 'react';
-import { FaXmark } from 'react-icons/fa6';
 import Modal from 'react-modal';
 
 const CustomModal = ({ children, modalIsOpen, closeModal, setModalIsOpen }) => {
@@ -38,7 +38,7 @@ const CustomModal = ({ children, modalIsOpen, closeModal, setModalIsOpen }) => {
       contentLabel="Example Modal"
     >
       <div className="flex justify-end mr-3">
-        <FaXmark
+        <X
           className="text-2xl cursor-pointer"
           onClick={() => handleCloseModal()}
         />

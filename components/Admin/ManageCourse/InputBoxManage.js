@@ -53,6 +53,7 @@ const InputBoxManage = ({
         onChange={(e) =>
           func(keyName.toLowerCase().split(' ').join('_'), e.target.value)
         }
+        onWheel={(e) => e.target.blur()}
         type={type}
         placeholder={placeholder}
         className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"

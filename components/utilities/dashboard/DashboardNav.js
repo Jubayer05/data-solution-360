@@ -83,8 +83,6 @@ const DashboardNavbar = () => {
     return initials?.toUpperCase(); // Ensure the initials are in uppercase
   }
 
-  console.log(findCurrentUser);
-
   return (
     <div
       className={`border-b border-dashboard_border fixed right-0 bg-white z-50 ${

@@ -9,31 +9,33 @@ const ProtectedRoute = (
   allowedRoles = ['user', 'content_manager'],
 ) => {
   const HOC = (props) => {
-    const { user, loading } = useAuth();
-    console.log(user);
     const router = useRouter();
     const [isAuthenticated, setIsAuthenticated] = useState(false);
+
+    // Add error handling for useAuth
+    const auth = useAuth();
+    const user = auth?.user;
+    const loading = auth?.loading ?? true; // Default to true if undefined
 
     useEffect(() => {
       if (!loading) {
         if (!user) {
-          router.push('/'); // Redirect to login if not authenticated
+          router.push('/');
         } else if (!allowedRoles.includes(user.role)) {
-          router.push('/unauthorized'); // Redirect to unauthorized page
+          router.push('/unauthorized');
         } else {
-          setIsAuthenticated(true); // Authentication successful
+          setIsAuthenticated(true);
         }
       }
-    }, [user, loading, router, allowedRoles]); // Add allowedRoles as a dependency
+    }, [user, loading, router, allowedRoles]);
 
     if (loading || !isAuthenticated) {
-      return <PageSkeleton />; // Show a loading indicator
+      return <PageSkeleton />;
     }
 
     return <WrappedComponent {...props} />;
   };
 
-  // Adding displayName to the HOC for better debugging in React DevTools
   HOC.displayName = `ProtectedRoute(${
     WrappedComponent.displayName || WrappedComponent.name || 'Component'
   })`;

@@ -46,7 +46,6 @@ const useEnrolledCourseData = () => {
           enrolledCourseIds.includes(course.unique_batch_id) &&
           course.enrolled_students.includes(findCurrentUser.student_id),
         onError: (error) => console.error('Failed to load courses:', error),
-        onComplete: () => console.log('Courses loaded successfully'),
       });
     }
   }, [enrolledCourseIds, findCurrentUser]);

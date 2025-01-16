@@ -22,7 +22,7 @@ const ClassJoiningMain = () => {
               key={item.id}
               className="w-full bg-white pb-10 shadow-lg rounded-lg px-4 md:px-6 py-3 my-5"
             >
-              <ClassJoiningItem item={item} />
+              <ClassJoiningItem item={item} batchId={item?.unique_batch_id} />
             </div>
           ))}
 

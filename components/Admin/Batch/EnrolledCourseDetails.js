@@ -26,8 +26,6 @@ const EnrolledCourseDetails = () => {
     (course) => course.id === url,
   );
 
-  // console.log(currentEnrolledCourse?.batchNumber);
-
   return (
     <div>
       <HeadingDashboard

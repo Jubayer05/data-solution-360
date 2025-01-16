@@ -35,8 +35,6 @@ const PastQuizResult = ({}) => {
       )
     : null;
 
-  console.log(findLessons);
-
   const obtained_percentage =
     (userAlreadyGiveQuiz?.obtained_marks /
       userAlreadyGiveQuiz?.quizDataUser?.length) *

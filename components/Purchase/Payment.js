@@ -1,6 +1,5 @@
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
-import { TbCurrencyTaka } from 'react-icons/tb';
 import Swal from 'sweetalert2';
 import { useStateContext } from '../../src/context/ContextProvider';
 
@@ -94,8 +93,7 @@ const Payment = ({ payableAmount, batchData }) => {
       <div className="w-full flex justify-between mt-8">
         <p className="font-semibold">Total Payment</p>
         <p className="text-lg text-gray-600 flex items-center font-bold">
-          <TbCurrencyTaka />
-          {payableAmount}
+          ৳&nbsp;{payableAmount}
         </p>
       </div>
       <button

@@ -1,7 +1,11 @@
-import { ChevronRight, ClipboardSignature, Facebook } from 'lucide-react';
+import {
+  ChevronRight,
+  ClipboardSignature,
+  Facebook,
+  MessageCircle,
+} from 'lucide-react';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { FaWhatsapp } from 'react-icons/fa6';
 import LeaderBoard from './LeaderBoard';
 import Report from './Report';
 
@@ -37,7 +41,7 @@ const ProgressHome = () => {
             className="flex justify-center items-center gap-2 bg-[#c8ffe6] hover:bg-[#d0d0d0] font-semibold
             py-2 px-4 rounded w-full text-[#009351] transition-all duration-200"
           >
-            JOIN <FaWhatsapp />
+            JOIN <MessageCircle />
           </button>
           <button
             className="flex justify-center items-center gap-2 bg-[#e9efff] hover:bg-[#d0d0d0] font-semibold

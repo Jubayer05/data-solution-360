@@ -78,7 +78,6 @@ const EditCourseItem = () => {
       img: courseImg,
     };
 
-    // console.log(updatedCourse);
     updateDocument(updatedCourse);
   };
 
@@ -93,7 +92,6 @@ const EditCourseItem = () => {
   }, [success]);
 
   const handleInputChange = (key, value) => {
-    console.log('Key:', key, 'value:', value);
     const updatedObject = {
       ...courseDataObj,
       [key]: value,

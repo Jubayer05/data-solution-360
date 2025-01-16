@@ -2,7 +2,6 @@ import { Spin } from 'antd';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import { TbCurrencyTaka } from 'react-icons/tb';
 import { loadData } from '../../src/hooks/loadData';
 import ButtonDashboard from '../utilities/dashboard/ButtonDashboard';
 import Payment from './Payment';
@@ -96,8 +95,7 @@ const Checkout = () => {
                 <div className="w-full flex justify-between">
                   <p>Course Price</p>
                   <p className="text-sm text-gray-600 flex items-center font-medium">
-                    <TbCurrencyTaka />
-                    {findCheckoutCourse.price}
+                    ৳ {findCheckoutCourse.price}
                   </p>
                 </div>
                 {findCheckoutCourse.discounted_price && (
@@ -116,7 +114,7 @@ const Checkout = () => {
                       </span>
                     </p>
                     <p className="text-sm text-gray-600 flex items-center font-medium">
-                      -<TbCurrencyTaka />
+                      -৳ &nbsp;
                       {findCheckoutCourse.price -
                         findCheckoutCourse.discounted_price}
                     </p>
@@ -126,7 +124,7 @@ const Checkout = () => {
                 <div className="w-full flex justify-between mt-2">
                   <p className="font-semibold">Total Payment</p>
                   <p className="text-sm text-gray-600 flex items-center font-medium">
-                    <TbCurrencyTaka />
+                    ৳ &nbsp;
                     {findCheckoutCourse.discounted_price
                       ? findCheckoutCourse.discounted_price
                       : findCheckoutCourse.price}
@@ -145,7 +143,7 @@ const Checkout = () => {
                       Coupon Applied: {findCouponData?.discount}% off
                     </p>
                     <p className="text-sm text-gray-600 flex items-center font-medium">
-                      -<TbCurrencyTaka />
+                      -৳ &nbsp;
                       {findCheckoutCourse.discounted_price
                         ? Math.round(
                             findCheckoutCourse.discounted_price *
@@ -166,8 +164,7 @@ const Checkout = () => {
                       Total Payment (After Coupon)
                     </p>
                     <p className="text-sm text-gray-600 flex items-center font-medium">
-                      <TbCurrencyTaka />
-                      {discountedTotal}
+                      ৳ &nbsp;{discountedTotal}
                     </p>
                   </div>
                 )}

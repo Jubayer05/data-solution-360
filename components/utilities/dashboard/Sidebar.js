@@ -1,12 +1,11 @@
 import { Collapse, ConfigProvider } from 'antd';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
-import { AiOutlineMenuFold } from 'react-icons/ai';
 const { Panel } = Collapse;
 
 import { Tooltip } from 'antd';
+import { ChevronDown, ChevronRight, MenuIcon } from 'lucide-react';
 import Image from 'next/image';
-import { FaAngleDown, FaAngleRight } from 'react-icons/fa';
 import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import { linksAdmin, linksStudents } from '../../../src/data/data';
@@ -31,8 +30,6 @@ const Sidebar = ({ status }) => {
 
   const userRole = findCurrentUser?.role;
 
-  console.log(userRole);
-
   return (
     <div className="md:overflow-hidden overflow-auto md:hover:overflow-auto pb-10 h-screen">
       <>
@@ -55,7 +52,7 @@ const Sidebar = ({ status }) => {
                   setActiveMenu((prevActiveMenu) => !prevActiveMenu)
                 }
               >
-                <AiOutlineMenuFold />
+                <MenuIcon />
               </button>
             </Tooltip>
           )}
@@ -139,11 +136,11 @@ const Sidebar = ({ status }) => {
                           expandIcon={({ isActive, key }) =>
                             isActive ? (
                               <div>
-                                <FaAngleDown className="text-lg group-hover:text-blue-500 font-medium text-blue-500" />
+                                <ChevronDown className="text-lg group-hover:text-blue-500 font-medium text-blue-500" />
                               </div>
                             ) : (
                               <div>
-                                <FaAngleRight className="text-lg group-hover:text-blue-500 font-medium" />
+                                <ChevronRight className="text-lg group-hover:text-blue-500 font-medium" />
                               </div>
                             )
                           }

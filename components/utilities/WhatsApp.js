@@ -1,8 +1,7 @@
-import { Phone } from 'lucide-react';
+import { MessageCircle, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
-import { IoLogoWhatsapp } from 'react-icons/io5';
 
 const WhatsApp = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -70,7 +69,7 @@ const WhatsApp = () => {
           className="flex items-center justify-center bg-[#12b76a] hover:bg-[rgb(10,145,82)] 
           transition-all duration-300 w-full gap-2 py-2 rounded-md text-white text-base md:text-lg"
         >
-          <IoLogoWhatsapp className="text-lg md:text-2xl" />
+          <MessageCircle className="text-lg md:text-2xl" />
           <span>Whatsapp</span>
         </button>
       </div>

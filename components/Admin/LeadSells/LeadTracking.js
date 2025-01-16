@@ -137,6 +137,7 @@ const LeadTracking = () => {
             placeholder="Enter phone number"
             className="w-full px-4 py-3 text-lg outline-none border-1 mt-2 rounded"
             type="number"
+            onWheel={(e) => e.target.blur()}
             id="customer_number"
             value={customerNumber}
             onChange={(e) => setCustomerNumber(e.target.value)}

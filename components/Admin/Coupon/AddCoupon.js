@@ -101,6 +101,7 @@ const AddCoupon = () => {
           id="discount"
           name="discount"
           value={formData.discount}
+          onWheel={(e) => e.target.blur()}
           onChange={handleChange}
           required
         />
@@ -151,6 +152,7 @@ const AddCoupon = () => {
           type="number"
           id="usageLimit"
           name="usageLimit"
+          onWheel={(e) => e.target.blur()}
           value={formData.usageLimit}
           onChange={handleChange}
         />

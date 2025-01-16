@@ -2,7 +2,6 @@ import { CircleCheck, X } from 'lucide-react';
 import React from 'react';
 
 const QuizResult = ({ userAlreadyGiveQuiz }) => {
-  // console.log(selectedAnswers);
   const quizData = userAlreadyGiveQuiz?.quizDataUser;
 
   return (

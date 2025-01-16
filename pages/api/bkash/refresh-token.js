@@ -7,8 +7,6 @@ export default async function refreshToken(req, res) {
 
   const { refreshToken } = req.body; // Get refresh_token from request body
 
-  console.log(refreshToken);
-
   try {
     const response = await axios.post(
       process.env.REFRESH_TOKEN_URL,

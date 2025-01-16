@@ -27,8 +27,6 @@ const AssignmentHome = () => {
     setUrl(window.location.href);
   }, []);
 
-  // console.log(url);
-
   const columns = [
     {
       title: 'Title',
@@ -50,7 +48,6 @@ const AssignmentHome = () => {
       align: 'center',
       // width: 80,
       render: (_, record) => (
-        console.log(record),
         (
           <div className="text-white  ">
             {record?.submitted_students?.find(
@@ -93,8 +90,6 @@ const AssignmentHome = () => {
   ];
 
   const assignmentData = enrolledCourse?.assignment_data;
-
-  console.log(assignmentData);
 
   return (
     <div className="min-h-screen">

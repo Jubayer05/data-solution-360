@@ -16,8 +16,6 @@ export const AuthProvider = ({ children }) => {
       setLoading(true); // Set loading true when processing starts
       if (firebaseUser) {
         try {
-          console.log('Firebase User:', firebaseUser); // Debugging
-
           // Query the 'users' collection by email
           const q = query(
             collection(firestore, 'users'),
@@ -28,8 +26,6 @@ export const AuthProvider = ({ children }) => {
           if (!querySnapshot.empty) {
             // Assuming only one document matches
             const userData = querySnapshot.docs[0].data();
-            console.log('User data from Firestore:', userData); // Debugging
-
             // Merge Firestore data with Firebase user object
             setUser({ ...firebaseUser, role: userData.role });
           } else {
@@ -44,7 +40,6 @@ export const AuthProvider = ({ children }) => {
           setUser({ ...firebaseUser, role: null });
         }
       } else {
-        console.log('No user is logged in.');
         setUser(null);
       }
 

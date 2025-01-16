@@ -18,8 +18,6 @@ const FromDetails = () => {
   const { updateDocument, loadingUpdate, errorUpdate, success } =
     useUpdateDocumentById('form_data', formId);
 
-  console.log(data);
-
   const columns = [
     {
       title: 'SL',

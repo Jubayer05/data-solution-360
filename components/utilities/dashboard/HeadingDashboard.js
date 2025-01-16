@@ -1,7 +1,7 @@
 import React from 'react';
-import { IoMdLogOut } from 'react-icons/io';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 
+import { LogOut } from 'lucide-react';
 import { handleLogout } from '../../../firebase';
 
 const HeadingDashboard = ({ title, batchNo, showLogout }) => {
@@ -33,7 +33,7 @@ const HeadingDashboard = ({ title, batchNo, showLogout }) => {
       items-center gap-1 text-base font-semibold"
         >
           Logout
-          <IoMdLogOut className="text-xl" />
+          <LogOut className="text-xl" />
         </button>
       )}
     </div>
