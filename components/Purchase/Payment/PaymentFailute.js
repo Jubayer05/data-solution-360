@@ -4,7 +4,7 @@ import { useRouter } from 'next/router';
 import { useEffect } from 'react';
 import animationData from '../../../src/data/json/payment-cancelled.json'; // Path to your Lottie JSON file
 const LottieAnimation = dynamic(
-  () => import('../utilities/Home/LottieAnimation'),
+  () => import('../../utilities/Home/LottieAnimation'),
   {
     ssr: false,
     loading: () => (

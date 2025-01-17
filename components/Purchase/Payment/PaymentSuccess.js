@@ -7,7 +7,7 @@ import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 import successAnimationData from '../../../src/data/json/payment-success.json';
 const LottieAnimation = dynamic(
-  () => import('../utilities/Home/LottieAnimation'),
+  () => import('../../utilities/Home/LottieAnimation'),
   {
     ssr: false,
     loading: () => (
