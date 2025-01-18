@@ -5,14 +5,40 @@ import {
   InfoCircleFilled,
   UserOutlined,
 } from '@ant-design/icons';
-import { Alert, Button, Card, Space, Tag, Typography } from 'antd';
-import React from 'react';
+import { Alert, Button, Card, Space, Tag } from 'antd';
 import { convertToAMPM } from '../../../src/utils/convertAMPM';
 import { formatDateWithoutYear, isToday } from '../../../src/utils/convertDate';
 
-const { Title, Text } = Typography;
+// Parent Component
+import React, { useMemo } from 'react';
 
-const TodayClassRight = ({ item }) => {
+const TodayClassContainer = ({ courseDataBatch }) => {
+  // Filter courses that have classes today
+  const todayClasses = useMemo(() => {
+    return courseDataBatch?.filter((item) => {
+      const currentModule = item?.course_modules.find(
+        (module) => module.moduleStatus === 'running',
+      );
+      const hasClassToday = currentModule?.lessons.some((lesson) =>
+        isToday(lesson.classDate),
+      );
+      return hasClassToday;
+    });
+  }, [courseDataBatch]);
+
+  // If no classes today, show single "no class" card
+  if (!todayClasses?.length) {
+    return <TodayClassRight item={courseDataBatch[0]} forceNoClass={true} />;
+  }
+
+  // Show only courses that have classes today
+  return todayClasses.map((item) => (
+    <TodayClassRight key={item.id} item={item} />
+  ));
+};
+
+// Modified Child Component
+const TodayClassRight = ({ item, forceNoClass = false }) => {
   const currentModule = item?.course_modules.find(
     (item) => item.moduleStatus === 'running',
   );
@@ -21,37 +47,39 @@ const TodayClassRight = ({ item }) => {
     isToday(lessonItem.classDate),
   );
 
-  const titleText = currentLesson
-    ? "You're Ready for Today's Class!"
-    : 'No Class Scheduled Today';
+  // If forceNoClass is true, always show the "no class" view
+  const shouldShowNoClass = forceNoClass || !currentLesson;
+  const titleText = shouldShowNoClass
+    ? 'No classes for today.'
+    : 'You are all set for today’s class!';
 
   return (
     <Card>
       <Space direction="vertical" size="middle" style={{ width: '100%' }}>
         <div>
-          <Title level={4} style={{ marginBottom: 8 }}>
+          <h4 className="font-semibold" style={{ marginBottom: 8 }}>
             {titleText}
-          </Title>
-          <Text type="secondary">
+          </h4>
+          <p type="secondary">
             <CalendarOutlined style={{ marginRight: 8 }} />
             {formatDateWithoutYear(currentLesson?.classDate || new Date())}
-          </Text>
+          </p>
         </div>
 
         <Tag
           color="blue"
           style={{
-            whiteSpace: 'normal', // Allows text wrapping
-            wordWrap: 'break-word', // Breaks long words if necessary
-            maxWidth: '100%', // Ensures it doesn't exceed the container width
-            display: 'inline-block', // Ensures proper block-level behavior
+            whiteSpace: 'normal',
+            wordWrap: 'break-word',
+            maxWidth: '100%',
+            display: 'inline-block',
           }}
         >
           {item?.courseData?.item_name}
         </Tag>
         <Tag color="green">Batch-{item?.batchNumber}</Tag>
 
-        {currentLesson ? (
+        {!shouldShowNoClass ? (
           <>
             <Card
               size="small"
@@ -65,24 +93,22 @@ const TodayClassRight = ({ item }) => {
                 </Space>
 
                 <div>
-                  <Text type="secondary">
+                  <p type="secondary">
                     <UserOutlined style={{ marginRight: 8 }} />
                     Instructor
-                  </Text>
+                  </p>
                   <div>
-                    <Text strong>
-                      {currentLesson?.instructorForClass?.profileName}
-                    </Text>
+                    <p>{currentLesson?.instructorForClass?.profileName}</p>
                   </div>
                 </div>
 
                 <div>
-                  <Text type="secondary">
+                  <p type="secondary">
                     <BookOutlined style={{ marginRight: 8 }} />
                     Topic
-                  </Text>
+                  </p>
                   <div>
-                    <Text strong>{currentLesson?.title}</Text>
+                    <p>{currentLesson?.title}</p>
                   </div>
                 </div>
               </Space>
@@ -114,4 +140,4 @@ const TodayClassRight = ({ item }) => {
   );
 };
 
-export default TodayClassRight;
+export default TodayClassContainer;

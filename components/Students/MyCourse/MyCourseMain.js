@@ -4,7 +4,7 @@ import { useStateContextDashboard } from '../../../src/context/UtilitiesContext'
 import useEnrolledCourseData from '../../../src/hooks/useEnrolledCourseData';
 import CourseItem from '../../Courses/HomeCourseItem';
 import EnrolledCourseHome from './EnrolledCourseHome';
-import TodayClassRight from './TodayClassRight';
+import TodayClassContainer from './TodayClassRight';
 
 const MyCourseMain = () => {
   const { courseData, findCurrentUser, enrolledCourseIds } = useStateContext();
@@ -66,9 +66,7 @@ const MyCourseMain = () => {
         {/* RIGHT SIDE */}
 
         <div className="w-full md:w-[28%] sticky top-20 bg-white shadow-lg rounded-lg p-4  my-5">
-          {courseDataBatch?.map((item) => (
-            <TodayClassRight key={item.id} item={item} />
-          ))}
+          <TodayClassContainer courseDataBatch={courseDataBatch} />
         </div>
       </div>
     </div>
