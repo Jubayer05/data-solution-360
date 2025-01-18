@@ -1,6 +1,7 @@
 import { Calendar, CalendarDays, CalendarDaysIcon, Clock } from 'lucide-react';
 import Image from 'next/image';
 import React, { useState } from 'react';
+import Swal from 'sweetalert2';
 import { convertToAMPM } from '../../../src/utils/convertAMPM';
 import {
   formatDate,
