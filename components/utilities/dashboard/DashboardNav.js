@@ -21,7 +21,8 @@ const DashboardNavbar = () => {
     enrolledCourse,
   } = useStateContextDashboard();
   const { userName, findCurrentUser } = useStateContext();
-  const { notifications, unreadCount, markAsRead } = useNotifications(); // Add this
+  const { notifications, unreadCount, markAsRead, markAllAsRead } =
+    useNotifications(); // Add this
   const [insideCourse, setInsideCourse] = useState(false);
   const [isNotificationOpen, setIsNotificationOpen] = useState(false);
   const previousUnreadCount = useRef(0);
@@ -37,22 +38,6 @@ const DashboardNavbar = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
-
-  useEffect(() => {
-    const handleClickOutside = (event) => {
-      // Check if click is outside notification panel
-      if (
-        isNotificationOpen &&
-        !event.target.closest('.notification-panel') &&
-        !event.target.closest('.notification-trigger')
-      ) {
-        setIsNotificationOpen(false);
-      }
-    };
-
-    document.addEventListener('mousedown', handleClickOutside);
-    return () => document.removeEventListener('mousedown', handleClickOutside);
-  }, [isNotificationOpen]);
 
   useEffect(() => {
     if (unreadCount > previousUnreadCount.current) {
