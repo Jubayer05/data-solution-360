@@ -1,33 +1,15 @@
 /* eslint-disable react-hooks/exhaustive-deps */
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useRef } from 'react';
 
 import { Badge, Tooltip } from 'antd';
-import { Bell } from 'lucide-react';
+import { Bell, UserCircle } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import { useNotifications } from '../../../src/context/NotificationContext';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
+import { useRouter } from 'next/router';
 import { userNamePrefix } from '../../../src/data/data';
-// import { useStateContext } from "../../src/context/UtilitiesContext";
-
-// const NavButton = ({ title, link, customFunc, icon, color, dotColor }) => {
-//   return (
-//     <Tooltip title={title} color="#707070">
-//       <button
-//         type="button"
-//         style={{ color }}
-//         className="relative text-xl rounded-full p-3 hover:bg-light-gray"
-//         onClick={customFunc}
-//       >
-//         <span
-//           style={{ background: dotColor }}
-//           className="absolute inline-flex rounded-full h-2 w-2 right-2 top-2"
-//         />
-//         {icon}
-//       </button>
-//     </Tooltip>
-//   );
-// };
 
 const DashboardNavbar = () => {
   const {
@@ -39,7 +21,12 @@ const DashboardNavbar = () => {
     enrolledCourse,
   } = useStateContextDashboard();
   const { userName, findCurrentUser } = useStateContext();
+  const { notifications, unreadCount, markAsRead } = useNotifications(); // Add this
   const [insideCourse, setInsideCourse] = useState(false);
+  const [isNotificationOpen, setIsNotificationOpen] = useState(false);
+  const previousUnreadCount = useRef(0);
+
+  const router = useRouter();
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -50,6 +37,33 @@ const DashboardNavbar = () => {
 
     return () => window.removeEventListener('resize', handleResize);
   }, []);
+
+  useEffect(() => {
+    const handleClickOutside = (event) => {
+      // Check if click is outside notification panel
+      if (
+        isNotificationOpen &&
+        !event.target.closest('.notification-panel') &&
+        !event.target.closest('.notification-trigger')
+      ) {
+        setIsNotificationOpen(false);
+      }
+    };
+
+    document.addEventListener('mousedown', handleClickOutside);
+    return () => document.removeEventListener('mousedown', handleClickOutside);
+  }, [isNotificationOpen]);
+
+  useEffect(() => {
+    if (unreadCount > previousUnreadCount.current) {
+      const audio = new Audio('/mp3/notification-bell.mp3');
+      audio.play().catch((error) => {
+        // Handle any autoplay restrictions
+        console.log('Audio autoplay failed:', error);
+      });
+    }
+    previousUnreadCount.current = unreadCount;
+  }, [unreadCount]);
 
   useEffect(() => {
     if (typeof window !== 'undefined') {
@@ -70,17 +84,16 @@ const DashboardNavbar = () => {
     }
   }, [screenSize]);
 
+  const handleNotificationClick = (e) => {
+    e.preventDefault();
+    setIsNotificationOpen(!isNotificationOpen);
+  };
+
   function getInitials(name) {
-    // Split the name into an array of words
     let words = name?.split(' ');
-
-    // Filter out the prefixes from the words array
     words = words?.filter((word) => !userNamePrefix.includes(word));
-
-    // Extract the first letter of each remaining word and join them together
     const initials = words?.map((word) => word.charAt(0)).join('');
-
-    return initials?.toUpperCase(); // Ensure the initials are in uppercase
+    return initials?.toUpperCase();
   }
 
   return (
@@ -120,14 +133,83 @@ const DashboardNavbar = () => {
           )}
         </div>
 
-        <div className="flex items-center ">
-          <Link href="/students/notification">
-            <div className="cursor-pointer mr-3 bg-hover_btn px-2 py-1 rounded">
-              <Badge count={5}>
-                <Bell className="text-2xl" />
-              </Badge>
+        <div className="flex items-center">
+          {/* Replace the existing notification section with this */}
+          {findCurrentUser?.role !== 'student' && (
+            <div className="relative">
+              <button
+                onClick={handleNotificationClick}
+                className="cursor-pointer mr-3 bg-hover_btn px-2 py-1 rounded flex items-center justify-center"
+              >
+                <Badge count={unreadCount}>
+                  <Bell className="text-2xl" />
+                </Badge>
+              </button>
+
+              {/* Notification Panel */}
+              {isNotificationOpen && (
+                <div className="absolute right-0 mt-2 w-80 bg-white rounded-lg shadow-lg z-50 border border-gray-200">
+                  <div className="p-4 border-b border-gray-200">
+                    <div className="flex items-center justify-between">
+                      <h3 className="text-lg font-semibold">Notifications</h3>
+                      {unreadCount > 0 && (
+                        <button
+                          onClick={() => markAllAsRead()}
+                          className="text-sm text-blue-600 hover:text-blue-800"
+                        >
+                          Mark all as read
+                        </button>
+                      )}
+                    </div>
+                  </div>
+
+                  <div className="max-h-[400px] overflow-y-auto">
+                    {notifications.length === 0 ? (
+                      <div className="p-4 text-center text-gray-500">
+                        No notifications
+                      </div>
+                    ) : (
+                      notifications.map((notification) => (
+                        <div
+                          key={notification.id}
+                          className={`p-4 border-b border-gray-100 hover:bg-gray-50 cursor-pointer ${
+                            !notification.read ? 'bg-blue-50' : ''
+                          }`}
+                          onClick={() => {
+                            markAsRead(notification.id);
+                            if (notification.leadId) {
+                              // Navigate to lead details if needed
+                              router.push(`/admin/lead-sells/sells-tracking`);
+                            }
+                          }}
+                        >
+                          <div className="flex items-start gap-3">
+                            <div className="flex-shrink-0">
+                              <UserCircle className="h-8 w-8 text-gray-400" />
+                            </div>
+                            <div>
+                              <p className="text-sm font-medium text-gray-900">
+                                {notification.title}
+                              </p>
+                              <p className="text-sm text-gray-500">
+                                {notification.message}
+                              </p>
+                              <p className="text-xs text-gray-400 mt-1">
+                                {new Date(
+                                  notification.createdAt,
+                                ).toLocaleString()}
+                              </p>
+                            </div>
+                          </div>
+                        </div>
+                      ))
+                    )}
+                  </div>
+                </div>
+              )}
             </div>
-          </Link>
+          )}
+
           <Tooltip title="Profile" color="#707070">
             <Link
               href={

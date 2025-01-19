@@ -57,7 +57,7 @@ const LeadTracking = () => {
   };
 
   // NOTE: HANDLE SUBMIT LEAD
-  const handleSubmitLead = () => {
+  const handleSubmitLead = async () => {
     setLoading(true);
     if (customerName && customerNumber && selectedCourse) {
       const newLead = {
@@ -75,19 +75,61 @@ const LeadTracking = () => {
         },
       };
 
-      db.collection('lead_data')
-        .add(newLead)
-        .then(() => {
-          Swal.fire(
-            'Lead Submitted!',
-            'The lead information has been successfully submitted.',
-            'success',
-          ).then(() => {
-            setLoading(false);
-            window.location.reload();
+      try {
+        // Add the lead to lead_data collection
+        const leadRef = await db.collection('lead_data').add(newLead);
+
+        // Get all sales team members
+        const salesAndAdminsSnapshot = await db
+          .collection('users')
+          .where('role', 'in', ['sales', 'admin'])
+          .get();
+
+        // Create notifications batch
+        const batch = db.batch();
+
+        // Add notification for each sales team member
+        salesAndAdminsSnapshot.docs.forEach((userDoc) => {
+          const notificationRef = db.collection('notifications').doc();
+          batch.set(notificationRef, {
+            recipientId: userDoc.id,
+            title: 'New Lead Received',
+            message: `New lead received from ${customerName} for ${selectedCourse.item_name}`,
+            type: 'new_lead',
+            leadId: leadRef.id,
+            read: false,
+            createdAt: timestamp,
+            leadData: {
+              customerName,
+              customerNumber,
+              courseName: selectedCourse.item_name,
+            },
           });
         });
+
+        // Commit all notifications
+        await batch.commit();
+
+        // Show success message
+        await Swal.fire(
+          'Lead Submitted!',
+          'The lead information has been successfully submitted.',
+          'success',
+        );
+
+        setLoading(false);
+        window.location.reload();
+      } catch (error) {
+        console.error('Error submitting lead:', error);
+        setLoading(false);
+        Swal.fire(
+          'Error!',
+          'There was an error submitting the lead. Please try again.',
+          'error',
+        );
+      }
     } else {
+      setLoading(false);
       Swal.fire(
         'Warning!',
         'Please fill in all required fields (Name, Number, and Course).',

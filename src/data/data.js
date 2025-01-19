@@ -14,6 +14,7 @@ import {
   MessageCircle,
   PieChart,
   PlayCircle,
+  ShieldAlert,
   User,
   UserPlus,
   Users,
@@ -100,12 +101,6 @@ export const linksAdmin = [
     key: '4',
     links: [
       {
-        name: 'New Students',
-        link: '/admin/new-student',
-        icon: <UserPlus />,
-        role: ['admin'],
-      },
-      {
         name: 'All Students',
         link: '/admin/all-student',
         icon: <Users />,
@@ -164,6 +159,12 @@ export const linksAdmin = [
         link: '/admin/lead-sells/sells-tracking',
         icon: <DollarSign />,
         role: ['admin', 'sells_member'],
+      },
+      {
+        name: 'Due Reports',
+        link: '/admin/lead-sells/due-reports',
+        icon: <ShieldAlert />,
+        role: ['admin'],
       },
       {
         name: 'All Reports',

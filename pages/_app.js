@@ -9,6 +9,7 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'slick-carousel/slick/slick.css';
 import { AuthProvider } from '../src/context/auth/AuthContext';
 import { MainContextProvider } from '../src/context/ContextProvider';
+import { NotificationProvider } from '../src/context/NotificationContext';
 import { StudentContextProvider } from '../src/context/StudentContext';
 import { UtilityContextProvider } from '../src/context/UtilitiesContext';
 import '../styles/globals.css';
@@ -31,19 +32,17 @@ function MyApp({ Component, pageProps }) {
   }, []);
 
   return (
-    // <ConfigProvider>
-    // <Analytics>
     <AuthProvider>
       <MainContextProvider>
         <UtilityContextProvider>
           <StudentContextProvider>
-            <Component {...pageProps} />
+            <NotificationProvider>
+              <Component {...pageProps} />
+            </NotificationProvider>
           </StudentContextProvider>
         </UtilityContextProvider>
       </MainContextProvider>
     </AuthProvider>
-    // </Analytics>
-    // </ConfigProvider>
   );
 }
 
