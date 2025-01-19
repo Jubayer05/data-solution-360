@@ -82,6 +82,13 @@ const CourseDetails = () => {
     setLoginModalIsOpen(false);
   };
 
+  if (!['Registration Going on', 'Running'].includes(courseDetails?.status)) {
+    return null;
+  }
+
+  const hasDiscount =
+    courseDetails?.discounted_price !== '0' && courseDetails?.discounted_price;
+
   return (
     <div>
       {isPopupOpen && findCurrentUser === undefined && (
@@ -359,6 +366,54 @@ const CourseDetails = () => {
           <p className="text-lg font-normal pb-10">
             Laptop/desktop with internet connection
           </p>
+        </div>
+
+        {/* NOTE: MOBILE PRICE */}
+
+        <div className="md:hidden">
+          <div className="relative overflow-hidden rounded-xl bg-white border border-blue-100 p-4 shadow-sm">
+            <div className="absolute top-0 right-0 w-24 h-24">
+              <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 rounded-tr-xl opacity-10 border-blue-500" />
+            </div>
+
+            <div className="flex items-center space-x-3">
+              <div className="flex flex-col">
+                <h2 className="text-xl font-bold mb-3 font-heading capitalize">
+                  Course Fee
+                </h2>
+
+                <div className="flex items-center flex-wrap gap-2">
+                  {hasDiscount ? (
+                    <>
+                      <span className="text-rose-500 font-medium text-lg line-through decoration-2">
+                        <strong>৳</strong> {courseDetails?.price}
+                      </span>
+                      <span className="text-blue-600 font-bold text-2xl">
+                        <strong>৳</strong> {courseDetails?.discounted_price}
+                      </span>
+                      <span className="text-emerald-600 text-sm font-medium bg-emerald-50 px-2 py-1 rounded-full">
+                        {Math.round(
+                          (1 -
+                            parseInt(courseDetails?.discounted_price) /
+                              parseInt(courseDetails?.price)) *
+                            100,
+                        )}
+                        % OFF
+                      </span>
+                    </>
+                  ) : (
+                    <span className="text-blue-600 font-bold text-2xl">
+                      <strong>৳</strong> {courseDetails?.price}
+                    </span>
+                  )}
+                </div>
+              </div>
+            </div>
+
+            {/* Decorative Elements */}
+            <div className="absolute -left-4 -bottom-4 w-24 h-24 blur-xl bg-blue-50 rounded-full opacity-50" />
+            <div className="absolute -right-4 -top-4 w-24 h-24 blur-xl bg-blue-50 rounded-full opacity-50" />
+          </div>
         </div>
 
         {/* NOTE: HELP */}

@@ -1,5 +1,4 @@
 import React from 'react';
-import { useStateContext } from '../../src/context/ContextProvider';
 import ReviewSlider from '../Home/Review/ReviewSlider';
 
 const StudentReviewCourse = ({ courseDetails }) => {

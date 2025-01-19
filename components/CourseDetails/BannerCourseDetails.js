@@ -2,7 +2,17 @@ import Link from 'next/link';
 import React, { useCallback, useEffect, useMemo, useState } from 'react';
 
 import { Breadcrumb, Spin } from 'antd';
-import { BookOpen, Calendar, Clock, Share2, Users } from 'lucide-react';
+import {
+  Award,
+  BookOpen,
+  Briefcase,
+  Calendar,
+  Clock,
+  Rocket,
+  Share2,
+  Users,
+  Video,
+} from 'lucide-react';
 import Image from 'next/image';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
@@ -106,6 +116,45 @@ const BannerCourseDetails = ({ courseDetails }) => {
     },
   ];
 
+  const stats = [
+    {
+      icon: (
+        <Rocket className="w-8 h-8 text-blue-600 group-hover:text-blue-500 transition-all duration-300 ease-in-out" />
+      ),
+      value: courseDetails?.module_number || 0,
+      label: 'Modules',
+      suffix: '',
+      accent: 'border-blue-200',
+    },
+    {
+      icon: (
+        <Video className="w-8 h-8 text-purple-600 group-hover:text-purple-500 transition-all duration-300 ease-in-out" />
+      ),
+      value: courseDetails?.live_class_number || 0,
+      label: 'Live Class',
+      suffix: '+',
+      accent: 'border-purple-200',
+    },
+    {
+      icon: (
+        <Briefcase className="w-8 h-8 text-emerald-600 group-hover:text-emerald-500 transition-all duration-300 ease-in-out" />
+      ),
+      value: courseDetails?.project_number || 0,
+      label: 'Real World Project',
+      suffix: '',
+      accent: 'border-emerald-200',
+    },
+    {
+      icon: (
+        <Award className="w-8 h-8 text-rose-600 group-hover:text-rose-500 transition-all duration-300 ease-in-out" />
+      ),
+      value: 'Community',
+      label: 'Large DS-360 Community',
+      suffix: '',
+      accent: 'border-rose-200',
+    },
+  ];
+
   return (
     <div className="flex items-start flex-col-reverse md:flex-row max-w-7xl mx-auto font-bold font-heading">
       {/* NOTE: LEFT SIDE */}
@@ -142,42 +191,38 @@ const BannerCourseDetails = ({ courseDetails }) => {
 
         <div className="h-[1px] w-full bg-slate-300 mt-3 mb-4" />
         {/* NOTE: BEST OUTLINE */}
-        <div className="grid grid-cols-2 md:grid-cols-4 gap-4 p-4">
-          <div className="flex flex-col items-center p-2 sm:p-4">
-            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
-              {courseDetails?.module_number}
-            </h2>
-            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
-              Modules
-            </p>
-          </div>
+        <div className="grid grid-cols-2 md:grid-cols-4 gap-6">
+          {stats.map((stat, index) => (
+            <div
+              key={index}
+              className={`group relative rounded-xl p-6 bg-white border ${stat.accent} hover:shadow-lg transition-all duration-300 ease-in-out`}
+            >
+              {/* Main Content Container */}
+              <div className="relative flex flex-col items-center">
+                {/* Icon Container */}
+                <div className="mb-4 relative">
+                  <div className="absolute inset-0 bg-gray-50 rounded-full scale-150 group-hover:scale-175 transition-transform duration-300 ease-in-out" />
+                  <div className="relative">{stat.icon}</div>
+                </div>
 
-          <div className="flex flex-col items-center p-2 sm:p-4">
-            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
-              {courseDetails?.live_class_number}+
-            </h2>
-            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
-              Live Class
-            </p>
-          </div>
+                {/* Value */}
+                <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-2 tracking-tight">
+                  {stat.value}
+                  <span className="font-medium">{stat.suffix}</span>
+                </h2>
 
-          <div className="flex flex-col items-center p-2 sm:p-4">
-            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
-              {courseDetails?.project_number}
-            </h2>
-            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
-              Real World Project
-            </p>
-          </div>
+                {/* Label */}
+                <p className="text-sm text-gray-600 font-medium text-center leading-snug">
+                  {stat.label}
+                </p>
+              </div>
 
-          <div className="flex flex-col items-center p-2 sm:p-4">
-            <h2 className="text-2xl sm:text-[28px] font-semibold mb-2">
-              Community
-            </h2>
-            <p className="text-[#222] text-sm sm:text-base font-normal text-center">
-              Large DS-360 Community
-            </p>
-          </div>
+              {/* Subtle corner accent */}
+              <div className="absolute top-0 right-0 w-16 h-16">
+                <div className="absolute top-0 right-0 w-8 h-8 border-t-2 border-r-2 rounded-tr-xl opacity-20 border-current" />
+              </div>
+            </div>
+          ))}
         </div>
         <div className="h-[1px] w-full bg-slate-300 mt-4 mb-3" />
 
@@ -255,7 +300,7 @@ const BannerCourseDetails = ({ courseDetails }) => {
               <div className="flex items-center">
                 {(courseDetails?.status === 'Registration Going on' ||
                   courseDetails?.status === 'Running') && (
-                  <div>
+                  <div className="hidden md:block">
                     {courseDetails?.discounted_price == '0' ||
                     !courseDetails?.discounted_price ? (
                       <span className="text-[#1d2939] font-bold text-3xl">

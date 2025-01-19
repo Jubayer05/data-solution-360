@@ -32,6 +32,12 @@ const QuizGameStart = ({ quizData, findLessons }) => {
     setModalIsOpen(false);
   };
 
+  const userAlreadyGiveQuiz = Array.isArray(findLessons?.user_quizData)
+    ? findLessons.user_quizData.find(
+        (user) => user.student_id === findCurrentUser.student_id,
+      )
+    : null;
+
   useEffect(() => {
     if (userAlreadyGiveQuiz) {
       setIsQuizCompleted(true);
@@ -82,12 +88,6 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       ]);
     }
   };
-
-  const userAlreadyGiveQuiz = Array.isArray(findLessons?.user_quizData)
-    ? findLessons.user_quizData.find(
-        (user) => user.student_id === findCurrentUser.student_id,
-      )
-    : null;
 
   const handleSubmitQuiz = async () => {
     if (isQuizCompleted) {
