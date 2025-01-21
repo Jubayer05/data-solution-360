@@ -298,29 +298,6 @@ const BannerCourseDetails = ({ courseDetails }) => {
           {courseDetails?.status && (
             <div className="py-4 px-5">
               <div className="flex items-center">
-                {(courseDetails?.status === 'Registration Going on' ||
-                  courseDetails?.status === 'Running') && (
-                  <div className="hidden md:block">
-                    {courseDetails?.discounted_price == '0' ||
-                    !courseDetails?.discounted_price ? (
-                      <span className="text-[#1d2939] font-bold text-3xl">
-                        {courseDetails?.price}
-                        /-
-                      </span>
-                    ) : (
-                      <>
-                        <span className="text-[orangered] font-bold text-lg">
-                          <strike>{courseDetails?.price}/-</strike>
-                        </span>{' '}
-                        &nbsp;
-                        <span className="text-[#1d2939] font-bold text-3xl">
-                          {courseDetails?.discounted_price}
-                          /-
-                        </span>
-                      </>
-                    )}
-                  </div>
-                )}
                 <div className="flex items-center ml-auto border-b-1 cursor-pointer">
                   <Share2 />
                   <span>Share</span>

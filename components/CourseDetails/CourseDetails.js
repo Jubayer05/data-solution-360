@@ -370,7 +370,7 @@ const CourseDetails = () => {
 
         {/* NOTE: MOBILE PRICE */}
 
-        <div className="md:hidden">
+        <div className="">
           <div className="relative overflow-hidden rounded-xl bg-white border border-blue-100 p-4 shadow-sm">
             <div className="absolute top-0 right-0 w-24 h-24">
               <div className="absolute top-0 right-0 w-12 h-12 border-t-2 border-r-2 rounded-tr-xl opacity-10 border-blue-500" />
@@ -378,7 +378,7 @@ const CourseDetails = () => {
 
             <div className="flex items-center space-x-3">
               <div className="flex flex-col">
-                <h2 className="text-xl font-bold mb-3 font-heading capitalize">
+                <h2 className="text-xl md:text-3xl font-bold mb-3 font-heading capitalize">
                   Course Fee
                 </h2>
 
