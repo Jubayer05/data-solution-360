@@ -4,7 +4,7 @@ import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import { useStateContext } from '../../src/context/ContextProvider';
 
-import { Lock, Monitor, Video } from 'lucide-react';
+import { Monitor, Video } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import { bg_colors, colors } from '../../src/data/data';
@@ -137,16 +137,6 @@ const CourseDetails = () => {
                 className="border rounded-lg self-start relative"
                 style={{ backgroundColor: bg_colors[index] }}
               >
-                {index >= 4 && findCurrentUser === undefined && (
-                  <div
-                    onClick={() => setIsPopupOpen(true)}
-                    className="absolute bg-gradient-to-br from-purple-500/40 to-blue-500/40 w-full h-full 
-                    z-10 rounded-lg shadow-2xl flex justify-center items-center backdrop-blur-sm cursor-pointer
-                     border border-white/10 transform hover:scale-[1.03] transition duration-500"
-                  >
-                    <Lock className="text-4xl text-white drop-shadow-lg animate-pulse" />
-                  </div>
-                )}
                 <Collapse
                   collapsible="header"
                   expandIconPosition="end"
@@ -175,7 +165,7 @@ const CourseDetails = () => {
                           </h2>
                           <div className="flex items-center gap-4">
                             <div className="flex items-center text-[13px] font-normal">
-                              <Video /> &nbsp;{' '}
+                              <Video className="w-5" /> &nbsp;
                               <p className="m-0">
                                 {' '}
                                 <span className="font-semibold">
@@ -185,7 +175,7 @@ const CourseDetails = () => {
                               </p>
                             </div>
                             <div className="flex items-center text-[13px] font-normal">
-                              <Monitor /> &nbsp;
+                              <Monitor className="w-4" /> &nbsp;
                               <p className="m-0">
                                 {' '}
                                 <span className="font-semibold">
@@ -200,10 +190,7 @@ const CourseDetails = () => {
                     }
                     key={item.id}
                   >
-                    <div
-                      className="text-base font-normal border-t-1 pt-4"
-                      // style={{ backgroundColor: bg_colors[index] }}
-                    >
+                    <div className="text-base font-normal border-t-1 pt-4">
                       {item.lessons.map((panelLesson, lessonIndex) => (
                         <Collapse
                           collapsible="header"
