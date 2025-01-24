@@ -96,7 +96,7 @@ const PopupImage = () => {
   };
 
   const findImageData = popupImage.find(
-    (item) => item.key === 'fkmw579u5iajG01FzncO',
+    (item) => item.id === 'fkmw579u5iajG01FzncO',
   );
 
   return (
