@@ -10,9 +10,17 @@ import { convertToAMPM } from '../../../src/utils/convertAMPM';
 import { formatDateWithoutYear, isToday } from '../../../src/utils/convertDate';
 
 // Parent Component
-import React, { useMemo } from 'react';
+import React, { useMemo, useState } from 'react';
+import CourseBatchModal from './ModalCourseBatch';
 
 const TodayClassContainer = ({ courseDataBatch }) => {
+  const [modalIsOpen, setModalIsOpen] = useState(false);
+  const openModal = () => {
+    setModalIsOpen(true);
+  };
+  const closeModal = () => {
+    setModalIsOpen(false);
+  };
   // Filter courses that have classes today
   const todayClasses = useMemo(() => {
     return courseDataBatch?.filter((item) => {
@@ -26,15 +34,27 @@ const TodayClassContainer = ({ courseDataBatch }) => {
     });
   }, [courseDataBatch]);
 
+  console.log(courseDataBatch);
+
   // If no classes today, show single "no class" card
   if (!todayClasses?.length) {
-    return <TodayClassRight item={courseDataBatch[0]} forceNoClass={true} />;
+    return (
+      <div>
+        <CourseBatchModal courseDataBatch={courseDataBatch} />
+        <TodayClassRight item={courseDataBatch[0]} forceNoClass={true} />
+      </div>
+    );
   }
 
   // Show only courses that have classes today
-  return todayClasses.map((item) => (
-    <TodayClassRight key={item.id} item={item} />
-  ));
+  return (
+    <div>
+      <CourseBatchModal courseDataBatch={courseDataBatch} />
+      {todayClasses.map((item) => (
+        <TodayClassRight key={item.id} item={item} />
+      ))}
+    </div>
+  );
 };
 
 // Modified Child Component

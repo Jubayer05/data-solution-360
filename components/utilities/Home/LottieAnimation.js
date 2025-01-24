@@ -17,7 +17,7 @@ const LottieAnimation = ({
   useEffect(() => {
     if (!containerRef.current) return;
 
-    animationRef.current = lottie.loadAnimation({
+    animationRef.current = lottie?.loadAnimation({
       container: containerRef.current,
       renderer: 'svg',
       loop,

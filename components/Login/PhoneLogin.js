@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import dynamic from 'next/dynamic';
 const LottieAnimation = dynamic(
-  () => import('../utilities/Home/LottieAnimation'),
+  () => import('../utilities/Home/LottieAnimation.js'),
   {
     ssr: false,
     loading: () => (
@@ -19,6 +19,8 @@ import { v4 as uuidv4 } from 'uuid';
 import firebase, { auth, handleAuthError } from '../../firebase';
 import * as congratulationsData from '../../src/data/json/congratulations.json';
 import * as animationData from '../../src/data/json/login_loading.json';
+import Congratulations from './Congratulations.js';
+import ForgetPassword from './PhoneForgetPassword.js';
 
 const db = firebase.firestore();
 
@@ -230,24 +232,33 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
               <button
                 type="submit"
                 className="w-full bg-primary-bg text-white px-4 py-3 rounded-md 
-                hover:bg-[#d85403] transition duration-300 flex items-center 
-                justify-center gap-2 md:text-lg"
+              hover:bg-[#d85403] transition duration-300 flex items-center 
+              justify-center gap-2 md:text-lg"
               >
                 Next Step <ArrowRight />
               </button>
 
-              <p className="text-center text-sm mt-3">
-                {loginStatePhone
-                  ? ' Or Login with Email and Password'
-                  : 'Or Login with Phone Number'}
-              </p>
+              <div className="flex justify-between items-center mt-3">
+                <p className="text-sm">
+                  {loginStatePhone
+                    ? 'Or Login with Email and Password'
+                    : 'Or Login with Phone Number'}
+                </p>
+                <button
+                  onClick={() => setStep(7)}
+                  className="text-primary-bg hover:text-[#d85403] text-sm font-medium"
+                >
+                  Forgot Password?
+                </button>
+              </div>
+
               <div className="mt-2">
                 <button
                   onClick={() => setLoginStatePhone(!loginStatePhone)}
                   type="submit"
                   className="w-full bg-[#f7d5c0] border-[#fd6404] border-2 px-4 py-3 rounded-md
-                   hover:bg-[#f5b993] transition duration-300 flex items-center justify-center 
-                   gap-2 text-base md:text-lg font-semibold"
+                 hover:bg-[#f5b993] transition duration-300 flex items-center justify-center 
+                 gap-2 text-base md:text-lg font-semibold"
                 >
                   {loginStatePhone ? 'Login with Email' : 'Login with Phone'}{' '}
                   <ArrowRight />
@@ -361,21 +372,22 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
 
           {step === 6 && (
             <div className="flex items-center justify-center flex-col">
-              {congratulationsLottie ? (
-                <LottieAnimation animationData={congratulationsLottie} />
-              ) : (
-                <p>Congratulations!</p>
-              )}
+              <Congratulations />
               <div className="max-w-md mx-auto p-6 text-center">
-                <p className="text-base my-4 text-green-600">
-                  Your account has been successfully created.
-                </p>
                 <button
                   onClick={() => (window.location.href = '/students/dashboard')}
                   className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] transition duration-300 flex items-center justify-center gap-2 text-base md:text-lg"
                 >
                   Go to Dashboard
                 </button>
+              </div>
+            </div>
+          )}
+
+          {step === 7 && (
+            <div className="flex items-center justify-center flex-col">
+              <div className="max-w-md mx-auto p-6 text-center">
+                <ForgetPassword />
               </div>
             </div>
           )}
