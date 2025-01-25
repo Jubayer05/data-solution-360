@@ -8,7 +8,6 @@ import RecordingContent from './RecordingContent';
 
 const RecordingHome = () => {
   const { activeMenu } = useStateContextDashboard();
-  const [activeBtn, setActiveBtn] = useState('Live Class');
   const [currentContent, setCurrentContent] = useState(null);
   const { courseDataBatch } = useEnrolledCourseData();
 
@@ -25,10 +24,6 @@ const RecordingHome = () => {
       borderRadius: '6px',
       backgroundColor: '#ffffff',
     }),
-  };
-
-  const handleSegmentClick = (item) => {
-    setActiveBtn(item.title);
   };
 
   useEffect(() => {
@@ -96,24 +91,6 @@ const RecordingHome = () => {
               <ChevronRight />
             </div>
           </div>
-          {/* </Link> */}
-
-          {/* <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-3 md:px-5 py-4 rounded-md my-5">
-            {segmentBtn.map((item) => (
-              <button
-                key={item.id}
-                onClick={() => handleSegmentClick(item)}
-                className={`${
-                  activeBtn === item.title
-                    ? 'bg-primary_btn hover:bg-[#001f3fdb] text-white'
-                    : ''
-                } flex justify-center items-center gap-2  hover:bg-[#c2c2c2] font-semibold
-          py-2 px-4 rounded border `}
-              >
-                {item.title}
-              </button>
-            ))}
-          </div> */}
 
           <RecordingContent item={currentContent} />
         </div>
@@ -123,22 +100,3 @@ const RecordingHome = () => {
 };
 
 export default RecordingHome;
-
-const segmentBtn = [
-  {
-    id: '1',
-    title: 'Live Class',
-  },
-  {
-    id: '2',
-    title: 'Support Class',
-  },
-  {
-    id: '3',
-    title: 'Conceptual Class',
-  },
-  {
-    id: '4',
-    title: 'Question Solving',
-  },
-];

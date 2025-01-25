@@ -1,6 +1,5 @@
 import React from 'react';
 import YouTube from 'react-youtube';
-import styles from '../../styles/freeCourse/FreeCourse.module.css';
 
 const YouTubePlayer = ({ videoId, url }) => {
   function extractVideoId(url) {
@@ -13,27 +12,27 @@ const YouTubePlayer = ({ videoId, url }) => {
   const videoIdUrl = extractVideoId(url);
 
   const opts = {
-    height: '330',
-    width: '550',
+    height: '100%',
+    width: '100%',
     playerVars: {
       controls: 1,
       rel: 0,
-      showinfo: 0, // hide video title and uploader info
+      showinfo: 0,
       modestbranding: 2,
       disablekb: 1,
       disableShare: 0,
-      autoplay: 1, // Auto-play the video
-      // controls: 0, // Hide controls
-      rel: 0, // Disable related videos at the end
+      autoplay: 0, // Changed to prevent auto-play
     },
   };
 
   return (
-    <YouTube
-      videoId={videoId || videoIdUrl}
-      opts={opts}
-      className={styles.youtube_player}
-    />
+    <div className="relative w-full aspect-video">
+      <YouTube
+        videoId={videoId || videoIdUrl}
+        opts={opts}
+        className="absolute top-0 left-0 w-full h-full"
+      />
+    </div>
   );
 };
 
