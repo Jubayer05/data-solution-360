@@ -114,7 +114,6 @@ const HeadingEnrolled = ({ item }) => {
             <h2 className="text-lg sm:text-xl font-bold leading-6">
               Recorded Live Class
             </h2>
-            <p className="text-xs mt-1">35 Videos</p>
           </div>
           <div>
             <ChevronRight />
