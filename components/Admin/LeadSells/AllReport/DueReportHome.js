@@ -1,15 +1,11 @@
 import { useEffect, useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
-import firebase from '../../../../firebase';
 
 import { loadData } from '../../../../src/hooks/loadData';
 import HeadingDashboard from '../../../utilities/dashboard/HeadingDashboard';
 import DueSheet from './DueSheet';
 
-const db = firebase.firestore();
-
 const DueReportHome = () => {
-  const [takeLead, setTakeLead] = useState(null);
   const [leads, setLeads] = useState([]);
   const [sells, setSells] = useState([]);
 

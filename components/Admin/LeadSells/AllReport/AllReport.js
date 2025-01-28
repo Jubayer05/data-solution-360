@@ -1,6 +1,5 @@
 import { useEffect, useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
-import firebase from '../../../../firebase';
 
 import { loadData } from '../../../../src/hooks/loadData';
 import HeadingDashboard from '../../../utilities/dashboard/HeadingDashboard';
@@ -9,10 +8,7 @@ import DueSheet from './DueSheet';
 import ReportDataCourse from './ReportDataCourse';
 import ReportDataPerson from './ReportDataPerson';
 
-const db = firebase.firestore();
-
 const AllReport = () => {
-  const [takeLead, setTakeLead] = useState(null);
   const [leads, setLeads] = useState([]);
   const [sells, setSells] = useState([]);
 
@@ -26,11 +22,7 @@ const AllReport = () => {
     <div>
       <HeadingDashboard title="All Reports" />
       <div className="max-w-6xl mx-auto my-20 font-dash_heading">
-        <LeadsForSells
-          leads={leads}
-          setLeads={setLeads}
-          setTakeLead={setTakeLead}
-        />
+        <LeadsForSells leads={leads} setLeads={setLeads} />
 
         <ReportDataPerson sells={sells} />
         <ReportDataCourse sells={sells} />

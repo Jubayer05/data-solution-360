@@ -149,6 +149,8 @@ const ShowLeads = ({ leads, setLeads }) => {
     },
   ];
 
+  console.log(filteredData);
+
   return (
     <div>
       <div className="max-w-6xl mx-auto my-20 font-dash_heading">

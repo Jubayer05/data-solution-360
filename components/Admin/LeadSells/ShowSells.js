@@ -11,8 +11,6 @@ import DataFilterComponent from '../../utilities/FilteredButton';
 import SellsModal from './SellsTrack/SellsModal';
 import StatusBadge from './Utils/StatusBadge';
 
-const db = firebase.firestore();
-
 const ShowSells = ({ sells }) => {
   const { findCurrentUser } = useStateContext();
   const [loading, setLoading] = useState(false);
@@ -85,11 +83,6 @@ const ShowSells = ({ sells }) => {
     } finally {
       setLoading(false);
     }
-  };
-
-  // Handle filter changes
-  const handleFilterChange = (newFilteredData) => {
-    setFinalFilter(newFilteredData);
   };
 
   // Ant Design Table Columns
