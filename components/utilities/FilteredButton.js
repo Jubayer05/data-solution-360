@@ -1,9 +1,13 @@
 import {
-  eachDayOfInterval,
+  Button,
+  Card,
+  ConfigProvider,
+  DatePicker,
+  Radio,
+  Typography,
+} from 'antd';
+import {
   endOfDay,
-  endOfMonth,
-  format,
-  getDay,
   isWithinInterval,
   parseISO,
   startOfDay,
@@ -11,118 +15,58 @@ import {
   startOfWeek,
   subDays,
 } from 'date-fns';
+import {
+  CalendarCheck,
+  CalendarClock,
+  CalendarDays,
+  Calendar as CalendarIcon,
+  CalendarRange,
+  ChevronDown,
+  ChevronLeft,
+  ChevronRight,
+  Clock,
+  History,
+  InfinityIcon,
+} from 'lucide-react';
 import React, { useCallback, useEffect, useRef, useState } from 'react';
-import ButtonDashboard from './dashboard/ButtonDashboard';
 
-const Calendar = ({ onSelectDate, selectedDate }) => {
-  // Calendar component remains unchanged
-  const [currentMonth, setCurrentMonth] = useState(new Date());
+const { RangePicker } = DatePicker;
+const { Title } = Typography;
 
-  const daysInMonth = eachDayOfInterval({
-    start: startOfMonth(currentMonth),
-    end: endOfMonth(currentMonth),
-  });
-
-  const startDayOfMonth = getDay(startOfMonth(currentMonth));
-  const blankDays = Array(startDayOfMonth).fill(null);
-
-  const previousMonth = () => {
-    setCurrentMonth(
-      (prev) => new Date(prev.getFullYear(), prev.getMonth() - 1),
-    );
-  };
-
-  const nextMonth = () => {
-    setCurrentMonth(
-      (prev) => new Date(prev.getFullYear(), prev.getMonth() + 1),
-    );
-  };
-
-  return (
-    <div className="w-64 bg-white rounded-lg shadow p-4">
-      <div className="flex justify-between items-center mb-4">
-        <button
-          onClick={previousMonth}
-          className="text-gray-600 hover:text-gray-800"
-        >
-          ←
-        </button>
-        <h2 className="text-lg font-semibold">
-          {format(currentMonth, 'MMMM yyyy')}
-        </h2>
-        <button
-          onClick={nextMonth}
-          className="text-gray-600 hover:text-gray-800"
-        >
-          →
-        </button>
-      </div>
-
-      <div className="grid grid-cols-7 gap-1 mb-2">
-        {['Su', 'Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa'].map((day) => (
-          <div
-            key={day}
-            className="text-center text-sm font-medium text-gray-600"
-          >
-            {day}
-          </div>
-        ))}
-      </div>
-
-      <div className="grid grid-cols-7 gap-1">
-        {blankDays.map((_, index) => (
-          <div key={`blank-${index}`} className="h-8" />
-        ))}
-
-        {daysInMonth.map((date) => {
-          const isSelected =
-            selectedDate &&
-            format(date, 'yyyy-MM-dd') === format(selectedDate, 'yyyy-MM-dd');
-          const isToday =
-            format(date, 'yyyy-MM-dd') === format(new Date(), 'yyyy-MM-dd');
-
-          return (
-            <button
-              key={date.toString()}
-              onClick={() => onSelectDate(date)}
-              className={`h-8 flex items-center justify-center rounded-full text-sm
-                ${isSelected ? 'bg-blue-600 text-white' : ''}
-                ${isToday && !isSelected ? 'bg-blue-100' : ''}
-                ${!isSelected && !isToday ? 'hover:bg-gray-100' : ''}
-              `}
-            >
-              {format(date, 'd')}
-            </button>
-          );
-        })}
-      </div>
-    </div>
-  );
-};
+const FilterOption = ({ icon, label, isSelected }) => (
+  <div className="flex items-center gap-2">
+    {React.cloneElement(icon, {
+      size: 16,
+      className: `${isSelected ? 'text-white' : 'text-blue-600'}`,
+    })}
+    <span className={`${isSelected ? 'text-white' : 'text-blue-600'}`}>
+      {label}
+    </span>
+  </div>
+);
 
 const DataFilterComponent = ({ setFilteredData, data }) => {
   const [activeButton, setActiveButton] = useState('Today');
-  const [selectedDate, setSelectedDate] = useState(null);
-  const [showCalendar, setShowCalendar] = useState(false);
+  const [dateRange, setDateRange] = useState(null);
   const autoRenderCount = useRef(0);
   const maxAutoRenders = 5;
   const isUserAction = useRef(false);
 
   const filterOptions = [
-    'Today',
-    'Yesterday',
-    '3 Days',
-    '7 Days',
-    '15 Days',
-    '1 Month',
-    'This Month',
-    'This Week',
-    'All Time',
-    'Calendar',
+    { label: 'Today', icon: <Clock />, key: 'Today' },
+    { label: 'Yesterday', icon: <History />, key: 'Yesterday' },
+    { label: '3 Days', icon: <CalendarClock />, key: '3 Days' },
+    { label: '7 Days', icon: <CalendarCheck />, key: '7 Days' },
+    { label: '15 Days', icon: <CalendarDays />, key: '15 Days' },
+    { label: '1 Month', icon: <CalendarIcon />, key: '1 Month' },
+    { label: 'This Month', icon: <CalendarRange />, key: 'This Month' },
+    { label: 'This Week', icon: <CalendarCheck />, key: 'This Week' },
+    { label: 'All Time', icon: <InfinityIcon />, key: 'All Time' },
+    { label: 'Custom Range', icon: <CalendarRange />, key: 'Date Range' },
   ];
 
   const getFilterFunction = useCallback(
-    (filterLabel, currentDate, date = null) => {
+    (filterLabel, currentDate, customDateRange = null) => {
       switch (filterLabel) {
         case 'Today':
           const todayStart = startOfDay(currentDate);
@@ -164,14 +108,15 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
           const weekStart = startOfWeek(currentDate);
           return (itemDate) => itemDate >= weekStart;
 
-        case 'Calendar':
-          if (date) {
-            const calendarDayStart = startOfDay(date);
-            const calendarDayEnd = endOfDay(date);
+        case 'Date Range':
+          if (customDateRange?.length === 2) {
+            const [start, end] = customDateRange;
+            const rangeStart = startOfDay(start.toDate());
+            const rangeEnd = endOfDay(end.toDate());
             return (itemDate) =>
               isWithinInterval(itemDate, {
-                start: calendarDayStart,
-                end: calendarDayEnd,
+                start: rangeStart,
+                end: rangeEnd,
               });
           }
           return () => true;
@@ -187,20 +132,13 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
   const filterData = useCallback(() => {
     if (!data?.length) return;
 
-    // Only increment counter for automatic renders
     if (!isUserAction.current) {
       autoRenderCount.current += 1;
-      console.log(`Auto render count: ${autoRenderCount.current}`);
     }
 
-    // Allow render if it's either user action or within auto render limit
     if (isUserAction.current || autoRenderCount.current <= maxAutoRenders) {
       const currentDate = new Date();
-      const filterFn = getFilterFunction(
-        activeButton,
-        currentDate,
-        selectedDate,
-      );
+      const filterFn = getFilterFunction(activeButton, currentDate, dateRange);
 
       const filtered = data.filter((item) => {
         if (!item?.createdAt) return false;
@@ -215,64 +153,131 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
 
       setFilteredData(filtered);
     }
-  }, [data, activeButton, selectedDate, getFilterFunction, setFilteredData]);
+  }, [data, activeButton, dateRange, getFilterFunction, setFilteredData]);
 
-  // Handle initial data load and changes
   useEffect(() => {
     isUserAction.current = false;
     filterData();
   }, [data]);
 
-  // Handle filter changes from user actions
   useEffect(() => {
     if (isUserAction.current) {
       filterData();
     }
-  }, [activeButton, selectedDate]);
+  }, [activeButton, dateRange]);
 
-  const handleButtonClick = useCallback((label) => {
+  const handleFilterChange = useCallback((value) => {
     isUserAction.current = true;
-    setActiveButton(label);
-    if (label === 'Calendar') {
-      setShowCalendar(true);
-    } else {
-      setShowCalendar(false);
-      setSelectedDate(null);
+
+    console.log(value);
+
+    setActiveButton(value);
+    if (value !== 'Date Range') {
+      setDateRange(null);
     }
   }, []);
 
-  const handleDateSelect = useCallback((date) => {
+  const handleDateRangeChange = useCallback((dates) => {
     isUserAction.current = true;
-    setSelectedDate(date);
+    setDateRange(dates);
   }, []);
 
-  return (
-    <div>
-      <div className="flex flex-wrap gap-4 mb-6">
-        {filterOptions.map((label) => (
-          <ButtonDashboard
-            key={label}
-            onClick={() => handleButtonClick(label)}
-            className={`py-2 px-4 rounded-md text-lg transition duration-200 border-2 ${
-              activeButton === label
-                ? 'bg-blue-600 text-white border-blue-600'
-                : 'bg-transparent text-blue-600 border-blue-600 hover:bg-blue-100'
-            }`}
-          >
-            {label}
-          </ButtonDashboard>
-        ))}
-      </div>
+  const theme = {
+    token: {
+      colorPrimary: '#2563eb',
+      colorSuccess: '#16a34a',
+      colorWarning: '#d97706',
+      colorError: '#dc2626',
+      colorInfo: '#2563eb',
+      borderRadius: 8,
+      controlHeight: 40,
+    },
+    components: {
+      Radio: {
+        buttonBg: '#ffffff',
+        buttonCheckedBg: '#2563eb',
+        buttonColor: '#2563eb',
+        buttonSolidCheckedColor: '#ffffff',
+        buttonCheckedBorderColor: '#2563eb',
+      },
+    },
+  };
 
-      {showCalendar && (
-        <div className="mt-4">
-          <Calendar
-            onSelectDate={handleDateSelect}
-            selectedDate={selectedDate}
-          />
+  return (
+    <ConfigProvider theme={theme}>
+      <Card
+        className="shadow-lg rounded-lg border-0"
+        bodyStyle={{ padding: '24px' }}
+      >
+        <Title level={5} className="mb-6 text-gray-700">
+          Date Filter
+        </Title>
+
+        <div className="space-y-6">
+          <Radio.Group
+            value={activeButton}
+            onChange={(e) => handleFilterChange(e.target.value)}
+            className="w-full"
+          >
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
+              {filterOptions.map(
+                ({ label, icon, key }) => (
+                  console.log(activeButton, key),
+                  (
+                    <Radio.Button
+                      key={key}
+                      value={key}
+                      className={`
+                    h-12 flex items-center justify-center
+                    transition-all duration-200 ease-in-out
+                    hover:border-blue-600 hover:text-blue-600 
+                    ${
+                      activeButton !== key
+                        ? 'bg-white border-gray-200'
+                        : 'bg-blue-600 border-blue-600'
+                    }
+                  `}
+                    >
+                      <FilterOption
+                        icon={icon}
+                        label={label}
+                        isSelected={activeButton === key}
+                      />
+                    </Radio.Button>
+                  )
+                ),
+              )}
+            </div>
+          </Radio.Group>
+
+          {activeButton === 'Date Range' && (
+            <div className="flex items-center gap-4">
+              <RangePicker
+                value={dateRange}
+                onChange={handleDateRangeChange}
+                format="MMM D, YYYY"
+                className="w-full md:w-auto"
+                size="large"
+                suffixIcon={<ChevronDown size={16} className="text-gray-400" />}
+                prevIcon={<ChevronLeft size={16} />}
+                nextIcon={<ChevronRight size={16} />}
+                placeholder={['Start Date', 'End Date']}
+              />
+              {dateRange && (
+                <Button
+                  type="text"
+                  danger
+                  onClick={() => setDateRange(null)}
+                  className="flex items-center"
+                >
+                  Clear
+                </Button>
+              )}
+            </div>
+          )}
         </div>
-      )}
-    </div>
+      </Card>
+    </ConfigProvider>
   );
 };
 
