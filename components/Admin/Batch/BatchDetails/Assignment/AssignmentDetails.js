@@ -142,6 +142,10 @@ const AssignmentDetails = () => {
     }
   };
 
+  const handleFileDownload = (downloadURL) => {
+    window.open(downloadURL, '_blank');
+  };
+
   const columns = [
     {
       title: 'SL',
@@ -198,7 +202,7 @@ const AssignmentDetails = () => {
       align: 'center',
       render: (_, record) => (
         <div>
-          {record?.assignmentLinks.map((item, index) => (
+          {record?.assignmentLinks?.map((item, index) => (
             <div
               key={index}
               className="flex items-center justify-between gap-4 mt-2"
