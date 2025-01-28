@@ -6,6 +6,7 @@ import { loadData } from '../../../src/hooks/loadData';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import AddAssignment from './BatchDetails/Assignment/AddAssignment';
 import AssignmentComp from './BatchDetails/Assignment/AssignmentComp';
+import AssignmentTrackingMatrix from './BatchDetails/Assignment/AssignmentTrackingMatrix';
 import EnrolledStudent from './BatchDetails/EnrolledStudents';
 import ManualPayment from './BatchDetails/ManualPayment';
 import ModuleDetails from './BatchDetails/ModuleDetails';
@@ -37,6 +38,7 @@ const EnrolledCourseDetails = () => {
         <ManualPayment />
         <ModuleDetails />
         <AssignmentComp />
+        <AssignmentTrackingMatrix />
         <AddAssignment />
       </div>
     </div>

@@ -1,5 +1,5 @@
 import { ConfigProvider, Spin, Table } from 'antd'; // Import Spin from 'antd'
-import Link from 'next/link';
+import { Download, FileDiff } from 'lucide-react';
 import { useRouter } from 'next/router';
 import { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
@@ -16,26 +16,30 @@ const AssignmentDetails = () => {
   const [url, setUrl] = useState('');
   const router = useRouter();
   const { batchId, assignmentId } = router.query;
-  const [marks, setMarks] = useState({}); // State to track marks input for each student
-  const [loading, setLoading] = useState({}); // State to track loading status for each student
+  const [marks, setMarks] = useState({});
+  const [loading, setLoading] = useState({});
+  const [currentAssignment, setCurrentAssignment] = useState(null);
+  const [currentEnrolledCourse, setCurrentEnrolledCourse] = useState(null);
 
   useEffect(() => {
-    loadData('course_data_batch', setCourseDataBatch); // Load course data
-    const currentUrl = window.location.href.split('/').slice(-1)[0]; // Get current URL
+    loadData('course_data_batch', setCourseDataBatch);
+    const currentUrl = window.location.href.split('/').slice(-1)[0];
     setUrl(currentUrl);
   }, []);
 
-  const currentEnrolledCourse = courseDataBatch.find(
-    (course) => course.id === batchId,
-  );
+  useEffect(() => {
+    if (courseDataBatch.length > 0 && batchId && assignmentId) {
+      const course = courseDataBatch.find((course) => course.id === batchId);
+      setCurrentEnrolledCourse(course);
 
-  const currentAssignment =
-    currentEnrolledCourse?.assignment_data?.find(
-      (assignment) => assignment.id === assignmentId,
-    ) || null;
+      const assignment = course?.assignment_data?.find(
+        (assignment) => assignment.id === assignmentId,
+      );
+      setCurrentAssignment(assignment || null);
+    }
+  }, [courseDataBatch, batchId, assignmentId]);
 
   const handleMarksChange = (studentId, value) => {
-    // Update marks in the state
     setMarks((prevMarks) => ({
       ...prevMarks,
       [studentId]: value,
@@ -45,7 +49,7 @@ const AssignmentDetails = () => {
   const handleUpdateMarks = async (studentId) => {
     const studentMarks = marks[studentId];
 
-    if (studentMarks > currentAssignment?.total_marks) {
+    if (parseFloat(studentMarks) > parseFloat(currentAssignment?.total_marks)) {
       Swal.fire({
         title: 'Invalid Marks',
         text: 'Marks cannot be greater than total marks.',
@@ -75,41 +79,52 @@ const AssignmentDetails = () => {
         const updatedSubmittedStudents =
           currentAssignment.submitted_students.map((student) => {
             if (student.student_id === studentId) {
-              return { ...student, obtain_marks: studentMarks }; // Update marks
+              return { ...student, obtain_marks: studentMarks };
             }
-            return student; // Return unchanged student
+            return student;
           });
 
-        const courseData = {
+        const updatedAssignment = {
+          ...currentAssignment,
+          submitted_students: updatedSubmittedStudents,
+        };
+
+        const updatedCourseData = {
           ...currentEnrolledCourse,
           assignment_data: [
             ...currentEnrolledCourse?.assignment_data.filter(
               (item) => item.id !== assignmentId,
             ),
-            {
-              ...currentAssignment,
-              submitted_students: updatedSubmittedStudents,
-            },
+            updatedAssignment,
           ],
         };
 
-        // Update the Firestore database
+        // Update Firestore
         await db
           .collection('course_data_batch')
           .doc(batchId)
-          .update(courseData);
+          .update(updatedCourseData);
+
+        // Update local state
+        setCurrentAssignment(updatedAssignment);
+        setCurrentEnrolledCourse(updatedCourseData);
+
+        // Update courseDataBatch state
+        setCourseDataBatch((prevBatches) =>
+          prevBatches.map((batch) =>
+            batch.id === batchId ? updatedCourseData : batch,
+          ),
+        );
+
+        // Clear the input field
+        setMarks((prevMarks) => ({ ...prevMarks, [studentId]: '' }));
 
         Swal.fire({
           title: 'Marks Updated',
           text: 'The marks have been updated successfully.',
           icon: 'success',
           confirmButtonText: 'OK',
-        }).then(() => {
-          window.location.reload();
         });
-
-        // Clear the input field for the updated student
-        setMarks((prevMarks) => ({ ...prevMarks, [studentId]: '' }));
       } catch (error) {
         console.error('Error updating marks:', error);
         Swal.fire({
@@ -182,15 +197,23 @@ const AssignmentDetails = () => {
       dataIndex: 'start_date',
       align: 'center',
       render: (_, record) => (
-        <Link
-          href={record.assignmentLink || ''}
-          target="_blank"
-          className="text-[13px] text-[#767576] visited:text-[#767576] font-medium font-dash_heading leading-1"
-        >
-          <ButtonDashboard className="bg-primary_btn hover:bg-[#002346bc] text-white">
-            Check Assignment
-          </ButtonDashboard>
-        </Link>
+        <div>
+          {record?.assignmentLinks.map((item, index) => (
+            <div
+              key={index}
+              className="flex items-center justify-between gap-4 mt-2"
+            >
+              <div className="flex items-center w-[98%] text-gray-500 text-xs">
+                <FileDiff className="mr-2 w-5" />
+                <span className="w-[90%] text-left">{item.fileName}</span>
+              </div>
+              <Download
+                onClick={() => handleFileDownload(item?.downloadURL)}
+                className="cursor-pointer text-lg text-red-500"
+              />
+            </div>
+          ))}
+        </div>
       ),
     },
     {
