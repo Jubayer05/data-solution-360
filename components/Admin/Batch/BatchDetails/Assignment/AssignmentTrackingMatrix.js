@@ -1,23 +1,46 @@
-import { Table } from 'antd';
+import {
+  Badge,
+  Card,
+  Input,
+  Progress,
+  Space,
+  Spin,
+  Table,
+  Typography,
+} from 'antd';
 import { Check, X } from 'lucide-react';
 import { useRouter } from 'next/router';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import firebase from '../../../../../firebase';
 import { loadData } from '../../../../../src/hooks/loadData';
 
+const { Title, Text } = Typography;
+const { Search: AntSearch } = Input;
+
 const AssignmentTrackingMatrix = () => {
   const [courseDataBatch, setCourseDataBatch] = useState([]);
+  const [enrolledStudents, setEnrolledStudents] = useState([]);
+  const [filteredStudents, setFilteredStudents] = useState([]);
+  const [searchText, setSearchText] = useState('');
+  const [isLoading, setIsLoading] = useState(true);
+
   const router = useRouter();
   const { batchId } = router.query;
-  const [enrolledStudents, setEnrolledStudents] = useState([]);
 
   useEffect(() => {
     loadData('course_data_batch', setCourseDataBatch);
   }, []);
 
+  const currentEnrolledCourse = courseDataBatch.find(
+    (course) => course.id === batchId,
+  );
+
   useEffect(() => {
     const fetchEnrolledStudents = async () => {
-      if (!currentEnrolledCourse?.enrolled_students?.length) return;
+      if (!currentEnrolledCourse?.enrolled_students?.length) {
+        setIsLoading(false);
+        return;
+      }
 
       try {
         const studentsRef = firebase.firestore().collection('users');
@@ -31,8 +54,11 @@ const AssignmentTrackingMatrix = () => {
           ...doc.data(),
         }));
         setEnrolledStudents(studentsData);
+        setFilteredStudents(studentsData);
       } catch (error) {
         console.error('Error fetching enrolled students:', error);
+      } finally {
+        setIsLoading(false);
       }
     };
 
@@ -41,30 +67,50 @@ const AssignmentTrackingMatrix = () => {
     }
   }, [courseDataBatch, batchId]);
 
-  const currentEnrolledCourse = courseDataBatch.find(
-    (course) => course.id === batchId,
-  );
+  const handleSearch = (value) => {
+    const filtered = enrolledStudents.filter((student) =>
+      student.full_name.toLowerCase().includes(value.toLowerCase()),
+    );
+    setFilteredStudents(filtered);
+    setSearchText(value);
+  };
 
-  // Create dynamic columns based on assignments
+  const getTotalSubmissions = (studentId) => {
+    return (currentEnrolledCourse?.assignment_data || []).reduce(
+      (count, assignment) => {
+        const hasSubmitted = assignment.submitted_students?.some(
+          (submission) => submission.student_id === studentId,
+        );
+        return count + (hasSubmitted ? 1 : 0);
+      },
+      0,
+    );
+  };
+
   const columns = [
     {
       title: 'Student Name',
       dataIndex: 'full_name',
       fixed: 'left',
       width: 200,
-      render: (text) => (
-        <p className="text-[13px] text-[#767576] font-medium font-dash_heading">
-          {text}
-        </p>
-      ),
+      render: (text) => <Text strong>{text}</Text>,
     },
     ...(currentEnrolledCourse?.assignment_data || []).map((assignment) => ({
-      title: assignment.title,
+      title: () => (
+        <div className="text-center">
+          <div>{assignment.title}</div>
+          <Badge
+            count={`${assignment.submitted_students?.length || 0}/${
+              filteredStudents.length
+            }`}
+            style={{ backgroundColor: '#52c41a' }}
+          />
+        </div>
+      ),
       dataIndex: assignment.id,
       width: 120,
       align: 'center',
       render: (_, record) => {
-        console.log(record?.student_id);
         const hasSubmitted = assignment.submitted_students?.some(
           (submission) => submission.student_id === record.student_id,
         );
@@ -76,88 +122,112 @@ const AssignmentTrackingMatrix = () => {
       },
     })),
     {
-      title: 'Total Submitted',
+      title: 'Completion',
       fixed: 'right',
-      width: 120,
+      width: 200,
       align: 'center',
       render: (_, record) => {
-        const totalSubmissions = (
-          currentEnrolledCourse?.assignment_data || []
-        ).reduce((count, assignment) => {
-          const hasSubmitted = assignment.submitted_students?.some(
-            (submission) => submission.student_id === record.student_id,
-          );
-          return count + (hasSubmitted ? 1 : 0);
-        }, 0);
+        const totalSubmissions = getTotalSubmissions(record.student_id);
+        const totalAssignments =
+          currentEnrolledCourse?.assignment_data?.length || 0;
+        const percentage = (totalSubmissions / totalAssignments) * 100;
+
         return (
-          <p className="text-[13px] font-medium font-dash_heading">
-            {totalSubmissions} /{' '}
-            {currentEnrolledCourse?.assignment_data?.length || 0}
-          </p>
+          <Space direction="vertical" size="small" className="w-full">
+            <Progress
+              percent={Math.round(percentage)}
+              size="small"
+              status={percentage === 100 ? 'success' : 'active'}
+            />
+            <Text type="secondary">
+              {totalSubmissions} / {totalAssignments}
+            </Text>
+          </Space>
         );
       },
     },
   ];
 
   return (
-    <div className="max-w-7xl mx-auto my-20">
-      <div className="border-1 p-5 rounded-lg bg-white mt-10">
-        <h2 className="text-xl pb-4 text-[#231f40] font-medium font-dash_heading">
-          Assignment Submission Matrix
-        </h2>
-        <div className="max-w-full mx-auto">
-          <Table
-            columns={columns}
-            dataSource={enrolledStudents}
-            pagination={{
-              pageSize: 15,
-            }}
-            scroll={{
-              x: 'max-content',
-              y: 500,
-            }}
-            rowKey="id"
-            summary={(pageData) => {
-              // Calculate total submissions per assignment
-              const totalSubmissions = (
-                currentEnrolledCourse?.assignment_data || []
-              ).map((assignment) => ({
-                title: assignment.title,
-                count: assignment.submitted_students?.length || 0,
-                total: enrolledStudents.length,
-              }));
+    <Card className="mx-auto my-8" style={{ maxWidth: 1200 }}>
+      <Space direction="vertical" size="large" className="w-full">
+        <Space direction="vertical" size="small">
+          <Title level={4} style={{ margin: 0 }}>
+            Assignment Submission Matrix
+          </Title>
+          <Text type="secondary">
+            Track student assignment submissions and completion rates
+          </Text>
+        </Space>
 
-              return (
-                <Table.Summary fixed>
-                  <Table.Summary.Row>
-                    <Table.Summary.Cell index={0} fixed="left">
-                      <strong>Total Submissions</strong>
-                    </Table.Summary.Cell>
-                    {totalSubmissions.map((total, index) => (
-                      <Table.Summary.Cell
-                        index={index + 1}
-                        key={index}
-                        align="center"
-                      >
-                        <strong>
-                          {total.count} / {total.total}
-                        </strong>
+        <Space className="w-full" direction="vertical">
+          <div className="flex justify-end">
+            <AntSearch
+              placeholder="Search student name..."
+              allowClear
+              enterButton="Search"
+              size="large"
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              onSearch={handleSearch}
+              style={{ width: 300 }}
+            />
+          </div>
+
+          <Spin spinning={isLoading} size="large">
+            <Table
+              columns={columns}
+              dataSource={filteredStudents}
+              rowKey="id"
+              pagination={{
+                pageSize: 15,
+                showSizeChanger: false,
+                showTotal: (total, range) =>
+                  `${range[0]}-${range[1]} of ${total} students`,
+              }}
+              scroll={{
+                x: 'max-content',
+                y: 600,
+              }}
+              summary={(pageData) => {
+                const totalSubmissions = (
+                  currentEnrolledCourse?.assignment_data || []
+                ).map((assignment) => ({
+                  title: assignment.title,
+                  count: assignment.submitted_students?.length || 0,
+                  total: filteredStudents.length,
+                }));
+
+                return (
+                  <Table.Summary fixed>
+                    <Table.Summary.Row>
+                      <Table.Summary.Cell index={0} fixed="left">
+                        <Text strong>Total Submissions</Text>
                       </Table.Summary.Cell>
-                    ))}
-                    <Table.Summary.Cell
-                      index={totalSubmissions.length + 1}
-                      fixed="right"
-                    >
-                      {/* Empty cell for the "Total Submitted" column */}
-                    </Table.Summary.Cell>
-                  </Table.Summary.Row>
-                </Table.Summary>
-              );
-            }}
-          />
-        </div>
-      </div>
-    </div>
+                      {totalSubmissions.map((total, index) => (
+                        <Table.Summary.Cell
+                          index={index + 1}
+                          key={index}
+                          align="center"
+                        >
+                          <Text strong>
+                            {total.count} / {total.total}
+                          </Text>
+                        </Table.Summary.Cell>
+                      ))}
+                      <Table.Summary.Cell
+                        index={totalSubmissions.length + 1}
+                        fixed="right"
+                      />
+                    </Table.Summary.Row>
+                  </Table.Summary>
+                );
+              }}
+            />
+          </Spin>
+        </Space>
+      </Space>
+    </Card>
   );
 };
 
