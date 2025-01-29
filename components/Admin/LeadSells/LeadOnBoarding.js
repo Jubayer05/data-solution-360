@@ -8,17 +8,12 @@ import { useStateContext } from '../../../src/context/ContextProvider';
 import { loadData } from '../../../src/hooks/loadData';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import LeadsForSells from './LeadsForSells';
-import ShowSells from './ShowSells';
 
 const db = firebase.firestore();
 
-const SellsTracking = () => {
+const LeadOnBoarding = () => {
   const { findCurrentUser } = useStateContext();
   const [takeLead, setTakeLead] = useState(null);
-  const [customerName, setCustomerName] = useState('');
-  const [customerNumber, setCustomerNumber] = useState('');
-  const [status, setStatus] = useState('');
-  const [loading, setLoading] = useState(false);
   const [leads, setLeads] = useState([]);
   const [sells, setSells] = useState([]);
 
@@ -31,15 +26,7 @@ const SellsTracking = () => {
     loadData('sells_data', setSells);
   }, []);
 
-  useEffect(() => {
-    setCustomerName(takeLead?.customer_name);
-    setCustomerNumber(takeLead?.customer_phoneNumber);
-    setStatus(takeLead?.status);
-  }, [takeLead]);
-
   const handleTakeLead = (lead) => {
-    setLoading(true);
-
     const newSells = {
       uniqueId,
       createdAt: timestamp,
@@ -66,7 +53,6 @@ const SellsTracking = () => {
               `The lead is taken right now by ${findCurrentUser?.full_name}.`,
               'success',
             ).then(() => {
-              setLoading(false);
               window.location.reload();
             });
           });
@@ -75,7 +61,7 @@ const SellsTracking = () => {
 
   return (
     <div>
-      <HeadingDashboard title="Track a Lead" />
+      <HeadingDashboard title="Lead on Boarding" />
       <div className="max-w-6xl mx-auto my-20 font-dash_heading">
         <LeadsForSells
           leads={leads}
@@ -83,26 +69,9 @@ const SellsTracking = () => {
           setTakeLead={setTakeLead}
           handleTakeLead={handleTakeLead}
         />
-
-        <ShowSells sells={sells} />
       </div>
     </div>
   );
 };
 
-export default SellsTracking;
-
-const customStyles = {
-  menu: (provided) => ({
-    ...provided,
-    borderBottom: '1px dotted pink',
-    padding: 20,
-  }),
-  control: () => ({
-    display: 'flex',
-    border: '1px solid #e5e5e5',
-    padding: '5px 10px',
-    borderRadius: '6px',
-    backgroundColor: '#ffffff',
-  }),
-};
+export default LeadOnBoarding;

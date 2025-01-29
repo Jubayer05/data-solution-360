@@ -45,11 +45,16 @@ const FilterOption = ({ icon, label, isSelected }) => (
   </div>
 );
 
-const DataFilterComponent = ({ setFilteredData, data }) => {
+const DataFilterComponent = ({
+  setFilteredData,
+  data,
+  setSecondState,
+  data2,
+}) => {
   const [activeButton, setActiveButton] = useState('Today');
   const [dateRange, setDateRange] = useState(null);
-  const autoRenderCount = useRef(0);
-  const maxAutoRenders = 5;
+  const renderCount = useRef(0);
+  const isInitialMount = useRef(true);
   const isUserAction = useRef(false);
 
   const filterOptions = [
@@ -132,15 +137,24 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
   const filterData = useCallback(() => {
     if (!data?.length) return;
 
-    if (!isUserAction.current) {
-      autoRenderCount.current += 1;
-    }
+    const currentDate = new Date();
+    const filterFn = getFilterFunction(activeButton, currentDate, dateRange);
 
-    if (isUserAction.current || autoRenderCount.current <= maxAutoRenders) {
-      const currentDate = new Date();
-      const filterFn = getFilterFunction(activeButton, currentDate, dateRange);
+    const filtered = data.filter((item) => {
+      if (!item?.createdAt) return false;
+      try {
+        const itemDate = parseISO(item.createdAt);
+        return filterFn(itemDate);
+      } catch (error) {
+        console.error('Error parsing date:', error);
+        return false;
+      }
+    });
 
-      const filtered = data.filter((item) => {
+    setFilteredData(filtered);
+
+    if (data2?.length > 0) {
+      const filtered2 = data2.filter((item) => {
         if (!item?.createdAt) return false;
         try {
           const itemDate = parseISO(item.createdAt);
@@ -150,27 +164,39 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
           return false;
         }
       });
-
-      setFilteredData(filtered);
+      setSecondState(filtered2);
     }
-  }, [data, activeButton, dateRange, getFilterFunction, setFilteredData]);
+  }, [
+    data,
+    data2,
+    activeButton,
+    dateRange,
+    getFilterFunction,
+    setFilteredData,
+    setSecondState,
+  ]);
 
   useEffect(() => {
-    isUserAction.current = false;
-    filterData();
-  }, [data]);
+    if (isInitialMount.current) {
+      isInitialMount.current = false;
+      filterData();
+      return;
+    }
 
-  useEffect(() => {
-    if (isUserAction.current) {
+    if (!isUserAction.current && renderCount.current < 5) {
+      renderCount.current += 1;
       filterData();
     }
-  }, [activeButton, dateRange]);
+  }, [data, data2, filterData]);
+
+  useEffect(() => {
+    if (!isInitialMount.current && isUserAction.current) {
+      filterData();
+    }
+  }, [activeButton, dateRange, filterData]);
 
   const handleFilterChange = useCallback((value) => {
     isUserAction.current = true;
-
-    console.log(value);
-
     setActiveButton(value);
     if (value !== 'Date Range') {
       setDateRange(null);
@@ -220,14 +246,11 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
             className="w-full"
           >
             <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-3">
-              {filterOptions.map(
-                ({ label, icon, key }) => (
-                  console.log(activeButton, key),
-                  (
-                    <Radio.Button
-                      key={key}
-                      value={key}
-                      className={`
+              {filterOptions.map(({ label, icon, key }) => (
+                <Radio.Button
+                  key={key}
+                  value={key}
+                  className={`
                     h-12 flex items-center justify-center
                     transition-all duration-200 ease-in-out
                     hover:border-blue-600 hover:text-blue-600 
@@ -237,16 +260,14 @@ const DataFilterComponent = ({ setFilteredData, data }) => {
                         : 'bg-blue-600 border-blue-600'
                     }
                   `}
-                    >
-                      <FilterOption
-                        icon={icon}
-                        label={label}
-                        isSelected={activeButton === key}
-                      />
-                    </Radio.Button>
-                  )
-                ),
-              )}
+                >
+                  <FilterOption
+                    icon={icon}
+                    label={label}
+                    isSelected={activeButton === key}
+                  />
+                </Radio.Button>
+              ))}
             </div>
           </Radio.Group>
 

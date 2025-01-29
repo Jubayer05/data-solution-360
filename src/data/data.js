@@ -1,5 +1,6 @@
 import {
   BarChart,
+  ChartNetwork,
   Clipboard,
   ClipboardList,
   DollarSign,
@@ -8,6 +9,7 @@ import {
   FileMinus,
   FilePlus,
   FileSearch,
+  FileSearch2,
   FileText,
   Home,
   Linkedin,
@@ -155,9 +157,21 @@ export const linksAdmin = [
         role: ['admin', 'lead_member'],
       },
       {
+        name: 'Lead On Boarding',
+        link: '/admin/lead-sells/lead-on-boarding',
+        icon: <ChartNetwork />,
+        role: ['admin', 'lead_member'],
+      },
+      {
         name: 'Sells Tracking',
         link: '/admin/lead-sells/sells-tracking',
         icon: <DollarSign />,
+        role: ['admin', 'sells_member'],
+      },
+      {
+        name: 'View Sells Status',
+        link: '/admin/lead-sells/sells-status',
+        icon: <FileSearch2 />,
         role: ['admin', 'sells_member'],
       },
       {

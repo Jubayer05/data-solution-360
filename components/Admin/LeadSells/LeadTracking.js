@@ -94,7 +94,7 @@ const LeadTracking = () => {
           batch.set(notificationRef, {
             recipientId: userDoc.id,
             title: 'New Lead Received',
-            message: `New lead received from ${customerName} for ${selectedCourse.item_name}`,
+            message: `New lead received from ${findCurrentUser?.full_name} for ${selectedCourse.item_name}`,
             type: 'new_lead',
             leadId: leadRef.id,
             read: false,

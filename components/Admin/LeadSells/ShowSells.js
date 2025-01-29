@@ -6,12 +6,14 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 import { useStateContext } from '../../../src/context/ContextProvider';
+import { loadData } from '../../../src/hooks/loadData';
 import CustomModal from '../../utilities/CustomModal';
+import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import DataFilterComponent from '../../utilities/FilteredButton';
 import SellsModal from './SellsTrack/SellsModal';
 import StatusBadge from './Utils/StatusBadge';
 
-const ShowSells = ({ sells }) => {
+const ShowSells = () => {
   const { findCurrentUser } = useStateContext();
   const [loading, setLoading] = useState(false);
   const [filteredData, setFilteredData] = useState([]);
@@ -19,6 +21,11 @@ const ShowSells = ({ sells }) => {
   const [selectedRecord, setSelectedRecord] = useState(null);
   const [finalFilter, setFinalFilter] = useState([]);
   const db = firebase.firestore();
+  const [sells, setSells] = useState([]);
+
+  useEffect(() => {
+    loadData('sells_data', setSells);
+  }, []);
 
   // Filter leads for the current user and set initial data
   useEffect(() => {
@@ -236,6 +243,7 @@ const ShowSells = ({ sells }) => {
 
   return (
     <div>
+      <HeadingDashboard title="Your Sells Table" />
       <div className="max-w-6xl mx-auto my-20 font-dash_heading">
         <div className="mt-10 p-10 bg-white rounded-md border-1">
           <h2 className="text-xl font-bold mb-4">

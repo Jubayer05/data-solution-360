@@ -1,12 +1,12 @@
 import React from 'react';
 import { DashboardFormat } from '../../../components';
-import SellsTracking from '../../../components/Admin/LeadSells/SellsTracking';
+import ShowSells from '../../../components/Admin/LeadSells/ShowSells';
 import ProtectedRoute from '../../../components/utilities/ProtectedRoute/ProtectedRoute';
 
 const sellsTracking = () => {
   return (
     <div>
-      <DashboardFormat status="admin" component={<SellsTracking />} />
+      <DashboardFormat status="admin" component={<ShowSells />} />
     </div>
   );
 };

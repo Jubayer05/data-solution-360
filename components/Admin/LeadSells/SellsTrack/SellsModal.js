@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import Select from 'react-select';
 import StatusSelect from '../Utils/StatusSelect';
 
@@ -13,7 +13,16 @@ const SellsModal = ({ onClose, onSubmit, initialData }) => {
     due_date: '',
     due_status: '',
     batch_name: '',
+    followup_date: '', // New field for followup date
   });
+
+  const inputRefs = {
+    paid_amount: useRef(null),
+    due_amount: useRef(null),
+    due_date: useRef(null),
+    batch_name: useRef(null),
+    followup_date: useRef(null), // New ref for followup date
+  };
 
   useEffect(() => {
     if (initialData) {
@@ -27,13 +36,24 @@ const SellsModal = ({ onClose, onSubmit, initialData }) => {
         due_date: initialData.due_date || '',
         due_status: initialData.due_status || '',
         batch_name: initialData.batch_name || '',
+        followup_date: initialData.followup_date || '', // Initialize followup date
+      });
+
+      // Set initial values to refs
+      Object.keys(inputRefs).forEach((key) => {
+        if (inputRefs[key].current) {
+          inputRefs[key].current.value = initialData[key] || '';
+        }
       });
     }
   }, [initialData]);
 
   const isFormEnabled = formData.status === 'enrolled';
+  const showFollowupDate = formData.status === 'follow-up needed';
 
-  const handleChange = (e) => {
+  console.log(formData.status);
+
+  const handleBlur = (e) => {
     const { name, value } = e.target;
     setFormData((prev) => ({ ...prev, [name]: value }));
   };
@@ -48,93 +68,46 @@ const SellsModal = ({ onClose, onSubmit, initialData }) => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    onSubmit(formData);
+    // Update formData with current ref values before submitting
+    const updatedFormData = { ...formData };
+    Object.keys(inputRefs).forEach((key) => {
+      if (inputRefs[key].current) {
+        updatedFormData[key] = inputRefs[key].current.value;
+      }
+    });
+    onSubmit(updatedFormData);
   };
 
-  const customSelectStyles = {
-    control: (provided) => ({
-      ...provided,
-      border: '1px solid #E2E8F0',
-      borderRadius: '0.375rem',
-      minHeight: '42px',
-      boxShadow: 'none',
-      opacity: isFormEnabled ? 1 : 0.6,
-      backgroundColor: isFormEnabled ? 'white' : '#f3f4f6',
-      '&:hover': {
-        border: '1px solid #CBD5E0',
-      },
-    }),
-    option: (provided, state) => ({
-      ...provided,
-      backgroundColor: state.isSelected
-        ? '#3B82F6'
-        : state.isFocused
-        ? '#EFF6FF'
-        : 'white',
-      color: state.isSelected ? 'white' : '#1F2937',
-    }),
-  };
-
-  const FormSection = ({ title, children }) => (
-    <div className="bg-gray-50 p-4 rounded-lg">
-      <h3 className="text-lg font-medium text-black mb-4">{title}</h3>
-      {children}
+  const SimpleInput = ({ label, name, type = 'text', placeholder }) => (
+    <div>
+      <label className="block text-sm font-medium text-black mb-1">
+        {label}
+      </label>
+      <input
+        ref={inputRefs[name]}
+        type={type}
+        name={name}
+        defaultValue={formData[name]}
+        onBlur={handleBlur}
+        className={`w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
+          !isFormEnabled && name !== 'followup_date'
+            ? 'bg-gray-100 opacity-60 cursor-not-allowed'
+            : ''
+        }`}
+        placeholder={placeholder}
+        disabled={!isFormEnabled && name !== 'followup_date'}
+      />
     </div>
   );
-
-  const InputField = ({
-    label,
-    name,
-    type = 'text',
-    value,
-    onChange,
-    placeholder,
-    options,
-  }) => {
-    if (type === 'select') {
-      return (
-        <div>
-          <label className="block text-sm font-medium text-black mb-1">
-            {label}
-          </label>
-          <Select
-            value={{ label: value, value: value }}
-            onChange={handleSelectChange(name)}
-            options={options}
-            styles={customSelectStyles}
-            placeholder={placeholder}
-            isDisabled={!isFormEnabled && name !== 'status'}
-          />
-        </div>
-      );
-    }
-
-    return (
-      <div>
-        <label className="block text-sm font-medium text-black mb-1">
-          {label}
-        </label>
-        <input
-          type={type}
-          name={name}
-          value={value}
-          onChange={onChange}
-          onWheel={(e) => e.target.blur()}
-          className={`w-full px-4 py-2 rounded-lg border border-gray-300 focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-colors ${
-            !isFormEnabled ? 'bg-gray-100 opacity-60 cursor-not-allowed' : ''
-          }`}
-          placeholder={placeholder}
-          disabled={!isFormEnabled}
-        />
-      </div>
-    );
-  };
 
   return (
     <form onSubmit={handleSubmit} className="p-6">
       <div className="space-y-6">
         {/* Customer Information */}
-        <FormSection title="Customer Information">
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="text-lg font-medium text-black mb-4">
+            Customer Information
+          </h3>
           <div className="flex justify-between">
             <h3 className="text-xl">
               <strong className="text-blue-500">
@@ -147,10 +120,13 @@ const SellsModal = ({ onClose, onSubmit, initialData }) => {
               </strong>
             </h3>
           </div>
-        </FormSection>
+        </div>
 
         {/* Status and Payment */}
-        <FormSection title="Status & Payment">
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="text-lg font-medium text-black mb-4">
+            Status & Payment
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
             <div>
               <label className="block text-sm font-medium text-black mb-1">
@@ -159,78 +135,98 @@ const SellsModal = ({ onClose, onSubmit, initialData }) => {
               <StatusSelect
                 value={{ value: formData.status, label: formData.status }}
                 onChange={handleStatusChange}
+                options={[
+                  { label: 'Enrolled', value: 'enrolled' },
+                  { label: 'Follow Up Needed', value: 'follow up needed' },
+                  // Add other status options as needed
+                ]}
               />
             </div>
-            <InputField
-              label="Payment Status"
-              name="payment"
-              type="select"
-              value={formData.payment}
-              options={[
-                { label: 'Partial', value: 'Partial' },
-                { label: 'Full', value: 'Full' },
-              ]}
-              placeholder="Select payment status"
-            />
+            <div>
+              <label className="block text-sm font-medium text-black mb-1">
+                Payment Status
+              </label>
+              <Select
+                value={{ value: formData.payment, label: formData.payment }}
+                onChange={handleSelectChange('payment')}
+                options={[
+                  { label: 'Partial', value: 'Partial' },
+                  { label: 'Full', value: 'Full' },
+                ]}
+                isDisabled={!isFormEnabled}
+              />
+            </div>
           </div>
-        </FormSection>
+
+          {/* Follow-up Date field - only shown when status is "follow up needed" */}
+          {showFollowupDate && (
+            <div className="mt-4">
+              <SimpleInput
+                label="Follow-up Date"
+                name="followup_date"
+                type="date"
+              />
+            </div>
+          )}
+        </div>
 
         {/* Payment Details */}
-        <FormSection title="Payment Details">
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="text-lg font-medium text-black mb-4">
+            Payment Details
+          </h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField
+            <SimpleInput
               label="Paid Amount"
               name="paid_amount"
               type="number"
-              value={formData.paid_amount}
-              onChange={handleChange}
               placeholder="Enter paid amount"
             />
-            <InputField
+            <SimpleInput
               label="Due Amount"
               name="due_amount"
               type="number"
-              value={formData.due_amount}
-              onChange={handleChange}
               placeholder="Enter due amount"
             />
           </div>
-        </FormSection>
+        </div>
 
         {/* Due Details */}
-        <FormSection title="Due Details">
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="text-lg font-medium text-black mb-4">Due Details</h3>
           <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            <InputField
-              label="Due Date"
-              name="due_date"
-              type="date"
-              value={formData.due_date}
-              onChange={handleChange}
-            />
-            <InputField
-              label="Due Status"
-              name="due_status"
-              type="select"
-              value={formData.due_status}
-              options={[
-                { label: 'Pending', value: 'Pending' },
-                { label: 'Completed', value: 'Completed' },
-              ]}
-              placeholder="Select due status"
-            />
+            <SimpleInput label="Due Date" name="due_date" type="date" />
+            <div>
+              <label className="block text-sm font-medium text-black mb-1">
+                Due Status
+              </label>
+              <Select
+                value={{
+                  value: formData.due_status,
+                  label: formData.due_status,
+                }}
+                onChange={handleSelectChange('due_status')}
+                options={[
+                  { label: 'Pending', value: 'Pending' },
+                  { label: 'Completed', value: 'Completed' },
+                ]}
+                isDisabled={!isFormEnabled}
+              />
+            </div>
           </div>
-        </FormSection>
+        </div>
 
         {/* Batch Information */}
-        <FormSection title="Batch Information">
-          <InputField
+        <div className="bg-gray-50 p-4 rounded-lg">
+          <h3 className="text-lg font-medium text-black mb-4">
+            Batch Information
+          </h3>
+          <SimpleInput
             label="Batch Name"
             name="batch_name"
-            value={formData.batch_name}
-            onChange={handleChange}
             placeholder="Enter batch name"
           />
-        </FormSection>
+        </div>
       </div>
 
       {/* Footer */}
@@ -238,7 +234,7 @@ const SellsModal = ({ onClose, onSubmit, initialData }) => {
         <button
           type="button"
           onClick={onClose}
-          className="px-6 py-2.5 border border-gray-300 rounded-lg text-black hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-gray-500"
+          className="px-6 py-2.5 border border-gray-300 rounded-lg text-black hover:bg-gray-50 transition-colors focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-500"
         >
           Cancel
         </button>

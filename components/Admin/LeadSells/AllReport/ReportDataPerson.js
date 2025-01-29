@@ -119,9 +119,8 @@ const ReportDataPerson = ({ sells, setLeads }) => {
       title: 'Lead Processed',
       dataIndex: 'lead_processed',
       key: 'lead_processed',
-      width: 200,
-      render: (processed) =>
-        `${processed?.name || 'N/A'} (${processed?.email || 'N/A'})`,
+      width: 100,
+      render: (processed) => `${processed?.name || 'N/A'}`,
     },
     {
       title: 'Created At',
