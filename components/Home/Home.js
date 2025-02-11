@@ -5,6 +5,7 @@ import { useStateContext } from '../../src/context/ContextProvider';
 import { loadData } from '../../src/hooks/loadData';
 import {
   AboutHome,
+  BannerCompanies,
   Faq,
   Footer,
   HomeCourse,
@@ -60,7 +61,6 @@ const Home = () => {
           <Navbar />
           <MainBanner />
 
-          {/* <BannerCompanies /> */}
           {/* <BannerCarousel /> */}
           <HomeCourse />
           <JoinFree />
@@ -71,6 +71,7 @@ const Home = () => {
           <Technology />
           <Faq />
           <Review />
+          <BannerCompanies />
           <BlogHome />
           <Subscribe />
           <Footer />

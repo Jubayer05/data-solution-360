@@ -10,13 +10,11 @@ const HeadingDashboard = ({ title, batchNo, showLogout }) => {
   return (
     <div
       className={`${
-        activeMenu
-          ? 'max-w-6xl mx-auto px-4'
-          : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+        activeMenu ? 'max-w-6xl mx-auto px-4' : 'w-full px-3'
       } flex items-center justify-between mt-3`}
     >
       <div className="w-full">
-        <h2 className="text-3xl pt-6 pb-4 text-[#231f40] text-center font-medium font-dash_heading ">
+        <h2 className="text-3xl pt-6 pb-4 text-[#231f40] md:text-center font-medium font-dash_heading ">
           <span className="font-bold">{title}</span>
         </h2>
         {batchNo && (

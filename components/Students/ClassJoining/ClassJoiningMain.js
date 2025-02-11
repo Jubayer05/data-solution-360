@@ -11,9 +11,7 @@ const ClassJoiningMain = () => {
     <div>
       <div
         className={`${
-          activeMenu
-            ? 'max-w-6xl mx-auto'
-            : 'w-full pr-3 md:pr-[6] pl-[84px] md:pl-[96px]'
+          activeMenu ? 'max-w-6xl mx-auto' : 'w-full px-4'
         } mx-auto `}
       >
         <div className="gap-10 pb-10">

@@ -1,16 +1,35 @@
+import { message } from 'antd';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import Marquee from 'react-fast-marquee';
+import firebase from '../../firebase';
 import { useStateContext } from '../../src/context/ContextProvider';
-import { loadData } from '../../src/hooks/loadData';
 
 const Technology = () => {
   const { userEmail } = useStateContext();
   const [technologyStack, setTechnologyStack] = useState([]);
 
   useEffect(() => {
-    loadData('technology_stack', setTechnologyStack);
+    const fetchCompanies = async () => {
+      try {
+        const doc = await firebase
+          .firestore()
+          .collection('utility_collection')
+          .doc('technology_stack')
+          .get();
+
+        if (doc.exists) {
+          const data = doc.data();
+          setTechnologyStack(data.technology || []);
+        }
+      } catch (error) {
+        message.error('Failed to load technology');
+      }
+    };
+
+    fetchCompanies();
   }, []);
+
   return (
     <div className="bg-[#f9f9fa]	py-4 md:pt-20 px-3" id="courses">
       <div

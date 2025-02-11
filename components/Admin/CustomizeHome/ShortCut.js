@@ -44,7 +44,7 @@ const ShortCut = () => {
     },
     {
       id: '9',
-      title: 'Youtube Students Feedback',
+      title: 'YouTube Video Feedback',
       link: '/admin/home-page/#students_feedback_video',
     },
     {
@@ -57,7 +57,7 @@ const ShortCut = () => {
     <div className="fixed -right-4 top-5 ">
       <div className="pt-10 pb-4 px-5 ">
         <div
-          className="w-44 mx-auto bg-[#ddd] shadow-md border-solid rounded-lg border-gray-300 
+          className="w-52 mx-auto bg-[#ddd] shadow-md border-solid rounded-lg border-gray-300 
         p-5 my-4 "
         >
           {/* <p className="text-center">Shortcut</p> */}

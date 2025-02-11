@@ -9,6 +9,7 @@ import ShortCut from './ShortCut';
 import SlideMainBanner from './SlideMainBanner';
 import StudentFeedback from './StudentFeedback';
 import StudentFeedbackVideo from './StudentsFeedbackVideo';
+import SupportCompanies from './SupportCompanies';
 import TechnologyStack from './TechnologyStack';
 import TrendingCourse from './TrendingCourse';
 
@@ -27,6 +28,7 @@ const CustomizeHome = () => {
       <TechnologyStack />
       <StudentFeedbackVideo />
       <StudentFeedback />
+      <SupportCompanies />
     </div>
   );
 };

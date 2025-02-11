@@ -1,11 +1,11 @@
 import { Card, Modal, Progress, message } from 'antd';
 import { useFormik } from 'formik';
-import { Cpu, X } from 'lucide-react';
+import { Plus, X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
 import firebase from '../../../firebase';
 
-const TechnologyStack = () => {
+const SupportCompanies = () => {
   const [technologyStack, setTechnologyStack] = useState([]);
   const [imageUrl, setImageUrl] = useState('');
   const [uploadProgress, setUploadProgress] = useState(0);
@@ -17,15 +17,15 @@ const TechnologyStack = () => {
         const doc = await firebase
           .firestore()
           .collection('utility_collection')
-          .doc('technology_stack')
+          .doc('companies_data')
           .get();
 
         if (doc.exists) {
           const data = doc.data();
-          setTechnologyStack(data.technology || []);
+          setTechnologyStack(data.companies || []);
         }
       } catch (error) {
-        message.error('Failed to load technology');
+        message.error('Failed to load companies');
       }
     };
 
@@ -78,9 +78,9 @@ const TechnologyStack = () => {
         await firebase
           .firestore()
           .collection('utility_collection')
-          .doc('technology_stack')
+          .doc('companies_data')
           .set({
-            technology: [...technologyStack, newCompany],
+            companies: [...technologyStack, newCompany],
           });
 
         setTechnologyStack((prev) => [...prev, newCompany]);
@@ -102,9 +102,9 @@ const TechnologyStack = () => {
       await firebase
         .firestore()
         .collection('utility_collection')
-        .doc('technology_stack')
+        .doc('companies_data')
         .set({
-          technology: updatedCompanies,
+          companies: updatedCompanies,
         });
 
       setTechnologyStack(updatedCompanies);
@@ -115,12 +115,12 @@ const TechnologyStack = () => {
   };
 
   return (
-    <div className="max-w-3xl mx-auto shadow mb-20" id="technology_stack">
+    <div className="max-w-3xl mx-auto shadow mb-20" id="support_companies">
       <Card
         title={
           <div className="flex items-center">
-            <Cpu className="mr-2" />
-            Technology Stack
+            <Plus className="mr-2" />
+            Investor Companies
           </div>
         }
         extra={
@@ -128,7 +128,7 @@ const TechnologyStack = () => {
             onClick={() => setIsModalVisible(true)}
             className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
           >
-            Add Technology
+            Add Company
           </button>
         }
       >
@@ -203,4 +203,4 @@ const TechnologyStack = () => {
   );
 };
 
-export default TechnologyStack;
+export default SupportCompanies;

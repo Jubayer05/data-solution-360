@@ -12,9 +12,7 @@ const Profile = ({ title }) => {
       <HeadingDashboard title="Your Profile" showLogout={true} />
       <div
         className={`${
-          activeMenu
-            ? 'max-w-6xl mx-auto px-4'
-            : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
+          activeMenu ? 'max-w-6xl mx-auto px-4' : 'w-full px-4'
         } mx-auto mt-10`}
       >
         <div className=" grid grid-cols-1 sm:grid-cols-2 gap-10  mt-10 pb-20">
@@ -22,7 +20,7 @@ const Profile = ({ title }) => {
             <h2 className="text-center bg-secondary_btn text-xl font-bold py-2 uppercase text-white rounded-t-md">
               Personal Details
             </h2>
-            <div className="px-4 pt-4">
+            <div className="px-8 pt-8">
               <PersonalDetails />
             </div>
           </div>
@@ -32,7 +30,7 @@ const Profile = ({ title }) => {
                 Change Password
               </h2>
 
-              <div className="px-4 pt-4">
+              <div className="px-8 pt-8">
                 <ChangePassword />
               </div>
             </div>

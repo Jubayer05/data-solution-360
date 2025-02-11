@@ -39,9 +39,7 @@ const LeaderBoardHome = () => {
     <div>
       <div
         className={`${
-          activeMenu
-            ? 'w-full mx-auto px-16'
-            : 'w-full pr-3 md:pr-6 pl-[84px] md:pl-[96px]'
+          activeMenu ? 'w-full mx-auto px-16' : 'w-full px-4'
         } mx-auto mb-10`}
       >
         <div className="flex items-end gap-4 pt-6">
