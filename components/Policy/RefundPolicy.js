@@ -1,4 +1,5 @@
 import React from 'react';
+import { globalPhoneNumber } from '../../src/utils/utils';
 
 const RefundPolicy = () => {
   return (
@@ -53,8 +54,9 @@ const RefundPolicy = () => {
 
       <ol className="list-decimal list-inside text-base mt-4">
         <li>
-          Contact our customer support team at <strong>+8801996104096</strong>.
-          within the specified refund period.
+          Contact our customer support team at{' '}
+          <strong>{globalPhoneNumber}</strong>. within the specified refund
+          period.
         </li>
         <li>
           Provide your order details, including the purchase date, course name,
@@ -81,7 +83,7 @@ const RefundPolicy = () => {
         notice. The most current version of the refund policy will be posted on
         our website. If you have any questions or need further assistance
         regarding our refund policy, please contact our customer support team at
-        <strong>+8801996104096</strong>.
+        <strong>{globalPhoneNumber}</strong>.
       </p>
     </div>
   );

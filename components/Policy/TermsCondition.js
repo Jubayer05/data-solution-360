@@ -1,4 +1,5 @@
 import React from 'react';
+import { globalPhoneNumber } from '../../src/utils/utils';
 
 const TermsCondition = () => {
   return (
@@ -115,7 +116,7 @@ const TermsCondition = () => {
       <h2 className="text-2xl font-bold mt-12">Contact Us</h2>
       <p className="text-base">
         If you have any questions, concerns, or suggestions regarding these
-        Terms, please contact us at <strong>+8801996104096</strong>.
+        Terms, please contact us at <strong>{globalPhoneNumber}</strong>.
       </p>
 
       <p className="text-base">

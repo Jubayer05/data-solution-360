@@ -4,3 +4,5 @@ export function extractVideoId(url) {
   const match = url?.match(regex);
   return match ? match[1] : null;
 }
+
+export const globalPhoneNumber = '+8801892432631';

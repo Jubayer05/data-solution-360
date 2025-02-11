@@ -2,6 +2,7 @@ import { MessageCircle, Phone } from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useRef, useState } from 'react';
+import { globalPhoneNumber } from '../../src/utils/utils';
 
 const WhatsApp = () => {
   const [showPopup, setShowPopup] = useState(false);
@@ -57,7 +58,7 @@ const WhatsApp = () => {
         w-full py-2 rounded-md text-base md:text-lg"
         >
           <Link
-            href="tel:+8801996104096"
+            href={`tel:${globalPhoneNumber}`}
             className="flex items-center justify-center gap-2 "
           >
             <Phone className="text-base md:text-xl" />

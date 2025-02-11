@@ -23,6 +23,7 @@ import {
   Video,
   Youtube,
 } from 'lucide-react';
+import { globalPhoneNumber } from '../utils/utils';
 
 // NOTE: FOCUS
 export const linksAdmin = [
@@ -269,7 +270,7 @@ export const footerFollowUs = [
 
   {
     id: '3',
-    link: 'https://wa.me/+8801996104096',
+    link: `https://wa.me/${globalPhoneNumber}`,
     title: 'Whatsapp',
     icon: <MessageCircle />,
     brandColor: '#25D366',

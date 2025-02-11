@@ -163,7 +163,7 @@ const PrivacyPolicy = () => {
       <p className="text-base">
         If you have any questions, concerns, or suggestions regarding this
         Privacy Policy or our privacy practices, please contact us at{' '}
-        <strong>+8801996104096</strong>.
+        <strong>{phoneNumber}</strong>.
       </p>
 
       <p className="text-base">

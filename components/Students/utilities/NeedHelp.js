@@ -1,6 +1,7 @@
 import { PhoneIncomingIcon } from 'lucide-react';
 import Image from 'next/image';
 import React from 'react';
+import { globalPhoneNumber } from '../../../src/utils/utils';
 
 const NeedHelp = () => {
   return (
@@ -25,7 +26,7 @@ const NeedHelp = () => {
         <p className="text-sm md:text-base font-semibold">Call Us</p>
         <button className="mt-2 px-4 py-3 bg-[#001f3f0e] rounded flex items-center justify-center gap-2 font-semibold text-sm md:text-base">
           <PhoneIncomingIcon />
-          <span>+8801996104096</span>
+          <span>{globalPhoneNumber}</span>
         </button>
       </div>
     </div>

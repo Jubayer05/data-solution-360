@@ -10,6 +10,7 @@ import { useStateContext } from '../../src/context/ContextProvider';
 import useEnrolledCourseData from '../../src/hooks/useEnrolledCourseData';
 import useUpdateLessonData from '../../src/hooks/useUpdateLessonData';
 import { convertToAMPM } from '../../src/utils/convertAMPM';
+import { globalPhoneNumber } from '../../src/utils/utils';
 const db = firebase.firestore();
 
 const JoinLive = () => {
@@ -191,7 +192,7 @@ const JoinLive = () => {
                 <Spin size="medium" />
               </div>
               <p className="text-center font-semibold">
-                For any help please call: +8801996104096{' '}
+                For any help please call: {globalPhoneNumber}{' '}
               </p>
             </div>
           )}

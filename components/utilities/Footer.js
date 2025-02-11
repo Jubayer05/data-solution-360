@@ -8,6 +8,7 @@ import {
   footerExploreData,
   footerFollowUs,
 } from '../../src/data/data';
+import { globalPhoneNumber } from '../../src/utils/utils';
 
 const Footer = () => {
   return (
@@ -103,13 +104,13 @@ const Footer = () => {
               <li className="text-base flex items-center justify-center md:justify-start cursor-pointer mt-4">
                 {/* <BiPhoneOutgoing className="text-xl" />{' '} */}
                 <Link
-                  href="tel:+8801996104096"
+                  href={`tel:${globalPhoneNumber}`}
                   target="_blank"
                   className="border-b-[1.5px] border-solid border-transparent cursor-pointer text-[#212529] hover:text-[orangered]
                   hover:border-[orangered] ease-in-out duration-300 flex items-center gap-2"
                 >
                   <Phone className="text-lg" />
-                  <span>+8801996104096</span>
+                  <span>{globalPhoneNumber}</span>
                 </Link>
               </li>
 
