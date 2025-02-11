@@ -1,21 +1,3 @@
-// import React from 'react';
-// // import { Footer, Navbar, WhatsApp } from '../../../components';
-// import JoinLive from '../../../components/Services/JoinLive';
-
-// const joinLive = () => {
-//   return (
-//     <div>
-//       <Navbar />
-//       <JoinLive />
-//       <Footer />
-//       <WhatsApp />
-//     </div>
-//   );
-// };
-
-// export default joinLive;
-// //
-
 import React from 'react';
 import JoinLive from '../../../../../../../../components/Services/JoinLive';
 import DashboardFormatStudent from '../../../../../../../../components/utilities/dashboard/DashboardFormatStudent';

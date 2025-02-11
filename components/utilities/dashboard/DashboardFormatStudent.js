@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from 'react';
 import { DashboardNavbar, Sidebar } from '../..';
-import { useStateContext } from '../../../src/context/ContextProvider';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 import CompleteProfile from '../../Students/Profile/CompleteProfile';
 
 const DashboardFormatStudent = ({ component, status }) => {
   const { activeMenu } = useStateContextDashboard();
-  const { findCurrentUser } = useStateContext();
   const [isModalOpen, setIsModalOpen] = useState(false);
 
   const handleClosePopup = () => {
@@ -14,15 +12,13 @@ const DashboardFormatStudent = ({ component, status }) => {
   };
 
   useEffect(() => {
-    if (
-      !findCurrentUser?.full_name ||
-      findCurrentUser?.full_name === undefined || findCurrentUser?.full_name === ""
-    ) {
+    const findName = sessionStorage.getItem('fullName');
+    if (!findName || findName === undefined || findName === '') {
       setIsModalOpen(true);
     } else {
       setIsModalOpen(false);
     }
-  }, [findCurrentUser]);
+  }, []);
 
   return (
     <div className="flex relative dark:bg-main-dark-bg">
@@ -47,10 +43,7 @@ const DashboardFormatStudent = ({ component, status }) => {
         <div className="pt-20 px-0 sm:px-4 md:px-8">
           {component}
           {status == 'student' && isModalOpen && (
-            <CompleteProfile
-              onClose={handleClosePopup}
-              // onRegister={handleRegister}
-            />
+            <CompleteProfile onClose={handleClosePopup} />
           )}
         </div>
       </div>

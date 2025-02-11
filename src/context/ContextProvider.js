@@ -32,12 +32,11 @@ export const MainContextProvider = ({ children }) => {
         setUserEmail('');
         setPhotoUrl('');
       }
-      setGlobalLoading(false); // Ensure loading state is updated
+      setGlobalLoading(false);
     });
 
     // Load data from Firestore
     loadData('users', setUserData);
-    // loadDataByOrder('course_data', setCourseData, 'order_course', 'asc');
     loadData('course_data', setCourseData, {
       orderBy: 'order_course',
       orderDirection: 'asc',
@@ -47,23 +46,16 @@ export const MainContextProvider = ({ children }) => {
     return () => unsubscribe();
   }, []);
 
-  const loadDataByOrder = (database, setState, orderProperty, orderBy) => {
-    db.collection(database)
-      .orderBy(orderProperty, orderBy)
-      .onSnapshot((snap) => {
-        const data = snap.docs.map((doc) => ({
-          key: doc.id,
-          ...doc.data(),
-        }));
-        setState(data);
-      });
-  };
-
   const findCurrentUser = userData.find((item) => item.email === userEmail);
   const uniqueUserName = userEmail?.split('@')[0];
   const enrolledCourseIds = findCurrentUser?.enrolled_courses?.map(
     (course) => course.batchId,
   );
+
+  if (findCurrentUser?.full_name) {
+    // Set the user's full name in session storage
+    sessionStorage.setItem('fullName', findCurrentUser.full_name);
+  }
 
   return (
     <StateContext.Provider

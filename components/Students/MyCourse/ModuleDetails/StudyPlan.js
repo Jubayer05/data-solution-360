@@ -3,6 +3,8 @@ import React, { useEffect, useState } from 'react';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 
 import { PlayCircle, RadioTower } from 'lucide-react';
+import Link from 'next/link';
+import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
 import { convertToAMPM } from '../../../../src/utils/convertAMPM';
 import {
@@ -16,6 +18,9 @@ import QuizItem from './QuizItem';
 const StudyPlan = ({ moduleData, enrolledCourse }) => {
   const { moduleShowComp } = useStudentContext();
   const [currentUrl, setCurrentUrl] = useState(null);
+  const router = useRouter();
+
+  const { moduleId, courseId } = router.query;
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -106,18 +111,33 @@ const StudyPlan = ({ moduleData, enrolledCourse }) => {
                 </div>
               </div>
               <div className="w-full md:w-[30%] flex justify-center md:justify-end">
-                {item?.liveClassLink && item?.classFinished ? (
-                  <button
+                {item?.liveClassLink &&
+                item?.classFinished &&
+                item?.recordingLink ? (
+                  <Link
+                    href={`/students/my-course/${courseId}/videos?moduleId=${moduleId}&lessonId=${
+                      item?.id || ''
+                    }`}
+                  >
+                    <button className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2 px-5 rounded border-dashboard_border border transition-all duration-200 text-sm md:text-base">
+                      <PlayCircle />
+                      <span>Class Recording</span>
+                    </button>
+                  </Link>
+                ) : item?.liveClassLink &&
+                  item?.classFinished &&
+                  !item?.recordingLink ? (
+                  <ButtonDashboard
                     onClick={() => showClassRecording(item)}
-                    className="flex justify-between items-center gap-2 bg-[#e2e2e2] hover:bg-[#d5d5d5] font-semibold py-2 px-5 rounded border-dashboard_border border transition-all duration-200 text-sm md:text-base"
+                    className="flex justify-between items-center gap-2 bg-[#fecb63] hover:bg-[#e7b655] 
+                font-semibold py-2 px-5 rounded transition-all duration-200 text-black visited:text-black text-sm md:text-base"
                   >
                     <PlayCircle />
                     <span>Class Recording</span>
-                  </button>
+                  </ButtonDashboard>
                 ) : isToday(item?.classDate) ? (
                   <ButtonDashboard
                     onClick={() => handleJoinLive(item)}
-                    // href={`${currentUrl}/join/live/${item?.id}`}
                     className="flex justify-between items-center gap-2 bg-[#fecb63] hover:bg-[#e7b655] 
                     font-semibold py-2 px-5 rounded transition-all duration-200 text-black visited:text-black text-sm md:text-base"
                   >
