@@ -50,7 +50,7 @@ const LeaderBoard = () => {
             <p className="font-semibold">{item.full_name}</p>
             <div className="ml-auto">
               <p className="text-lg font-bold" style={{ color: colors[index] }}>
-                {item.totalStudentScore}%
+                {item.totalStudentScore || 0}%
               </p>
               <p className="text-xs -mt-1">Marks</p>
             </div>

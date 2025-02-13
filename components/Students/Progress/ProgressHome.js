@@ -17,7 +17,10 @@ const ProgressHome = () => {
   }, []);
 
   return (
-    <div className="h-[calc(100vh-100px)] md:fixed top-[90px] overflow-y-scroll md:mr-5 pl-[84px] pr-2 md:pl-6 md:pr-3">
+    <div
+      className="h-[calc(100vh-100px)] md:fixed top-[90px] overflow-y-scroll md:mr-5 
+    pl-[16px] pr-2 md:pl-6 md:pr-3"
+    >
       <Report />
       <Link href={`${currentUrl}/notice`}>
         <button

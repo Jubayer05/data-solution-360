@@ -1,11 +1,23 @@
 import { Collapse, Empty, Spin } from 'antd';
-import { ArrowLeft, ChevronRight, CirclePlay, Menu, X } from 'lucide-react';
+import {
+  ArrowLeft,
+  Award,
+  Bookmark,
+  Calendar,
+  ChevronRight,
+  CirclePlay,
+  Clock,
+  Menu,
+  X,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
+import { convertToAMPM } from '../../../../src/utils/convertAMPM';
+import { formatDate } from '../../../../src/utils/convertDate';
 import { extractVideoId } from '../../../../src/utils/utils';
 import YouTubePlayer from '../../../FreeCourse/YoutubePlayer';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
@@ -35,9 +47,11 @@ const HomeRecordedVideo = () => {
     return module.lessons.filter((lesson) => lesson.recordingLink).length;
   };
 
-  const findVideoRecording = enrolledCourse?.course_modules
+  const classDetails = enrolledCourse?.course_modules
     ?.find((item) => item.id === moduleId)
     ?.lessons?.find((lesson) => lesson?.id === lessonId);
+
+  console.log(classDetails);
 
   return (
     <div className="container mx-auto px-4">
@@ -82,9 +96,9 @@ const HomeRecordedVideo = () => {
           <div className="px-2 lg:px-0 pb-2">
             <h2 className="font-heading font-bold text-2xl my-2">My Courses</h2>
             <div className="rounded-xl overflow-hidden">
-              {findVideoRecording?.recordingLink ? (
+              {classDetails?.recordingLink ? (
                 <YouTubePlayer
-                  videoId={extractVideoId(findVideoRecording?.recordingLink)}
+                  videoId={extractVideoId(classDetails?.recordingLink)}
                 />
               ) : (
                 <div className="min-h-[30vh] flex justify-center items-center bg-white">
@@ -92,10 +106,75 @@ const HomeRecordedVideo = () => {
                 </div>
               )}
             </div>
-            <div className="mt-6">
-              <p className="text-lg font-medium mb-2">
-                {capitalizeWords(findVideoRecording?.title)}
-              </p>
+            <div className="max-w-2xl mx-auto mt-10 pb-10">
+              <div className="bg-gradient-to-br from-white to-gray-50 rounded-2xl shadow-xl overflow-hidden border border-gray-200 transition-all duration-300 hover:shadow-2xl">
+                {/* Header Section with Gradient Accent */}
+                <div className="relative px-8 pt-8 pb-6 bg-gradient-to-r from-blue-50 to-indigo-50">
+                  <div className="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-100 to-indigo-100 opacity-20 rounded-bl-full" />
+                  <h2 className="text-2xl font-bold text-gray-900 mb-2">
+                    {capitalizeWords(classDetails?.title)}
+                  </h2>
+                  <div className="inline-flex items-center px-3 py-1 rounded-full bg-blue-50 text-blue-600 text-sm font-medium">
+                    <Bookmark className="w-4 h-4 mr-2" />
+                    {classDetails?.classType}
+                  </div>
+                </div>
+
+                {/* Details Section */}
+                <div className="px-8 py-6 space-y-6">
+                  <div className="grid grid-cols-2 gap-6">
+                    <div className="flex items-start space-x-3">
+                      <Calendar className="w-5 h-5 text-blue-500 mt-1" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-500">
+                          Date
+                        </p>
+                        <p className="text-base font-semibold text-gray-900">
+                          {formatDate(classDetails?.classDate)}
+                        </p>
+                      </div>
+                    </div>
+                    <div className="flex items-start space-x-3">
+                      <Clock className="w-5 h-5 text-blue-500 mt-1" />
+                      <div>
+                        <p className="text-sm font-medium text-gray-500">
+                          Time
+                        </p>
+                        <p className="text-base font-semibold text-gray-900">
+                          {convertToAMPM(classDetails?.classTime)}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+
+                  {/* Instructor Section */}
+                  <div className="relative mt-8 p-6 bg-gradient-to-br from-gray-50 to-white rounded-xl border border-gray-100">
+                    <div className="absolute top-0 right-0 transform -translate-y-1/2">
+                      <Award className="w-8 h-8 text-blue-500" />
+                    </div>
+                    <div className="flex items-start space-x-5">
+                      <div className="flex-shrink-0">
+                        <img
+                          src={classDetails?.instructorForClass.photoUrl}
+                          alt={classDetails?.instructorForClass.profileName}
+                          className="w-20 h-20 rounded-xl object-cover border-2 border-white shadow-lg"
+                        />
+                      </div>
+                      <div className="flex-1 min-w-0">
+                        <p className="text-lg font-bold text-gray-900 mb-2">
+                          {classDetails?.instructorForClass.profileName}
+                        </p>
+                        <div
+                          className="text-sm leading-relaxed text-gray-600 prose prose-sm max-w-none"
+                          dangerouslySetInnerHTML={{
+                            __html: classDetails?.instructorForClass.details,
+                          }}
+                        />
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
             </div>
           </div>
         </div>

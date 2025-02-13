@@ -1,7 +1,6 @@
 import { Progress } from 'antd';
 import { ChevronRight, HelpCircle } from 'lucide-react';
 import Image from 'next/image';
-import Link from 'next/link';
 import React, { useState } from 'react';
 import { useStudentContext } from '../../../../src/context/StudentContext';
 import { colors } from '../../../../src/data/data';
@@ -98,28 +97,26 @@ const HeadingEnrolled = ({ item }) => {
       </div>
 
       {/* Video section */}
-      <Link href={`/students/my-course/${item?.key}/videos`}>
-        <div
-          className="w-full flex  items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
+      <div
+        className="w-full flex  items-center gap-4 bg-[#e9efff] border border-[#7986f7] px-5 py-3 rounded-md 
         mt-3 cursor-pointer hover:shadow-md transition-all duration-200"
-        >
-          <Image
-            width={500}
-            height={300}
-            src="/icon/video-player.png"
-            className="w-[50px] sm:w-[60px]"
-            alt="Video Player Icon"
-          />
-          <div className="flex-1">
-            <h2 className="text-lg sm:text-xl font-bold leading-6">
-              Recorded Live Class
-            </h2>
-          </div>
-          <div>
-            <ChevronRight />
-          </div>
+      >
+        <Image
+          width={500}
+          height={300}
+          src="/icon/video-player.png"
+          className="w-[50px] sm:w-[60px]"
+          alt="Video Player Icon"
+        />
+        <div className="flex-1">
+          <h2 className="text-lg sm:text-xl font-bold leading-6">
+            Recorded Live Class
+          </h2>
         </div>
-      </Link>
+        <div>
+          <ChevronRight />
+        </div>
+      </div>
 
       {/* Button section */}
       <div className="w-full flex flex-wrap items-center gap-2 bg-white border px-3 md:px-5 py-4 rounded-md my-5">

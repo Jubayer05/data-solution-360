@@ -24,7 +24,7 @@ const ModuleEnrolled = () => {
                 item.moduleStatus === 'running'
                   ? 'bg-primary_btn text-white'
                   : ''
-              } p-[10px] md:p-5 rounded-md cursor-pointer border-2 hover:border-[#56d478] transition-all`}
+              } p-[24px] md:p-5 rounded-md cursor-pointer border-2 hover:border-[#56d478] transition-all`}
             >
               <div className="flex items-center gap-1.5 md:gap-4">
                 <div
