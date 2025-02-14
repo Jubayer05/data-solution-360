@@ -370,6 +370,13 @@ export const navItems = [
     titleBang: 'ব্লগ',
     link: '/blog',
   },
+  {
+    id: 'nav-6',
+    title: 'Datalytics360',
+    slug: 'Datalytics360',
+    titleBang: 'ব্লগ',
+    link: '/data-lytics-360',
+  },
 ];
 
 export const navItems2 = [

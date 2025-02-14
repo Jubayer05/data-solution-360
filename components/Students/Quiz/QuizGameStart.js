@@ -15,7 +15,7 @@ import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import PastQuizResult from './PastQuizResult';
 
 const QuizGameStart = ({ quizData, findLessons }) => {
-  const TOTAL_TIME = quizData?.length * 2 * 60;
+  const TOTAL_TIME = quizData?.length * 0.5 * 60;
   const { findCurrentUser } = useStateContext();
   const { updateLessonData } = useUpdateLessonData();
   const { submitQuizAndUpdateLeaderboard } =
@@ -25,8 +25,10 @@ const QuizGameStart = ({ quizData, findLessons }) => {
   const [timeRemaining, setTimeRemaining] = useState(TOTAL_TIME);
   const [loading, setLoading] = useState(false);
   const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  const countdownRef = useRef(null); // To store the countdown interval ID
+  const [isSubmitting, setIsSubmitting] = useState(false);
+  const quizStartTimeRef = useRef(null);
+  const countdownRef = useRef(null);
+  const autoSubmitTimeoutRef = useRef(null);
 
   const closeModal = () => {
     setModalIsOpen(false);
@@ -38,43 +40,139 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       )
     : null;
 
-  useEffect(() => {
-    if (userAlreadyGiveQuiz) {
-      setIsQuizCompleted(true);
-    }
-  }, [userAlreadyGiveQuiz]);
-
-  useEffect(() => {
+  // Function to check if quiz time has expired
+  const hasQuizExpired = () => {
     const savedProgress = localStorage.getItem('quizProgress');
-    if (savedProgress) {
-      const { selectedAnswers, timeRemaining } = JSON.parse(savedProgress);
-      setSelectedAnswers(selectedAnswers);
-      setTimeRemaining(timeRemaining);
+    if (!savedProgress) return false;
+
+    const { startTime, originalTime } = JSON.parse(savedProgress);
+    const elapsedSeconds = Math.floor(
+      (Date.now() - new Date(startTime).getTime()) / 1000,
+    );
+    return elapsedSeconds >= originalTime;
+  };
+
+  // Setup auto-submit timeout
+  const setupAutoSubmit = (remainingTime) => {
+    if (autoSubmitTimeoutRef.current) {
+      clearTimeout(autoSubmitTimeoutRef.current);
     }
+
+    autoSubmitTimeoutRef.current = setTimeout(() => {
+      if (!isQuizCompleted && !isSubmitting) {
+        handleSubmitQuiz(true);
+      }
+    }, remainingTime * 1000);
+  };
+
+  // Initialize quiz
+  useEffect(() => {
+    const initializeQuiz = () => {
+      const savedProgress = localStorage.getItem('quizProgress');
+
+      if (savedProgress) {
+        const {
+          selectedAnswers: savedAnswers,
+          startTime,
+          originalTime,
+        } = JSON.parse(savedProgress);
+        const elapsedSeconds = Math.floor(
+          (Date.now() - new Date(startTime).getTime()) / 1000,
+        );
+        const remainingTime = Math.max(0, originalTime - elapsedSeconds);
+
+        if (remainingTime <= 0 || hasQuizExpired()) {
+          handleSubmitQuiz(true);
+          return;
+        }
+
+        setSelectedAnswers(savedAnswers);
+        setTimeRemaining(remainingTime);
+        quizStartTimeRef.current = startTime;
+        setupAutoSubmit(remainingTime);
+      } else {
+        const startTime = new Date().toISOString();
+        quizStartTimeRef.current = startTime;
+        localStorage.setItem(
+          'quizProgress',
+          JSON.stringify({
+            selectedAnswers: [],
+            startTime,
+            originalTime: TOTAL_TIME,
+          }),
+        );
+        setupAutoSubmit(TOTAL_TIME);
+      }
+    };
+
+    if (!isQuizCompleted && !userAlreadyGiveQuiz) {
+      initializeQuiz();
+    }
+
+    return () => {
+      if (autoSubmitTimeoutRef.current) {
+        clearTimeout(autoSubmitTimeoutRef.current);
+      }
+    };
+  }, [TOTAL_TIME, isQuizCompleted, userAlreadyGiveQuiz]);
+
+  // Start countdown timer
+  useEffect(() => {
+    if (isQuizCompleted || userAlreadyGiveQuiz) return;
 
     countdownRef.current = setInterval(() => {
       setTimeRemaining((prevTime) => {
         if (prevTime <= 1) {
           clearInterval(countdownRef.current);
-          handleSubmitQuiz();
+          handleSubmitQuiz(true);
           return 0;
         }
         return prevTime - 1;
       });
     }, 1000);
 
-    return () => clearInterval(countdownRef.current); // Cleanup on unmount
-  }, []);
-
-  useEffect(() => {
-    const quizProgress = {
-      selectedAnswers,
-      timeRemaining,
+    const handleVisibilityChange = () => {
+      if (!document.hidden && !isQuizCompleted) {
+        // Check if quiz should auto-submit when tab becomes visible
+        if (hasQuizExpired()) {
+          handleSubmitQuiz(true);
+        }
+      }
     };
-    localStorage.setItem('quizProgress', JSON.stringify(quizProgress));
-  }, [selectedAnswers, timeRemaining]);
+
+    const handleBeforeUnload = (e) => {
+      if (!isQuizCompleted) {
+        e.preventDefault();
+        e.returnValue =
+          "You haven't submitted your quiz yet. Are you sure you want to leave?";
+      }
+    };
+
+    document.addEventListener('visibilitychange', handleVisibilityChange);
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      clearInterval(countdownRef.current);
+      document.removeEventListener('visibilitychange', handleVisibilityChange);
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [isQuizCompleted, userAlreadyGiveQuiz]);
+
+  // Save progress
+  useEffect(() => {
+    if (quizStartTimeRef.current && !isQuizCompleted) {
+      const quizProgress = {
+        selectedAnswers,
+        startTime: quizStartTimeRef.current,
+        originalTime: TOTAL_TIME,
+      };
+      localStorage.setItem('quizProgress', JSON.stringify(quizProgress));
+    }
+  }, [selectedAnswers, TOTAL_TIME, isQuizCompleted]);
 
   const handleOptionClick = (question, option) => {
+    if (isQuizCompleted || isSubmitting) return;
+
     const findQuestion = selectedAnswers.find(
       (item) => item.id === question.id,
     );
@@ -89,16 +187,20 @@ const QuizGameStart = ({ quizData, findLessons }) => {
     }
   };
 
-  const handleSubmitQuiz = async () => {
-    if (isQuizCompleted) {
-      return; // Prevent resubmission if the quiz is already completed
-    }
+  const handleSubmitQuiz = async (isAutoSubmit = false) => {
+    if (isQuizCompleted || isSubmitting) return;
 
+    setIsSubmitting(true);
     setLoading(true);
+
+    // Clear all timers
+    if (countdownRef.current) clearInterval(countdownRef.current);
+    if (autoSubmitTimeoutRef.current)
+      clearTimeout(autoSubmitTimeoutRef.current);
+
     let calculatedScore = 0;
     const submissionDate = new Date().toISOString();
 
-    // Calculate the user's score by comparing their answers with the correct answers
     quizData?.forEach((question) => {
       const userAnswer = selectedAnswers.find(
         (item) => item.id === question.id,
@@ -109,13 +211,6 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       }
     });
 
-    // Check if the user has already submitted the quiz
-    if (userAlreadyGiveQuiz) {
-      Swal.fire('Warning', 'You have already taken this quiz.', 'warning');
-      return; // Exit early to prevent duplicate submission
-    }
-
-    // Update the quiz data with the user's answers
     const updatedQuizData = quizData?.map((question) => {
       const findQuestion = selectedAnswers.find(
         (item) => item.id === question.id,
@@ -126,48 +221,92 @@ const QuizGameStart = ({ quizData, findLessons }) => {
       return question;
     });
 
-    // Prepare the new quiz data to be stored
     const updatedLessonContent = {
       quizDataUser: updatedQuizData,
       obtained_marks: calculatedScore,
       student_id: findCurrentUser.student_id,
       submission_date: submissionDate,
       timeTaken: TOTAL_TIME - timeRemaining,
+      isAutoSubmitted: isAutoSubmit,
     };
 
     try {
-      await submitQuizAndUpdateLeaderboard(
-        findCurrentUser.student_id,
-        calculatedScore,
-      );
-
-      // Await the updateLessonData to ensure it completes before moving forward
+      // First update the lesson data
       await updateLessonData({
         user_quizData: [
-          ...(findLessons?.user_quizData || []), // Preserve previous quiz attempts
+          ...(findLessons?.user_quizData || []),
           updatedLessonContent,
         ],
       });
 
-      // Stop the timer
-      clearInterval(countdownRef.current);
-      setLoading(false);
+      // Then try to update the leaderboard
+      try {
+        await submitQuizAndUpdateLeaderboard(
+          findCurrentUser.student_id,
+          calculatedScore,
+        );
+      } catch (leaderboardError) {
+        console.error('Leaderboard update error:', leaderboardError);
+        // Don't show error to user as quiz is already submitted
+      }
+
       setIsQuizCompleted(true);
       localStorage.removeItem('quizProgress');
       closeModal();
 
-      Swal.fire({
-        title: 'Quiz Submitted',
-        text: 'Your quiz has been submitted successfully!',
-        icon: 'success',
-      });
+      if (isAutoSubmit) {
+        Swal.fire({
+          title: "Time's Up!",
+          text: 'Your quiz has been automatically submitted.',
+          icon: 'info',
+        });
+      } else {
+        Swal.fire({
+          title: 'Quiz Submitted',
+          text: 'Your quiz has been submitted successfully!',
+          icon: 'success',
+        });
+      }
     } catch (error) {
-      Swal.fire({
-        title: 'Error',
-        text: 'There was a problem submitting your quiz. Please try again later.',
-        icon: 'error',
-      });
       console.error('Quiz submission error:', error);
+
+      // For auto-submit, keep trying to submit
+      if (isAutoSubmit) {
+        const retrySubmission = async () => {
+          try {
+            await updateLessonData({
+              user_quizData: [
+                ...(findLessons?.user_quizData || []),
+                updatedLessonContent,
+              ],
+            });
+
+            setIsQuizCompleted(true);
+            localStorage.removeItem('quizProgress');
+
+            Swal.fire({
+              title: "Time's Up!",
+              text: 'Your quiz has been automatically submitted.',
+              icon: 'info',
+            });
+          } catch (retryError) {
+            console.error('Retry submission error:', retryError);
+            // If still failing, try again after 5 seconds
+            setTimeout(retrySubmission, 5000);
+          }
+        };
+
+        retrySubmission();
+      } else {
+        Swal.fire({
+          title: 'Error',
+          text: 'There was a problem submitting your quiz. Please try again.',
+          icon: 'error',
+        });
+      }
+    } finally {
+      setLoading(false);
+      setIsSubmitting(false);
     }
   };
 
@@ -177,6 +316,7 @@ const QuizGameStart = ({ quizData, findLessons }) => {
     return `${minutes}m:${secs < 10 ? '0' : ''}${secs}s`;
   };
 
+  // Rest of the render logic remains the same...
   return (
     <div className="relative mx-auto p-6 rounded-lg">
       {isQuizCompleted ? (
@@ -232,12 +372,13 @@ const QuizGameStart = ({ quizData, findLessons }) => {
                 Back
               </ButtonDashboard>
               <p className="bg-gray-200 px-2 py-1 rounded-md">
-                {Object.keys(selectedAnswers).length}/{quizData.length}{' '}
+                {Object.keys(selectedAnswers).length}/{quizData?.length}{' '}
                 Questions Answered
               </p>
               <ButtonDashboard
                 onClick={() => setModalIsOpen(true)}
                 className=" bg-[#101828] text-white hover:bg-[#101828ca]"
+                disabled={isSubmitting}
               >
                 Finish Exam <ArrowRightFromLineIcon />
               </ButtonDashboard>
@@ -270,8 +411,9 @@ const QuizGameStart = ({ quizData, findLessons }) => {
           </ButtonDashboard>
 
           <ButtonDashboard
-            onClick={handleSubmitQuiz}
+            onClick={() => handleSubmitQuiz(false)}
             className="bg-[#101828] text-white hover:bg-[#101828ca]"
+            disabled={isSubmitting}
           >
             {loading ? (
               <ConfigProvider

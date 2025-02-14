@@ -16,6 +16,7 @@ const QuizItem = ({ item, enrolledCourse }) => {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [checked, setChecked] = useState(false);
   const [quizId, setQuizId] = useState(null);
+  const [isLate, setIsLate] = useState(false);
 
   useEffect(() => {
     setCurrentUrl(window.location.href);
@@ -30,15 +31,34 @@ const QuizItem = ({ item, enrolledCourse }) => {
     setChecked(e.target.checked);
   };
 
-  const handleOpenQuiz = (item) => {
-    setModalIsOpen(true);
-    setQuizId(item);
+  const isOver36Hours = (classDate, classTime) => {
+    const classDateTime = new Date(`${classDate}T${classTime}`);
+    const currentTime = new Date();
+    const hoursDifference = (currentTime - classDateTime) / (1000 * 60 * 60);
+    return hoursDifference > 36;
   };
+
+  const handleOpenQuiz = (lesson) => {
+    const isOverdue = isOver36Hours(lesson.classDate, lesson.classTime);
+    setIsLate(isOverdue);
+    setModalIsOpen(isOverdue); // Only show modal if overdue
+    setQuizId(lesson.id);
+
+    // If not overdue, directly navigate to quiz
+    if (!isOverdue) {
+      window.location.href = `${currentUrl}/quiz/${lesson.id}`;
+    }
+  };
+
+  console.log(moduleData?.lessons);
 
   return (
     <div>
       {moduleData?.lessons
-        .filter((item) => item.quizData && item.quizData.length > 0)
+        .filter(
+          (item) =>
+            item.quizData && item.quizData.length > 0 && item.classFinished,
+        )
         ?.map((lesson, index) => {
           const userAlreadyGiveQuiz = Array.isArray(lesson?.user_quizData)
             ? lesson.user_quizData.find(
@@ -102,75 +122,80 @@ const QuizItem = ({ item, enrolledCourse }) => {
                   </Link>
                 ) : (
                   <ButtonDashboard
-                    onClick={() => handleOpenQuiz(lesson.id)}
+                    onClick={() => handleOpenQuiz(lesson)}
                     className="bg-primary_btn hover:bg-[#001f3fdb] text-white"
                   >
                     <span className="flex items-center gap-2">Start Quiz</span>
                   </ButtonDashboard>
                 )}
               </div>
-              <CustomModal
-                modalIsOpen={modalIsOpen}
-                closeModal={closeModal}
-                setModalIsOpen={setModalIsOpen}
-              >
-                <Image
-                  width={500}
-                  height={200}
-                  src="/icon/warning-sign.png"
-                  className="w-24 mx-auto -mt-5"
-                  alt=""
-                />
-                <h2 className="text-xl sm:text-3xl font-bold text-center mt-2 text-[#ff4400a7]">
-                  Careful! Know about the rules of quiz.
-                </h2>
-                <p className="text-center mb-5 text-sm sm:text-base">
-                  You have missed the deadline of the quiz.{' '}
-                  <strong className="text-[orangered]">
-                    50% Marks will be cut.
-                  </strong>
-                </p>
-                <div className="h-60 sm:h-[350px] overflow-y-scroll px-4 sm:px-10 pb-4 sm:pb-10 text-sm sm:text-lg">
-                  <p>
-                    - Ensure your internet and electricity are stable during the
-                    quiz.
+              {isLate && (
+                <CustomModal
+                  modalIsOpen={modalIsOpen}
+                  closeModal={closeModal}
+                  setModalIsOpen={setModalIsOpen}
+                >
+                  <Image
+                    width={500}
+                    height={200}
+                    src="/icon/warning-sign.png"
+                    className="w-24 mx-auto -mt-5"
+                    alt=""
+                  />
+                  <h2 className="text-xl sm:text-3xl font-bold text-center mt-2 text-[#ff4400a7]">
+                    Careful! Know about the rules of quiz.
+                  </h2>
+                  <p className="text-center mb-5 text-sm sm:text-base">
+                    You have missed the deadline of the quiz.{' '}
+                    <strong className="text-[orangered]">
+                      50% Marks will be cut.
+                    </strong>
                   </p>
-                  <p className="mt-5">
-                    - If disconnected, you can log in again, but time lost will
-                    not be restored.
-                  </p>
-                  <p className="mt-5">- You may switch devices if necessary.</p>
-                  <p className="mt-5">
-                    - The quiz will auto-submit if time runs out; retakes are
-                    not allowed.
-                  </p>
-                  <ConfigProvider
-                    theme={{
-                      components: {
-                        Checkbox: { colorPrimary: '#02274b', fontSize: 14 },
-                      },
-                    }}
-                  >
-                    <Checkbox
-                      onChange={onChange}
-                      className="text-lg bg-[#ffefe2] mt-5 p-2 rounded-md border border-[#f9c296]"
+                  <div className="h-60 sm:h-[350px] overflow-y-scroll px-4 sm:px-10 pb-4 sm:pb-10 text-sm sm:text-lg">
+                    <p>
+                      - Ensure your internet and electricity are stable during
+                      the quiz.
+                    </p>
+                    <p className="mt-5">
+                      - If disconnected, you can log in again, but time lost
+                      will not be restored.
+                    </p>
+                    <p className="mt-5">
+                      - You may switch devices if necessary.
+                    </p>
+                    <p className="mt-5">
+                      - The quiz will auto-submit if time runs out; retakes are
+                      not allowed.
+                    </p>
+                    <ConfigProvider
+                      theme={{
+                        components: {
+                          Checkbox: { colorPrimary: '#02274b', fontSize: 14 },
+                        },
+                      }}
                     >
-                      I accept the 50% mark deduction for missing the deadline.
-                    </Checkbox>
-                  </ConfigProvider>
-                </div>
-                <div className="px-4 sm:px-10 pt-5 bg-white">
-                  <button
-                    disabled={!checked}
-                    onClick={() =>
-                      (window.location.href = `${currentUrl}/quiz/${quizId}`)
-                    }
-                    className="w-full bg-[#101828] text-white hover:bg-[#101828dc] rounded-md px-5 py-2 transition duration-300"
-                  >
-                    Proceed to Quiz
-                  </button>
-                </div>
-              </CustomModal>
+                      <Checkbox
+                        onChange={onChange}
+                        className="text-lg bg-[#ffefe2] mt-5 p-2 rounded-md border border-[#f9c296]"
+                      >
+                        I accept the 50% mark deduction for missing the
+                        deadline.
+                      </Checkbox>
+                    </ConfigProvider>
+                  </div>
+                  <div className="px-4 sm:px-10 pt-5 bg-white">
+                    <button
+                      disabled={!checked}
+                      onClick={() =>
+                        (window.location.href = `${currentUrl}/quiz/${quizId}`)
+                      }
+                      className="w-full bg-[#101828] text-white hover:bg-[#101828dc] rounded-md px-5 py-2 transition duration-300"
+                    >
+                      Proceed to Quiz
+                    </button>
+                  </div>
+                </CustomModal>
+              )}
             </div>
           );
         })}
