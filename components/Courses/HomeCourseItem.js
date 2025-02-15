@@ -133,7 +133,8 @@
 // export default CourseItem;
 
 import { motion } from 'framer-motion';
-import { ArrowRight, Award, BookOpen, Clock, Star, Users } from 'lucide-react';
+import { ArrowRight, Award, BookOpen, Clock, Layers, Star } from 'lucide-react';
+import Link from 'next/link';
 import React, { useState } from 'react';
 import Typewriter from 'typewriter-effect';
 
@@ -238,11 +239,11 @@ const CourseItem = ({ item, upcoming, running }) => {
         <div className="flex flex-wrap gap-2 mb-4">
           <motion.span
             whileHover={{ scale: 1.02 }}
-            className="px-2 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs 
-                     font-medium flex items-center gap-1.5"
+            className="px-1.5 py-1 bg-blue-50 text-blue-700 rounded-lg text-xs 
+                     font-medium flex items-center gap-1"
           >
-            <Users className="w-4 h-4" />
-            {item?.total_seat_number} Seats
+            <Layers className="w-4 h-4" />
+            {item?.project_number} Real Project
           </motion.span>
 
           {!upcoming &&
@@ -251,8 +252,8 @@ const CourseItem = ({ item, upcoming, running }) => {
               new Date().getTime() && (
               <motion.span
                 whileHover={{ scale: 1.02 }}
-                className="px-2 py-1 bg-orange-50 text-orange-700 rounded-lg 
-                       text-xs font-medium flex items-center gap-1.5"
+                className="px-1.5 py-1 bg-orange-50 text-orange-700 rounded-lg 
+                       text-xs font-medium flex items-center gap-1"
               >
                 <Clock className="w-4 h-4" />
                 {Math.ceil(
@@ -286,22 +287,24 @@ const CourseItem = ({ item, upcoming, running }) => {
         )}
 
         {/* Action Button */}
-        <motion.button
-          whileHover={{ scale: 1.01 }}
-          whileTap={{ scale: 0.98 }}
-          className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 
-                     hover:to-blue-800 text-white py-3 px-5 rounded-lg text-sm 
-                     font-medium uppercase tracking-wide flex items-center justify-center gap-2 
-                     shadow-md hover:shadow-lg transition-all duration-300"
-        >
-          <span>Explore Course</span>
-          <motion.div
-            animate={{ x: isHovered ? 3 : 0 }}
-            transition={{ duration: 0.3 }}
+        <Link href={`/course-details/${item?.key}`}>
+          <motion.button
+            whileHover={{ scale: 1.01 }}
+            whileTap={{ scale: 0.98 }}
+            className="w-full bg-gradient-to-r from-blue-600 to-blue-700 hover:from-blue-700 
+          hover:to-blue-800 text-white py-3 px-5 rounded-lg text-sm 
+          font-medium uppercase tracking-wide flex items-center justify-center gap-2 
+          shadow-md hover:shadow-lg transition-all duration-300"
           >
-            <ArrowRight className="w-4 h-4" />
-          </motion.div>
-        </motion.button>
+            <span>Explore Course</span>
+            <motion.div
+              animate={{ x: isHovered ? 3 : 0 }}
+              transition={{ duration: 0.3 }}
+            >
+              <ArrowRight className="w-4 h-4" />
+            </motion.div>
+          </motion.button>
+        </Link>
       </div>
     </motion.div>
   );
