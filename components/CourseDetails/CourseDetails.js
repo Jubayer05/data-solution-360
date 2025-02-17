@@ -89,6 +89,8 @@ const CourseDetails = () => {
   const hasDiscount =
     courseDetails?.discounted_price !== '0' && courseDetails?.discounted_price;
 
+  console.log(courseDetails?.discounted_price);
+
   return (
     <div>
       {isPopupOpen && findCurrentUser === undefined && (
@@ -376,7 +378,7 @@ const CourseDetails = () => {
                         <strong>৳</strong> {courseDetails?.price}
                       </span>
                       <span className="text-blue-600 font-bold text-2xl">
-                        <strong>৳</strong> {courseDetails?.discounted_price}
+                        <strong>৳</strong> {courseDetails?.discounted_price}{' '}
                       </span>
                       <span className="text-emerald-600 text-sm font-medium bg-emerald-50 px-2 py-1 rounded-full">
                         {Math.round(

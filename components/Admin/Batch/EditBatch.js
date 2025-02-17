@@ -53,7 +53,6 @@ const EditBatch = () => {
   };
 
   const handleUpdateBatch = () => {
-    setLoading(true);
     const updatedCourse = {
       ...findBatchInfo,
       courseData: {

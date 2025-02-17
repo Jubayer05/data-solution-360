@@ -3,6 +3,7 @@ import Image from 'next/image';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
 import { loadData } from '../../src/hooks/loadData';
+import useFetchDocById from '../../src/hooks/manageDataById/useLoadDocumentById';
 import ButtonDashboard from '../utilities/dashboard/ButtonDashboard';
 import Payment from './Payment';
 
@@ -33,24 +34,31 @@ const Checkout = () => {
 
   const findCheckoutCourse = findBatchData?.courseData;
 
+  const { data, loading, error } = useFetchDocById(
+    'course_data',
+    findCheckoutCourse?.courseId,
+  );
+
+  console.log(data);
+
   // Calculate the total price after applying the coupon
   const calculateDiscountedPrice = () => {
-    if (findCouponData?.isActive && findCheckoutCourse) {
+    if (findCouponData?.isActive && data) {
       const discount = parseFloat(findCouponData?.discount / 100);
-      const newPrice = findCheckoutCourse.discounted_price
-        ? findCheckoutCourse.discounted_price
-        : findCheckoutCourse.price;
+      const newPrice = data.discounted_price
+        ? data.discounted_price
+        : data.price;
       return parseInt(newPrice - newPrice * discount);
     }
-    return findCheckoutCourse?.discounted_price || findCheckoutCourse?.price;
+    return data?.discounted_price || data?.price;
   };
 
   useEffect(() => {
-    if (findCheckoutCourse) {
+    if (data) {
       const priceWithDiscount = calculateDiscountedPrice();
       setDiscountedTotal(priceWithDiscount);
     }
-  }, [findCouponData, findCheckoutCourse]);
+  }, [findCouponData, data]);
 
   const handleSubmitCoupon = () => {
     const findCoupon = couponData.find((item) => item.code === couponCode);
@@ -74,20 +82,18 @@ const Checkout = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:flex-[55%] bg-white shadow p-4 sm:p-6 rounded-lg">
           {/* NOTE: COURSE DETAILS */}
-          {findCheckoutCourse ? (
+          {data ? (
             <div>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <Image
                   width={300}
                   height={200}
-                  src={findCheckoutCourse.img}
-                  alt={findCheckoutCourse.course_name}
+                  src={data.img}
+                  alt={data.course_name}
                   className="w-full sm:w-[120px] rounded-lg"
                 />
                 <div>
-                  <h2 className="text-lg font-bold">
-                    {findCheckoutCourse.title}
-                  </h2>
+                  <h2 className="text-lg font-bold">{data.title}</h2>
                 </div>
               </div>
               <div className="mt-7">
@@ -95,19 +101,17 @@ const Checkout = () => {
                 <div className="w-full flex justify-between">
                   <p>Course Price</p>
                   <p className="text-sm text-gray-600 flex items-center font-medium">
-                    ৳ {findCheckoutCourse.price}
+                    ৳ {data.price}
                   </p>
                 </div>
-                {findCheckoutCourse.discounted_price && (
+                {data.discounted_price && (
                   <div className="w-full flex justify-between mt-1">
                     <p>
                       Discount{' '}
                       <span className="text-primary">
                         (
                         {Math.round(
-                          ((findCheckoutCourse.price -
-                            findCheckoutCourse.discounted_price) /
-                            findCheckoutCourse.price) *
+                          ((data.price - data.discounted_price) / data.price) *
                             100,
                         )}
                         % off)
@@ -115,8 +119,7 @@ const Checkout = () => {
                     </p>
                     <p className="text-sm text-gray-600 flex items-center font-medium">
                       -৳ &nbsp;
-                      {findCheckoutCourse.price -
-                        findCheckoutCourse.discounted_price}
+                      {data.price - data.discounted_price}
                     </p>
                   </div>
                 )}
@@ -125,9 +128,7 @@ const Checkout = () => {
                   <p className="font-semibold">Total Payment</p>
                   <p className="text-sm text-gray-600 flex items-center font-medium">
                     ৳ &nbsp;
-                    {findCheckoutCourse.discounted_price
-                      ? findCheckoutCourse.discounted_price
-                      : findCheckoutCourse.price}
+                    {data.discounted_price ? data.discounted_price : data.price}
                   </p>
                 </div>
 
@@ -144,12 +145,12 @@ const Checkout = () => {
                     </p>
                     <p className="text-sm text-gray-600 flex items-center font-medium">
                       -৳ &nbsp;
-                      {findCheckoutCourse.discounted_price
+                      {data.discounted_price
                         ? Math.round(
-                            findCheckoutCourse.discounted_price *
+                            data.discounted_price *
                               (findCouponData.discount / 100),
                           )
-                        : findCheckoutCourse.discounted_price}
+                        : data.discounted_price}
                     </p>
                   </div>
                 )}
@@ -205,7 +206,7 @@ const Checkout = () => {
         <div className="lg:flex-[40%] bg-white shadow p-4 sm:p-6 rounded-lg">
           <Payment
             batchData={findBatchData}
-            payableAmount={discountedTotal || findCheckoutCourse?.price}
+            payableAmount={discountedTotal || data?.price}
           />
         </div>
       </div>

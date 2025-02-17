@@ -28,6 +28,8 @@ const BannerCourseDetails = ({ courseDetails }) => {
     loadData('course_data_batch', setCourseDataBatch);
   }, []);
 
+  console.log(courseDataBatch);
+
   const currentCourse = useMemo(() => {
     return courseDataBatch.find(
       (course) => course.unique_batch_id === courseDetails?.unique_batch_id,
