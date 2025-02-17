@@ -82,7 +82,7 @@ const Checkout = () => {
       <div className="flex flex-col lg:flex-row gap-8">
         <div className="lg:flex-[55%] bg-white shadow p-4 sm:p-6 rounded-lg">
           {/* NOTE: COURSE DETAILS */}
-          {data ? (
+          {!loading ? (
             <div>
               <div className="flex flex-col sm:flex-row items-start sm:items-center gap-4">
                 <Image
