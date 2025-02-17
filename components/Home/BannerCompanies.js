@@ -67,17 +67,6 @@ const BannerCompanies = () => {
 
   const slidesData = [...companies, ...companies, ...companies];
 
-  console.log(companies);
-
-  const companyLogos = [
-    { id: '1', img: '/bannerCompany/1.png', name: 'Tech Innovators' },
-    { id: '2', img: '/bannerCompany/2.png', name: 'Global Solutions' },
-    { id: '3', img: '/bannerCompany/3.png', name: 'Digital Frontier' },
-    { id: '4', img: '/bannerCompany/1.png', name: 'Future Systems' },
-    { id: '5', img: '/bannerCompany/2.png', name: 'Quantum Dynamics' },
-    { id: '6', img: '/bannerCompany/3.png', name: 'Innovative Nexus' },
-  ];
-
   return (
     <section className="bg-[#0a192f] py-16 overflow-hidden">
       <div className="container mx-auto px-4">
