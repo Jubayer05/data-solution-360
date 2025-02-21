@@ -1,4 +1,4 @@
-import { compareDesc } from 'date-fns';
+import { compareDesc, format } from 'date-fns';
 import { useEffect, useMemo, useState } from 'react';
 import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
@@ -11,6 +11,8 @@ const db = firebase.firestore();
 
 const AllStudents = () => {
   const [userData, setUserData] = useState([]);
+  const [filteredData, setFilteredData] = useState([]);
+  const [filter, setFilter] = useState('all'); // To store the current filter type
 
   useEffect(() => {
     const fetchData = async () => {
@@ -26,24 +28,22 @@ const AllStudents = () => {
 
   // Sorting logic using useMemo to prevent unnecessary re-sorting on each render
   const sortedData = useMemo(() => {
-    return [...userData].sort((a, b) => {
-      const defaultDate = new Date(0); // Fallback to a very early date for missing createdAt
+    return [...filteredData].sort((a, b) => {
+      const defaultDate = new Date(0); // Default to a very early date if missing
 
-      const dateA = a.createdAt
-        ? a.createdAt.toDate() instanceof Date
-          ? a.createdAt.toDate()
-          : defaultDate
-        : defaultDate;
+      const parseDate = (date) => {
+        if (!date) return defaultDate; // If null or undefined, use default
+        if (typeof date.toDate === 'function') return date.toDate(); // Firestore Timestamp
+        if (typeof date === 'string') return new Date(date); // ISO String
+        return defaultDate;
+      };
 
-      const dateB = b.createdAt
-        ? b.createdAt.toDate() instanceof Date
-          ? b.createdAt.toDate()
-          : defaultDate
-        : defaultDate;
+      const dateA = parseDate(a.createdAt);
+      const dateB = parseDate(b.createdAt);
 
       return compareDesc(dateA, dateB); // Newest first
     });
-  }, [userData]);
+  }, [filteredData]);
 
   const handleDelete = async (userId) => {
     try {
@@ -76,6 +76,26 @@ const AllStudents = () => {
     }
   };
 
+  const handleFilter = (type) => {
+    setFilter(type);
+    const bangladeshRegex = /^(?:\+880|880)/;
+
+    // Filter the data based on the phone number prefix and role being 'student'
+    const filteredByRole = userData.filter((user) => user.role === 'student');
+
+    if (type === 'bangladesh') {
+      setFilteredData(
+        filteredByRole.filter((user) => bangladeshRegex.test(user.phone)),
+      );
+    } else if (type === 'foreign') {
+      setFilteredData(
+        filteredByRole.filter((user) => !bangladeshRegex.test(user.phone)),
+      );
+    } else {
+      setFilteredData(filteredByRole); // For 'all', only show students
+    }
+  };
+
   const columns = [
     {
       title: 'SL',
@@ -101,7 +121,7 @@ const AllStudents = () => {
       dataIndex: 'createdAt',
       align: 'center',
       render: (_, record) => (
-        <p>{record.createdAt ? formatDate(record.createdAt) : 'N/A'}</p>
+        <p>{record.createdAt ? formatDate(record?.createdAt) : 'N/A'}</p>
       ),
       width: 180,
     },
@@ -119,8 +139,18 @@ const AllStudents = () => {
   ];
 
   function formatDate(timestamp) {
-    const date = timestamp.toDate();
-    return date.toLocaleString(); // Display as "MM/DD/YYYY, HH:MM:SS AM/PM"
+    let date;
+    if (!timestamp) return 'N/A';
+
+    if (typeof timestamp.toDate === 'function') {
+      date = timestamp.toDate(); // Firestore Timestamp
+    } else if (typeof timestamp === 'string') {
+      date = new Date(timestamp); // ISO String
+    } else {
+      return 'Invalid Date';
+    }
+
+    return format(date, 'yyyy-MM-dd HH:mm:ss'); // Format the date
   }
 
   return (
@@ -129,6 +159,26 @@ const AllStudents = () => {
         <h2 className="text-xl pb-4 text-[#231f40] font-medium font-dash_heading">
           Enrolled Student
         </h2>
+
+        <div className="mb-4">
+          <Button
+            onClick={() => handleFilter('bangladesh')}
+            type="primary"
+            className="mr-2"
+          >
+            Bangladeshi Students
+          </Button>
+          <Button
+            onClick={() => handleFilter('foreign')}
+            type="primary"
+            className="mr-2"
+          >
+            Foreign Students
+          </Button>
+          <Button onClick={() => handleFilter('all')} type="default">
+            All Students
+          </Button>
+        </div>
 
         <div className="max-w-5xl mx-auto">
           <Table

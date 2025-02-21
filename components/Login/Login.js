@@ -1,4 +1,3 @@
-import { ArrowRight } from 'lucide-react';
 import React, { useEffect, useState } from 'react';
 import Swal from 'sweetalert2';
 import firebase from '../../firebase';
@@ -13,7 +12,7 @@ const initialState = {
   confirmPassword: '',
 };
 
-const Login = ({ loginStatePhone, setLoginStatePhone }) => {
+const Login = ({ state, setState }) => {
   const [haveAccount, setHaveAccount] = useState(false);
   const [formData, setFormData] = useState(initialState);
   const [userData, setUserData] = useState([]);
@@ -34,7 +33,7 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
     });
   }, []);
 
-  const handleLogin = () => {
+  const handleLogin = async () => {
     const { email, password } = formData;
 
     if (!validateEmail(email)) {
@@ -43,29 +42,47 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
 
     const validUser = userData.find((item) => item.email === email);
 
-    // If valid user or admin is found
     if (validUser) {
       auth
         .signInWithEmailAndPassword(email, password)
-        .then((userCredential) => {
+        .then(async (userCredential) => {
           const user = userCredential.user;
 
-          // If valid user and role is admin
-          if (validUser?.role === 'admin') {
-            Swal.fire(
-              'Dear user!',
-              'You are successfully logged in as an admin.',
-              'success',
-            ).then(() => {
-              window.location.href = '/admin/dashboard';
-            });
+          if (user) {
+            // Call API to generate and set the token in cookies
+            try {
+              const response = await fetch('/api/auth/loginAdmin', {
+                method: 'POST',
+                headers: {
+                  'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ email }),
+              });
+
+              if (response.ok) {
+                Swal.fire(
+                  'Success!',
+                  'You are successfully logged in.',
+                  'success',
+                ).then(() => {
+                  window.location.href = '/admin/dashboard'; // Redirect user after login
+                });
+              } else {
+                Swal.fire(
+                  'Error!',
+                  'Something went wrong while setting authentication.',
+                  'error',
+                );
+              }
+            } catch (error) {
+              Swal.fire('Error!', 'Failed to set authentication.', 'error');
+            }
           }
         })
-        .catch((error) => {
+        .catch(() => {
           Swal.fire('Error!', 'No user found with this email.', 'error');
         });
     } else {
-      // If no valid user or admin is found
       Swal.fire('Hey!', 'Please check your email and password again!', 'error');
     }
   };
@@ -210,22 +227,29 @@ const Login = ({ loginStatePhone, setLoginStatePhone }) => {
             )}
           </p>
 
-          <p className="text-center text-sm mt-3">
-            {loginStatePhone
-              ? ' Or Login with Email and Password'
-              : 'Or Login with Phone Number'}
-          </p>
-          <div className="mt-2">
+          <div className="flex justify-center mt-3">
             <button
-              onClick={() => setLoginStatePhone(!loginStatePhone)}
+              onClick={() => setState('phone_login')}
+              className="text-primary-bg hover:text-[#f0772c] text-sm font-semibold"
+            >
+              {state == 'phone_login' || state == 'phone_signup'
+                ? 'Or Login with Email'
+                : 'Or Login with Phone Number'}
+            </button>
+          </div>
+          {/* <div className="mt-2">
+            <button
+              onClick={() => setState('phone_login')}
               type="submit"
               className="w-full bg-[#f7d5c0] border-[#fd6404] border-2 px-4 py-3 rounded-md hover:bg-[#f5b993] 
             transition duration-300 flex items-center justify-center gap-2 text-lg font-semibold"
             >
-              {loginStatePhone ? 'Login with Email' : 'Login with Phone'}{' '}
+              {state == 'phone_login' || state == 'phone_signup'
+                ? 'Login with Email'
+                : 'Login with Phone'}{' '}
               <ArrowRight size={16} />
             </button>
-          </div>
+          </div> */}
         </div>
       </div>
     </div>

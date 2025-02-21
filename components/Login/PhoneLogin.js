@@ -1,4 +1,3 @@
-import { serverTimestamp } from 'firebase/firestore';
 import React, { useState } from 'react';
 
 import dynamic from 'next/dynamic';
@@ -12,74 +11,64 @@ const LottieAnimation = dynamic(
   },
 );
 
+import axios from 'axios';
 import { ArrowRight } from 'lucide-react';
-import PhoneInput from 'react-phone-number-input';
+import PhoneInputWithCountrySelect from 'react-phone-number-input';
 import 'react-phone-number-input/style.css';
-import { v4 as uuidv4 } from 'uuid';
-import firebase, { auth, handleAuthError } from '../../firebase';
-import * as congratulationsData from '../../src/data/json/congratulations.json';
+import firebase from '../../firebase';
 import * as animationData from '../../src/data/json/login_loading.json';
-import Congratulations from './Congratulations.js';
 import ForgetPassword from './PhoneForgetPassword.js';
 
 const db = firebase.firestore();
 
-const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
+const PhoneLogin = ({ state, setState }) => {
   const [phoneNumberInput, setPhoneNumberInput] = useState('');
-  const [otpCode, setOtpCode] = useState('');
   const [password, setPassword] = useState('');
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [step, setStep] = useState(1);
-  const [fullName, setFullName] = useState('');
+  const [userData, setUserData] = useState(null);
 
   const formatPhoneNumber = (phoneNumberInput) => {
-    const normalizedPhoneNumber = phoneNumberInput
-      ?.replace(/\D/g, '') // Remove all non-digit characters
-      ?.replace(/^0/, '880') // Replace leading '0' with '880'
-      ?.replace(/^(?!880)/, '880'); // If it doesn't start with '880', add it
+    if (!phoneNumberInput) return ''; // Handle empty input safely
 
-    return normalizedPhoneNumber;
+    const cleanedNumber = phoneNumberInput.replace(/\D/g, ''); // Remove all non-numeric characters
+
+    // If the number starts with a country code (like 880, 1, 44, etc.), return it as is.
+    if (/^\d{2,}/.test(cleanedNumber)) {
+      return cleanedNumber;
+    }
+
+    // If there's no country code, default to Bangladesh (880)
+    return `880${cleanedNumber}`;
   };
 
   const phoneNumber = formatPhoneNumber(phoneNumberInput);
   const phoneNumberEmail = `${phoneNumber}@datasolution360.com`;
 
-  // NOTE: HANDLE SET USER AND SEND CODE
-  const handleCheckUserAndSendCode = async (e) => {
+  const handleCheckUserValid = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError(''); // Clear any previous error
-    setSuccess(''); // Clear any previous success message
     try {
       // Check if the user already exists in Firebase Auth using phoneNumberEmail
-      const userRecord = await firebase
-        .auth()
-        .fetchSignInMethodsForEmail(phoneNumberEmail);
+      const usersRef = db.collection('users');
+      const snapshot = await usersRef
+        .where('email', '==', phoneNumberEmail)
+        .get();
 
-      if (userRecord.length > 0) {
-        // If user exists, go directly to login
-        setStep(4); // Skip OTP and proceed to login step
-        setSuccess('User found! Please enter your password to login.');
-      } else {
-        // If user does not exist, send OTP for account creation
-        const res = await fetch('/api/otp/sendOtp', {
-          method: 'POST',
-          headers: {
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ phoneNumber }), // Send phoneNumber in request body
-        });
+      if (!snapshot.empty) {
+        const userData = snapshot.docs.map((doc) => ({
+          id: doc.id, // Include document ID
+          ...doc.data(), // Extract user data
+        }));
 
-        const data = await res.json();
-
-        if (res.ok) {
-          setSuccess(data.message); // Show success message
-          setStep(2); // Proceed to OTP verification step
-        } else {
-          setError(data.message || 'Failed to send OTP'); // Handle errors
+        if (userData.length > 0) {
+          setUserData(userData[0]);
+          setStep(4); // Skip OTP and proceed to login step
         }
+      } else {
+        setError('User not found! Please try again.');
       }
     } catch (err) {
       setError('Error during sending OTP or checking user: ' + err.message); // Catch request errors
@@ -88,121 +77,23 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
     }
   };
 
-  // NOTE: HANDLE VERIFY CODE AND SET PASSWORD
-  const handleVerifyCode = async (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
-
-    try {
-      const res = await fetch('/api/otp/verifyOtp', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ phoneNumber, inputOtp: otpCode }), // Send OTP for verification
-      });
-
-      const data = await res.json();
-
-      if (res.ok) {
-        setSuccess(data.message); // Show success message
-        setStep(3); // Proceed to set fullname step
-      } else {
-        setError(data.message || 'Invalid OTP, please try again'); // Show error if OTP is invalid
-      }
-    } catch (err) {
-      setError('Error during OTP verification: ' + err.message); // Handle request errors
-    } finally {
-      setLoading(false); // Stop loading
-    }
-  };
-
-  const handleSetPassword = (e) => {
-    e.preventDefault();
-    setLoading(true);
-    setError('');
-    setSuccess('');
-
-    let user = firebase.auth().currentUser;
-
-    if (!user) {
-      // If no user is signed in, create a new user with email and password
-      auth
-        .createUserWithEmailAndPassword(phoneNumberEmail, password)
-        .then((newUserCredential) => {
-          user = newUserCredential.user;
-
-          // Show success message for account creation
-          setSuccess('Account created successfully!');
-
-          // Add user details to Firestore
-          return db.collection('users').add({
-            full_name: fullName,
-            email: phoneNumberEmail,
-            phone: phoneNumber,
-            role: 'student',
-            student_id: uuidv4().split('-')[0],
-            enrolled_courses: [],
-            createdAt: serverTimestamp(),
-          });
-        })
-        .then((userDocRef) => {
-          if (userDocRef.id) {
-            setStep(6); // Proceed to success step
-          } else {
-            setError('Failed to add user to the database.');
-          }
-        })
-        .catch((err) => {
-          if (err.code === 'auth/email-already-in-use') {
-            setError('This email is already registered.');
-          } else if (err.code === 'auth/weak-password') {
-            setError('The password is too weak.');
-          } else {
-            setError(err.message);
-          }
-          console.error('Error creating account or adding user:', err);
-        })
-        .finally(() => {
-          setLoading(false);
-        });
-    }
-  };
-
   // NOTE: HANDLE LOGIN
   const handleLogin = async (e) => {
     e.preventDefault();
     setLoading(true);
     setError('');
-    setSuccess('');
     try {
-      await auth.signInWithEmailAndPassword(phoneNumberEmail, password);
-      window.location.reload();
+      await axios.post('/api/auth/login', {
+        email: phoneNumberEmail,
+        password: password,
+      });
+      window.location.reload(); // Redirect to a protected page
     } catch (err) {
-      handleAuthError(err);
-      console.error('Error during login:', err);
+      console.log(err);
+      setError(err.response?.data?.message || 'Login failed');
     } finally {
       setLoading(false);
     }
-  };
-
-  const defaultOptions = {
-    loop: true,
-    autoplay: true,
-    animationData: animationData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
-  };
-  const congratulationsLottie = {
-    loop: true,
-    autoplay: true,
-    animationData: congratulationsData,
-    rendererSettings: {
-      preserveAspectRatio: 'xMidYMid slice',
-    },
   };
 
   return (
@@ -213,20 +104,15 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
       ) : (
         <>
           {step === 1 && (
-            <form
-              onSubmit={handleCheckUserAndSendCode}
-              className="mb-4 px-3 md:px-5"
-            >
-              <h2 className="-mt-4 text-[22px] md:text-[26px] font-bold">
-                Email / Phone Number
+            <form onSubmit={handleCheckUserValid} className="mb-4 px-3 md:px-5">
+              <h2 className="-mt-2 text-[18px] md:text-[20px] font-bold">
+                Your Phone Number
               </h2>
-              <div className="mb-4">
-                <PhoneInput
-                  className="w-full pt-5 pb-1"
+              <div className="mb-4 flex gap-2">
+                <PhoneInputWithCountrySelect
                   placeholder="Enter phone number"
                   value={phoneNumberInput}
                   onChange={setPhoneNumberInput}
-                  country="BD"
                 />
               </div>
               <button
@@ -239,11 +125,15 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
               </button>
 
               <div className="flex justify-between items-center mt-3">
-                <p className="text-sm">
-                  {loginStatePhone
-                    ? 'Or Login with Email and Password'
+                <button
+                  onClick={() => setState('email_login')}
+                  className="text-primary-bg hover:text-[#d85403] text-sm font-medium"
+                >
+                  {state == 'phone_login' || state == 'phone_signup'
+                    ? 'Or Login with Email'
                     : 'Or Login with Phone Number'}
-                </p>
+                </button>
+
                 <button
                   onClick={() => setStep(7)}
                   className="text-primary-bg hover:text-[#d85403] text-sm font-medium"
@@ -251,71 +141,6 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
                   Forgot Password?
                 </button>
               </div>
-
-              <div className="mt-2">
-                <button
-                  onClick={() => setLoginStatePhone(!loginStatePhone)}
-                  type="submit"
-                  className="w-full bg-[#f7d5c0] border-[#fd6404] border-2 px-4 py-3 rounded-md
-                 hover:bg-[#f5b993] transition duration-300 flex items-center justify-center 
-                 gap-2 text-base md:text-lg font-semibold"
-                >
-                  {loginStatePhone ? 'Login with Email' : 'Login with Phone'}{' '}
-                  <ArrowRight />
-                </button>
-              </div>
-            </form>
-          )}
-          {step === 2 && (
-            <form onSubmit={handleVerifyCode} className="mb-4 px-3 md:px-5">
-              <h2 className="-mt-4 text-[26px] font-bold">Enter OTP</h2>
-              <p>An OTP has been sent to this number {phoneNumberInput}</p>
-              <div className="my-4">
-                <input
-                  type="text"
-                  id="otpCode"
-                  value={otpCode}
-                  onChange={(e) => setOtpCode(e.target.value)}
-                  className="mt-1 block w-full px-3 py-3 text-base md:text-lg border border-gray-300 rounded-md
-              shadow-sm focus:outline-none focus:ring-indigo-500 focus:border-indigo-500"
-                  placeholder="Enter verification code"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] 
-            transition duration-300 flex items-center justify-center gap-2 text-lg"
-              >
-                Verify Code
-              </button>
-            </form>
-          )}
-          {step === 3 && (
-            <form
-              onSubmit={(e) => {
-                e.preventDefault();
-                setStep(5);
-              }}
-              className="mb-4 px-3 md:px-5"
-            >
-              <h2 className="-mt-4 text-[26px] font-bold">Full Name</h2>
-              <div className="my-4">
-                <input
-                  type="text"
-                  id="fullName"
-                  value={fullName}
-                  onChange={(e) => setFullName(e.target.value)}
-                  className="mt-1 block w-full px-3 py-3 text-base md:text-lg border border-gray-300 rounded-md"
-                  placeholder="Enter your full name"
-                />
-              </div>
-              <button
-                type="submit"
-                className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] 
-            transition duration-300 flex items-center justify-center gap-2 text-lg"
-              >
-                Next Step <ArrowRight />
-              </button>
             </form>
           )}
           {step === 4 && (
@@ -370,33 +195,16 @@ const PhoneAuth = ({ loginStatePhone, setLoginStatePhone }) => {
             </form>
           )}
 
-          {step === 6 && (
-            <div className="flex items-center justify-center flex-col">
-              <Congratulations />
-              <div className="max-w-md mx-auto p-6 text-center">
-                <button
-                  onClick={() => (window.location.href = '/students/dashboard')}
-                  className="w-full bg-primary-bg text-white px-4 py-3 rounded-md hover:bg-[#d85403] transition duration-300 flex items-center justify-center gap-2 text-base md:text-lg"
-                >
-                  Go to Dashboard
-                </button>
-              </div>
-            </div>
+          {error && (
+            <p className="text-red-500 text-sm text-center font-semibold">
+              {error}
+            </p>
           )}
-
-          {step === 7 && (
-            <div className="flex items-center justify-center flex-col">
-              <div className="max-w-md mx-auto p-6 text-center">
-                <ForgetPassword />
-              </div>
-            </div>
-          )}
-
-          {error && <p className="text-red-500 text-sm">{error}</p>}
         </>
       )}
+      {step === 7 && <ForgetPassword state={state} setState={setState} />}
     </div>
   );
 };
 
-export default PhoneAuth;
+export default PhoneLogin;

@@ -1,57 +1,63 @@
-import { onAuthStateChanged } from 'firebase/auth';
 import { collection, getDocs, query, where } from 'firebase/firestore';
+import Cookies from 'js-cookie';
+import { jwtDecode } from 'jwt-decode';
 import { createContext, useContext, useEffect, useState } from 'react';
-import { auth, firestore } from '../../../firebase'; // Ensure firebase is configured properly
+import { db } from '../../../firebase';
 
-const AuthContext = createContext();
-
-export const useAuth = () => useContext(AuthContext);
+const AuthContext = createContext(null);
 
 export const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
-    const unsubscribe = onAuthStateChanged(auth, async (firebaseUser) => {
-      setLoading(true); // Set loading true when processing starts
-      if (firebaseUser) {
-        try {
-          // Query the 'users' collection by email
-          const q = query(
-            collection(firestore, 'users'),
-            where('email', '==', firebaseUser.email),
-          );
-          const querySnapshot = await getDocs(q);
-
-          if (!querySnapshot.empty) {
-            // Assuming only one document matches
-            const userData = querySnapshot.docs[0].data();
-            // Merge Firestore data with Firebase user object
-            setUser({ ...firebaseUser, role: userData.role });
-          } else {
-            console.warn(
-              'No user data found in Firestore for:',
-              firebaseUser.email,
-            );
-            setUser({ ...firebaseUser, role: null });
-          }
-        } catch (error) {
-          console.error('Error fetching user data:', error);
-          setUser({ ...firebaseUser, role: null });
-        }
-      } else {
-        setUser(null);
+    const fetchUserData = async () => {
+      const token = Cookies.get('auth_token'); // Read token from cookies
+      if (!token) {
+        setLoading(false);
+        return;
       }
 
-      setLoading(false); // Finish loading
-    });
+      try {
+        const decoded = jwtDecode(token);
+        let userData = { ...decoded, role: null };
 
-    return () => unsubscribe();
-  }, []);
+        const q = query(
+          collection(db, 'users'),
+          where('email', '==', decoded.email),
+        );
+        const querySnapshot = await getDocs(q); // Await Firestore query
+
+        if (!querySnapshot.empty) {
+          const userFirestoreData = querySnapshot.docs[0].data();
+          userData = { ...decoded, ...userFirestoreData };
+        } else {
+          console.warn('No user data found in Firestore for:', decoded.email);
+        }
+
+        setUser(userData);
+      } catch (error) {
+        console.error('Error decoding token or fetching user data:', error);
+        setUser(null);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []); // Dependencies kept empty to run only on mount
+
+  const logout = () => {
+    Cookies.remove('auth_token');
+    setUser(null);
+    window.location.reload();
+  };
 
   return (
-    <AuthContext.Provider value={{ user, loading }}>
+    <AuthContext.Provider value={{ user, logout, loading }}>
       {!loading && children}
     </AuthContext.Provider>
   );
 };
+
+export const useAuth = () => useContext(AuthContext);

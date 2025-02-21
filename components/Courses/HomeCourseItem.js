@@ -139,7 +139,6 @@ import React, { useState } from 'react';
 import Typewriter from 'typewriter-effect';
 
 const CourseItem = ({ item, upcoming, running }) => {
-  console.log(item);
   const [isHovered, setIsHovered] = useState(false);
 
   const statusColor = upcoming

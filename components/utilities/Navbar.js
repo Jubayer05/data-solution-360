@@ -12,14 +12,7 @@ import LoginModal from '../Login/LoginModal';
 import Sidebar from './Home/SideBar';
 
 const Navbar = ({ home }) => {
-  const {
-    language,
-    setLanguage,
-    userName,
-    photoUrl,
-    userEmail,
-    findCurrentUser,
-  } = useStateContext();
+  const { language, setLanguage, findCurrentUser } = useStateContext();
   const auth = getAuth();
   const [url, setUrl] = useState(null);
   const [openNav, setOpenNav] = useState(null);
@@ -109,7 +102,7 @@ const Navbar = ({ home }) => {
             />
           </Link>
           <div className="flex items-center gap-5 md:hidden">
-            {userEmail ? (
+            {findCurrentUser?.role ? (
               <div>
                 <Link
                   href={
@@ -155,10 +148,7 @@ const Navbar = ({ home }) => {
             eng={eng}
             setEng={setEng}
             url={url}
-            photoUrl={photoUrl}
             language={language}
-            userName={userName}
-            userEmail={userEmail}
           />
         )}
         <div
@@ -245,7 +235,7 @@ const Navbar = ({ home }) => {
               </ul>
             </div>
 
-            {!userEmail && !modalIsOpen ? (
+            {!findCurrentUser?.role && !modalIsOpen ? (
               <button
                 onClick={() => openModal()}
                 type="button"
@@ -262,10 +252,10 @@ const Navbar = ({ home }) => {
                     language === 'English' ? 'font-body' : 'font-bangla'
                   }`}
                 >
-                  {language === 'English' ? 'Log in' : 'লগ ইন'}
+                  {language === 'English' ? 'Log in / Sing Up' : 'লগ ইন'}
                 </span>
               </button>
-            ) : userEmail ? (
+            ) : findCurrentUser?.role ? (
               <div>
                 <Link
                   href={

@@ -2,10 +2,11 @@ import React from 'react';
 import { useStateContextDashboard } from '../../../src/context/UtilitiesContext';
 
 import { LogOut } from 'lucide-react';
-import { handleLogout } from '../../../firebase';
+import { useAuth } from '../../../src/context/auth/AuthContext';
 
 const HeadingDashboard = ({ title, batchNo, showLogout }) => {
   const { activeMenu } = useStateContextDashboard();
+  const { logout } = useAuth();
 
   return (
     <div
@@ -26,7 +27,7 @@ const HeadingDashboard = ({ title, batchNo, showLogout }) => {
       {showLogout && (
         <button
           type="button"
-          onClick={handleLogout}
+          onClick={logout}
           className="text-[#101828] bg-[#EAECF0] hover:bg-[#D0D5DD] rounded-md px-6 py-3 flex justify-center 
       items-center gap-1 text-base font-semibold"
         >

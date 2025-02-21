@@ -105,8 +105,14 @@ export const linksAdmin = [
     links: [
       {
         name: 'All Students',
-        link: '/admin/all-student',
+        link: '/admin/students/all-student',
         icon: <Users />,
+        role: ['admin'],
+      },
+      {
+        name: 'Foreign Student',
+        link: '/admin/students/add-foreign-student',
+        icon: <UserPlus />,
         role: ['admin'],
       },
     ],
