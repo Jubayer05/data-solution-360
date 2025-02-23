@@ -80,7 +80,11 @@ const Login = ({ state, setState }) => {
           }
         })
         .catch(() => {
-          Swal.fire('Error!', 'No user found with this email.', 'error');
+          Swal.fire(
+            'Error!',
+            'No user found with this email. Please try again.',
+            'error',
+          );
         });
     } else {
       Swal.fire('Hey!', 'Please check your email and password again!', 'error');
