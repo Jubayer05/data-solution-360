@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../../firebase';
 
-import { Table } from 'antd';
+import { Input, Table } from 'antd';
 import Swal from 'sweetalert2';
 import { loadData } from '../../../../src/hooks/loadData';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
@@ -12,7 +12,7 @@ const db = firebase.firestore();
 const EnrolledStudent = () => {
   const [courseDataBatch, setCourseDataBatch] = useState([]);
   const [url, setUrl] = useState('');
-
+  const [searchQuery, setSearchQuery] = useState('');
   const [enrolledUsers, setEnrolledUsers] = useState([]);
 
   useEffect(() => {
@@ -355,17 +355,41 @@ const EnrolledStudent = () => {
     },
   ];
 
+  const filteredUsers = enrolledUsers.filter(
+    (user) =>
+      user?.full_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+      user.phone.includes(searchQuery),
+  );
+
   return (
     <div className="max-w-5xl mx-auto my-20">
       <div className="border-1 p-5 rounded-lg bg-white mt-10">
         <h2 className="text-xl pb-4 text-[#231f40] font-medium font-dash_heading ">
-          Enrolled Student
+          Enrolled Student({filteredUsers?.length})
         </h2>
+
+        <Input
+          placeholder="🔍 Search by Name or Phone"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            marginBottom: '20px',
+            width: '100%',
+            maxWidth: '400px',
+            padding: '10px 15px',
+            fontSize: '16px',
+            borderRadius: '8px',
+            border: '1px solid #d9d9d9',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            transition: 'all 0.3s ease-in-out',
+          }}
+          allowClear
+        />
 
         <div className="max-w-5xl mx-auto">
           <Table
             columns={columns}
-            dataSource={[...enrolledUsers]}
+            dataSource={filteredUsers}
             scroll={{
               x: 'max-content',
               y: 500,

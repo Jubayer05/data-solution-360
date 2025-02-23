@@ -4,7 +4,7 @@ import Swal from 'sweetalert2';
 import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../firebase';
 
-import { Button, Table } from 'antd';
+import { Button, Input, Table } from 'antd';
 import { loadData } from '../../../src/hooks/loadData';
 
 const db = firebase.firestore();
@@ -12,7 +12,8 @@ const db = firebase.firestore();
 const AllStudents = () => {
   const [userData, setUserData] = useState([]);
   const [filteredData, setFilteredData] = useState([]);
-  const [filter, setFilter] = useState('all'); // To store the current filter type
+  const [filter, setFilter] = useState('all');
+  const [searchQuery, setSearchQuery] = useState('');
 
   useEffect(() => {
     const fetchData = async () => {
@@ -25,6 +26,32 @@ const AllStudents = () => {
     };
     fetchData();
   }, []);
+
+  useEffect(() => {
+    const bangladeshRegex = /^(?:\+880|880)/;
+    let filteredByRole = userData.filter((user) => user.role === 'student');
+
+    if (filter === 'bangladesh') {
+      filteredByRole = filteredByRole.filter((user) =>
+        bangladeshRegex.test(user.phone),
+      );
+    } else if (filter === 'foreign') {
+      filteredByRole = filteredByRole.filter(
+        (user) => !bangladeshRegex.test(user.phone),
+      );
+    }
+
+    // Apply search query
+    if (searchQuery.trim()) {
+      filteredByRole = filteredByRole.filter(
+        (user) =>
+          user?.full_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          user.phone.includes(searchQuery),
+      );
+    }
+
+    setFilteredData(filteredByRole);
+  }, [userData, filter, searchQuery]);
 
   // Sorting logic using useMemo to prevent unnecessary re-sorting on each render
   const sortedData = useMemo(() => {
@@ -157,9 +184,25 @@ const AllStudents = () => {
     <div className="max-w-5xl mx-auto my-20">
       <div className="border-1 p-5 rounded-lg bg-white mt-10">
         <h2 className="text-xl pb-4 text-[#231f40] font-medium font-dash_heading">
-          Enrolled Student
+          Total Students ({sortedData?.length})
         </h2>
-
+        <Input
+          placeholder="🔍 Search by Name or Phone"
+          value={searchQuery}
+          onChange={(e) => setSearchQuery(e.target.value)}
+          style={{
+            marginBottom: '20px',
+            width: '100%',
+            maxWidth: '400px',
+            padding: '10px 15px',
+            fontSize: '16px',
+            borderRadius: '8px',
+            border: '1px solid #d9d9d9',
+            boxShadow: '0 2px 8px rgba(0, 0, 0, 0.1)',
+            transition: 'all 0.3s ease-in-out',
+          }}
+          allowClear
+        />
         <div className="mb-4">
           <Button
             onClick={() => handleFilter('bangladesh')}
