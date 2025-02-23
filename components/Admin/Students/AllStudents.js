@@ -103,6 +103,53 @@ const AllStudents = () => {
     }
   };
 
+  const handleReset = async (userId) => {
+    try {
+      const confirm = await Swal.fire({
+        title: 'Are you sure?',
+        text: 'Do you want to reset this user information?',
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonColor: '#3085d6',
+        cancelButtonColor: '#d33',
+        confirmButtonText: 'Yes, reset it!',
+      });
+
+      if (confirm.isConfirmed) {
+        await db.collection('users').doc(userId).update({
+          enrolled_courses: [],
+        });
+
+        Swal.fire(
+          'Reset!',
+          'The user information has been updated.',
+          'success',
+        );
+
+        // Update the user data in the state
+        setUserData((prevData) =>
+          prevData.map((user) =>
+            user.id === userId
+              ? {
+                  ...user,
+                  full_name: 'Default Name',
+                  phone: '0000000000',
+                  role: 'student',
+                }
+              : user,
+          ),
+        );
+      }
+    } catch (error) {
+      Swal.fire(
+        'Error!',
+        'An error occurred while resetting the user.',
+        'error',
+      );
+      console.error('Error resetting user:', error);
+    }
+  };
+
   const handleFilter = (type) => {
     setFilter(type);
     const bangladeshRegex = /^(?:\+880|880)/;
@@ -158,9 +205,14 @@ const AllStudents = () => {
       align: 'center',
       width: 120,
       render: (_, record) => (
-        <Button type="primary" danger onClick={() => handleDelete(record.id)}>
-          Delete
-        </Button>
+        <div className="flex gap-2">
+          <Button type="primary" info onClick={() => handleReset(record.id)}>
+            Reset
+          </Button>
+          <Button type="primary" danger onClick={() => handleDelete(record.id)}>
+            Delete
+          </Button>
+        </div>
       ),
     },
   ];
