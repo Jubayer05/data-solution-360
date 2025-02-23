@@ -1,7 +1,7 @@
 import { Check } from 'lucide-react';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
-import firebase, { auth } from '../../../firebase';
+import { useStateContext } from '../../../src/context/ContextProvider';
 import InputBoxStudent from '../utilities/InputBoxStudent';
 
 const ChangePassword = () => {
@@ -9,6 +9,7 @@ const ChangePassword = () => {
     current_password: '',
     new_password: '',
   });
+  const { findCurrentUser } = useStateContext();
 
   const handleChange = (key, value) => {
     setPassword((prevInfo) => ({
@@ -20,44 +21,46 @@ const ChangePassword = () => {
   const handleUpdatePassword = async (e) => {
     e.preventDefault();
 
-    const user = auth.currentUser;
-    if (user && user.email) {
-      try {
-        // Reauthenticate the user
-        const credential = firebase.auth.EmailAuthProvider.credential(
-          user.email,
-          password.current_password,
-        );
-        await user.reauthenticateWithCredential(credential);
+    try {
+      const response = await fetch('/api/auth/change-password', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: findCurrentUser.email, // Ensure user is authenticated
+          currentPassword: password.current_password,
+          newPassword: password.new_password,
+        }),
+      });
 
-        // Update the password
-        await user.updatePassword(password.new_password);
+      const data = await response.json();
+
+      if (response.ok) {
         Swal.fire({
-          title: 'Dear User!',
-          text: 'Your Account Password Changed Successfully!',
+          title: 'Success!',
+          text: data.message,
           icon: 'success',
-          confirmButtonColor: '#3085d6',
           confirmButtonText: 'Okay',
-        }).then((result) => {
-          if (result.isConfirmed) {
-            window.location.reload();
-          }
+        }).then(() => {
+          window.location.reload();
         });
-      } catch (err) {
-        Swal.fire(
-          'Dear User!',
-          'Wrong Password! Try again with correct password.',
-          'error',
-        );
+      } else {
+        Swal.fire({
+          title: 'Error',
+          text: data.message || 'Something went wrong!',
+          icon: 'error',
+        });
       }
-    } else {
-      Swal.fire(
-        'Dear User!',
-        'You are not authenticated. Try again with correct password.',
-        'error',
-      );
+    } catch (error) {
+      Swal.fire({
+        title: 'Error',
+        text: error.message || 'Something went wrong. Please try again.',
+        icon: 'error',
+      });
     }
   };
+
   return (
     <div>
       <InputBoxStudent
