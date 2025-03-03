@@ -3,6 +3,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../../firebase';
 
 import { Empty } from 'antd';
+import PhoneInput from 'react-phone-number-input';
 import Swal from 'sweetalert2';
 import { loadData } from '../../../../src/hooks/loadData';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
@@ -21,20 +22,12 @@ const ManualPayment = () => {
 
   useEffect(() => {
     // Remove any non-numeric characters and leading "+"
-    const cleanNumber = phoneNumber.trim().replace(/^\+/, '');
-
-    // Check if the number starts with "880"; if not, add it
-    let normalizedNumber;
-    if (cleanNumber.startsWith('880')) {
-      normalizedNumber = cleanNumber;
-    } else if (cleanNumber.startsWith('0')) {
-      normalizedNumber = '880' + cleanNumber.slice(1);
-    } else {
-      normalizedNumber = '880' + cleanNumber;
-    }
+    const formatPhoneNumber = (phoneNumberInput) => {
+      return phoneNumberInput?.replace(/^\+/, '');
+    };
 
     // Format as email
-    const email = `${normalizedNumber}@datasolution360.com`;
+    const email = `${formatPhoneNumber(phoneNumber)}@datasolution360.com`;
     const findUser = users.find((item) => item.email === email);
     setUserData(findUser);
   }, [phoneNumber, users]);
@@ -148,7 +141,7 @@ const ManualPayment = () => {
               Registered Phone Number{' '}
               <span className="text-red-500">(required)</span>
             </label>
-            <div className="flex items-center gap-2">
+            {/* <div className="flex items-center gap-2">
               <input
                 disabled
                 type="text"
@@ -161,6 +154,13 @@ const ManualPayment = () => {
                 onWheel={(e) => e.target.blur()}
                 placeholder="01712345678"
                 className="w-full px-4 py-2.5 text-base outline-none border-1 mt-1.5 rounded"
+              />
+            </div> */}
+            <div className="mb-4 flex gap-2">
+              <PhoneInput
+                placeholder="Enter phone number"
+                value={phoneNumber}
+                onChange={setPhoneNumber}
               />
             </div>
           </div>

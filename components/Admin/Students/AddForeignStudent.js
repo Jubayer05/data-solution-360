@@ -1,17 +1,6 @@
-import dynamic from 'next/dynamic';
 import React, { useState } from 'react';
 import PhoneInput from 'react-phone-number-input';
 import { v4 as uuidv4 } from 'uuid';
-
-const LottieAnimation = dynamic(
-  () => import('../../utilities/Home/LottieAnimation.js'),
-  {
-    ssr: false,
-    loading: () => (
-      <div className="animate-pulse bg-gray-200 w-full h-64 rounded-lg" />
-    ), // Loading placeholder
-  },
-);
 
 import axios from 'axios';
 import { ClipboardCopy, UserCheck } from 'lucide-react';
@@ -20,9 +9,7 @@ import Swal from 'sweetalert2';
 
 const AddForeignStudent = () => {
   const [phoneNumberInput, setPhoneNumberInput] = useState('');
-  const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
-  const [success, setSuccess] = useState('');
   const [fullName, setFullName] = useState('');
   const [copied, setCopied] = useState(false);
   const DEFAULT_PASSWORD = '123456#ds360';
@@ -37,9 +24,7 @@ const AddForeignStudent = () => {
 
   const handleSetPassword = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError('');
-    setSuccess('');
 
     if (!phoneNumberInput || !fullName) {
       setError('Please enter a phone number and full name.');
@@ -59,10 +44,7 @@ const AddForeignStudent = () => {
           window.location.reload();
         },
       );
-      setLoading(false); // Stop loading
-    } catch (error) {
-      setSuccess('An error occurred. Please try again.');
-    }
+    } catch (error) {}
   };
 
   const handleCopy = () => {
