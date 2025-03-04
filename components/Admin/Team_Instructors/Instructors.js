@@ -5,7 +5,7 @@ import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 import AddProfile from './AddProfile';
 
 const Instructors = () => {
-  const [instructor, setInstructor] = useState();
+  const [instructor, setInstructor] = useState([]);
 
   useEffect(() => {
     loadData('instructors', setInstructor);

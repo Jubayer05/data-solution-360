@@ -30,7 +30,7 @@ const initialBlogState = {
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 const AddNewBlog = () => {
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
@@ -55,7 +55,7 @@ const AddNewBlog = () => {
     if (fileSize < 512000) {
       const uploadTask = firebase
         .storage()
-        .ref(`blogImage/${userEmail}/${blogImg?.name}`)
+        .ref(`blogImage/${findCurrentUser?.email}/${blogImg?.name}`)
         .put(blogImg);
       uploadTask.on(
         'state_changed',
@@ -73,7 +73,7 @@ const AddNewBlog = () => {
           firebase
             .storage()
             .ref('blogImage')
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(blogImg?.name)
             .getDownloadURL()
             .then((url) => {

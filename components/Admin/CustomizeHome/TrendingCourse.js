@@ -11,7 +11,7 @@ import { loadData } from '../../../src/hooks/loadData';
 const db = firebase.firestore();
 
 const TrendingCourse = () => {
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
   const [photoUrl, setPhotoUrl] = useState('');
   const [progressData, setProgressData] = useState('');
   const [trendingCourse, setTrendingCourse] = useState([]);
@@ -59,7 +59,7 @@ const TrendingCourse = () => {
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`courseImage/${userEmail}/${courseImg?.name}`)
+        .ref(`courseImage/${findCurrentUser?.email}/${courseImg?.name}`)
         .put(courseImg);
       uploadTask.on(
         'state_changed',
@@ -77,7 +77,7 @@ const TrendingCourse = () => {
           firebase
             .storage()
             .ref('courseImage')
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(courseImg?.name)
             .getDownloadURL()
             .then((url) => {

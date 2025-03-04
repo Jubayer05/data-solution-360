@@ -69,10 +69,6 @@ const AddInstructorCourse = ({ instructors, setInstructors }) => {
     setInstructors(filterInstructor);
   };
 
-  const options = [
-    { value: 'instructor1', label: 'Instructor 1' },
-    { value: 'instructor2', label: 'Instructor 2' },
-  ];
   return (
     <div className="bg-white border-1 p-5 rounded-lg mt-5 ">
       {instructors?.length > 0 && (

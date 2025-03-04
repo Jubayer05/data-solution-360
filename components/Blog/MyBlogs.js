@@ -12,7 +12,7 @@ import HeadingDashboard from '../utilities/dashboard/HeadingDashboard';
 const db = firebase.firestore();
 
 const MyBlogs = () => {
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [blogDataState, setBlogDataState] = useState();
   const [modalData, setModalData] = useState(null);
@@ -95,7 +95,7 @@ const MyBlogs = () => {
     if (fileSize < 512000) {
       const uploadTask = firebase
         .storage()
-        .ref(`blogImage/${userEmail}/${blogImg?.name}`)
+        .ref(`blogImage/${findCurrentUser?.email}/${blogImg?.name}`)
         .put(blogImg);
       uploadTask.on(
         'state_changed',
@@ -113,7 +113,7 @@ const MyBlogs = () => {
           firebase
             .storage()
             .ref('blogImage')
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(blogImg?.name)
             .getDownloadURL()
             .then((url) => {

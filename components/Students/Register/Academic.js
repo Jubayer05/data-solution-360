@@ -43,45 +43,6 @@ const Academic = () => {
     },
   });
 
-  // const handleFileSubmit = (e) => {
-  //   const fileSize = document.getElementById("photoUrl").files[0].size;
-  //   const profileImg = e.target.files[0];
-
-  //   if (fileSize < 512000) {
-  //     const uploadTask = firebase
-  //       .storage()
-  //       .ref(`profileImage/${userEmail}/${profileImg?.name}`)
-  //       .put(profileImg);
-  //     uploadTask.on(
-  //       "state_changed",
-  //       (snapshot) => {
-  //         const progress = Math.round(
-  //           (snapshot.bytesTransferred / snapshot.totalBytes) * 100
-  //         );
-
-  //         setProgressData(progress);
-  //       },
-  //       (error) => {
-  //         alert(error.message + "" + "Something went wrong");
-  //       },
-  //       () => {
-  //         firebase
-  //           .storage()
-  //           .ref("profileImage")
-  //           .child(userEmail)
-  //           .child(profileImg?.name)
-  //           .getDownloadURL()
-  //           .then((url) => {
-  //             // NOTE: use this url
-  //             setPhotoUrl(url);
-  //           });
-  //       }
-  //     );
-  //   } else {
-  //     alert("File Size must be under 500kb");
-  //   }
-  // };
-
   return (
     <div>
       <div className="pt-4 pb-5 px-5 ">

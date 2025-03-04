@@ -42,7 +42,7 @@ const initialCourseState = {
 const options = { year: 'numeric', month: 'long', day: 'numeric' };
 
 const AddCourse = () => {
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
   const [editorState, setEditorState] = useState(() =>
     EditorState.createEmpty(),
   );
@@ -92,7 +92,7 @@ const AddCourse = () => {
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`courseImage/${userEmail}/${courseImg?.name}`)
+        .ref(`courseImage/${findCurrentUser?.email}/${courseImg?.name}`)
         .put(courseImg);
       uploadTask.on(
         'state_changed',
@@ -104,7 +104,7 @@ const AddCourse = () => {
           firebase
             .storage()
             .ref('courseImage')
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(courseImg?.name)
             .getDownloadURL()
             .then((url) => {

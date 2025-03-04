@@ -7,7 +7,7 @@ import { useStateContext } from '../../../src/context/ContextProvider';
 
 const FileInput = ({ folderName, setImageState }) => {
   const [progressData, setProgressData] = useState(0);
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
 
   const fileInputRef = useRef(null);
 
@@ -23,7 +23,7 @@ const FileInput = ({ folderName, setImageState }) => {
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`${folderName}/${userEmail}/${image?.name}`)
+        .ref(`${folderName}/${findCurrentUser?.email}/${image?.name}`)
         .put(image);
       uploadTask.on(
         'state_changed',
@@ -41,7 +41,7 @@ const FileInput = ({ folderName, setImageState }) => {
           firebase
             .storage()
             .ref(folderName)
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(image?.name)
             .getDownloadURL()
             .then((url) => {

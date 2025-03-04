@@ -10,7 +10,7 @@ import { loadData } from '../../../src/hooks/loadData';
 const db = firebase.firestore();
 
 const PopupImage = () => {
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
   const [photoUrl, setPhotoUrl] = useState('');
   const [progressData, setProgressData] = useState('');
   const [popupImage, setPopupImage] = useState([]);
@@ -92,7 +92,7 @@ const PopupImage = () => {
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`trendingImage/${userEmail}/${courseImg?.name}`)
+        .ref(`trendingImage/${findCurrentUser?.email}/${courseImg?.name}`)
         .put(courseImg);
       uploadTask.on(
         'state_changed',
@@ -110,7 +110,7 @@ const PopupImage = () => {
           firebase
             .storage()
             .ref('trendingImage')
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(courseImg?.name)
             .getDownloadURL()
             .then((url) => {

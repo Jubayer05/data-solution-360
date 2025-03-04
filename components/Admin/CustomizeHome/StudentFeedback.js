@@ -11,7 +11,7 @@ import CustomModal from '../../utilities/CustomModal';
 const db = firebase.firestore();
 
 const StudentFeedback = () => {
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
   const [img, setImg] = useState('');
   const [progressData, setProgressData] = useState('');
   const [modalIsOpen, setModalIsOpen] = useState(false);
@@ -65,7 +65,9 @@ const StudentFeedback = () => {
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`studentFeedbackImg/${userEmail}/${studentFeedbackImg?.name}`)
+        .ref(
+          `studentFeedbackImg/${findCurrentUser?.email}/${studentFeedbackImg?.name}`,
+        )
         .put(studentFeedbackImg);
       uploadTask.on(
         'state_changed',
@@ -83,7 +85,7 @@ const StudentFeedback = () => {
           firebase
             .storage()
             .ref('studentFeedbackImg')
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(studentFeedbackImg?.name)
             .getDownloadURL()
             .then((url) => {

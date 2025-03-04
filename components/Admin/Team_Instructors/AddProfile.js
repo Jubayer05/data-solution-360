@@ -24,6 +24,8 @@ const AddProfile = ({ profile, db_name, showRole }) => {
   const [details, setDetails] = useState('');
   const [editProfile, setEditProfile] = useState(null);
 
+  console.log(editProfile);
+
   const conicColors = {
     '0%': '#87d068',
     '50%': '#ffe58f',
@@ -135,7 +137,7 @@ const AddProfile = ({ profile, db_name, showRole }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         db.collection(db_name)
-          .doc(editProfile.key)
+          .doc(editProfile.id)
           .update({ ...editProfile, ...profileInfo, details })
           .then(() => {
             Swal.fire(
@@ -147,6 +149,7 @@ const AddProfile = ({ profile, db_name, showRole }) => {
             });
           })
           .catch((error) => {
+            console.log(error);
             Swal.fire('Error!', 'Something went wrong.', 'error');
           });
       }
@@ -165,7 +168,7 @@ const AddProfile = ({ profile, db_name, showRole }) => {
     }).then((result) => {
       if (result.isConfirmed) {
         db.collection(db_name)
-          .doc(item.key)
+          .doc(item.id)
           .delete()
           .then(() => {
             Swal.fire(
@@ -193,7 +196,7 @@ const AddProfile = ({ profile, db_name, showRole }) => {
           <p className="text-base">No profile information were added!</p>
         ) : (
           profile?.map((item) => (
-            <div key={item.key} className="my-4 shadow-md flex items-center">
+            <div key={item.id} className="my-4 shadow-md flex items-center">
               <div className="flex-1">
                 <div className="px-4 py-2 rounded-lg text-base font-normal flex items-center justify-between gap-10 bg-white">
                   <div className="flex items-center gap-4">

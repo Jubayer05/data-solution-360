@@ -11,7 +11,7 @@ import { loadData } from '../../../src/hooks/loadData';
 const db = firebase.firestore();
 
 const SlideMainBanner = () => {
-  const { userEmail } = useStateContext();
+  const { findCurrentUser } = useStateContext();
   const [img, setImg] = useState('');
   const [progressData, setProgressData] = useState('');
   const [slidesMainBannerData, setSlidesMainBannerData] = useState([]);
@@ -64,7 +64,9 @@ const SlideMainBanner = () => {
     if (fileSize < 1024000) {
       const uploadTask = firebase
         .storage()
-        .ref(`banner_and_popup/${userEmail}/${technologyImg?.name}`)
+        .ref(
+          `banner_and_popup/${findCurrentUser?.email}/${technologyImg?.name}`,
+        )
         .put(technologyImg);
       uploadTask.on(
         'state_changed',
@@ -86,7 +88,7 @@ const SlideMainBanner = () => {
           firebase
             .storage()
             .ref('banner_and_popup')
-            .child(userEmail)
+            .child(findCurrentUser?.email)
             .child(technologyImg?.name)
             .getDownloadURL()
             .then((url) => {
