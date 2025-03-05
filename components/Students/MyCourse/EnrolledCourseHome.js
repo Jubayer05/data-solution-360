@@ -5,6 +5,7 @@ import Image from 'next/image';
 import Link from 'next/link';
 
 const EnrolledCourseHome = ({ item }) => {
+  console.log(item);
   return (
     <div
       className="w-full mx-auto rounded-lg overflow-hidden hover:border-[#676767] 
@@ -22,7 +23,7 @@ const EnrolledCourseHome = ({ item }) => {
           <div className="p-0.5 md:p-2 border-b-1 border-[#d6dae1] flex items-center flex-wrap">
             <div className="py-1 px-2 m-0.5 md:m-1 bg-[#eaecf0] rounded">
               <span className="text-[#101828] text-[10px] md:text-[12px] block -mt-[1px]">
-                Batch <strong>{item?.courseData?.batch_no}</strong>
+                Batch <strong>{item?.batchNumber}</strong>
               </span>
             </div>
           </div>

@@ -71,7 +71,7 @@ const About = () => {
               <li>Become a Data Analyst with Power BI</li>
               <li>Data Science and Machine Learning with Python and R</li>
               <li>Basic to Advanced Excel for Data Analysis</li>
-              <li>Complete Data Analyst Boot-camp</li>
+              <li>Complete Data Analyst Bootcamp</li>
             </ul>
             <h3 className="mt-8 text-xl">Analysis and Serving Model:</h3>
             We serve businesses and other organizations to analyze their data to

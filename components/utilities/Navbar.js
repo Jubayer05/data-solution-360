@@ -252,7 +252,7 @@ const Navbar = ({ home }) => {
                     language === 'English' ? 'font-body' : 'font-bangla'
                   }`}
                 >
-                  {language === 'English' ? 'Log in / Sing Up' : 'লগ ইন'}
+                  {language === 'English' ? 'Log in / Sign Up' : 'লগ ইন'}
                 </span>
               </button>
             ) : findCurrentUser?.role ? (

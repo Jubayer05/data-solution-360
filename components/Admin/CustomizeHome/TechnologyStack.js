@@ -3,6 +3,7 @@ import { useFormik } from 'formik';
 import { Cpu, X } from 'lucide-react';
 import Image from 'next/image';
 import React, { useEffect, useState } from 'react';
+import Swal from 'sweetalert2';
 import firebase from '../../../firebase';
 
 const TechnologyStack = () => {
@@ -41,7 +42,7 @@ const TechnologyStack = () => {
       return;
     }
 
-    const storageRef = firebase.storage().ref(`investorCompanies/${file.name}`);
+    const storageRef = firebase.storage().ref(`technologyIcon/${file.name}`);
     const uploadTask = storageRef.put(file);
 
     uploadTask.on(
@@ -96,22 +97,36 @@ const TechnologyStack = () => {
   });
 
   const handleRemoveTechnology = async (id) => {
-    try {
-      const updatedCompanies = technologyStack.filter((tech) => tech.id !== id);
+    Swal.fire({
+      title: 'Are you sure?',
+      text: 'You won’t be able to revert this!',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#3085d6',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Yes, remove it!',
+    }).then(async (result) => {
+      if (result.isConfirmed) {
+        try {
+          const updatedCompanies = technologyStack.filter(
+            (tech) => tech.id !== id,
+          );
 
-      await firebase
-        .firestore()
-        .collection('utility_collection')
-        .doc('technology_stack')
-        .set({
-          technology: updatedCompanies,
-        });
+          await firebase
+            .firestore()
+            .collection('utility_collection')
+            .doc('technology_stack')
+            .set({
+              technology: updatedCompanies,
+            });
 
-      setTechnologyStack(updatedCompanies);
-      message.success('Company removed successfully');
-    } catch (error) {
-      message.error('Failed to remove company');
-    }
+          setTechnologyStack(updatedCompanies);
+          Swal.fire('Removed!', 'Company has been removed.', 'success');
+        } catch (error) {
+          Swal.fire('Error!', 'Failed to remove company.', 'error');
+        }
+      }
+    });
   };
 
   return (

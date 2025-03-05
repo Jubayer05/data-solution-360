@@ -73,7 +73,7 @@ const Prospectus = () => {
             Data Science and Machine Learning with Python and R
           </li>
           <li className="my-3">Basic to Advanced Excel for Data Analysis</li>
-          <li className="my-3">Complete Data Analyst Boot-camp</li>
+          <li className="my-3">Complete Data Analyst Bootcamp</li>
         </ul>
 
         <h2 className="text-center capitalize text-2xl mt-16 font-bold">
