@@ -24,6 +24,8 @@ const AddProfile = ({ profile, db_name, showRole }) => {
   const [details, setDetails] = useState('');
   const [editProfile, setEditProfile] = useState(null);
 
+  console.log(editProfile);
+
   const conicColors = {
     '0%': '#87d068',
     '50%': '#ffe58f',
@@ -184,7 +186,7 @@ const AddProfile = ({ profile, db_name, showRole }) => {
     });
   };
 
-  const removeToken = (url) => url.replace(/&?token=[^&]+/, '');
+  console.log(profile);
 
   return (
     <div>
@@ -204,7 +206,7 @@ const AddProfile = ({ profile, db_name, showRole }) => {
                       width={500}
                       height={300}
                       className="w-20 h-20 rounded-full"
-                      src={removeToken(item.photoUrl)}
+                      src={item.photoUrl}
                       alt={item.profileName}
                     />
                     <div>
