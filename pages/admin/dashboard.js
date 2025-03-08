@@ -12,4 +12,8 @@ const dashboard = () => {
 };
 
 // export default dashboard;
-export default ProtectedRoute(dashboard, ['admin', 'content_manager']);
+export default ProtectedRoute(dashboard, [
+  'admin',
+  'content_manager',
+  'teacher',
+]);

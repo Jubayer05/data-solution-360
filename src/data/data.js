@@ -35,7 +35,7 @@ export const linksAdmin = [
         name: 'Home',
         link: '/admin/dashboard',
         icon: <Home />,
-        role: ['admin'],
+        role: ['admin', 'teacher'],
       },
       {
         name: 'Edit Home Page',
@@ -77,7 +77,7 @@ export const linksAdmin = [
         name: 'All batch',
         link: '/admin/course/all-batch',
         icon: <ClipboardList />,
-        role: ['admin', 'content_manager'],
+        role: ['admin', 'content_manager', 'teacher'],
       },
     ],
   },

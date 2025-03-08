@@ -14,4 +14,5 @@ const enrolledCourseDetails = () => {
 export default ProtectedRoute(enrolledCourseDetails, [
   'admin',
   'content_manager',
+  'teacher',
 ]);

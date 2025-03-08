@@ -12,4 +12,8 @@ const courseId = () => {
 };
 
 // export default manageCourse;
-export default ProtectedRoute(courseId, ['admin', 'content_manager']);
+export default ProtectedRoute(courseId, [
+  'admin',
+  'content_manager',
+  'teacher',
+]);
