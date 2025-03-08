@@ -34,12 +34,16 @@ const ResourceHome = () => {
 
   // NOTE: THIS WILL BE THE ENROLLED COURSE BY USER
   const selectCourse = courseDataBatch.map((option) => ({
-    label: option.courseData.item_name,
-    value: option.course_modules,
+    label: option?.courseData.item_name,
+    value: option,
   }));
 
   const handleChange = (item) => {
-    setCurrentContent({ moduleData: item.value, title: item.label });
+    setCurrentContent({
+      moduleData: item.value?.course_modules,
+      title: item.label,
+      free_resources: item.value?.free_resources,
+    });
   };
 
   return (

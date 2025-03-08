@@ -8,6 +8,7 @@ import AddAssignment from './BatchDetails/Assignment/AddAssignment';
 import AssignmentComp from './BatchDetails/Assignment/AssignmentComp';
 import AssignmentTrackingMatrix from './BatchDetails/Assignment/AssignmentTrackingMatrix';
 import EnrolledStudent from './BatchDetails/EnrolledStudents';
+import AddFreeResource from './BatchDetails/FreeResource/AddNewFreeResource';
 import ManualPayment from './BatchDetails/ManualPayment';
 import ModuleDetails from './BatchDetails/ModuleDetails';
 
@@ -40,6 +41,7 @@ const EnrolledCourseDetails = () => {
         <AssignmentComp />
         <AssignmentTrackingMatrix />
         <AddAssignment />
+        <AddFreeResource />
       </div>
     </div>
   );

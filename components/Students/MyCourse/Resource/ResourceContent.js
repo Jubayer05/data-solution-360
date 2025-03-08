@@ -14,6 +14,7 @@ import Modal from 'react-modal';
 import useEnrolledCourseData from '../../../../src/hooks/useEnrolledCourseData';
 import { capitalizeWords } from '../../../../src/utils/capitalizeWords';
 import { formatDate } from '../../../../src/utils/convertDate';
+import FreeResources from './FreeResource';
 
 const ResourceContent = ({ item }) => {
   const [modalData, setModalData] = useState(null);
@@ -119,6 +120,8 @@ const ResourceContent = ({ item }) => {
 
   return (
     <div className="min-h-screen">
+      <FreeResources item={item?.free_resources} />
+
       {item?.moduleData || enrolledCourse?.course_modules ? (
         (item?.moduleData || enrolledCourse?.course_modules)?.map(
           (itemData, index) => (

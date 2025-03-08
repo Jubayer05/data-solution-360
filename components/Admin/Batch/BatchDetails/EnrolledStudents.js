@@ -3,6 +3,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import firebase from '../../../../firebase';
 
 import { Input, Table } from 'antd';
+import { BadgePoundSterling, CreditCardIcon } from 'lucide-react';
 import Swal from 'sweetalert2';
 import { loadData } from '../../../../src/hooks/loadData';
 import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
@@ -322,6 +323,29 @@ const EnrolledStudent = () => {
     },
 
     {
+      title: 'Payment Method',
+      align: 'center',
+      width: 180,
+      render: (_, record) => (
+        <div>
+          {record?.enrolled_courses.find(
+            (pd) => pd.batchId == currentEnrolledCourse?.unique_batch_id,
+          )?.paymentInfo?.paymentWay === 'manual' ? (
+            <div className="flex items-center justify-center gap-2">
+              <BadgePoundSterling className="h-5 w-5 text-secondary_icon" />
+              Manual
+            </div>
+          ) : (
+            <div className="flex items-center justify-center gap-2 text-[#d8136b] font-semibold">
+              <CreditCardIcon className="h-5 w-5 text-secondary_icon" />
+              Bkash
+            </div>
+          )}
+        </div>
+      ),
+    },
+
+    {
       title: 'Action',
       width: 250,
       align: 'center',
@@ -360,6 +384,8 @@ const EnrolledStudent = () => {
       user?.full_name?.toLowerCase().includes(searchQuery.toLowerCase()) ||
       user.phone.includes(searchQuery),
   );
+
+  // console.log(enrolledUsers);
 
   return (
     <div className="max-w-5xl mx-auto my-20">
