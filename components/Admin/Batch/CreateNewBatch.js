@@ -93,8 +93,6 @@ const CreateNewBatch = () => {
     }
   };
 
-  console.log(courseDataObj);
-
   // NOTE: HANDLE CREATE NEW BATCH BUTTON
   const handleCreateNewBatch = async () => {
     if (selectedCourse && batchNumber && selectedInstructor.length !== 0) {
@@ -103,6 +101,8 @@ const CreateNewBatch = () => {
         item_name: courseDataObj?.item_name,
         unique_batch_id: uniqueId,
         img: courseDataObj?.img,
+        class_days: courseDataObj?.class_days,
+        class_time: courseDataObj?.class_time,
       };
 
       const newBatch = {

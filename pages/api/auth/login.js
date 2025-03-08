@@ -35,11 +35,10 @@ export default async function handler(req, res) {
     res.setHeader(
       'Set-Cookie',
       serialize('auth_token', token, {
-        // httpOnly: true,
         secure: process.env.NODE_ENV === 'production',
         sameSite: 'strict',
         path: '/',
-        maxAge: 86400, // 24 hours
+        maxAge: 3 * 24 * 60 * 60, // 3 days
       }),
     );
 

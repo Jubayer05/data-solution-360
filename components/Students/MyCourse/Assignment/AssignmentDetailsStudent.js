@@ -1,5 +1,6 @@
 import { DownloadOutlined, FileOutlined } from '@ant-design/icons';
 import { Spin } from 'antd';
+import { Download, FileDiff } from 'lucide-react';
 import { useRouter } from 'next/router';
 import React, { useState } from 'react';
 import Swal from 'sweetalert2';
@@ -23,8 +24,6 @@ const AssignmentDetailsStudent = () => {
     downloadURL: item.downloadURL,
     fileName: item.file.name,
   }));
-
-  console.log(assignmentDownloadLinks);
 
   const { assignmentId } = router.query;
 
@@ -171,11 +170,36 @@ const AssignmentDetailsStudent = () => {
                 What have to do? <br />
               </h2>
               {findAssignment ? (
-                <div
-                  dangerouslySetInnerHTML={{
-                    __html: findAssignment?.description,
-                  }}
-                />
+                <>
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: findAssignment?.description,
+                    }}
+                  />
+
+                  <h2 className="text-lg text-center pb-4 text-[#4870ff] font-medium font-dash_heading mt-10">
+                    Download Attached Files
+                  </h2>
+                  <div>
+                    {findAssignment?.assignmentLinks?.map((item, index) => (
+                      <div
+                        key={index}
+                        className="flex items-center justify-between gap-4 mt-2"
+                      >
+                        <div className="flex items-center w-[98%] text-gray-500 text-xs">
+                          <FileDiff className="mr-2 w-5" />
+                          <span className="w-[90%] text-left">
+                            {item.fileName}
+                          </span>
+                        </div>
+                        <Download
+                          onClick={() => handleFileDownload(item?.downloadURL)}
+                          className="cursor-pointer text-lg text-red-500"
+                        />
+                      </div>
+                    ))}
+                  </div>
+                </>
               ) : (
                 <div className="min-h-40 flex justify-center items-center">
                   <Spin size="medium" />
@@ -235,6 +259,7 @@ const AssignmentDetailsStudent = () => {
             </div>
             <div className="bg-white border-1 p-5 rounded-lg mt-5">
               <AssignmentSubmission
+                title="Assignment Submission Box"
                 assignmentLinks={assignmentLinks}
                 setAssignmentLinks={setAssignmentLinks}
               />

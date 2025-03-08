@@ -24,7 +24,7 @@ export default function handler(req, res) {
       secure: process.env.NODE_ENV === 'production',
       sameSite: 'strict',
       path: '/',
-      maxAge: 86400, // 24 hours
+      maxAge: 3 * 24 * 60 * 60, // 3 days
     }),
   );
 

@@ -8,6 +8,7 @@ import { Trash } from 'lucide-react';
 import Image from 'next/image';
 import { useRouter } from 'next/router';
 import Swal from 'sweetalert2';
+import { useStateContext } from '../../../src/context/ContextProvider';
 import { loadData } from '../../../src/hooks/loadData';
 import ButtonDashboard from '../../utilities/dashboard/ButtonDashboard';
 import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
@@ -15,6 +16,7 @@ import HeadingDashboard from '../../utilities/dashboard/HeadingDashboard';
 const db = firebase.firestore();
 
 const EditBatch = () => {
+  const { courseData } = useStateContext();
   const [selectedInstructor, setSelectedInstructor] = useState([]);
   const [batchNumber, setBatchNumber] = useState(null);
   const [discountedPrice, setDiscountedPrice] = useState(null);
@@ -43,6 +45,10 @@ const EditBatch = () => {
     (item) => item.unique_batch_id === batchId,
   );
 
+  const courseDataObj = courseData.find(
+    (course) => course.key === findBatchInfo?.courseData?.courseId,
+  );
+
   const handleChange = (record) => {
     if (
       selectedInstructor?.findIndex((item) => item?.id === record.value.id) ===
@@ -57,6 +63,11 @@ const EditBatch = () => {
       ...findBatchInfo,
       courseData: {
         ...findBatchInfo.courseData,
+        courseId: courseDataObj?.key,
+        item_name: courseDataObj?.item_name,
+        img: courseDataObj?.img,
+        class_days: courseDataObj?.class_days,
+        class_time: courseDataObj?.class_time,
         discounted_price: discountedPrice,
       },
       batchNumber: batchNumber,
@@ -68,7 +79,7 @@ const EditBatch = () => {
       .update(updatedCourse)
       .then(() => {
         db.collection('course_data')
-          .doc(findBatchInfo.courseData.key)
+          .doc(findBatchInfo.courseData.courseId)
           .update({
             discounted_price: discountedPrice,
           })

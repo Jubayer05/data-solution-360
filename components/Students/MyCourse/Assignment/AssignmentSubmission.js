@@ -11,7 +11,11 @@ import ButtonDashboard from '../../../utilities/dashboard/ButtonDashboard';
 
 const storage = firebase.storage();
 
-const AssignmentSubmission = ({ assignmentLinks, setAssignmentLinks }) => {
+const AssignmentSubmission = ({
+  title,
+  assignmentLinks,
+  setAssignmentLinks,
+}) => {
   const [selectedFiles, setSelectedFiles] = useState([]);
   const [fileLoading, setFileLoading] = useState(false);
 
@@ -93,7 +97,7 @@ const AssignmentSubmission = ({ assignmentLinks, setAssignmentLinks }) => {
   return (
     <div className="bg-white border-1 p-5 rounded-lg mt-5">
       <h2 className="text-lg text-center pb-4 text-[#5e5eff] font-medium font-dash_heading">
-        Submission Box
+        {title}
       </h2>
 
       <input

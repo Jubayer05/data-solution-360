@@ -6,6 +6,7 @@ import 'sweetalert2/dist/sweetalert2.css';
 import { v4 as uuidv4 } from 'uuid';
 import firebase from '../../../../../firebase';
 import { loadData } from '../../../../../src/hooks/loadData';
+import AssignmentSubmission from '../../../../Students/MyCourse/Assignment/AssignmentSubmission';
 import ButtonDashboard from '../../../../utilities/dashboard/ButtonDashboard';
 import RichTextEditorJodit from '../../../../utilities/RichTextEditor/RichTextEditor';
 import InputBox from '../../../Course/InputBox';
@@ -19,6 +20,7 @@ const AddAssignment = () => {
   const [totalMarks, setTotalMarks] = useState('');
   const [courseDataBatch, setCourseDataBatch] = useState([]);
   const [loading, setLoading] = useState(false); // Loading state
+  const [assignmentLinks, setAssignmentLinks] = useState([]);
   const router = useRouter();
   const { batchId } = router.query;
 
@@ -27,6 +29,11 @@ const AddAssignment = () => {
   useEffect(() => {
     loadData('course_data_batch', setCourseDataBatch);
   }, []);
+
+  const assignmentDownloadLinks = assignmentLinks.map((item) => ({
+    downloadURL: item.downloadURL,
+    fileName: item.file.name,
+  }));
 
   const handleAddAssignment = async () => {
     // Basic form validation
@@ -46,6 +53,7 @@ const AddAssignment = () => {
       id: uuidv4().split('-')[0],
       title: title,
       description: assignmentDetails,
+      assignmentLinks: assignmentDownloadLinks,
       submission_date: classDate,
       submitted_students: [],
       total_marks: totalMarks,
@@ -138,6 +146,14 @@ const AddAssignment = () => {
             />
           </div>
 
+          <div>
+            <AssignmentSubmission
+              title="Attached Assignment Files"
+              assignmentLinks={assignmentLinks}
+              setAssignmentLinks={setAssignmentLinks}
+            />
+          </div>
+
           {/* Submit Button with Spinner */}
           <div className="flex justify-center mt-8">
             <ButtonDashboard
@@ -145,11 +161,7 @@ const AddAssignment = () => {
               className="bg-primary_btn hover:bg-[#002346bc] text-white"
               disabled={loading} // Disable button when loading
             >
-              {loading ? (
-                <Spin size="medium" /> // Show spinner when loading
-              ) : (
-                'Submit Assignment'
-              )}
+              {loading ? <Spin size="medium" /> : 'Submit Assignment'}
             </ButtonDashboard>
           </div>
         </div>
